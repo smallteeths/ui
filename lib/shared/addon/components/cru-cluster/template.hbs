@@ -96,7 +96,20 @@
           descriptionPlaceholder='clusterNew.description.placeholder'
       }}
     </div>
-
+    {{#if (or (eq provider 'custom') (eq provider 'import'))}}
+      <div class="row">
+        <div class="col span-12">
+          <label class="acc-label">{{t 'systemInfoSection.arch'}}</label>
+        {{new-select
+          classNames="form-control"
+          content=archChoices
+          value=model.cluster.arch
+          optionLabelPath="label"
+          optionValuePath="value"
+        }}
+        </div>
+      </div>
+    {{/if}}
     {{#accordion-list showExpandAll=false as |al expandFn|}}
       {{#accordion-list-item
            title=(t 'clusterNew.members.label')
