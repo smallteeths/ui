@@ -3904,6 +3904,8 @@ formSecurity:
     label: NVIDIA GPU Reservation
     placeholder: e.g. 1
     unit: GPUs
+    shared: Shared
+    set: Limit to
   isolation:
     label: Isolation
     default: Default (Container)

@@ -154,13 +154,21 @@
 
     <div class="col box span-4">
       <label class="acc-label">{{t 'formSecurity.gpuReservation.label'}}</label>
-      {{#input-or-display editable=editing value=gpuReservation classesForDisplay="text-muted form-control-static"}}
-        <span class="with-input">
-          <div class="input-group">
-            {{input-integer min="0" step="1" value=gpuReservation classNames="form-control" placeholder=(t 'formSecurity.gpuReservation.placeholder')}}
-            <div class="input-group-addon bg-default">{{t 'formSecurity.gpuReservation.unit'}}</div>
-          </div>
-        </span>
+      {{#input-or-display editable=editing value=gpuDisplayValue classesForDisplay="text-muted form-control-static"}}
+        <div class="radio">
+          <label>{{radio-button selection=gpuMode value="shared"}} {{t 'formSecurity.gpuReservation.shared'}}</label>
+        </div>
+        <div class="radio">
+          <label>
+            {{radio-button selection=gpuMode value="set"}} {{t 'formSecurity.gpuReservation.set'}}
+            <span class="with-input" style="width: 175px;">
+              <div class="input-group input-sm">
+                {{input-integer min="0" step="1" value=gpuReservation disabled=(not-eq gpuMode 'set') placeholder=(t 'formSecurity.gpuReservation.placeholder')}}
+                <div class="input-group-addon bg-default">{{t 'formSecurity.gpuReservation.unit'}}</div>
+              </div>
+            </span>
+          </label>
+        </div>
       {{/input-or-display}}
     </div>
   </div>
