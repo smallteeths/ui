@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import ManageLabels from 'shared/mixins/manage-labels';
+import { get, set, observer } from '@ember/object';
 import layout from './template';
 
 export default Component.extend(ManageLabels, {
@@ -21,6 +22,7 @@ export default Component.extend(ManageLabels, {
       name:           'name',
       sort:           ['name'],
       translationKey: 'generic.name',
+      width:          400
     },
     {
       name:           'displayImage',
@@ -31,18 +33,13 @@ export default Component.extend(ManageLabels, {
       name:           'node',
       sort:           ['displayName'],
       translationKey: 'generic.node',
-    },
-    {
-      name:           'displayIp',
-      sort:           ['displayIp'],
-      translationKey: 'generic.ipAddress',
       width:          180
     },
   ],
 
-  expandAllObserve: function() {
-    let expandAll = this.get('expandAll');
+  expandAllObserve: observer('expandAll', function() {
+    let expandAll = get(this, 'expandAll');
 
-    this.set('initExpandAll', expandAll);
-  }.observes('expandAll')
+    set(this, 'initExpandAll', expandAll);
+  })
 });

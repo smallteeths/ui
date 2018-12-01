@@ -1,0 +1,15 @@
+<div class="banner {{if healthy 'bg-success' 'bg-error'}}">
+  <div class="banner-icon"><i class="icon icon-2x {{if healthy 'icon-check' 'icon-alert'}}" /></div>
+  <div class="banner-message text-left">
+    <p>
+      {{t label}}
+      {{#if url}}
+        <span class="pull-right">
+          <a href={{url}} target="_blank" rel="nofollow noopener noreferrer">
+            <div class="grafana"></div>
+          </a>
+        </span>
+      {{/if}}
+    </p>
+  </div>
+</div>

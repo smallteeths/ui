@@ -1,0 +1,23 @@
+<div class="metrics-accordion">
+  <div class="title text-muted pl-20">
+    {{title}}
+  </div>
+  <div class="pull-right">
+    <button class="btn bg-primary" {{action "doExpand"}}>
+      {{t (if expanded 'metricsAction.more.hide' 'metricsAction.more.view' )}}
+    </button>
+  </div>
+  {{#if grafanaUrl}}
+    <div class="pull-right grafana-link pr-20">
+      <a href={{grafanaUrl}} target="_blank" rel="nofollow noopener noreferrer">
+        <div class="inline-block vertical-middle grafana"></div>
+        <span class="vertical-middle text-muted">{{t 'metricsAction.grafana.label'}}</span>
+      </a>
+    </div>
+  {{/if}}
+</div>
+<div class="metrics-accordion-content {{unless expanded 'hide'}}">
+  {{#if everExpanded}}
+    {{yield this}}
+  {{/if}}
+</div>

@@ -85,6 +85,18 @@
     }}
   {{/if}}
 
+  {{#unless isSidekick}}
+    {{#if scope.currentCluster.enableClusterMonitoring}}
+      {{container/form-custom-metrics
+        classNames="accordion-wrapper"
+        workload=service
+        editing=true
+        expandAll=al.expandAll
+        expandFn=expandFn
+      }}
+    {{/if}}
+  {{/unless}}
+
   {{#accordion-list-item
     title=(t 'newContainer.environment.label')
     detail=(t 'newContainer.environment.detail' appName=settings.appName)

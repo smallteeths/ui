@@ -3,9 +3,11 @@ import { reference } from 'ember-api-store/utils/denormalize';
 import DisplayImage from 'shared/mixins/display-image';
 import { get, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
+import Grafana from 'shared/mixins/grafana';
+import { alias } from '@ember/object/computed';
 import { later } from '@ember/runloop';
 
-var Container = Resource.extend(DisplayImage, {
+var Container = Resource.extend(Grafana, DisplayImage, {
   modalService: service('modal'),
   intl:         service(),
   scope:        service(),
@@ -14,7 +16,11 @@ var Container = Resource.extend(DisplayImage, {
   links:        {},
   type:         'container',
 
-  pod: reference('podId'),
+  grafanaDashboardName: 'Pods',
+  pod:                  reference('podId'),
+  grafanaResourceId:    alias('name'),
+  namespaceId:          alias('pod.namespace.id'),
+  podName:              alias('pod.name'),
 
   availableActions: computed('state', function() {
     let isRunning = get(this, 'state') === 'running';
@@ -37,6 +43,14 @@ var Container = Resource.extend(DisplayImage, {
     ];
 
     return choices;
+  }),
+
+  restarts: computed('pod.status.containerStatuses.@each.restartCount', function() {
+    const state = (get(this, 'pod.status.containerStatuses') || []).findBy('name', get(this, 'name'));
+
+    if ( state ) {
+      return get(state, 'restartCount');
+    }
   }),
 
   validateQuota() {
