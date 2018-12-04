@@ -1,4 +1,5 @@
 import { get, set, observer, computed } from '@ember/object';
+import { inject as service } from '@ember/service';
 import { next } from '@ember/runloop';
 import Component from '@ember/component';
 import { alias } from '@ember/object/computed';
@@ -7,8 +8,10 @@ import { convertToMillis } from 'shared/utils/util';
 import layout from './template';
 
 const GPU_KEY = 'nvidia.com/gpu';
+const GPU_SHARED_KEY = 'nvidia.com/shared-gpu';
 
 export default Component.extend({
+  intl:  service(),
   layout,
 
   classNames: ['accordion-wrapper'],
@@ -35,6 +38,8 @@ export default Component.extend({
   cpuReservationMillis: null,
   // ----------------------------------
   gpuReservation:       null,
+  gpuMode:              'set',
+  // set, shared
   limits:               alias('instance.resources.limits'),
   requests:             alias('instance.resources.requests'),
 
@@ -111,12 +116,25 @@ export default Component.extend({
       set(this, 'instance.resources.requests.cpu', `${ cpu }m`);
     }
   }),
-
+  gpuDidChange: observer('gpuReservation', 'gpuMode', function() {
+    next(this, 'updateGpu');
+  }),
   updateGpu: observer('gpuReservation', function() {
-    var gpu = get(this, 'gpuReservation');
-
+    var gpuMode = get(this, 'gpuMode');
     const requests = get(this, 'instance.resources.requests');
     const limits = get(this, 'instance.resources.limits');
+
+    if (gpuMode === 'shared') {
+      delete requests[GPU_KEY];
+      delete limits[GPU_KEY];
+      requests[GPU_SHARED_KEY] = '1';
+      limits[GPU_SHARED_KEY] = '1';
+
+      return;
+    }
+    delete requests[GPU_SHARED_KEY];
+    delete limits[GPU_SHARED_KEY];
+    var gpu = get(this, 'gpuReservation');
 
     if (isNaN(gpu) || gpu <= 0) {
       delete requests[GPU_KEY];
@@ -126,7 +144,17 @@ export default Component.extend({
       limits[GPU_KEY] = `${ gpu }`;
     }
   }),
+  gpuDisplayValue: computed('gpuReservation', 'gpuMode', function() {
+    var mode = get(this, 'gpuMode');
 
+    if (mode === 'shared') {
+      return get(this, 'intl').t('formSecurity.gpuReservation.shared');
+    }
+
+    var gpu = get(this, 'gpuReservation');
+
+    return gpu;
+  }),
   // 2) has CAP_SYS_ADMIN
   allowPrivilegeEscalationDisabled: computed('instance.privileged', 'instance.capAdd.[]', function() {
     return get(this, 'instance.privileged') || (get(this, 'instance.capAdd') && get(this, 'instance.capAdd').indexOf('SYS_ADMIN') > -1);
@@ -221,8 +249,14 @@ export default Component.extend({
   // GPU
   initGpu() {
     var gpu = (get(this, 'instance.resources.limits') || {})[GPU_KEY];
+    var gpuShared = (get(this, 'instance.resources.limits') || {})[GPU_SHARED_KEY];
 
-    set(this, 'gpuReservation', gpu);
+    if (gpuShared) {
+      set(this, 'gpuMode', 'shared');
+    } else {
+      set(this, 'gpuReservation', gpu);
+      set(this, 'gpuMode', 'set');
+    }
     this.updateGpu();
   },
 });

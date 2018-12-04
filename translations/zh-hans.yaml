@@ -4054,6 +4054,8 @@ formSecurity:
     label: NVIDIA GPU预留
     placeholder: '例如: 1'
     unit: GPUs
+    shared: 共享
+    set: 限制为
   isolation:
     label: 隔离
     default: 默认(容器)
