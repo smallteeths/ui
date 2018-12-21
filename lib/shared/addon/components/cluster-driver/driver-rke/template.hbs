@@ -40,14 +40,14 @@
             <div class="col span-4">
               <label class="acc-label">{{t 'clusterNew.rke.windowsSupport.label'}}</label>
               <div class="radio">
-                <label>
-                  {{radio-button selection=windowsSupport value=true }}
+                <label  class={{if isArm64 'text-muted'}}>
+                  {{radio-button selection=windowsSupport value=true disabled=isArm64}}
                   {{t 'generic.enabled'}}
                 </label>
               </div>
               <div class="radio">
-                <label>
-                  {{radio-button selection=windowsSupport value=false }}
+                <label class={{if isArm64 'text-muted'}}>
+                  {{radio-button selection=windowsSupport value=false  disabled=isArm64}}
                   {{t 'generic.disabled'}}
                 </label>
               </div>
