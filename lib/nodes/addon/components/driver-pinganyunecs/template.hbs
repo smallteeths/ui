@@ -1,0 +1,203 @@
+{{#accordion-list showExpandAll=false as | al expandFn |}}
+  <div class="over-hr"><span>{{driverOptionsTitle}}</span></div>
+
+  {{#accordion-list-item
+    title=(t 'nodeDriver.pinganyunecs.accountSection.label')
+    detail=(t 'nodeDriver.pinganyunecs.accountSection.detail')
+    expandAll=expandAll
+    expand=(action expandFn)
+    expandOnInit=true
+  }}
+    <div class="row">
+      <div class="col span-6">
+        <label class="acc-label">{{t 'nodeDriver.pinganyunecs.accessKey.label'}}{{field-required}}</label>
+        {{#input-or-display editable=(eq step 1) value=config.accessKeyId}}
+          {{input type="text" class="form-control" value=config.accessKeyId placeholder=(t 'nodeDriver.pinganyunecs.accessKey.placeholder')}}
+        {{/input-or-display}}
+      </div>
+      <div class="col span-6">
+        <label class="acc-label">{{t 'nodeDriver.pinganyunecs.accessKeySecret.label'}}{{field-required}}</label>
+        {{#if (eq step 1)}}
+          {{input type="password" class="form-control" value=config.accessKeySecret placeholder=(t 'nodeDriver.pinganyunecs.accessKeySecret.placeholder')}}
+        {{else}}
+          <div class="text-muted text-italic">{{t 'nodeDriver.pinganyunecs.accessKeySecret.provided'}}</div>
+        {{/if}}
+      </div>
+    </div>
+  {{/accordion-list-item}}
+
+  {{#if (eq step 1)}}
+    {{top-errors errors=errors}}
+    {{save-cancel
+      save="showNetworkConfig"
+      cancel="cancel"
+      createLabel="nodeDriver.pinganyunecs.accountSection.next"
+      savingLabel="nodeDriver.pinganyunecs.accountSection.loading"
+    }}
+  {{/if}}
+
+  <div class="{{unless (gte step 2) 'hide'}}">
+    {{#accordion-list-item 
+      title=(t 'nodeDriver.pinganyunecs.networkSection.label')
+      detail=(t 'nodeDriver.pinganyunecs.networkSection.detail')
+      expandAll=expandAll
+      expand=(action expandFn)
+      expandOnInit=true
+    }}
+      <div class="row">
+        <div class="col span-4">
+          <label class="acc-label">{{t 'nodeDriver.pinganyunecs.region.label'}}</label>
+          {{#input-or-display editable=(eq step 2) value=currentRegion}}
+            {{new-select classNames="form-control" content=regions value=config.region}}
+          {{/input-or-display}}
+        </div>
+        <div class="col span-4">
+          <label class="acc-label">{{t 'nodeDriver.pinganyunecs.zone.label'}}</label>
+          {{#input-or-display editable=(eq step 2) value=currentZone}}
+            {{new-select classNames="form-control" content=zones value=config.zone prompt="nodeDriver.pinganyunecs.zone.prompt" localizedPrompt=true}}
+          {{/input-or-display}}
+        </div>
+        <div class="col span-4">
+          <label class="acc-label">{{t 'nodeDriver.pinganyunecs.pod.label'}}</label>
+          {{#input-or-display editable=(eq step 2) value=currentPod}}
+            {{new-select classNames="form-control" content=pods value=config.podId prompt="nodeDriver.pinganyunecs.pod.prompt" localizedPrompt=true}}
+          {{/input-or-display}}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col span-4">
+          <label class="acc-label">{{t 'nodeDriver.pinganyunecs.vpc.label'}}</label>
+          {{#input-or-display editable=(eq step 2) value=currentVpc}}
+            {{new-select classNames="form-control" content=vpcs value=config.vpcId prompt="nodeDriver.pinganyunecs.vpc.prompt" localizedPrompt=true}}
+          {{/input-or-display}}
+        </div>
+        <div class="col span-4">
+          <label class="acc-label">{{t 'nodeDriver.pinganyunecs.network.label'}}</label>
+          {{#input-or-display editable=(eq step 2) value=currentNetwork}}
+            {{new-select classNames="form-control" content=networks value=config.networkId prompt="nodeDriver.pinganyunecs.network.prompt" localizedPrompt=true}}
+              <p class="help-block">{{t 'nodeDriver.pinganyunecs.zoneAvailableIPs.label'}} {{zoneAvailableIps}}</p>
+          {{/input-or-display}}
+        </div>
+        <div class="col span-4">
+          <label class="acc-label">{{t 'nodeDriver.pinganyunecs.securityGroup.label'}}</label>
+          {{#input-or-display editable=(eq step 2) value=currentSecurityGroup}}
+            {{new-select classNames="form-control" content=securityGroups value=config.securityGroupId prompt="nodeDriver.pinganyunecs.securityGroup.prompt" localizedPrompt=true}}
+          {{/input-or-display}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col span-4">
+          <label class="acc-label">{{t 'nodeDriver.pinganyunecs.nat.label'}}</label>
+          {{#input-or-display editable=(eq step 2) value=currentNat}}
+            {{new-select classNames="form-control" content=nats value=config.natId prompt="nodeDriver.pinganyunecs.nat.prompt" localizedPrompt=true}}
+          {{/input-or-display}}
+        </div>
+      </div>
+    {{/accordion-list-item}}
+
+    {{#if (eq step 2)}}
+      {{top-errors errors=errors}}
+      {{save-cancel
+        save="showStorageConfig"
+        cancel="cancel"
+        createLabel="nodeDriver.pinganyunecs.networkSection.next"
+        savingLabel="nodeDriver.pinganyunecs.networkSection.loading"
+      }}
+    {{/if}}
+  </div>
+  <div class="{{unless (gte step 3) 'hide'}}">
+    {{#accordion-list-item
+      title=(t 'nodeDriver.pinganyunecs.storageSection.label')
+      detail=(t 'nodeDriver.pinganyunecs.storageSection.detail')
+      expandAll=expandAll
+      expand=(action expandFn)
+      expandOnInit=true
+    }}
+      <div class="row">
+        <div class="col span-6">
+          <label class="acc-label">{{t 'nodeDriver.pinganyunecs.dataDiskCategory.label'}}</label>
+          {{#input-or-display editable=(eq step 3) value=currentDiskType}}
+            {{new-select classNames="form-control" content=ebsTypes value=config.diskType prompt="nodeDriver.pinganyunecs.dataDiskCategory.prompt" localizedPrompt=true}}
+          {{/input-or-display}}
+        </div>
+        <div class="col span-6">
+          <label class="acc-label">{{t 'nodeDriver.pinganyunecs.dataDiskSize.label'}}</label>
+          {{#input-or-display editable=(eq step 3) value=config.diskSize}}
+            <div class="input-group">
+              {{input type="text" class="form-control" value=config.diskSize placeholder=(t 'nodeDriver.pinganyunecs.dataDiskSize.placeholder')}}
+              <div class="input-group-addon bg-default">GB</div>
+            </div>
+          {{/input-or-display}}
+        </div>
+      </div>
+    {{/accordion-list-item}}
+
+    {{#if (eq step 3)}}
+      {{top-errors errors=errors}}
+      {{save-cancel
+        save="showInstanceConfig"
+        cancel="cancel"
+        createLabel="nodeDriver.pinganyunecs.storageSection.next"
+        savingLabel="nodeDriver.pinganyunecs.storageSection.loading"
+      }}
+    {{/if}}
+  </div>
+ <div class="{{unless (gte step 4) 'hide'}}">
+    {{#accordion-list-item
+      title=(t 'nodeDriver.pinganyunecs.instanceOptionsSection.label')
+      detail=(t 'nodeDriver.pinganyunecs.instanceOptionsSection.detail')
+      expandAll=expandAll
+      expand=(action expandFn)
+      expandOnInit=true
+    }}
+      <div class="row">
+        <div class="col span-6">
+          <label class="acc-label">{{t 'nodeDriver.pinganyunecs.instanceDescription.label'}}</label>
+          {{input type="text" class="form-control" value=config.displayName placeholder=(t 'nodeDriver.pinganyunecs.instanceDescription.placeholder')}}
+        </div>
+        <div class="col span-6">
+          <label class="acc-label">{{t 'nodeDriver.pinganyunecs.instanceType.label'}}</label>
+          {{new-select classNames="form-control" content=instanceTypes value=config.instanceType prompt="nodeDriver.pinganyunecs.instanceType.prompt" localizedPrompt=true}}
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col span-4">
+          <label class="acc-label">{{t 'nodeDriver.pinganyunecs.imageType.label'}}</label>
+          {{new-select classNames="form-control" content=useTypes value=useType prompt="nodeDriver.pinganyunecs.imageType.prompt" localizedPrompt=true}}
+        </div>
+        <div class="col span-4">
+          <label class="acc-label">{{t 'nodeDriver.pinganyunecs.osType.label'}}</label>
+          {{new-select classNames="form-control" content=osTypes value=osTypeId prompt="nodeDriver.pinganyunecs.osType.prompt" localizedPrompt=true}}
+        </div>
+        <div class="col span-4">
+          <label class="acc-label">{{t 'nodeDriver.pinganyunecs.systemImage.label'}}</label>
+          {{new-select classNames="form-control" content=images value=config.imageId prompt="nodeDriver.pinganyunecs.systemImage.prompt" localizedPrompt=true}}
+        </div>
+      </div>
+    {{/accordion-list-item}}
+
+    <div class="over-hr"><span>{{templateOptionsTitle}}</span></div>
+
+    {{form-name-description
+      model=model
+      nameRequired=true
+    }}
+
+    {{form-user-labels
+      initialLabels=labelResource.labels
+      setLabels=(action 'setLabels')
+      expandAll=expandAll
+      expand=(action expandFn)
+    }}
+
+    {{form-engine-opts
+      machine=model
+      showEngineUrl=showEngineUrl
+    }}
+
+    {{top-errors errors=errors}}
+    {{save-cancel save="save" cancel="cancel" editing=editing}}
+  </div>
+{{/accordion-list}}

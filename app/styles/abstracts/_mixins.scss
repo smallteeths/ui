@@ -131,6 +131,10 @@
   background-image: url('images/providers/aliyunecs.svg');
 }
 
+@mixin pinganyunecs {
+  background-image: url('images/providers/pinganyunecs.svg');
+}
+
 @mixin newtemplate {
   background-image: url('images/resources/container.svg');
 }
