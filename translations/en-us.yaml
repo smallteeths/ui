@@ -5894,7 +5894,7 @@ nodeDriver:
     nat:
       label: NAT Gateway
       placeholder: NAT Gateway
-      prompt: NNAT Gateway
+      prompt: NAT Gateway
     sshPassword:
       label: SH Password
       placeholder: Set Instance SSH Password (Optional)
