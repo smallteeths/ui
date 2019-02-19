@@ -5849,7 +5849,7 @@ nodeDriver:
     securityGroup:
       label: 安全组
       placeholder: 安全组
-      prompt: 不绑定安全组
+      prompt: 创建新的安全组
     nat:
       label: NAT 网关
       placeholder: NAT 网关

@@ -5890,7 +5890,7 @@ nodeDriver:
     securityGroup:
       label: Security Group
       placeholder: Security Group
-      prompt: Do not bind Security Group
+      prompt: Create A New Security Group
     nat:
       label: NAT Gateway
       placeholder: NAT Gateway
