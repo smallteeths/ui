@@ -5877,7 +5877,7 @@ nodeDriver:
       sshPasswordInvalidCharacter: SSH密码包含非法字符
       sshPasswordFormatError: "SSH密码必须至少包括大写字符，小写字符，数字和特殊字符中的三种"
       nameNotValidForApp: 请填写英文字母, 空格, 数字, @ 和 _, -, 最长 50 个字符
-      diskSizeExceedTheLimit: 单个磁盘大小不能超过2000G
+      diskSizeExceedTheLimit: 单个磁盘大小必须在20G到2000G之间
 newConfigMap:
   title:
     new: 添加ConfigMap
