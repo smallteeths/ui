@@ -251,7 +251,11 @@ Router.map(function() {
       this.route('console');
       this.route('container-log');
     });
-
+    // Custom Extension
+    this.mount('custom-extension', {
+      path:           '/custom-extension',
+      resetNamespace: true,
+    })
     // End: Authenticated
   });
 

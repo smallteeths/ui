@@ -112,12 +112,13 @@
   "ember-addon": {
     "paths": [
       "lib/alert",
+      "lib/custom-extension",
       "lib/global-admin",
       "lib/logging",
       "lib/login",
+      "lib/monitoring",
       "lib/nodes",
       "lib/pipeline",
-      "lib/monitoring",
       "lib/shared"
     ]
   }

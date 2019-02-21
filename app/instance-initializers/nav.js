@@ -331,6 +331,55 @@ const rootNav = [
   },
   {
     scope:          'global',
+    id:             'global-image-repo',
+    localizedLabel: 'nav.admin.imageRepo.tab',
+    route:          'custom-extension.image-repo.index',
+    resourceScope:  'global',
+    submenu:        [
+      {
+        scope:          'global',
+        id:             'global-image-repo-config',
+        localizedLabel: 'nav.admin.imageRepo.config',
+        icon:           'icon icon-key',
+        route:          'custom-extension.image-repo.config',
+        condition() {
+          return true;
+        }
+      },
+      {
+        scope:          'global',
+        id:             'global-image-repo-registries',
+        localizedLabel: 'nav.admin.imageRepo.registries',
+        icon:           'icon icon-key',
+        route:          'custom-extension.image-repo.registries',
+        condition() {
+          return true;
+        }
+      },
+      {
+        scope:          'global',
+        id:             'global-image-repo-project',
+        localizedLabel: 'nav.admin.imageRepo.project',
+        icon:           'icon icon-key',
+        route:          'custom-extension.image-repo.project',
+        condition() {
+          return true;
+        }
+      },
+      {
+        scope:          'global',
+        id:             'global-image-repo-log',
+        localizedLabel: 'nav.admin.imageRepo.log',
+        icon:           'icon icon-key',
+        route:          'custom-extension.image-repo.log',
+        condition() {
+          return true;
+        }
+      },
+    ],
+  },
+  {
+    scope:          'global',
     id:             'global-accounts',
     localizedLabel: 'nav.admin.accounts',
     route:          'global-admin.accounts',

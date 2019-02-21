@@ -6716,6 +6716,12 @@ nav:
       auth: Access Control
       registration: Host Registration
       advanced: Advanced
+    imageRepo:
+      tab: Image Repo
+      config: Confing
+      registries: Registries
+      project: Project
+      log: Log
   user:
     label: "User Menu: {username}"
     logout: Log Out
