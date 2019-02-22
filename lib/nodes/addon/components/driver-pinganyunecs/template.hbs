@@ -165,11 +165,11 @@
       <div class="row">
         <div class="col span-4">
           <label class="acc-label">{{t 'nodeDriver.pinganyunecs.imageType.label'}}</label>
-          {{new-select classNames="form-control" content=useTypes value=useType prompt="nodeDriver.pinganyunecs.imageType.prompt" localizedPrompt=true}}
+          {{new-select classNames="form-control" content=useTypes value=config.useType prompt="nodeDriver.pinganyunecs.imageType.prompt" localizedPrompt=true}}
         </div>
         <div class="col span-4">
           <label class="acc-label">{{t 'nodeDriver.pinganyunecs.osType.label'}}</label>
-          {{new-select classNames="form-control" content=osTypes value=osTypeId prompt="nodeDriver.pinganyunecs.osType.prompt" localizedPrompt=true}}
+          {{new-select classNames="form-control" content=osTypes value=config.osTypeId prompt="nodeDriver.pinganyunecs.osType.prompt" localizedPrompt=true}}
         </div>
         <div class="col span-4">
           <label class="acc-label">{{t 'nodeDriver.pinganyunecs.systemImage.label'}}</label>
