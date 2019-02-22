@@ -5895,6 +5895,10 @@ nodeDriver:
       label: NAT Gateway
       placeholder: NAT Gateway
       prompt: NAT Gateway
+    snatName:
+      label: SNAT Rule
+      placeholder: SNAT Rule
+      prompt: SNAT Rule
     sshPassword:
       label: SH Password
       placeholder: Set Instance SSH Password (Optional)

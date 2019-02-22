@@ -5854,6 +5854,10 @@ nodeDriver:
       label: NAT 网关
       placeholder: NAT 网关
       prompt: NAT 网关...
+    snatName:
+      label: SNAT 规则
+      placeholder: SNAT 规则
+      prompt: SNAT 规则...
     sshPassword:
       label: SSH密码
       placeholder: 创建实例后SSH远程登录密码(非必填)
