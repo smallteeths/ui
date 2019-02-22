@@ -82,7 +82,7 @@
         <div class="col span-4">
           <label class="acc-label">{{t 'nodeDriver.pinganyunecs.securityGroup.label'}}</label>
           {{#input-or-display editable=(eq step 2) value=currentSecurityGroup}}
-            {{new-select classNames="form-control" content=securityGroups value=config.securityGroup prompt="nodeDriver.pinganyunecs.securityGroup.prompt" localizedPrompt=true}}
+            {{new-select classNames="form-control" content=securityGroups value=config.securityGroupId prompt="nodeDriver.pinganyunecs.securityGroup.prompt" localizedPrompt=true}}
           {{/input-or-display}}
         </div>
       </div>
