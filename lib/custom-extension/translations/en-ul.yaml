@@ -1,2 +1,3 @@
-customExtension:
-  imageRepoPage:
+  imageRepoSection:
+    projectsPage:
+      addProject: New Project

@@ -334,14 +334,16 @@ const rootNav = [
     id:             'global-image-repo',
     localizedLabel: 'nav.admin.imageRepo.tab',
     route:          'custom-extension.image-repo.index',
+    resource:       [],
     resourceScope:  'global',
     submenu:        [
       {
         scope:          'global',
-        id:             'global-image-repo-config',
+        id:             'global-image-repo-admin-config',
         localizedLabel: 'nav.admin.imageRepo.config',
         icon:           'icon icon-key',
-        route:          'custom-extension.image-repo.config',
+        route:          'custom-extension.image-repo.adminConfig',
+        resource:       [],
         condition() {
           return !!get(this, 'access.admin');
         }
@@ -352,23 +354,37 @@ const rootNav = [
         localizedLabel: 'nav.admin.imageRepo.registries',
         icon:           'icon icon-key',
         route:          'custom-extension.image-repo.registries',
+        resource:       [],
         condition() {
           return !!get(this, 'access.admin');
         }
       },
       {
         scope:          'global',
-        id:             'global-image-repo-project',
-        localizedLabel: 'nav.admin.imageRepo.project',
+        id:             'global-image-repo-user-config',
+        localizedLabel: 'nav.admin.imageRepo.config',
         icon:           'icon icon-key',
-        route:          'custom-extension.image-repo.project',
+        route:          'custom-extension.image-repo.userConfig',
+        resource:       [],
+        condition() {
+          return !get(this, 'access.admin');
+        }
       },
       {
         scope:          'global',
-        id:             'global-image-repo-log',
-        localizedLabel: 'nav.admin.imageRepo.log',
+        id:             'global-image-repo-projects',
+        localizedLabel: 'nav.admin.imageRepo.projects',
         icon:           'icon icon-key',
-        route:          'custom-extension.image-repo.log',
+        route:          'custom-extension.image-repo.projects',
+        resource:       [],
+      },
+      {
+        scope:          'global',
+        id:             'global-image-repo-logs',
+        localizedLabel: 'nav.admin.imageRepo.logs',
+        icon:           'icon icon-key',
+        route:          'custom-extension.image-repo.logs',
+        resource:       [],
       },
     ],
   },
