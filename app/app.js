@@ -207,10 +207,6 @@ const App = Application.extend({
           'app',
           'access',
           'clusterStore',
-          'catalog',
-          'endpoint',
-          'azureAd',
-          'github',
           'globalStore',
           'intl',
           'modal',
@@ -224,22 +220,7 @@ const App = Application.extend({
           'user-language',
           'user-theme',
         ],
-        externalRoutes: {
-          index:                                          'index',
-          failWhale:                                      'failWhale',
-          authenticated:                                  'authenticated',
-          'authenticated.cluster':                        'authenticated.cluster',
-          'authenticated.cluster.projects':               'authenticated.cluster.projects',
-          'authenticated.project':                        'authenticated.project',
-          'authenticated.project.apps-tab':               'authenticated.project.apps-tab',
-          'authenticated.project.apps-tab.detail':        'authenticated.project.apps-tab.detail',
-          'apps-tab':                                     'apps-tab',
-          'apps-tab.detail':                              'apps-tab.detail',
-          'authenticated.prefs':                          'nauthenticated.prefs',
-          'authenticated.cluster.nodes':                  'authenticated.cluster.nodes',
-          'authenticated.cluster.security.members.index': 'authenticated.cluster.security.members.index',
-          'logout':                                       'logout'
-        }
+        externalRoutes: { 'logout': 'logout' }
       }
     },
   }

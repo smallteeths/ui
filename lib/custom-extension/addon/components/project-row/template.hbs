@@ -1,0 +1,36 @@
+<td valign="middle" class="row-check" style="padding-top: 2px;">
+  {{check-box nodeId=model.name}}
+</td>
+
+<td data-title="{{dt.name}}">
+  {{model.name}}
+</td>
+<td data-title="{{dt.public}}">
+  {{#if model.metadata.public}}
+    公开
+  {{else}}
+    私有
+  {{/if}}
+</td>
+<td data-title="{{dt.UserRole}}">
+  {{#if (eq model.current_user_role_id 0)}}
+  系统管理员
+  {{else if (eq model.current_user_role_id 1)}}
+    项目管理员
+  {{else if (eq model.current_user_role_id 2)}}
+    维护人员
+  {{else if (eq model.current_user_role_id 3)}}
+    开发人员
+  {{else if (eq model.current_user_role_id 4)}}
+    访客
+  {{/if}}
+</td>
+<td data-title="{{dt.repoCount}}">
+  {{model.repo_count}}
+</td>
+<td data-title="{{dt.chartCount}}">
+  {{model.chart_count}}
+</td>
+<td data-title="{{dt.creationTime}}">
+  {{date-from-now model.creation_time}}
+</td>

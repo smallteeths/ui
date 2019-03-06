@@ -1,0 +1,14 @@
+imageRepoSection:
+  projectsPage:
+    addProject: New Project
+    removeProject: Delete Project
+    projectPublic: Public
+    porjectPrivate: Private
+    projectRoles:
+      admin: Project Admin
+      master: Master
+      developer: Developer
+      guest: Guest
+    table:
+      noData: There are no projects yet
+      noMatch: No projects match the current search

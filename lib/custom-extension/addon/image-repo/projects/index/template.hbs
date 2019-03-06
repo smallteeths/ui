@@ -1,0 +1,47 @@
+<section class="header clearfix">
+  <div class="right-buttons">
+    <button class="btn btn-sm bg-primary right-divider-btn" {{action 'addNewProject'}}>新建项目</button>
+  </div>
+
+  <h1>项目</h1>
+
+</section>
+<section class="instances pt-5 pb-5">
+  {{#custom-table
+    classNames="grid sortable-table"
+    headers=headers
+    body=model.data
+    availableActions=availableActions
+    totalCount=model.totalCount
+    sortChanged="sortChanged"
+    primaryKeyName="name"
+    remove=(action "promptDelete")
+    as |sortable kind row dt|
+  }}
+  {{#if (eq kind "row")}}
+      {{project-row model=row}}
+    {{else if (eq kind "nomatch")}}
+      <tr>
+        <td
+          colspan="{{sortable.fullColspan}}"
+          class="text-center text-muted lacsso pt-20 pb-20"
+        >
+          {{t "imageRepoSection.projectsPage.table.noMatch"}}
+        </td>
+      </tr>
+    {{else if (eq kind "norows")}}
+      <tr>
+        <td
+          colspan="{{sortable.fullColspan}}"
+          class="text-center text-muted pt-20 pb-20"
+        >
+          {{t "imageRepoSection.projectsPage.table.noData"}}
+        </td>
+      </tr>
+    {{/if}}
+
+  {{/custom-table}}
+</section>
+{{#custom-modal-confirm-delete confirm=(action 'confirmDelete') resources=selectedProjects modalVisible=showConfirmDeleteModal}}
+
+{{/custom-modal-confirm-delete}}

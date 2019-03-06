@@ -6,9 +6,11 @@
   ],
   "dependencies": {
     "ember-auto-import": "*",
+    "ember-basic-dropdown": "*",
     "ember-cli-htmlbars": "*",
     "ember-href-to": "*",
-    "ember-cli-babel": "*"
+    "ember-cli-babel": "*",
+    "ember-intl": "*"
   },
   "ember-addon": {
     "paths": [
