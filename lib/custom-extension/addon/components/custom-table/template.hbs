@@ -47,7 +47,7 @@
             <div class="vertical-middle">
               {{#ember-wormhole to=searchToWormhole renderInPlace=(not searchToWormhole)}}
                 <div class="{{unless searchToWormhole 'pull-right'}} search-group input-group">
-                  {{input value=searchText aria-title=(t 'generic.search') type="search" class="input-sm pull-right" placeholder=(t 'generic.search')}}
+                  {{input value=searchText aria-title=(t 'generic.search') type="search" class="input-sm pull-right" placeholder=(t 'generic.search') keyUp=(action "search")}}
                   {{#if searchText}}
                     <span class="input-group-btn">
                       <button class="btn bg-transparent text-info pl-10 pr-10" {{action 'clearSearch'}}><i class="icon icon-close"/></button>
@@ -84,16 +84,13 @@
     </tr>
   </thead>
     <tbody>
-      {{#each pagedContent as |row|}}
-        {{yield this 'row' row dt (array-includes childFilterNodes row.id)}}
+      {{#each data as |row|}}
+        {{yield this 'row' row dt}}
       {{else}}
         {{yield this 'norows'}}
       {{/each}}
     </tbody>
 </table>
-{{log indexTo}}
-{{log indexFrom}}
-{{log totalCount}}
 {{#if paging }}
-  {{page-numbers content=pagedContent class="text-center mt-10 mb-10 no-select" indexTo=indexTo indexFrom=indexFrom totalCount=totalCount textLabel=pagingLabel}}
+  {{page-numbers content=pagedContent class="text-center mt-10 mb-10 no-select" indexTo=indexTo indexFrom=indexFrom totalCount=totalCount textLabel=pagingLabel action=(action "pageChange")}}
 {{/if}}
