@@ -1,0 +1,71 @@
+<section class="header clearfix">
+  <h1>Harbor 配置</h1>
+</section>
+<section>
+{{#accordion-list-item
+    title="Harbor 配置"
+    detail="Harbor访问设置"
+    expandOnInit=true
+    showExpand=false
+  }}
+{{top-errors errors=harborAccountErrors}}
+<div class="row">
+  <div class="col span-12">
+    <label class="acc-label">访问地址{{field-required}}</label>
+    {{#input-or-display editable=harborConfigEditable value=harborConfig.url}}
+      {{input type="text" class="form-control" value=harborConfig.url placeholder="访问Harbor 的 URL"}}
+    {{/input-or-display}}
+  </div>
+  <div class="col span-6">
+    <label class="acc-label">用户名{{field-required}}</label>
+    {{#input-or-display editable=harborConfigEditable value=harborConfig.username}}
+      {{input type="text" class="form-control" value=harborConfig.username placeholder="访问Harbor的用户名"}}
+    {{/input-or-display}}
+  </div>
+  <div class="col span-6">
+    <label class="acc-label">密码{{field-required}}</label>
+    {{#input-or-display editable=harborConfigEditable value="***"}}
+      {{input type="password" class="form-control" value=harborConfig.password placeholder="访问Harbor的密码"}}
+    {{/input-or-display}}
+  </div>
+</div>
+{{save-cancel save="saveHarboConfig" cancel="cancelHarborConfig" createLabel="imageRepoSection.adminConfigpage.saveHarborConfig" }}
+{{/accordion-list-item}}
+</section>
+{{#if harborAccountValid}}
+<section>
+{{#accordion-list as | al expandFn | }}
+  {{#accordion-list-item
+      title="邮箱"
+      detail="邮件服务器配置"
+      expandAll=al.expandAll
+      expand=(action expandFn)
+  }}
+  {{/accordion-list-item}}
+
+  {{#accordion-list-item
+      title="系统"
+      detail="系统设置"
+      expandAll=al.expandAll
+      expand=(action expandFn)
+  }}
+  {{/accordion-list-item}}
+
+  {{#accordion-list-item
+      title="标签"
+      detail="标签管理"
+      expandAll=al.expandAll
+      expand=(action expandFn)
+  }}
+  {{/accordion-list-item}}
+
+ {{#accordion-list-item
+      title="垃圾清理"
+      detail="垃圾清理配置"
+      expandAll=al.expandAll
+      expand=(action expandFn)
+  }}
+  {{/accordion-list-item}}
+{{/accordion-list}}
+</section>
+{{/if}}

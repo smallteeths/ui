@@ -1,0 +1,16 @@
+imageRepoSection:
+  projectsPage:
+    addProject: 新建项目
+    removeProject: 删除项目
+    projectPublic: 公开
+    porjectPrivate: 私有
+    projectRoles:
+      admin: Project Admin
+      master: Master
+      developer: Developer
+      guest: Guest
+    table:
+      noData: There are no projects yet
+      noMatch: No projects match the current search
+  adminConfigpage:
+    saveHarborConfig: 保存

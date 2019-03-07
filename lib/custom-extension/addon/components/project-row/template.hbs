@@ -6,7 +6,7 @@
   {{model.name}}
 </td>
 <td data-title="{{dt.public}}">
-  {{#if model.metadata.public}}
+  {{#if (eq model.metadata.public "true")}}
     公开
   {{else}}
     私有

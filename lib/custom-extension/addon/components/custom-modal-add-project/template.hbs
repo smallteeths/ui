@@ -3,16 +3,22 @@
   {{top-errors errors=errors}}
   <h2 class="alert-header">新建项目</h2>
   <hr/>
-  <div class="inline-form">
-    <label class="acc-label">项目名称{{field-required}}</label>
-    {{input
-        class="form-control"
-        value=project.project_name
-    }}
+  <div class="row">
+    <div class="col span-12">
+      <label class="acc-label">项目名称{{field-required}}</label>
+      {{input
+          class="form-control"
+          value=project.project_name
+      }}
+    </div>
   </div>
-  <div class="inline-form">
-  <label class="acc-label">访问级别</label>
-  {{input type="checkbox" class="form-control" checked=project.metadata.public}}
+  <div class="row">
+    <div class="col span-12">
+      <label class="acc-label">访问级别</label>
+      <label>
+      {{input type="checkbox" class="form-control" checked=project.metadata.public label="ddd"}}公开
+      </label>
+    </div>
   <br/>
   <span class="text-info">当项目设为公开后，任何人都有此项目下镜像的读权限。命令行用户不需要“docker login”就可以拉取此项目下的镜像。</span>
 </div>
