@@ -1,0 +1,35 @@
+<section class="header clearfix">
+  <h1>Harbor 账号配置</h1>
+</section>
+{{#if (not hasHarborRegistry)}}
+<section>
+  <p>请等待管理员配置镜像库</p>
+</section>
+{{/if}}
+{{#if (and hasHarborRegistry accountSynced)}}
+<section>
+  <p>镜像库账号已经同步完成</p>
+  {{top-errors errors=harborAccountErrors}}
+</section>
+{{/if}}
+{{#if (and hasHarborRegistry (not accountSynced))}}
+<section>
+{{top-errors errors=errors}}
+<div class="row">
+  <div class="col span-6">
+    <label class="acc-label">邮箱地址{{field-required}}</label>
+    {{#input-or-display editable=accountEditable value=account.email}}
+      {{input type="text" class="form-control" value=account.email placeholder="邮箱地址"}}
+    {{/input-or-display}}
+  </div>
+  <div class="col span-6">
+    <label class="acc-label">密码{{field-required}}</label>
+    {{#input-or-display editable=accountEditable value="***"}}
+      {{input type="password" class="form-control" value=account.password placeholder="访问Harbor的密码"}}
+    {{/input-or-display}}
+  </div>
+</div>
+
+{{save-cancel save="syncAccount" cancelDisabled=true createLabel="imageRepoSection.userConfigPage.syncAccount" }}
+</section>
+{{/if}}

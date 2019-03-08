@@ -12,5 +12,7 @@ imageRepoSection:
     table:
       noData: There are no projects yet
       noMatch: No projects match the current search
-  adminConfigpage:
+  adminConfigPage:
     saveHarborConfig: 保存
+  userConfigPage:
+    syncAccount: 同步账号
