@@ -41,7 +41,72 @@
       expandAll=al.expandAll
       expand=(action expandFn)
   }}
-  {{/accordion-list-item}}
+  {{top-errors errors=emailServerConfigErrors}}
+  <div class="row">
+    <div class="col span-6">
+      <label class="acc-label">邮件服务器{{field-required}}</label>
+      {{#input-or-display editable=emailConfigEditble value=configurations.email_host}}
+        {{input type="text" class="form-control" value=configurations.email_host placeholder="邮件服务器地址"}}
+      {{/input-or-display}}
+    </div>
+    <div class="col span-6">
+      <label class="acc-label">邮件服务器端口{{field-required}}</label>
+      {{#input-or-display editable=emailConfigEditble value=configurations.email_port}}
+        {{input type="text" class="form-control" value=configurations.email_port placeholder="邮件服务器端口"}}
+      {{/input-or-display}}
+    </div>
+    </div>
+    <div class="row">
+    <div class="col span-6">
+      <label class="acc-label">用户名</label>
+      {{#input-or-display editable=emailConfigEditble value=configurations.email_username}}
+        {{input type="text" class="form-control" value=configurations.email_username placeholder="用户名"}}
+      {{/input-or-display}}
+    </div>
+    <div class="col span-6">
+      <label class="acc-label">密码</label>
+      {{#input-or-display editable=emailConfigEditble value="***"}}
+        {{input type="password" class="form-control" value=configurations.email_password placeholder="密码"}}
+      {{/input-or-display}}
+    </div>
+    </div>
+    <div class="row">
+    <div class="col span-6">
+      <label class="acc-label">邮件来源{{field-required}}</label>
+      {{#input-or-display editable=emailConfigEditble value=configurations.email_from}}
+        {{input type="text" class="form-control" value=configurations.email_from placeholder="邮件来源"}}
+      {{/input-or-display}}
+    </div>
+    </div>
+   <div class="row">
+    <div class="col span-6">
+      <label class="acc-label">邮件 SSL{{field-required}}</label>
+      <br>
+      {{#input-or-display editable=emailConfigEditble value=configurations.email_ssl}}
+        {{input type="checkbox" class="form-control" checked=configurations.email_ssl placeholder="邮件 SSL"}}
+      {{/input-or-display}}
+      <div class="text-info">启用SSL到邮件服务器连接。</div>
+    </div>
+    <div class="col span-6">
+      <label class="acc-label">验证证书{{field-required}}</label>
+      <br>
+      {{#input-or-display editable=emailConfigEditble value=configurations.email_insecure}}
+        {{input type="checkbox" class="form-control" checked=configurations.email_insecure placeholder="验证证书"}}
+      {{/input-or-display}}
+      <div class="text-info">确定是否要验证邮件服务器的证书。如果邮件服务器使用的是自签或者非信任证书，不要勾选此项。</div>
+    </div>
+  </div> 
+  <div class="row">
+    <div class="col span-6">
+      {{save-cancel save="saveEmailConfig" cancel="cancelEmailConfig" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" class="pull-right"}}
+    </div>
+    <div class="col span-6">
+      {{save-cancel save="testEmailServer" cancelDisabled=true createLabel="imageRepoSection.adminConfigPage.testEmailServer" class="pull-left"}}
+    </div>
+    
+    
+  </div>
+{{/accordion-list-item}}
 
   {{#accordion-list-item
       title="系统"
