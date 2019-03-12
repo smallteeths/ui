@@ -12,3 +12,12 @@ imageRepoSection:
     table:
       noData: There are no projects yet
       noMatch: No projects match the current search
+  adminConfigPage:
+    saveHarborConfig: save
+    testEmailServer: test email server connection
+  userConfigPage:
+    syncAccount: Sync Account
+  labelPage:
+      table:
+        noMatch: No labels match the current search
+        noData: There are no labels yet

@@ -114,6 +114,38 @@
       expandAll=al.expandAll
       expand=(action expandFn)
   }}
+  {{top-errors errors=systemConfigErrors}}
+  <div class="row">
+    <div class="col span-4">
+      <label class="acc-label">项目创建</label>
+      <br>
+      {{#input-or-display editable=systemConfigEditble value=configurations.project_creation_restriction}}
+        {{new-select
+          class="form-control input-sm"
+          content=projectCreationOptions
+          value=configurations.project_creation_restriction
+        }}
+      {{/input-or-display}}
+      <div class="text-info">由令牌服务创建的令牌的过期时间（分钟），默认为30分钟。</div>
+    </div>
+    <div class="col span-4">
+      <label class="acc-label">令牌过期时间（分钟）{{field-required}}</label>
+      <br>
+      {{#input-or-display editable=systemConfigEditble value=configurations.token_expiration}}
+        {{input type="number" class="form-control" value=configurations.token_expiration placeholder="令牌过期时间（分钟）"}}
+      {{/input-or-display}}
+      <div class="text-info">由令牌服务创建的令牌的过期时间（分钟），默认为30分钟。</div>
+    </div>
+    <div class="col span-4">
+      <label class="acc-label">仓库只读</label>
+      <br>
+      {{#input-or-display editable=systemConfigEditble value=configurations.read_only}}
+        {{input type="checkbox" class="form-control" checked=configurations.read_only placeholder="仓库只读"}}
+      {{/input-or-display}}
+      <div class="text-info">用户在此模式下无法对仓库执行任何操作。</div>
+    </div>
+  </div>
+  {{save-cancel save="saveSystemConfig" cancel="cancelSystemConfigy" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig"}}
   {{/accordion-list-item}}
 
   {{#accordion-list-item
@@ -122,6 +154,8 @@
       expandAll=al.expandAll
       expand=(action expandFn)
   }}
+
+  {{#custom-labels param=labelParam}}{{/custom-labels}}
   {{/accordion-list-item}}
 
  {{#accordion-list-item

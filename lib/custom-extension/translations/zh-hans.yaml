@@ -17,3 +17,8 @@ imageRepoSection:
     testEmailServer: 测试邮件服务器
   userConfigPage:
     syncAccount: 同步账号
+  labelPage:
+    table:
+      noMatch: 没有Label匹配当前搜索
+      noData: 暂无数据
+

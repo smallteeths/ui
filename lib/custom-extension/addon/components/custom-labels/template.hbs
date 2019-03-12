@@ -1,0 +1,51 @@
+<section class="header clearfix">
+  <div class="right-buttons">
+    <button class="btn btn-sm bg-primary right-divider-btn" {{action 'addNewLabel'}}>新建标签</button>
+  </div>
+</section>
+<section class="instances pt-5 pb-5">
+  {{#custom-table
+    classNames="grid sortable-table"
+    headers=headers
+    data=data
+    availableActions=availableActions
+    totalCount=model.totalCount
+    primaryKeyName="id"
+    remove=(action "promptDelete")
+    search=(action "search")
+    pageChange=(action "pageChange")
+    edit=(action "edit")
+    saveEdit=(action "saveEdit")
+    create=(action "create")
+    saveCreate=(action "saveCreate")
+    sortChanged=(action "sortChanged")
+    as |sortable kind row dt|
+  }}
+  {{#if (eq kind "row")}}
+      {{custom-label-row model=row labelColors=labelColors}}
+    {{else if (eq kind "nomatch")}}
+      <tr>
+        <td
+          colspan="{{sortable.fullColspan}}"
+          class="text-center text-muted lacsso pt-20 pb-20"
+        >
+          {{t "imageRepoSection.labelPage.table.noMatch"}}
+        </td>
+      </tr>
+    {{else if (eq kind "norows")}}
+      <tr>
+        <td
+          colspan="{{sortable.fullColspan}}"
+          class="text-center text-muted pt-20 pb-20"
+        >
+          {{t "imageRepoSection.labelPage.table.noData"}}
+        </td>
+      </tr>
+    {{/if}}
+
+  {{/custom-table}}
+</section>
+{{#custom-modal-add-label modalVisible=showAddLabelModal labelColors=labelColors saved=(action "refreshLabels")}}
+{{/custom-modal-add-label }}
+{{#custom-modal-confirm-delete confirm=(action 'confirmDelete') resources=selectedLabels modalVisible=showConfirmDeleteModal}}
+{{/custom-modal-confirm-delete}}
