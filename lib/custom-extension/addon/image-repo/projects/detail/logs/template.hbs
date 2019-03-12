@@ -21,5 +21,49 @@
   </ul>
 </section>
 <section>
-logs
+  <div class="fixed-header-actions row clearfix">
+    <div class="pull-right" style="display: flex;">
+      <div class="vertical-middle" style="height: 38px;display:flex;align-items:center">
+        <div class="{{unless searchToWormhole 'pull-right'}} search-group input-group">
+          {{input value=searchText type="search" class="input-sm pull-right" enter="search" }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="instances pt-5 pb-5">
+  {{#custom-table
+    classNames="grid sortable-table"
+    headers=headers
+    availableActions=availableActions
+    data=model.data
+    hasBulkActions=false
+    search=false
+    totalCount=model.totalCount
+    pageChange=(action "pageChange")
+    as |sortable kind row dt|
+  }}
+  {{#if (eq kind "row")}}
+      {{logs-row model=row}}
+    {{else if (eq kind "nomatch")}}
+      <tr>
+        <td
+          colspan="{{sortable.fullColspan}}"
+          class="text-center text-muted lacsso pt-20 pb-20"
+        >
+          {{t "imageRepoSection.projectsPage.table.noMatch"}}
+        </td>
+      </tr>
+    {{else if (eq kind "norows")}}
+      <tr>
+        <td
+          colspan="{{sortable.fullColspan}}"
+          class="text-center text-muted pt-20 pb-20"
+        >
+          {{t "imageRepoSection.projectsPage.table.noData"}}
+        </td>
+      </tr>
+    {{/if}}
+
+  {{/custom-table}}
 </section>
