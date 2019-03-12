@@ -1,9 +1,14 @@
 <td valign="middle" class="row-check" style="padding-top: 2px;">
-  {{check-box nodeId=model.name}}
+  {{check-box nodeId=model.project_id}}
 </td>
 
 <td data-title="{{dt.name}}">
-  {{model.name}}
+  {{!-- <a href="{{href-to 'custom-extension.image-repo.projects.detail.repositories' model.project_id}}">
+    {{model.name}}
+  </a> --}}
+    {{#link-to 'image-repo.projects.detail.repositories' model.project_id class="clip project-link"}}
+    {{model.name}}
+  {{/link-to}}
 </td>
 <td data-title="{{dt.public}}">
   {{#if (eq model.metadata.public "true")}}
