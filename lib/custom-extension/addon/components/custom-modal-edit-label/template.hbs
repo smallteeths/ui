@@ -1,0 +1,46 @@
+{{#if modalVisible}}
+<form class="modal-container large-modal alert">
+  {{top-errors errors=errors}}
+  <h2 class="alert-header">编辑标签</h2>
+  <hr/>
+  <div class="row">
+    <div class="col span-4">
+      <label class="acc-label">标签名称{{field-required}}</label>
+      {{input
+          class="form-control"
+          value=label.name
+      }}
+    </div>
+    <div class="col span-4">
+      <label class="acc-label">颜色</label>
+      {{#basic-dropdown
+         horizontalPosition="left"
+         as |dd|}}
+      {{#dd.trigger
+           class="form-control"
+      }}
+        颜色
+        <span class="darken"><i class="icon icon-chevron-down"></i></span>
+        {{label.color}}
+      {{/dd.trigger}}
+
+      {{#dd.content}}
+       <div style="width: 180px;">
+        {{#each labelColors as |color|}}
+        <div  onclick={{action "changeColor" color}} style="cursor: pointer;display: inline-block;margin: 2px 4px;padding: 0;width: 30px;height: 24px;text-align: center;line-height: 24px;border: 0;font-size: 12px;background-color:{{color.color}};color:{{color.textColor}};">Aa</div>
+        {{/each}}
+       </div> 
+      {{/dd.content}}
+    {{/basic-dropdown}}
+    </div>
+    <div class="col span-4">
+      <label class="acc-label">标签描述</label>
+      {{input
+          class="form-control"
+          value=label.description
+      }}
+    </div>
+  </div>
+{{save-cancel editing=editing save="save" cancel="cancel" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig"}}
+</form>
+{{/if}}

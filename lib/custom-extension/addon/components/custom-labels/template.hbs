@@ -14,10 +14,7 @@
     remove=(action "promptDelete")
     search=(action "search")
     pageChange=(action "pageChange")
-    edit=(action "edit")
-    saveEdit=(action "saveEdit")
-    create=(action "create")
-    saveCreate=(action "saveCreate")
+    edit=(action "editLabel")
     sortChanged=(action "sortChanged")
     as |sortable kind row dt|
   }}
@@ -47,5 +44,7 @@
 </section>
 {{#custom-modal-add-label modalVisible=showAddLabelModal labelColors=labelColors saved=(action "refreshLabels")}}
 {{/custom-modal-add-label }}
+{{#custom-modal-edit-label modalVisible=showEditLabelModal label=editingLabel labelColors=labelColors saved=(action "refreshLabels")}}
+{{/custom-modal-edit-label }}
 {{#custom-modal-confirm-delete confirm=(action 'confirmDelete') resources=selectedLabels modalVisible=showConfirmDeleteModal}}
 {{/custom-modal-confirm-delete}}
