@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col span-2">垃圾清理</div>
+  <div class="col span-2">
+    {{new-select
+        class="form-control input-sm"
+        content=scheduleTypes
+        value=schedule.type
+        style="display: inline-block; width: auto;"
+      }}
+  </div>
+  {{#if (and hasSchedule isWeeklySchedule)}}
+  <div class="col span-2">
+    {{new-select
+    class="form-control input-sm"
+    content=weekdays
+    value=schedule.weekday
+    style="display: inline-block; width: auto;"
+  }}
+  </div>
+  {{/if}}
+  {{#if hasSchedule}}
+  <div class="col span-4">
+    <div style="display: flex;align-items: center;">
+      时:{{input min="0" max="23" step="1" type="number" value=schedule.hour}}
+      分:{{input min="0" max="59" step="1" type="number" value=schedule.min}}
+    </div>
+  </div>
+  {{/if}} 
+</div>
+{{save-cancel save="saveGCSchedule" cancel="cancelGCSchedule" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig"}} 
+<div style="display: flex;">
+  {{save-cancel save="gcSchedule" createLabel="imageRepoSection.adminConfigPage.gcSchedule" cancelDisabled=true}} 
+</div>

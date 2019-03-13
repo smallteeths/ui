@@ -158,13 +158,15 @@
   {{#custom-labels param=labelParam}}{{/custom-labels}}
   {{/accordion-list-item}}
 
- {{#accordion-list-item
+ {{!-- {{#accordion-list-item
       title="垃圾清理"
       detail="垃圾清理配置"
       expandAll=al.expandAll
       expand=(action expandFn)
   }}
-  {{/accordion-list-item}}
+
+  {{#custom-gc-schedule}}{{/custom-gc-schedule}}
+  {{/accordion-list-item}} --}}
 {{/accordion-list}}
 </section>
 {{/if}}

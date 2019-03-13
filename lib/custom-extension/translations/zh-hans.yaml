@@ -15,6 +15,7 @@ imageRepoSection:
   adminConfigPage:
     saveHarborConfig: 保存
     testEmailServer: 测试邮件服务器
+    gcSchedule: 立即清理垃圾
   userConfigPage:
     syncAccount: 同步账号
   labelPage:

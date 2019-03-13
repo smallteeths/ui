@@ -15,6 +15,7 @@ imageRepoSection:
   adminConfigPage:
     saveHarborConfig: save
     testEmailServer: test email server connection
+    gcSchedule: GC Now
   userConfigPage:
     syncAccount: Sync Account
   labelPage:
