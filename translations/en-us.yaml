@@ -2866,6 +2866,7 @@ cruRegistry:
     dockerhub: DockerHub
     quay: Quay.io
     custom: Custom
+    harbor: Harbor
     placeholder: e.g. registry.example.com
   multiple: Multiple
   auth:

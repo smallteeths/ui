@@ -1,13 +1,15 @@
-import { get, set, observer } from '@ember/object';
+import { get, set, observer, computed } from '@ember/object';
 import Component from '@ember/component';
 import ViewNewEdit from 'shared/mixins/view-new-edit';
 import OptionallyNamespaced from 'shared/mixins/optionally-namespaced';
 import layout from './template';
 import  { PRESETS_BY_NAME } from  'ui/models/dockercredential';
+import { inject as service } from '@ember/service';
 
 export default Component.extend(ViewNewEdit, OptionallyNamespaced, {
+  harbor: service(),
   layout,
-  model: null,
+  model:  null,
 
   titleKey: 'cruRegistry.title',
 
@@ -18,6 +20,9 @@ export default Component.extend(ViewNewEdit, OptionallyNamespaced, {
   projectType:    'dockerCredential',
   namespacedType: 'namespacedDockerCredential',
 
+  harborAccount: null,
+  harborServer:  null,
+
   init() {
     this._super(...arguments);
 
@@ -26,8 +31,14 @@ export default Component.extend(ViewNewEdit, OptionallyNamespaced, {
     if (get(this, 'model.type') === 'namespacedDockerCredential') {
       set(this, 'scope', 'namespace');
     }
+    // load harbor account
+    get(this, 'harbor').loadHarborServerUrl().then((resp) => {
+      set(this, 'harborServer', resp);
+      get(this, 'harbor').fetchHarborUserInfo().then((resp) => {
+        set(this, 'harborAccount', atob(resp.body.value));
+      });
+    });
   },
-
   arrayChanged: observer('asArray.@each.{preset,address,username,password,auth}', function() {
     const registries = {};
 
@@ -41,22 +52,31 @@ export default Component.extend(ViewNewEdit, OptionallyNamespaced, {
 
       let val = {};
 
-      ['username', 'password', 'auth'].forEach((k) => {
-        let v = get(obj, k);
+      if (preset === 'harbor' && get(this, 'hasHarborAccount')) {
+        const [username, password] = get(this, 'harborAccount').split(':');
 
-        if ( v ) {
-          val[k] = v;
-        }
-      });
+        val.username = username;
+        val.password = password;
+        key = get(this, 'harborServer');
+      } else {
+        ['username', 'password', 'auth'].forEach((k) => {
+          let v = get(obj, k);
+
+          if ( v ) {
+            val[k] = v;
+          }
+        });
+      }
 
       registries[key] = val;
     });
-
     set(this, 'model.registries', registries);
 
     return this._super(...arguments);
   }),
-
+  hasHarborAccount: computed('harborAccount', function() {
+    return !!get(this, 'harborAccount');
+  }),
   willSave() {
     let pr = get(this, 'primaryResource');
 
