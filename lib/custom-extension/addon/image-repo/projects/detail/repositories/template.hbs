@@ -63,6 +63,7 @@
     availableActions=availableActions
     data=model.mirrorList.data
     search=false
+    page=page
     primaryKeyName="id"
     totalCount=model.mirrorList.totalCount
     remove=(action "promptDelete")
@@ -93,5 +94,5 @@
 
   {{/custom-table}}
 </section>
-{{#custom-modal-confirm-delete confirm=(action 'confirmDelete') resources=selectedMirror modalVisible=showConfirmDeleteModal}}
+{{#custom-modal-confirm-delete confirm=(action 'confirmDelete') resources=selectedImage modalVisible=showConfirmDeleteModal}}
 {{/custom-modal-confirm-delete}}
