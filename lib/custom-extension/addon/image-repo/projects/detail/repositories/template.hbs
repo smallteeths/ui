@@ -3,6 +3,7 @@
     <li>
       {{#link-to "image-repo.projects.detail.repositories" model.mirrorList.projectId}}镜像仓库{{/link-to}}
     </li>
+    {{#if isAdmin}}
     <li>
       {{#link-to "image-repo.projects.detail.members" model.mirrorList.projectId}}成员{{/link-to}}
     </li>
@@ -18,6 +19,7 @@
     <li>
       {{#link-to "image-repo.projects.detail.configs" model.mirrorList.projectId}}配置管理{{/link-to}}
     </li>
+    {{/if}}
   </ul>
 </section>
 <section>

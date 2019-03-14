@@ -377,6 +377,15 @@ const rootNav = [
         icon:           'icon icon-key',
         route:          'custom-extension.image-repo.projects',
         resource:       [],
+        condition() {
+          if (get(this, 'access.admin')) {
+            return true
+          } else {
+            const a = get(this, 'access.me.annotations');
+
+            return !!(a && a['authz.management.cattle.io.cn/harborauth']);
+          }
+        }
       },
       {
         scope:          'global',
@@ -385,6 +394,15 @@ const rootNav = [
         icon:           'icon icon-key',
         route:          'custom-extension.image-repo.logs',
         resource:       [],
+        condition() {
+          if (get(this, 'access.admin')) {
+            return true
+          } else {
+            const a = get(this, 'access.me.annotations');
+
+            return !!(a && a['authz.management.cattle.io.cn/harborauth']);
+          }
+        }
       },
     ],
   },

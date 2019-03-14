@@ -1,11 +1,14 @@
 <section class="header clearfix">
+  {{#if hasHarborServer}}
   <div class="right-buttons">
     <button class="btn btn-sm bg-primary right-divider-btn" {{action 'addNewProject'}}>新建项目</button>
   </div>
+  {{/if}}
 
   <h1>项目</h1>
 
 </section>
+{{#if hasHarborServer}}
 <section class="instances pt-5 pb-5">
   {{#custom-table
     classNames="grid sortable-table"
@@ -47,3 +50,6 @@
 {{#custom-modal-confirm-delete confirm=(action 'confirmDelete') resources=selectedProjects modalVisible=showConfirmDeleteModal}}
 {{/custom-modal-confirm-delete}}
 {{#custom-modal-add-project modalVisible=showAddProjectModal saved=(action "refresh")}}{{/custom-modal-add-project }}
+{{else}}
+请先配置Harbor账号在访问此页面
+{{/if}}

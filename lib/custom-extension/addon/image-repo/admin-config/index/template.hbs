@@ -29,7 +29,19 @@
     {{/input-or-display}}
   </div>
 </div>
-{{save-cancel save="saveHarboConfig" cancel="cancelHarborConfig" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
+{{#if harborAccountValid}}
+  <div class="row">
+    <div class="col span-6">
+      {{save-cancel save="saveHarboConfig" cancel="cancelHarborConfig" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" class="pull-right"}}
+    </div>
+    <div class="col span-6">
+      {{save-cancel save="removeHarboConfig" cancelDisabled=true createLabel="imageRepoSection.adminConfigPage.removeHarborConfig" class="pull-left"}}
+    </div>
+  </div>
+{{else}}
+  {{save-cancel save="saveHarboConfig" cancel="cancelHarborConfig" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
+{{/if}}
+
 {{/accordion-list-item}}
 </section>
 {{#if harborAccountValid}}

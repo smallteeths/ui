@@ -1,6 +1,7 @@
 <section class="header clearfix">
   <h1>日志</h1>
 </section>
+{{#if hasHarborServer}}
 <section>
   <div class="fixed-header-actions row clearfix">
     <div class="pull-right" style="display: flex;">
@@ -59,3 +60,6 @@
 
   {{/custom-table}}
 </section>
+{{else}}
+请先配置Harbor账号再访问此页面
+{{/if}}
