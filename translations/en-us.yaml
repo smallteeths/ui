@@ -6721,7 +6721,7 @@ nav:
       tab: Image Repo
       config: Confing
       registries: Registries
-      projects: Projects
+      projects: Image Repositories
       logs: Logs
   user:
     label: "User Menu: {username}"

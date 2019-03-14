@@ -6310,6 +6310,12 @@ nav:
       auth: 访问控制
       registration: 主机注册
       advanced: 高级
+    imageRepo:
+      tab: 镜像仓库
+      config: 仓库配置
+      registries: 仓库管理
+      projects: 镜像仓库
+      logs: 日志
   user:
     label: "用户菜单:{username}"
     logout: 注销
