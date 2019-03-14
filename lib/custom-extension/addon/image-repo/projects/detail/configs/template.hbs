@@ -21,6 +21,19 @@
   </ul>
 </section>
 <section>
-repositories
-
+  <div class="fixed-header-actions row clearfix" style="display: flex;align-items:center;margin-top:40px;">
+    <div class="pull-left" style="margin-left:10px;padding-left:20px;font-size:17px">
+      项目仓库
+    </div>
+    <div class="pull-left" style="flex:1;padding-left:180px;">
+      <div class="row">
+        <label class="acc-label" for="plubic" style="font-size: 15px; color: #454545;user-select: none;">公开</label>
+        {{#input-or-display value=openOrTransparent}}
+          {{input type="checkbox" id="plubic" name="plubic" class="form-control" checked=model.metaData.public placeholder="是否公开"}}
+        {{/input-or-display}}
+        <div class="text-info" style="margin-top:5px;"> 所有人都可访问公开的项目仓库。</div>
+      </div> 
+    </div>
+  </div>
+  {{save-cancel save="savePublicConfig" saving=saving saveDisabled=saveDisabled cancelDisabled=cancelDisabled cancel="cancelPublicConfig" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
 </section>

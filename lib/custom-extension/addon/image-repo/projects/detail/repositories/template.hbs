@@ -1,23 +1,23 @@
 <section class="header has-tabs clearfix pb-0">
   <ul class="tab-nav">
     <li>
-      {{#link-to "image-repo.projects.detail.repositories" model.mirrorList.projectId}}镜像仓库{{/link-to}}
+      {{#link-to "image-repo.projects.detail.repositories" model.imageList.projectId}}镜像仓库{{/link-to}}
     </li>
     {{#if isAdmin}}
     <li>
-      {{#link-to "image-repo.projects.detail.members" model.mirrorList.projectId}}成员{{/link-to}}
+      {{#link-to "image-repo.projects.detail.members" model.imageList.projectId}}成员{{/link-to}}
     </li>
     <li>
-      {{#link-to "image-repo.projects.detail.replications" model.mirrorList.projectId}}复制{{/link-to}}
+      {{#link-to "image-repo.projects.detail.replications" model.imageList.projectId}}复制{{/link-to}}
     </li>
     <li>
-      {{#link-to "image-repo.projects.detail.labels" model.mirrorList.projectId}}标签{{/link-to}}
+      {{#link-to "image-repo.projects.detail.labels" model.imageList.projectId}}标签{{/link-to}}
     </li>
     <li>
-      {{#link-to "image-repo.projects.detail.logs" model.mirrorList.projectId}}日志{{/link-to}}
+      {{#link-to "image-repo.projects.detail.logs" model.imageList.projectId}}日志{{/link-to}}
     </li>
     <li>
-      {{#link-to "image-repo.projects.detail.configs" model.mirrorList.projectId}}配置管理{{/link-to}}
+      {{#link-to "image-repo.projects.detail.configs" model.imageList.projectId}}配置管理{{/link-to}}
     </li>
     {{/if}}
   </ul>
@@ -25,7 +25,7 @@
 <section>
   <div class="fixed-header-actions row clearfix">
     <div class="pull-left" style="margin-left:10px">
-      <h2>{{model.mirrorInformation.name}}</h2>
+      <h2>{{model.imageInformation.name}}</h2>
     </div>
     <div class="pull-right" style="display: flex;">
       <div class="vertical-middle" style="height: 38px;display:flex;align-items:center">
@@ -49,9 +49,9 @@
           <div style = "padding:10px 20px;border: 1px solid #ccc;box-shadow: 0 1px 0.125rem rgba(115,115,115,.25);">
             <div style="padding:8px 5px; font-size:18px">推送镜像</div>
             <div style="padding:5px">在项目中标记镜像:</div>
-            <div style="padding:5px">{{model.mirrorInformation.tag}}<span style="margin-left:10px">{{copy-to-clipboard clipboardText=model.mirrorInformation.tag size="small"}}</span></div>
+            <div style="padding:5px">{{model.imageInformation.tag}}<span style="margin-left:10px">{{custom-copy-to-clipboard defaultText="" clipboardText=model.imageInformation.tag size="small"}}</span></div>
             <div style="padding:5px">推送镜像到当前项目:</div>
-            <div style="padding:5px 5px 8px 5px">{{model.mirrorInformation.push}}<span style="margin-left:10px">{{copy-to-clipboard clipboardText=model.mirrorInformation.push size="small"}}</span></div>
+            <div style="padding:5px 5px 8px 5px">{{model.imageInformation.push}}<span style="margin-left:10px">{{custom-copy-to-clipboard clipboardText=model.imageInformation.push size="small"}}</span></div>
           </div>
         {{/dd.content}}
       {{/basic-dropdown}}
@@ -63,17 +63,17 @@
     classNames="grid sortable-table"
     headers=headers
     availableActions=availableActions
-    data=model.mirrorList.data
+    data=model.imageList.data
     search=false
     page=page
     primaryKeyName="id"
-    totalCount=model.mirrorList.totalCount
+    totalCount=model.imageList.totalCount
     remove=(action "promptDelete")
     pageChange=(action "pageChange")
     as |sortable kind row dt|
   }}
   {{#if (eq kind "row")}}
-      {{mirror-row model=row}}
+      {{image-row model=row}}
     {{else if (eq kind "nomatch")}}
       <tr>
         <td
