@@ -42,9 +42,9 @@
 
   {{/custom-table}}
 </section>
-{{#custom-modal-add-label modalVisible=showAddLabelModal labelColors=labelColors saved=(action "refreshLabels")}}
+{{#custom-modal-add-label modalVisible=showAddLabelModal labelColors=labelColors scope=scope projectId=projectId saved=(action "refreshLabels")}}
 {{/custom-modal-add-label }}
-{{#custom-modal-edit-label modalVisible=showEditLabelModal label=editingLabel labelColors=labelColors saved=(action "refreshLabels")}}
+{{#custom-modal-edit-label modalVisible=showEditLabelModal label=editingLabel labelColors=labelColors scope=scope projectId=projectId saved=(action "refreshLabels")}}
 {{/custom-modal-edit-label }}
 {{#custom-modal-confirm-delete confirm=(action 'confirmDelete') resources=selectedLabels modalVisible=showConfirmDeleteModal}}
 {{/custom-modal-confirm-delete}}
