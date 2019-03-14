@@ -1,0 +1,29 @@
+<td valign="middle" class="row-check" style="padding-top: 2px;">
+  {{check-box nodeId=model.id}}
+</td>
+
+<td data-title="{{dt.name}}">
+  {{model.name}}
+</td>
+<td data-title="{{dt.size}}">
+  {{model.size}}
+</td>
+<td data-title="{{dt.pullCommand}}">
+  {{copy-to-clipboard clipboardText=pullCommand size="small"}}
+</td>
+<td data-title="{{dt.author}}">
+  {{ model.author }}
+</td>
+<td data-title="{{dt.created}}">
+  {{date-from-now model.created}}
+</td>
+<td data-title="{{dt.docker_version}}">
+  {{model.docker_version}}
+</td>
+<td data-title="{{dt.labels}}">
+  {{#each labels as |label|}}
+  <div style={{label.cssStyle}}>
+    <span class="icon icon-tag"></span><span>{{label.name}}</span>
+  </div>
+  {{/each}}
+</td>

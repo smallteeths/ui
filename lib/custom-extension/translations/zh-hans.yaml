@@ -22,4 +22,12 @@ imageRepoSection:
     table:
       noMatch: 没有Label匹配当前搜索
       noData: 暂无数据
+  tagPage:
+    table:
+      noMatch: 没有TAG匹配当前搜索
+      noData: 暂无数据
+    action:
+      copyDigest: 复制摘要
+      addLabel: 添加标签
+      retag: 复制镜像
 

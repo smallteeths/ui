@@ -1,0 +1,50 @@
+<section class="header">
+  <h1>{{#link-to "image-repo.projects.detail.repositories" model.projectId}}镜像仓库{{/link-to}}>{{model.repository}}</h1>
+</section>
+<section>
+{{#custom-table
+    classNames="grid sortable-table"
+    headers=headers
+    data=data
+    availableActions=availableActions
+    totalCount=data.length
+    primaryKeyName="id"
+    remove=(action "promptDelete")
+    search=(action "search")
+    pageChange=(action "pageChange")
+    sortChanged=(action "sortChanged")
+    retag=(action "retag")
+    addLabel=(action "addLabel")
+    copyDigest=(action "copyDigest")
+    as |sortable kind row dt|
+  }}
+  {{#if (eq kind "row")}}
+      {{custom-tag-row model=row labelColors=labelColors harborServer=model.harborServer repo=model.repository}}
+    {{else if (eq kind "nomatch")}}
+      <tr>
+        <td
+          colspan="{{sortable.fullColspan}}"
+          class="text-center text-muted lacsso pt-20 pb-20"
+        >
+          {{t "imageRepoSection.tagPage.table.noMatch"}}
+        </td>
+      </tr>
+    {{else if (eq kind "norows")}}
+      <tr>
+        <td
+          colspan="{{sortable.fullColspan}}"
+          class="text-center text-muted pt-20 pb-20"
+        >
+          {{t "imageRepoSection.tagPage.table.noData"}}
+        </td>
+      </tr>
+    {{/if}}
+
+  {{/custom-table}}
+
+</section>
+{{#custom-modal-confirm-delete confirm=(action 'confirmDelete') resources=selectedTags modalVisible=showConfirmDeleteModal}}
+{{/custom-modal-confirm-delete}}
+{{#custom-modal-change-tag-label labelColors=labelColors imageRepo=model.repository imageTag=selectedTag.name allLabels=allLabels checkedLabels=selectedTag.labels  modalVisible=showChangeTagLabelModal saved=(action "refresh")}}
+{{/custom-modal-change-tag-label}}
+{{#custom-modal-copy-digest digest=selectedTag.digest modalVisible=showCopyDigestModal}} {{/custom-modal-copy-digest}}

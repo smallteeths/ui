@@ -1,0 +1,15 @@
+{{#if modalVisible}}
+<form class="modal-container large-modal alert">
+  {{top-errors errors=errors}}
+  <h2 class="alert-header">添加标签</h2>
+  <hr/>
+  <div style="display: flex;">
+    {{#each labels as |item|}}
+      <label style={{item.style}}>
+      {{input type="checkbox" class="form-control" checked=item.checked}} {{item.name}}
+      </label>
+    {{/each}}
+  </div>
+{{save-cancel editing=editing save="save" cancel="cancel" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig"}}
+</form>
+{{/if}}
