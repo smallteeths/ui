@@ -58,6 +58,7 @@ export default Component.extend(ViewNewEdit, OptionallyNamespaced, {
         val.username = username;
         val.password = password;
         key = get(this, 'harborServer');
+        key = key.indexOf('://') > -1 ? key.substr(key.indexOf('://') + 3) : key;
       } else {
         ['username', 'password', 'auth'].forEach((k) => {
           let v = get(obj, k);
