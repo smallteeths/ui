@@ -2,49 +2,77 @@
   <h1>Harbor 配置</h1>
 </section>
 <section>
-{{#accordion-list-item
-    title="Harbor 配置"
-    detail="Harbor访问设置"
-    expandOnInit=true
-    showExpand=false
-  }}
-{{top-errors errors=harborAccountErrors}}
-<div class="row">
-  <div class="col span-12">
-    <label class="acc-label">访问地址{{field-required}}</label>
-    {{#input-or-display editable=harborConfigEditable value=harborConfig.url}}
-      {{input type="text" class="form-control" value=harborConfig.url placeholder="访问Harbor 的 URL"}}
-    {{/input-or-display}}
+<div class="accordion">
+  <div class="accordion-header">
+    <div class="expand"></div>
+    <div class="title">
+      <span class="m-0">Harbor 配置</span>
+      <p class="help-block">Harbor访问设置</p>
+    </div>
+    {{#if (not harborConfigEditable)}}
+      <button class="btn bg-transparent pull-right" {{action "editHarborConfig"}}>编辑</button>
+    {{/if}}
   </div>
-  <div class="col span-6">
-    <label class="acc-label">用户名{{field-required}}</label>
-    {{#input-or-display editable=harborConfigEditable value=harborConfig.username}}
-      {{input type="text" class="form-control" value=harborConfig.username placeholder="访问Harbor的用户名"}}
-    {{/input-or-display}}
-  </div>
-  <div class="col span-6">
-    <label class="acc-label">密码{{field-required}}</label>
-    {{#input-or-display editable=harborConfigEditable value="***"}}
-      {{input type="password" class="form-control" value=harborConfig.password placeholder="访问Harbor的密码"}}
-    {{/input-or-display}}
+  <div class="accordion-content">
+    {{top-errors errors=harborAccountErrors}}
+    <div class="row">
+      <div class="col span-12">
+        <label class="acc-label">访问地址{{field-required}}</label>
+        {{#input-or-display editable=harborConfigEditable value=harborConfig.url}}
+          {{input type="text" class="form-control" value=harborConfig.url placeholder="访问Harbor的URL"}}
+        {{/input-or-display}}
+      </div>
+      <div class="col span-6">
+        <label class="acc-label">用户名{{field-required}}</label>
+        {{#input-or-display editable=harborConfigEditable value=harborConfig.username}}
+          {{input type="text" class="form-control" value=harborConfig.username placeholder="访问Harbor的用户名"}}
+        {{/input-or-display}}
+      </div>
+      <div class="col span-6">
+        <label class="acc-label">密码{{field-required}}</label>
+        {{#input-or-display editable=harborConfigEditable value="******"}}
+          {{input type="password" class="form-control" value=harborConfig.password placeholder="访问Harbor的密码"}}
+        {{/input-or-display}}
+      </div>
+    </div>
+    {{#if harborConfigEditable}}
+    {{save-cancel save="saveHarboConfig" cancel="cancelHarborConfig" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
+    {{/if}}
+    {{!-- {{#if harborAccountValid}}
+      <div class="row">
+        <div class="col span-6">
+          {{save-cancel save="saveHarboConfig" cancel="cancelHarborConfig" cancelLabel="imageRepoSection.common.reset" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" class="pull-right"}}
+        </div>
+        <div class="col span-6">
+          {{save-cancel save="removeHarboConfig" cancelDisabled=true cancelLabel="imageRepoSection.common.reset" createLabel="imageRepoSection.adminConfigPage.removeHarborConfig" class="pull-left"}}
+        </div>
+      </div>
+    {{else}}
+      {{save-cancel save="saveHarboConfig" cancel="cancelHarborConfig" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
+    {{/if}} --}}
   </div>
 </div>
-{{#if harborAccountValid}}
-  <div class="row">
-    <div class="col span-6">
-      {{save-cancel save="saveHarboConfig" cancel="cancelHarborConfig" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" class="pull-right"}}
-    </div>
-    <div class="col span-6">
-      {{save-cancel save="removeHarboConfig" cancelDisabled=true createLabel="imageRepoSection.adminConfigPage.removeHarborConfig" class="pull-left"}}
-    </div>
-  </div>
-{{else}}
-  {{save-cancel save="saveHarboConfig" cancel="cancelHarborConfig" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
-{{/if}}
 
-{{/accordion-list-item}}
+
+
+
 </section>
 {{#if harborAccountValid}}
+<p>其他高级选项在<a class="clip project-link" target="_blank" href="{{model.harborServer}}">Harbor</a>中进行配置</p>
+  <section>
+    {{#accordion-list as | al expandFn | }}
+      {{#accordion-list-item
+        title="标签"
+        detail="标签管理"
+        expandAll=al.expandAll
+        expand=(action expandFn)
+      }}
+        {{#custom-labels labelParam=labelParam}}{{/custom-labels}}
+      {{/accordion-list-item}}
+    {{/accordion-list}}
+  </section>
+{{/if}}
+{{!-- {{#if harborAccountValid}}
 <section>
 {{#accordion-list as | al expandFn | }}
   {{#accordion-list-item
@@ -157,7 +185,7 @@
       <div class="text-info">用户在此模式下无法对仓库执行任何操作。</div>
     </div>
   </div>
-  {{save-cancel save="saveSystemConfig" cancel="cancelSystemConfigy" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig"}}
+  {{save-cancel save="saveSystemConfig" cancel="cancelSystemConfigy" cancelLabel="imageRepoSection.common.reset" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig"}}
   {{/accordion-list-item}}
 
   {{#accordion-list-item
@@ -170,7 +198,7 @@
   {{#custom-labels labelParam=labelParam}}{{/custom-labels}}
   {{/accordion-list-item}}
 
- {{!-- {{#accordion-list-item
+ {{#accordion-list-item
       title="垃圾清理"
       detail="垃圾清理配置"
       expandAll=al.expandAll
@@ -178,7 +206,7 @@
   }}
 
   {{#custom-gc-schedule}}{{/custom-gc-schedule}}
-  {{/accordion-list-item}} --}}
+  {{/accordion-list-item}}
 {{/accordion-list}}
 </section>
-{{/if}}
+{{/if}} --}}

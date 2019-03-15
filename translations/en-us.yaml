@@ -6719,9 +6719,9 @@ nav:
       advanced: Advanced
     imageRepo:
       tab: Image Repo
-      config: Confing
+      config: Configuration
       registries: Registries
-      projects: Image Repositories
+      projects: Image Management 
       logs: Logs
   user:
     label: "User Menu: {username}"

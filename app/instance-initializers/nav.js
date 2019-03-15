@@ -348,17 +348,17 @@ const rootNav = [
           return !!get(this, 'access.admin');
         }
       },
-      {
-        scope:          'global',
-        id:             'global-image-repo-registries',
-        localizedLabel: 'nav.admin.imageRepo.registries',
-        icon:           'icon icon-key',
-        route:          'custom-extension.image-repo.registries',
-        resource:       [],
-        condition() {
-          return !!get(this, 'access.admin');
-        }
-      },
+      // {
+      //   scope:          'global',
+      //   id:             'global-image-repo-registries',
+      //   localizedLabel: 'nav.admin.imageRepo.registries',
+      //   icon:           'icon icon-key',
+      //   route:          'custom-extension.image-repo.registries',
+      //   resource:       [],
+      //   condition() {
+      //     return !!get(this, 'access.admin');
+      //   }
+      // },
       {
         scope:          'global',
         id:             'global-image-repo-user-config',

@@ -1,4 +1,6 @@
 imageRepoSection:
+  common:
+    reset: Reset
   projectsPage:
     addProject: New Project
     removeProject: Delete Project

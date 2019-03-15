@@ -3,23 +3,27 @@ import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 import layout from './template';
 import { get, set, observer, computed } from '@ember/object'
+import { debouncedObserver } from 'ui/utils/debounce';
 
 
 // Remember the last value and use that for new one
 var lastContainer = 'ubuntu:xenial';
 
 export default Component.extend({
-  scope: service(),
+  scope:  service(),
+  harbor: service(),
 
   layout,
   // Inputs
   initialValue: null,
   errors:       null,
 
-  userInput: null,
-  tagName:   '',
-  value:     null,
-  allPods:   null,
+  userInput:    null,
+  tagName:      '',
+  value:        null,
+  allPods:      null,
+  harborImages: [],
+  harborServer: null,
 
   init() {
     this._super(...arguments);
@@ -34,6 +38,7 @@ export default Component.extend({
     scheduleOnce('afterRender', () => {
       this.send('setInput', initial);
       this.userInputDidChange();
+      this.loadHarborServerUrl();
     });
   },
 
@@ -58,8 +63,12 @@ export default Component.extend({
     this.sendAction('changed', out);
     this.validate();
   }),
+  searchImages: debouncedObserver('userInput', function() {
+    var input = (get(this, 'userInput') || '').trim();
 
-  suggestions: computed('allPods.@each.containers', function() {
+    this.loadImagesInHarbor(input);
+  }),
+  suggestions: computed('allPods.@each.containers', 'harborImages', function() {
     let inUse = [];
 
     get(this, 'allPods').forEach((pod) => {
@@ -71,7 +80,10 @@ export default Component.extend({
       .uniq()
       .sort();
 
-    return { 'Used by other containers': inUse, };
+    return {
+      'Used by other containers':             inUse,
+      'Images in harbor image repositories': get(this, 'harborImages'),
+    };
   }),
 
   validate() {
@@ -83,5 +95,33 @@ export default Component.extend({
 
     set(this, 'errors', errors);
   },
+
+  loadImagesInHarbor(query) {
+    if (!get(this, 'harborServer')) {
+      return;
+    }
+    if (!query) {
+      set(this, 'harborImages', []);
+
+      return;
+    }
+
+    return get(this, 'harbor').fetchProjectsAndImages(query).then((resp) => {
+      const images = resp.body.repository.map((r) => {
+        let url = get(this, 'harborServer');
+
+        let endpoint = url.indexOf('://') > -1 ? url.substr(url.indexOf('://') + 3) : url;
+
+        return `${ endpoint }/${ r.repository_name }`
+      });
+
+      set(this, 'harborImages', images);
+    });
+  },
+  loadHarborServerUrl() {
+    get(this, 'harbor').loadHarborServerUrl().then((resp) => {
+      set(this, 'harborServer', resp);
+    });
+  }
 
 });

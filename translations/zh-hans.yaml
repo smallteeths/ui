@@ -6312,9 +6312,9 @@ nav:
       advanced: 高级
     imageRepo:
       tab: 镜像仓库
-      config: 仓库配置
+      config: 系统配置 
       registries: 仓库管理
-      projects: 镜像仓库
+      projects: 镜像管理
       logs: 日志
   user:
     label: "用户菜单:{username}"

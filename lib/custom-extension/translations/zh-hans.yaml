@@ -1,4 +1,6 @@
 imageRepoSection:
+  common:
+    reset: 重置
   projectsPage:
     addProject: 新建项目
     removeProject: 删除项目

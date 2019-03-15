@@ -8,6 +8,7 @@ import { inject as service } from '@ember/service';
 
 export default Component.extend(ViewNewEdit, OptionallyNamespaced, {
   harbor: service(),
+  access: service(),
   layout,
   model:  null,
 
@@ -34,9 +35,18 @@ export default Component.extend(ViewNewEdit, OptionallyNamespaced, {
     // load harbor account
     get(this, 'harbor').loadHarborServerUrl().then((resp) => {
       set(this, 'harborServer', resp);
-      get(this, 'harbor').fetchHarborUserInfo().then((resp) => {
-        set(this, 'harborAccount', atob(resp.body.value));
-      });
+      if (!resp) {
+        return;
+      }
+      if (!!get(this, 'access.admin')) {
+        get(this, 'harbor').fetchHarborUserInfo().then((resp) => {
+          set(this, 'harborAccount', atob(resp.body.value));
+        });
+      } else {
+        const account = get(this, 'access.me.annotations')['authz.management.cattle.io.cn/harborauth'];
+
+        set(this, 'harborAccount', atob(account));
+      }
     });
   },
   arrayChanged: observer('asArray.@each.{preset,address,username,password,auth}', function() {
