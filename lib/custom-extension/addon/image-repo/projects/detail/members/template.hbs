@@ -21,5 +21,93 @@
   </ul>
 </section>
 <section>
-members
+  <div class="fixed-header-actions row clearfix">
+    <div class="pull-left">
+      <button class="btn btn-sm bg-primary right-divider-btn" {{action 'addUser'}}>添加用户</button>
+    </div>
+    <div class="pull-left" style="width: 115px;margin-left:10px;">
+      {{#if model.refreshFlag}}
+        {{#basic-dropdown
+          horizontalPosition="right"
+          as |dd|
+        }}
+        {{#dd.trigger}}
+          <div style="margin-top:2px;height: 30px;display:flex;justify-content:center;align-items:center;margin-right:15px;">
+            <span style="margin-left:14px;">其他操作</span>
+            <span style="margin-left:10px;"><i class="icon icon-chevron-down"></i></span>
+          </div>
+        {{/dd.trigger}}
+          {{#dd.content}}
+            <div style = "width:115px;border: 1px solid #ccc;box-shadow: 0 1px 0.125rem rgba(115,115,115,.25);">
+              <div style="margin-left:10px;font-weight:700;margin-top:10px">设置角色</div>
+              <div>
+                {{#each roleArr as |role|}}
+                  {{#if canChange}}
+                    <div style="curser:pointer;padding-left:15px;line-height: 32px;cursor:pointer;" onclick={{action 'changeRole' role.id}} onmouseover="this.style.background='#eee'" onmouseout="this.style.background='#fff'">{{role.name}}</div>
+                    {{else}}
+                    <div style="curser:pointer;padding-left:15px;line-height: 32px;color:rgb(216, 216, 216)" onclick={{action 'changeRole' role.id}} onmouseover="this.style.background='#eee'" onmouseout="this.style.background='#fff'">{{role.name}}</div>
+                  {{/if}}
+                {{/each}}
+              </div>
+              {{#if canChange}}
+              <div style="curser:pointer;padding-left:15px;line-height: 39px; border-top:1px solid rgb(216, 216, 216);cursor:pointer;" onclick={{action 'deleteMembersRole'}} onmouseover="this.style.background='#eee'" onmouseout="this.style.background='#fff'">移除成员</div>
+              {{else}}
+              <div style="curser:pointer;padding-left:15px;line-height: 39px; border-top:1px solid rgb(216, 216, 216);color:rgb(216, 216, 216)" onclick={{action 'deleteMembersRole'}} onmouseover="this.style.background='#eee'" onmouseout="this.style.background='#fff'">移除成员</div>
+              {{/if}}
+            </div>
+          {{/dd.content}}
+        {{/basic-dropdown}}
+      {{/if}}
+    </div>
+    <div class="pull-right" style="display: flex;">
+      <div class="vertical-middle" style="height: 38px;display:flex;align-items:center">
+        <div class="{{unless searchToWormhole 'pull-right'}} search-group input-group">
+          {{input value=searchText type="search" class="input-sm pull-right" enter="search" }}
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+<section class="instances pt-5 pb-5">
+  {{#custom-table
+    classNames="grid sortable-table"
+    headers=headers
+    primaryKeyName="id"
+    availableActions=availableActions
+    selectChange=( action "selectChange")
+    data=model.data
+    hasBulkActions=true
+    showHeader=false
+    page=page
+    totalCount=model.totalCount
+    pageChange=(action "pageChange")
+    as |sortable kind row dt|
+  }}
+  {{#if (eq kind "row")}}
+      {{members-row model=row}}
+    {{else if (eq kind "nomatch")}}
+      <tr>
+        <td
+          colspan="{{sortable.fullColspan}}"
+          class="text-center text-muted lacsso pt-20 pb-20"
+        >
+          {{t "imageRepoSection.projectsPage.table.noMatch"}}
+        </td>
+      </tr>
+    {{else if (eq kind "norows")}}
+      <tr>
+        <td
+          colspan="{{sortable.fullColspan}}"
+          class="text-center text-muted pt-20 pb-20"
+        >
+          {{t "imageRepoSection.projectsPage.table.noData"}}
+        </td>
+      </tr>
+    {{/if}}
+
+  {{/custom-table}}
+</section>
+{{#custom-modal-add-user modalVisible=showAddUserModal projectId=model.projectId saved=(action "refresh")}}
+{{/custom-modal-add-user }}
+{{#custom-modal-confirm-delete confirm=(action 'confirmDelete') resources=selectedNodes modalVisible=showConfirmDeleteModal}}
+{{/custom-modal-confirm-delete}}
