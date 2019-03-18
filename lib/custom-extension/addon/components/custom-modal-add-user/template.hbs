@@ -1,0 +1,33 @@
+{{#if modalVisible}}
+<form class="modal-container large-modal alert">
+  {{top-errors errors=errors}}
+  <h2 class="alert-header">新建成员</h2>
+  <hr/>
+  <div class="row">
+    <div style="display:flex;margin-top:20px">
+      <div style="width:120px;margin-right:200px;"><label for="user">用户名</label></div>
+      <div>
+        {{input id="user" class="form-control" value=username placeholder="用户名"}}
+      </div>
+      {{#if validateUsername}}
+        <div style="line-height: 32px; color:red; margin-left:10px">{{validateText}}</div>
+      {{/if}}
+    </div>
+    <div style="display:flex;margin-top:50px">
+      <div style="width:120px;margin-right:200px;">角色</div>
+      <div>
+        {{#each checkRadio as |item|}}
+        <div>
+          {{#input-or-display value=openOrTransparent}}
+            {{#radio-button name="role" type="radio" id=item.id selection=role  value=item.id}}
+            {{/radio-button}}
+          {{/input-or-display}}  
+          <label class="acc-label" for={{item.id}} style="font-size: 15px; color: #454545;user-select: none;">{{item.name}}</label>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+{{save-cancel saving=saving save="save" cancel="cancel"}}
+</form>
+{{/if}}
