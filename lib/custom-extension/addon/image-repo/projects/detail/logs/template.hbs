@@ -36,12 +36,13 @@
     classNames="grid sortable-table"
     headers=headers
     availableActions=availableActions
-    data=model.data
+    data=data
     hasBulkActions=false
     search=false
     page=page
     totalCount=model.totalCount
     pageChange=(action "pageChange")
+    sortChanged=(action "sortChanged")
     as |sortable kind row dt|
   }}
   {{#if (eq kind "row")}}

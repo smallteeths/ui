@@ -13,14 +13,17 @@
   {{#custom-table
     classNames="grid sortable-table"
     headers=headers
-    data=model.data
+    data=data
+    selectData=selectData
+    hasSelect=hasSelect
     availableActions=availableActions
     totalCount=model.totalCount
-    sortChanged="sortChanged"
     primaryKeyName="project_id"
     remove=(action "promptDelete")
     search=(action "search")
     pageChange=(action "pageChange")
+    sortChanged=(action "sortChanged")
+    selectChange=(action "selectChange")
     as |sortable kind row dt|
   }}
   {{#if (eq kind "row")}}
