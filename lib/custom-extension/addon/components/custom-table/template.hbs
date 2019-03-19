@@ -42,7 +42,20 @@
           {{/if}}
         </div>
 
-        <div class="pull-right">
+        <div class="pull-right" style="display: flex;">
+          {{#if hasSelect}}
+            <div style="width:100px;margin-top:-3px;margin-right:20px">
+              {{new-select
+                classNames="form-control"
+                optionValuePath="value"
+                optionLabelPath="label"
+                content=selectData
+                localizedPrompt=true
+                value=selectValue
+                change=(action 'change')
+              }}
+            </div>
+          {{/if}}
           {{#if search}}
             <div class="vertical-middle">
               {{#ember-wormhole to=searchToWormhole renderInPlace=(not searchToWormhole)}}
