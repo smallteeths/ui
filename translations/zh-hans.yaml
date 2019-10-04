@@ -1350,6 +1350,8 @@ projectsPage:
       nameInExists: 名称已经存在，请使用新的项目名称。
       memberNameReq: 成员名称必须设置。
       memberRoleReq: 成员角色必须设置。
+clusterTemplateRevisionUpgradeNotification:
+  tooltip: "{revision}修订可用于升级。"
 
 clusterTemplateRevisionUpgradeNotification:
   tooltip: 修订 {revision} 可用于升级。
