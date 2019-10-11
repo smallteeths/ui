@@ -34,13 +34,17 @@ fi
 
 if [[ "${BUILD_LATEST}" == "true" ]]; then
   echo "Building latest..."
-  ./scripts/build-static -l -v latest-2.4
+  #./scripts/build-static -l -v latest-2.4
+  ./scripts/build-static -l -c 'pandaria-ui.s3-ap-northeast-1.amazonaws.com/static-2-3'
   # (build-static contains a call to test & build)
 elif [[ ! -z "${CI_BUILD_TAG}" ]]; then
   echo "Building v${CI_BUILD_TAG}..."
   ./scripts/build-static -s -v "${CI_BUILD_TAG}"
   # (build-static contains a call to test & build)
+elif [[ "${BUILD_TAG}" == "true" ]]; then
+  echo "Building..."
+  ./scripts/build-static -v ${DRONE_TAG}
 else
   echo "Testing..."
-  yarn test
+  node --max_old_space_size=4096 ./node_modules/.bin/ember test
 fi

@@ -15,7 +15,7 @@ RUN apt-get -qq update \
   && rm -rf /var/lib/apt/lists/*
 
 ENV DAPPER_RUN_ARGS --privileged -v npm-cache:/var/cache/npm
-ENV DAPPER_ENV REPO TAG DRONE_TAG IMAGE_NAME BUILD_LATEST
+ENV DAPPER_ENV REPO TAG DRONE_TAG IMAGE_NAME BUILD_LATEST BUILD_TAG
 ENV DAPPER_SOURCE /tmp/ui
 ENV DAPPER_OUTPUT ./bin ./dist
 ENV DAPPER_DOCKER_SOCKET true

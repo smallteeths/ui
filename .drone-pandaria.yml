@@ -1,0 +1,94 @@
+---
+kind: pipeline
+name: default
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: test
+  pull: default
+  image: rancher/dapper:v0.4.1
+  commands:
+  - dapper ci
+  privileged: true
+  volumes:
+  - name: docker
+    path: /var/run/docker.sock
+  when:
+    event:
+    - pull_request
+
+- name: build
+  pull: default
+  image: rancher/dapper:v0.4.1
+  commands:
+  - BUILD_LATEST=true dapper ci
+  privileged: true
+  volumes:
+  - name: docker
+    path: /var/run/docker.sock
+  when:
+    branch:
+    - 2.4-fixes-cn
+    event:
+    - push
+
+- name: build-tag
+  pull: default
+  image: rancher/dapper:v0.4.1
+  commands:
+  - BUILD_TAG=true dapper ci
+  privileged: true
+  volumes:
+  - name: docker
+    path: /var/run/docker.sock
+  when:
+    event:
+    - tag
+
+- name: upload-latest
+  pull: default
+  image: plugins/s3
+  settings:
+    bucket: pandaria-ui
+    region: ap-northeast-1
+    acl: public-read
+    access_key:
+      from_secret: aws_access_id
+    secret_key:
+      from_secret: aws_access_secret
+    source: dist/static/latest2/**/*
+    strip_prefix: dist/static/latest2
+    target: /static-2-3/latest2
+  when:
+    branch:
+    - 2.4-fixes-cn
+    event:
+    - push
+
+- name: upload
+  pull: default
+  image: plugins/s3
+  settings:
+    bucket: pandaria-ui
+    region: ap-northeast-1
+    acl: public-read
+    access_key:
+      from_secret: aws_access_id
+    secret_key:
+      from_secret: aws_access_secret
+    source: dist/static/${DRONE_TAG}.tar.gz
+    strip_prefix: dist/static/
+    target: /releases
+  when:
+    event:
+      - tag
+
+volumes:
+- name: docker
+  host:
+    path: /var/run/docker.sock
+node:
+  instance: agent-amd64

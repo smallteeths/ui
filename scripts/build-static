@@ -193,7 +193,7 @@ echo "Current Directory: $(pwd)"
 
 if [[ $TEST -eq 1 ]]; then
   echo "Testing..."
-  runCmd ./node_modules/.bin/ember test
+  runCmd node --max_old_space_size=4096 ./node_modules/.bin/ember test
   echo "Done Testing."
 else
   echo "Skipping Tests"
@@ -201,7 +201,7 @@ fi
 
 if [[ $LATEST -ne 1 ]]; then
   echo "Building Static Tarball..."
-  UI_MODE="${MODE}" RANCHER="" CATALOG="" runCmd ./node_modules/.bin/ember build --environment=${ENVIRONMENT} --output-path=${BUILD_DIR}
+  UI_MODE="${MODE}" RANCHER="" CATALOG="" runCmd node --max_old_space_size=4096 ./node_modules/.bin/ember build --environment=${ENVIRONMENT} --output-path=${BUILD_DIR}
 
   # Create a file containing the version
   echo "${PKG_VERSION}" > ${BUILD_DIR}/VERSION.txt
@@ -214,7 +214,7 @@ if [[ $LATEST -ne 1 ]]; then
 fi;
 
 echo "Building Hosted Version..."
-UI_MODE="${MODE}" FINGERPRINT="${FINGERPRINT}" RANCHER="" CATALOG="" BASE_ASSETS="//${CDN}/${VERSION}/" runCmd ./node_modules/.bin/ember build --environment=${ENVIRONMENT} --output-path=${BUILD_DIR}
+UI_MODE="${MODE}" FINGERPRINT="${FINGERPRINT}" RANCHER="" CATALOG="" BASE_ASSETS="//${CDN}/${VERSION}/" runCmd node --max_old_space_size=4096 ./node_modules/.bin/ember build --environment=${ENVIRONMENT} --output-path=${BUILD_DIR}
 
 # Create a file containing the version
 echo "${PKG_VERSION}" > ${BUILD_DIR}/VERSION.txt
