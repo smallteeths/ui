@@ -3,7 +3,7 @@ var pkg  = require('../package.json');
 var fs   = require('fs');
 var YAML = require('yamljs');
 
-var packageVersion = process.env.DRONE_TAG || pkg.version;
+var packageVersion = process.env.DRONE_TAG || pkg.cnVersion || pkg.version;
 
 if (packageVersion.startsWith('v')) {
   packageVersion = packageVersion.slice(1);
