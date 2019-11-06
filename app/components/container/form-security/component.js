@@ -5,10 +5,13 @@ import { alias } from '@ember/object/computed';
 import { parseSi } from 'shared/utils/parse-unit';
 import { convertToMillis } from 'shared/utils/util';
 import layout from './template';
+import { inject as service } from '@ember/service';
 
 const GPU_KEY = 'nvidia.com/gpu';
+const GPU_SHARED_KEY = 'nvidia.com/shared-gpu';
 
 export default Component.extend({
+  intl:  service(),
   layout,
 
   classNames: ['accordion-wrapper'],
@@ -35,6 +38,8 @@ export default Component.extend({
   cpuReservationMillis: null,
   // ----------------------------------
   gpuReservation:       null,
+  gpuMode:              'set',
+  // set, shared
   limits:               alias('instance.resources.limits'),
   requests:             alias('instance.resources.requests'),
 
@@ -113,10 +118,21 @@ export default Component.extend({
   }),
 
   updateGpu: observer('gpuReservation', function() {
-    var gpu = get(this, 'gpuReservation');
-
+    var gpuMode = get(this, 'gpuMode');
     const requests = get(this, 'instance.resources.requests');
     const limits = get(this, 'instance.resources.limits');
+
+    if (gpuMode === 'shared') {
+      delete requests[GPU_KEY];
+      delete limits[GPU_KEY];
+      requests[GPU_SHARED_KEY] = '1';
+      limits[GPU_SHARED_KEY] = '1';
+
+      return;
+    }
+    delete requests[GPU_SHARED_KEY];
+    delete limits[GPU_SHARED_KEY];
+    var gpu = get(this, 'gpuReservation');
 
     if (isNaN(gpu) || gpu <= 0) {
       delete requests[GPU_KEY];
@@ -125,6 +141,18 @@ export default Component.extend({
       requests[GPU_KEY] = `${ gpu }`;
       limits[GPU_KEY] = `${ gpu }`;
     }
+  }),
+
+  gpuDisplayValue: computed('gpuReservation', 'gpuMode', function() {
+    var mode = get(this, 'gpuMode');
+
+    if (mode === 'shared') {
+      return get(this, 'intl').t('formSecurity.gpuReservation.shared');
+    }
+
+    var gpu = get(this, 'gpuReservation');
+
+    return gpu;
   }),
 
   // 2) has CAP_SYS_ADMIN
@@ -223,8 +251,14 @@ export default Component.extend({
   // GPU
   initGpu() {
     var gpu = (get(this, 'instance.resources.limits') || {})[GPU_KEY];
+    var gpuShared = (get(this, 'instance.resources.limits') || {})[GPU_SHARED_KEY];
 
-    set(this, 'gpuReservation', gpu);
+    if (gpuShared) {
+      set(this, 'gpuMode', 'shared');
+    } else {
+      set(this, 'gpuReservation', gpu);
+      set(this, 'gpuMode', 'set');
+    }
     this.updateGpu();
   },
 });
