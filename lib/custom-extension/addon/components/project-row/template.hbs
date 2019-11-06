@@ -1,0 +1,39 @@
+<td valign="middle" class="row-check" style="padding-top: 2px;">
+  {{check-box nodeId=model.project_id}}
+</td>
+
+<td data-title="{{dt.name}}" class="clip">
+  {{!-- <a href="{{href-to 'custom-extension.image-repo.projects.detail.repositories' model.project_id}}">
+    {{model.name}}
+  </a> --}}
+  {{#link-to 'image-repo.projects.detail.repositories' model.project_id model.current_user_role_id class="clip project-link"}}
+    {{model.name}}
+  {{/link-to}}
+</td>
+<td data-title="{{dt.public}}">
+  {{#if (eq model.metadata.public "true")}}
+    公开
+  {{else}}
+    私有
+  {{/if}}
+</td>
+<td data-title="{{dt.UserRole}}">
+  {{#if (eq model.current_user_role_id 0)}}
+  
+  {{else if (eq model.current_user_role_id 1)}}
+    项目管理员
+  {{else if (eq model.current_user_role_id 2)}}
+    开发人员
+  {{else if (eq model.current_user_role_id 3)}}
+    访客
+  {{/if}}
+</td>
+<td data-title="{{dt.repoCount}}">
+  {{model.repo_count}}
+</td>
+<td data-title="{{dt.creationTime}}">
+  {{date-from-now model.creation_time}}
+</td>
+<td data-title="{{dt.actions}}" class="actions">
+  {{custom-action-menu model=model resourceActions=resourceActions menuClick=(action 'handleMenuClick')}}
+</td>

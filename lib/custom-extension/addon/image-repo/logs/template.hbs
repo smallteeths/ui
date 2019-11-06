@@ -1,0 +1,69 @@
+<section class="header clearfix">
+  <h1>日志</h1>
+</section>
+{{#if hasHarborServer}}
+<section>
+  <div class="fixed-header-actions row clearfix">
+    <div class="pull-right" style="display: flex;">
+      <div style="width:100px;margin-right:30px">
+        {{new-select
+          classNames="form-control"
+          optionValuePath="value"
+          optionLabelPath="Label"
+          content=selectData
+          localizedPrompt=true
+          value=selectValue
+        }}
+      </div>
+      <div class="search-group input-group">
+        {{input value=searchText aria-title=(t 'generic.search') type="search" class="input-sm pull-right" placeholder=(t 'generic.search') enter=(action "search")}}
+        {{#if searchText}}
+          <span class="input-group-btn">
+            <button class="btn bg-transparent text-info pl-10 pr-10" {{action 'clearSearch'}}><i class="icon icon-close"/></button>
+          </span>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</section>
+<section class="instances pt-5 pb-5">
+  {{#custom-table
+    classNames="grid sortable-table"
+    headers=headers
+    availableActions=availableActions
+    data=data
+    hasBulkActions=false
+    search=false
+    page=page
+    totalCount=model.totalCount
+    pageChange=(action "pageChange")
+    sortChanged=(action "sortChanged")
+    as |sortable kind row dt|
+  }}
+  {{#if (eq kind "row")}}
+      {{logs-row model=row}}
+    {{else if (eq kind "nomatch")}}
+      <tr>
+        <td
+          colspan="{{sortable.fullColspan}}"
+          class="text-center text-muted lacsso pt-20 pb-20"
+        >
+          {{t "imageRepoSection.projectsPage.table.noMatch"}}
+        </td>
+      </tr>
+    {{else if (eq kind "norows")}}
+      <tr>
+        <td
+          colspan="{{sortable.fullColspan}}"
+          class="text-center text-muted pt-20 pb-20"
+        >
+          {{t "imageRepoSection.projectsPage.table.noData"}}
+        </td>
+      </tr>
+    {{/if}}
+
+  {{/custom-table}}
+</section>
+{{else}}
+请先配置Harbor账号再访问此页面
+{{/if}}

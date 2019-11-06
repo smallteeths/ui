@@ -1,0 +1,112 @@
+<section style="width: 100%;">
+  <div style="font-size: 1.5em;height: 30px;" class="clip">{{model.repo.name}}</div>
+</section>
+<section class="header has-tabs clearfix pb-0">
+  <ul class="tab-nav">
+    <li>
+      {{#link-to "image-repo.projects.detail.repositories" model.imageList.projectId model.currentUserRoleId}}镜像仓库{{/link-to}}
+    </li>
+    {{#if (or isSystemAdmin isMember)}}
+    <li>
+      {{#link-to "image-repo.projects.detail.members" model.imageList.projectId model.currentUserRoleId}}成员{{/link-to}}
+    </li>
+    {{/if}}
+    {{!-- <li>
+      {{#link-to "image-repo.projects.detail.replications" model.imageList.projectId}}复制{{/link-to}}
+    </li> --}}
+    {{#if (or isProjectAdmin isSystemAdmin)}}
+    <li>
+      {{#link-to "image-repo.projects.detail.labels" model.imageList.projectId model.currentUserRoleId}}标签{{/link-to}}
+    </li>
+    {{/if}}
+    {{#if (or isSystemAdmin isMember)}}
+    <li>
+      {{#link-to "image-repo.projects.detail.logs" model.imageList.projectId model.currentUserRoleId}}日志{{/link-to}}
+    </li>
+    {{/if}}
+    {{#if (or isSystemAdmin isMember)}}
+    <li>
+      {{#link-to "image-repo.projects.detail.configs" model.imageList.projectId model.currentUserRoleId}}访问级别{{/link-to}}
+    </li>
+    {{/if}}
+  </ul>
+</section>
+<section>
+  <div style="position: relative;">
+    <div style="display: flex; position: absolute;top: 5px; right: 0px; z-index: 1;">
+      <div style="width: 115px;margin-right:10px;">
+        {{#basic-dropdown
+          horizontalPosition="right"
+          as |dd|
+        }}
+          {{#dd.trigger}}
+            <div style="height: 30px;display:flex;justify-content:center;align-items:center;margin-right:15px;">
+              <span style="margin-left:14px;">推送镜像</span>
+              <span style="margin-left:10px;"><i class="icon icon-chevron-down"></i></span>
+            </div>
+          {{/dd.trigger}}
+          {{#dd.content}}
+            <div style = "padding:10px 20px;border: 1px solid #ccc;box-shadow: 0 1px 0.125rem rgba(115,115,115,.25);">
+              <div style="padding:8px 5px; font-size:18px">推送镜像</div>
+              <div style="padding:5px">在项目中标记镜像:</div>
+              <div style="padding:5px">{{model.repo.tag}}<span style="margin-left:10px">{{custom-copy-to-clipboard defaultText="" clipboardText=model.repo.tag size="small"}}</span></div>
+              <div style="padding:5px">推送镜像到当前项目:</div>
+              <div style="padding:5px 5px 8px 5px">{{model.repo.push}}<span style="margin-left:10px">{{custom-copy-to-clipboard clipboardText=model.repo.push size="small"}}</span></div>
+            </div>
+          {{/dd.content}}
+        {{/basic-dropdown}}
+      </div>
+      <div class="pull-right search-group input-group">
+        {{input value=searchText aria-title=(t 'generic.search') type="search" class="input-sm pull-right" placeholder=(t 'generic.search') enter=(action "search")}}
+        {{#if searchText}}
+          <span class="input-group-btn">
+            <button class="btn bg-transparent text-info pl-10 pr-10" {{action 'clearSearch'}}><i class="icon icon-close"/></button>
+          </span>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</section>
+<section class="instances pt-5 pb-5">
+  {{#custom-table
+    classNames="grid sortable-table"
+    headers=headers
+    availableActions=availableActions
+    data=data
+    search=false
+    page=page
+    primaryKeyName="id"
+    totalCount=model.imageList.totalCount
+    remove=(action "promptDelete")
+    pageChange=(action "pageChange")
+    sortChanged=(action "sortChanged")
+    model=model
+    hasRowActions=true
+    as |sortable kind row dt|
+  }}
+  {{#if (eq kind "row")}}
+      {{custom-repo-row model=row currentUserRoleId=model.currentUserRoleId hasAdminRole=model.currentUser.has_admin_role command=(action "handleCommand")}}
+    {{else if (eq kind "nomatch")}}
+      <tr>
+        <td
+          colspan="{{sortable.fullColspan}}"
+          class="text-center text-muted lacsso pt-20 pb-20"
+        >
+          {{t "imageRepoSection.projectsPage.table.noMatch"}}
+        </td>
+      </tr>
+    {{else if (eq kind "norows")}}
+      <tr>
+        <td
+          colspan="{{sortable.fullColspan}}"
+          class="text-center text-muted pt-20 pb-20"
+        >
+          {{t "imageRepoSection.projectsPage.table.noData"}}
+        </td>
+      </tr>
+    {{/if}}
+
+  {{/custom-table}}
+</section>
+{{#custom-modal-confirm-delete confirm=(action 'confirmDelete') resources=selectedRepos modalVisible=showConfirmDeleteModal}}
+{{/custom-modal-confirm-delete}}

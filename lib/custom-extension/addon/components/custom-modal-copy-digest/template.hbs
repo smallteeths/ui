@@ -1,0 +1,16 @@
+{{#if modalVisible}}
+<form class="modal-container large-modal alert">
+  {{top-errors errors=errors}}
+  <h2 class="alert-header">复制摘要</h2>
+  <hr/>
+  <div>
+     {{textarea value=digest classNames="form-control no-resize" rows="3"}}
+  </div>
+  <div class="footer-actions">
+    {{#copy-button class="btn btn-sm bg-primary" clipboardText=digest success=(action 'close')}}
+    复制 
+    {{/copy-button}}
+  </div>
+  
+</form>
+{{/if}}

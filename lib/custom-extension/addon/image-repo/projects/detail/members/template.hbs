@@ -1,0 +1,126 @@
+<section style="width: 100%;">
+  <div style="font-size: 1.5em;height: 30px;" class="clip">{{model.repo.name}}</div>
+</section>
+<section class="header has-tabs clearfix pb-0">
+  <ul class="tab-nav">
+    <li>
+      {{#link-to "image-repo.projects.detail.repositories" model.projectId model.currentUserRoleId}}镜像仓库{{/link-to}}
+    </li>
+    {{#if (or isSystemAdmin isMember)}}
+    <li>
+      {{#link-to "image-repo.projects.detail.members" model.projectId model.currentUserRoleId}}成员{{/link-to}}
+    </li>
+    {{/if}}
+    {{!-- <li>
+      {{#link-to "image-repo.projects.detail.replications" model.projectId}}复制{{/link-to}}
+    </li> --}}
+    {{#if (or isProjectAdmin isSystemAdmin)}}
+    <li>
+      {{#link-to "image-repo.projects.detail.labels" model.projectId model.currentUserRoleId}}标签{{/link-to}}
+    </li>
+    {{/if}}
+    {{#if (or isSystemAdmin isMember)}}
+    <li>
+      {{#link-to "image-repo.projects.detail.logs" model.projectId model.currentUserRoleId}}日志{{/link-to}}
+    </li>
+    {{/if}}
+    {{#if (or isSystemAdmin isMember)}}
+    <li>
+      {{#link-to "image-repo.projects.detail.configs" model.projectId model.currentUserRoleId}}访问级别{{/link-to}}
+    </li>
+    {{/if}}
+  </ul>
+</section>
+<section>
+  <div class="fixed-header-actions row clearfix">
+    <div style="position: absolute;right: 0px;top: 52px;">
+      <button class="btn btn-sm bg-primary right-divider-btn" {{action 'addUser'}} disabled={{not isProjectAdmin}}>添加用户</button>
+    </div>
+    <div class="pull-left" style="width: 115px;margin-left:10px;">
+      {{#if model.refreshFlag}}
+        {{#basic-dropdown
+          horizontalPosition="right"
+          as |dd|
+        }}
+        {{#dd.trigger}}
+          <div style="margin-top:2px;height: 30px;display:flex;justify-content:center;align-items:center;margin-right:15px;">
+            <span>其他操作</span>
+            <span style="margin-left:10px;"><i class="icon icon-chevron-down"></i></span>
+          </div>
+        {{/dd.trigger}}
+          {{#dd.content}}
+            <div style = "width:115px;border: 1px solid #ccc;box-shadow: 0 1px 0.125rem rgba(115,115,115,.25);">
+              <div style="margin-left:10px;font-weight:700;margin-top:10px">设置角色</div>
+              <div>
+                {{#each roleArr as |role|}}
+                  {{#if (not disableActions)}}
+                    <div style="curser:pointer;padding-left:15px;line-height: 32px;cursor:pointer;" onclick={{action 'changeRole' role.id}} onmouseover="this.style.background='#eee'" onmouseout="this.style.background='#fff'">{{role.name}}</div>
+                    {{else}}
+                    <div style="curser:pointer;padding-left:15px;line-height: 32px;color:rgb(216, 216, 216)" onclick={{action 'changeRole' role.id}} onmouseover="this.style.background='#eee'" onmouseout="this.style.background='#fff'">{{role.name}}</div>
+                  {{/if}}
+                {{/each}}
+              </div>
+              {{#if (not disableActions)}}
+              <div style="curser:pointer;padding-left:15px;line-height: 39px; border-top:1px solid rgb(216, 216, 216);cursor:pointer;" onclick={{action 'deleteMembersRole'}} onmouseover="this.style.background='#eee'" onmouseout="this.style.background='#fff'">移除成员</div>
+              {{else}}
+              <div style="curser:pointer;padding-left:15px;line-height: 39px; border-top:1px solid rgb(216, 216, 216);color:rgb(216, 216, 216)" onclick={{action 'deleteMembersRole'}} onmouseover="this.style.background='#eee'" onmouseout="this.style.background='#fff'">移除成员</div>
+              {{/if}}
+            </div>
+          {{/dd.content}}
+        {{/basic-dropdown}}
+      {{/if}}
+    </div>
+    <div class="pull-right search-group input-group">
+      {{input value=searchText aria-title=(t 'generic.search') type="search" class="input-sm pull-right" placeholder=(t 'generic.search') enter=(action "search")}}
+      {{#if searchText}}
+        <span class="input-group-btn">
+          <button class="btn bg-transparent text-info pl-10 pr-10" {{action 'clearSearch'}}><i class="icon icon-close"/></button>
+        </span>
+      {{/if}}
+    </div>
+  </div>
+</section>
+<section class="instances pt-5 pb-5">
+  {{#custom-table
+    classNames="grid sortable-table"
+    headers=headers
+    primaryKeyName="id"
+    availableActions=availableActions
+    selectionChanged=( action "selectChange")
+    data=model.memberList.data
+    hasBulkActions=true
+    showHeader=false
+    page=page
+    totalCount=model.memberList.totalCount
+    sortChanged=(action "sortChanged")
+    pageChange=(action "pageChange")
+    as |sortable kind row dt|
+  }}
+  {{#if (eq kind "row")}}
+      {{custom-members-row model=row}}
+    {{else if (eq kind "nomatch")}}
+      <tr>
+        <td
+          colspan="{{sortable.fullColspan}}"
+          class="text-center text-muted lacsso pt-20 pb-20"
+        >
+          {{t "imageRepoSection.projectsPage.table.noMatch"}}
+        </td>
+      </tr>
+    {{else if (eq kind "norows")}}
+      <tr>
+        <td
+          colspan="{{sortable.fullColspan}}"
+          class="text-center text-muted pt-20 pb-20"
+        >
+          {{t "imageRepoSection.projectsPage.table.noData"}}
+        </td>
+      </tr>
+    {{/if}}
+
+  {{/custom-table}}
+</section>
+{{#custom-modal-add-user modalVisible=showAddUserModal projectId=model.projectId saved=(action "refresh")}}
+{{/custom-modal-add-user }}
+{{#custom-modal-confirm-delete confirm=(action 'confirmDelete') resources=selectedMembersWithoutSelf modalVisible=showConfirmDeleteModal}}
+{{/custom-modal-confirm-delete}}

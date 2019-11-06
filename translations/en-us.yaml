@@ -4597,6 +4597,7 @@ cruRegistry:
     dockerhub: DockerHub
     quay: Quay.io
     custom: Custom
+    harbor: Harbor
     globalRegistry: Global Registry
     placeholder: e.g. registry.example.com
     artifactory: Artifactory
@@ -6369,6 +6370,8 @@ formImage:
   label: Docker Image
   container:
     placeholder: "e.g. ubuntu:xenial"
+  tag:
+    placeholder: Choose Image tag
 
 formNameDescription:
   name:
@@ -9564,6 +9567,12 @@ nav:
       auth: Access Control
       registration: Host Registration
       advanced: Advanced
+    imageRepo:
+      tab: Image Repo
+      config: Configuration
+      registries: Registries
+      projects: Image Management
+      logs: Logs
   user:
     label: "User Menu: {username}"
     logout: Log Out

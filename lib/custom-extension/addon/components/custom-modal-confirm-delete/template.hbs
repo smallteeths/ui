@@ -1,0 +1,26 @@
+{{#if modalVisible}}
+<div class="modal-container medium-modal">
+  <div class="container-header-text">
+    <h3>{{t 'confirmDelete.title'}}:</h3>
+    <hr/>
+    <div class="display-name">
+      {{#if (lte resources.length 10)}}
+        {{#each resources as |resource|}}
+            <div>{{resource.displayName}}</div>
+        {{/each}}
+      {{else}}
+        <div>{{t 'confirmDelete.largeDeleteText' key=resources.firstObject.displayName othersCount=(sub resources.length 1)}}</div>
+      {{/if}}
+    </div>
+  </div>
+  <div class="footer-actions">
+    <button {{action "confirm"}} class="btn bg-error">{{t 'confirmDelete.confirmAction'}}</button>
+    <button {{action "cancel"}} class="btn bg-transparent">{{t 'confirmDelete.cancelAction'}}</button>
+  </div>
+
+  {{#if showProtip}}
+    <div class="protip mt-10">{{t 'confirmDelete.protip' key=alternateLabel}}</div>
+  {{/if}}
+
+</div>
+{{/if}}

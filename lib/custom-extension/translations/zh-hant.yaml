@@ -1,0 +1,61 @@
+imageRepoSection:
+  common:
+    reset: 重置
+  action:
+    changePwd: 修改密码
+    edit: 编辑
+    editAccount: 修改账号
+  projectsPage:
+    addProject: 新建项目
+    removeProject: 删除项目
+    projectPublic: 公开
+    porjectPrivate: 私有
+    projectRoles:
+      admin: Project Admin
+      master: Master
+      developer: Developer
+      guest: Guest
+    table:
+      noData: 暂无数据 
+      noMatch: 暂无数据
+  adminConfigPage:
+    saveHarborConfig: 保存
+    removeHarborConfig: 删除
+    testEmailServer: 测试邮件服务器
+    gcSchedule: 立即清理垃圾
+  userConfigPage:
+    syncAccount: 同步账号
+    reSyncAccount: 重新同步账号
+  labelPage:
+    table:
+      noMatch: 没有Label匹配当前搜索
+      noData: 暂无数据
+  tagPage:
+    table:
+      noMatch: 没有TAG匹配当前搜索
+      noData: 暂无数据
+    action:
+      copyDigest: 复制摘要
+      addLabel: 添加标签
+      retag: 复制镜像
+quotasCn:
+  quotas: 配额
+  remain: 剩余可分配
+  editProjectModal: 修改项目配额
+  editNamespaceModal: 修改命名空间配额
+  headers: 
+    namespace: 命名空间
+    used: 已分配
+    percent: 百分比
+  common:
+    limit: 限制
+    reserved: 預留
+    use: 已使用
+    total: 總共
+    usage: 使用率
+    avaliable: 可用
+  project:
+    title: 项目配额
+  namespace:
+    title: 命名空间配额
+  notice: 没有配置配额，通过设置项目配额项添加配额。

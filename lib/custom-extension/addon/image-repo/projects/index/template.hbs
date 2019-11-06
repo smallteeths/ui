@@ -1,0 +1,61 @@
+<section class="header clearfix">
+  {{#if hasHarborServer}}
+  <div class="right-buttons">
+    <button class="btn btn-sm bg-primary right-divider-btn" {{action 'addNewProject'}}>新建仓库项目</button>
+  </div>
+  {{/if}}
+
+  <h1>仓库项目</h1>
+
+</section>
+{{#if hasHarborServer}}
+<section class="instances pt-5 pb-5">
+  {{#custom-table
+    classNames="grid sortable-table"
+    headers=headers
+    data=data
+    selectData=selectData
+    selectValue=isPublic
+    hasSelect=hasSelect
+    availableActions=availableActions
+    totalCount=model.projects.totalCount
+    searchText=searchText
+    primaryKeyName="project_id"
+    remove=(action "promptDelete")
+    search=(action "search")
+    pageChange=(action "pageChange")
+    sortChanged=(action "sortChanged")
+    model=model
+    hasRowActions=true
+    as |sortable kind row dt|
+  }}
+  {{#if (eq kind "row")}}
+      {{project-row model=row hasAdminRole=model.currentUser.has_admin_role command=(action "handleCommand")}}
+    {{else if (eq kind "nomatch")}}
+      <tr>
+        <td
+          colspan="{{sortable.fullColspan}}"
+          class="text-center text-muted lacsso pt-20 pb-20"
+        >
+          {{t "imageRepoSection.projectsPage.table.noMatch"}}
+        </td>
+      </tr>
+    {{else if (eq kind "norows")}}
+      <tr>
+        <td
+          colspan="{{sortable.fullColspan}}"
+          class="text-center text-muted pt-20 pb-20"
+        >
+          {{t "imageRepoSection.projectsPage.table.noData"}}
+        </td>
+      </tr>
+    {{/if}}
+
+  {{/custom-table}}
+</section>
+{{#custom-modal-confirm-delete confirm=(action 'confirmDelete') resources=selectedProjects modalVisible=showConfirmDeleteModal}}
+{{/custom-modal-confirm-delete}}
+{{#custom-modal-add-project modalVisible=showAddProjectModal saved=(action "refresh")}}{{/custom-modal-add-project }}
+{{else}}
+请先配置Harbor账号再访问此页面
+{{/if}}

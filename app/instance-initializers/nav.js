@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { getProjectId, getClusterId, bulkAdd } from 'ui/utils/navigation-tree';
 import { get } from '@ember/object';
 
@@ -428,11 +429,11 @@ const rootNav = [
 ]
 
 export function initialize(/* appInstance*/) {
-  bulkAdd(rootNav);
+  // bulkAdd(rootNav); Reduce the conflict, The original is 'bulkAdd(rootNav)'
 }
 
 export default {
-  name:       'nav',
+  name:       'nav-cn',
   initialize,
   after:      'store',
 };

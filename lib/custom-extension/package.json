@@ -1,0 +1,20 @@
+{
+  "name": "custom-extension",
+  "keywords": [
+    "ember-addon",
+    "ember-engine"
+  ],
+  "dependencies": {
+    "ember-auto-import": "*",
+    "ember-basic-dropdown": "*",
+    "ember-cli-htmlbars": "*",
+    "ember-href-to": "*",
+    "ember-cli-babel": "*",
+    "ember-intl": "*"
+  },
+  "ember-addon": {
+    "paths": [
+      "../shared"
+    ]
+  }
+}

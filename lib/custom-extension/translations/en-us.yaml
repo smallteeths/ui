@@ -1,0 +1,61 @@
+imageRepoSection:
+  common:
+    reset: 重置
+  action:
+    changePwd: 修改密码
+    edit: 编辑
+    editAccount: 修改账号
+  projectsPage:
+    addProject: 新建项目
+    removeProject: 删除项目
+    projectPublic: 公开
+    porjectPrivate: 私有
+    projectRoles:
+      admin: Project Admin
+      master: Master
+      developer: Developer
+      guest: Guest
+    table:
+      noData: No Data 
+      noMatch: No Data Match
+  adminConfigPage:
+    saveHarborConfig: 保存
+    removeHarborConfig: 删除
+    testEmailServer: 测试邮件服务器
+    gcSchedule: 立即清理垃圾
+  userConfigPage:
+    syncAccount: 同步账号
+    reSyncAccount: 重新同步账号
+  labelPage:
+    table:
+      noMatch: 没有Label匹配当前搜索
+      noData: 暂无数据
+  tagPage:
+    table:
+      noMatch: 没有TAG匹配当前搜索
+      noData: 暂无数据
+    action:
+      copyDigest: 复制摘要
+      addLabel: 添加标签
+      retag: 复制镜像
+quotasCn:
+  quotas: Quotas
+  remain: Assignable
+  editProjectModal: Edit project quotas
+  editNamespaceModal: Edit namespace quotas
+  headers: 
+    namespace: Namespace
+    used: Allocated
+    percent: Percent
+  common:
+    limit: Limit
+    reserved: Reserved
+    use: Used
+    total: Total
+    usage: Usage
+    avaliable: Avaliable
+  project:
+    title: Project Quotas
+  namespace:
+    title: Namespace Quotas
+  notice: No quotas configured, Add quotas by setting the project quota item.

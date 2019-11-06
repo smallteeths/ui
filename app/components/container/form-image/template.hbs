@@ -10,3 +10,20 @@
     placeholder=(t 'formImage.container.placeholder')
   }}
 </div>
+{{#if (gt harborImageTags.length 0)}}
+<div>
+  <label class="acc-label">
+    Tags
+  </label>
+</div>
+<div style="display: flex;">
+  {{new-select
+    value= imageTag
+    content= harborImageTags
+    optionValuePath="name"
+    optionLabelPath="name"
+    prompt=(t 'formImage.tag.placeholder')
+    localizedLabel=false
+  }}
+</div>
+{{/if}}

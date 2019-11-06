@@ -232,6 +232,28 @@ const App = Application.extend({
         externalRoutes: { 'authenticated.cluster.istio.cluster-setting': 'authenticated.cluster.istio.cluster-setting', }
       }
     },
+    customExtension: {
+      dependencies: {
+        services: [
+          'app',
+          'access',
+          'clusterStore',
+          'globalStore',
+          'intl',
+          'modal',
+          'router',
+          'resource-actions',
+          'scope',
+          'session',
+          'settings',
+          'store',
+          'tooltip',
+          'user-language',
+          'user-theme',
+        ],
+        externalRoutes: { 'logout': 'logout' }
+      }
+    },
   }
 });
 

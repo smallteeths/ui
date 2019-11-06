@@ -2501,6 +2501,7 @@ cruRegistry:
     dockerhub: DockerHub
     quay: Quay.io
     custom: 自定義
+    harbor: Harbor
     placeholder: '例如: registry.example.com'
   multiple: 多個
   auth:
@@ -3863,6 +3864,8 @@ formImage:
   label: Docker鏡像
   container:
     placeholder: "例如: ubuntu:xenial"
+  tag:
+    placeholder: 選擇鏡像標簽
 
 formNameDescription:
   name:
@@ -6302,6 +6305,12 @@ nav:
       auth: 訪問控制
       registration: 主機註冊
       advanced: 高級
+    imageRepo:
+      tab: 鏡像倉庫
+      config: Harbor 配置
+      registries: 倉庫管理
+      projects: 鏡像管理
+      logs: 日誌
   user:
     label: "用戶菜單:{username}"
     logout: 註銷
