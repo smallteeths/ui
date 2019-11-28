@@ -22,7 +22,14 @@
     }}
   </div>
 </div>
-
+{{#if supportVlansubnet}}
+<div class="row">
+  <div class="col span-11-of-23 mt-0 mb-0">
+    <label class="acc-label">扁平网络负载</label>
+    {{schema/input-boolean value=enableVlansubnet}}
+  </div>
+</div>
+{{/if}}
 <section class="mt-40 horizontal-form container-fluid">
   {{form-ingress-rule
     editing=true

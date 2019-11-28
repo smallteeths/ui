@@ -1,0 +1,85 @@
+<section class="header clearfix">
+  <h1 class="pull-left">MacvlanSubnet</h1>
+  <div class="vertical-middle"></div>
+  <div class="right-buttons">
+    <a href="#" {{action "newVlansubent"}} class="btn bg-primary btn-sm ml-10" >创建MacvlanSubnet</a>
+  </div>
+</section>
+<section class="mt-30">
+  {{#custom-table
+       tableClassNames="bordered"
+       paging=true
+       primaryKeyName="id"
+       search=(action "search")
+       sortChanged=(action "sortChanged")
+       headers=headers
+       bulkActions=true
+       availableActions=availableActions
+       selectChange=(action "selectChange")
+       data=data
+       hasRowActions=true
+       remove=(action "promptDelete")
+       pageChange=(action 'pageChange')
+       nextData=next
+       as |sortable kind obj dt|
+  }}
+    {{#if (eq kind "row")}}
+      <tr class="main-row">
+        <td valign="middle" class="row-check" style="padding-top: 2px;">
+          {{check-box nodeId=obj.id}}
+        </td>
+        <td data-title="{{dt.name}}" class="clip">
+          {{#link-to 'authenticated.cluster.macvlan-ip' (query-params subnet=obj.name) class="clip project-link"}}
+            {{obj.name}}
+          {{/link-to}}
+        </td>
+        <td data-title="{{dt.project}}">
+          {{#if obj.project}}
+          {{obj.project}}
+          {{else}}
+            All Projects
+          {{/if}}
+        </td>
+        <td data-title="{{dt.master}}">
+          {{obj.master}}
+        </td>
+        <td data-title="{{dt.vlan}}">
+          {{#if obj.vlan}}
+          {{obj.vlan}}
+          {{/if}}
+        </td>
+        <td data-title="{{dt.cidr}}">
+          {{obj.cidr}}
+        </td>
+        <td data-title="{{dt.ipRanges}}">
+          {{obj.ipRanges}}
+        </td>
+        <td data-title="{{dt.routes}}">
+          {{obj.routes}}
+        </td>
+        <td data-title="{{dt.mode}}">
+          {{obj.mode}}
+        </td>
+        <td data-title="{{dt.gateway}}">
+          {{obj.gateway}}
+        </td>
+        <td class="text-right pr-20">
+          {{date-calendar obj.creationTimestamp}}
+        </td> 
+        <td data-title="{{dt.actions}}" class="actions">
+        {{custom-action-menu model=obj resourceActions=rowActions menuClick=(action 'handleMenuClick')}}
+        </td>
+      </tr>
+    {{else if (eq kind "nomatch")}}
+      <tr><td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">暂无匹配的数据</td></tr>
+    {{else if (eq kind "norows")}}
+      <tr><td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">暂无数据</td></tr>
+    {{/if}}
+  {{/custom-table}}
+</section>
+{{#if model.vlansubnets.errorMsg}}
+{{#banner-message color='bg-error m-0'}}
+  {{model.vlansubnets.errorMsg}}
+  {{/banner-message}}
+{{/if}}
+{{#custom-modal-confirm-delete confirm=(action 'confirmDelete') resources=selectedData modalVisible=showConfirmDeleteModal}}{{/custom-modal-confirm-delete}}

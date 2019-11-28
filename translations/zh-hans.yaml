@@ -9711,6 +9711,8 @@ nav:
       classes: 存储类
       volumes: 持久卷
     projects: '项目/命名空间'
+    staticPods: Static Pods
+    vlansubnet: 扁平网络
   containers:
     tab: 工作负载
     systemTab: 系统

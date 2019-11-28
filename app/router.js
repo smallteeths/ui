@@ -68,7 +68,16 @@ Router.map(function() {
       this.route('nodes', function() {
         this.route('index', { path: '/' });
       });
-
+      // vlansubnet
+      this.route('vlansubnet', { path: '/vlansubnet' }, function() {
+        this.route('index', { path: '/' });
+        this.route('new', { path: '/add' });
+        this.route('edit', { path: '/:macvlan_name' });
+        this.route('unsupport', { path: '/unsupport' });
+      });
+      this.route('macvlan-ip', function() {
+        this.route('index', { path: '/' });
+      });
       this.mount('monitoring');
       this.mount('istio');
 

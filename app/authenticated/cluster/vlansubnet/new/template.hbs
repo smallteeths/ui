@@ -1,0 +1,173 @@
+<section class="header clearfix">
+  <div class="pull-left">
+    <h1>创建MacvlanSubnet</h1>
+  </div>
+</section>
+
+<div class="row">
+  <div class="col span-4">
+     <label class="acc-label">名称{{field-required}}</label>
+      {{input
+        class="form-control"
+        value=form.metadata.name
+        maxlength=62
+        placeholder="例如: testvlan"
+      }}
+  </div>
+  <div class="col span-4">
+    <label class="acc-label">Master{{field-required}}</label>
+      {{input
+        class="form-control"
+        value=form.spec.master
+        placeholder="例如: eth0"
+      }}
+  </div>
+  <div class="col span-4">
+      <label class="acc-label">VLAN</label>
+      {{input
+          class="form-control"
+          value=form.spec.vlan
+          type="number"
+          max="4095"
+          min="2"
+          step="1"
+          placeholder="取值范围2-4095之间的整数"
+      }}
+    </div>
+</div>
+<div class="row">
+    <div class="col span-4">
+      <label class="acc-label">CIDR{{field-required}}</label>
+      {{input
+          class="form-control"
+          value=form.spec.cidr
+          placeholder="例如: 192.168.2.0/24"
+      }}
+    </div>
+    <div class="col span-4">
+      <label class="acc-label">MODE{{field-required}}</label>
+      {{new-select
+        value=form.spec.mode
+        content=modes
+      }}
+    </div>
+    <div class="col span-4">
+      <label class="acc-label">GATEWAY</label>
+      {{input
+          class="form-control"
+          value=form.spec.gateway
+          placeholder="例如: 192.168.1.1"
+      }}
+    </div>
+</div>
+<div class="row">
+  <div class="col span-4">
+      <label class="acc-label">Project</label>
+      {{new-select
+        value=form.metadata.labels.project
+        content=projects
+      }}
+    </div>
+</div>
+<div class="row">
+  <div class="col span-8">
+    <label class="acc-label">IP Ranges</label>
+    {{#if form.spec.ranges.length}}
+    {{#if ipRangesExistedMsg}}
+    <div class="text-small text-muted">
+      已经存在的IP Ranges: {{ipRangesExistedMsg}}
+    </div>
+    {{/if}}
+    <table class="table fixed no-lines small mb-10">
+      <thead>
+        <tr class="hidden-sm">
+          <th class="acc-label">Range Start{{field-required}}</th>
+          <th width="10"></th>
+          <th class="acc-label">Range End{{field-required}}</th>
+          <th width="40">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each form.spec.ranges as |range|}}
+          <tr>
+            <td >
+              {{input  placeholder="例如: 192.168.56.10" value=range.rangeStart}}
+            </td>
+            <td>-</td>
+            <td>
+              {{input  placeholder="例如: 192.168.56.20" value=range.rangeEnd}}
+            </td>
+            <td>
+              <button class="btn bg-primary btn-sm" {{action "removeIPRange" range}}>
+                <i class="icon icon-minus"/><span class="sr-only">{{t 'generic.remove'}}</span>
+              </button>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{/if}}
+    <div>
+      <button class="btn bg-link icon-btn p-0" {{action "addIPRange"}}>
+      <span class="darken"><i class="icon icon-plus text-small"/></span>
+      <span>添加 IP Range</span>
+    </button>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col span-8">
+    <label class="acc-label">Custom Route</label>
+    {{#if form.spec.routes.length}}
+    <table class="table fixed no-lines small mb-10">
+      <thead>
+        <tr class="hidden-sm">
+          <th class="acc-label">Destination{{field-required}}</th>
+          <th width="10"></th>
+          <th class="acc-label">Gateway</th>
+          {{#if hasIface}}
+          <th width="10"></th>
+          <th class="acc-label">Iface</th>
+          {{/if}}
+          <th width="40">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each form.spec.routes as |route|}}
+          <tr>
+            <td >
+              {{input  placeholder="例如: 192.168.1.1/16" value=route.dst}}
+            </td>
+            <td>&nbsp;</td>
+            <td>
+              {{input  placeholder="例如: 192.168.1.1" value=route.gw}}
+            </td>
+            {{#if hasIface}}
+            <td>&nbsp;</td>
+            <td>
+              {{new-select
+                value=route.iface
+                content=ifaceChoice
+              }}
+            </td>
+            {{/if}}
+            <td>
+              <button class="btn bg-primary btn-sm" {{action "removeRoute" route}}>
+                <i class="icon icon-minus"/><span class="sr-only">{{t 'generic.remove'}}</span>
+              </button>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{/if}}
+    <div>
+      <button class="btn bg-link icon-btn p-0" {{action "addRoute"}}>
+      <span class="darken"><i class="icon icon-plus text-small"/></span>
+      <span>添加自定义路由</span>
+    </button>
+    </div>
+  </div>
+</div>
+{{top-errors errors=errors}}
+{{save-cancel editing=editing save="save" cancel="cancel"}}

@@ -1,0 +1,11 @@
+{{#if model.isActive}}
+<section>
+  {{#banner-message color='bg-error m-0'}}
+  {{#if errorMsg}}
+    {{errorMsg}}
+  {{else}}
+    <p> 当前集群不支持扁平网络 </p>
+    {{/if}}
+  {{/banner-message}}
+</section>
+{{/if}}

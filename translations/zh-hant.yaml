@@ -6246,6 +6246,8 @@ nav:
       classes: 存儲類
       volumes: 持久卷
     projects: 項目/命名空間
+    staticPods: Static Pods
+    vlansubnet: 扁平網絡
   containers:
     tab: 工作負載
     systemTab: 系統

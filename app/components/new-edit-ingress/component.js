@@ -10,12 +10,16 @@ export default Component.extend(NewOrEdit, {
   intl:  service(),
   scope: service(),
 
+  vlansubnet: service(),
+
   layout,
   ingress:                null,
   editing:                null,
   existing:               null,
   namespacedCertificates: null,
   certificates:           null,
+  supportVlansubnet:      false,
+  enableVlansubnet:       false,
 
   isGKE: alias('scope.currentCluster.isGKE'),
 
@@ -26,6 +30,18 @@ export default Component.extend(NewOrEdit, {
 
     if ( get(this, 'existing')) {
       set(this, 'namespace', get(this, 'existing.namespace'));
+    }
+    const clusterId = get(this, 'scope.currentCluster.id');
+
+    if (clusterId) {
+      get(this, 'vlansubnet').fetchVlansubnets(clusterId).then(() => {
+        set(this, 'supportVlansubnet', true);
+        const a = get(this, 'ingress.annotations') || {};
+
+        if (a['macvlan.panda.io/ingress'] === 'true') {
+          set(this, 'enableVlansubnet', true);
+        }
+      });
     }
   },
   actions: {
@@ -73,6 +89,14 @@ export default Component.extend(NewOrEdit, {
     let ok = this.validate();
 
     set(pr, 'namespaceId', nsId);
+    // macvlan
+    if (get(this, 'supportVlansubnet')) {
+      const v = get(this, 'enableVlansubnet');
+      const a = get(this, 'ingress.annotations') || {};
+
+      a['macvlan.panda.io/ingress'] = v ? 'true' : 'false';
+      set(this, 'ingress.annotations', a);
+    }
 
     return ok;
   },

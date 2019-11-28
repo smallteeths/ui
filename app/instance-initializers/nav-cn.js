@@ -172,6 +172,15 @@ const rootNav = [
   },
   {
     scope:          'cluster',
+    id:             'cluster-vlansubnet',
+    localizedLabel: 'nav.cluster.vlansubnet',
+    icon:           'macvlan-icon',
+    route:          'authenticated.cluster.vlansubnet.index',
+    ctx:            [getClusterId],
+    resourceScope:  'global',
+  },
+  {
+    scope:          'cluster',
     id:             'cluster-storage',
     localizedLabel: 'nav.cluster.storage.tab',
     ctx:            [getClusterId],

@@ -1,0 +1,52 @@
+<section class="header clearfix">
+  <h1 class="pull-left">Macvlan IP</h1>
+</section>
+<section class="mt-30">
+  {{#custom-table
+       tableClassNames="bordered"
+       paging=true
+       hasBulkActions=false
+       primaryKeyName="id"
+       search=(action "search")
+       sortChanged=(action "sortChanged")
+       headers=headers
+       data=data
+       pageChange=(action 'pageChange')
+       nextData=next
+       as |sortable kind obj dt|
+  }}
+    {{#if (eq kind "row")}}
+      <tr class="main-row">
+        <td data-title="{{dt.name}}">
+          <span style="padding-right: 5px;">
+            {{obj.name}}
+          </span>
+        </td>
+        <td data-title="{{dt.namespace}}">
+          {{obj.namespace}}
+        </td>
+        <td data-title="{{dt.cidr}}">
+          {{obj.cidr}}
+        </td>
+        <td data-title="{{dt.mac}}">
+          {{obj.mac}}
+        </td>
+        <td data-title="{{dt.podId}}">
+          {{obj.podId}}
+        </td>
+        <td data-title="{{dt.subnet}}">
+          {{obj.subnet}}
+        </td>
+        <td class="text-right pr-20">
+          {{date-calendar obj.creationTimestamp}}
+        </td> 
+      </tr>
+    {{else if (eq kind "nomatch")}}
+      <tr><td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">暂无匹配的数据</td></tr>
+    {{else if (eq kind "norows")}}
+      <tr><td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">暂无数据</td></tr>
+    {{/if}}
+  {{/custom-table}}
+</section>
+
+
