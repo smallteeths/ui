@@ -1171,6 +1171,100 @@
               {{drain-node selection=upgradeStrategy.nodeDrainInput clusterTemplateCreate=clusterTemplateCreate editable=notView applyClusterTemplate=applyClusterTemplate clusterTemplateRevision=model.clusterTemplateRevision.clusterConfig questions=model.clusterTemplateRevision.questions addOverride=(action "addOverride")}}
             </div>
           {{/if}}
+          <hr>
+          <div class="row">
+            <div class="col span-4">
+              <label class="acc-label">
+                {{t "clusterNew.rke.gpu.enableGPUManagement.label"}}
+                {{#if clusterTemplateCreate}}
+                  <ClusterTemplateOverrideToggle
+                    @path="enableGPUManagement"
+                    @configVariable={{cluster.enableGPUManagement}}
+                    @addOverride={{action "addOverride"}}
+                    @questions={{model.clusterTemplateRevision.questions}}
+                  />
+                {{/if}}
+              </label>
+              <CheckOverrideAllowed
+                @paramName="enableGPUManagement"
+                @applyClusterTemplate={{applyClusterTemplate}}
+                @clusterTemplateRevision={{model.clusterTemplateRevision.clusterConfig}}
+                @questions={{model.clusterTemplateRevision.questions}}
+              >
+              {{#input-or-display
+                editable=notView
+                value=cluster.enableGPUManagement
+              }}
+              <div class="radio">
+                <label>
+                  {{radio-button
+                    selection=cluster.enableGPUManagement
+                    value=true
+                  }}
+                  {{t "generic.enabled"}}
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  {{radio-button
+                    selection=cluster.enableGPUManagement
+                    value=false
+                  }}
+                  {{t "generic.disabled"}}
+                </label>
+              </div>
+              {{/input-or-display}}
+              </CheckOverrideAllowed>
+            </div>
+            {{#if cluster.enableGPUManagement}}
+            <div class="col span-4">
+              <label class="acc-label">
+                {{t "clusterNew.rke.gpu.nodePort.label"}}
+                {{#if clusterTemplateCreate}}
+                  <ClusterTemplateOverrideToggle
+                    @path="gpuSchedulerNodePort"
+                    @configVariable={{cluster.gpuSchedulerNodePort}}
+                    @addOverride={{action "addOverride"}}
+                    @questions={{model.clusterTemplateRevision.questions}}
+                  />
+                {{/if}}
+              </label>
+              <CheckOverrideAllowed
+                @paramName="gpuSchedulerNodePort"
+                @applyClusterTemplate={{applyClusterTemplate}}
+                @clusterTemplateRevision={{model.clusterTemplateRevision.clusterConfig}}
+                @questions={{model.clusterTemplateRevision.questions}}
+              >
+              {{#input-or-display
+                editable=notView
+                value=cluster.gpuSchedulerNodePort
+              }}
+              {{input
+                type="number"
+                value=cluster.gpuSchedulerNodePort
+                className="form-control"
+                placeholder=(t "clusterNew.rke.gpu.nodePort.placeholder")
+              }}
+              {{/input-or-display}}
+              </CheckOverrideAllowed>
+            </div>
+            {{/if}}
+          </div>
+          {{#if cluster.enableGPUManagement}}
+          <div class="row">
+            <div class="col span-12">
+              <label class="acc-label">请将以下配置保存到将要作为control节点的主机下的/etc/gpushare/scheduler-policy-config.json文件中</label>
+              <div class="copy-pre mt-20 mb-20">
+                {{copy-to-clipboard
+                  clipboardText=schedulerPolicyConfigStr
+                  tagName="div"
+                  classNames="copy-to-pre"
+                }}
+                <pre id="scheduler-policy-config" style="font-size: 14px;">{{schedulerPolicyConfigStr}}</pre>
+              </div>
+            </div>
+          </div>
+          {{/if}}
         {{/accordion-list-item}}
 
         {{#accordion-list-item
