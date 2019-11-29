@@ -1616,6 +1616,8 @@ monitoringPage:
       memoryLimit:
         label: Node Exporter Memory Limit
         placeholder: e.g. 200
+    gpuMonitoring:
+      enable: Enable GPU Monitoring
   nodeSelector:
     addSelectorLabel: Add Selector
     helpText: Select the nodes where monitoring related workloads will be scheduled to
@@ -1715,6 +1717,9 @@ metrics:
   workload-memory-usage-bytes-sum: Memory Utilization
   workload-network-io: Network I/O
   workload-network-packet: Network Packets
+  cluster-gpu-memory-usage: GPU Memory Utilization
+  node-gpu-memory-usage: GPU Memory Utilization
+  node-gpu-memory-total: GPU Memory Total
 
 dnsPage:
   noMatch: No records match the current search

@@ -68,11 +68,15 @@
           </div>
         </div>
         {{#if (eq level "cluster")}}
-          <div class="col span-6">
+          <div class="col span-3">
             <label class="acc-label">
               {{t "monitoringPage.config.nodeexporter.enable"}}
             </label>
             {{schema/input-boolean value=enableNodeExporter}}
+          </div>
+          <div class="col span-3">
+            <label class="acc-label">{{t "monitoringPage.config.gpuMonitoring.enable"}}</label>
+            {{schema/input-boolean value=enableGpuMonitoring}}
           </div>
         {{/if}}
       </div>
