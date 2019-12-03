@@ -16,6 +16,7 @@ export default Route.extend({
     const workloadId = params.workloadId
     const pagesize = get(this, 'prefs.tablePerPage');
     const users = get(this, 'globalStore').findAll('user');
+    const intl = get(this, 'intl');
     let operations = [];
     let resources = [];
     const selectionResources = this.auditLog.fetchRancherAuditResources().then((resp) => {
@@ -27,11 +28,11 @@ export default Route.extend({
               label: item.resourceType,
             })
           }
-        })
+        });
         operations.unshift({
-          label: '所有类型',
+          label: intl.t('auditLog.form.type.label'),
           value: ''
-        })
+        });
         resources = resp.body.data;
       }
 

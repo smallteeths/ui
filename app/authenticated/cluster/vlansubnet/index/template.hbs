@@ -2,7 +2,7 @@
   <h1 class="pull-left">MacvlanSubnet</h1>
   <div class="vertical-middle"></div>
   <div class="right-buttons">
-    <a href="#" {{action "newVlansubent"}} class="btn bg-primary btn-sm ml-10" >创建MacvlanSubnet</a>
+    <a href="#" {{action "newVlansubent"}} class="btn bg-primary btn-sm ml-10" >{{t "vlansubnetPage.createMacvlan"}}</a>
   </div>
 </section>
 <section class="mt-30">
@@ -71,9 +71,9 @@
         </td>
       </tr>
     {{else if (eq kind "nomatch")}}
-      <tr><td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">暂无匹配的数据</td></tr>
+      <tr><td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">{{t "vlansubnetPage.noMatch"}}</td></tr>
     {{else if (eq kind "norows")}}
-      <tr><td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">暂无数据</td></tr>
+      <tr><td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">{{t "vlansubnetPage.noData"}}</td></tr>
     {{/if}}
   {{/custom-table}}
 </section>

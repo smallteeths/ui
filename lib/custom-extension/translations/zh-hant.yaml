@@ -4,10 +4,10 @@ imageRepoSection:
   action:
     changePwd: 修改密码
     edit: 编辑
-    editAccount: 修改账号
+    editAccount: 修改帳號
   projectsPage:
-    addProject: 新建项目
-    removeProject: 删除项目
+    addProject: 新建項目
+    removeProject: 删除項目
     projectPublic: 公开
     porjectPrivate: 私有
     projectRoles:
@@ -16,34 +16,34 @@ imageRepoSection:
       developer: Developer
       guest: Guest
     table:
-      noData: 暂无数据 
-      noMatch: 暂无数据
+      noData: 暫無數據
+      noMatch: 暫無數據
   adminConfigPage:
     saveHarborConfig: 保存
-    removeHarborConfig: 删除
-    testEmailServer: 测试邮件服务器
+    removeHarborConfig: 刪除
+    testEmailServer: 測試郵件服務區
     gcSchedule: 立即清理垃圾
   userConfigPage:
-    syncAccount: 同步账号
-    reSyncAccount: 重新同步账号
+    syncAccount: 同步帳號
+    reSyncAccount: 重新同步帳號
   labelPage:
     table:
-      noMatch: 没有Label匹配当前搜索
-      noData: 暂无数据
+      noMatch: 沒有Label匹配當前搜索
+      noData: 暫無數據
   tagPage:
     table:
       noMatch: 没有TAG匹配当前搜索
-      noData: 暂无数据
+      noData: 暫無數據
     action:
       copyDigest: 复制摘要
-      addLabel: 添加标签
+      addLabel: 添加標簽
       retag: 复制镜像
 quotasCn:
   quotas: 配额
   remain: 剩余可分配
-  editProjectModal: 修改项目配额
+  editProjectModal: 修改項目配额
   editNamespaceModal: 修改命名空间配额
-  headers: 
+  headers:
     namespace: 命名空间
     used: 已分配
     percent: 百分比
@@ -55,7 +55,251 @@ quotasCn:
     usage: 使用率
     avaliable: 可用
   project:
-    title: 项目配额
+    title: 項目配额
   namespace:
     title: 命名空间配额
-  notice: 没有配置配额，通过设置项目配额项添加配额。
+  notice: 没有配置配额，通过设置項目配额项添加配额。
+
+harborConfig:
+  title: "Harbor 配置"
+  sync:
+    title: "Harbor 帳號同步"
+    subtitle: "将當前的用戶信息同步到"
+  setting:
+    title: "Harbor 帳號设置"
+    subTitle: 对邮箱和訪問密码进行设置
+  wait: 请等待管理員配置鏡像庫
+  info: 请先配置Harbor帳號再訪問此頁面
+  log: 日誌
+  image: 倉庫項目
+  newProject: 新建項目
+  access:
+    title: "Harbor 訪問配置"
+    subtitle: "对 Harbor 訪問地址和帳號進行配置"
+  form:
+    address:
+      label: 訪問地址
+      placeholder: 訪問Harbor的URL
+    email:
+      label: 郵箱地址
+      placeholder: 郵箱地址
+    username:
+      label: 用戶名
+      placeholder: 訪問Harbor的用戶名
+    pw:
+      label: 密碼
+      placeholder: 訪問Harbor的密碼
+    newPw:
+      label: 新密碼
+      placeholder: 新的Harbor密碼
+    confirmPw:
+      label: 確認密碼
+      placeholder: 確認Harbor密碼
+    image:
+      all: 所有倉庫項目
+      public: 公开項目
+      private: 私有項目
+    search:
+      placeholder: 搜索
+      username: 用戶名
+      store: 倉庫
+      tag: 標簽
+      operation: 操作
+    projectName:
+      label: 項目名称
+    accessLevel:
+      label: 訪問級別
+      checkPublic: 公开
+      info: "当項目设为公开后，任何人都有此項目下镜像的读权限。命令行用戶不需要“docker login”就可以拉取此項目下的镜像。"
+    creator:
+      all: 所有人
+      admin: 仅管理员
+  validate:
+    notAdmin: 请使用管理员角色的用户配置Harbor
+    addressError: 访问地址错误
+    unableAccess: 无法访问Harbor服务
+    HarborInfoError: "Harbor地址、用户名或密码错误"
+    numAndReq: "令牌过期时间必填，且为数字"
+    formatError: "密码长度在8到20之间且需包含至少一个大写字符，一个小写字符和一个数字。"
+    confirmError: "新密码和确认密码必须相同"
+    urlReq: "访问地址不能为空"
+    urlFormatError: "URL 地址格式错误，正确格式如：http(s)://example.com"
+    usernameReq: "用户名不能为空"
+    pwReq: "密码不能为空"
+    emailHostReq: "请输入邮件服务器地址"
+    emailFromReq: "请输入邮件来源"
+    emailPortFormatError: "请输入正确的端口号"
+    updateEmailServerOk: "更新邮件服务器配置成功"
+    updateEmailServerError: "更新邮件服务器配置失败, 错误"
+    validateEmailServerError: "验证邮件服务器失败, 错误"
+    updateSystemOk: "更新系统设置成功"
+    updateSystemError: "更新系统设置失败, 错误"
+    emailPortReq: "请输入邮件服务器端口"
+    errorAndResetHarbor: "原始账号或密码错误, 无法修改密码，请重新配置Harbor账号."
+    validateEmailServerOk: "验证邮件服务器成功"
+    accountUnavailable: "Harbor 账号无法使用"
+    emailReq: "请输入邮箱地址"
+    emailUrlError: "请使用正确的邮箱地址，例如: name@example.com"
+    projectNameReq: "请输入项目名称"
+    projectNameFormatError: "项目名称由小写字符、数字、和._-组成，且至少有两个字符并以字母或数字开头"
+    projectNameExist: "项目名称已经存在"
+  table:
+    name: 仓倉庫項目名稱
+    level: 訪問級別
+    role: 角色
+    count: 镜像倉庫数
+    username: 用戶名
+    imagename: 镜像名稱
+    tag: 標簽
+    operation: 操作
+    timestamp: 时间戳
+    entityName: 姓名
+    entityType: 成員類型
+    roleItem:
+      admin: 項目管理员
+      developer: 開發人員
+      visitor: 訪客
+      user: 用戶
+    storeStatus:
+      public: 公開
+      private: 私有
+  btn:
+    createProject: 新建倉庫項目
+  advanced:
+    titleLeft: 其他高級選項在
+    titleRight: 中進行配置
+    label:
+      title: 標簽
+      subtitle: 標簽管理 biaoqian
+      create: 新建標簽
+      name: 標簽
+      describe: 描述
+      createTime: 創建時間
+      nodata: "暫無數據"
+  formTag:
+    titleAdd: 新建標簽
+    titleEdit: 編輯標簽
+    name:
+      label: 標簽名稱
+    color:
+      label: 顏色
+    description: 標簽描述
+    btn:
+      add: "新建標簽"
+
+vlansubnetPage:
+  unsupport: 當前集群不支持扁平網路
+  createMacvlan: 創建MacvlanSubnet
+  editMacvlan: 編輯MacvlanSubnet
+  noData: 暫無數據
+  noMatch: 暫無匹配數據
+  deleteVlanAboutPodsTotal: "正在使用的pod 共 {total} 条"
+  deleteVlanAboutPodsTotalThan: "正在使用的pod 共 {total} 条以上"
+  deleteVlanAboutVlans: "{vlan} 及 {others} 其他"
+formVlan:
+  name:
+    label: 名稱
+    placeholder: "例如：testvlan"
+    nameReq: 名稱不能為空
+    nameFormatError: "項目名稱由子母、數字、和._-組成，長度不超過62且至少有兩個字符並以子母和數字開頭"
+  master:
+    label: Master
+    placeholder: "例如：eth0"
+    masterReq: "master 不能為空"
+  vlan:
+    label: VLAN
+    placeholder: "取值範圍2-4095之間的整數"
+    vlanRangeError: VLAN值應該是2到4095之間的整數
+  cidr:
+    label: CIDR
+    placeholder: "例如：192.168.2.0/24"
+    cidrReq: "CIDR 不能為空"
+    cidrFormatError: "CIDR格式錯誤"
+  mode:
+    label: MODE
+  gateway:
+    label: GATEWAY
+    placeholder: "例如：192.168.1.1"
+    gatewayFormatError: "Gateway IP 格式錯誤"
+  project:
+    label: Project
+  ipRange:
+    label: "IP Range"
+    btn: "添加 IP Range"
+    IPFormatError: "IP Ranges 中，存在IP地址格式不正確的紀錄"
+    IPInCidrError: "IP Ranges 中，存在IP地址不在子網範圍内的紀錄"
+    IPRangeError: "開始地址{min}不能大於結束地址{max}"
+    IPRangeExist: "已經存在的IP Ranges"
+    IPRangeExistWithOthers: "當前ip地址範圍與已經存在的ip地址範圍有衝突"
+    formInfoExist: "master為{master}, vlan為{vlan}, cidr為{cidr}的紀錄已經存在"
+    start:
+      label: "開始IP"
+      placeholder: "例如：192.168.56.10"
+    end:
+      label: "結束IP"
+      placeholder: "例如：192.168.56.20"
+  route:
+    label: "自定義路由"
+    btn: 添加自定義路由
+    routeDstReq: "自定義路由中，Destination 存在為空的紀錄"
+    routeDstFormatError: "自定義路由中，Destination 存在格式錯誤的紀錄"
+    routeGwFormatError: "自定義路由中，Gateway 存在格式錯誤的紀錄"
+    routeGwInCidrError: "自定義路由中，Gateway 存在IP地址不在子網範圍内的紀錄"
+    des:
+      label: Destination
+      placeholder: "例如：192.168.0.0/16"
+    gw:
+      label: Gateway
+      placeholder: "例如：192.168.1.1"
+    iface:
+      label: Iface
+      eth1: eth1
+      eth0: eth0
+  defaultGateway:
+    label: eth1作为容器默认网关
+    serviceCidr:
+      label: ServiceCidr
+      placeholder: "例如: 10.43.0.0/16"
+      serviceCidrReq: "ServiceCidr 不能为空"
+      serviceCidrFormatError: "ServiceCidr 格式错误"
+auditLog:
+  title: "審計日誌"
+  serverSetError: '請檢查auditlog-server-url服務配置是否正確'
+  unknownError: '未知錯誤'
+  form:
+    name:
+      label: "請求資源Name/ID"
+      placeholder: "請求資源Name/ID"
+    type:
+      label: 所有類型
+      placeholder: 所有類型
+    operation:
+      all: 所有操作
+      create: 新增
+      update: 更新
+      delete: 删除
+    time:
+      all: "日誌時間-全部"
+      day5: 最近5天
+      day10: 最近10天
+      day15: 最近15天
+  table:
+    user: 操作人
+    operation: 操作
+    result: 操作結果
+    time: 變更時間
+    type: 資源類型
+    name: 資源Name/ID
+    detail: 詳情
+    noData: 暫無數據
+    noMatch: 暂无匹配的数据
+  btn:
+    clearAll: 全部清除
+    search: 搜索
+    detail: 查看
+  detail:
+    title: "審計日誌-請求詳情"
+    request: 請求對象
+    response: 響應對象
+    btn:
+      close: 關閉

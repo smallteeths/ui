@@ -2641,6 +2641,8 @@ servicePage:
         placeholder: e.g. website
       description:
         placeholder: e.g. Ingress for mycompany.com
+      load:
+        label: "Flat network load"
   portsTab:
     title: Ports
     detail: 'Ports mapped from a host IP to the listening ports of a container.'
@@ -6436,6 +6438,18 @@ formNetwork:
       label: DNS Search Domains
       placeholder: e.g. example.com
       addActionLabel: Add Search Domain
+  subnet:
+    msg: "The upgrade strategy has been changed to: stop the old Pod and start the new Pod"
+    form:
+      ip:
+        label: IP
+        placeholder: "e.g. 192.168.1.100,Multiple ips are connected by commas"
+      mac:
+        label: MAC
+        placeholder: "例如: 0a:00:27:00:00:00, Multiple MACs are connected by commas"
+      subnet:
+        label: Subnet
+        placeholder: "Please choose a MacvlanSubnet"
   container:
     label: Container
   requestedIp:

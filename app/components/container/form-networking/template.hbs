@@ -99,13 +99,13 @@
   </div>
   <div class="row box mt-20">
     <div class="col span-4">
-      <label class="acc-label">扁平网络</label>
+      <label class="acc-label">{{t 'nav.cluster.vlansubnet'}}</label>
         {{#input-or-display editable=editing value=enableStaticPodLabel}}
           <div class="radio">
-            <label>{{radio-button selection=staticPod value=false}} 禁用</label>
+            <label>{{radio-button selection=staticPod value=false}} {{t 'generic.disable'}}</label>
           </div>
           <div class="radio">
-            <label style={{vlansubnetdisabledStyle}}>{{radio-button selection=staticPod disabled=unsupportVlansubnet value=true}} 启用</label>
+            <label style={{vlansubnetdisabledStyle}}>{{radio-button selection=staticPod disabled=unsupportVlansubnet value=true}} {{t 'generic.enable'}}</label>
           </div>
         {{/input-or-display}}
     </div>
@@ -117,13 +117,13 @@
             <div>{{netInterface}}</div>
           </div>
           <div class="col span-6">
-            <label class="acc-label">IP</label>
+            <label class="acc-label">{{t "formNetwork.subnet.form.ip.label"}}</label>
             {{#input-or-display editable=editing value=staticPodAnnotation.ip classesForDisplay="force-wrap"}}
             {{input
                 class="form-control"
                 maxlength=250
                 value=staticPodForm.ip
-                placeholder="例如: 192.168.1.100, 多个IP用逗号连接"
+                placeholder=(t "formNetwork.subnet.form.ip.placeholder")
                 change=(action 'updateStaticPod')
             }}
             {{/input-or-display}}
@@ -131,13 +131,13 @@
         </div>
         <div class="row">
          <div class="col span-6">
-            <label class="acc-label">MAC</label>
+            <label class="acc-label">{{t "formNetwork.subnet.form.mac.label"}}</label>
             {{#input-or-display editable=editing value=staticPodAnnotation.mac classesForDisplay="force-wrap"}}
             {{input
                 class="form-control"
                 maxlength=250
                 value=staticPodForm.mac
-                placeholder="例如: 0a:00:27:00:00:00, 多个MAC用逗号连接"
+                placeholder=(t "formNetwork.subnet.form.mac.placeholder")
                 change=(action 'updateStaticPod')
             }}
             {{/input-or-display}}
@@ -154,7 +154,7 @@
                 classNames="form-control"
                 content=vlansubnets
                 value=staticPodForm.subnet
-                prompt="请选择一个MacvlanSubnet"
+                prompt=(t "formNetwork.subnet.form.subnet.placeholder")
                 change=(action 'updateStaticPod')
               }}
             {{/input-or-display}}
@@ -165,7 +165,7 @@
   </div>
   {{#if (and enableStaticPod isStopFirstChange)}}
     {{#banner-message color='bg-success mb-0 mt-10'}}
-      因扁平网络使用方式限制，Pod 缩放/升级策略已改为: 先停止旧Pod，再启动新Pod
+      {{t "formNetwork.subnet.msg"}}
     {{/banner-message}}
   {{/if}}
 {{/accordion-list-item}}

@@ -1,5 +1,5 @@
 <section class="header clearfix">
-  <h1 class="pull-left">审计日志</h1>
+  <h1 class="pull-left">{{t "auditLog.title"}}</h1>
 </section>
 <section>
   <div class="row">
@@ -30,8 +30,8 @@
       }}
     </div>
     <div class="col span-4">
-       <button class="btn bg-danger" {{action "clear"}}>全部清除</button>
-        <button class="btn bg-primary" {{action "search"}}>搜索</button>
+       <button class="btn bg-danger" {{action "clear"}}>{{t "auditLog.btn.clearAll"}}</button>
+        <button class="btn bg-primary" {{action "search"}}>{{t "auditLog.btn.search"}}</button>
     </div>
   </div>
 </section>
@@ -82,13 +82,13 @@
             {{/if}}
         </td>
         <td style="text-align:center;" data-title="{{dt.requestResId}}">
-          <a href="#" {{action "showDetail" obj}} >Detail</a>
+          <a href="#" {{action "showDetail" obj}} >{{t "auditLog.btn.detail"}}</a>
         </td>
       </tr>
     {{else if (eq kind "nomatch")}}
-      <tr><td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">暂无匹配的数据</td></tr>
+      <tr><td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">{{t "auditLog.table.noMatch"}}</td></tr>
     {{else if (eq kind "norows")}}
-      <tr><td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">暂无数据</td></tr>
+      <tr><td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">{{t "auditLog.table.noData"}}</td></tr>
     {{/if}}
   {{/custom-table}}
 </section>

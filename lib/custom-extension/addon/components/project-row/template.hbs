@@ -12,20 +12,20 @@
 </td>
 <td data-title="{{dt.public}}">
   {{#if (eq model.metadata.public "true")}}
-    公开
+    {{t "harborConfig.table.storeStatus.option1"}}
   {{else}}
-    私有
+    {{t "harborConfig.table.storeStatus.option2"}}
   {{/if}}
 </td>
 <td data-title="{{dt.UserRole}}">
   {{#if (eq model.current_user_role_id 0)}}
-  
+
   {{else if (eq model.current_user_role_id 1)}}
-    项目管理员
+    {{t "harborConfig.table.roleItem.admin"}}
   {{else if (eq model.current_user_role_id 2)}}
-    开发人员
+    {{t "harborConfig.table.roleItem.developer"}}
   {{else if (eq model.current_user_role_id 3)}}
-    访客
+    {{t "harborConfig.table.roleItem.visitor"}}
   {{/if}}
 </td>
 <td data-title="{{dt.repoCount}}">

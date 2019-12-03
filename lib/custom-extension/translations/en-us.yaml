@@ -1,39 +1,39 @@
 imageRepoSection:
   common:
-    reset: 重置
+    reset: Reset
   action:
-    changePwd: 修改密码
-    edit: 编辑
-    editAccount: 修改账号
+    changePwd: "Change Password"
+    edit: Edit
+    editAccount: "Edit Account"
   projectsPage:
-    addProject: 新建项目
-    removeProject: 删除项目
-    projectPublic: 公开
-    porjectPrivate: 私有
+    addProject: "New Project"
+    removeProject: "Remove Project"
+    projectPublic: "Public"
+    porjectPrivate: "Pricate"
     projectRoles:
       admin: Project Admin
       master: Master
       developer: Developer
       guest: Guest
     table:
-      noData: No Data 
+      noData: No Data
       noMatch: No Data Match
   adminConfigPage:
-    saveHarborConfig: 保存
-    removeHarborConfig: 删除
-    testEmailServer: 测试邮件服务器
-    gcSchedule: 立即清理垃圾
+    saveHarborConfig: "SAVE"
+    removeHarborConfig: "REMOVE"
+    testEmailServer: "Test mail server"
+    gcSchedule: "Clean up"
   userConfigPage:
-    syncAccount: 同步账号
-    reSyncAccount: 重新同步账号
+    syncAccount: "Synchronous Account"
+    reSyncAccount: "Resynchronize Account"
   labelPage:
     table:
       noMatch: 没有Label匹配当前搜索
-      noData: 暂无数据
+      noData: "No Data"
   tagPage:
     table:
       noMatch: 没有TAG匹配当前搜索
-      noData: 暂无数据
+      noData: "No Data"
     action:
       copyDigest: 复制摘要
       addLabel: 添加标签
@@ -43,7 +43,7 @@ quotasCn:
   remain: Assignable
   editProjectModal: Edit project quotas
   editNamespaceModal: Edit namespace quotas
-  headers: 
+  headers:
     namespace: Namespace
     used: Allocated
     percent: Percent
@@ -59,3 +59,247 @@ quotasCn:
   namespace:
     title: Namespace Quotas
   notice: No quotas configured, Add quotas by setting the project quota item.
+
+harborConfig:
+  title: "Harbor Configuration"
+  sync:
+    title: "Harbor Account synchronous"
+    subtitle: "Synchronizes the current user information to"
+  setting:
+    title: "Harbor Account Settings"
+    subTitle: "Set the mailbox and access password"
+  wait: "Please wait for the administrator to configure the mirror library."
+  info: "Please configure your Harbor account before visiting this page."
+  log: "Logs"
+  image: "Image Management"
+  newProject: "New Project"
+  access:
+    title: "Harbor Access Configuration"
+    subtitle: "Set up the Harbor visiting address and account."
+  form:
+    address:
+      label: Address
+      placeholder: "Access the URL of the Harbor."
+    email:
+      label: Email
+      placeholder: Email
+    username:
+      label: Username
+      placeholder: "The username of access the Harbor."
+    pw:
+      label: Password
+      placeholder: "The password to access the Harbor."
+    newPw:
+      label: "New"
+      placeholder: "New Harbor password"
+    confirmPw:
+      label: "Confirm"
+      placeholder: "Confirm your website password"
+    image:
+      all: "All Projects"
+      public: "Public Projects"
+      private: "Private Projects"
+    search:
+      placeholder: Search
+      username: Username
+      store: Store
+      tag: Tag
+      operation: Operation
+    projectName:
+      label: "Project Name"
+    accessLevel:
+      label: "Access Level"
+      checkPublic: Public
+      info: 'When the project is set to public, anyone with read access to the image under this item can pull the image under this item without "docker login".'
+    creator:
+      all: All
+      admin: Admin
+  validate:
+    notAdmin: "Configure Harbor with the user of the administrator role"
+    addressError: "Access address error"
+    unableAccess: "Unable to access Harbor services"
+    HarborInfoError: "Harbor Website address、 username or password incorrect"
+    numAndReq: "Token expiration time must be filled, and is a number"
+    formatError: "Passwords should be between 8 and 20 in length and contain at least one uppercase character, one lowercase character, and one number"
+    confirmError: "The new password and the confirmation password must be the same"
+    urlReq: "Address cannot be empty"
+    urlFormatError: "URL address format error，e.g. http(s)://example.com"
+    usernameReq: "Username cannot be empty"
+    pwReq: "Password cannot be empty"
+    emailHostReq: "Please enter the mail server address"
+    emailFromReq: "Please enter the email source"
+    emailPortFormatError: "Please enter the correct port number"
+    updateEmailServerOk: "The updated mail server configuration was successful"
+    updateEmailServerError: "Failed to update mail server configuration, error"
+    validateEmailServerError: "Verify that the mail server failed, error"
+    updateSystemOk: "System Settings were updated successfully"
+    updateSystemError: "Failed to update system Settings, error"
+    emailPortReq: "Please enter the mail server port"
+    errorAndResetHarbor: "The original account or password is wrong, the password cannot be changed, please reconfigure the Harbor account."
+    validateEmailServerOk: "Verify that the mail server was successful"
+    accountUnavailable: "Harbor Account unavailable"
+    emailReq: "Please enter your email address"
+    emailUrlError: "Please use the correct email address，e.g. name@example.com"
+    projectNameReq: "Please enter the project name"
+    projectNameFormatError: 'The project name consists of a lowercase character number and "._-", and has at least two characters beginning with a letter or number'
+    projectNameExist: "The project name already exists"
+  table:
+    name: "Warehouse project name"
+    level: "Access Level"
+    role: Role
+    count: Image warehouse number
+    username: Username
+    imagename: Image Name
+    tag: Tag
+    operation: Operation
+    timestamp: Timestamp
+    entityName: Name
+    entityType: "Member Type"
+    roleItem:
+      admin: Manager
+      developer: Developer
+      visitor: Visitors
+      user: User
+    storeStatus:
+      public: Public
+      private: Private
+  btn:
+    createProject: "NEW"
+  advanced:
+    titleLeft: "Other advanced options are configured in the "
+    titleRight: "."
+    label:
+      title: Labels
+      subtitle: "Label Management"
+      create: "NEW LABEL"
+      name: Label
+      describe: Description
+      createTime: "Creation Time"
+      nodata: "No Data"
+  formTag:
+    titleAdd: "New Tag"
+    titleEdit: "Edit Tag"
+    name:
+      label: "Tag Name"
+    color:
+      label: Color
+    description: "Tag Description"
+    btn:
+      add: "New Tag"
+
+vlansubnetPage:
+  unsupport: "The current cluster does not support flat networks."
+  createMacvlan: "Create MacvlanSubnet"
+  editMacvlan: "Edit MacvlanSubnet"
+  noData: "No Data"
+  noMatch: "There is no matching data."
+  deleteVlanAboutPodsTotal: "There are {total} Pods in use"
+  deleteVlanAboutPodsTotalThan: "More than {total} Pods are in use"
+  deleteVlanAboutVlans: '"{vlan}" and {others} others'
+formVlan:
+  name:
+    label: Name
+    placeholder: "e.g. testvlan"
+    nameReq: '"name" cannot be empty'
+    nameFormatError: '"name" consists of alphanumeric and ._-, not more than 62 characters in length and beginning with a letter or number"'
+  master:
+    label: Master
+    placeholder: "e.g. eth0"
+    masterReq: '"master" cannot be empty'
+  vlan:
+    label: VLAN
+    placeholder: "Values between 2 and 4095."
+    vlanRangeError: '"VLAN" should be between 2 and 4095'
+  cidr:
+    label: CIDR
+    placeholder: "e.g. 192.168.2.0/24"
+    cidrReq: '"CIDR" cannot be empty'
+    cidrFormatError: '"CIDR" format error'
+  mode:
+    label: MODE
+  gateway:
+    label: GATEWAY
+    placeholder: "e.g. 192.168.1.1"
+    gatewayFormatError: '"Gateway" format error'
+  project:
+    label: Project
+  ipRange:
+    label: "IP Range"
+    btn: "Add IP Range"
+    IPFormatError: '"IP Ranges" There are records with incorrect IP address format'
+    IPInCidrError: '"IP Ranges" There are records of IP addresses that are not in the subnet scope'
+    IPRangeError: 'The starting address {min} cannot be greater than the ending address {max}'
+    IPRangeExist: '"IP Ranges" already existed '
+    IPRangeExistWithOthers: "The current IP address range conflicts with an existing IP address range."
+    formInfoExist: '"master":{master}, "vlan":{vlan}, "cidr":{cidr} already exists'
+    start:
+      label: "Range Start"
+      placeholder: "e.g. 192.168.56.10"
+    end:
+      label: "Range End"
+      placeholder: "e.g. 192.168.56.20"
+  route:
+    label: "Custom Route"
+    btn: "Add Custom Route"
+    routeDstReq: '"Custom Route": "Destination" cannot be empty'
+    routeDstFormatError: '"Custom Route": "Destination" format error'
+    routeGwFormatError: '"Custom Route": "Gateway" format error'
+    routeGwInCidrError: '"Custom Route": "Gateway" There are records of IP addresses that are not in the subnet scope'
+    des:
+      label: Destination
+      placeholder: "e.g. 192.168.0.0/16"
+    gw:
+      label: Gateway
+      placeholder: "e.g. 192.168.1.1"
+    iface:
+      label: Iface
+      eth1: eth1
+      eth0: eth0
+  defaultGateway:
+    label: "The eth1 as the container's default gateway"
+    serviceCidr:
+      label: ServiceCidr
+      placeholder: "e.g. 10.43.0.0/16"
+      serviceCidrReq: '"ServiceCidr" cannot be empty'
+      serviceCidrFormatError: '"ServiceCidr" format error'
+auditLog:
+  title: "Audit Log"
+  serverSetError: 'Please check if the "auditlog-server-url" service configuration is correct'
+  unknownError: 'unknown error'
+  form:
+    name:
+      label: "Resource Name/ID"
+      placeholder: "Resource Name/ID"
+    type:
+      label: "All Types"
+      placeholder: "All Types"
+    operation:
+      all: "All Operations"
+      create: Create
+      update: Update
+      delete: Delete
+    time:
+      all: "All Created"
+      day5: "The last 5 days"
+      day10: "The last 10 days"
+      day15: "The last 15 days"
+  table:
+    user: Operator
+    operation: Operation
+    result: "Operating Result"
+    time: "Change Time"
+    type: "Resource Type"
+    name: "Resource Name/ID"
+    detail: Detail
+    noData: "No Data"
+    noMatch: "No matching data is available"
+  btn:
+    clearAll: "CLEAR"
+    search: Search
+    detail: Detail
+  detail:
+    title: "Audit Log - Request details"
+    request: "Request Object"
+    response: "Response Object"
+    btn:
+      close: Close

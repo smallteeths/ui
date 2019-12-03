@@ -1,11 +1,11 @@
 <section class="header clearfix">
   {{#if hasHarborServer}}
   <div class="right-buttons">
-    <button class="btn btn-sm bg-primary right-divider-btn" {{action 'addNewProject'}}>新建仓库项目</button>
+    <button class="btn btn-sm bg-primary right-divider-btn" {{action 'addNewProject'}}>{{t "harborConfig.btn.createProject"}}</button>
   </div>
   {{/if}}
 
-  <h1>仓库项目</h1>
+  <h1>{{t "harborConfig.image"}}</h1>
 
 </section>
 {{#if hasHarborServer}}
@@ -57,5 +57,5 @@
 {{/custom-modal-confirm-delete}}
 {{#custom-modal-add-project modalVisible=showAddProjectModal saved=(action "refresh")}}{{/custom-modal-add-project }}
 {{else}}
-请先配置Harbor账号再访问此页面
+  {{t "harborConfig.info"}}
 {{/if}}

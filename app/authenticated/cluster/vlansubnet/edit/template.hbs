@@ -1,31 +1,31 @@
 <section class="header clearfix">
   <div class="pull-left">
-    <h1>编辑MacvlanSubnet</h1>
+    <h1>{{t "vlansubnetPage.editMacvlan"}}</h1>
   </div>
 </section>
 
 <div class="row">
   <div class="col span-4">
-     <label class="acc-label">名称{{field-required}}</label>
+     <label class="acc-label">{{t "formVlan.name.label"}}{{field-required}}</label>
       {{input
         class="form-control"
         value=form.metadata.name
         maxlength=60
-        placeholder="例如: testvlan"
+        placeholder=(t "formVlan.name.placeholder")
         disabled=true
       }}
   </div>
   <div class="col span-4">
-    <label class="acc-label">Master{{field-required}}</label>
+    <label class="acc-label">{{t "formVlan.vlan.label"}}{{field-required}}</label>
       {{input
         class="form-control"
         value=form.spec.master
-        placeholder="例如: eth0"
+        placeholder=(t "formVlan.master.placeholder")
         disabled=true
       }}
   </div>
   <div class="col span-4">
-      <label class="acc-label">VLAN</label>
+      <label class="acc-label">{{t "formVlan.vlan.label"}}</label>
       {{input
           class="form-control"
           value=form.spec.vlan
@@ -33,23 +33,23 @@
           max="4095"
           min="2"
           step="1"
-          placeholder="取值范围2-4095之间的整数"
+          placeholder=(t "formVlan.vlan.placeholder")
           disabled=true
       }}
     </div>
 </div>
 <div class="row">
     <div class="col span-4">
-      <label class="acc-label">CIDR{{field-required}}</label>
+      <label class="acc-label">{{t "formVlan.cidr.label"}}{{field-required}}</label>
       {{input
           class="form-control"
           value=form.spec.cidr
-          placeholder="例如: 192.168.2.0/24"
+          placeholder=(t "formVlan.cidr.placeholder")
           disabled=true
       }}
     </div>
     <div class="col span-4">
-      <label class="acc-label">MODE{{field-required}}</label>
+      <label class="acc-label">{{t "formVlan.mode.label"}}{{field-required}}</label>
       {{new-select
         value=form.spec.mode
         content=modes
@@ -57,18 +57,18 @@
       }}
     </div>
     <div class="col span-4">
-      <label class="acc-label">GATEWAY</label>
+      <label class="acc-label">{{t "formVlan.gateway.label"}}</label>
       {{input
           class="form-control"
           value=form.spec.gateway
-          placeholder="例如: 192.168.1.1"
+          placeholder=(t "formVlan.gateway.placeholder")
           disabled=true
       }}
     </div>
 </div>
 <div class="row">
   <div class="col span-4">
-      <label class="acc-label">Project</label>
+      <label class="acc-label">{{t "formVlan.project.label"}}</label>
       {{new-select
         value=form.metadata.labels.project
         content=projects
@@ -78,19 +78,19 @@
 </div>
 <div class="row">
   <div class="col span-8">
-    <label class="acc-label">IP Ranges</label>
+    <label class="acc-label">{{t "formVlan.ipRange.label"}}</label>
     {{#if ipRangesExistedMsg}}
     <div class="text-small text-muted">
-      已经存在的IP Ranges: {{ipRangesExistedMsg}}
+      {{t "formVlan.ipRange.IPRangeExist"}}: {{ipRangesExistedMsg}}
     </div>
     {{/if}}
     {{#if (or form.spec.ranges.length model.vlansubnet.spec.ranges.length)}}
     <table class="table fixed no-lines small mb-10">
       <thead>
         <tr class="hidden-sm">
-          <th class="acc-label">Range Start{{field-required}}</th>
+          <th class="acc-label">{{t "formVlan.ipRange.start.label"}}{{field-required}}</th>
           <th width="10"></th>
-          <th class="acc-label">Range End{{field-required}}</th>
+          <th class="acc-label">{{t "formVlan.ipRange.end.label"}}{{field-required}}</th>
           <th width="40">&nbsp;</th>
         </tr>
       </thead>
@@ -98,11 +98,11 @@
         {{#each model.vlansubnet.spec.ranges as |range|}}
           <tr>
             <td >
-              {{input  placeholder="例如: 192.168.56.10" value=range.rangeStart disabled=true}}
+              {{input  placeholder=(t "formVlan.ipRange.start.placeholder") value=range.rangeStart disabled=true}}
             </td>
             <td>-</td>
             <td>
-              {{input  placeholder="例如: 192.168.56.20" value=range.rangeEnd disabled=true}}
+              {{input  placeholder=(t "formVlan.ipRange.end.placeholder") value=range.rangeEnd disabled=true}}
             </td>
             <td>
               <button class="btn bg-primary btn-sm" disabled>
@@ -114,11 +114,11 @@
         {{#each form.spec.ranges as |range|}}
           <tr>
             <td >
-              {{input  placeholder="例如: 192.168.56.10" value=range.rangeStart}}
+              {{input  placeholder=(t "formVlan.ipRange.start.placeholder") value=range.rangeStart}}
             </td>
             <td>-</td>
             <td>
-              {{input  placeholder="例如: 192.168.56.20" value=range.rangeEnd}}
+              {{input  placeholder=(t "formVlan.ipRange.end.placeholder") value=range.rangeEnd}}
             </td>
             <td>
               <button class="btn bg-primary btn-sm" {{action "removeIPRange" range}}>
@@ -133,23 +133,23 @@
     <div>
       <button class="btn bg-link icon-btn p-0" {{action "addIPRange"}}>
       <span class="darken"><i class="icon icon-plus text-small"/></span>
-      <span>添加 IP Range</span>
+      <span>{{t "formVlan.ipRange.btn"}}</span>
     </button>
     </div>
   </div>
 </div>
 <div class="row">
   <div class="col span-8">
-    <label class="acc-label">Custom Route</label>
+    <label class="acc-label">{{t "formVlan.route.label"}}</label>
     {{#if (or form.spec.routes.length model.vlansubnet.spec.routes.length)}}
     <table class="table fixed no-lines small mb-10">
       <thead>
         <tr class="hidden-sm">
-          <th class="acc-label">Destination{{field-required}}</th>
+          <th class="acc-label">{{t "formVlan.route.des.label"}}{{field-required}}</th>
           <th width="10"></th>
-          <th class="acc-label">Gateway</th>
+          <th class="acc-label">{{t "formVlan.route.gw.label"}}</th>
           <th width="10"></th>
-          <th class="acc-label">Iface</th>
+          <th class="acc-label">{{t "formVlan.route.iface.label"}}</th>
           <th width="40">&nbsp;</th>
         </tr>
       </thead>
@@ -157,11 +157,11 @@
         {{#each form.spec.routes as |route|}}
           <tr>
             <td >
-              {{input  placeholder="例如: 192.168.0.0/16" value=route.dst}}
+              {{input  placeholder=(t "formVlan.route.des.placeholder") value=route.dst}}
             </td>
             <td>&nbsp;</td>
             <td>
-              {{input  placeholder="例如: 192.168.1.1" value=route.gw}}
+              {{input  placeholder=(t "formVlan.route.gw.placeholder") value=route.gw}}
             </td>
             <td>&nbsp;</td>
             <td>
@@ -183,7 +183,7 @@
     <div>
       <button class="btn bg-link icon-btn p-0" {{action "addRoute"}}>
       <span class="darken"><i class="icon icon-plus text-small"/></span>
-      <span>添加自定义路由</span>
+      <span>{{t "formVlan.route.btn"}}</span>
     </button>
     </div>
   </div>
@@ -191,7 +191,7 @@
 {{#if hasDefaultGateway}}
 <div class="row">
   <div class="col span-8 row">
-    <label class="acc-label">eth1作为容器默认网关</label>
+    <label class="acc-label">{{t "formVlan.defaultGateway.label"}}</label>
     <div class="radio">
       <label>
         {{radio-button selection=form.spec.podDefaultGateway.enable value=false}}
@@ -206,11 +206,11 @@
     </div>
     <div class="row">
       <div class="col span-6">
-        <label class="acc-label">serviceCidr</label>
+        <label class="acc-label">{{t "formVlan.defaultGateway.serviceCidr.label"}}</label>
         {{input
           class="form-control"
           value=form.spec.podDefaultGateway.serviceCidr
-          placeholder="例如: 10.43.0.0/16"
+          placeholder=(t "formVlan.defaultGateway.serviceCidr.placeholder")
           disabled=(not form.spec.podDefaultGateway.enable)
         }}
       </div>

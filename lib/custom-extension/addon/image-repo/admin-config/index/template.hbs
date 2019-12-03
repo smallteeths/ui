@@ -1,13 +1,13 @@
 <section class="header clearfix">
-  <h1>Harbor 配置</h1>
+  <h1>{{t "harborConfig.title"}}</h1>
 </section>
 <section>
 <div class="accordion">
   <div class="accordion-header">
     <div class="expand"></div>
     <div class="title">
-      <span class="m-0">Harbor 访问设置</span>
-      <p class="help-block">对 Harbor 访问地址和账号进行设置</p>
+      <span class="m-0">{{t "harborConfig.access.title"}}</span>
+      <p class="help-block">{{t "harborConfig.access.subtitle"}}</p>
     </div>
     {{#if showActionMenu}}
     {{#custom-action-menu class="btn bg-transparent pull-right" resourceActions=configActions menuClick=(action 'handleMenuClick')}} {{/custom-action-menu}}
@@ -18,21 +18,21 @@
     {{#if (not changePwd)}}
     <div class="row">
       <div class="col span-12">
-        <label class="acc-label">访问地址{{field-required}}</label>
+        <label class="acc-label">{{t "harborConfig.form.address.label"}}{{field-required}}</label>
         {{#input-or-display editable=harborConfigEditable value=harborConfig.url}}
-          {{input type="text" class="form-control" value=harborConfig.url placeholder="访问Harbor的URL"}}
+          {{input type="text" class="form-control" value=harborConfig.url placeholder=(t "harborConfig.form.address.placeholder")}}
         {{/input-or-display}}
       </div>
       <div class="col span-6">
-        <label class="acc-label">用户名{{field-required}}</label>
+        <label class="acc-label">{{t "harborConfig.form.username.label"}}{{field-required}}</label>
         {{#input-or-display editable=harborConfigEditable value=harborConfig.username}}
-          {{input type="text" class="form-control" value=harborConfig.username placeholder="访问Harbor的用户名"}}
+          {{input type="text" class="form-control" value=harborConfig.username placeholder=(t "harborConfig.form.username.placeholder")}}
         {{/input-or-display}}
       </div>
       <div class="col span-6">
-        <label class="acc-label">密码{{field-required}}</label>
+        <label class="acc-label">{{t "harborConfig.form.pw.label"}}{{field-required}}</label>
         {{#input-or-display editable=harborConfigEditable value="******"}}
-          {{input type="password" class="form-control" value=harborConfig.password placeholder="访问Harbor的密码"}}
+          {{input type="password" class="form-control" value=harborConfig.password placeholder=(t "harborConfig.form.pw.placeholder")}}
         {{/input-or-display}}
       </div>
     </div>
@@ -40,24 +40,24 @@
     {{#if (and changePwd (not harborConfigEditable))}}
     <div class="row">
       <div class="col span-12">
-        <label class="acc-label">访问地址:</label>
+        <label class="acc-label">{{t "harborConfig.form.address.label"}}:</label>
         <span>{{harborConfig.url}}</span>
       </div>
       <div class="col span-6">
-        <label class="acc-label">用户名:</label>
+        <label class="acc-label">{{t "harborConfig.form.username.label"}}:</label>
         <span>{{harborConfig.username}}</span>
       </div>
     </div>
     <div class="row">
       <div class="col span-12">
-        <label class="acc-label">新的Harbor密码{{field-required}}</label>
-        {{input type="password" class="form-control" value=changePwdForm.newPwd placeholder="新的Harbor密码"}}
+        <label class="acc-label">{{t "harborConfig.form.newPw.label"}}{{field-required}}</label>
+        {{input type="password" class="form-control" value=changePwdForm.newPwd placeholder=(t "harborConfig.form.newPw.placeholder")}}
       </div>
     </div>
     <div class="row">
       <div class="col span-12">
-        <label class="acc-label">确认Harbor密码{{field-required}}</label>
-        {{input type="password" class="form-control" value=changePwdForm.confirmPwd placeholder="确认Harbor密码"}}
+        <label class="acc-label">{{t "harborConfig.form.confirmPw.label"}}{{field-required}}</label>
+        {{input type="password" class="form-control" value=changePwdForm.confirmPwd placeholder=(t "harborConfig.form.confirmPw.placeholder")}}
       </div>
     </div>
     {{save-cancel save=(action "confirmChangePwd") cancel=(action "cancelChangePwd") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
@@ -85,12 +85,12 @@
 
 </section>
 {{#if harborAccountValid}}
-<p>其他高级选项在<a class="clip project-link" target="_blank" href="{{model.harborServer}}">Harbor</a>中进行配置</p>
+<p>{{t "harborConfig.advanced.titleLeft"}}<a class="clip project-link" target="_blank" href="{{model.harborServer}}">Harbor</a>{{t "harborConfig.advanced.titleRight"}}</p>
   <section>
     {{#accordion-list showExpandAll=false as | al expandFn |}}
       {{#accordion-list-item
-        title="标签"
-        detail="标签管理"
+        title=(t "harborConfig.advanced.label.title")
+        detail=(t "harborConfig.advanced.label.subtitle")
         expandAll=al.expandAll
         expand=(action expandFn)
       }}
@@ -162,7 +162,7 @@
       {{/input-or-display}}
       <div class="text-info">确定是否要验证邮件服务器的证书。如果邮件服务器使用的是自签或者非信任证书，不要勾选此项。</div>
     </div>
-  </div> 
+  </div>
   <div class="row">
     <div class="col span-6">
       {{save-cancel save=(action "saveEmailConfig") cancel=(action "cancelEmailConfig") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" class="pull-right"}}
@@ -170,8 +170,8 @@
     <div class="col span-6">
       {{save-cancel save=(action "testEmailServer") cancelDisabled=true createLabel="imageRepoSection.adminConfigPage.testEmailServer" class="pull-left"}}
     </div>
-    
-    
+
+
   </div>
 {{/accordion-list-item}}
 

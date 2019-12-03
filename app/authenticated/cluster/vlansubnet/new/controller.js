@@ -9,6 +9,7 @@ const ipv4RegExp = /^(((\d{1,2})|(1\d{2})|(2[0-4]\d)|(25[0-5]))\.){3}((\d{1,2})|
 export default Controller.extend({
   vlansubnet:      service(),
   scope:           service(),
+  intl:            service(),
   errors:          null,
   ipRangesExisted: null,
   modes:           [
@@ -65,6 +66,7 @@ export default Controller.extend({
 
       (!get(this, 'hasDefaultGateway') || !podDefaultGateway.enable) && (form.spec.podDefaultGateway = {});
       this.hasVlan(master || '', vlan || 0).then(() => {
+        const intl = get(this, 'intl');
         // if (result) {
         //   set(this, 'errors', [`master为${ master }且vlan为${ vlan || '空' }, 已经存在`]);
         //   cb(false);
@@ -72,14 +74,18 @@ export default Controller.extend({
         //   return;
         // }
         if (this.hasIpConflict()) {
-          set(this, 'errors', ['当前ip地址范围与已经存在的ip地址范围有冲突']);
+          set(this, 'errors', [intl.t('formVlan.ipRange.IPRangeExistWithOthers')]);
           cb(false);
 
           return;
         }
 
         if ((!ranges || ranges.length === 0) && this.hasDuplicateValues(cidr)) {
-          set(this, 'errors', [`master为${ master }, vlan为${ vlan }, cidr为${ cidr } 的记录已经存在`]);
+          set(this, 'errors', [intl.t('formVlan.ipRange.formInfoExist', {
+            master,
+            vlan,
+            cidr
+          })]);
           cb(false);
 
           return;
@@ -184,64 +190,68 @@ export default Controller.extend({
   validate() {
     const form = get(this, 'form');
     const errors = [];
+    const intl = get(this, 'intl');
 
     if (form.metadata.name === '') {
-      errors.push('名称不能为空');
+      errors.push(intl.t('formVlan.name.nameReq'));
     }
     const nameReg = /^[a-z0-9A-Z][a-z0-9A-Z_.-]{0,60}[a-z0-9A-Z]$/;
 
     if (form.metadata.name !== '' && !nameReg.test(form.metadata.name)) {
-      errors.push('项目名称由字母、数字、和._-组成，长度不超过62且至少有两个字符并以字母或数字开头');
+      errors.push(intl.t('formVlan.name.nameFormatError'));
     }
     if (form.spec.master === '') {
-      errors.push('master 不能为空');
+      errors.push(intl.t('formVlan.master.masterReq'));
     }
 
     if (form.spec.vlan !== '' && (!/^\d+$/.test(form.spec.vlan) || form.spec.vlan < 2 || form.spec.vlan > 4095)) {
-      errors.push('VLAN值应该是2到4095之间的整数');
+      errors.push(intl.t('formVlan.vlan.vlanRangeError'));
     }
 
     if (form.spec.cidr === '') {
-      errors.push('CIDR 不能为空');
+      errors.push(intl.t('formVlan.cidr.cidrReq'));
     }
     const cidrIPV4RegExp = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/\d{1,2}$/;
 
     if (form.spec.cidr !== '' && !cidrIPV4RegExp.test(form.spec.cidr)) {
-      errors.push('CIDR格式错误');
+      errors.push(intl.t('formVlan.cidr.cidrFormatError'));
     }
 
     if (form.spec.gateway && !ipv4RegExp.test(form.spec.gateway)) {
-      errors.push('Gateway IP 格式错误');
+      errors.push(intl.t('formVlan.gateway.gatewayFormatError'));
     }
     if (form.spec.podDefaultGateway.enable && !form.spec.podDefaultGateway.serviceCidr) {
-      errors.push('ServiceCidr 不能为空');
+      errors.push(intl.t('formVlan.defaultGateway.serviceCidr.serviceCidrReq'));
     }
     if (form.spec.podDefaultGateway.enable && form.spec.podDefaultGateway.serviceCidr && !cidrIPV4RegExp.test(form.spec.podDefaultGateway.serviceCidr)) {
-      errors.push('ServiceCidr 格式错误');
+      errors.push(intl.t('formVlan.defaultGateway.serviceCidr.serviceCidrFormatError'));
     }
     if (form.spec.ranges.some((r) => !ipv4RegExp.test(r.rangeEnd) || !ipv4RegExp.test(r.rangeStart))) {
-      errors.push('IP Ranges 中，存在IP地址格式不正确的记录');
+      errors.push(intl.t('formVlan.ipRange.IPFormatError'));
     } else if (form.spec.ranges.some((r) => !this.ip4CIDRContains(form.spec.cidr, r.rangeEnd) || !this.ip4CIDRContains(form.spec.cidr, r.rangeStart))) {
-      errors.push('IP Ranges 中，存在IP地址不在子网范围内的记录');
+      errors.push(intl.t('formVlan.ipRange.IPInCidrError'));
     } else {
       form.spec.ranges.forEach((r) => {
         if (this.comapreIP4(r.rangeStart, r.rangeEnd) > 0) {
-          errors.push(`开始地址(${ r.rangeStart })不能大于结束地址(${ r.rangeEnd })`);
+          errors.push(intl.t('formVlan.ipRange.IPRangeError', {
+            min: r.rangeStart,
+            max: r.rangeEnd
+          }));
         }
       });
     }
 
     if (form.spec.routes.some((r) => !r.dst)) {
-      errors.push('自定义路由中，存在Destination为空的记录');
+      errors.push(intl.t('formVlan.route.routeDstReq'));
     }
     if (form.spec.routes.some((r) => !!r.dst && !cidrIPV4RegExp.test(r.dst))) {
-      errors.push('自定义路由中，存在Destination格式错误的记录');
+      errors.push(intl.t('formVlan.route.routeDstFormatError'));
     }
     if (form.spec.routes.some((r) => !!r.gw && !ipv4RegExp.test(r.gw))) {
-      errors.push('自定义路由中，存在Gateway格式错误的记录');
+      errors.push(intl.t('formVlan.route.routeGwFormatError'));
     }
     if (form.spec.routes.some((r) => ((r.iface && r.iface !== 'eth0') || !r.iface) && !!r.gw && ipv4RegExp.test(r.gw) && !this.ip4CIDRContains(form.spec.cidr, r.gw))) {
-      errors.push('Custom Route Gateway中，存在IP地址不在子网范围内的记录');
+      errors.push(intl.t('formVlan.route.routeGwInCidrError'));
     }
     if (errors.length > 0) {
       set(this, 'errors', errors);

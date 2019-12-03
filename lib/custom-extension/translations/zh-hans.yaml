@@ -16,7 +16,7 @@ imageRepoSection:
       developer: Developer
       guest: Guest
     table:
-      noData: 暂无数据 
+      noData: 暂无数据
       noMatch: 暂无数据
   adminConfigPage:
     saveHarborConfig: 保存
@@ -43,7 +43,7 @@ quotasCn:
   remain: 剩余可分配
   editProjectModal: 修改项目配额
   editNamespaceModal: 修改命名空间配额
-  headers: 
+  headers:
     namespace: 命名空间
     used: 已分配
     percent: 百分比
@@ -59,3 +59,249 @@ quotasCn:
   namespace:
     title: 命名空间配额
   notice: 没有配置配额，通过设置项目配额项添加配额。
+
+harborConfig:
+  title: "Harbor 配置"
+  sync:
+    title: "Harbor 账号同步"
+    subtitle: "将当前的用户信息同步到"
+  setting:
+    title: "Harbor 账号设置"
+    subTitle: 对邮箱和访问密码进行设置
+  wait: 请等待管理员配置镜像库
+  info: 请先配置Harbor账号再访问此页面
+  log: 日志
+  image: 仓库项目
+  newProject: 新建项目
+  access:
+    title: "Harbor 访问配置"
+    subtitle: 对邮箱和访问密码进行设置
+  form:
+    address:
+      label: 访问地址
+      placeholder: 访问Harbor的URL
+    email:
+      label: 邮箱地址
+      placeholder: 邮箱地址
+    username:
+      label: 用户名
+      placeholder: 访问Harbor的用户名
+    pw:
+      label: 密码
+      placeholder: 访问Harbor的密码
+    newPw:
+      label: 新密码
+      placeholder: 新的Harbor密码
+    confirmPw:
+      label: 确认密码
+      placeholder: 确认Harbor密码
+    image:
+      all: 所有仓库项目
+      public: 公开项目
+      private: 私有项目
+    search:
+      placeholder: 搜索
+      username: 用户名
+      store: 仓库
+      tag: 标签
+      operation: 操作
+    projectName:
+      label: 项目名称
+    accessLevel:
+      label: 访问级别
+      checkPublic: 公开
+      info: "当项目设为公开后，任何人都有此项目下镜像的读权限。命令行用户不需要“docker login”就可以拉取此项目下的镜像。"
+    creator:
+      all: 所有人
+      admin: 仅管理员
+  validate:
+    notAdmin: 请使用管理员角色的用户配置Harbor
+    addressError: 访问地址错误
+    unableAccess: 无法访问Harbor服务
+    HarborInfoError: "Harbor地址、用户名或密码错误"
+    numAndReq: "令牌过期时间必填，且为数字"
+    formatError: "密码长度在8到20之间且需包含至少一个大写字符，一个小写字符和一个数字。"
+    confirmError: "新密码和确认密码必须相同"
+    urlReq: "访问地址不能为空"
+    urlFormatError: "URL 地址格式错误，正确格式如：http(s)://example.com"
+    usernameReq: "用户名不能为空"
+    pwReq: "密码不能为空"
+    emailHostReq: "请输入邮件服务器地址"
+    emailFromReq: "请输入邮件来源"
+    emailPortFormatError: "请输入正确的端口号"
+    updateEmailServerOk: "更新邮件服务器配置成功"
+    updateEmailServerError: "更新邮件服务器配置失败, 错误"
+    validateEmailServerError: "验证邮件服务器失败, 错误"
+    updateSystemOk: "更新系统设置成功"
+    updateSystemError: "更新系统设置失败, 错误"
+    emailPortReq: "请输入邮件服务器端口"
+    errorAndResetHarbor: "原始账号或密码错误, 无法修改密码，请重新配置Harbor账号."
+    validateEmailServerOk: "验证邮件服务器成功"
+    accountUnavailable: "Harbor 账号无法使用"
+    emailReq: "请输入邮箱地址"
+    emailUrlError: "请使用正确的邮箱地址，例如: name@example.com"
+    projectNameReq: "请输入项目名称"
+    projectNameFormatError: "项目名称由小写字符、数字、和._-组成，且至少有两个字符并以字母或数字开头"
+    projectNameExist: "项目名称已经存在"
+  table:
+    name: 仓库项目名称
+    level: 访问级别
+    role: 角色
+    count: 镜像仓库数
+    username: 用户名
+    imagename: 镜像名称
+    tag: 标签
+    operation: 操作
+    timestamp: 时间戳
+    entityName: 姓名
+    entityType: 成员类型
+    roleItem:
+      admin: 项目管理员
+      developer: 开发人员
+      visitor: 访客
+      user: 用户
+    storeStatus:
+      public: 公开
+      private: 私有
+  btn:
+    createProject: 新建仓库项目
+  advanced:
+    titleLeft: 其他高级选项在
+    titleRight: 中进行配置
+    label:
+      title: 标签
+      subtitle: 标签管理
+      create: 新建标签
+      name: 标签
+      describe: 描述
+      createTime: 创建时间
+      nodata: 暂无数据
+  formTag:
+    titleAdd: 新建标签
+    titleEdit: 编辑标签
+    name:
+      label: 标签名称
+      nameReq: 请输入标签名称
+      nameExist: 标签名称已经存在
+    color:
+      label: 颜色
+    description: 标签描述
+    btn:
+      add: "新建标签"
+
+vlansubnetPage:
+  unsupport: "当前集群不支持扁平网络"
+  createMacvlan: "创建MacvlanSubnet"
+  editMacvlan: "编辑MacvlanSubnet"
+  noData: "暂无数据"
+  noMatch: "暂无匹配数据"
+  deleteVlanAboutPodsTotal: "正在使用的pod 共 {total} 条"
+  deleteVlanAboutPodsTotalThan: "正在使用的pod 共 {total} 条以上"
+  deleteVlanAboutVlans: "{vlan} 及 {others} 其他"
+formVlan:
+  name:
+    label: 名称
+    placeholder: "例如：testvlan"
+    nameReq: 名称不能为空
+    nameFormatError: "项目名称由字母、数字、和._-组成，长度不超过62且至少有两个字符并以字母或数字开头"
+  master:
+    label: Master
+    placeholder: "例如：eth0"
+    masterReq: "master 不能为空"
+  vlan:
+    label: VLAN
+    placeholder: "取值范围2-4095之间的整数"
+    vlanRangeError: VLAN值应该是2到4095之间的整数
+  cidr:
+    label: CIDR
+    placeholder: "例如：192.168.2.0/24"
+    cidrReq: "CIDR 不能为空"
+    cidrFormatError: "CIDR格式错误"
+  mode:
+    label: MODE
+  gateway:
+    label: GATEWAY
+    placeholder: "例如：192.168.1.1"
+    gatewayFormatError: "Gateway IP 格式错误"
+  project:
+    label: Project
+  ipRange:
+    label: IP范围
+    btn: "添加 IP Range"
+    IPFormatError: "IP Ranges 中，存在IP地址格式不正确的记录"
+    IPInCidrError: "IP Ranges 中，存在IP地址不在子网范围内的记录"
+    IPRangeError: "开始地址{min}不能大于结束地址{max}"
+    IPRangeExist: "已经存在的IP Ranges"
+    IPRangeExistWithOthers: "当前ip地址范围与已经存在的ip地址范围有冲突"
+    formInfoExist: "master为{master}, vlan为{vlan}, cidr为{cidr}的记录已经存在"
+    start:
+      label: 开始IP
+      placeholder: "例如：192.168.56.10"
+    end:
+      label: 结束IP
+      placeholder: "例如：192.168.56.20"
+  route:
+    label: 自定义路由
+    btn: 添加自定义路由
+    routeDstReq: "自定义路由中，Destination 存在为空的记录"
+    routeDstFormatError: "自定义路由中，Destination 存在格式错误的记录"
+    routeGwFormatError: "自定义路由中，Gateway 存在格式错误的记录"
+    routeGwInCidrError: "自定义路由中，Gateway 存在IP地址不在子网范围内的记录"
+    des:
+      label: Destination
+      placeholder: "例如：192.168.0.0/16"
+    gw:
+      label: Gateway
+      placeholder: "例如：192.168.1.1"
+    iface:
+      label: Iface
+      eth1: eth1
+      eth0: eth0
+  defaultGateway:
+    label: eth1作为容器默认网关
+    serviceCidr:
+      label: ServiceCidr
+      placeholder: "例如: 10.43.0.0/16"
+      serviceCidrReq: "ServiceCidr 不能为空"
+      serviceCidrFormatError: "ServiceCidr 格式错误"
+auditLog:
+  title: "审计日志"
+  serverSetError: '请检查auditlog-server-url服务配置是否正确'
+  unknownError: '未知错误'
+  form:
+    name:
+      label: "请求资源Name/ID"
+      placeholder: "请求资源Name/ID"
+    type:
+      label: 所有类型
+      placeholder: 所有类型
+    operation:
+      all: 所有操作
+      create: 新增
+      update: 更新
+      delete: 删除
+    time:
+      all: 日志时间-全部
+      day5: 最近5天
+      day10: 最近10天
+      day15: 最近15天
+  table:
+    user: 操作人
+    operation: 操作
+    result: 操作结果
+    time: 变更时间
+    type: 资源类型
+    name: 资源Name/ID
+    detail: 详情
+    noData: 暂无数据
+    noMatch: 暂无匹配的数据
+  btn:
+    clearAll: 全部清除
+    search: 搜索
+    detail: 查看
+  detail:
+    title: "审计日志-请求详情"
+    request: 请求对象
+    response: 响应对象
+    btn:
+      close: 关闭

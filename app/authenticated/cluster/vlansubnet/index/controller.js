@@ -35,31 +35,31 @@ export const headers = [
   },
   {
     name:           'ipRanges',
-    label:          'IP Ranges',
+    translationKey: 'formVlan.ipRange.label',
     width:          210,
   },
   {
     name:           'routes',
-    label:          'Custom Routes',
+    translationKey: 'formVlan.route.label',
     width:          180,
   },
   {
     name:           'mode',
-    label:          'Mode',
+    translationKey: 'formVlan.mode.label',
     sort:           ['mode'],
     searchField:    'mode',
     width:          80
   },
   {
     name:           'gateway',
-    label:          'Gateway',
+    translationKey: 'formVlan.gateway.label',
     sort:           ['gateway'],
     searchField:    'gateway',
   },
   {
     classNames:     'text-right pr-20',
     name:           'creationTimestamp',
-    label:          '创建时间',
+    translationKey: 'generic.created',
     sort:           ['creationTimestamp'],
     searchField:    false,
   },
@@ -71,6 +71,7 @@ export default Controller.extend({
   scope:                  service(),
   router:                 service(),
   session:                service(),
+  intl:                   service(),
   sortBy:                 'name',
   headers,
   data:                   [],
@@ -169,6 +170,7 @@ export default Controller.extend({
       set(this, 'data', data);
     },
     promptDelete(data) {
+      const intl = get(this, 'intl');
       const clusterId = get(this, 'model.clusterId');
       const timestamp = new Date().getTime();
       let nameList = '';
@@ -181,7 +183,11 @@ export default Controller.extend({
       });
 
       if (data.length > 5){
-        nameList = `${ data.firstObject.name }及${ data.length - 1 }其他`;
+        // nameList = `${ data.firstObject.name }及${ data.length - 1 }其他`;
+        nameList = intl.t('vlansubnetPage.deleteVlanAboutVlans', {
+          vlan:   data.firstObject.name,
+          others: data.length - 1
+        });
       }
       set(this, 'showConfirmDeleteModal', true);
       set(this, 'infos', [{ displayName: nameList }]);
@@ -195,9 +201,9 @@ export default Controller.extend({
 
         if (pods.length > 14){
           pods.length = 14;
-          get(this, 'infos').push(...pods, { displayName: `············` }, { displayName: `${ length > 200 ? '正在使用pod 共 200 条以上' : `正在使用pod 共 ${ length } 条` }` });
+          get(this, 'infos').push(...pods, { displayName: `············` }, { displayName: `${ length > 200 ? intl.t('vlansubnetPage.deleteVlanAboutPodsTotalThan', { total: 200 }) : intl.t('vlansubnetPage.deleteVlanAboutPodsTotal', { total: length }) }` });
         } else {
-          get(this, 'infos').push(...pods, { displayName: `正在使用pod 共 ${ length } 条` });
+          get(this, 'infos').push(...pods, { displayName: intl.t('vlansubnetPage.deleteVlanAboutPodsTotal', { total: length }) });
         }
         set(this, 'infos', JSON.parse(JSON.stringify(get(this, 'infos'))));
       });

@@ -5,24 +5,24 @@ import { get, set, computed } from '@ember/object';
 export const headers = [
   {
     name:           'username',
-    label:          '操作人',
+    translationKey: 'auditLog.table.user',
     searchField:    'username',
   },
   {
     name:           'operation',
-    label:          '操作',
+    translationKey: 'auditLog.table.operation',
     searchField:    'operation',
   },
   {
     name:           'responseCode',
-    label:          '操作结果',
+    translationKey: 'auditLog.table.result',
     searchField:    'responseCode',
   },
   {
     name:           'requestTimestamp',
-    label:          '变更时间',
+    translationKey: 'auditLog.table.time',
     sort:           ['requestTimestamp'],
-    searchField: 'requestTimestamp',
+    searchField:    'requestTimestamp',
   },
   // {
   //   name:           'clusterID',
@@ -31,17 +31,17 @@ export const headers = [
   // },
   {
     name:           'requestResType',
-    label:          '资源类型',
+    translationKey: 'auditLog.table.type',
     searchField:    'requestResType',
   },
   {
     name:           'requestResId',
-    label:          '资源Name/ID',
+    translationKey: 'auditLog.table.name',
     searchField:    'requestResId',
   },
   {
     name:           'detail',
-    label:          '详情',
+    translationKey: 'auditLog.table.detail',
     searchField:    'detail',
     classNames:     'text-center',
   },
@@ -55,53 +55,12 @@ export default Controller.extend({
   session:          service(),
   modalService:     service('modal'),
   growl:            service(),
+  intl:             service(),
   queryParams:      ['workloadId', 'clusterId'],
   workloadId:       null,
   clusterId:        null,
   tableFlag:        true,
   sortBy:           'requestTimestamp',
-  dateRanges:       [
-    {
-      label: '日志时间-全部',
-      value: '-1',
-    },
-    {
-      label: '最近5天',
-      value: '5',
-    },
-    {
-      label: '最近10天',
-      value: '10',
-    },
-    {
-      label: '最近15天',
-      value: '15',
-    }
-  ],
-  operations: [
-    {
-      label: '所有操作',
-      value: ''
-    },
-    {
-      label: 'Create',
-      value: 'Create'
-    },
-    {
-      label: 'Update',
-      value: 'Update'
-    },
-    {
-      label: 'Delete',
-      value: 'Delete'
-    }
-  ],
-  searchFields: [
-    {
-      label: '请求资源Name/ID',
-      value: 'requestResId',
-    },
-  ],
   headers,
   data:             [],
   availableActions: [],
@@ -146,23 +105,24 @@ export default Controller.extend({
     operationsChanged() {
       let resourceTypeObject = null;
       let resourceActions = null;
+      const intl = get(this, 'intl');
 
       if (!get(this, 'form.operationLabel')) {
         resourceActions = [
           {
-            label: '所有操作',
+            label: intl.t('auditLog.form.operation.all'),
             value: ''
           },
           {
-            label: 'Create',
+            label: intl.t('auditLog.form.operation.create'),
             value: 'Create'
           },
           {
-            label: 'Update',
+            label: intl.t('auditLog.form.operation.update'),
             value: 'Update'
           },
           {
-            label: 'Delete',
+            label: intl.t('auditLog.form.operation.delete'),
             value: 'Delete'
           }
         ]
@@ -180,7 +140,7 @@ export default Controller.extend({
             }
           })
           resourceActions.unshift({
-            label: '所有操作',
+            label: intl.t('auditLog.form.operation.all'),
             value: ''
           })
         }
@@ -241,6 +201,60 @@ export default Controller.extend({
       });
     },
   },
+  searchFields: computed('intl.locale', function() {
+    const intl = get(this, 'intl');
+
+    let arr = [{
+      label: intl.t('auditLog.form.name.label'),
+      value: 'requestResId'
+    }]
+
+    return arr;
+  }),
+  operations: computed('intl.locale', function() {
+    const intl = get(this, 'intl');
+
+    let arr = [{
+      label: intl.t('auditLog.form.operation.all'),
+      value: ''
+    },
+    {
+      label: intl.t('auditLog.form.operation.create'),
+      value: 'Create'
+    },
+    {
+      label: intl.t('auditLog.form.operation.update'),
+      value: 'Update'
+    },
+    {
+      label: intl.t('auditLog.form.operation.delete'),
+      value: 'Delete'
+    }]
+
+    return arr;
+  }),
+  dateRanges: computed('intl.locale', function() {
+    const intl = get(this, 'intl');
+
+    let arr = [{
+      label: intl.t('auditLog.form.time.all'),
+      value: '-1',
+    },
+    {
+      label: intl.t('auditLog.form.time.day5'),
+      value: '5',
+    },
+    {
+      label: intl.t('auditLog.form.time.day10'),
+      value: '10',
+    },
+    {
+      label: intl.t('auditLog.form.time.day15'),
+      value: '15',
+    }]
+
+    return arr;
+  }),
   rows: computed('model.logs.content.data', function() {
     !get(this, 'model.logs.status') && this.messageError(get(this, 'model.logs.content'))
 
@@ -267,8 +281,10 @@ export default Controller.extend({
     }, {});
   }),
   messageError(error) {
+    const intl = get(this, 'intl');
+
     if (error.status === 502) {
-      get(this, 'growl').fromError('请检查auditlog-server-url服务配置是否正确');
+      get(this, 'growl').fromError(intl.t('auditLog.serverSetError'));
     } else {
       let messageBody = error.body;
       let messageJSON = null;
@@ -281,7 +297,7 @@ export default Controller.extend({
 
       let message = messageJSON ? messageJSON.message : messageBody;
 
-      message = message ? message : '未知错误'
+      message = message ? message : intl.t('auditLog.unknownError')
       get(this, 'growl').fromError(message);
     }
   },
