@@ -15,7 +15,7 @@ export default Route.extend({
           harborAccount: '',
         };
       }
-      if (!!get(this, 'access.currentUser.hasAdmin')) {
+      if (!!get(this, 'access.me.hasAdmin')) {
         return get(this, 'harbor').fetchHarborUserInfo().then((resp) => {
           return {
             harborServer,
@@ -23,7 +23,7 @@ export default Route.extend({
           }
         });
       } else {
-        const account = get(this, 'access.currentUser.annotations')['authz.management.cattle.io.cn/harborauth'];
+        const account = get(this, 'access.me.annotations')['authz.management.cattle.io.cn/harborauth'];
 
         return {
           harborServer,
