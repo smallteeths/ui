@@ -2887,6 +2887,11 @@ notifierPage:
     agentPlaceholder: '例如: 1000003'
     corpPlaceholder: '例如: wwc0cc3d58f9b021b6'
     defaultRecipientPlaceholder: '例如: 2'
+  endpoint:
+    label: 接收API URL
+    default: 默认
+    custom: 自定义
+    endpoint.placeholder: '例如: https://qyapi.weixin.qq.com/cgi-bin/'
   proxyUrl:
     label: Proxy URL
     placeholder: '例如: http://my-proxy/'
