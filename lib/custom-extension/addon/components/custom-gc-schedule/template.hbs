@@ -27,7 +27,7 @@
   </div>
   {{/if}} 
 </div>
-{{save-cancel save="saveGCSchedule" cancel="cancelGCSchedule" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig"}} 
+{{save-cancel save=(action "saveGCSchedule") cancel=(action "cancelGCSchedule") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig"}} 
 <div style="display: flex;">
-  {{save-cancel save="gcSchedule" createLabel="imageRepoSection.adminConfigPage.gcSchedule" cancelDisabled=true}} 
+  {{save-cancel save=(action "gcSchedule") createLabel="imageRepoSection.adminConfigPage.gcSchedule" cancelDisabled=true}} 
 </div>

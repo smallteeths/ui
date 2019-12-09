@@ -52,7 +52,7 @@
     </p>
   {{/banner-message}}
 
-  {{save-cancel save="savePublicConfig" save="savePublicConfig" saveDisabled=saveDisabled cancelDisabled=true createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
+  {{save-cancel save=(action "savePublicConfig") saveDisabled=saveDisabled cancelDisabled=true createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
   </div>
     {{!-- <div class="pull-left" style="margin-left:10px;padding-left:20px;font-size:17px">
       项目仓库
@@ -67,5 +67,5 @@
       </div> 
     </div>
   </div>
-  {{save-cancel save="savePublicConfig" saving=saving saveDisabled=saveDisabled cancelDisabled=cancelDisabled cancel="cancelPublicConfig" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }} --}}
+  {{save-cancel save=(action "savePublicConfig") saving=saving saveDisabled=saveDisabled cancelDisabled=cancelDisabled cancel="cancelPublicConfig" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }} --}}
 </section>

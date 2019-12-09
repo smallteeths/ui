@@ -60,22 +60,22 @@
         {{input type="password" class="form-control" value=changePwdForm.confirmPwd placeholder="确认Harbor密码"}}
       </div>
     </div>
-    {{save-cancel save="confirmChangePwd" cancel="cancelChangePwd" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
+    {{save-cancel save=(action "confirmChangePwd") cancel=(action "cancelChangePwd") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
     {{/if}}
     {{#if harborConfigEditable}}
-    {{save-cancel save="saveHarboConfig" cancel="cancelHarborConfig" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
+    {{save-cancel save=(action "saveHarboConfig") cancel=(action "cancelHarborConfig") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
     {{/if}}
     {{!-- {{#if harborAccountValid}}
       <div class="row">
         <div class="col span-6">
-          {{save-cancel save="saveHarboConfig" cancel="cancelHarborConfig" cancelLabel="imageRepoSection.common.reset" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" class="pull-right"}}
+          {{save-cancel save=(action "saveHarboConfig") cancel=(action "cancelHarborConfig") cancelLabel="imageRepoSection.common.reset" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" class="pull-right"}}
         </div>
         <div class="col span-6">
-          {{save-cancel save="removeHarboConfig" cancelDisabled=true cancelLabel="imageRepoSection.common.reset" createLabel="imageRepoSection.adminConfigPage.removeHarborConfig" class="pull-left"}}
+          {{save-cancel save=(action "removeHarboConfig") cancelDisabled=true cancelLabel="imageRepoSection.common.reset" createLabel="imageRepoSection.adminConfigPage.removeHarborConfig" class="pull-left"}}
         </div>
       </div>
     {{else}}
-      {{save-cancel save="saveHarboConfig" cancel="cancelHarborConfig" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
+      {{save-cancel save=(action "saveHarboConfig") cancel=(action "cancelHarborConfig") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
     {{/if}} --}}
   </div>
 </div>
@@ -165,10 +165,10 @@
   </div> 
   <div class="row">
     <div class="col span-6">
-      {{save-cancel save="saveEmailConfig" cancel="cancelEmailConfig" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" class="pull-right"}}
+      {{save-cancel save=(action "saveEmailConfig") cancel=(action "cancelEmailConfig") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" class="pull-right"}}
     </div>
     <div class="col span-6">
-      {{save-cancel save="testEmailServer" cancelDisabled=true createLabel="imageRepoSection.adminConfigPage.testEmailServer" class="pull-left"}}
+      {{save-cancel save=(action "testEmailServer") cancelDisabled=true createLabel="imageRepoSection.adminConfigPage.testEmailServer" class="pull-left"}}
     </div>
     
     
@@ -212,7 +212,7 @@
       <div class="text-info">用户在此模式下无法对仓库执行任何操作。</div>
     </div>
   </div>
-  {{save-cancel save="saveSystemConfig" cancel="cancelSystemConfigy" cancelLabel="imageRepoSection.common.reset" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig"}}
+  {{save-cancel save=(action "saveSystemConfig") cancel=(action "cancelSystemConfigy") cancelLabel="imageRepoSection.common.reset" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig"}}
   {{/accordion-list-item}}
 
   {{#accordion-list-item

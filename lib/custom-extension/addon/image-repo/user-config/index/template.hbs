@@ -39,7 +39,7 @@
           </div>
         </div>
         {{#if hasHarborAccountError}}
-          {{save-cancel save="reSyncAccount" cancelDisabled=true createLabel="imageRepoSection.userConfigPage.reSyncAccount" }}
+          {{save-cancel save=(action "reSyncAccount") cancelDisabled=true createLabel="imageRepoSection.userConfigPage.reSyncAccount" }}
         {{/if}}
       </section>
       {{/if}}
@@ -61,7 +61,7 @@
         </div>
       </div>
 
-      {{save-cancel save="syncAccount" cancelDisabled=true createLabel="imageRepoSection.userConfigPage.syncAccount" }}
+      {{save-cancel save=(action "syncAccount") cancelDisabled=true createLabel="imageRepoSection.userConfigPage.syncAccount" }}
       </section>
       {{/if}}
       {{#if changeHarborAccount}}
@@ -94,7 +94,7 @@
             {{input type="password" class="form-control" value=changeHarborAccountForm.confirmPwd placeholder="确认Harbor密码"}}
           </div>
         </div>
-        {{save-cancel save="confirmChangeHarborAccount" cancel="cancelChangeHarborAccount" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
+        {{save-cancel save=(action "confirmChangeHarborAccount") cancel=(action "cancelChangeHarborAccount") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
       {{/if}}
   </div>
 </div>

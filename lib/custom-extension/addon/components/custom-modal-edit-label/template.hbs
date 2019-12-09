@@ -43,6 +43,6 @@
       }}
     </div>
   </div>
-{{save-cancel editing=editing save="save" cancel="cancel" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig"}}
+{{save-cancel editing=editing save=(action "save") cancel=(action "cancel") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig"}}
 </form>
 {{/if}}

@@ -354,7 +354,7 @@
       cancelDisabled=true
       editing=enabled
       createLabel="monitoringPage.enableActionLabel"
-      save="enable"
+      save=(action "enable")
     }}
       {{#if (and enabled canDisableMonitor)}}
         {{#if confirmDisable}}

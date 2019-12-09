@@ -22,6 +22,6 @@
   <br/>
   <span class="text-info">当项目设为公开后，任何人都有此项目下镜像的读权限。命令行用户不需要“docker login”就可以拉取此项目下的镜像。</span>
 </div>
-{{save-cancel editing=editing save="save" cancel="cancel"}}
+{{save-cancel editing=editing save=(action "save") cancel=(action "cancel")}}
 </form>
 {{/if}}
