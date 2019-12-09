@@ -293,4 +293,28 @@ export default Component.extend({
       });
     });
   },
+  initStaticPod() {
+    const {
+      'k8s.v1.cni.cncf.io/networks': network, 'macvlan.pandaria.cattle.io/ip':ip, 'macvlan.pandaria.cattle.io/subnet':subnet, 'macvlan.pandaria.cattle.io/mac':mac
+    } = get(this, 'service.annotations') || {};
+
+    if (network && subnet) {
+      set(this, 'staticPodForm', {
+        network,
+        ip:  ip === 'auto' ? '' : ip.split('-').join(','),
+        mac: mac === 'auto' ? '' : mac.split('-').join(','),
+        subnet,
+      });
+      set(this, 'staticPod', true);
+    } else {
+      set(this, 'staticPodForm', {
+        network: '[{"name":"static-macvlan-cni-attach","interface":"eth1"}]',
+        ip:      '',
+        mac:     '',
+        subnet:  '',
+      });
+      set(this, 'staticPod', false);
+    }
+    this.loadVlansubnets();
+  }
 });
