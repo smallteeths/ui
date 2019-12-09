@@ -87,9 +87,24 @@ export default Component.extend(ViewNewEdit, OptionallyNamespaced, {
         val.password = password;
         key = get(this, 'harborServer');
         key = key.indexOf('://') > -1 ? key.substr(key.indexOf('://') + 3) : key;
-        set(this, 'model.labels', { 'rancher.cn/registry-harbor-auth': 'true' });
+        const labels = get(this, 'model.labels') || {};
+
+        labels['rancher.cn/registry-harbor-auth'] = 'true';
+        set(this, 'model.labels', labels);
       } else {
-        set(this, 'model.labels', null);
+        const labels = get(this, 'model.labels');
+
+        if (labels) {
+          const keys = Object.keys(labels);
+
+          if (keys.indexOf('rancher.cn/registry-harbor-auth') > -1) {
+            if (keys.length === 1) {
+              delete get(this, 'model').labels;
+            } else {
+              delete labels['rancher.cn/registry-harbor-auth'];
+            }
+          }
+        }
         ['username', 'password', 'auth'].forEach((k) => {
           let v = get(obj, k);
 
