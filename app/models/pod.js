@@ -57,6 +57,13 @@ var Pod = Resource.extend(Grafana, DisplayImage, {
         enabled:   true,
         altAction: 'popoutLogs'
       },
+      {
+        label:     'action.downloadFile',
+        icon:      'icon icon-download',
+        action:    'popoutDownload',
+        enabled:   canShell && get(this, 'actionLinks.download'),
+        altAction: 'popoutDownload'
+      },
     ];
 
     return choices;
@@ -222,6 +229,9 @@ var Pod = Resource.extend(Grafana, DisplayImage, {
       later(() => {
         window.open(`//${ window.location.host }${ route }?podId=${ podId }&isPopup=true`, '_blank', 'toolbars=0,width=900,height=700,left=200,top=200');
       });
+    },
+    popoutDownload() {
+      get(this, 'modalService').toggleModal('modal-download-file', { originalModel: this });
     },
   },
 

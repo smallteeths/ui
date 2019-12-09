@@ -9921,9 +9921,10 @@ action:
   viewInApi: API查看
   viewInGrafana: 查看Grafana
   viewInstance: 查看实例
-  viewYaml: 查看YAML
-  enableAutoInject: 启用Istio自动注入
-  disableAutoInject: 禁用Istio自动注入
+  viewYaml: 查看 YAML
+  enableAutoInject: 启用 Istio 自动注入
+  disableAutoInject: 禁用 Istio 自动注入
+  downloadFile: 下载文件
 
 ##############################
 # Resource Actions

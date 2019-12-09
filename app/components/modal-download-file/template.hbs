@@ -1,0 +1,27 @@
+<div class="container-header-text">
+<h3>
+  容器文件下载
+</h3>
+<hr/>
+</div>
+<section class="p-20 pt-0">
+  <div class="row">
+    <div class="col span-12">
+      <label class="acc-label">容器</label>
+      {{new-select
+        content=choices
+        value=currentContainer
+        optionLabelPath="label"
+        optionValuePath="value"
+      }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col span-12">
+      <label class="acc-label">文件路径</label>
+      {{input type="text" value=filePath classNames="form-control" placeholder="请输入容器中的文件路径"}}
+    </div>
+  </div>
+</section>
+{{top-errors errors=errors}}
+{{save-cancel save="save" createLabel="generic.download"  cancel="cancel"}}

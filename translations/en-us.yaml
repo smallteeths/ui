@@ -9709,6 +9709,7 @@ action:
   viewYaml: View YAML
   enableAutoInject: Enable Istio Auto Injection
   disableAutoInject: Disable Istio Auto Injection
+  downloadFile: Download File
 
 ##############################
 # Resource Actions
