@@ -9539,6 +9539,9 @@ schema:
   inputSecret:
     secret: 选择密文...
     certificate: 选择证书...
+  inputMacvlansubnet:
+    prompt: 请选择Macvlansubnet...
+    notSupport: 当前集群不支持 Macvlansubnet
 
 schedulingRuleRow:
   theHost: 主机

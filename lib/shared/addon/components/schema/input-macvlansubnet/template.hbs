@@ -1,0 +1,10 @@
+{{#if support}}
+{{searchable-select
+    content=macvlansubnetOptions
+    class="form-control"
+    value=selected
+    placeholder=(t 'schema.inputMacvlansubnet.prompt')
+}}
+{{else}}
+    {{t 'schema.inputMacvlansubnet.notSupport'}}
+{{/if}}
