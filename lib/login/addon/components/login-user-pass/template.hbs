@@ -19,11 +19,13 @@
   </div>
 
   <p class="text-center">
-    <button disabled={{waiting}} class="btn bg-primary" {{action "authenticate"}}>
+    <button disabled={{or waiting countdown}} class="btn bg-primary" {{action "authenticate"}}>
       {{#if waiting}}
         <i class="icon icon-spinner icon-spin"></i> {{t 'loginUserPass.loggingInLabel'}}
       {{else if readableProvider}}
         {{t 'loginUserPass.loginLabel' provider=readableProvider}}
+      {{else if countdown}}
+        {{t 'loginUserPass.genericLoginLabel'}}({{countdown}}s)
       {{else}}
         {{t 'loginUserPass.genericLoginLabel'}}
       {{/if}}
