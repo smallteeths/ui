@@ -117,6 +117,31 @@ var Pod = Resource.extend(Grafana, DisplayImage, {
     return get(this, 'status.podIp') || null;
   }),
 
+  displayMacvlanIp: computed('annotations.[]', function() {
+    const a = get(this, 'annotations');
+    const networkStatusStr = a && a['k8s.v1.cni.cncf.io/networks-status'];
+
+    if (!networkStatusStr) {
+      return '';
+    }
+    let networkStatus;
+
+    try {
+      networkStatus = JSON.parse(networkStatusStr);
+    } catch (err) {
+      return '';
+    }
+    if (networkStatus) {
+      const macvlan = networkStatus.find((n) => n.interface === 'eth1');
+      const labels = get(this, 'labels');
+      const type = labels && labels['macvlan.panda.io/macvlanIpType'];
+
+      return `${ (macvlan && macvlan.ips && macvlan.ips[0]) || '' }${ type ? ` (${ type })` : '' }`;
+    }
+
+    return '';
+  }),
+
   dislayContainerMessage: computed('containers.@each.showTransitioningMessage', function() {
     return !!get(this, 'containers').findBy('showTransitioningMessage', true);
   }),

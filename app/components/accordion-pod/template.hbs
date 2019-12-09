@@ -45,6 +45,10 @@
               {{inst.displayIp}} /
             {{/if}}
             {{t 'generic.createdDate' date=(date-from-now inst.created) htmlSafe=true}} / {{t 'generic.restarts'}}: {{inst.restarts}}
+            {{#if inst.displayMacvlanIp}}
+            <br/>
+            {{inst.displayMacvlanIp}}
+            {{/if}}
           </p>
         </td>
         <td data-title="{{dt.node}}">

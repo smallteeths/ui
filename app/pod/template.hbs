@@ -61,6 +61,13 @@
     {{else}}
       {{t "generic.none"}}
     {{/if}}
+    {{#if model.displayMacvlanIp}}
+      <div class="text-small text-muted clip"> 
+      {{#copy-inline clipboardText=model.displayMacvlanIp size="small"}}
+        {{format-ip model.displayMacvlanIp}}
+      {{/copy-inline}}
+      </div>
+    {{/if}}
   </div>
   <div class="vertical-middle">
     <label class="acc-label vertical-middle p-0">{{t "podPage.nodeIp"}}:</label>
