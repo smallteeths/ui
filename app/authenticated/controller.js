@@ -3,18 +3,23 @@ import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import Controller, { inject as controller } from '@ember/controller';
 import C from 'ui/utils/constants';
-import { computed } from '@ember/object';
+import { computed, get } from '@ember/object';
 import { on } from '@ember/object/evented';
 
 export default Controller.extend({
-  settings:    service(),
-  prefs:       service(),
-  scope:       service(),
-  application: controller(),
-  error:       null,
+  settings:      service(),
+  prefs:         service(),
+  scope:         service(),
+  menuPosition:  service(),
+  application:   controller(),
+  error:         null,
 
   isPopup:     alias('application.isPopup'),
   pageScope:   alias('scope.currentPageScope'),
+
+  sidebar:     computed('menuPosition.currentPosition', function(){
+    return get(this, 'menuPosition.currentPosition') === 'left';
+  }),
 
   bootstrap: on('init', function() {
     schedule('afterRender', this, () => {

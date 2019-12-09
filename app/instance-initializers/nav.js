@@ -433,7 +433,7 @@ export function initialize(/* appInstance*/) {
 }
 
 export default {
-  name:       'nav-cn',
+  name:       'nav',
   initialize,
   after:      'store',
 };

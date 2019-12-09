@@ -39,6 +39,7 @@ export default Component.extend({
 
     (get(this, 'quotaArray') || []).forEach((quota) => {
       if ( quota.key && (quota.projectLimit || quota.namespaceLimit) ) {
+        console.log(quota.namespaceLimit)
         limit[quota.key] = this.convertToString(quota.key, quota.projectLimit);
         nsDefaultLimit[quota.key] = this.convertToString(quota.key, quota.namespaceLimit);
       }
@@ -114,6 +115,7 @@ export default Component.extend({
       }
     });
 
+    console.log(array)
     set(this, 'quotaArray', array);
   }
 });

@@ -52,6 +52,10 @@
 
 .shell-popup {
   padding: 10px;
+  position: fixed;
+  left: 30px;
+  right: 30px;
+  bottom: 30px;
 }
 
 .shell-popup .footer-actions {

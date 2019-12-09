@@ -2,6 +2,23 @@
   height: calc(100vh - 170px);
 }
 
+.container-log {
+  padding: 10px;
+  position: fixed;
+  left: 30px;
+  right: 30px;
+  bottom: 30px;
+}
+
+.modal-container {
+  .container-log {
+    position: relative;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+  }
+}
+
 .modal-overlay .log-body {
   height: calc(100vh - 260px);
 }

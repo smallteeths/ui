@@ -50,4 +50,33 @@
   .slider {
     background: $accent-three;
   }
+  .logo-oss-dark {
+    background-color: #3d3d3d !important;
+  }
+  .nav-main-dark {
+    background-color: #3d3d3d !important;
+  }
+  .footer-cn-dark {
+    background-color: #3d3d3d !important;
+  }
+  .page-header-left-dark {
+    box-shadow: 10px 10px 16px #333333 !important;
+  }
+  .page-header-left-top NAV > ul {
+    background: #3d3d3d !important;
+    .ember-basic-dropdown-trigger {
+      background: #3d3d3d !important;
+    }
+    .text-white {
+      background: #3d3d3d !important;
+    }
+  }
+  .project-menu {
+    .clusters {
+      background: #3d3d3d !important;
+    }
+    .search {
+      background: #3d3d3d !important;
+    }
+  }
 }

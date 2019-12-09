@@ -7,6 +7,7 @@ const rootNav = [
     scope:          'project',
     id:             'infra',
     localizedLabel: 'nav.infra.tab',
+    icon:           'authenticated-icon',
     ctx:            [getProjectId],
     submenu:        [
       {
@@ -79,6 +80,7 @@ const rootNav = [
     id:             'project-apps',
     localizedLabel: 'nav.apps.tab',
     route:          'apps-tab',
+    icon:           'apps-icon',
     ctx:            [getProjectId],
     resource:       ['app'],
     resourceScope:  'project',
@@ -88,6 +90,7 @@ const rootNav = [
     id:             'namespaces',
     localizedLabel: 'nav.project.namespaces',
     route:          'authenticated.project.ns.index',
+    icon:           'projects-icon',
     ctx:            [getProjectId],
     resource:       ['namespace'],
     resourceScope:  'cluster',
@@ -97,6 +100,7 @@ const rootNav = [
     id:             'project-security-roles',
     localizedLabel: 'nav.infra.members',
     route:          'authenticated.project.security.members',
+    icon:           'members-icon',
     resource:       ['projectroletemplatebinding'],
     resourceScope:  'global',
     ctx:            [getProjectId],
@@ -108,6 +112,7 @@ const rootNav = [
     ctx:            [getProjectId],
     resource:       [],
     resourceScope:  'global',
+    icon:           'tools-icon',
     submenu:        [
       {
         id:             'tools-alerts',
@@ -156,6 +161,7 @@ const rootNav = [
     scope:          'cluster',
     id:             'cluster-k8s',
     localizedLabel: 'nav.cluster.dashboard',
+    icon:           'cluster-icon',
     route:          'authenticated.cluster.monitoring.index',
     ctx:            [getClusterId],
     resource:       ['node'],
@@ -165,6 +171,7 @@ const rootNav = [
     scope:          'cluster',
     id:             'cluster-nodes',
     localizedLabel: 'nav.cluster.nodes',
+    icon:           'host-icon',
     route:          'authenticated.cluster.nodes',
     ctx:            [getClusterId],
     resource:       ['node'],
@@ -185,6 +192,7 @@ const rootNav = [
     localizedLabel: 'nav.cluster.storage.tab',
     ctx:            [getClusterId],
     resource:       ['clusterroletemplatebinding'],
+    icon:           'storage-icon',
     resourceScope:  'global',
     submenu:        [
       {
@@ -211,6 +219,7 @@ const rootNav = [
     scope:          'cluster',
     id:             'cluster-projects',
     localizedLabel: 'nav.cluster.projects',
+    icon:           'projects-icon',
     route:          'authenticated.cluster.projects.index',
     ctx:            [getClusterId],
     resource:       ['project'],
@@ -221,6 +230,7 @@ const rootNav = [
     id:             'cluster-security-roles',
     localizedLabel: 'nav.cluster.members',
     route:          'authenticated.cluster.security.members.index',
+    icon:           'members-icon',
     resource:       ['clusterroletemplatebinding'],
     resourceScope:  'global',
     ctx:            [getClusterId],
@@ -232,6 +242,7 @@ const rootNav = [
     ctx:            [getClusterId],
     resource:       [],
     resourceScope:  'global',
+    icon:           'tools-icon',
     submenu:        [
       {
         id:             'cluster-tools-alert',
@@ -301,6 +312,7 @@ const rootNav = [
     scope:          'global',
     id:             'global-clusters',
     localizedLabel: 'nav.admin.clusters.tab',
+    icon:           'cluster-icon',
     route:          'global-admin.clusters',
     resource:       ['cluster'],
     resourceScope:  'global',
@@ -309,6 +321,7 @@ const rootNav = [
     scope:          'global',
     id:             'multi-cluster-apps',
     localizedLabel: 'nav.admin.multiClusterApps',
+    icon:           'apply-icon',
     route:          'global-admin.multi-cluster-apps',
     resource:       ['multiclusterapp'],
     resourceScope:  'global',
@@ -318,7 +331,6 @@ const rootNav = [
     id:             'global-image-repo',
     icon:           'images-icon',
     localizedLabel: 'nav.admin.imageRepo.tab',
-    route:          'custom-extension.image-repo.index',
     resource:       [],
     resourceScope:  'global',
     submenu:        [
@@ -390,6 +402,7 @@ const rootNav = [
   {
     scope:          'global',
     id:             'global-accounts',
+    icon:           'user-icon',
     localizedLabel: 'nav.admin.accounts',
     route:          'global-admin.accounts',
     resource:       ['user'],
@@ -398,6 +411,7 @@ const rootNav = [
   {
     scope:          'global',
     id:             'global-settings',
+    icon:           'settings-icon',
     localizedLabel: 'nav.settings.tab',
     route:          'global-admin.settings.advanced',
     resourceScope:  'global',
@@ -405,6 +419,7 @@ const rootNav = [
   {
     scope:          'global',
     id:             'global-security',
+    icon:           'security-icon',
     localizedLabel: 'nav.admin.security.tab',
     submenu:        [
       {
@@ -436,6 +451,7 @@ const rootNav = [
   {
     scope:          'global',
     id:             'global-tools',
+    icon:           'tools-icon',
     localizedLabel: 'nav.tools.tab',
     submenu:        [
       {
@@ -499,7 +515,7 @@ export function initialize(/* appInstance*/) {
 }
 
 export default {
-  name:       'nav',
+  name:       'nav-cn',
   initialize,
   after:      'store',
 };

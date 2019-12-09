@@ -1,0 +1,504 @@
+// Header
+$header                              : $secondary !default;
+$header-link                         : $light-grey !default;
+$header-link-active                  : $primary !default;
+$user-btn                            : darken($header, 10%) !default;
+$nav-spacing: 3.5px;
+
+$project-nav-hover: #c1cce0 !default;
+$project-nav-active: $dropdown-link-hover-bg !default;
+
+@media only screen and (max-width: map-get($breakpoints, medium)) {
+  body {
+    .container-nav-left {
+      padding:0px 10px 70px 10px !important;
+      min-width: 0px !important;
+    }
+    .nav-list {
+      position: absolute;
+      z-index: 1000;
+    }
+  }
+  .logo-oss {
+    height: 40px !important;
+    width: 200px !important;
+    background-color: #355599 !important;
+    background-image: url('images/logos/rancher-logo-cow-white.svg') !important;
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: auto 23px;
+    position: relative;
+    .nav-logo-text-cn {
+      position: absolute;
+      top: 30px;
+      left: 140px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 12px;
+    }
+  }
+  .page-header-left-top {
+    NAV {
+      font-size: .9em;
+      width: 100%;
+      box-sizing: border-box;
+      display: -ms-flexbox;
+      display: -webkit-box;
+      display: flex;
+      flex: 0 1 auto;
+      flex-direction: row;
+      flex-wrap: nowrap !important;
+      align-items: center !important;
+      margin: 0px;
+      padding: 0px;
+      .nav-user {
+        float: right;
+      }
+      .nav-item {
+        position: relative;
+        display: block !important;
+        float: none;
+      }
+      ul {
+        height: auto !important;
+        display: block !important;
+      }
+    }
+    .responsive-nav {
+      display: block !important;
+      position: relative !important;
+      background-color: #355599 !important;
+    }
+    .nav-main {
+      li {
+        display: block;
+      }
+    }
+  }
+}
+
+.page-header-left-top {
+  @include no-select;
+  margin-bottom: 10px;
+
+  NAV {
+    font-size: .9em;
+    width: 100%;
+    box-sizing: border-box;
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    flex: 0 1 auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: start;
+    margin: 0px;
+    padding: 0px;
+    .dropdown-menu {
+      background: $dropdown-bg;
+      border: 0;
+      z-index: 4;
+      padding: 0;
+      top: auto!important;
+      border-radius: 0;
+      box-shadow: $darken-helper 0 0 7px;
+    }
+
+    > ul {
+      height: 60px;
+      background-color: #355599;
+      padding: 0;
+      vertical-align: middle;
+      display: flex;
+      align-items: center;
+      &.nav-main {
+        margin: 0;
+        flex-grow: 1;
+      }
+
+      > li {
+        list-style-type: none;
+        display: inline-block;
+
+        &.active {
+          > .ember-basic-dropdown-trigger > a,
+          > a {
+            color: $info;
+            text-decoration: none;
+            margin: 0;
+          }
+        }
+
+        > .ember-basic-dropdown-trigger > a,
+        > a {
+          color: $header-link;
+          display: block;
+          padding: 11px;
+
+          &:hover {
+            background-color: darken($header, 5%);
+            color: white;
+            text-decoration: none;
+          }
+
+          .icon-chevron-down {
+            font-size: .75em;
+          }
+        }
+      }
+    }
+  }
+
+  .nav-logo {
+    height: 60px;
+    background-size: auto 32px;
+    background-position: 60px center !important;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-user {
+    border-radius: 0 3px 3px 0;
+    margin: 0;
+
+    > li > a {
+      display: block;
+      padding: 4px 10px;
+
+      &:hover {
+        border-bottom-color: transparent;
+      }
+    }
+
+    .user-auth {
+      line-height: initial;
+      padding: 10px 20px 10px 10px;
+      background: $accent-bg;
+    }
+
+    > div:hover {
+      background: #1b4398;
+    }
+  }
+
+  .nav-item {
+    position: relative;
+    display: none;
+  }
+
+  .nav-cluster {
+    float: left;
+    display: block !important;
+    a {
+      &:hover {
+        text-decoration: none;
+      }
+
+      &.text-white:hover {
+        background: #1b4398;
+
+        &::after {
+          border-left-color: mix($user-btn, black, 80%);
+        }
+      }
+    }
+
+    .project-menu .global ul li a:hover {
+      background: transparent;
+    }
+
+
+    .ember-basic-dropdown-trigger {
+      max-width: 300px;
+      background: #1b4398;
+      @include clip;
+      @include hand;
+
+      > a {
+        padding-right: 43px;
+        padding-left: 36px;
+
+        &.two-line {
+          padding-top: 7px;
+          padding-bottom: 4px;
+        }
+      }
+
+    }
+
+    .chevron {
+      color: white;
+      position: absolute;
+      right: 10px;
+      top: 24px;
+    }
+  }
+
+  .ember-basic-dropdown-trigger {
+    &.active {
+      > a {
+        color: $info;
+        text-decoration: none;
+        margin: 0;
+      }
+    }
+
+    > a {
+      color: $header-link;
+      display: block;
+      padding: 16px;
+      border-bottom: solid $nav-spacing transparent;
+      border-top: solid $nav-spacing transparent;
+
+      .icon-chevron-down {
+        font-size: .75em;
+      }
+    }
+
+  }
+
+  .quick-add {
+    display:table-cell;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    li {
+      display: block;
+      a {
+        display: block;
+      }
+    }
+  }
+
+  .logo-oss {
+    max-width: 260px;
+    min-width: 160px;
+    width: 16%;
+    background-color: #355599;
+    background-image: url('images/logos/rancher-logo-cow-white.svg');
+    background-position: 40% center !important;
+    background-repeat: no-repeat;
+    background-size: 30% auto;
+    border-radius: 0px;
+    position: relative;
+    .nav-logo-text-cn {
+      position: absolute;
+      top: 30px;
+      left: 60%;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.73vw;
+    }
+  }
+
+  .bg-error.badge-xs {
+    position: absolute;
+    right: 4px;
+    top: 15px;
+    text-align: center;
+    width: 19px;
+    border-radius: 90%;
+
+    a {
+      color: white;
+    }
+  }
+
+  .project-link {
+    position: relative;
+    .default-project {
+      position: absolute;
+      font-size: 10px;
+      left: 10px;
+      top: 8px;
+      color: $warning;
+
+      &.nested {
+        left: 25px;
+      }
+    }
+  }
+}
+
+.project-menu {
+  overflow: hidden;
+  border: 0;
+  box-shadow: $darken-helper 0 0 7px;
+
+  $labels: 22px;
+  $item: 50px;
+
+  .clusters UL, .projects UL {
+    overflow-y: auto;
+  }
+
+  display: grid;
+  grid-template-rows: $item auto;
+
+  LABEL {
+    @include clip;
+    height: $labels;
+    color: $text-muted;
+    font-size: .8em;
+    padding: 0 10px;
+    display: block;
+    border-bottom: 1px solid $accent-border;
+  }
+
+  .clusters {
+    grid-column-start: 1;
+    grid-row-start: 2;
+    // border-right: 1px solid $table-border-color;
+    background-color: $accent-bg;
+
+    ul.no-hover-entry li.item.cluster.active {
+      position: relative;
+      background: #eaeef5!important;
+      color: #3e69c5;
+      &:after {
+        content: '';
+        border-right: 8px solid #fff;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        position: absolute;
+        top: 17px;
+        right: 0;
+      }
+    }
+
+    ul li.item.cluster.hover {
+      position: relative;
+      background: #c1cce0!important;
+      color: #737977;
+      &:after {
+        content: '';
+        border-right: 8px solid #c1cce0;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        position: absolute;
+        top: 17px;
+        right: 0;
+      }
+    }
+  }
+
+  .projects {
+    grid-column-start: 2;
+    grid-row-start: 2;
+
+    UL {
+      border-left: 1px solid transparent;
+    }
+  }
+
+  .global {
+    > ul.list-unstyled {
+      background: #fff !important;
+      &:first-child {
+        border-right: 1px solid $table-border-color;
+      }
+    }
+  }
+
+  .global, .search {
+    background-color: darken($accent-bg,2%);
+    border-bottom: $table-border-color;
+
+    ul .item.active {
+      background: #eaeff5;
+      a {
+        color: #3a6cc3;
+      }
+    }
+  }
+
+  .global {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    ul li.item {
+      padding: 5px 10px;
+    }
+  }
+
+  .search {
+    grid-column-start: 2;
+    grid-row-start: 1;
+    background: #fff !important;
+    padding: 5px 10px;
+  }
+
+  .search-match {
+    font-weight: bold;
+    background-color: lighten($warning, 25);
+  }
+
+  .item {
+    height: $item;
+    padding: 5px 20px;
+    @include hand;
+
+    &.active {
+      background-color: #eaeef5;
+      a {
+        color: #3497DA;
+
+        + .state {
+          color: #3497DA;
+        }
+      }
+    }
+
+    &:not(:first-child) {
+      border-top: 1px solid $accent-border;
+    }
+  }
+
+  .global > ul.list-unstyled > LI:hover,
+  .item.cluster.hover {
+    background-color: #c1cce0;
+    A, .state {
+      color: #737977;
+    }
+  }
+
+  .item.project:hover {
+    background-color: #c1cce0;
+    A, .state {
+      color: #737977;
+    }
+  }
+
+  .state {
+    color: $text-muted;
+    font-size: .8em;
+    padding: 0;
+    margin: 0;
+  }
+
+  LI {
+    &.active {
+      A, .state {
+        color: $link-color;
+      }
+    }
+
+    &.not-ready {
+      cursor: not-allowed;
+
+      A, .state {
+        cursor: not-allowed !important;
+        color: $text-muted;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .global {
+    A {
+      display: block;
+      padding: 10px;
+    }
+  }
+}

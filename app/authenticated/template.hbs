@@ -1,14 +1,31 @@
 {{#unless isPopup}}
+  {{#if sidebar}}
+  {{page-header-left-top
+    pageScope=pageScope
+    goToPrevious="goToPrevious"
+  }}
+  {{page-header-left
+    pageScope=pageScope
+    goToPrevious="goToPrevious"
+  }}
+  {{else}}
   {{page-header
     pageScope=pageScope
     goToPrevious="goToPrevious"
   }}
+  {{/if}}
 {{/unless}}
-<main class="clearfix">
+<main class="clearfix {{if sidebar "sidebar"}}">
   {{outlet}}
 </main>
 {{#unless isPopup}}
+  {{#if sidebar}}
+  {{page-footer-cn
+    showAbout="showAbout"
+  }}
+  {{else}}
   {{page-footer
     showAbout="showAbout"
   }}
+  {{/if}}
 {{/unless}}

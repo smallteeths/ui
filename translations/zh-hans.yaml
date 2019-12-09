@@ -2791,6 +2791,10 @@ userPreferencesPage:
       label: 邮件地址
     password:
       text: 修改密码
+  menu:
+    header: 菜单位置
+    left: 左侧
+    top: 顶部
 
 verifyPage:
   header: "您已经成功验证了邮件地址!"

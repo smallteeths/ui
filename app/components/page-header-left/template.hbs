@@ -1,0 +1,127 @@
+<nav class="clearfix responsive-nav" role="navigation" id="js-responsive-nav">
+  <ul class="nav-main nav-main-dark nav-list no-inline-space">
+    {{#each navTree as |item|}}
+      {{#if item.submenu.length}}
+        {{! Has a submenu }}
+        <li class="nav-item">
+           {{#if (or (not item.resource) (rbac-allows resource=item.resource scope=item.resourceScope))}}
+              {{#if item.route}}
+                {{#link-to-as-attrs
+                  ourRoute=item.route
+                  ctx=item.ctx
+                  qp=item.qp
+                  currentWhen=item.currentWhen
+                  activeParent="LI"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                }}
+                  {{#if item.icon}}
+                    <img class="icon-chevron-describe" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/{{item.icon}}.svg" width="16" height="16" />
+                    <img class="icon-chevron-describe-active" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/{{item.icon}}-active.svg" width="16" height="16" />
+                  {{/if}}
+                  <div style="position: absolute; width: 100%; height: 60px; top: 0px; left: 0px" {{action 'toogleExpand' item}}></div>
+                  {{t item.localizedLabel item.label}}
+                  <div class="pull-right nav-item-pull-right" >
+                    {{#if item.expanded}}
+                      <span class="icon icon-chevron-up" />
+                    {{else}}
+                      <span style="font-size: 14px" class="icon icon-chevron-down" />
+                    {{/if}}
+                  </div>
+                {{/link-to-as-attrs}}
+              {{else}}
+                <a role="button" aria-haspopup="true" aria-label={{t item.localizedLabel item.label}} {{action 'toogleExpand' item}}>
+                  {{#if item.icon}}
+                    <img class="icon-chevron-describe" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/{{item.icon}}.svg" fill="#fff" width="16" height="16" />
+                    <img class="icon-chevron-describe-active" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/{{item.icon}}-active.svg" width="16" height="16" />
+                  {{/if}}
+                  {{t item.localizedLabel item.label}}
+                  <div class="pull-right nav-item-pull-right" >
+                    {{#if item.expanded}}
+                      <span class="icon icon-chevron-up" />
+                    {{else}}
+                      <span style="font-size: 14px" class="icon icon-chevron-down" />
+                    {{/if}}
+                  </div>
+                </a>
+              {{/if}}
+            {{/if}}
+            <ul class="{{unless item.expanded 'hide'}} nav-item-second">
+              {{#each item.submenu as |subitem|}}
+                {{#if subitem.route}}
+                  {{#if (or (not subitem.resource) (rbac-allows resource=subitem.resource scope=subitem.resourceScope))}}
+                    <li>
+                      {{#link-to-as-attrs
+                        ourRoute=subitem.route
+                        ctx=subitem.ctx
+                        qp=subitem.qp
+                        activeParent="LI"
+                        currentWhen=subitem.currentWhen
+                      }}
+                        <span>
+                          {{t subitem.localizedLabel subitem.label}}
+                        </span>
+                        <i class="{{subitem.icon}}"/>
+                      {{/link-to-as-attrs}}
+                    </li>
+                  {{/if}}
+                {{else if subitem.divider}}
+                  <li class="divider"></li>
+                {{else}}
+                  {{! Just a label }}
+                  <li class="dropdown-header">
+                    <span>
+                      {{t subitem.localizedLabel subitem.label}}
+                    </span>
+                    <i class="{{subitem.icon}}"/>
+                  </li>
+                {{/if}}
+              {{/each}}
+            </ul>
+        </li>
+      {{else if item.route}}
+
+        {{#if (or (not item.resource) (rbac-allows resource=item.resource scope=item.resourceScope))}}
+          {{! No submenu }}
+          <li class="nav-item">
+            {{#link-to-as-attrs
+               ourRoute=item.route
+               ctx=item.ctx
+               qp=item.qp
+               activeParent="LI"
+               currentWhen=item.currentWhen
+               class="nav-link"
+            }}
+              {{#if item.icon}}
+                <img class="icon-chevron-describe" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/{{item.icon}}.svg" width="16" height="16" />
+                <img class="icon-chevron-describe-active" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/{{item.icon}}-active.svg" width="16" height="16" />
+              {{/if}}
+              <div style="position: absolute; width: 100%; height: 60px; top: 0px; left: 0px" {{action 'toogleExpand' item}}></div>
+              {{t item.localizedLabel item.label}}
+            {{/link-to-as-attrs}}
+          </li>
+        {{/if}}
+      {{else if item.url}}
+        <li class="nav-item">
+          <a href="{{item.url}}" target="_blank">
+            <img class="icon-chevron-describe" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/external-link-icon.svg" width="16" height="16" />
+            <span class="clip">
+              {{t item.localizedLabel item.label}}
+            </span>
+          </a>
+        </li>
+      {{else}}
+
+        {{! Just a label }}
+        <li class="dropdown-header">
+          {{#if item.icon}}
+            <img class="icon-chevron-describe" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/{{item.icon}}.svg" width="16" height="16" />
+          {{/if}}
+          {{t item.localizedLabel item.label}}
+        </li>
+
+      {{/if}}
+    {{/each}}
+  </ul>
+</nav>

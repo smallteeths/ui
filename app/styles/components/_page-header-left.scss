@@ -1,0 +1,247 @@
+// Header
+$header                              : $secondary !default;
+$header-link                         : $light-grey !default;
+$header-link-active                  : $primary !default;
+$user-btn                            : darken($header, 10%) !default;
+$nav-spacing: 3.5px;
+
+$project-nav-hover: $secondary !default;
+$project-nav-active: $dropdown-link-hover-bg !default;
+@media screen and (max-width: 1000px) {
+  .sidebar{
+    margin-left: 160px;
+    margin-right: 50px;
+    padding-left: 50px
+  }
+}
+
+@media screen and (min-width: 1620px) {
+  .sidebar{
+    margin-left: 260px;
+    margin-right: 50px;
+    padding-left: 50px
+  }
+}
+
+@media screen and (min-width: 1000px) and (max-width: 1620px) {
+  .sidebar{
+    margin-left: 16%;
+    margin-right: 50px;
+    padding-left: 50px
+  }
+}
+
+@media only screen and (max-width: map-get($breakpoints, medium)) {
+  .page-header-left {
+    position: absolute;
+    width: 0px !important;
+    min-width: 0px !important;
+    top: 41px;
+    bottom: 60px;
+    overflow: auto;
+    @include no-select;
+    padding: 0px 0 60px 0;
+  }
+  .sidebar {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+  }
+}
+/**
+ * Main content containers
+ * 1. When nav on the left add this class name on the application element
+ */
+ .container-nav-left {
+  padding-top: 0px !important;
+  margin: 0px !important;
+  padding: 0px 0px 70px 0px !important;
+  width: 100% !important; 
+  max-width: 100% !important; 
+  min-width: 780px !important; 
+}
+
+.page-header-left {
+  position: absolute;
+  max-width: 260px;
+  min-width: 160px;
+  width: 16%;
+  top: 60px;
+  bottom: 60px;
+  overflow: auto;
+  @include no-select;
+  padding: 0px 0 60px 0;
+  box-shadow: 10px 10px 16px #ebebeb;
+  NAV {
+    font-size: .9em;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    flex: 0 1 auto;
+    flex-direction: column;
+    align-items: center;
+
+    .dropdown-menu {
+      background: $dropdown-bg;
+      border: 0;
+      z-index: 4;
+      padding: 0;
+      top: auto!important;
+      border-radius: 0;
+      box-shadow: $darken-helper 0 0 7px;
+    }
+
+    > ul {
+      background-color: #fff;
+      border-radius: 3px 0 0 3px;
+      padding: 0 0;
+      vertical-align: middle;
+      margin: 0 0 0 0;
+      &.nav-main {
+        height: 100%;
+        width: 100%;
+      }
+
+      > li {
+        list-style-type: none;
+        &.active {
+          > .ember-basic-dropdown-trigger > a,
+          > a {
+            background: #eaeef5;
+            color: #3e69c5;
+            text-decoration: none;
+            border-left: 3px solid #3e69c5;
+            .icon-chevron-describe {
+              left: 0px;
+              display: none
+            }
+            .icon-chevron-describe-active {
+              display: block
+            }
+          }
+        }
+
+        > .ember-basic-dropdown-trigger > a,
+        > a {
+          color: #777777;
+          display: flex !important;
+          display: block;
+          padding: 18px 18% 14px 13%;
+          border-bottom: solid $nav-spacing transparent;
+          border-top: solid $nav-spacing transparent;
+          font-size: 0.82vw;
+          border-left: 3px solid transparent;
+          .icon-chevron-describe {
+            position: relative;
+            float: left;
+            left: 0px;
+            top: 2px;
+            margin-right: 13%;
+            margin-left: 6%;
+            opacity: 1;
+            border-left: 8px transparent;
+            border-right: 8px transparent;
+            filter: drop-shadow(#3e69c5 0px 0px);
+          }
+          .icon-chevron-describe-active {
+            position: relative;
+            float: left;
+            left: 0px;
+            top: 2px;
+            margin-right: 13%;
+            margin-left: 6%;
+            opacity: 1;
+            border-left: 8px transparent;
+            border-right: 8px transparent;
+            display: none;
+          }
+          .nav-item-pull-right {
+            flex: 1;
+            text-align: right;
+          }
+
+          &:hover {
+            background-color: #c1cce0;
+            color: #78777c;
+            text-decoration: none;
+            .icon-chevron-describe {
+              display: block !important;
+              filter: drop-shadow(#78777c 0px 0px);
+            }
+            .icon-chevron-describe-active {
+              display: none !important;
+            }
+          }
+
+          .icon-chevron-down {
+            font-size: .55em;
+          }
+        }
+      }
+    }
+  }
+
+  .nav-item {
+    position: relative;
+    .nav-item-second {
+      padding-left: 0px;
+      a {
+        color: #777777;
+        display: block;
+        padding: 11px 11px 11px 35%;
+        border-bottom: solid 3.5px transparent;
+        border-top: solid 3.5px transparent;
+      }
+      a:hover {
+        background-color: #c1cce0 !important;
+        color: #777777 !important;
+        text-decoration: none;
+      }
+      li.active > a {
+        background-color: #d6dbe7;
+        color: #6784cc;
+        text-decoration: none;
+        margin: 0;
+      }
+    }
+  }
+
+  .ember-basic-dropdown-trigger {
+    &.active {
+      > a {
+        color: $info;
+        text-decoration: none;
+        margin: 0;
+      }
+    }
+
+    > a {
+      color: $header-link;
+      display: block;
+      padding: 11px;
+      border-bottom: solid $nav-spacing transparent;
+      border-top: solid $nav-spacing transparent;
+
+      .icon-chevron-down {
+        font-size: .75em;
+      }
+    }
+
+  }
+
+  .quick-add {
+    display:table-cell;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    li {
+      display: block;
+      a {
+        display: block;
+      }
+    }
+  }
+
+}

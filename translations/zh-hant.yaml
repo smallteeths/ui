@@ -1613,6 +1613,10 @@ userPreferencesPage:
       label: 郵件地址
     password:
       text: 修改密碼
+  menu:
+    header: 菜单位置
+    left: 左侧
+    top: 顶部
 
 verifyPage:
   header: "您已經成功驗證了郵件地址!"

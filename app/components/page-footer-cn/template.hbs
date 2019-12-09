@@ -1,0 +1,42 @@
+<div class="footer-cn-dark" style="background: #355599;position: absolute;top: -29px; left: 0px; width: 100%;padding: 15px;">
+  <a href="#" style="color: #fff" class="btn btn-sm bg-transparent" {{action "showAbout"}} aria-label="About Rancher">{{if settings.rancherVersion settings.rancherVersion (t 'pageFooter.notARelease')}}</a>
+
+  {{#if settings.isRancher}}
+    {{#if projectId}}
+      <a style="color: #fff"  href="{{href-to 'authenticated.project.help' projectId}}" role="button" class="btn btn-sm bg-transparent">{{t 'pageFooter.help'}}</a>
+    {{/if}}
+    <a style="color: #fff" role="button" class="btn btn-sm bg-transparent" target="blank" rel="noreferrer noopener" href="{{settings.docsBase}}">{{t 'pageFooter.help'}}</a>
+    <a style="color: #fff" role="button" class="btn btn-sm bg-transparent" target="blank" rel="noreferrer noopener" href="{{forumBase}}">{{t 'pageFooter.forums'}}</a>
+    <a style="color: #fff" role="button" class="btn btn-sm bg-transparent" target="blank" rel="noreferrer noopener" href="{{slackBase}}">{{t 'pageFooter.slack'}}</a>
+    {{#if showWechat}}
+      <a style="color: #fff" role="button" class="btn btn-sm bg-transparent" target="blank" rel="noreferrer noopener" href="{{cnforumBase}}">{{t 'pageFooter.cnforums'}}</a>
+      <a style="color: #fff" class="btn btn-sm bg-transparent" {{action "showWechat"}}>{{t 'modalWechat.wechat'}}</a>
+    {{/if}}
+    <a style="color: #fff" role="button" class="btn btn-sm bg-transparent" target="blank" rel="noreferrer noopener" href="{{settings.issueUrl}}">{{t 'pageFooter.issues'}}</a>
+  {{/if}}
+
+  <div class="pull-right">
+    <div class="compose-download inline-block dropup">
+      {{#basic-dropdown
+          verticalPosition="above"
+          horizontalPosition="right"
+          as |dd|}}
+        {{#dd.trigger
+            class="hand btn btn-sm bg-transparent"
+            style=style
+        }}
+          <i class="icon icon-download"></i> {{t 'pageFooter.download.link'}} <i class="icon icon-chevron-down"></i>
+        {{/dd.trigger}}
+
+        {{#dd.content class="text-right"}}
+          <li><a href="{{cli.darwin}}">{{t 'pageFooter.download.mac'}} <i class="icon icon-fw icon-apple"></i></a></li>
+          <li><a href="{{cli.windows}}">{{t 'pageFooter.download.windows'}} <i class="icon icon-fw icon-windows"></i></a></li>
+          <li><a href="{{cli.linux}}">{{t 'pageFooter.download.linux'}} <i class="icon icon-fw icon-linux"></i></a></li>
+        {{/dd.content}}
+      {{/basic-dropdown}}
+    </div>
+  </div>
+  <div class="pull-right">
+    {{language-dropdown-cn classNames="dropup"}}
+  </div>
+</div>
