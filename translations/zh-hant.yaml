@@ -3177,6 +3177,7 @@ dangerZone:
     'ingress-ip-domain': '用於自動生成Ingress主機名的通配域名。<入口名>.<命名空間名>.<入口控制器的IP地址>將被添加到域名中。'
     'server-url': '默認的{appName} Server訪問地址，必須是HTTPS。集群中的所有主機都必須能夠訪問此地址。'
     'system-default-registry': '用於RKE部署系統服務時鏡像的拉取，其他服務拉取鏡像不生效。'
+    'auditlog-server-url': '配置审计日志服务地址'
     'ui-index': 'UI的HTML索引位置。'
     'ui-pl': '公司名稱專用標籤。'
     'telemetry-opt': '遙感報告設置。'

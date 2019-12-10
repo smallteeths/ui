@@ -86,11 +86,20 @@
     </div>
   </div>
 </section>
+{{#if (eq model.key 'auditlog-server-url')}}
+  {{#if disabled}}
+  <section>
+    {{#banner-message color='bg-error m-0'}}
+      <p> URL非法 </p>
+    {{/banner-message}}
+  </section>
+  {{/if}}
+{{/if}}
 
 {{#unless (eq model.kind "url")}}
   {{save-cancel
     editing=true
-    saveDisabled=removing
+    saveDisabled=disabled
     save=(action "save")
     cancel=(action "cancel")
   }}

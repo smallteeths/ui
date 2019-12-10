@@ -5,7 +5,7 @@ import Component from '@ember/component';
 import { normalizeName } from 'shared/settings/service';
 import ModalBase from 'shared/mixins/modal-base';
 import layout from './template';
-import { get, set } from '@ember/object';
+import { get, set, computed } from '@ember/object';
 import $ from 'jquery';
 
 const cmOpts = {
@@ -79,4 +79,16 @@ export default Component.extend(ModalBase, {
       set(this, 'value', json);
     }
   },
+
+  disabled: computed('value', function() {
+    let urlReg = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/;
+    let subUrl = urlReg.exec( get(this, 'value') )
+    let flag = subUrl && subUrl[0]
+
+    if ( get(this, 'model.key') === 'auditlog-server-url' && get(this, 'value') ){
+      return get(this, 'removing') || (!flag && get(this, 'model.key') === 'auditlog-server-url')
+    }
+
+    return get(this, 'removing')
+  }),
 });

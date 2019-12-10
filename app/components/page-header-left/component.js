@@ -159,6 +159,16 @@ export default Component.extend({
       }
     })
 
+    out.forEach((item) => {
+      if (item.submenu && !item.route) {
+        if (item.submenu.some((ele) => {
+          return ele.initExpand === get(this, 'application.currentRouteName')
+        })) {
+          set(item, 'expanded', true);
+        }
+      }
+    })
+
     set(this, 'navTree', out);
   },
 

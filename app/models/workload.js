@@ -20,7 +20,8 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
   modalService:  service('modal'),
   scope:         service(),
   router:        service(),
-  clusterStore: service(),
+  settings:      service(),
+  clusterStore:  service(),
 
   pods:         hasMany('id', 'pod', 'workloadId'),
 
@@ -119,6 +120,13 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
         action:   'pause',
         enabled:  !!a.pause && !isPaused,
         bulkable: true
+      },
+      {
+        label:    'action.auditlog',
+        icon:     'cnicon-cnrancher-audit-log',
+        action:   'auditlog',
+        bulkable:  false,
+        enabled:   !!(get(this, 'settings.asMap')['auditlog-server-url'] && get(this, 'settings.asMap')['auditlog-server-url']['value'])
       },
       {
         label:    'action.resume',
@@ -232,6 +240,12 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
 
     rollback() {
       get(this, 'modalService').toggleModal('modal-rollback-service', { originalModel: this });
+    },
+
+    auditlog() {
+      var route = 'containers.audit-log';
+
+      get(this, 'router').transitionTo(route, { queryParams: { workloadId: get(this, 'id') } });
     },
 
     garbageCollect() {

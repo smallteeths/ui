@@ -24,6 +24,7 @@ const rootNav = [
           'authenticated.project.dns',
           'volumes',
         ],
+        initExpand: 'containers.index',
       },
       {
         id:             'hpa',
@@ -32,6 +33,7 @@ const rootNav = [
         ctx:            [getProjectId],
         resource:       ['horizontalpodautoscaler'],
         resourceScope:  'project',
+        initExpand:     'authenticated.project.hpa.index'
       },
       {
         id:             'pipelines',
@@ -40,6 +42,7 @@ const rootNav = [
         ctx:            [getProjectId],
         resource:       [],
         resourceScope:  'project',
+        initExpand:     'authenticated.project.pipeline.pipelines.index'
       },
       {
         id:             'istio',
@@ -51,6 +54,7 @@ const rootNav = [
         currentWhen:    [
           'authenticated.project.istio.project-istio',
         ],
+        initExpand:     'authenticated.project.istio.index'
       },
       {
         id:             'infra-secrets',
@@ -64,6 +68,7 @@ const rootNav = [
           'authenticated.project.registries',
           'authenticated.project.secrets',
         ],
+        initExpand:     'authenticated.project.secrets.index'
       },
       {
         id:             'infra-config-maps',
@@ -72,6 +77,7 @@ const rootNav = [
         ctx:            [getProjectId],
         resource:       ['configmap'],
         resourceScope:  'project',
+        initExpand:     'authenticated.project.config-maps.index'
       },
     ],
   },
@@ -121,6 +127,7 @@ const rootNav = [
         resource:       [],
         ctx:            [getProjectId],
         resourceScope:  'global',
+        initExpand:     'authenticated.project.alert.index'
       },
       {
         id:             'manage-catalogs',
@@ -129,6 +136,7 @@ const rootNav = [
         ctx:            [getProjectId],
         resource:       ['catalog', 'project-catalog'],
         resourceScope:  'global',
+        initExpand:     'authenticated.project.project-catalogs'
       },
       {
         id:             'tools-logging',
@@ -137,6 +145,7 @@ const rootNav = [
         resourceScope:  'global',
         resource:       [],
         ctx:            [getProjectId],
+        initExpand:     'authenticated.project.logging.logging'
       },
       {
         id:             'tools-monitoring',
@@ -145,6 +154,7 @@ const rootNav = [
         resourceScope:  'global',
         resource:       [],
         ctx:            [getProjectId],
+        initExpand:     'authenticated.project.monitoring.project-setting'
       },
       {
         id:             'tools-pipeline',
@@ -153,8 +163,22 @@ const rootNav = [
         resource:       ['sourcecodeproviderconfig'],
         resourceScope:  'project',
         ctx:            [getProjectId],
+        initExpand:     'authenticated.project.pipeline.settings'
       },
     ]
+  },
+  {
+    scope:          'project',
+    id:             'project-audit-log',
+    localizedLabel: 'nav.auditLog.tab',
+    route:          'authenticated.project.audit-log.index',
+    icon:           'auditlog-icon',
+    resourceScope:  'global',
+    resource:       [],
+    ctx:            [getProjectId],
+    condition() {
+      return !!(get(this, 'settings.asMap')['auditlog-server-url'] && get(this, 'settings.asMap')['auditlog-server-url']['value']);
+    }
   },
   // Cluster
   {
@@ -203,6 +227,7 @@ const rootNav = [
         ctx:            [getClusterId],
         resource:       ['project'],
         resourceScope:  'global',
+        initExpand:     'authenticated.cluster.storage.persistent-volumes.index'
       },
       {
         scope:          'cluster',
@@ -212,6 +237,7 @@ const rootNav = [
         ctx:            [getClusterId],
         resource:       ['project'],
         resourceScope:  'global',
+        initExpand:     'authenticated.cluster.storage.classes.index'
       },
     ]
   },
@@ -251,6 +277,7 @@ const rootNav = [
         resourceScope:  'global',
         resource:       [],
         ctx:            [getClusterId],
+        initExpand:     'authenticated.cluster.alert.index'
       },
       {
         id:             'cluster-tools-backups',
@@ -259,6 +286,7 @@ const rootNav = [
         resourceScope:  'global',
         resource:       ['etcdbackup'],
         ctx:            [getClusterId],
+        initExpand:     'authenticated.cluster.backups.index',
         condition() {
           return get(this, 'cluster.rancherKubernetesEngineConfig')
         }
@@ -271,6 +299,7 @@ const rootNav = [
         ctx:            [getClusterId],
         resource:       ['catalog', 'cluster-catalog'],
         resourceScope:  'global',
+        initExpand:     'authenticated.cluster.cluster-catalogs',
       },
       {
         id:             'cluster-tools-notifiers',
@@ -279,6 +308,7 @@ const rootNav = [
         resourceScope:  'global',
         resource:       [],
         ctx:            [getClusterId],
+        initExpand:     'authenticated.cluster.notifier.index',
       },
       {
         id:             'cluster-tools-logging',
@@ -287,6 +317,7 @@ const rootNav = [
         resourceScope:  'global',
         resource:       [],
         ctx:            [getClusterId],
+        initExpand:     'authenticated.cluster.logging.logging',
       },
       {
         id:             'cluster-tools-monitoring',
@@ -295,6 +326,7 @@ const rootNav = [
         resourceScope:  'global',
         resource:       [],
         ctx:            [getClusterId],
+        initExpand:     'authenticated.cluster.monitoring.cluster-setting',
       },
       {
         id:                       'cluster-tools-istio',
@@ -303,8 +335,22 @@ const rootNav = [
         resourceScope:            'global',
         resource:                 [],
         ctx:                      [getClusterId],
+        initExpand:               'authenticated.cluster.istio.cluster-setting',
       },
     ],
+  },
+  {
+    scope:          'cluster',
+    id:             'cluster-audit-log',
+    localizedLabel: 'nav.auditLog.tab',
+    route:          'authenticated.cluster.audit-log.index',
+    icon:           'auditlog-icon',
+    resourceScope:  'global',
+    resource:       [],
+    ctx:            [getClusterId],
+    condition() {
+      return !!(get(this, 'settings.asMap')['auditlog-server-url'] && get(this, 'settings.asMap')['auditlog-server-url']['value']);
+    }
   },
 
   // Global
@@ -340,6 +386,7 @@ const rootNav = [
         localizedLabel: 'nav.admin.imageRepo.config',
         route:          'custom-extension.image-repo.admin-config',
         resource:       [],
+        initExpand:     'custom-extension.image-repo.admin-config',
         condition() {
           return !!get(this, 'access.me.hasAdmin');
         }
@@ -361,6 +408,7 @@ const rootNav = [
         localizedLabel: 'nav.admin.imageRepo.config',
         route:          'custom-extension.image-repo.user-config',
         resource:       [],
+        initExpand:     'custom-extension.image-repo.user-config',
         condition() {
           return !get(this, 'access.me.hasAdmin');
         }
@@ -371,6 +419,7 @@ const rootNav = [
         localizedLabel: 'nav.admin.imageRepo.projects',
         route:          'custom-extension.image-repo.projects',
         resource:       [],
+        initExpand:     'custom-extension.image-repo.projects',
         condition() {
           if (get(this, 'access.me.hasAdmin')) {
             return true
@@ -387,6 +436,7 @@ const rootNav = [
         localizedLabel: 'nav.admin.imageRepo.logs',
         route:          'custom-extension.image-repo.logs',
         resource:       [],
+        initExpand:     'custom-extension.image-repo.logs',
         condition() {
           if (get(this, 'access.me.hasAdmin')) {
             return true
@@ -428,6 +478,7 @@ const rootNav = [
         route:          'global-admin.security.roles.index',
         resource:       ['roletemplate'],
         resourceScope:  'global',
+        initExpand:     'global-admin.security.roles.index'
       },
       {
         id:             'global-security-roles',
@@ -435,11 +486,13 @@ const rootNav = [
         route:          'global-admin.security.policies',
         resource:       ['podsecuritypolicytemplate'],
         resourceScope:  'global',
+        initExpand:     'global-admin.security.policies.index'
       },
       {
         id:             'global-security-authentication',
         localizedLabel: 'nav.admin.security.authentication',
         route:          'global-admin.security.authentication',
+        initExpand:     'global-admin.security.authentication.localauth',
         condition() {
           const authConfigs = this.get('globalStore').all('authConfig');
 
@@ -461,6 +514,7 @@ const rootNav = [
         route:          'global-admin.catalog',
         resource:       ['catalog'],
         resourceScope:  'global',
+        initExpand:     'global-admin.catalog'
       },
       {
         scope:          'global',
@@ -469,6 +523,7 @@ const rootNav = [
         route:          'nodes.custom-drivers',
         resource:       ['nodedriver', 'kontainerdriver'],
         resourceScope:  'global',
+        initExpand:     'nodes.custom-drivers.cluster-drivers'
       },
       {
         id:             'global-dns-entries',
@@ -476,6 +531,7 @@ const rootNav = [
         route:          'global-admin.global-dns.entries',
         resource:       ['globaldns'],
         resourceScope:  'global',
+        initExpand:     'global-admin.global-dns.entries'
       },
       {
         id:             'global-dns-providers',
@@ -483,6 +539,7 @@ const rootNav = [
         route:          'global-admin.global-dns.providers',
         resource:       ['globaldnsprovider'],
         resourceScope:  'global',
+        initExpand:     'global-admin.global-dns.providers'
       },
       // {
       //   id:             'global-registry',
@@ -498,8 +555,20 @@ const rootNav = [
         route:          'global-admin.cluster-templates',
         resource:       ['clustertemplate'],
         resourceScope:  'global',
+        initExpand:     'global-admin.cluster-templates.index'
       },
     ],
+  },
+  {
+    scope:          'global',
+    id:             'global-audit-log',
+    localizedLabel: 'nav.auditLog.tab',
+    route:          'custom-extension.audit-log.index',
+    icon:           'auditlog-icon',
+    resourceScope:  'global',
+    condition() {
+      return !!(get(this, 'settings.asMap')['auditlog-server-url'] && get(this, 'settings.asMap')['auditlog-server-url']['value']);
+    }
   },
 //  {
 //    scope: 'global',

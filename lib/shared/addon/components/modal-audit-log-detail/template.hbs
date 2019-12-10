@@ -1,0 +1,26 @@
+<div class="modal-audit-log-detail">
+  <section class="header">
+    <h1>审计日志-请求详情</h1>
+  </section>
+  <div>
+     <h2>请求对象</h2>
+    {{ivy-codemirror
+        value=requestBody
+        options=codeMirrorOptions
+    }}
+  </div>
+<br>
+  <div>
+    <h2>响应对象</h2>
+    {{ivy-codemirror
+        value=responseBody
+        options=codeMirrorOptions
+    }}
+  </div>
+
+<br>
+  <div class="text-center">
+    <button class="btn bg-primary" {{action "cancel"}}>关闭</button>
+  </div>
+</div>
+

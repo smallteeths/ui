@@ -9843,6 +9843,8 @@ nav:
     namespaces: 命名空间
   dashboard:
     try: 仪表盘
+  auditLog:
+    tab: 审计日志
 
 
 ##############################
@@ -9931,6 +9933,7 @@ action:
   viewYaml: 查看 YAML
   enableAutoInject: 启用 Istio 自动注入
   disableAutoInject: 禁用 Istio 自动注入
+  auditlog: 审计日志
   downloadFile: 下载文件
 
 ##############################
