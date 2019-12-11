@@ -74,9 +74,12 @@ export default Controller.extend({
   sortBy:                 'name',
   headers,
   data:                   [],
+  infoTotal:                1000,
   loading:                false,
   showConfirmDeleteModal: false,
   selectedData:           null,
+  infos:                  [],
+  deleteTime:               null,
   availableActions:       [
     {
       action:         'remove',
@@ -166,8 +169,38 @@ export default Controller.extend({
       set(this, 'data', data);
     },
     promptDelete(data) {
-      set(this, 'showConfirmDeleteModal', true)
+      const clusterId = get(this, 'model.clusterId');
+      const timestamp = new Date().getTime();
+      let nameList = '';
+      const promisAll = data.map(({ name }, index) => {
+        if (index <= 5) {
+          nameList += `${ name };`
+        }
+
+        return this.getPods(clusterId, name);
+      });
+
+      if (data.length > 5){
+        nameList = `${ data.firstObject.name }及${ data.length - 1 }其他`;
+      }
+      set(this, 'showConfirmDeleteModal', true);
+      set(this, 'infos', [{ displayName: nameList }]);
       set(this, 'selectedData', data);
+      set(this, 'deleteTime', timestamp);
+      this.getPodInfoList(promisAll, timestamp).then(({ pods, timestamp }) => {
+        if (get(this, 'deleteTime') !== timestamp){
+          return;
+        }
+        let length = pods.length - 1;
+
+        if (pods.length > 14){
+          pods.length = 14;
+          get(this, 'infos').push(...pods, { displayName: `············` }, { displayName: `${ length > 200 ? '正在使用pod 共 200 条以上' : `正在使用pod 共 ${ length } 条` }` });
+        } else {
+          get(this, 'infos').push(...pods, { displayName: `正在使用pod 共 ${ length } 条` });
+        }
+        set(this, 'infos', JSON.parse(JSON.stringify(get(this, 'infos'))));
+      });
     },
     confirmDelete() {
       const data = get(this, 'selectedData');
@@ -217,4 +250,64 @@ export default Controller.extend({
   next: computed('model.vlansubnets.continue', function() {
     return get(this, 'model.vlansubnets.continue');
   }),
+  async getPodInfoList(promisAll, timestamp){
+    return await Promise.all(promisAll).then((results) => {
+      let pods = results.reduce((a, b) => {
+        return a.concat(b);
+      }, [{ displayName: '-----------------------------' }]);
+
+      return {
+        pods,
+        timestamp
+      };
+    }).catch((err) => {
+      get(this, 'growl').fromError(err && err.body && err.body.message);
+
+      return {
+        pods: [],
+        timestamp
+      };
+    });
+  },
+  displayMacvlanIp(a) {
+    const networkStatusStr = a && a['k8s.v1.cni.cncf.io/networks-status'];
+
+    if (!networkStatusStr) {
+      return '';
+    }
+    let networkStatus;
+
+    try {
+      networkStatus = JSON.parse(networkStatusStr);
+    } catch (err) {
+      return '';
+    }
+    if (networkStatus) {
+      const macvlan = networkStatus.find((n) => n.interface === 'eth1');
+      const labels = get(this, 'labels');
+      const type = labels && labels['macvlan.panda.io/macvlanIpType'];
+
+      return `${ (macvlan && macvlan.ips && macvlan.ips[0]) || '' }${ type ? ` (${ type })` : '' }`;
+    }
+
+    return '';
+  },
+  getPods(clusterId, name) {
+    return get(this, 'vlansubnet').fetchPods(clusterId, name).then((resp) => {
+      if (!resp.body || !resp.body.items) {
+        return [];
+      }
+
+      return Array.from(resp.body.items).filter(({ metadata }) => metadata && metadata.annotations && this.displayMacvlanIp(metadata.annotations)
+      ).map(({ metadata, displayName }) => {
+        displayName = `${ metadata.namespace }/${ metadata.name } [${ this.displayMacvlanIp(metadata.annotations) }]`
+
+        return { displayName }
+      });
+    }).catch((err) => {
+      get(this, 'growl').fromError(err && err.body && err.body.message);
+
+      return [];
+    });
+  },
 })
