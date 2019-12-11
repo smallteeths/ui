@@ -189,6 +189,25 @@ select {
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
+.select-dropdown-list {
+  min-width: calc(39.5% - 47.043px);
+  max-width: calc(84% - 100px);
+  margin-left: calc(-39.5% + 93.043px);
+  li > a {
+    display: inline-block!important;
+    width: 100%;
+    white-space: normal!important;
+    word-wrap:break-word!important;
+    overflow: inherit!important;
+  }
+}
+@media only screen and (max-width: 767px){
+  .select-dropdown-list {
+    min-width: calc(100% - 116px);
+    max-width: calc(100% - 50px);
+    margin-left: calc(-100% + 116px);
+  }
+}
 .input-group {
     position: relative;
     display: table;

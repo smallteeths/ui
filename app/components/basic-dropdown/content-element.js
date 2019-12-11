@@ -3,6 +3,7 @@ import { get } from '@ember/object';
 import { next } from '@ember/runloop';
 
 const CE =  ContentElement.extend({
+  popperClass: null,
   click() {
     this.closeDD();
 

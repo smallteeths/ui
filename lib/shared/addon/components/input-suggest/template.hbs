@@ -6,7 +6,7 @@
 }}
 
 {{#basic-dropdown
-     horizontalPosition="right"
+     horizontalPosition=horizontalPosition
      as |dd|}}
   {{#dd.trigger
        class="btn bg-primary input-group-btn"
@@ -14,7 +14,7 @@
     <i class="icon icon-chevron-down"></i>
   {{/dd.trigger}}
 
-  {{#dd.content}}
+  {{#dd.content class=popperClass}}
     {{#if grouped}}
       {{#each-in grouped as |group choices|}}
         {{#if choices.length}}
