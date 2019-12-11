@@ -25,7 +25,9 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
 
   pods:         hasMany('id', 'pod', 'workloadId'),
 
-  scaleTimer:       null,
+  scaleTimer:             null,
+  infos:                  [],
+  showConfirmDeleteModal: false,
 
   // @TODO-2.0 cleanup all these...
   hasPorts:            true,
@@ -276,7 +278,11 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
       let scale = get(this, 'scale');
 
       scale -= 1;
-      scale = Math.max(scale, 0);
+      if (scale <= 0){
+        this.promptDelete(scale)
+
+        return;
+      }
       set(this, 'scale', scale);
       this.saveScale();
     },
@@ -342,8 +348,17 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
         window.open(`//${ window.location.host }${ route }?podId=${ podId }&windows=${ windows }&isPopup=true`, '_blank', opt);
       });
     },
+    confirmDelete(){
+      set(this, 'scale', 0);
+      this.saveScale();
+      set(this, 'showConfirmDeleteModal', false);
+    }
   },
 
+  promptDelete(){
+    set(this, 'showConfirmDeleteModal', true);
+    set(this, 'infos', [{ displayName: 'POD数将设置为0，是否继续？' }])
+  },
   updateTimestamp() {
     let obj = get(this, 'annotations');
 
