@@ -35,7 +35,7 @@
           step="1"
           placeholder="取值范围2-4095之间的整数"
           disabled=true
-      }} 
+      }}
     </div>
 </div>
 <div class="row">
@@ -46,7 +46,7 @@
           value=form.spec.cidr
           placeholder="例如: 192.168.2.0/24"
           disabled=true
-      }} 
+      }}
     </div>
     <div class="col span-4">
       <label class="acc-label">MODE{{field-required}}</label>
@@ -63,7 +63,7 @@
           value=form.spec.gateway
           placeholder="例如: 192.168.1.1"
           disabled=true
-      }} 
+      }}
     </div>
 </div>
 <div class="row">
@@ -148,10 +148,8 @@
           <th class="acc-label">Destination{{field-required}}</th>
           <th width="10"></th>
           <th class="acc-label">Gateway</th>
-          {{#if hasIface}}
           <th width="10"></th>
           <th class="acc-label">Iface</th>
-          {{/if}}
           <th width="40">&nbsp;</th>
         </tr>
       </thead>
@@ -159,13 +157,12 @@
         {{#each form.spec.routes as |route|}}
           <tr>
             <td >
-              {{input  placeholder="例如: 192.168.1.1/16" value=route.dst}}
+              {{input  placeholder="例如: 192.168.0.0/16" value=route.dst}}
             </td>
             <td>&nbsp;</td>
             <td>
               {{input  placeholder="例如: 192.168.1.1" value=route.gw}}
             </td>
-            {{#if hasIface}}
             <td>&nbsp;</td>
             <td>
               {{new-select
@@ -173,7 +170,6 @@
                 content=ifaceChoice
               }}
             </td>
-            {{/if}}
             <td>
               <button class="btn bg-primary btn-sm" {{action "removeRoute" route}}>
                 <i class="icon icon-minus"/><span class="sr-only">{{t 'generic.remove'}}</span>
@@ -192,5 +188,35 @@
     </div>
   </div>
 </div>
+{{#if hasDefaultGateway}}
+<div class="row">
+  <div class="col span-8 row">
+    <label class="acc-label">eth1作为容器默认网关</label>
+    <div class="radio">
+      <label>
+        {{radio-button selection=form.spec.podDefaultGateway.enable value=false}}
+        {{t 'generic.disabled'}}
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        {{radio-button selection=form.spec.podDefaultGateway.enable value=true}}
+        {{t 'generic.enabled'}}
+      </label>
+    </div>
+    <div class="row">
+      <div class="col span-6">
+        <label class="acc-label">serviceCidr</label>
+        {{input
+          class="form-control"
+          value=form.spec.podDefaultGateway.serviceCidr
+          placeholder="例如: 10.43.0.0/16"
+          disabled=(not form.spec.podDefaultGateway.enable)
+        }}
+      </div>
+    </div>
+  </div>
+</div>
+{{/if}}
 {{top-errors errors=errors}}
 {{save-cancel editing=true save=(action "save") cancel=(action "cancel")}}

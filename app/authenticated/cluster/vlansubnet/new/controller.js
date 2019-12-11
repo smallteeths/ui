@@ -59,9 +59,11 @@ export default Controller.extend({
         master,
         vlan,
         cidr,
-        ranges
+        ranges,
+        podDefaultGateway
       } = form.spec;
 
+      (!get(this, 'hasDefaultGateway') || !podDefaultGateway.enable) && (form.spec.podDefaultGateway = {});
       this.hasVlan(master || '', vlan || 0).then(() => {
         // if (result) {
         //   set(this, 'errors', [`master为${ master }且vlan为${ vlan || '空' }, 已经存在`]);
@@ -120,9 +122,8 @@ export default Controller.extend({
         gw:  '',
       };
 
-      if (get(this, 'hasIface')) {
-        r.iface = get(this, 'ifaceChoice')[0].value;
-      }
+      r.iface = get(this, 'ifaceChoice')[0].value;
+
       routes.push(r);
       set(this, 'form.spec.routes', routes);
     },
@@ -162,6 +163,9 @@ export default Controller.extend({
   }),
   hasIface: computed('scope.currentCluster.rancherKubernetesEngineConfig.network.plugin', function() {
     return get(this, 'scope.currentCluster.rancherKubernetesEngineConfig.network') && get(this, 'scope.currentCluster.rancherKubernetesEngineConfig.network.plugin') === 'multus-canal-macvlan';
+  }),
+  hasDefaultGateway: computed('scope.currentCluster.rancherKubernetesEngineConfig.network.plugin', function() {
+    return get(this, 'scope.currentCluster.rancherKubernetesEngineConfig.network') && get(this, 'scope.currentCluster.rancherKubernetesEngineConfig.network.plugin') === 'multus-flannel-macvlan';
   }),
   hasVlan(master, vlan) {
     const clusterId = get(this, 'model.clusterId');
@@ -209,6 +213,12 @@ export default Controller.extend({
     if (form.spec.gateway && !ipv4RegExp.test(form.spec.gateway)) {
       errors.push('Gateway IP 格式错误');
     }
+    if (form.spec.podDefaultGateway.enable && !form.spec.podDefaultGateway.serviceCidr) {
+      errors.push('ServiceCidr 不能为空');
+    }
+    if (form.spec.podDefaultGateway.enable && form.spec.podDefaultGateway.serviceCidr && !cidrIPV4RegExp.test(form.spec.podDefaultGateway.serviceCidr)) {
+      errors.push('ServiceCidr 格式错误');
+    }
     if (form.spec.ranges.some((r) => !ipv4RegExp.test(r.rangeEnd) || !ipv4RegExp.test(r.rangeStart))) {
       errors.push('IP Ranges 中，存在IP地址格式不正确的记录');
     } else if (form.spec.ranges.some((r) => !this.ip4CIDRContains(form.spec.cidr, r.rangeEnd) || !this.ip4CIDRContains(form.spec.cidr, r.rangeStart))) {
@@ -221,14 +231,17 @@ export default Controller.extend({
       });
     }
 
-    if (form.spec.routes.some((r) => r.dst === '')) {
+    if (form.spec.routes.some((r) => !r.dst)) {
       errors.push('自定义路由中，存在Destination为空的记录');
     }
-    if (form.spec.routes.some((r) => r.dst !== '' && !cidrIPV4RegExp.test(r.dst))) {
+    if (form.spec.routes.some((r) => !!r.dst && !cidrIPV4RegExp.test(r.dst))) {
       errors.push('自定义路由中，存在Destination格式错误的记录');
     }
-    if (form.spec.routes.some((r) => r.gw !== '' && !ipv4RegExp.test(r.gw))) {
+    if (form.spec.routes.some((r) => !!r.gw && !ipv4RegExp.test(r.gw))) {
       errors.push('自定义路由中，存在Gateway格式错误的记录');
+    }
+    if (form.spec.routes.some((r) => ((r.iface && r.iface !== 'eth0') || !r.iface) && !!r.gw && ipv4RegExp.test(r.gw) && !this.ip4CIDRContains(form.spec.cidr, r.gw))) {
+      errors.push('Custom Route Gateway中，存在IP地址不在子网范围内的记录');
     }
     if (errors.length > 0) {
       set(this, 'errors', errors);

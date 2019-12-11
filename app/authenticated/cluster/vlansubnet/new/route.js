@@ -5,7 +5,7 @@ import { hash } from 'rsvp'
 
 export default Route.extend({
   scope:       service(),
-  vlansubnet:   service(),
+  vlansubnet:  service(),
   model(params = {}) {
     const clusterId = get(this, 'scope.currentCluster.id');
     const { copy_id } = params
@@ -15,23 +15,27 @@ export default Route.extend({
 
     if ( copy_id ){
       form = get(this, 'vlansubnet').fetchVlansubnet(clusterId, copy_id).then((resp) => {
-        const vlansubnet = resp.body;
+        let { metadata, spec } = resp.body || {};
         const cloneForm = {
           apiVersion: 'macvlan.cluster.cattle.io/v1',
           kind:       'MacvlanSubnet',
           metadata:   {
             name:      '',
             namespace: 'kube-system',
-            labels:    { project: vlansubnet.metadata.labels.project },
+            labels:    { project: metadata && metadata.labels && metadata.labels.project || '' },
           },
           spec: {
-            master:  vlansubnet.spec.master,
-            vlan:    vlansubnet.spec.vlan || '',
-            cidr:    vlansubnet.spec.cidr,
-            mode:    'bridge',
-            gateway: vlansubnet.spec.gateway,
-            ranges:  [],
-            routes:  vlansubnet.spec.routes || []
+            master:            spec && spec.master || '',
+            vlan:              spec && spec.vlan || '',
+            cidr:              spec && spec.cidr || '',
+            mode:              spec && spec.mode || 'bridge',
+            gateway:           spec && spec.gateway || '',
+            ranges:            [],
+            routes:            spec && spec.routes || [],
+            podDefaultGateway: {
+              enable:      spec && spec.podDefaultGateway && spec.podDefaultGateway.enable || false,
+              serviceCidr: spec && spec.podDefaultGateway && spec.podDefaultGateway.serviceCidr || ''
+            }
           }
         };
 
@@ -47,13 +51,17 @@ export default Route.extend({
           labels:    { project: '' },
         },
         spec: {
-          master:  '',
-          vlan:    '',
-          cidr:    '',
-          mode:    'bridge',
-          gateway: '',
-          ranges:  [],
-          routes:  [],
+          master:            '',
+          vlan:              '',
+          cidr:              '',
+          mode:              'bridge',
+          gateway:           '',
+          ranges:            [],
+          routes:            [],
+          podDefaultGateway: {
+            enable:      false,
+            serviceCidr: ''
+          }
         }
       };
 
