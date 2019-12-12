@@ -105,7 +105,7 @@ export default Component.extend({
     this.loadImagesInHarbor(input);
   }),
 
-  suggestions: computed('allPods.@each.containers', function() {
+  suggestions: computed('allPods.@each.containers', 'harborImages', function() {
     let inUse = [];
 
     get(this, 'allPods').forEach((pod) => {
@@ -117,7 +117,10 @@ export default Component.extend({
       .uniq()
       .sort();
 
-    return { 'Used by other containers': inUse, };
+    return {
+      'Used by other containers':            inUse,
+      'Images in harbor image repositories': get(this, 'harborImages').urls
+    };
   }),
 
   harborRepo: computed('harborServer', function() {
