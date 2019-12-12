@@ -133,7 +133,114 @@ export default Component.extend({
 
     return repo.replace(/\/+$/, '');
   }),
+  captureVersion(str){
+    let reg = /[0-9]+(\.[0-9]+)+/;
+    const versionMat = str.match(reg);
 
+    if (!versionMat) {
+      return versionMat;
+    }
+    const [version] = versionMat;
+
+    return [version, str];
+  },
+  captureMark(str){
+    let nReg = /.*[_|-]([0-9]+)$/;
+    const markMat = str.match(nReg);
+
+    if (!markMat){
+      return  markMat
+    }
+    const [, mark] = markMat;
+
+    return [mark, str];
+  },
+  markSort(marks2, marks1){
+    if (parseInt(marks1[0], 10) > parseInt(marks2[0], 10)){
+      return 1;
+    } else if (parseInt(marks1[0], 10) < parseInt(marks2[0], 10)){
+      return -1;
+    } else {
+      return 0;
+    }
+  },
+  versionSort(ver2, ver1) {
+    if (ver1[0] === ver2[0]){
+      let mark1 = this.captureMark(ver1[1]);
+      let mark2 = this.captureMark(ver2[1]);
+
+      if (mark1 && mark2){
+        return  this.markSort(mark2, mark1);
+      } else if (mark1){
+        return  -1
+      } else if (mark2){
+        return 1
+      } else {
+        return this.normalSort(ver2[1], ver1[1]);
+      }
+    }
+    const arr1 = ver1[0].split('.'),
+      arr2 = ver2[0].split('.'),
+      minLen = Math.min(arr1.length, arr2.length)
+
+    for (let i = 0; i < minLen; i++) {
+      if (parseInt(arr1[i], 10) > parseInt(arr2[i], 10)) {
+        return 1;
+      } else if (parseInt(arr1[i], 10) < parseInt(arr2[i], 10)) {
+        return -1;
+      }
+      if (i + 1 === minLen) {
+        if (arr1.length > arr2.length) {
+          return 1;
+        } else if (arr1.length < arr2.length){
+          return -1;
+        }
+      }
+    }
+  },
+  normalSort(str2, str1){
+    return str1.localeCompare(str2);
+  },
+  tagsSortingInit(arrTag){
+    let versions = [];
+    let marks = [];
+    let noRules = [];
+    let result = [];
+
+    arrTag.forEach((item) => {
+      let version = this.captureVersion(item);
+
+      if (version){
+        versions.push(version);
+      } else {
+        let mark = this.captureMark(item);
+
+        if (mark){
+          marks.push(mark);
+        } else {
+          noRules.push(item);
+        }
+      }
+    });
+    versions.sort(this.versionSort.bind(this)).forEach((item) => {
+      result.push(item[1])
+    });
+    marks.sort(this.markSort.bind(this)).forEach((item) => {
+      result.push(item[1])
+    });
+    result = result.concat(noRules.sort(this.normalSort.bind(this)));
+
+    return result;
+  },
+  tagsResultFormat(arr){
+    let list = [];
+
+    arr.forEach((item) => {
+      list.push({ name: item })
+    });
+
+    return list;
+  },
   validate() {
     var errors = [];
 
@@ -212,13 +319,24 @@ export default Component.extend({
       return;
     }
     get(this, 'harbor').fetchTags(repo.project_id, repo.repository_name).then((resp) => {
-      const tags = resp.body;
+      let names = [];
+      let tags = [];
+
+      try {
+        Array.from(resp.body).forEach(({ name }) => {
+          names.push(name);
+        });
+        tags = this.tagsResultFormat(this.tagsSortingInit(names));
+      } catch (err) {
+        console.log(err)
+        tags = resp.body;
+      }
       const input = get(this, 'userInput');
       const imageTag = input.indexOf(':') > -1 ? input.substr(input.indexOf(':') + 1) : null;
       const tag = tags.find((t) => t.name === imageTag);
 
       set(this, 'imageTag', tag && tag.name);
-      set(this, 'harborImageTags', resp.body);
+      set(this, 'harborImageTags', tags);
     });
   },
 });
