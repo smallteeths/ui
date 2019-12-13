@@ -1,6 +1,6 @@
 import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
-import { get, set, computed } from '@ember/object';
+import { get, set, computed, observer } from '@ember/object';
 
 export const headers = [
   {
@@ -143,52 +143,6 @@ export default Controller.extend({
         set(this, 'loading', false);
       });
     },
-    operationsChanged() {
-      let resourceTypeObject = null;
-      let resourceActions = null;
-
-      if (!get(this, 'form.operationLabel')) {
-        resourceActions = [
-          {
-            label: '所有操作',
-            value: ''
-          },
-          {
-            label: 'Create',
-            value: 'Create'
-          },
-          {
-            label: 'Update',
-            value: 'Update'
-          },
-          {
-            label: 'Delete',
-            value: 'Delete'
-          }
-        ]
-      } else {
-        get(this, 'model.selectionResources.resources').forEach((item) => {
-          if (item.resourceType === get(this, 'form.operationLabel')) {
-            resourceTypeObject = item
-          }
-        })
-        if (resourceTypeObject) {
-          resourceActions = resourceTypeObject.resourceActions.map((item) => {
-            return {
-              label: item,
-              value: item
-            }
-          })
-          resourceActions.unshift({
-            label: '所有操作',
-            value: ''
-          })
-        }
-      }
-
-      set(this, 'form.operation', '')
-      set(this, 'operations', resourceActions)
-    },
     clear() {
       this.resetForm();
       this.send('search');
@@ -241,6 +195,33 @@ export default Controller.extend({
       });
     },
   },
+
+  operationsChange: observer('model.selectionResources.resources.[]', function() {
+    let resourceTypeObject = null;
+    let resourceActions = null;
+
+    get(this, 'model.selectionResources.resources').forEach((item) => {
+      if (item.resourceType === 'workload') {
+        resourceTypeObject = item
+      }
+    })
+    if (resourceTypeObject) {
+      resourceActions = resourceTypeObject.resourceActions.map((item) => {
+        return {
+          label: item,
+          value: item
+        }
+      })
+      resourceActions.unshift({
+        label: '所有操作',
+        value: ''
+      })
+
+      set(this, 'form.operation', '')
+      set(this, 'operations', resourceActions)
+    }
+  }),
+
   rows: computed('model.logs.content.data', function() {
     !get(this, 'model.logs.status') && this.messageError(get(this, 'model.logs.content'))
 

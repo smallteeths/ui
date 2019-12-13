@@ -3,20 +3,20 @@
 </section>
 <section>
   <div class="row">
-    <div class="col span-3">
+    {{!-- <div class="col span-3">
       {{input
         class="form-control"
         value=form.fieldValue
         placeholder=fieldPlaceholder
       }}
-    </div>
-    <div class="col span-2">
+    </div> --}}
+    {{!-- <div class="col span-2">
       {{new-select
         value=form.operationLabel
         change=(action "operationsChanged")
         content=model.selectionResources.operations
       }}
-    </div>
+    </div> --}}
     <div class="col span-2">
       {{new-select
         value=form.operation
@@ -29,7 +29,7 @@
         content=dateRanges
       }}
     </div>
-    <div class="col span-2">
+    <div class="col span-4">
        <button class="btn bg-danger" {{action "clear"}}>全部清除</button>
         <button class="btn bg-primary" {{action "search"}}>搜索</button>
     </div>
