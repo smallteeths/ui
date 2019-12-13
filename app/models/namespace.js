@@ -80,7 +80,9 @@ var Namespace = Resource.extend(StateCounts, {
   ingress:               hasMany('id', 'ingress', 'namespaceId', 'projectStore', null, 'clusterStore'),
   volumes:               hasMany('id', 'persistentVolumeClaim', 'namespaceId', 'projectStore', null, 'clusterStore'),
   type:                  'namespace',
+  canEditQoutaKey:       null,
   project:               reference('projectId', 'project', 'globalStore'),
+
 
   init() {
     this._super(...arguments);

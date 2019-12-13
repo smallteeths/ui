@@ -1,0 +1,17 @@
+<section class="horizontal-form container-fluid">
+  <h2>{{t 'quotasCn.editNamespaceModal'}}</h2>
+  {{namespace-resource-quota-cn
+      editing=(or editing isNew)
+      isNew=false
+      expanded=expanded
+      canEditQuotaKey=model.canEditQoutaKey
+      limit=primaryResource.resourceQuota.limit
+      projectLimit=projectLimit
+      usedLimit=projectUsedLimit
+      nsDefaultQuota=nsDefaultQuota
+      changed=(action "updateNsQuota")
+  }}
+</section>
+
+{{top-errors errors=errors}}
+{{save-cancel editing=editing save=(action "save") cancel=(action "cancel")}}

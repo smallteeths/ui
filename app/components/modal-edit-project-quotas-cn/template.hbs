@@ -1,0 +1,14 @@
+<section class="horizontal-form container-fluid">
+  <h2>{{t 'quotasCn.editProjectModal'}}</h2>
+  {{project-resource-quota-cn
+    editing=(or editing isNew)
+    expanded=expanded
+    limit=model.resourceQuota.limit
+    canEditQuotaKey=model.canEditQoutaKey
+    nsDefaultLimit=model.namespaceDefaultResourceQuota.limit
+    changed=(action "updateQuota")
+  }}
+</section>
+
+{{top-errors errors=errors}}
+{{save-cancel editing=editing save=(action "save") cancel=(action "cancel")}}

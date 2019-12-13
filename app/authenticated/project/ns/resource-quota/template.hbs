@@ -1,0 +1,26 @@
+<section class="header clearfix">
+  <h1 class="pull-left">{{model.name}} {{t 'quotasCn.namespace.title'}}</h1>
+</section>
+
+<section class="mt-30">
+  {{#if model.quotaSetting.hasSetLimit}}
+    <div class="quota-container-cn">
+      {{#each quotaTypeArray as |quota|}}
+        {{#quota-item-namespace-cn 
+          refreshModel='refreshModel' 
+          namespace=currentNamespace 
+          usedProp=quota.usedProp
+          quotaKey=quota.quotaKey 
+          quotaName=quota.quotaName 
+          quotaState=quota.quotaState 
+          quotaTotal=quota.quotaTotal
+        }}
+        {{/quota-item-namespace-cn}}
+      {{/each}}
+    </div>
+  {{else}}
+    <div class="quota-container-cn">
+      {{t 'quotasCn.notice'}}
+    </div>
+  {{/if}}
+</section>

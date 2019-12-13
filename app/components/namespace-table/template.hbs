@@ -27,7 +27,9 @@
         {{badge-state model=ns}}
       </td>
       <td>
-        {{ns.name}}
+        {{#link-to "authenticated.project.ns.resource-quota" ns.projectId ns.name}}
+          {{ns.name}}
+        {{/link-to}}
         {{#if ns.autoInjectionEnabled}}
           <div class="istio istio-autoinjection"></div>
         {{/if}}

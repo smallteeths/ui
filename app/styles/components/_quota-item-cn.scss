@@ -1,0 +1,203 @@
+.quota-container-cn {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  .quota-inner-cn {
+    width: 50%;
+    min-width: 566px;
+    .quota-item-cn {
+      height: 190px;
+      min-width: 566px;
+      border: 1px solid #ebebeb;
+      margin: 0px 20px 60px;
+      display: flex;
+      overflow: hidden;
+      .quota-item-edit {
+        position: absolute;
+        right: 2px;
+        top: 2px;
+        font-size: 12px;
+        .more-actions {
+          padding: 0 !important;
+        }
+      }
+      .quota-namespqce-table {
+        overflow-y: hidden;
+        flex: 1;
+        position: relative;
+        top: -2px;
+        min-width: 326px;
+        .quota-namespqce-table-fixed {
+          position:relative; 
+          top:0px;
+          & > div {
+            padding-top: 0px !important;
+          }
+          .fixed-header {
+            position: relative !important;
+            top: 0px !important;
+          }
+        }
+        .quota-namespqce-table-inner {
+          overflow-y: auto;
+          height: 147px;
+          thead {
+            display: none;
+          }
+          & > div {
+            padding-top: 0px !important;
+          }
+          .fixed-header {
+            position: relative !important;
+            top: 0px !important;
+          }
+        }
+        // max-width: 370px;
+      }
+      .fixed-header {
+        border-bottom: 1px solid #dee0e2 !important;
+      }
+      tr {
+        border-bottom: 1px solid #dee0e2 !important;
+        background: #fff;
+        font-size: 12px
+      }
+      tr:last-child {
+        border-bottom: none !important; 
+      }
+      TABLE.bordered {
+        border: none;
+      }
+      th {
+        padding: 10px;
+        background: rgb(249, 251, 253);
+        border: none !important;
+        a {
+          color: #3c3c3c !important;
+        }
+      }
+      tr {
+        border-top: none !important;
+      }
+      .quota-title {
+        padding: 22px 0px 12px 30px;
+        span {
+          font-size: 12px;
+        }
+      }
+      .quota-container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        span {
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          border-radius: 30px;
+          border: 2px solid rgb(90, 214, 58);
+          text-align: center;
+          line-height: 26px;
+          margin: 0px 8px 0px 30px;
+          color: rgb(90, 214, 58);
+        }
+        .quota-container-size {
+          margin-right: 8px;
+        }
+        .quota-container-state {
+          color: rgb(90, 214, 58);
+        }
+      }
+      .quota-progress {
+        margin-top: 10px;
+        padding: 0px 30px;
+        .quota-progress-precent {
+          margin-top: 10px;
+          margin-bottom: 6px;
+          span {
+            margin-left: 10px;
+            font-size: 12px;
+          }
+        }
+        .progress-bar-quota {
+          background: rgb(0, 152, 223);
+          max-width: 100% !important;
+        }
+        .quota-progress-total {
+          span {
+            margin-right: 5px;
+          }
+          span:last-child {
+            margin-right: 0px;
+          }
+        }
+      }
+    }
+ }
+ .quota-item-namespace-cn {
+    width: 240px;
+    height: 200px;
+    border: 1px solid #ebebeb;
+    margin-bottom: 60px;
+    margin-left: 60px;
+    position: relative;
+    .quota-item-edit {
+      position: absolute;
+      right: 2px;
+      top: 2px;
+      font-size: 12px;
+      .more-actions {
+        padding: 0 !important;
+      }
+    }
+    .quota-title {
+      padding: 22px 0px 12px 30px;
+      span {
+        font-size: 12px;
+      }
+    }
+    .quota-container {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      span {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        border-radius: 30px;
+        border: 2px solid rgb(90, 214, 58);
+        text-align: center;
+        line-height: 26px;
+        margin: 0px 8px 0px 30px;
+        color: rgb(90, 214, 58);
+      }
+      .quota-container-size {
+        margin-right: 8px;
+      }
+      .quota-container-state {
+        color: rgb(90, 214, 58);
+      }
+    }
+    .quota-progress {
+      margin-top: 16px;
+      padding: 0px 30px;
+      .quota-progress-precent {
+        margin-top: 5px;
+        margin-bottom: 6px;
+        span {
+          font-size: 12px;
+        }
+      }
+      .progress-bar-quota {
+        background: rgb(0, 152, 223);
+        max-width: 100% !important;
+        min-width: 0% !important;
+      }
+      .quota-progress-total {
+        margin-top: 5px;
+        span:last-child {
+          margin-right: 0px;
+        }
+      }
+    }
+  }
+}

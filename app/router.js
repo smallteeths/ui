@@ -135,8 +135,12 @@ Router.map(function() {
 
       this.route('ns', { path: '/ns' }, function() {
         this.route('index', { path: '/' });
+        this.route('resource-quota', { path: '/:ns' });
       });
 
+      this.route('quotas-cn', { path: '/quotas-cn' }, function() {
+        this.route('index', { path: '/' });
+      });
       // alert/logging
       this.mount('logging', { path: '/logging' });
       this.mount('alert', { path: '/alerts' });

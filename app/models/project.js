@@ -26,6 +26,7 @@ export default Resource.extend({
   name:              null,
   description:       null,
   isMonitoringReady: false,
+  canEditQoutaKey:   null,
 
   cluster:                     reference('clusterId', 'cluster'),
   // 2.0 bug projectId is wrong in the ptrb should be <cluster-id>:<project-id> instead of just <project-id>

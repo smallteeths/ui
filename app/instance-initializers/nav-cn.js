@@ -113,6 +113,16 @@ const rootNav = [
   },
   {
     scope:          'project',
+    id:             'quotas',
+    localizedLabel: 'quotasCn.quotas',
+    route:          'authenticated.project.quotas-cn.index',
+    icon:           'quotas-icon',
+    ctx:            [getProjectId],
+    resource:       ['namespace'],
+    resourceScope:  'cluster',
+  },
+  {
+    scope:          'project',
     id:             'project-tools',
     localizedLabel: 'nav.tools.tab',
     ctx:            [getProjectId],
