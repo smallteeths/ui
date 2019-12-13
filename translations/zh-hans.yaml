@@ -4182,6 +4182,16 @@ clusterNew:
       calico: Calico
       canal: Canal (支持网络隔离)
       weave: Weave
+      multusFlannel: Flannel+Macvlan
+      multusFlannelOptions:
+        label: 网络高级选项
+        detail: 自定义网络插件选项
+        flannelInterfaceName: Flannel Interface Name
+      multusCanal: Canal+Macvlan
+      multusCanalOptions:
+        label: 网络高级选项
+        detail: 自定义网络插件选项
+        canalInterfaceName: Canal Interface Name
       flannelBackends:
         label: Flannel Backend
         hostgw: Host Gateway (L2bridge)

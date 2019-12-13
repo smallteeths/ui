@@ -4187,6 +4187,16 @@ clusterNew:
       calico: Calico
       canal: Canal (Network Isolation Available)
       weave: Weave
+      multusFlannel: Flannel+Macvlan
+      multusFlannelOptions:
+        label: Advanced network options
+        detail: Customize network plug options
+        flannelInterfaceName: Flannel Interface Name
+      multusCanal: Canal+Macvlan
+      multusCanalOptions:
+        label: Advanced network options
+        detail: Customize network plug options
+        canalInterfaceName: Canal Interface Name
       flannelBackends:
         label: Flannel Backend
         hostgw: Host Gateway (L2bridge)
