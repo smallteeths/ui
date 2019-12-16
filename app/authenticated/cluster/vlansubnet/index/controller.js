@@ -93,15 +93,15 @@ export default Controller.extend({
       single:         true,
     },
     {
-      action:         'remove',
-      icon:           'icon icon-trash',
-      label:          'action.remove',
-    },
-    {
       action:         'clone',
       icon:           'icon icon-copy',
       label:          'action.clone',
     },
+    {
+      action:         'remove',
+      icon:           'icon icon-trash',
+      label:          'action.remove',
+    }
   ],
   init() {
     this._super(...arguments);

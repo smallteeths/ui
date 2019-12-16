@@ -26,12 +26,12 @@ export default Route.extend({
           },
           spec: {
             master:  vlansubnet.spec.master,
-            vlan:    vlansubnet.spec.vlan,
+            vlan:    vlansubnet.spec.vlan || '',
             cidr:    vlansubnet.spec.cidr,
             mode:    'bridge',
             gateway: vlansubnet.spec.gateway,
-            ranges:  vlansubnet.spec.ranges,
-            routes:  vlansubnet.spec.routes,
+            ranges:  [],
+            routes:  vlansubnet.spec.routes || []
           }
         };
 
