@@ -5,6 +5,7 @@ import { hash } from 'rsvp';
 
 export default Route.extend({
   harbor: service(),
+  access: service(),
 
   model(params/* , transition*/) {
     // load harbor account
