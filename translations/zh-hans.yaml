@@ -2583,6 +2583,11 @@ servicePage:
     created: '创建时间'
     daemonSetScale: '每主机1个Pod'
     currentScale: 'Pod可用副本数: {count}'
+    podNum:
+      label: pod个数
+      error:
+        required: pod个数不能为空
+        typeError: pod个数值为大于0的整数
   serviceType:
     deployment: Deployment (无状态)
     replicaSet: Replica Set

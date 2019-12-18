@@ -1413,6 +1413,12 @@ servicePage:
     namespace: '命名空間:'
     created: '創建時間: '
     daemonSetScale: '每主機1個Pod'
+    podNum:
+      label: pod個数
+      error:
+        required: pod個数不能為空
+        typeError: pod個数值為大于0的整数
+
   serviceType:
     deployment: Deployment
     replicaSet: 副本集

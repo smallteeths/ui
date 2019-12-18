@@ -2592,6 +2592,11 @@ servicePage:
     created: 'Created'
     daemonSetScale: '1 per node'
     currentScale: 'Ready Scale: {count}'
+    podNum:
+      label: 'The pod number'
+      error:
+        required: 'The pod number is required'
+        typeError: 'The pod number value is an integer greater than 0'
   serviceType:
     deployment: Deployment
     replicaSet: Replica Set

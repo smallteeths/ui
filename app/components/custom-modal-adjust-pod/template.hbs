@@ -1,0 +1,29 @@
+{{#if modalVisible}}
+<form class="modal-container small-modal alert">
+  {{top-errors errors=errors}}
+  <h2 class="alert-header">{{t "generic.edit"}}</h2>
+  <hr/>
+  <div class="row">
+    <div class="col span-8">
+      <label class="acc-label">{{t "servicePage.multistat.podNum.label"}}{{field-required}}</label>
+      <div class="custom-input-number">
+        {{input
+          class="form-control input-sm"
+          value=pod.pod_num
+          type="number"
+          min="0"
+          step="1"
+        }}
+        <div class="custom-input-number__btn">
+          <button class="btn btn-xs bg-primary custom-input-number__decrease" {{action "podDown"}} disabled={{not models.canScaleDown}}><i class="icon icon-minus icon-fw"/></button>
+          <button class="btn btn-xs bg-primary custom-input-number__increase" {{action "podUp"}}  disabled={{not models.canScaleUp}}><i class="icon icon-plus icon-fw"/></button>
+        </div>
+       </div>
+     </div>
+  </div>
+  <div class="custom-message-box__btns footer-actions pt-20">
+    <button {{action "confirm"}} class="btn bg-primary">{{t "generic.confirm"}}</button>
+    <button {{action "cancel"}} class="btn bg-transparent">{{t "generic.cancel"}}</button>
+  </div>
+</form>
+{{/if}}

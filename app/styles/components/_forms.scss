@@ -208,6 +208,19 @@ select {
     margin-left: calc(-100% + 116px);
   }
 }
+.small-modal.modal-container {
+  width: 30%;
+  min-width: 250px;
+  margin: 0 auto;
+}
+.custom-input-number{
+  position: relative;
+}
+.custom-input-number__btn{
+  position: absolute;
+  right: 3px;
+  top: 3px;
+}
 .input-group {
     position: relative;
     display: table;
