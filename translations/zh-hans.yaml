@@ -6805,7 +6805,7 @@ formNamespace:
     default: 默认命名空间
   toggle:
     simple: 自定义
-    reuse: 使用现有的名称空间
+    reuse: 使用现有的命名空间
     create: 创建新的命名空间
   reuse:
     prompt: 选择命名空间...
@@ -8325,7 +8325,7 @@ newMultiClusterApp:
   maintainer: "维护人员:"
   newNamespace: 新的命名空间
   customizeNamespace: "此应用程序将部署到<code>{namespaceId}</code>命名空间中。"
-  newAppDetail: 为应用程序选择应用程序版本和名称空间。
+  newAppDetail: 为应用程序选择应用程序版本和命名空间。
   appInfo: 详细描述
   appInfoDetail: 应用程序信息和用户指南。
   noConfig: 此模板没有配置选项。
@@ -9778,8 +9778,8 @@ nav:
     none: 列表视图
     node: 按主机分组
     workload: 按负载量分组
-    namespace: 按名称空间分组
-    namespaceWorkload: '按名称空间/工作负载分组'
+    namespace: 按命名空间分组
+    namespaceWorkload: '按命名空间/工作负载分组'
   hosts:
     tab: 主机
     addHost: 添加主机
