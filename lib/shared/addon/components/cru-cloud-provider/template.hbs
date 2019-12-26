@@ -41,7 +41,7 @@
   >
     {{#input-or-display
        editable=(or (and (eq mode "new") (or (not applyClusterTemplate) (and (eq mode "new") selectedCloudProviderOverrideAvailable))) clusterTemplateCreate)
-       value=selectedCloudProvider
+       value=selectedCloudProviderDisplayName
     }}
       <div class="col span-6">
         {{#if (and applyClusterTemplate (eq selectedCloudProvider "none"))}}
