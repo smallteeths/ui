@@ -141,7 +141,7 @@
 <div class="row">
   <div class="col span-8">
     <label class="acc-label">{{t "formVlan.route.label"}}</label>
-    {{#if (or form.spec.routes.length model.vlansubnet.spec.routes.length)}}
+    {{#if form.spec.routes.length}}
     <table class="table fixed no-lines small mb-10">
       <thead>
         <tr class="hidden-sm">
