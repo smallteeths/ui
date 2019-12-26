@@ -2490,7 +2490,7 @@ confirmDelete:
   protip: '高級技巧:在點擊刪除時按住{key}鍵以跳過確認操作。'
   confirmAction: 刪除
   cancelAction: 取消
-  largeDeleteText: '{key}及{othersCount}其他'
+  largeDeleteText: '"{key}" 及 {othersCount} 其他'
 
 containerLogs:
   download: 下載日誌
@@ -3743,6 +3743,7 @@ formEnvVar:
 formGlobalRoles:
   title: 全局權限
   description: 控制用戶管理整個{appName}安裝的訪問權限。
+  loginError: 用戶沒有登錄權限。管理员、標準用户或基礎用户提供登錄權限。
   mode:
     admin:
       label: 管理員
@@ -3750,6 +3751,9 @@ formGlobalRoles:
     user:
       label: 標準用戶
       detail: 標準用戶可以創建新的集群並管理他們已被授權訪問的集群和項目。
+    userBase:
+      label: 基礎用戶
+      detail: 基礎用戶只有登錄訪問權限。
     custom:
       label: 自定義
       detail: 為這個用戶選擇獨立的權限

@@ -4,11 +4,11 @@
 <section class="header has-tabs clearfix pb-0">
   <ul class="tab-nav">
     <li>
-      {{#link-to "image-repo.projects.detail.repositories" model.projectId model.currentUserRoleId}}镜像仓库{{/link-to}}
+      {{#link-to "image-repo.projects.detail.repositories" model.projectId model.currentUserRoleId}}{{t "harborConfig.tab.store"}}{{/link-to}}
     </li>
     {{#if (or isSystemAdmin isMember)}}
     <li>
-      {{#link-to "image-repo.projects.detail.members" model.projectId model.currentUserRoleId}}成员{{/link-to}}
+      {{#link-to "image-repo.projects.detail.members" model.projectId model.currentUserRoleId}}{{t "harborConfig.tab.member"}}{{/link-to}}
     </li>
     {{/if}}
     {{!-- <li>
@@ -16,17 +16,17 @@
     </li> --}}
     {{#if (or isProjectAdmin isSystemAdmin)}}
     <li>
-      {{#link-to "image-repo.projects.detail.labels" model.projectId model.currentUserRoleId}}标签{{/link-to}}
+      {{#link-to "image-repo.projects.detail.labels" model.projectId model.currentUserRoleId}}{{t "harborConfig.tab.tag"}}{{/link-to}}
     </li>
     {{/if}}
     {{#if (or isSystemAdmin isMember)}}
     <li>
-      {{#link-to "image-repo.projects.detail.logs" model.projectId model.currentUserRoleId}}日志{{/link-to}}
+      {{#link-to "image-repo.projects.detail.logs" model.projectId model.currentUserRoleId}}{{t "harborConfig.tab.log"}}{{/link-to}}
     </li>
     {{/if}}
     {{#if (or isSystemAdmin isMember)}}
     <li>
-      {{#link-to "image-repo.projects.detail.configs" model.projectId model.currentUserRoleId}}访问级别{{/link-to}}
+      {{#link-to "image-repo.projects.detail.configs" model.projectId model.currentUserRoleId}}{{t "harborConfig.tab.accessLevel"}}{{/link-to}}
     </li>
     {{/if}}
   </ul>
@@ -36,19 +36,19 @@
     <div style="position: absolute; right: 0px; top: 62px;">
     {{#if config.public}}
       <div class="btn-group no-inline-space">
-        <button disabled={{not isProjectAdmin}} class="btn btn-link btn-sm bg-default" {{action "changePublic" false}}>私有</button>
-        <button class="btn btn-link btn-sm bg-success">公开</button>
+        <button disabled={{not isProjectAdmin}} class="btn btn-link btn-sm bg-default" {{action "changePublic" false}}>{{t "harborConfig.table.storeStatus.private"}}</button>
+        <button class="btn btn-link btn-sm bg-success">{{t "harborConfig.table.storeStatus.public"}}</button>
       </div>
     {{else}}
       <div class="btn-group no-inline-space">
-        <button class="btn btn-link btn-sm bg-primary">私有</button>
-        <button disabled={{not isProjectAdmin}} class="btn btn-link btn-sm bg-defualt" {{action "changePublic" true}}>公开</button>
+        <button class="btn btn-link btn-sm bg-primary">{{t "harborConfig.table.storeStatus.private"}}</button>
+        <button disabled={{not isProjectAdmin}} class="btn btn-link btn-sm bg-defualt" {{action "changePublic" true}}>{{t "harborConfig.table.storeStatus.public"}}</button>
       </div>
     {{/if}}
     </div>
   {{#banner-message color="bg-info"}}
     <p>
-      当项目设为公开后，任何人都有此项目下镜像的读权限。命令行用户不需要“docker login”就可以拉取此项目下的镜像。
+      {{t "harborConfig.table.storeStatus.message"}}
     </p>
   {{/banner-message}}
 
@@ -64,7 +64,7 @@
           {{input type="checkbox" id="plubic" name="plubic" class="form-control" checked=config.public placeholder="是否公开"}}
         {{/input-or-display}}
         <div class="text-info" style="margin-top:5px;"> 所有人都可访问公开的项目仓库。</div>
-      </div> 
+      </div>
     </div>
   </div>
   {{save-cancel save=(action "savePublicConfig") saving=saving saveDisabled=saveDisabled cancelDisabled=cancelDisabled cancel="cancelPublicConfig" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }} --}}

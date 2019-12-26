@@ -4577,7 +4577,7 @@ confirmDelete:
   protip: 'ProTip: Hold the {key} key while clicking Delete to bypass this confirmation.'
   confirmAction: Delete
   cancelAction: Cancel
-  largeDeleteText: '{key} and {othersCount} others'
+  largeDeleteText: '"{key}" and {othersCount} others'
   systemChartNote: 'You are removing a system app. It may cause issues with the cluster if it is removed.'
   globalRoleNote: |
     {count, plural,

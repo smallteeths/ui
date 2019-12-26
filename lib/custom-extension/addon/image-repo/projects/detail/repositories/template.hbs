@@ -4,11 +4,11 @@
 <section class="header has-tabs clearfix pb-0">
   <ul class="tab-nav">
     <li>
-      {{#link-to "image-repo.projects.detail.repositories" model.imageList.projectId model.currentUserRoleId}}镜像仓库{{/link-to}}
+      {{#link-to "image-repo.projects.detail.repositories" model.imageList.projectId model.currentUserRoleId}}{{t "harborConfig.tab.store"}}{{/link-to}}
     </li>
     {{#if (or isSystemAdmin isMember)}}
     <li>
-      {{#link-to "image-repo.projects.detail.members" model.imageList.projectId model.currentUserRoleId}}成员{{/link-to}}
+      {{#link-to "image-repo.projects.detail.members" model.imageList.projectId model.currentUserRoleId}}{{t "harborConfig.tab.member"}}{{/link-to}}
     </li>
     {{/if}}
     {{!-- <li>
@@ -16,17 +16,17 @@
     </li> --}}
     {{#if (or isProjectAdmin isSystemAdmin)}}
     <li>
-      {{#link-to "image-repo.projects.detail.labels" model.imageList.projectId model.currentUserRoleId}}标签{{/link-to}}
+      {{#link-to "image-repo.projects.detail.labels" model.imageList.projectId model.currentUserRoleId}}{{t "harborConfig.tab.tag"}}{{/link-to}}
     </li>
     {{/if}}
     {{#if (or isSystemAdmin isMember)}}
     <li>
-      {{#link-to "image-repo.projects.detail.logs" model.imageList.projectId model.currentUserRoleId}}日志{{/link-to}}
+      {{#link-to "image-repo.projects.detail.logs" model.imageList.projectId model.currentUserRoleId}}{{t "harborConfig.tab.log"}}{{/link-to}}
     </li>
     {{/if}}
     {{#if (or isSystemAdmin isMember)}}
     <li>
-      {{#link-to "image-repo.projects.detail.configs" model.imageList.projectId model.currentUserRoleId}}访问级别{{/link-to}}
+      {{#link-to "image-repo.projects.detail.configs" model.imageList.projectId model.currentUserRoleId}}{{t "harborConfig.tab.accessLevel"}}{{/link-to}}
     </li>
     {{/if}}
   </ul>
@@ -41,16 +41,16 @@
         }}
           {{#dd.trigger}}
             <div style="height: 30px;display:flex;justify-content:center;align-items:center;margin-right:15px;">
-              <span style="margin-left:14px;">推送镜像</span>
+              <span style="margin-left:14px;">{{t "harborConfig.table.pushImg.btn"}}</span>
               <span style="margin-left:10px;"><i class="icon icon-chevron-down"></i></span>
             </div>
           {{/dd.trigger}}
           {{#dd.content}}
             <div style = "padding:10px 20px;border: 1px solid #ccc;box-shadow: 0 1px 0.125rem rgba(115,115,115,.25);">
-              <div style="padding:8px 5px; font-size:18px">推送镜像</div>
-              <div style="padding:5px">在项目中标记镜像:</div>
+              <div style="padding:8px 5px; font-size:18px">{{t "harborConfig.table.pushImg.title"}}</div>
+              <div style="padding:5px">{{t "harborConfig.table.pushImg.markedImg"}}:</div>
               <div style="padding:5px">{{model.repo.tag}}<span style="margin-left:10px">{{custom-copy-to-clipboard defaultText="" clipboardText=model.repo.tag size="small"}}</span></div>
-              <div style="padding:5px">推送镜像到当前项目:</div>
+              <div style="padding:5px">{{t "harborConfig.table.pushImg.pushImgToProject"}}:</div>
               <div style="padding:5px 5px 8px 5px">{{model.repo.push}}<span style="margin-left:10px">{{custom-copy-to-clipboard clipboardText=model.repo.push size="small"}}</span></div>
             </div>
           {{/dd.content}}

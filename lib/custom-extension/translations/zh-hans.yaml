@@ -31,9 +31,12 @@ imageRepoSection:
       noMatch: 没有Label匹配当前搜索
       noData: 暂无数据
   tagPage:
+    copyDigest: 复制摘要
+    copy: 复制
     table:
       noMatch: 没有TAG匹配当前搜索
       noData: 暂无数据
+      addLabel: 添加标签
     action:
       copyDigest: 复制摘要
       addLabel: 添加标签
@@ -114,6 +117,13 @@ harborConfig:
     creator:
       all: 所有人
       admin: 仅管理员
+    addMember:
+      title: 新建成员
+      username:
+        label: 用户名
+        placeholder: 用户名
+      role:
+        label: 角色
   validate:
     notAdmin: 请使用管理员角色的用户配置Harbor
     addressError: 访问地址错误
@@ -144,7 +154,7 @@ harborConfig:
     projectNameFormatError: "项目名称由小写字符、数字、和._-组成，且至少有两个字符并以字母或数字开头"
     projectNameExist: "项目名称已经存在"
   table:
-    name: 仓库项目名称
+    projectName: 仓库项目名称
     level: 访问级别
     role: 角色
     count: 镜像仓库数
@@ -163,6 +173,26 @@ harborConfig:
     storeStatus:
       public: 公开
       private: 私有
+      message: "当项目设为公开后，任何人都有此项目下镜像的读权限。命令行用户不需要“docker login”就可以拉取此项目下的镜像。"
+    name: 名称
+    tagCount: 标签数
+    downCount: 下载数
+    pushImg:
+      btn: 推送镜像
+      title: 推送镜像
+      markedImg: 在项目中标记镜像
+      pushImgToProject: 推送镜像到当前项目
+    otherOperation:
+      title: 其他操作
+      setRole: 设置角色
+      removeMembers: 移除成员
+    addUser: 添加用户
+    imageTag: 镜像标签
+    size: 大小
+    pullCommand: pull命令
+    author: 作者
+    dockerVersion: Docker版本
+    label: 标签
   btn:
     createProject: 新建仓库项目
   advanced:
@@ -188,6 +218,13 @@ harborConfig:
     description: 标签描述
     btn:
       add: "新建标签"
+  tab:
+    store: 镜像仓库
+    member: 成员
+    copy: 复制
+    tag: 标签
+    log: 日志
+    accessLevel: 访问级别
 
 vlansubnetPage:
   unsupport: "当前集群不支持扁平网络"
@@ -218,13 +255,13 @@ formVlan:
     cidrReq: "CIDR 不能为空"
     cidrFormatError: "CIDR格式错误"
   mode:
-    label: MODE
+    label: 模式
   gateway:
     label: GATEWAY
     placeholder: "例如：192.168.1.1"
     gatewayFormatError: "Gateway IP 格式错误"
   project:
-    label: Project
+    label: 项目
   ipRange:
     label: IP范围
     btn: "添加 IP Range"
@@ -305,3 +342,28 @@ auditLog:
     response: 响应对象
     btn:
       close: 关闭
+  status:
+    200: 成功
+    201: 已创建
+    202: 已接受
+    203: 非授权信息
+    204: 成功
+    205: 重置内容
+    206: 部分内容
+    300: 多种选择
+    301: 永久移动
+    302: 临时移动
+    400: 错误请求
+    401: 未授权
+    403: 禁止
+    404: 未找到
+    405: 方法禁用
+    406: 不接受
+    407: 需要代理授权
+    408: 请求超时
+    500: 服务器内部错误
+    501: 尚未实施
+    502: 错误网关
+    503: 服务不可用
+    504: 网关超时
+    505: HTTP 版本不受支持

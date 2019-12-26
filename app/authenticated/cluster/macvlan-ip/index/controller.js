@@ -42,7 +42,7 @@ const headers = [
   {
     classNames:     'text-right pr-20',
     name:           'creationTimestamp',
-    label:          '创建时间',
+    translationKey: 'generic.created',
     searchField:    false,
     width:          250,
   },

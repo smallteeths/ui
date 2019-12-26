@@ -39,12 +39,12 @@
         </td>
         <td class="text-right pr-20">
           {{date-calendar obj.creationTimestamp}}
-        </td> 
+        </td>
       </tr>
     {{else if (eq kind "nomatch")}}
-      <tr><td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">暂无匹配的数据</td></tr>
+      <tr><td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">{{t "vlansubnetPage.noMatch"}}</td></tr>
     {{else if (eq kind "norows")}}
-      <tr><td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">暂无数据</td></tr>
+      <tr><td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">{{t "vlansubnetPage.noData"}}</td></tr>
     {{/if}}
   {{/custom-table}}
 </section>

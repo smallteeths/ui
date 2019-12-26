@@ -191,6 +191,17 @@ export default Controller.extend({
 
     return arr;
   }),
+  sourceTypes: computed('intl.locale', function() {
+    const intl = get(this, 'intl');
+    let arr = JSON.parse(JSON.stringify(get(this, 'model.selectionResources.operations')));
+
+    arr.unshift({
+      label: intl.t('auditLog.form.type.label'),
+      value: ''
+    });
+
+    return arr;
+  }),
   operations: computed('intl.locale', function() {
     const intl = get(this, 'intl');
 
@@ -199,15 +210,15 @@ export default Controller.extend({
       value: ''
     },
     {
-      label: intl.t('auditLog.form.operation.create'),
+      label: 'Create',
       value: 'Create'
     },
     {
-      label: intl.t('auditLog.form.operation.update'),
+      label: 'Update',
       value: 'Update'
     },
     {
-      label: intl.t('auditLog.form.operation.delete'),
+      label: 'Delete',
       value: 'Delete'
     }]
 
@@ -242,7 +253,7 @@ export default Controller.extend({
       return d;
     }) : [];
   }),
-  fieldPlaceholder: computed('form.field', function() {
+  fieldPlaceholder: computed('intl.locale', 'form.field', function() {
     const f = get(this, 'form.field');
     const fields = get(this, 'searchFields');
 

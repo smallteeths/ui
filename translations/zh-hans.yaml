@@ -4302,7 +4302,7 @@ clusterNew:
     gpu:
       enableGPUManagement:
         label: GPU共享调度（显存单位）
-      nodePort: 
+      nodePort:
         label: 设置GPU扩展调度器使用的NodePort端口
         placeholder: "例如: 1024"
   custom:
@@ -4571,7 +4571,7 @@ confirmDelete:
   protip: '提示: 按住{key}键，同时点击Delete以绕过此确认。'
   confirmAction: 删除
   cancelAction: 取消
-  largeDeleteText: '{key} and {othersCount} others'
+  largeDeleteText: '"{key}" 及 {othersCount} 其他'
   systemChartNote: '您正在删除一个系统应用程序。如果删除该应用程序，可能会导致集群出现问题。'
   globalRoleNote: |
     {count, plural,
@@ -6170,8 +6170,8 @@ formEnvVar:
 
 formGlobalRoles:
   title: 全局角色
-  description: 控制用户管理整个{appName}安装的访问权限。
-  loginError: 用户没有登录权限。Administrator, Standard User或User-Base提供登录权限。
+  description: 控制用户管理整个 {appName} 安装的访问权限。
+  loginError: 用户没有登录权限。管理员、标准用户或基础用户库提供登录权限。
   mode:
     admin:
       label: 管理员
@@ -6180,8 +6180,8 @@ formGlobalRoles:
       label: 标准用户
       detail: 标准用户可以创建新的集群并管理他们已被授权访问的集群和项目。
     userBase:
-      label: User-Base
-      detail: User-Base 用户只有登录访问权限。
+      label: 基础用户
+      detail: 基础用户只有登录访问权限。
     userCreated:
       label: 自定义
       detail: 非Rancher创建的角色。

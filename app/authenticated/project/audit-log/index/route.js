@@ -17,7 +17,6 @@ export default Route.extend({
     const clusterId = project.get('clusterId');
     const pagesize = get(this, 'prefs.tablePerPage');
     const users = get(this, 'globalStore').findAll('user');
-    const intl = get(this, 'intl');
     let operations = [];
     let resources = [];
     const selectionResources = this.auditLog.fetchRancherAuditResources().then((resp) => {
@@ -27,10 +26,6 @@ export default Route.extend({
             value: item.resourceType,
             label: item.resourceType,
           }
-        });
-        operations.unshift({
-          label: intl.t('auditLog.form.type.label'),
-          value: ''
         });
         resources = resp.body.data;
       }
