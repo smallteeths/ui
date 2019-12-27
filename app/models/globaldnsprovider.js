@@ -36,6 +36,13 @@ export default Resource.extend({
         provider: 'alidns'
       });
     }
+
+    if (get(this, 'rdnsProviderConfig')) {
+      setProperties(this, {
+        config:   alias('rdnsProviderConfig'),
+        provider: 'rdns'
+      });
+    }
   },
 
   canEdit: computed('links.update', function() {

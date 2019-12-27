@@ -1,0 +1,56 @@
+<section>
+  {{form-name-description
+    model=config
+    nameDisabled=isEdit
+  }}
+</section>
+<form class="horizontal-form container-fluid text-left" autocomplete="off">
+  <div class="row">
+    <div class="col span-6 mb-0">
+      <label
+        class="acc-label"
+        for="rdns-root-domain"
+      >
+        {{t "globalDnsPage.providersPage.config.root.label"}}
+      </label>
+      {{input
+        classNames="form-control"
+        id="rnds-root-domain"
+        placeholder=(t "globalDnsPage.providersPage.config.root.placeholder")
+        type="text"
+        value=config.rootDomain
+      }}
+    </div>
+    <div class="col span-6 mb-0">
+      <label
+        class="acc-label"
+        for="rdns-secret"
+      >
+        Secret Key
+      </label>
+        {{new-select
+          value=config.rdnsProviderConfig.secret
+          content=secrets
+          prompt="no Secret Key"
+        }}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col span-6">
+      <label
+        class="acc-label"
+        for="rdns-etcd-url"
+      >
+        Etcd Url{{field-required}}
+      </label>
+      {{input
+        classNames="form-control"
+        id="rdns-etcd-url"
+        placeholder="Etcd Url"
+        type="text"
+        value=config.rdnsProviderConfig.etcdUrls
+      }}
+    </div>
+  </div>
+</form>

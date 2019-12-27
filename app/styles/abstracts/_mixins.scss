@@ -180,6 +180,10 @@
   // background-size: contain;
 }
 
+@mixin rdns {
+  background-image: url('images/providers/rdns.svg');
+}
+
 @mixin cloudflare {
   background-image: url('images/providers/cloudflare.svg');
 }
