@@ -199,12 +199,34 @@
               expand=(action expandFn)
             }}
               <div>
-                <label class="acc-label">{{t "clusterNew.rke.network.multusFlannelOptions.flannelInterfaceName"}}</label>
-                {{input
-                  type="text"
-                  value=cluster.rancherKubernetesEngineConfig.network.options.flannel_iface
-                  classNames="form-control"
-                }}
+                <label class="acc-label">
+                  {{t "clusterNew.rke.network.multusFlannelOptions.flannelInterfaceName"}}
+                  {{#if clusterTemplateCreate}}
+                    <ClusterTemplateOverrideToggle
+                      @path="rancherKubernetesEngineConfig.network.options.flannel_iface"
+                      @configVariable={{config.network.options.flannel_iface}}
+                      @addOverride={{action "addOverride"}}
+                      @questions={{model.clusterTemplateRevision.questions}}
+                    />
+                  {{/if}}
+                </label>
+                <CheckOverrideAllowed
+                  @applyClusterTemplate={{applyClusterTemplate}}
+                  @paramName="rancherKubernetesEngineConfig.network.options.flannel_iface"
+                  @clusterTemplateRevision={{model.clusterTemplateRevision.clusterConfig}}
+                  @questions={{model.clusterTemplateRevision.questions}}
+                >
+                  {{#input-or-display
+                    editable=notView
+                    value=config.network.options.flannel_iface
+                  }}
+                    {{input
+                      type="text"
+                      value=cluster.rancherKubernetesEngineConfig.network.options.flannel_iface
+                      classNames="form-control"
+                    }}
+                  {{/input-or-display}}
+                </CheckOverrideAllowed>
               </div>
             {{/accordion-list-item}}
           {{/if}}
@@ -216,12 +238,34 @@
               expand=(action expandFn)
             }}
               <div>
-                <label class="acc-label">{{t "clusterNew.rke.network.multusCanalOptions.canalInterfaceName"}}</label>
-                {{input
-                  type="text"
-                  value=cluster.rancherKubernetesEngineConfig.network.options.canal_iface
-                  classNames="form-control"
-                }}
+                <label class="acc-label">
+                {{t "clusterNew.rke.network.multusCanalOptions.canalInterfaceName"}}
+                {{#if clusterTemplateCreate}}
+                  <ClusterTemplateOverrideToggle
+                    @path="rancherKubernetesEngineConfig.network.options.canal_iface"
+                    @configVariable={{config.network.options.canal_iface}}
+                    @addOverride={{action "addOverride"}}
+                    @questions={{model.clusterTemplateRevision.questions}}
+                  />
+                {{/if}}
+                </label>
+                  <CheckOverrideAllowed
+                    @applyClusterTemplate={{applyClusterTemplate}}
+                    @paramName="rancherKubernetesEngineConfig.network.options.canal_iface"
+                    @clusterTemplateRevision={{model.clusterTemplateRevision.clusterConfig}}
+                    @questions={{model.clusterTemplateRevision.questions}}
+                  >
+                    {{#input-or-display
+                      editable=notView
+                      value=config.network.options.canal_iface
+                    }}
+                    {{input
+                      type="text"
+                      value=cluster.rancherKubernetesEngineConfig.network.options.canal_iface
+                      classNames="form-control"
+                    }}
+                  {{/input-or-display}}
+                </CheckOverrideAllowed>
               </div>
             {{/accordion-list-item}}
           {{/if}}

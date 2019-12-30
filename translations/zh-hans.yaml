@@ -4299,6 +4299,12 @@ clusterNew:
       title: 授权集群访问地址
       detail: '授权集群访问地址可用于直接访问Kubernetes API SERVER，绕过Rancher API代理。'
       label: 授权集群访问地址
+    gpu:
+      enableGPUManagement:
+        label: GPU共享调度（显存单位）
+      nodePort: 
+        label: 设置GPU扩展调度器使用的NodePort端口
+        placeholder: "例如: 1024"
   custom:
     label: 自定义
     shortLabel: 自定义

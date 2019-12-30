@@ -2440,6 +2440,12 @@ clusterNew:
     advanced:
       label: 高級集群選項
       detail: 自定義高級選項
+    gpu:
+      enableGPUManagement:
+        label: GPU共享調度（顯存單位）
+      nodePort:
+        label: 設置GPU擴展調度器使用的NodePort端口
+        placeholder: "例如: 1024"
   custom:
     label: 自定義
     shortLabel: 自定義
