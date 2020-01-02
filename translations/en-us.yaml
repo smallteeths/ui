@@ -6778,6 +6778,7 @@ formSecurity:
     label: NVIDIA GPU Reservation
     placeholder: e.g. 1
     unit: GPUs
+    memUnit: GiB
     shared: Shared
     set: Limit to
   isolation:

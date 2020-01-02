@@ -8,7 +8,8 @@ import layout from './template';
 import { inject as service } from '@ember/service';
 
 const GPU_KEY = 'nvidia.com/gpu';
-const GPU_SHARED_KEY = 'nvidia.com/shared-gpu';
+// const GPU_SHARED_KEY = 'nvidia.com/shared-gpu';
+const GPU_SHARED_KEY = 'rancher.io/gpu-mem';
 
 export default Component.extend({
   intl:  service(),
@@ -38,6 +39,7 @@ export default Component.extend({
   cpuReservationMillis: null,
   // ----------------------------------
   gpuReservation:       null,
+  gpuMemoryGb:          null,
   gpuMode:              'set',
   // set, shared
   limits:               alias('instance.resources.limits'),
@@ -117,7 +119,11 @@ export default Component.extend({
     }
   }),
 
-  updateGpu: observer('gpuReservation', function() {
+  gpuDidChange: observer('gpuReservation', 'gpuMemoryGb', 'gpuMode', function() {
+    next(this, 'updateGpu');
+  }),
+
+  updateGpu: observer('gpuReservation', 'gpuMemoryGb', function() {
     var gpuMode = get(this, 'gpuMode');
     const requests = get(this, 'instance.resources.requests');
     const limits = get(this, 'instance.resources.limits');
@@ -125,8 +131,15 @@ export default Component.extend({
     if (gpuMode === 'shared') {
       delete requests[GPU_KEY];
       delete limits[GPU_KEY];
-      requests[GPU_SHARED_KEY] = '1';
-      limits[GPU_SHARED_KEY] = '1';
+      var gpuMem = get(this, 'gpuMemoryGb');
+
+      if (isNaN(gpuMem) || gpuMem <= 0) {
+        delete requests[GPU_SHARED_KEY];
+        delete limits[GPU_SHARED_KEY];
+      } else {
+        requests[GPU_SHARED_KEY] = `${ gpuMem }`;
+        limits[GPU_SHARED_KEY] = `${ gpuMem }`;
+      }
 
       return;
     }
@@ -254,6 +267,7 @@ export default Component.extend({
     var gpuShared = (get(this, 'instance.resources.limits') || {})[GPU_SHARED_KEY];
 
     if (gpuShared) {
+      set(this, 'gpuMemoryGb', gpuShared);
       set(this, 'gpuMode', 'shared');
     } else {
       set(this, 'gpuReservation', gpu);

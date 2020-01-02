@@ -157,6 +157,12 @@
       {{#input-or-display editable=editing value=gpuDisplayValue classesForDisplay="text-muted form-control-static"}}
         <div class="radio">
           <label>{{radio-button selection=gpuMode value="shared"}} {{t 'formSecurity.gpuReservation.shared'}}</label>
+          <span class="with-input" style="width: 175px;">
+            <div class="input-group input-sm">
+              {{input-integer min="0" step="1" value=gpuMemoryGb disabled=(not-eq gpuMode 'shared') placeholder=(t 'formSecurity.gpuReservation.placeholder')}}
+              <div class="input-group-addon bg-default">{{t 'formSecurity.gpuReservation.memUnit'}}</div>
+            </div>
+          </span>
         </div>
         <div class="radio">
           <label>
