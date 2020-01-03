@@ -6781,7 +6781,7 @@ formSecurity:
     placeholder: e.g. 1
     unit: GPUs
     memUnit: GiB
-    shared: Shared
+    shared: Shared GPU Memory
     set: Limit to
   isolation:
     label: Isolation

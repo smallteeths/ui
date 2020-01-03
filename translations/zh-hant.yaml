@@ -4245,7 +4245,7 @@ formSecurity:
     placeholder: '例如: 1'
     unit: GPUs
     memUnit: GiB
-    shared: 共享
+    shared: 共享GPU内存
     set: 限制為
   isolation:
     label: 隔離
