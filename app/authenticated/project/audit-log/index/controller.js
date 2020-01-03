@@ -211,7 +211,7 @@ export default Controller.extend({
 
     return arr;
   }),
-  sourceTypes: computed('intl.locale', function() {
+  sourceTypes: computed('intl.locale', 'model.selectionResources.operations', function() {
     const intl = get(this, 'intl');
     let arr = JSON.parse(JSON.stringify(get(this, 'model.selectionResources.operations')));
 

@@ -179,7 +179,7 @@ harborConfig:
     downCount: Down Count
     pushImg:
       btn: PUSH
-      title: Puse Image
+      title: Push Image
       markedImg: Mark the image in the project
       pushImgToProject: Push the image to the current project
     otherOperation:
