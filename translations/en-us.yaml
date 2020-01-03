@@ -6161,6 +6161,8 @@ formResourceQuota:
     services: Services
     servicesLoadBalancers: Services Load Balancers
     servicesNodePorts: Services Node Ports
+    requestsGpuMemory: GPU Memory
+    requestsGpuCount: GPU Count
 
 formEnvVar:
   title: Environment Variables

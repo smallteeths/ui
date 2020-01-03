@@ -6153,6 +6153,8 @@ formResourceQuota:
     services: 服务
     servicesLoadBalancers: 服务负载均衡器
     servicesNodePorts: 服务节点端口
+    requestsGpuMemory: GPU Memory
+    requestsGpuCount: GPU Count
 
 formEnvVar:
   title: 环境变量
