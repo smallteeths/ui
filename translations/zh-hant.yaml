@@ -3205,6 +3205,7 @@ dangerZone:
     'engine-newest-version': '當前Rancher Server支持的最新Docker版本，不支持的版本或比此Docker版本新的將被標記為未測試。'
     'engine-supported-range': '當前Rancher Server支持的Docker版本範圍，不滿足此範圍的Docker版本將在UI中標記為不受支持。'
     'ingress-ip-domain': '用於自動生成Ingress主機名的通配域名。<入口名>.<命名空間名>.<入口控制器的IP地址>將被添加到域名中。'
+    'rdns-base-url': '配置RDNS服務地址。'
     'server-url': '默認的{appName} Server訪問地址，必須是HTTPS。集群中的所有主機都必須能夠訪問此地址。'
     'system-default-registry': '用於RKE部署系統服務時鏡像的拉取，其他服務拉取鏡像不生效。'
     'auditlog-server-url': '配置审计日志服务地址'
