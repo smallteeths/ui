@@ -9895,8 +9895,8 @@ action:
   backupEtcd: 备份
   backupEtcdMessage:
     success:
-      title: 备份成功
-      message: "已备份{ clusterId }到{ backupType }存储。"
+      title: 开始备份
+      message: "已备份{ clusterId }到{ backupType }存储"
   clone: 克隆
   cloneRevision: 克隆修订
   console: 打开控制台
