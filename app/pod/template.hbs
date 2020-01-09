@@ -63,7 +63,7 @@
     {{/if}}
     {{#if model.displayMacvlanIp}}
       <div class="text-small text-muted clip"> 
-      {{#copy-inline clipboardText=model.displayMacvlanIp size="small"}}
+      {{#copy-inline clipboardText=model.macvlanIpWithoutType size="small"}}
         {{format-ip model.displayMacvlanIp}}
       {{/copy-inline}}
       </div>

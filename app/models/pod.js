@@ -124,7 +124,18 @@ var Pod = Resource.extend(Grafana, DisplayImage, {
     return get(this, 'status.podIp') || null;
   }),
 
-  displayMacvlanIp: computed('annotations.[]', function() {
+  displayMacvlanIp: computed('macvlanIpWithoutType', function() {
+    const labels = get(this, 'labels');
+    const type = labels && labels['macvlan.panda.io/macvlanIpType'];
+    let macvlanIpWithoutType = get(this, 'macvlanIpWithoutType');
+
+    if (!macvlanIpWithoutType){
+      return ''
+    }
+
+    return `${ macvlanIpWithoutType }${ type ? ` (${ type })` : '' }`;
+  }),
+  macvlanIpWithoutType: computed('annotations.[]', function() {
     const a = get(this, 'annotations');
     const networkStatusStr = a && a['k8s.v1.cni.cncf.io/networks-status'];
 
@@ -140,10 +151,8 @@ var Pod = Resource.extend(Grafana, DisplayImage, {
     }
     if (networkStatus) {
       const macvlan = networkStatus.find((n) => n.interface === 'eth1');
-      const labels = get(this, 'labels');
-      const type = labels && labels['macvlan.panda.io/macvlanIpType'];
 
-      return `${ (macvlan && macvlan.ips && macvlan.ips[0]) || '' }${ type ? ` (${ type })` : '' }`;
+      return `${ (macvlan && macvlan.ips && macvlan.ips[0]) || '' }`;
     }
 
     return '';
