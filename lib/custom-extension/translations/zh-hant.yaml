@@ -118,7 +118,7 @@ harborConfig:
     notAdmin: 请使用管理员角色的用户配置Harbor
     addressError: 访问地址错误
     unableAccess: 无法访问Harbor服务
-    HarborInfoError: "Harbor地址、用户名或密码错误"
+    harborInfoError: "Harbor地址、用户名或密码错误"
     numAndReq: "令牌过期时间必填，且为数字"
     formatError: "密码长度在8到20之间且需包含至少一个大写字符，一个小写字符和一个数字。"
     confirmError: "新密码和确认密码必须相同"
@@ -181,6 +181,8 @@ harborConfig:
     titleEdit: 編輯標簽
     name:
       label: 標簽名稱
+      nameReq: 请输入標簽名稱
+      nameExist: 標簽名稱已经存在
     color:
       label: 顏色
     description: 標簽描述

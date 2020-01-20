@@ -128,7 +128,7 @@ harborConfig:
     notAdmin: "Configure Harbor with the user of the administrator role"
     addressError: "Access address error"
     unableAccess: "Unable to access Harbor services"
-    HarborInfoError: "Harbor Website address、 username or password incorrect"
+    harborInfoError: "Harbor Website address、 username or password incorrect"
     numAndReq: "Token expiration time must be filled, and is a number"
     formatError: "Passwords should be between 8 and 20 in length and contain at least one uppercase character, one lowercase character, and one number"
     confirmError: "The new password and the confirmation password must be the same"
@@ -185,7 +185,7 @@ harborConfig:
     otherOperation:
       title: Others
       setRole: Set Role
-      removeMembers: Remove Members
+      removeMembers: Remove
     addUser: Add User
     imageTag: Image Tag
     size: Size
@@ -211,6 +211,8 @@ harborConfig:
     titleEdit: "Edit Tag"
     name:
       label: "Tag Name"
+      nameReq: '"Tag Name" cannot be empty'
+      nameExist: '"Tag Name" already existed '
     color:
       label: Color
     description: "Tag Description"
@@ -223,7 +225,6 @@ harborConfig:
     tag: "Tag"
     log: "Log"
     accessLevel: "Access Level"
-
 
 vlansubnetPage:
   unsupport: "The current cluster does not support flat networks."
