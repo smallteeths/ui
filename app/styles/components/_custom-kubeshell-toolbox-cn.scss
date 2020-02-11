@@ -1,0 +1,84 @@
+.custom-kubeshell-toolbox-modal-popover{
+  &.not-select{
+    -moz-user-select:none;
+    -webkit-user-select:none;
+    -ms-user-select:none;
+    -khtml-user-select:none;
+    user-select:none;
+  }
+  &.dis-none{
+    display: none;
+  }
+  &.dis-block{
+    display: block;
+  }
+  &.dis-inline-block{
+    display: inline-block;
+  }
+}
+.custom-kubeshell-toolbox-popover{
+  background-color: #FFFFFF;
+  box-shadow: 0 0 4px 2px rgba(0,0,0,0.10);
+  font-size: 12px;
+  position: absolute;
+  bottom: 0;
+  right: 40px;
+  width: 160px;
+  height: 80px;
+}
+.custom-kubeshell-toolbox-popover__reference{
+  cursor: pointer;
+  background: #355599;
+  color: #fff;
+  height: 80px;
+  width: 30px;
+  overflow: hidden;
+  text-align: center;
+  span{
+    display: inline-block;
+    margin: -3px auto 0;
+    line-height: 14px;
+    width: 12px;
+    font-size: 12px;
+    word-break:break-all;
+    font-family: Serif;
+  }
+  svg{
+    margin-top: 8px;
+    margin-bottom: 2px;
+  }
+}
+
+.modal-open{
+  .custom-kubeshell-toolbox-popover{
+    display: inline-block;
+  }
+}
+
+.modal-closed{
+  .custom-kubeshell-toolbox-popover{
+    display: none;
+  }
+}
+.en-us .custom-kubeshell-toolbox-popover__reference span{
+    line-height: 12px;
+}
+.custom-kubeshell-toolbox-button {
+  line-height: 40px;
+  height: 40px;
+  width: 100%;
+  display: inline-block;
+  white-space: nowrap;
+  cursor: pointer;
+  background: #fff;
+  font-weight: 500;
+  font-size: 12px;
+}
+.custom-kubeshell-toolbox-button--info {
+  color: #555555;
+  background-color: #ffffff;
+  &:hover {
+    background-color: rgba(53,85,153,0.10);
+    color: #355599;
+  }
+}

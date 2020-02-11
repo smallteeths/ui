@@ -2458,6 +2458,7 @@ k8sPage:
         将配置保存到<code>~/.kube/config</code>
       downloadText: |
         然后下载<a href="https://www.cnrancher.com/docs/rancher/v2.x/cn/install-prepare/download/kubernetes/" target="_blank"><code>kubectl</code></a>(如有需要)安装并运行。
+  toolbox: 工具箱
 
 loginPage:
   greeting: "您好！<br>欢迎使用{appName}"

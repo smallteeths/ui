@@ -17,6 +17,8 @@
 {{/unless}}
 <main class="clearfix {{if sidebar "sidebar"}}">
   {{outlet}}
+
+  {{custom-kubeshell-toolbox}}
 </main>
 {{#unless isPopup}}
   {{#if sidebar}}

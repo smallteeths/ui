@@ -2467,6 +2467,7 @@ k8sPage:
         Put this into <code>~/.kube/config</code>:
       downloadText: |
         Then <a href="{downloadUrl}" target="_blank">download</a> (if needed) and run <code>kubectl</code>
+  toolbox: TOOL
 
 loginPage:
   greeting: "Howdy!<br><span>Welcome to {appName}</span>"

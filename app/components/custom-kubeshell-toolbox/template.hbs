@@ -1,0 +1,36 @@
+<div class="custom-kubeshell-toolbox-popover__reference">
+  <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <!-- Generator: Sketch 60 (88103) - https://sketch.com -->
+      <title>{{t "k8sPage.toolbox"}}</title>
+      <desc>Created with Sketch.</desc>
+      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g transform="translate(-1416.000000, -588.000000)" fill="#FFFFFF" fill-rule="nonzero">
+              <g transform="translate(1409.000000, 580.000000)">
+                  <g>
+                      <g id="wrench" transform="translate(5.000000, 6.000000)">
+                          <path d="M17.2909004,4.52226953 C17.2808846,4.50423889 17.2668625,4.48620825 17.2508373,4.47218442 C17.1506796,4.37201419 16.9884241,4.37201419 16.8882665,4.47218442 L13.4368326,7.92405042 L12.0766913,6.56373875 L15.5301282,3.10986934 C15.5461535,3.0938421 15.5581724,3.07781487 15.5701913,3.05978423 C15.6423049,2.93757655 15.6022418,2.781311 15.4800494,2.70918843 C13.5129525,1.54721381 10.9368968,1.81366661 9.24423191,3.50454003 C7.90211892,4.84682107 7.4574188,6.75005537 7.91213469,8.46096284 L2.04289432,14.3309381 C1.98279971,14.3910402 1.98680602,14.4892071 2.04890379,14.5513126 L5.44825563,17.9510901 C5.51035339,18.0131956 5.61051108,18.0172024 5.66860254,17.9571003 L11.5358397,12.0891284 C13.2485362,12.5459047 15.1515322,12.1031523 16.4956483,10.7588678 C18.1863101,9.06599101 18.4527295,6.48961278 17.2909004,4.52226953 Z M15.4760431,9.73713152 C14.3122108,10.9011096 12.5654608,11.1254909 11.1772752,10.4102754 L11.0009977,10.586575 L10.9989946,10.5845716 L5.51035339,16.0759035 L3.92385566,14.4892071 L8.53311234,9.87937324 C8.53311234,9.87937324 8.53311234,9.88137665 8.53511549,9.88137665 L9.59278065,8.82357906 C8.87765478,7.43521972 9.10200799,5.68825097 10.2658403,4.52427294 C11.0510766,3.73893836 12.1107449,3.37632214 13.1503816,3.45245151 L10.4881904,6.11297273 C10.2377961,6.3633983 10.2377961,6.77008941 10.4881904,7.02051498 L12.9821167,9.51475362 C13.2325109,9.76517919 13.6391511,9.76517919 13.8895454,9.51475362 L16.5497335,6.85423241 C16.6238502,7.89199595 16.2612793,8.95380035 15.4760431,9.73713152 Z" id="形状"></path>
+                      </g>
+                  </g>
+              </g>
+          </g>
+      </g>
+  </svg>
+  <span>{{t "k8sPage.toolbox"}}</span>
+</div>
+<div class="custom-kubeshell-toolbox-popover">
+  <div class="custom-kubeshell-toolbox-popover__body">
+    <div
+      class="custom-kubeshell-toolbox-button custom-kubeshell-toolbox-button--info"
+      onClick={{action "kubectl" allowedKeys="meta"}}>
+      <i class="icon icon-terminal f14 mr-5 ml-15"></i>
+      <span>{{t "k8sPage.shell.button"}}</span>
+    </div>
+    <div
+      class="custom-kubeshell-toolbox-button custom-kubeshell-toolbox-button--info"
+      {{action "kubeconfig"}}>
+      <i class="icon icon-file f14 mr-5 ml-15"></i>
+      <span>{{t "k8sPage.configFile.button"}}</span>
+    </div>
+  </div>
+  <div class="custom-kubeshell-toolbox-popover__tip"></div>
+</div>
