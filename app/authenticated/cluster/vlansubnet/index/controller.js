@@ -190,7 +190,11 @@ export default Controller.extend({
         });
       }
       set(this, 'showConfirmDeleteModal', true);
-      set(this, 'infos', [{ displayName: nameList }]);
+      set(this, 'infos', [{
+        displayName: nameList,
+        resources:   data,
+        kind:        'MacvlanSubnet'
+      }]);
       set(this, 'selectedData', data);
       set(this, 'deleteTime', timestamp);
       this.getPodInfoList(promisAll, timestamp).then(({ pods, timestamp }) => {
