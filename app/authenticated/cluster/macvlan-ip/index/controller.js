@@ -53,6 +53,7 @@ export default Controller.extend({
   scope:            service(),
   router:           service(),
   session:          service(),
+  prefs:            service(),
   queryParams:      ['subnet'],
   subnet:           '',
   sortBy:           'name',
@@ -71,12 +72,17 @@ export default Controller.extend({
         return;
       }
       const clusterId = get(this, 'scope.currentCluster.id');
-      const limit = get(this, 'prefs.tablePerPage');
+      const limit = get(this, 'prefs.tablePerPage') || 50;
+      const subnet = get(this, 'subnet');
       const p = {
         limit,
         continue: next
       };
 
+      if (subnet) {
+        p.labelSelector = encodeURIComponent(`subnet=${ subnet }`);
+      }
+      set(this, 'loading', true);
       get(this, 'vlansubnet').fetchMacvlanIp(clusterId, p).then((resp) => {
         set(this, 'loading', false);
         const data = [...get(this, 'model.vlansubnets.data')];
