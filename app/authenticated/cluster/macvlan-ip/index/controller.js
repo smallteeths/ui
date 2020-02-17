@@ -85,11 +85,11 @@ export default Controller.extend({
       set(this, 'loading', true);
       get(this, 'vlansubnet').fetchMacvlanIp(clusterId, p).then((resp) => {
         set(this, 'loading', false);
-        const data = [...get(this, 'model.vlansubnets.data')];
+        const data = [...get(this, 'model.macvlanIps.data')];
 
         data.push(...resp.body.data);
 
-        set(this, 'model.vlansubnets', {
+        set(this, 'model.macvlanIps', {
           data,
           continue: resp.body.metadata.continue,
         });
