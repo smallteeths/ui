@@ -21,6 +21,7 @@ export default Route.extend({
         return {
           data: resp.body.data.map((item) => {
             item.displayName = item.name;
+            item.macvlanIpCount = (item.rawData && item.rawData.metadata && item.rawData.metadata.annotations && item.rawData.metadata.annotations.macvlanipCount) || 0;
 
             return item;
           }),

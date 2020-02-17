@@ -29,9 +29,16 @@
           {{check-box nodeId=obj.id}}
         </td>
         <td data-title="{{dt.name}}" class="clip">
-          {{#link-to 'authenticated.cluster.macvlan-ip' (query-params subnet=obj.name) class="clip project-link"}}
-            {{obj.name}}
-          {{/link-to}}
+          {{#tooltip-element
+              type="tooltip-basic"
+              tooltipTemplate='tooltip-static'
+              model=(t 'vlansubnetPage.macvlanIpCount' total=obj.macvlanIpCount)
+              inlineBlock=true
+          }}
+            {{#link-to 'authenticated.cluster.macvlan-ip' (query-params subnet=obj.name) class="clip project-link"}}
+              {{obj.name}}
+            {{/link-to}}
+          {{/tooltip-element}}
         </td>
         <td data-title="{{dt.project}}">
           {{#if obj.project}}
