@@ -18,7 +18,7 @@ const headers = [
   },
   {
     name:           'cidr',
-    label:          'CIDR',
+    label:          'Address',
     sort:           ['cidr'],
     searchField:    'ip',
     width:          150,
