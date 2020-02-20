@@ -1,0 +1,19 @@
+name: SYNC-REPO-2.3
+
+on:
+  create
+
+jobs:
+  repo-sync:
+    runs-on: ubuntu-latest
+    steps:
+    - name: repo-sync
+      uses: kingsd041/git-sync@ksd/v2.0
+      env:
+        SOURCE_REPO: "cnrancher/pandaria-ui"
+        SOURCE_BRANCH: "refs/remotes/source/2.3-fixes-cn"
+        DESTINATION_REPO: "ranchervip/pandaria-ui"
+        DESTINATION_BRANCH: "refs/heads/2.3-fixes-cn"
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      with:
+        args: $SOURCE_REPO $SOURCE_BRANCH $DESTINATION_REPO $DESTINATION_BRANCH
