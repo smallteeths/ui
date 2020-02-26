@@ -1,0 +1,12 @@
+<section>
+  <ClustersMetricsAction
+    @queryAction={{action "query"}}
+    @allowDetail={{false}}
+    @state={{state}}
+  />
+  <MetricsGraph
+    @graphs={{graphs}}
+    @loading={{state.loading}}
+    @noGraphs={{state.noGraphs}}
+  />
+</section>

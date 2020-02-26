@@ -1,6 +1,6 @@
 import Resource from '@rancher/ember-api-store/models/resource';
 import { reference } from '@rancher/ember-api-store/utils/denormalize';
-import { computed, get } from '@ember/object';
+import { computed, get, set } from '@ember/object';
 import { parseHelmExternalId } from 'ui/utils/parse-externalid';
 import StateCounts from 'ui/mixins/state-counts';
 import { inject as service } from '@ember/service';
@@ -200,6 +200,19 @@ const App = Resource.extend(StateCounts, EndpointPorts, {
       },
     ];
   }),
+
+  delete(){
+    if ( this.targetNamespace === 'cattle-global-data' && this.name === 'global-monitoring' ) {
+      const enabled = this.globalStore.all('setting').findBy('id', C.SETTING.GLOBAL_MONITORING_ENABLED)
+
+      if ( enabled ) {
+        set(enabled, 'value', 'false')
+        enabled.save();
+      }
+    }
+
+    return this._super();
+  },
 
   actions: {
     viewYaml(){

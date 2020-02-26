@@ -1,0 +1,55 @@
+<section class="header clearfix">
+  <h1 class="pull-left">
+    {{t "globalMonitoringPage.header"}}
+  </h1>
+</section>
+{{#if model.globalMonitoringClusterUnavailable}}
+  <BannerMessage
+    @message={{t "globalMonitoringPage.globalMonitoringClusterUnavailable" clusterName=model.cluster.displayName}}
+    @color="bg-warning"
+  />
+{{else if model.noClusters}}
+  <BannerMessage
+    @message={{t "globalMonitoringPage.noAvailableClusters"}}
+    @color="bg-warning"
+  />
+{{else}}
+  {{#if (eq settings.globalMonitoringEnabled "false")}}
+    <BannerMessage
+      @color="bg-warning"
+      @message={{t "globalMonitoringPage.disabled" htmlSafe=true}}
+    />
+    <div class="row mt-10 mb-10">
+      <div class="col span-6">
+        <label class="acc-label">
+          {{t "globalMonitoringPage.cluster"}}{{field-required}}
+        </label>
+        <div>
+          <NewSelect
+            @classNames="form-control"
+            @content={{model.clusters}}
+            @value={{clusterId}}
+            @optionValuePath="id"
+            @optionLabelPath="displayName"
+          />
+        </div>
+      </div>
+    </div>
+  {{/if}}
+  {{#unless loading}}
+    <ThanosCatalog
+      @app={{model.app}}
+      @cluster={{model.cluster}}
+      @project={{model.project}}
+      @nsExists={{model.nsExists}}
+      @storageClasses={{model.storageClasses}}
+      @persistentVolumeClaims={{model.persistentVolumeClaims}}
+      @namespace={{model.namespace}}
+      @cancel={{action "cancel"}}
+    />
+  {{else}}
+    <div class="text-center">
+      <i class="icon icon-spinner icon-spin icon-3x"></i>
+    </div>
+  {{/unless}}
+{{/if}}

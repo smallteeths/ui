@@ -1,0 +1,24 @@
+<div class="row text-left">
+  <div class="pull-right pl-20 pt-0 mr-10">
+    <div class="text-left inline-block">
+      <NewSelect
+        @classNames="period"
+        @content={{periods}}
+        @value={{selected}}
+        @localizedLabel={{true}}
+        @disabled={{state.loading}}
+      />
+    </div>
+
+    <button
+      type="button"
+      style="height: 37px;margin-top: -4px;"
+      class="btn bg-primary"
+      disabled={{state.loading}}
+      {{action "refresh"}}
+    >
+      <span><i class="icon icon-refresh"></i></span>
+    </button>
+  </div>
+</div>
+

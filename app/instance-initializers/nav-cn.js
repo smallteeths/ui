@@ -551,6 +551,15 @@ const rootNav = [
         resourceScope:  'global',
         initExpand:     'global-admin.global-dns.providers'
       },
+      {
+        id:             'global-monitoring',
+        localizedLabel: 'nav.admin.globalMonitoring',
+        route:          'global-admin.global-monitoring',
+        resourceScope:  'global',
+        condition() {
+          return !!get(this, 'access.admin');
+        }
+      },
       // {
       //   id:             'global-registry',
       //   localizedLabel: 'nav.admin.globalRegistry',

@@ -20,6 +20,7 @@ export default Resource.extend(Grafana, ResourceUsage, {
   intl:        service(),
   router:      service(),
   scope:       service(),
+  settings:    service(),
 
   clusterRoleTemplateBindings: hasMany('id', 'clusterRoleTemplateBinding', 'clusterId'),
   etcdbackups:                 hasMany('id', 'etcdbackup', 'clusterId'),
@@ -369,6 +370,10 @@ export default Resource.extend(Grafana, ResourceUsage, {
       || get(this, 'isClusterScanDown');
   }),
 
+  isGlobalMonitoringCluster: computed('settings.globalMonitoringClusterId', function() {
+    return this.settings.globalMonitoringClusterId === this.id;
+  }),
+
   unhealthyComponents: computed('componentStatuses.@each.conditions', function() {
     return (get(this, 'componentStatuses') || [])
       .filter((s) => !(s.conditions || []).any((c) => c.status === 'True'));
@@ -589,6 +594,15 @@ export default Resource.extend(Grafana, ResourceUsage, {
     return promise.then((/* resp */) => {
       if (get(this, 'scope.currentCluster.id') === get(this, 'id')) {
         get(this, 'router').transitionTo('global-admin.clusters');
+      }
+
+      if ( this.isGlobalMonitoringCluster) {
+        const enabled = this.globalStore.all('setting').findBy('id', C.SETTING.GLOBAL_MONITORING_ENABLED)
+
+        if ( enabled ) {
+          set(enabled, 'value', 'false')
+          enabled.save();
+        }
       }
     });
   },

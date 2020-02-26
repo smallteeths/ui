@@ -1358,6 +1358,7 @@ clusterTemplateRevisionUpgradeNotification:
 
 clustersPage:
   header: Clusters
+  metricsHeader: Metrics
   newCluster: Add Cluster
   newTemplate: Add Template
   newClusterName: "Add Cluster: {name}"
@@ -1659,6 +1660,17 @@ metricsAction:
     30d: 30 days
 
 metrics:
+  global-cluster-cpu-usage: Cluster CPU Utilization Top 5
+  global-cluster-memory-usage: Cluster Memory Utilization Top 5
+  global-cluster-disk-usage: Cluster Disk Utilization Top 5
+  global-node-cpu-usage: Node CPU Utilization Top 5
+  global-node-memory-usage: Node Memory Utilization Top 5
+  global-node-disk-usage: Node Disk Utilization Top 5
+  global-pod-unhealthy: Cluster Unhealthy Pods Top 5
+  global-pod-unschedulable: Cluster Unschedulable Pods Top 5
+  global-pod-restart: Cluster Pods Restart Top 5
+  global-pod-cpu-usage: Pod CPU Utilization Top 5
+  global-pod-memory-usage: Pod Memory Utilization Top 5
   apiserver-request-count: API Server Request Rate
   apiserver-request-latency: API Server Request Latency
   cluster-cpu-load: Load Average
@@ -1987,6 +1999,90 @@ destinationRulePage:
     subsets:
       label: Subsets
 
+globalMonitoringPage:
+  header: Global Monitoring (Experimental)
+  cluster: Global Monitoring Cluster
+  noAvailableClusters: No active clusters. Please add a cluster first.
+  enabled: "Global Monitoring is enabled. You can query your metrics across multiple clusters if cluster monitoring <code>v0.0.7</code> or above enabled inside the clusters."
+  disabled: "Global Monitoring is not enabled yet. Please click Enable button to enable it. You will be able to query your metrics across multiple clusters if cluster monitoring <code>v0.0.7</code> or above enabled inside the clusters."
+  notReady: Installing Global Monitoring into the system project of global monitoring cluster...
+  updating: Updating Global Monitoring in the system project of global monitoring cluster...
+  version: Global Monitoring Version
+  disable: Disable
+  noTemplate: Failed to load global monitoring catalog templates.
+  confirmDisable: "Are you sure?  Click again to disable global monitoring"
+  enableActionLabel: Enable
+  globalMonitoringClusterUnavailable: Cluster {clusterName} is unavailable.
+  s3Warning: Thanos sidecar in each cluster requires the S3 crednetials. So cluster owners will also be able to see the S3 crednetials in the System projects.
+  customAnswers:
+    title: Custom Answers
+    detail: Configure custom answers.
+  nodeSelector:
+    addSelectorLabel: Add Selector
+    helpText: Select the nodes where {component} workloads will be scheduled to
+  links:
+    grafana:
+      label: Grafana UI
+    globalMonitoring:
+      label: Global Dashboard
+    thanos:
+      label: Thanos UI
+  thanos:
+    title: Thanos Query
+    detail: Query Prometheus metrics across multiple clusters.
+    serviceType:
+      label: Thanos Query UI Service
+  store:
+    title: Object Storage
+    detail: Store Prometheus metrics across multiple clusters to S3 for unlimited time.
+    enabled:
+      label: Store Prometheus metrics to S3
+    s3:
+      bucketName:
+        label: S3 Bucket Name
+        placeholder: "e.g. backups"
+      endpoint:
+        label: S3 Region Endpoint
+        placeholder: "e.g. s3.us-west-2.amazonaws.com"
+      accessKey:
+        label: S3 Access Key
+        placeholder: Your AWS access key
+      secretKey:
+        label: S3 Secret Key
+        placeholder: Your AWS secret key
+        provided: Provided
+  grafana:
+    title: Global Dashboard
+    detail: Global Grafana and {appName} Global Dashboard configuration.
+    enablePersistence:
+      label: Enable Persistent Storage for Grafana
+    enableGrafanaSidecar:
+      label: Enable Grafana Dashboard Provisioning Sidecar
+    size:
+      label: Grafana Persistent Volume Size
+      placeholder: e.g. 10Gi
+    serviceType:
+      label: Grafana UI Service
+    storageClass:
+      label: Default StorageClass for Grafana
+  svc:
+    clusterIp: "{appName} Proxy"
+    nodePort: NodePort
+    loadBalancer: L4 Load Balancer
+  insufficientSize:
+    total:
+      cpu: Please make sure you have at least {minCpu} milli CPUs available to {action} Global Monitoring.
+      memory: Please make sure you have at least {minMemory} MiB of memory available to {action} Global Monitoring.
+      all: Please make sure you have at least {minCpu} milli CPUs and {minMemory} MiB of memory available to {action} Global Monitoring.
+    workload:
+      cpu: Please make sure you have at least one node with {cpu} milli CPUs available to deploy {component} workload.
+      memory: Please make sure you have at least one node with {memory} MiB of memory available to deploy {component} workload.
+      all: Please make sure you have at least one node with {cpu} milli CPUs and {memory} MiB of memory available to deploy {component} workload.
+    selectors:
+      cpu: Please make sure you have at least one node matches node selectors with {cpu} milli CPUs available to enable {component} workload.
+      memory: Please make sure you have at least one node matches node selectors with {memory} MiB of memory available to enable {component} workload.
+      all: Please make sure you have at least one node matches node selectors with {cpu} milli CPUs and {memory} MiB of memory available to enable {component} workload.
+      unsupported: 'Node selector with value "true", "false" or number is not supported'
 globalRegistryPage:
   header: Global Registry
   enabled: Registry is enabled. Click <a href="{url}/registry" target="_blank" rel="nofollow noopener noreferrer">here</a> to open Harbor UI in a new tab.
@@ -9613,6 +9709,7 @@ nav:
     globalDns: Global DNS
     globalDnsEntries: Global DNS Entries
     globalDnsProviders: Global DNS Providers
+    globalMonitoring: Global Monitoring
     globalRegistry: Global Registry
     multiClusterApps: Apps
     security:

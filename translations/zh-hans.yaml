@@ -1356,6 +1356,7 @@ clusterTemplateRevisionUpgradeNotification:
 
 clustersPage:
   header: 集群列表
+  metricsHeader: 指标
   newCluster: 添加集群
   newTemplate: 添加模板
   newClusterName: "添加集群: {name}"
@@ -1509,8 +1510,6 @@ clusterDashboard:
       title: k3S节点参数
       detail: 当前节点的K3S参数的只读列表。
       noArgs: 没有节点参数
-
-
 ingressResponse:
   host: 主机
   path: 路径
@@ -1643,23 +1642,69 @@ metricsAction:
     label: 结束时间
   periods:
     custom: 自定义时间段
-    5m: 5分钟
-    1h: 1小时
-    6h: 6小时
-    24h: 24小时
-    7d: 7天
-    30d: 30天
-
+    5m: 5 分钟
+    1h: 1 小时
+    6h: 6 小时
+    24h: 24 小时
+    7d: 7 天
+    30d: 30 天
 metrics:
-  apiserver-request-count: API Server请求速率
-  apiserver-request-latency: API Server请求延迟
-  cluster-cpu-load: 集群负载
   cluster-cpu-usage: CPU使用率
-  cluster-disk-io: 磁盘I/O
-  cluster-fs-usage-percent: 磁盘使用率
+  cluster-cpu-load: 集群负载
   cluster-memory-usage: 内存使用率
+  cluster-fs-usage-percent: 磁盘使用率
+  cluster-disk-io: 磁盘I/O
   cluster-network-io: 网络I/O
   cluster-network-packet: 网络数据包
+  etcd-db-bytes-sum: 数据库大小
+  etcd-grpc-client: GRPC客户端流量
+  etcd-peer-traffic: 传输流量
+  etcd-raft-proposals: Raft提议
+  etcd-rpc-rate: RPC速率
+  etcd-stream: 活动流
+  etcd-sync-duration: 磁盘同步周期
+  global-cluster-cpu-usage: 集群CPU使用量Top 5
+  global-cluster-memory-usage: 集群内存使用量Top 5
+  global-cluster-disk-usage: 集群磁盘使用量Top 5
+  global-node-cpu-usage: 节点CPU使用量Top 5
+  global-node-memory-usage: 节点内存使用量Top 5
+  global-node-disk-usage: 节点磁盘使用量Top 5
+  global-pod-unhealthy: 集群异常Pod数量Top 5
+  global-pod-unschedulable: 集群不可调度Pod数量Top 5
+  global-pod-restart: 集群Pod重启次数Top 5
+  global-pod-cpu-usage: Pod CPU使用量Top 5
+  global-pod-memory-usage: Pod 内存使用量Top 5
+  apiserver-request-count: API Server请求速率
+  apiserver-request-latency: API Server请求延迟
+  scheduler-e-2-e-scheduling-latency-seconds-quantile: 调度器e2e调度延迟
+  scheduler-pod-unscheduler: 调度失败的Pod
+  scheduler-total-preemption-attempts: 调度器尝试调度次数
+  controllermanager-queue-depth: 控制器队列深度
+  ingresscontroller-nginx-connection: Ingress控制器连接数
+  ingresscontroller-request-process-time: Ingress控制器请求处理时长
+  node-cpu-load: 节点负载
+  node-cpu-usage: CPU使用率
+  node-memory-usage: 内存使用率
+  node-fs-usage-percent: 磁盘使用率
+  node-disk-io: 磁盘I/O
+  node-network-io: 网络I/O
+  node-network-packet: 网络数据包
+  etcd-leader-change: Leader变更
+  etcd-disk-operate: 磁盘操作
+  fluentd-buffer-queue-length: Fluentd缓存区队列长度
+  fluentd-output-errors: Fluentd输出错误速率
+  fluentd-output-record-number: Fluentd输出速率
+  fluentd-input-record-number: Fluentd输入速率
+  workload-cpu-usage: CPU
+  workload-disk-io: '磁盘I/O'
+  workload-memory-usage-bytes-sum: 内存
+  workload-network-io: '网络I/O'
+  workload-network-packet: 网络数据包
+  pod-cpu-usage: CPU
+  pod-disk-io: '磁盘I/O'
+  pod-memory-usage-bytes-sum: 内存
+  pod-network-io: 网络I/O
+  pod-network-packet: 网络数据包
   container-cpu-usage: CPU
   container-disk-io: '磁盘I/O'
   container-memory-usage-bytes-sum: 内存
@@ -1978,6 +2023,90 @@ destinationRulePage:
     subsets:
       label: Subsets
 
+globalMonitoringPage:
+  header: 全局监控（实验性）
+  cluster: 全局监控所在集群
+  noAvailableClusters: 没有可用集群。请先添加一个集群。
+  enabled: "全局监控已启用。如果在集群中启用了集群监控并且版本不低于<code>v0.0.7</code>，你可以通过全局监控查看多个集群的指标。"
+  disabled: "全局监控未启用。点击启用来激活全局监控。 如果在集群中启用了集群监控并且版本不低于<code>v0.0.7</code>，你将可以通过全局监控查看多个集群的指标。"
+  notReady: 正在安装全局监控到指定集群的系统项目里...
+  updating: 正在更新全局监控组件...
+  noTemplate: 无法加载全局监控模版
+  version: 全局监控版本
+  disable: 禁用
+  confirmDisable: "你确定吗? 再次单击将禁用全局监控"
+  enableActionLabel: 启用
+  globalMonitoringClusterUnavailable: 集群 {clusterName} 不可用。
+  s3Warning: 每个集群中的Thanos sidecar都需要S3的密钥。所以这些集群的管理员也可以在集群的系统项目里看到你所配置的S3的密钥。
+  customAnswers:
+    title: 自定义应答
+    detail: 配置自定义的应答。
+  nodeSelector:
+    addSelectorLabel: 添加选择器
+    helpText: 选择要运行{component}工作负载的节点。
+  links:
+    grafana:
+      label: Grafana UI
+    globalMonitoring:
+      label: 监控大屏
+    thanos:
+      label: Thanos UI
+  thanos:
+    title: Thanos Query
+    detail: 查询多集群Prometheus指标的组件。
+    serviceType:
+      label: Thanos Query UI 服务类型
+  store:
+    title: 对象存储
+    detail: 将多集群的Prometheus指标存储到S3上。
+    enabled:
+      label: 存储指标到S3
+    s3:
+      bucketName:
+        label: S3存储桶名称
+        placeholder: "例如：backups"
+      endpoint:
+        label: S3区域地址
+        placeholder: "例如：s3.us-west-2.amazonaws.com"
+      accessKey:
+        label: S3 Access Key
+        placeholder: 你的AWS access key
+      secretKey:
+        label: S3 Secret Key
+        placeholder: 你的AWS secret key
+        provided: 已提供
+  grafana:
+    title: 监控大屏
+    detail: 全局Grafana和{appName}监控大屏的配置。
+    enablePersistence:
+      label: Grafana启用持久化存储
+    enableGrafanaSidecar:
+      label: Grafana启用初始化Sidecar
+    size:
+      label: Grafana持久化存储大小
+      placeholder: '例如: 10Gi'
+    serviceType:
+      label: Grafana UI SVC类型
+    storageClass:
+      label: Grafana默认存储类
+  svc:
+    clusterIp: "{appName}代理"
+    nodePort: NodePort
+    loadBalancer: 4层负载均衡
+  insufficientSize:
+    total:
+      cpu: 请确保至少有{minCpu} milli cpu可供全局监控使用。
+      memory: 请确保您至少有{minMemory} MiB的内存可供全局监控使用。
+      all: 请确保至少有{minCpu} milli cpu和{minMemory} MiB内存可供全局监控使用。
+    workload:
+      cpu: 请确保至少有一个具有{cpu} milli cpu的节点可用来部署{component}工作负载。
+      memory: 请确保您至少有一个具有{memory} MiB内存的节点可用来部署{component}工作负载。
+      all: 请确保至少有一个节点具有{cpu} milli cpu和{memory} MiB内存，可用来部署{component}工作负载。
+    selectors:
+      cpu: 请确保至少有一个节点将节点选择器与{cpu} milli cpu匹配，以启用{component}工作负载。
+      memory: 请确保至少有一个节点将节点选择器与{memory} MiB内存匹配，以启用{component}工作负载。
+      all: 请确保至少有一个节点与{cpu} milli cpu和{memory} MiB内存匹配，以启用{component}工作负载。
+      unsupported: '不支持值为“true”、“false”或number的节点选择器'
 globalRegistryPage:
   header: 全局镜像库
   enabled: 镜像库已启用。点击<a href="{url}/registry" target="_blank" rel="nofollow noopener noreferrer">这里</a>在新页面中打开Harbor UI。
@@ -9831,6 +9960,7 @@ nav:
     globalDnsEntries: 全局DNS服务
     globalDnsProviders: 全局DNS提供商
     globalRegistry: 全局镜像库
+    globalMonitoring: 全局监控
     multiClusterApps: 多集群应用
     security:
       accounts: 用户

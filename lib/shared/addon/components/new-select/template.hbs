@@ -12,7 +12,7 @@
   {{#each ungroupedContent as |item|}}
     <option value="{{get item optionValuePath}}" selected={{eq value (get item optionValuePath)}} disabled={{get item optionDisabledPath}}>
       {{#if localizedLabel}}
-        {{t (get item optionLabelPath)}}
+        {{t (get item optionLabelPath) appName=settings.appName}}
       {{else if localizedHtmlLabel}}
         {{t (get item optionLabelPath) htmlSafe=true}}
       {{else}}

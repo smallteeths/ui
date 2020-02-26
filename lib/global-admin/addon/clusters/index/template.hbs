@@ -1,11 +1,59 @@
-<section class="header clearfix">
-  <h1 class="pull-left">
-    {{t "clustersPage.header"}}
-  </h1>
-
-  <div class="vertical-middle"></div>
+<section class="header clearfix {{if showMetricsTab "has-tabs p-0"}}">
+  {{#if showMetricsTab}}
+    <ul class="tab-nav">
+      <li>
+        {{#link-to
+          "clusters.index.list"
+        }}
+          {{t "clustersPage.header"}}
+        {{/link-to}}
+      </li>
+      <li>
+        {{#link-to
+          "clusters.index.metrics"
+        }}
+          {{t "clustersPage.metricsHeader"}}
+        {{/link-to}}
+      </li>
+    </ul>
+  {{else}}
+    <h1 class="pull-left">
+      {{t "clustersPage.header"}}
+    </h1>
+  {{/if}}
 
   <div class="right-buttons">
+    {{#if showMetricsTab}}
+      <div class="inline-block vertical-bottom mr-20">
+        <a
+          class="inline-block"
+          href={{globalMonitoringUrl}}
+          target="_blank"
+          rel="nofollow noopener noreferrer"
+        >
+          <div class="global-monitoring"></div>
+        </a>
+
+        <a
+          class="inline-block"
+          href={{grafanaUrl}}
+          target="_blank"
+          rel="nofollow noopener noreferrer"
+        >
+          <div class="grafana"></div>
+        </a>
+
+        <a
+          class="inline-block"
+          href={{thanosUrl}}
+          target="_blank"
+          rel="nofollow noopener noreferrer"
+        >
+          <div class="thanos"></div>
+        </a>
+      </div>
+    {{/if}}
+
     {{#link-to
        "clusters.new"
        class="btn btn-sm bg-primary"
@@ -16,39 +64,4 @@
   </div>
 </section>
 
-{{#sortable-table
-   classNames="grid sortable-table"
-   body=model.clusters
-   searchText=searchText
-   descending=descending
-   sortBy=sortBy
-   bulkActions=true
-   extraSearchFields=extraSearchFields
-   extraSearchSubFields=extraSearchSubFields
-   subSearchField="nodes"
-   pagingLabel="pagination.cluster"
-   headers=headers as |sortable kind inst dt|
-}}
-  {{#if (eq kind "row")}}
-    {{cluster-row
-      model=inst
-      fullColspan=sortable.fullColspan
-      launchOnCluster=(action "launchOnCluster")
-      useKubernetes=(action "useKubernetes")
-      subMatches=sortable.subMatches
-      dt=dt
-    }}
-  {{else if (eq kind "nomatch")}}
-    <tr>
-      <td colspan="{{sortable.fullColspan}}" class="text-center text-muted pt-20 pb-20">
-        {{t "clusterRow.noClusterMatch"}}
-      </td>
-    </tr>
-  {{else if (eq kind "norows")}}
-    <tr>
-      <td colspan="{{sortable.fullColspan}}" class="text-center text-muted pt-20 pb-20">
-        {{t "clusterRow.noClusterData"}}
-      </td>
-    </tr>
-  {{/if}}
-{{/sortable-table}}
+{{outlet}}
