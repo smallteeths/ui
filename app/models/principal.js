@@ -41,6 +41,7 @@ var Principal = Resource.extend({
   logicalType: computed('parsedExternalType', function() {
     switch ( get(this, 'parsedExternalType') ) {
     case C.PROJECT.TYPE_ACTIVE_DIRECTORY_USER:
+    case C.PROJECT.TYPE_ACTIVE_DIRECTORY_USER_UID:
     case C.PROJECT.TYPE_ADFS_USER:
     case C.PROJECT.TYPE_AZURE_USER:
     case C.PROJECT.TYPE_FREEIPA_USER:
@@ -49,6 +50,7 @@ var Principal = Resource.extend({
     case C.PROJECT.TYPE_KEYCLOAK_USER:
     case C.PROJECT.TYPE_LDAP_USER:
     case C.PROJECT.TYPE_OPENLDAP_USER:
+    case C.PROJECT.TYPE_OPENLDAP_USER_UID:
     case C.PROJECT.TYPE_PING_USER:
     case C.PROJECT.TYPE_RANCHER:
     case C.PROJECT.TYPE_SHIBBOLETH_USER:
@@ -58,6 +60,7 @@ var Principal = Resource.extend({
       return C.PROJECT.TEAM;
 
     case C.PROJECT.TYPE_ACTIVE_DIRECTORY_GROUP:
+    case C.PROJECT.TYPE_ACTIVE_DIRECTORY_GROUP_UID:
     case C.PROJECT.TYPE_ADFS_GROUP:
     case C.PROJECT.TYPE_AZURE_GROUP:
     case C.PROJECT.TYPE_FREEIPA_GROUP:
@@ -65,6 +68,7 @@ var Principal = Resource.extend({
     case C.PROJECT.TYPE_KEYCLOAK_GROUP:
     case C.PROJECT.TYPE_LDAP_GROUP:
     case C.PROJECT.TYPE_OPENLDAP_GROUP:
+    case C.PROJECT.TYPE_OPENLDAP_GROUP_UID:
     case C.PROJECT.TYPE_PING_GROUP:
     case C.PROJECT.TYPE_SHIBBOLETH_GROUP:
     case C.PROJECT.TYPE_GOOGLE_GROUP:
@@ -87,6 +91,7 @@ var Principal = Resource.extend({
 
     switch ( type ) {
     case C.PROJECT.TYPE_ACTIVE_DIRECTORY_USER:
+    case C.PROJECT.TYPE_ACTIVE_DIRECTORY_USER_UID:
     case C.PROJECT.TYPE_ADFS_USER:
     case C.PROJECT.TYPE_OKTA_USER:
     case C.PROJECT.TYPE_AZURE_USER:
@@ -96,12 +101,14 @@ var Principal = Resource.extend({
     case C.PROJECT.TYPE_KEYCLOAK_USER:
     case C.PROJECT.TYPE_LDAP_USER:
     case C.PROJECT.TYPE_OPENLDAP_USER:
+    case C.PROJECT.TYPE_OPENLDAP_USER_UID:
     case C.PROJECT.TYPE_PING_USER:
     case C.PROJECT.TYPE_SHIBBOLETH_USER:
       key = 'model.identity.displayType.user';
       break;
 
     case C.PROJECT.TYPE_ACTIVE_DIRECTORY_GROUP:
+    case C.PROJECT.TYPE_ACTIVE_DIRECTORY_GROUP_UID:
     case C.PROJECT.TYPE_ADFS_GROUP:
     case C.PROJECT.TYPE_OKTA_GROUP:
     case C.PROJECT.TYPE_AZURE_GROUP:
@@ -109,6 +116,7 @@ var Principal = Resource.extend({
     case C.PROJECT.TYPE_KEYCLOAK_GROUP:
     case C.PROJECT.TYPE_LDAP_GROUP:
     case C.PROJECT.TYPE_OPENLDAP_GROUP:
+    case C.PROJECT.TYPE_OPENLDAP_GROUP_UID:
     case C.PROJECT.TYPE_PING_GROUP:
     case C.PROJECT.TYPE_SHIBBOLETH_GROUP:
     case C.PROJECT.TYPE_GOOGLE_GROUP:
