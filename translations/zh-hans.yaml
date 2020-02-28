@@ -4530,7 +4530,7 @@ clusterNew:
       label: 项目网络隔离
     networkMTU:
       label: 容器网卡 MTU
-      help: "自定义容器网卡MTU值，0 表示使用网络驱动默认配置的MTU值。常规网络通信MTU为1500，对于非标准的网络驱动，可通过这个参数来自定义容器的MTU值。"
+      help: "自定义容器网卡MTU值。默认网络传输的MTU为1500，对于有些网络驱动(比如canal)，由于使用vxlan后端，会有50bit用于传输vxlan的tag，所以在主机上创建的网桥flannel.1的MTU值是1450，非标准的1500。默认情况容器的网卡MTU值是1500，为了对应flannel.1的MTU值，可通过这个参数来自定义容器的MTU值。"
       detail: '例如: 1500'
     version:
       label: Kubernetes版本
