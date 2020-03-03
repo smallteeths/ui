@@ -169,13 +169,13 @@
             {{t "globalMonitoringPage.store.s3.bucketName.label"}}
             <FieldRequired/>
           </label>
-          <Input
-            @id="input-s3-bucket-name"
-            @type="text"
-            @value={{config.s3BucketName}}
-            @classNames="form-control"
-            @placeholder={{t "globalMonitoringPage.store.s3.bucketName.placeholder"}}
-          />
+          {{input
+            id="input-s3-bucket-name"
+            type="text"
+            value=config.s3BucketName
+            class="form-control"
+            placeholder=(t "globalMonitoringPage.store.s3.bucketName.placeholder")
+          }}
         </div>
 
         <div class="col span-6">
@@ -186,13 +186,13 @@
             {{t "globalMonitoringPage.store.s3.endpoint.label"}}
             <FieldRequired/>
           </label>
-          <Input
-            @type="text"
-            @id="input-s3-endpoint"
-            @value={{config.s3Endpoint}}
-            @classNames="form-control"
-            @placeholder={{t "globalMonitoringPage.store.s3.endpoint.placeholder"}}
-          />
+          {{input
+            type="text"
+            id="input-s3-endpoint"
+            value=config.s3Endpoint
+            class="form-control"
+            placeholder=(t "globalMonitoringPage.store.s3.endpoint.placeholder")
+          }}
         </div>
       </div>
 
@@ -205,14 +205,14 @@
             {{t "globalMonitoringPage.store.s3.accessKey.label"}}
             <FieldRequired/>
           </label>
-          <Input
-            @type="text"
-            @name="accessKey"
-            @id="input-s3-access-key"
-            @classNames="form-control"
-            @placeholder={{t "globalMonitoringPage.store.s3.accessKey.placeholder"}}
-            @value={{config.s3AccessKey}}
-          />
+          {{input
+            type="text"
+            name="accessKey"
+            id="input-s3-access-key"
+            class="form-control"
+            placeholder=(t "globalMonitoringPage.store.s3.accessKey.placeholder")
+            value=config.s3AccessKey
+          }}
         </div>
 
         <div class="col span-6">
@@ -223,14 +223,14 @@
             {{t "globalMonitoringPage.store.s3.secretKey.label"}}
             <FieldRequired/>
           </label>
-          <Input
-            @type="password"
-            @name="password"
-            @id="input-s3-secret-key"
-            @classNames="form-control"
-            @placeholder={{t "globalMonitoringPage.store.s3.secretKey.placeholder"}}
-            @value={{config.s3SecretKey}}
-          />
+          {{input
+            type="password"
+            name="password"
+            id="input-s3-secret-key"
+            class="form-control"
+            placeholder=(t "globalMonitoringPage.store.s3.secretKey.placeholder")
+            value=config.s3SecretKey
+          }}
         </div>
       </div>
 
