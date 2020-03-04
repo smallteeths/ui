@@ -1,0 +1,103 @@
+<section style="width: 100%;">
+  <div style="font-size: 1.5em;height: 30px;" class="clip">{{model.repo.name}}</div>
+</section>
+<section class="header has-tabs clearfix pb-0">
+  <ul class="tab-nav">
+    {{#if (or isSystemAdmin isMember)}}
+    <li>
+      {{#link-to "image-repo.projects.detail.summary" model.projectId model.currentUserRoleId}}{{t "harborConfig.tab.summary"}}{{/link-to}}
+    </li>
+    {{/if}}
+    <li>
+      {{#link-to "image-repo.projects.detail.repositories" model.projectId model.currentUserRoleId}}{{t "harborConfig.tab.store"}}{{/link-to}}
+    </li>
+    {{#if (or isSystemAdmin isMember)}}
+      <li>
+        {{#link-to "image-repo.projects.detail.members" model.projectId model.currentUserRoleId}}{{t "harborConfig.tab.member"}}{{/link-to}}
+      </li>
+    {{/if}}
+    {{!-- <li>
+      {{#link-to "image-repo.projects.detail.replications" model.projectId}}复制{{/link-to}}
+    </li> --}}
+    {{#if (or isProjectAdmin isSystemAdmin)}}
+      <li>
+        {{#link-to "image-repo.projects.detail.labels" model.projectId model.currentUserRoleId}}{{t "harborConfig.tab.tag"}}{{/link-to}}
+      </li>
+    {{/if}}
+    {{#if (or isSystemAdmin isMember)}}
+      <li>
+        {{#link-to "image-repo.projects.detail.logs" model.projectId model.currentUserRoleId}}{{t "harborConfig.tab.log"}}{{/link-to}}
+      </li>
+    {{/if}}
+    {{#if (or isSystemAdmin isMember)}}
+      <li>
+        {{#link-to "image-repo.projects.detail.configs" model.projectId model.currentUserRoleId}}{{t "harborConfig.tab.accessLevel"}}{{/link-to}}
+      </li>
+    {{/if}}
+  </ul>
+</section>
+<div class="row project-summary">
+  <section class="col span-4">
+    <div class="project-summary__repo pb-40 clearfix">
+      <div class="col span-6">
+        <span><b>{{t "harborConfig.summary.projectImageRepo"}}</b></span>
+      </div>
+      <div class="col span-6">
+        <span class="pl-40">{{model.summary.repo_count}}</span>
+      </div>
+    </div>
+    <div class="project-summary__members clearfix">
+      <div class="col span-6 clearfix" style="padding-top: 1em;">
+        <span><b>{{t "harborConfig.summary.projectMember"}}</b></span>
+      </div>
+      <div class="col span-6">
+        <ul style="list-style-type: none">
+          <li>{{model.summary.project_admin_count}} {{t "harborConfig.table.roleItem.admin"}}</li>
+          <li>{{model.summary.master_count}} {{t "harborConfig.table.roleItem.master"}}</li>
+          <li>{{model.summary.developer_count}} {{t "harborConfig.table.roleItem.developer"}}</li>
+          <li>{{model.summary.guest_count}} {{t "harborConfig.table.roleItem.visitor"}}</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="col span-4 offset-4 project-summary__quota">
+    <div class="col span-4">
+      <span><b>{{t "harborConfig.summary.projectQuota"}}</b></span>
+    </div>
+    <div class="col span-8 mt-0" style="font-size: 12px;">
+      <div class="row">
+        <div class="col span-6">
+          <span>{{t "harborConfig.summary.count"}}</span>
+        </div>
+        <div class="col span-6">
+          <span class="pull-right">{{model.summary.quota.used.count}} of {{transformCountMax}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col span-12">
+          {{progress-bar
+            percent=countPercent
+            color='primary'
+          }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col span-6">
+          <span>{{t "harborConfig.summary.storage"}}</span>
+        </div>
+        <div class="col span-6">
+          <span class="pull-right">{{transformStorageUsed}} of {{transformStorageMax}}</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col span-12">
+          {{progress-bar
+            percent=storagePercent
+            color='primary'
+          }}
+        </div>
+      </div>
+    </div>
+
+  </section>
+</div>

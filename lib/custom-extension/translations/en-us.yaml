@@ -170,6 +170,7 @@ harborConfig:
       developer: Developer
       visitor: Visitors
       user: User
+      master: Master
     storeStatus:
       public: Public
       private: Private
@@ -219,12 +220,20 @@ harborConfig:
     btn:
       add: "New Tag"
   tab:
+    summary: "Summary"
     store: "Image Store"
     member: "Member"
     copy: "Copy"
     tag: "Tag"
     log: "Log"
     accessLevel: "Access Level"
+  summary:
+    projectImageRepo: "Project repositories"
+    projectMember: "Project members"
+    projectQuota: "Project quotas"
+    count: "Artifact count"
+    storage: "Storage used"
+    infinity: "unlimited"
 
 vlansubnetPage:
   unsupport: "The current cluster does not support flat networks."

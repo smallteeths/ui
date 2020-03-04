@@ -170,6 +170,7 @@ harborConfig:
       developer: 开发人员
       visitor: 访客
       user: 用户
+      master: 维护人员
     storeStatus:
       public: 公开
       private: 私有
@@ -219,12 +220,20 @@ harborConfig:
     btn:
       add: "新建标签"
   tab:
+    summary: 概要
     store: 镜像仓库
     member: 成员
     copy: 复制
     tag: 标签
     log: 日志
     accessLevel: 访问级别
+  summary:
+    projectImageRepo: 项目镜像仓库
+    projectMember: 项目成员
+    projectQuota: 项目容量
+    count: Artifact 数量
+    storage: 存储消耗
+    infinity: 无限制
 
 vlansubnetPage:
   unsupport: "当前集群不支持扁平网络"

@@ -6,7 +6,7 @@
   {{!-- <a href="{{href-to 'custom-extension.image-repo.projects.detail.repositories' model.project_id}}">
     {{model.name}}
   </a> --}}
-  {{#link-to 'image-repo.projects.detail.repositories' model.project_id model.current_user_role_id class="clip project-link"}}
+  {{#link-to 'image-repo.projects.detail.summary' model.project_id model.current_user_role_id class="clip project-link"}}
     {{model.name}}
   {{/link-to}}
 </td>
@@ -26,6 +26,8 @@
     {{t "harborConfig.table.roleItem.developer"}}
   {{else if (eq model.current_user_role_id 3)}}
     {{t "harborConfig.table.roleItem.visitor"}}
+  {{else if (eq model.current_user_role_id 4)}}
+    {{t "harborConfig.table.roleItem.master"}}
   {{/if}}
 </td>
 <td data-title="{{dt.repoCount}}">

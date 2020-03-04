@@ -1,6 +1,9 @@
 <section class="header has-tabs clearfix pb-0">
   <ul class="tab-nav">
     <li>
+      {{#link-to "image-repo.projects.detail.summary" model.projectId}}{{t "harborConfig.tab.summary"}}{{/link-to}}
+    </li>
+    <li>
       {{#link-to "image-repo.projects.detail.repositories" model.projectId}}{{t "harborConfig.tab.store"}}{{/link-to}}
     </li>
     <li>
