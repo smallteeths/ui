@@ -1,3 +1,4 @@
+import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
 import { get, set, computed, observer } from '@ember/object';
@@ -40,11 +41,15 @@ const headers = [
     label:          'Subnet',
   },
   {
+    name:           'workloadName',
+    label:          'Workload',
+  },
+  {
     classNames:     'text-right pr-20',
     name:           'creationTimestamp',
     translationKey: 'generic.created',
     searchField:    false,
-    width:          250,
+    width:          180,
   },
 ];
 
@@ -54,7 +59,7 @@ export default Controller.extend({
   router:           service(),
   session:          service(),
   prefs:            service(),
-  queryParams:      ['subnet'],
+  queryParams:      ['subnet', 'projectId'],
   subnet:           '',
   sortBy:           'name',
   headers,
@@ -62,6 +67,9 @@ export default Controller.extend({
   searchText:       '',
   availableActions: [],
   loading:          false,
+  projectId:         '',
+  hasSelect:        true,
+  selectData:       alias('model.projectOptions'),
   init() {
     this._super(...arguments);
     this.staticPodsDidChanged();
@@ -78,10 +86,11 @@ export default Controller.extend({
         limit,
         continue: next
       };
+      let q = [];
 
-      if (subnet) {
-        p.labelSelector = encodeURIComponent(`subnet=${ subnet }`);
-      }
+      subnet && q.push(encodeURIComponent(`subnet=${ subnet }`));
+      this.projectId && q.push(encodeURIComponent(`field.cattle.io/projectId=${ this.projectId }`));
+      q.length && (p.labelSelector = q.join(','));
       set(this, 'loading', true);
       get(this, 'vlansubnet').fetchMacvlanIp(clusterId, p).then((resp) => {
         set(this, 'loading', false);

@@ -11,6 +11,9 @@
        sortChanged=(action "sortChanged")
        headers=headers
        data=data
+       selectData=selectData
+       selectValue=projectId
+       hasSelect=hasSelect
        pageChange=(action 'pageChange')
        nextData=next
        as |sortable kind obj dt|
@@ -36,6 +39,9 @@
         </td>
         <td data-title="{{dt.subnet}}">
           {{obj.subnet}}
+        </td>
+        <td data-title="{{dt.workloadName}}">
+          {{obj.workloadName}}
         </td>
         <td class="text-right pr-20">
           {{date-calendar obj.creationTimestamp}}
