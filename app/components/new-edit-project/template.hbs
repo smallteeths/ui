@@ -67,7 +67,7 @@
          expandOnInit=false
       }}
         {{project-resource-quota
-          editing=(or editing isNew)
+          editing=(and (or editing isNew) canEditQuota)
           expanded=expanded
           limit=primaryResource.resourceQuota.limit
           nsDefaultLimit=primaryResource.namespaceDefaultResourceQuota.limit

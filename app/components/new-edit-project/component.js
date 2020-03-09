@@ -21,11 +21,13 @@ export default Component.extend(NewOrEdit, ChildHook, {
   intl:                        service(),
   router:                      service(),
   globalStore:                 service(),
+  scope:                       service(),
   layout,
   memberConfig:                M_CONFIG,
   model:                       null,
   podSecurityPolicyTemplateId: null,
   isNew:                       false,
+  canEditQuota:                true,
 
   primaryResource:             alias('model.project'),
   secPolicy:                   alias('model.project.defaultPodSecurityPolicyTemplateId'),
@@ -33,6 +35,19 @@ export default Component.extend(NewOrEdit, ChildHook, {
   init() {
     this._super(...arguments);
     let bindings = (get(this, 'model.project.projectRoleTemplateBindings') || []).slice();
+    let currentUser = get(this, 'model.users.content').find((item) => {
+      return item.me;
+    })
+
+    if (currentUser && currentUser.me && !currentUser.hasAdmin) {
+      let hasClusterRoleBindings = currentUser.clusterRoleBindings && currentUser.clusterRoleBindings.length > 0 && currentUser.clusterRoleBindings.some((item) => {
+        return item.clusterId === get(this, 'scope.currentCluster.id')
+      })
+
+      if (!hasClusterRoleBindings && currentUser && currentUser.projectRoleBindings && currentUser.projectRoleBindings.length > 0) {
+        set(this, 'canEditQuota', false)
+      }
+    }
 
     bindings = bindings.filter((x) => get(x, 'name') !== 'creator');
     set(this, 'memberArray', bindings);

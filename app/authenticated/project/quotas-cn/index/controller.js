@@ -129,6 +129,10 @@ export default Controller.extend({
       })
     }
 
+    if (currentUser.hasAdmin) {
+      return true
+    }
+
     return false;
   }),
 
