@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col span-6">
+    <label
+      class="acc-label"
+      for="input-s3-bucket-name"
+    >
+      {{t "globalMonitoringPage.store.s3.bucketName.label"}}
+      <FieldRequired/>
+    </label>
+    {{input
+      id="input-s3-bucket-name"
+      type="text"
+      value=bucketName
+      class="form-control"
+      placeholder=(t "globalMonitoringPage.store.s3.bucketName.placeholder")
+    }}
+  </div>
+
+  <div class="col span-6">
+    <label
+      class="acc-label"
+      for="input-s3-endpoint"
+    >
+      {{t "globalMonitoringPage.store.s3.endpoint.label"}}
+      <FieldRequired/>
+    </label>
+    {{input
+      type="text"
+      id="input-s3-endpoint"
+      value=endpoint
+      class="form-control"
+      placeholder=(t "globalMonitoringPage.store.s3.endpoint.placeholder")
+    }}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col span-6">
+    <label
+      class="acc-label"
+      for="input-s3-access-key"
+    >
+      {{t "globalMonitoringPage.store.s3.accessKey.label"}}
+      <FieldRequired/>
+    </label>
+    {{input
+      type="text"
+      name="accessKey"
+      id="input-s3-access-key"
+      class="form-control"
+      placeholder=(t "globalMonitoringPage.store.s3.accessKey.placeholder")
+      value=accessKey
+    }}
+  </div>
+
+  <div class="col span-6">
+    <label
+      class="acc-label"
+      for="input-s3-secret-key"
+    >
+      {{t "globalMonitoringPage.store.s3.secretKey.label"}}
+      <FieldRequired/>
+    </label>
+    {{input
+      type="password"
+      name="password"
+      id="input-s3-secret-key"
+      class="form-control"
+      placeholder=(t "globalMonitoringPage.store.s3.secretKey.placeholder")
+      value=secretKey
+    }}
+  </div>
+</div>

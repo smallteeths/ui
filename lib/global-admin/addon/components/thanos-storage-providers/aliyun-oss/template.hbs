@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col span-6">
+    <label
+      class="acc-label"
+      for="input-aliyunoss-bucket-name"
+    >
+      {{t "globalMonitoringPage.store.aliyunoss.bucketName.label"}}
+      <FieldRequired/>
+    </label>
+    {{input
+      id="input-aliyunoss-bucket-name"
+      type="text"
+      value=bucketName
+      class="form-control"
+      placeholder=(t "globalMonitoringPage.store.aliyunoss.bucketName.placeholder")
+    }}
+  </div>
+
+  <div class="col span-6">
+    <label
+      class="acc-label"
+      for="input-aliyunoss-endpoint"
+    >
+      {{t "globalMonitoringPage.store.aliyunoss.endpoint.label"}}
+      <FieldRequired/>
+    </label>
+    {{input
+      type="text"
+      id="input-aliyunoss-endpoint"
+      value=endpoint
+      class="form-control"
+      placeholder=(t "globalMonitoringPage.store.aliyunoss.endpoint.placeholder")
+    }}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col span-6">
+    <label
+      class="acc-label"
+      for="input-aliyunoss-access-key"
+    >
+      {{t "globalMonitoringPage.store.aliyunoss.accessKey.label"}}
+      <FieldRequired/>
+    </label>
+    {{input
+      type="text"
+      name="accessKey"
+      id="input-aliyunoss-access-key"
+      class="form-control"
+      placeholder=(t "globalMonitoringPage.store.aliyunoss.accessKey.placeholder")
+      value=accessKey
+    }}
+  </div>
+
+  <div class="col span-6">
+    <label
+      class="acc-label"
+      for="input-aliyunoss-secret-key"
+    >
+      {{t "globalMonitoringPage.store.aliyunoss.secretKey.label"}}
+      <FieldRequired/>
+    </label>
+    {{input
+      type="password"
+      name="password"
+      id="input-aliyunoss-secret-key"
+      class="form-control"
+      placeholder=(t "globalMonitoringPage.store.aliyunoss.secretKey.placeholder")
+      value=secretKey
+    }}
+  </div>
+</div>

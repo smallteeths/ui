@@ -2013,7 +2013,7 @@ globalMonitoringPage:
   confirmDisable: "Are you sure?  Click again to disable global monitoring"
   enableActionLabel: Enable
   globalMonitoringClusterUnavailable: Cluster {clusterName} is unavailable.
-  s3Warning: Thanos sidecar in each cluster requires the S3 crednetials. So cluster owners will also be able to see the S3 crednetials in the System projects.
+  objectStorageWarning: Thanos sidecar in each cluster requires the S3 crednetials. So cluster owners will also be able to see the S3 crednetials in the System projects.
   customAnswers:
     title: Custom Answers
     detail: Configure custom answers.
@@ -2038,6 +2038,7 @@ globalMonitoringPage:
     enabled:
       label: Store Prometheus metrics to S3
     s3:
+      label: S3
       bucketName:
         label: S3 Bucket Name
         placeholder: "e.g. backups"
@@ -2050,6 +2051,21 @@ globalMonitoringPage:
       secretKey:
         label: S3 Secret Key
         placeholder: Your AWS secret key
+        provided: Provided
+    aliyunoss:
+      label: Aliyun OSS
+      bucketName:
+        label: Aliyun OSS Bucket Name
+        placeholder: "e.g. backups"
+      endpoint:
+        label: Aliyun OSS Region Endpoint
+        placeholder: "e.g. oss-cn-shanghai.aliyuncs.com"
+      accessKey:
+        label: Aliyun OSS Access Key
+        placeholder: Your Aliyun access key
+      secretKey:
+        label: Aliyun OSS Secret Key
+        placeholder: Your Aliyun secret key
         provided: Provided
   grafana:
     title: Global Dashboard

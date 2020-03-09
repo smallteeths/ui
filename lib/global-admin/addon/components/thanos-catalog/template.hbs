@@ -132,7 +132,7 @@
     {{#if objectStorageEnabled}}
       <BannerMessage
         @color="bg-warning"
-        @message={{t "globalMonitoringPage.s3Warning"}}
+        @message={{t "globalMonitoringPage.objectStorageWarning"}}
       />
     {{/if}}
     <div class="row">
@@ -162,76 +162,18 @@
     {{#if objectStorageEnabled}}
       <div class="row">
         <div class="col span-6">
-          <label
-            class="acc-label"
-            for="input-s3-bucket-name"
-          >
-            {{t "globalMonitoringPage.store.s3.bucketName.label"}}
-            <FieldRequired/>
+          <label class="acc-label">
+            {{t "globalMonitoringPage.store.enabled.label"}}<FieldRequired/>
           </label>
-          {{input
-            id="input-s3-bucket-name"
-            type="text"
-            value=config.s3BucketName
-            class="form-control"
-            placeholder=(t "globalMonitoringPage.store.s3.bucketName.placeholder")
-          }}
-        </div>
-
-        <div class="col span-6">
-          <label
-            class="acc-label"
-            for="input-s3-endpoint"
-          >
-            {{t "globalMonitoringPage.store.s3.endpoint.label"}}
-            <FieldRequired/>
-          </label>
-          {{input
-            type="text"
-            id="input-s3-endpoint"
-            value=config.s3Endpoint
-            class="form-control"
-            placeholder=(t "globalMonitoringPage.store.s3.endpoint.placeholder")
-          }}
+          <NewSelect
+            @content={{objectStorageProviders}}
+            @value={{selectedProvider}}
+            @localizedLabel={{true}}
+          />
         </div>
       </div>
-
       <div class="row">
-        <div class="col span-6">
-          <label
-            class="acc-label"
-            for="input-s3-access-key"
-          >
-            {{t "globalMonitoringPage.store.s3.accessKey.label"}}
-            <FieldRequired/>
-          </label>
-          {{input
-            type="text"
-            name="accessKey"
-            id="input-s3-access-key"
-            class="form-control"
-            placeholder=(t "globalMonitoringPage.store.s3.accessKey.placeholder")
-            value=config.s3AccessKey
-          }}
-        </div>
-
-        <div class="col span-6">
-          <label
-            class="acc-label"
-            for="input-s3-secret-key"
-          >
-            {{t "globalMonitoringPage.store.s3.secretKey.label"}}
-            <FieldRequired/>
-          </label>
-          {{input
-            type="password"
-            name="password"
-            id="input-s3-secret-key"
-            class="form-control"
-            placeholder=(t "globalMonitoringPage.store.s3.secretKey.placeholder")
-            value=config.s3SecretKey
-          }}
-        </div>
+        {{component objectStorageProvider model=config initAnswers=app.answers}}
       </div>
 
       <hr class="mt-15 mb-15"/>
