@@ -2069,9 +2069,9 @@ globalMonitoringPage:
       label: Thanos Query UI 服务类型
   store:
     title: 对象存储
-    detail: 将多集群的Prometheus指标存储到S3上。
+    detail: 将多集群的Prometheus指标存储到对象存储上。
     enabled:
-      label: 存储指标到S3
+      label: 存储指标到对象存储
     s3:
       label: S3
       bucketName:

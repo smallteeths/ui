@@ -2034,9 +2034,9 @@ globalMonitoringPage:
       label: Thanos Query UI Service
   store:
     title: Object Storage
-    detail: Store Prometheus metrics across multiple clusters to S3 for unlimited time.
+    detail: Store Prometheus metrics across multiple clusters to object storage for unlimited time.
     enabled:
-      label: Store Prometheus metrics to S3
+      label: Store Prometheus metrics to object storage
     s3:
       label: S3
       bucketName:
