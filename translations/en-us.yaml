@@ -2013,7 +2013,7 @@ globalMonitoringPage:
   confirmDisable: "Are you sure?  Click again to disable global monitoring"
   enableActionLabel: Enable
   globalMonitoringClusterUnavailable: Cluster {clusterName} is unavailable.
-  objectStorageWarning: Thanos sidecar in each cluster requires the S3 crednetials. So cluster owners will also be able to see the S3 crednetials in the System projects.
+  objectStorageWarning: Thanos sidecar in each cluster requires the object storage crednetials. So cluster owners will also be able to see the object storage crednetials in the System projects.
   customAnswers:
     title: Custom Answers
     detail: Configure custom answers.

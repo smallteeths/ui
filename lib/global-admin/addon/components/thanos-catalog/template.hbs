@@ -167,13 +167,17 @@
           </label>
           <NewSelect
             @content={{objectStorageProviders}}
-            @value={{selectedProvider}}
+            @value={{selectedObjectStorageProvider}}
             @localizedLabel={{true}}
           />
         </div>
       </div>
       <div class="row">
-        {{component objectStorageProvider model=config initAnswers=app.answers}}
+        {{component objectStorageProvider
+          model=config
+          initAnswers=app.answers
+          shouldInit=initObjectStorageConfig
+        }}
       </div>
 
       <hr class="mt-15 mb-15"/>

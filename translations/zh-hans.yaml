@@ -2048,7 +2048,7 @@ globalMonitoringPage:
   confirmDisable: "你确定吗? 再次单击将禁用全局监控"
   enableActionLabel: 启用
   globalMonitoringClusterUnavailable: 集群 {clusterName} 不可用。
-  objectStorageWarning: 每个集群中的Thanos sidecar都需要S3的密钥。所以这些集群的管理员也可以在集群的系统项目里看到你所配置的S3的密钥。
+  objectStorageWarning: 每个集群中的Thanos sidecar都需要S3的密钥。所以这些集群的管理员也可以在集群的系统项目里看到你所配置的存储的密钥。
   customAnswers:
     title: 自定义应答
     detail: 配置自定义的应答。
