@@ -24,7 +24,8 @@ export default Route.extend({
           }
         });
       } else {
-        const account = get(this, 'access.me.annotations')['authz.management.cattle.io.cn/harborauth'];
+        const a = get(this, 'access.me.annotations');
+        const account = a && a['authz.management.cattle.io.cn/harborauth'];
 
         return {
           harborServer,
