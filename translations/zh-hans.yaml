@@ -2038,8 +2038,8 @@ globalMonitoringPage:
   header: 全局监控（实验性）
   cluster: 全局监控所在集群
   noAvailableClusters: 没有可用集群。请先添加一个集群。
-  enabled: "全局监控已启用。如果在集群中启用了集群监控并且版本不低于<code>v0.0.7</code>，你可以通过全局监控查看多个集群的指标。"
-  disabled: "全局监控未启用。点击启用来激活全局监控。 如果在集群中启用了集群监控并且版本不低于<code>v0.0.7</code>，你将可以通过全局监控查看多个集群的指标。"
+  enabled: "全局监控已启用。如果在集群中启用了集群监控并且版本不低于<code>v0.0.7000</code>，你可以通过全局监控查看多个集群的指标。"
+  disabled: "全局监控未启用。点击启用来激活全局监控。 如果在集群中启用了集群监控并且版本不低于<code>v0.0.7000</code>，你将可以通过全局监控查看多个集群的指标。"
   notReady: 正在安装全局监控到指定集群的系统项目里...
   updating: 正在更新全局监控组件...
   noTemplate: 无法加载全局监控模版
@@ -2048,7 +2048,7 @@ globalMonitoringPage:
   confirmDisable: "你确定吗? 再次单击将禁用全局监控"
   enableActionLabel: 启用
   globalMonitoringClusterUnavailable: 集群 {clusterName} 不可用。
-  objectStorageWarning: 每个集群中的Thanos sidecar都需要S3的密钥。所以这些集群的管理员也可以在集群的系统项目里看到你所配置的存储的密钥。
+  objectStorageWarning: 每个集群中的Thanos sidecar都需要对象存储的密钥。所以这些集群的管理员也可以在集群的系统项目里看到你所配置的存储的密钥。
   customAnswers:
     title: 自定义应答
     detail: 配置自定义的应答。

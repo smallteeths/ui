@@ -2003,8 +2003,8 @@ globalMonitoringPage:
   header: Global Monitoring (Experimental)
   cluster: Global Monitoring Cluster
   noAvailableClusters: No active clusters. Please add a cluster first.
-  enabled: "Global Monitoring is enabled. You can query your metrics across multiple clusters if cluster monitoring <code>v0.0.7</code> or above enabled inside the clusters."
-  disabled: "Global Monitoring is not enabled yet. Please click Enable button to enable it. You will be able to query your metrics across multiple clusters if cluster monitoring <code>v0.0.7</code> or above enabled inside the clusters."
+  enabled: "Global Monitoring is enabled. You can query your metrics across multiple clusters if cluster monitoring <code>v0.0.7000</code> or above enabled inside the clusters."
+  disabled: "Global Monitoring is not enabled yet. Please click Enable button to enable it. You will be able to query your metrics across multiple clusters if cluster monitoring <code>v0.0.7000</code> or above enabled inside the clusters."
   notReady: Installing Global Monitoring into the system project of global monitoring cluster...
   updating: Updating Global Monitoring in the system project of global monitoring cluster...
   version: Global Monitoring Version
