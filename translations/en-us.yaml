@@ -2962,6 +2962,9 @@ notifierPage:
     pagerduty: PagerDuty
     webhook: Webhook
     wechat: WeChat
+    dingtalk: DingTalk
+    msteams: Microsoft Teams
+    aliyunsms: Aliyun SMS
   slack:
     url: URL
     urlPlaceholder: e.g. https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
@@ -3021,6 +3024,31 @@ notifierPage:
     agentPlaceholder: e.g. 1000003
     corpPlaceholder: e.g. wwc0cc3d58f9b021b6
     defaultRecipientPlaceholder: e.g. 2
+  dingtalk:
+    url: Webhook URL
+    urlPlaceholder: Your webhook URL
+    secret: Secret
+    secretPlaceholder: Only for webhook with sign enabled
+  msteams:
+    url: Webhook URL
+    urlPlaceholder: Your webhook URL
+  aliyunsms:
+    accessKeyID:
+      label: Access Key
+      placeholder: Aliyun Access Key
+    accessKeySecret:
+      label: Access Key Secret
+      placeholder: Aliyun Access Key Secret
+    signName:
+      label: Signature Name
+      placeholder: e.g. mysign
+    templateCode:
+      label: Template Code
+      placeholder: e.g. mytemplate
+    to:
+      label: Phone Number
+      action: Add Phone Number
+      placeholder: e.g. 112314
   proxyUrl:
     label: Proxy URL
     placeholder: e.g. http://my-proxy/

@@ -39,6 +39,24 @@ const TYPES = [
     css:      'wechat',
     disabled: false,
   },
+  {
+    type:     'dingtalk',
+    label:    'notifierPage.notifierTypes.dingtalk',
+    css:      'dingtalk',
+    disabled: false,
+  },
+  {
+    type:     'msteams',
+    label:    'notifierPage.notifierTypes.msteams',
+    css:      'msteams',
+    disabled: false,
+  },
+  {
+    type:     'aliyunsms',
+    label:    'notifierPage.notifierTypes.aliyunsms',
+    css:      'aliyunsms',
+    disabled: false,
+  },
 ];
 
 const RECIPIENT_TYPES = [

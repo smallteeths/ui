@@ -21,12 +21,15 @@ export default Resource.extend({
     return `${ get(this, 'displayName') } (${ upperCaseType })`
   }),
 
-  notifierTableLabel: computed('slackConfig', 'pagerdutyConfig', 'emailConfig', 'webhookConfig', 'wechatConfig', function(){
+  notifierTableLabel: computed('slackConfig', 'pagerdutyConfig', 'emailConfig', 'webhookConfig', 'wechatConfig', 'dingtalkConfig', 'msteamsConfig', 'aliyunsmsConfig', function(){
     const sc = get(this, 'slackConfig');
     const pc = get(this, 'pagerdutyConfig');
     const ec = get(this, 'smtpConfig');
     const wc = get(this, 'webhookConfig');
     const wcc = get(this, 'wechatConfig');
+    const dtc = get(this, 'dingtalkConfig');
+    const msc = get(this, 'msteamsConfig');
+    const asc = get(this, 'aliyunsmsConfig');
 
     if ( sc ) {
       return C.NOTIFIER_TABLE_LABEL.SLACK;
@@ -43,16 +46,28 @@ export default Resource.extend({
     if ( wcc ) {
       return C.NOTIFIER_TABLE_LABEL.WECHAT;
     }
+    if ( dtc ) {
+      return C.NOTIFIER_TABLE_LABEL.DINGTALK;
+    }
+    if ( msc ) {
+      return C.NOTIFIER_TABLE_LABEL.MICROSOFTTEAMS;
+    }
+    if ( asc ) {
+      return C.NOTIFIER_TABLE_LABEL.ALIYUN_SMS;
+    }
 
     return C.NOTIFIER_TABLE_LABEL.DEFAULT;
   }),
 
-  notifierType: computed('slackConfig', 'pagerdutyConfig', 'emailConfig', 'webhookConfig', 'wechatConfig', function(){
+  notifierType: computed('slackConfig', 'pagerdutyConfig', 'emailConfig', 'webhookConfig', 'wechatConfig', 'dingtalkConfig', 'msteamsConfig', 'aliyunsmsConfig', function(){
     const sc = get(this, 'slackConfig');
     const pc = get(this, 'pagerdutyConfig');
     const ec = get(this, 'smtpConfig');
     const wc = get(this, 'webhookConfig');
     const wcc = get(this, 'wechatConfig');
+    const dtc = get(this, 'dingtalkConfig');
+    const msc = get(this, 'msteamsConfig');
+    const asc = get(this, 'aliyunsmsConfig');
 
     if ( sc ) {
       return 'slack';
@@ -68,6 +83,15 @@ export default Resource.extend({
     }
     if ( wcc ) {
       return 'wechat';
+    }
+    if ( dtc ) {
+      return 'dingtalk';
+    }
+    if ( msc ) {
+      return 'msteams';
+    }
+    if ( asc ) {
+      return 'aliyunsms';
     }
 
     return null;
@@ -105,12 +129,15 @@ export default Resource.extend({
     return moment(d).fromNow();
   }),
 
-  notifierLabel: computed('slackConfig', 'pagerdutyConfig', 'emailConfig', 'webhookConfig', 'wechartConfig', function(){
+  notifierLabel: computed('slackConfig', 'pagerdutyConfig', 'emailConfig', 'webhookConfig', 'wechartConfig', 'dingtalkConfig', 'msteamsConfig', 'aliyunsmsConfig', function(){
     const sc = get(this, 'slackConfig');
     const pc = get(this, 'pagerdutyConfig');
     const ec = get(this, 'smtpConfig');
     const wc = get(this, 'webhookConfig');
     const wcc = get(this, 'wechatConfig');
+    const dtc = get(this, 'dingtalkConfig');
+    const msc = get(this, 'msteamsConfig');
+    const asc = get(this, 'aliyunsmsConfig');
 
     if ( sc ) {
       return 'Channel';
@@ -126,6 +153,15 @@ export default Resource.extend({
     }
     if ( wcc ) {
       return 'Recipient';
+    }
+    if ( dtc ) {
+      return '';
+    }
+    if ( msc ) {
+      return '';
+    }
+    if ( asc ) {
+      return '';
     }
 
     return 'Notifier';
