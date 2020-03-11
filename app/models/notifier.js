@@ -135,9 +135,6 @@ export default Resource.extend({
     const ec = get(this, 'smtpConfig');
     const wc = get(this, 'webhookConfig');
     const wcc = get(this, 'wechatConfig');
-    const dtc = get(this, 'dingtalkConfig');
-    const msc = get(this, 'msteamsConfig');
-    const asc = get(this, 'aliyunsmsConfig');
 
     if ( sc ) {
       return 'Channel';
@@ -153,15 +150,6 @@ export default Resource.extend({
     }
     if ( wcc ) {
       return 'Recipient';
-    }
-    if ( dtc ) {
-      return '';
-    }
-    if ( msc ) {
-      return '';
-    }
-    if ( asc ) {
-      return '';
     }
 
     return 'Notifier';
