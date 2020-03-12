@@ -2058,8 +2058,28 @@ globalMonitoringPage:
         label: Aliyun OSS Bucket Name
         placeholder: "e.g. backups"
       endpoint:
-        label: Aliyun OSS Region Endpoint
-        placeholder: "e.g. oss-cn-shanghai.aliyuncs.com"
+        label: Aliyun OSS Region
+        hangzhou: oss-cn-hangzhou
+        shanghai: oss-cn-shanghai
+        qingdao: oss-cn-qingdao
+        beijing: oss-cn-beijing
+        zhangjiakou: oss-cn-zhangjiakou
+        huhehaote: oss-cn-huhehaote
+        shenzhen: oss-cn-shenzhen
+        heyuan: oss-cn-heyuan
+        chengdu: oss-cn-chengdu
+        hongkong: oss-cn-hongkong
+        west-1: oss-us-west-1
+        east-1: oss-us-east-1
+        southeast-1: oss-ap-southeast-1
+        southeast-2: oss-ap-southeast-2
+        southeast-3: oss-ap-southeast-3
+        southeast-5: oss-ap-southeast-5
+        northeast-1: oss-ap-northeast-1
+        south-1: oss-ap-south-1
+        eu-central-1: oss-eu-central
+        eu-west-1: oss-eu-west-1
+        me-east-1: oss-me-east-1
       accessKey:
         label: Aliyun OSS Access Key
         placeholder: Your Aliyun access key

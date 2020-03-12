@@ -2093,8 +2093,28 @@ globalMonitoringPage:
         label: 阿里云存储桶名称
         placeholder: "例如：backups"
       endpoint:
-        label: 阿里云区域地址
-        placeholder: "例如：oss-cn-shanghai.aliyuncs.com"
+        label: 阿里云区域
+        hangzhou: '华东 1（杭州）'
+        shanghai: '华东 2（上海）'
+        qingdao: '华北 1（青岛）'
+        beijing: '华北 2（北京）'
+        zhangjiakou: '华北 3（张家口）'
+        huhehaote: '华北 5（呼和浩特）'
+        shenzhen: '华南 1（深圳）'
+        heyuan: '华南 2（河源）'
+        chengdu: '西南 1（成都）'
+        hongkong: '中国（香港）'
+        west-1: '美国西部 1 （硅谷）'
+        east-1: '美国东部 1 （弗吉尼亚）'
+        southeast-1: '亚太东南 1 （新加坡）'
+        southeast-2: '亚太东南 2 （悉尼）'
+        southeast-3: '亚太东南 3 （吉隆坡）'
+        southeast-5: '亚太东南 5 （雅加达）'
+        northeast-1: '亚太东北 1 （日本）'
+        south-1: '亚太南部 1 （孟买）'
+        eu-central-1: '欧洲中部 1 （法兰克福）'
+        eu-west-1: '英国（伦敦）'
+        me-east-1: '中东东部 1 （迪拜）'
       accessKey:
         label: 阿里云 Access Key
         placeholder: 你的阿里云 access key

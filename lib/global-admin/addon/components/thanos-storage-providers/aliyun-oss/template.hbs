@@ -24,13 +24,12 @@
       {{t "globalMonitoringPage.store.aliyunoss.endpoint.label"}}
       <FieldRequired/>
     </label>
-    {{input
-      type="text"
-      id="input-aliyunoss-endpoint"
-      value=endpoint
+    <NewSelect
       class="form-control"
-      placeholder=(t "globalMonitoringPage.store.aliyunoss.endpoint.placeholder")
-    }}
+      @value={{endpoint}}
+      @content={{endpointChoices}}
+      @localizedLabel={{true}}
+    />
   </div>
 </div>
 
