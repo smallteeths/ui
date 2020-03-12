@@ -81,14 +81,9 @@ export default Component.extend({
           }
           if ((a === 'ip' || a === 'mac') && annotationsForm[a] !== '') {
             const v = annotationsForm[a].split(/,|，/);
-            const macAddrReg =  /[A-Fa-f0-9]{2}:[A-Fa-f0-9]{2}:[A-Fa-f0-9]{2}:[A-Fa-f0-9]{2}:[A-Fa-f0-9]{2}:[A-Fa-f0-9]{2}/;
-            const ipv4Reg = /^(((\d{1,2})|(1\d{2})|(2[0-4]\d)|(25[0-5]))\.){3}((\d{1,2})|(1\d{2})|(2[0-4]\d)|(25[0-5]))$/;
 
-            if (a === 'ip' && !ipv4Reg.test(v[v.length - 1])) {
-              v.pop();
-            } else if (a === 'mac' && !macAddrReg.test(v[v.length - 1])) {
-              v.pop();
-            }
+            // const macAddrReg =  /[A-Fa-f0-9]{2}:[A-Fa-f0-9]{2}:[A-Fa-f0-9]{2}:[A-Fa-f0-9]{2}:[A-Fa-f0-9]{2}:[A-Fa-f0-9]{2}/;
+            // const ipv4Reg = /^(((\d{1,2})|(1\d{2})|(2[0-4]\d)|(25[0-5]))\.){3}((\d{1,2})|(1\d{2})|(2[0-4]\d)|(25[0-5]))$/;
             form[propMap[a]] = v.join('-');
           }
         });
