@@ -67,12 +67,24 @@
     </div>
 </div>
 <div class="row">
-  <div class="col span-4">
+    <div class="col span-4">
       <label class="acc-label">{{t "formVlan.project.label"}}</label>
       {{new-select
         value=form.metadata.labels.project
         content=projects
         disabled=true
+      }}
+    </div>
+    <div class="col span-4">
+      <label class="acc-label">{{t "formVlan.ipReuse.label"}}({{t "formVlan.ipReuse.ipReuseUnit"}})</label>
+      {{input-integer
+          classNames="form-control"
+          value=form.spec.ipDelayReuse
+          min="1"
+          max="3600"
+          step="1"
+          disabled=true
+          placeholder=(t "formVlan.ipReuse.placeholder")
       }}
     </div>
 </div>

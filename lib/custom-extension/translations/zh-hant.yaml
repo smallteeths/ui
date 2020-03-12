@@ -226,6 +226,11 @@ formVlan:
     gatewayFormatError: "Gateway IP 格式錯誤"
   project:
     label: Project
+  ipReuse:
+    label: 自動IP延遲回收
+    ipReuseUnit: 分鐘
+    placeholder: "取值範圍1-3600之間的整數"
+    ipReuseFormatError: "自動IP延遲回收 格式錯誤"
   ipRange:
     label: "IP Range"
     btn: "添加 IP Range"

@@ -272,6 +272,11 @@ formVlan:
     gatewayFormatError: '"Gateway" format error'
   project:
     label: Project
+  ipReuse:
+    label: Ip Delay Reuse
+    ipReuseUnit: minute
+    placeholder: "Values between 1 and 3600."
+    ipReuseFormatError: '"Ip Delay Reuse" format error'
   ipRange:
     label: "IP Range"
     btn: "Add IP Range"

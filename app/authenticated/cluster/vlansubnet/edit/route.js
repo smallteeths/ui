@@ -27,6 +27,7 @@ export default Route.extend({
     form.spec.podDefaultGateway = form.spec.podDefaultGateway || {}
     form.spec.podDefaultGateway.enable = !!form.spec.podDefaultGateway.enable;
     form.spec.routes = model.vlansubnet.spec.routes ? JSON.parse(JSON.stringify(model.vlansubnet.spec.routes)) : [];
+    form.spec.ipDelayReuse = (form.spec.ipDelayReuse && form.spec.ipDelayReuse / 60) || '',
     set(controller, 'form', form);
     set(controller, 'ipRangesExisted', null);
     this._super(controller, model);

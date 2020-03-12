@@ -15,7 +15,7 @@ export default Route.extend({
 
     if ( copy_id ){
       form = get(this, 'vlansubnet').fetchVlansubnet(clusterId, copy_id).then((resp) => {
-        let { metadata, spec } = resp.body || {};
+        let { metadata, spec = {} } = resp.body || {};
         const cloneForm = {
           apiVersion: 'macvlan.cluster.cattle.io/v1',
           kind:       'MacvlanSubnet',
@@ -25,16 +25,17 @@ export default Route.extend({
             labels:    { project: metadata && metadata.labels && metadata.labels.project || '' },
           },
           spec: {
-            master:            spec && spec.master || '',
-            vlan:              spec && spec.vlan || '',
-            cidr:              spec && spec.cidr || '',
-            mode:              spec && spec.mode || 'bridge',
-            gateway:           spec && spec.gateway || '',
+            master:            spec.master || '',
+            vlan:              spec.vlan || '',
+            cidr:              spec.cidr || '',
+            mode:              spec.mode || 'bridge',
+            gateway:           spec.gateway || '',
             ranges:            [],
-            routes:            spec && spec.routes || [],
+            routes:            spec.routes || [],
+            ipDelayReuse:      (spec.ipDelayReuse && spec.ipDelayReuse / 60) || '',
             podDefaultGateway: {
-              enable:      spec && spec.podDefaultGateway && spec.podDefaultGateway.enable || false,
-              serviceCidr: spec && spec.podDefaultGateway && spec.podDefaultGateway.serviceCidr || ''
+              enable:          spec.podDefaultGateway && spec.podDefaultGateway.enable || false,
+              serviceCidr:     spec.podDefaultGateway && spec.podDefaultGateway.serviceCidr || ''
             }
           }
         };

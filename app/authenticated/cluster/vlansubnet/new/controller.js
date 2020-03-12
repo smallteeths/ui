@@ -54,6 +54,7 @@ export default Controller.extend({
       const form = JSON.parse(JSON.stringify(get(this, 'form')));
 
       form.spec.vlan = parseInt(form.spec.vlan, 10) || 0;
+      form.spec.ipDelayReuse = (parseInt(form.spec.ipDelayReuse, 10) || 0) * 60;
 
       const clusterId = get(this, 'model.clusterId');
       const {
