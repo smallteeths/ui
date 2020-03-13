@@ -1352,7 +1352,7 @@ projectsPage:
       memberRoleReq: 成员角色必须设置。
 
 clusterTemplateRevisionUpgradeNotification:
-  tooltip: 修订 {revision} 可用于升级。
+  tooltip: 修订{revision}可用于升级。
 
 clustersPage:
   header: 集群列表
@@ -3046,7 +3046,7 @@ userPreferencesPage:
     top: 顶部
 
 verifyPage:
-  header: "您已经成功验证了邮件地址!"
+  header: "邮件地址已验证成功!"
   subtext: 在完成账号设置前，我们还需要一些信息。
   account:
     header: 账号创建完成
