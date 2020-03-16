@@ -1,0 +1,11 @@
+{{#if settings.footerText}}
+  {{#if settings.footerUrl}}
+    <a role="button" style={{textStyle}} class="btn btn-sm bg-transparent" target="blank" rel="noreferrer noopener" href="{{settings.footerUrl}}">
+      {{settings.footerText}}
+    </a>
+  {{else}}
+      <span style={{textStyle}}>
+        {{settings.footerText}}
+      </span>
+  {{/if}}
+{{/if}}

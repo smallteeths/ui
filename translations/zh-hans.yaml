@@ -5808,9 +5808,11 @@ dangerZone:
     'auth-user-info-max-age-seconds': '在执行身份验证提供者组成员同步之前，用户身份验证令牌的最大有效期。'
     'auth-user-info-resync-cron': '用于重新同步身份验证提供者组成员关系的默认cron调度。'
     'cluster-template-enforcement': '非管理员只能通过预先批准的集群模板启动集群。'
-    'auth-user-session-ttl-minutes': '用户验证会话上的自定义TTL(以分钟为单位)。'
-    'rke-metadata-config': '配置RKE元数据刷新参数。'
-    'ui-banners': '分类条幅用于在标题中显示自定义固定条幅, 页脚, 或者两者同时显示。该设置使用包含3个根参数的JSON对象; <code>banner</code>, <code>showHeader</code>, <code>showFooter</code>. <code>banner</code> is an object containing; <code>textColor</code>, <code>background</code>, and <code>text</code>, where <code>textColor</code> and <code>background</code> are any valid CSS color value.'
+    'auth-user-session-ttl-minutes': '用户验证会话上的自定义 TTL(以分钟为单位)。'
+    'rke-metadata-config': '配置 RKE 元数据刷新参数。'
+    'ui-banners': '分类条幅用于在标题中显示自定义固定条幅, 页脚, 或者两者同时显示。该设置使用包含 3 个根参数的 JSON 对象; <code>banner</code>, <code>showHeader</code>, <code>showFooter</code>. <code>banner</code> is an object containing; <code>textColor</code>, <code>background</code>, and <code>text</code>, where <code>textColor</code> and <code>background</code> are any valid CSS color value.'
+    'ui-footer-text': '额外的页脚内容'
+    'ui-footer-url': '额外页脚内容对应的链接'
 
 deleteEksCluster:
   title: "确定删除集群{clusterName}吗?"

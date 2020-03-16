@@ -5753,6 +5753,8 @@ dangerZone:
     'auditlog-server-url': 'Configure the audit log service url'
     'rke-metadata-config': 'Configure RKE metadata refresh parameters.'
     'ui-banners': 'Classification banner is used to display a custom fixed banner in the header, footer, or both. The setting takes JSON object containing 3 root parameters; <code>banner</code>, <code>showHeader</code>, <code>showFooter</code>. <code>banner</code> is an object containing; <code>textColor</code>, <code>background</code>, and <code>text</code>, where <code>textColor</code> and <code>background</code> are any valid CSS color value.'
+    'ui-footer-text': 'Extra text in footer.'
+    'ui-footer-url': 'URL for the extra text in footer.'
 
 deleteEksCluster:
   title: "Delete {clusterName}?"
