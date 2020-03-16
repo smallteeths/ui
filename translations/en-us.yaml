@@ -2037,6 +2037,14 @@ globalMonitoringPage:
     detail: Store Prometheus metrics across multiple clusters to object storage for unlimited time.
     enabled:
       label: Store Prometheus metrics to object storage
+    gcs:
+      label: Google Cloud Storage
+      bucketName:
+        label: Bucket Name
+        placeholder: "e.g. backups"
+      serviceAccount:
+        label: Service Account
+        placeholder: "Your Google service account"
     s3:
       label: S3
       bucketName:

@@ -2072,6 +2072,14 @@ globalMonitoringPage:
     detail: 将多集群的Prometheus指标存储到对象存储上。
     enabled:
       label: 存储指标到对象存储
+    gcs:
+      label: Google 云存储
+      bucketName:
+        label: 存储桶名称
+        placeholder: "例如：backups"
+      serviceAccount:
+        label: Service Account
+        placeholder: "你的 Google service account"
     s3:
       label: S3
       bucketName:
