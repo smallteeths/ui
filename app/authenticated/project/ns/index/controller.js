@@ -29,7 +29,7 @@ export const headers = [
 ];
 
 export default Controller.extend({
-
+  access:            service(),
   scope:             service(),
   router:            service(),
   session:           service(),
@@ -55,7 +55,13 @@ export default Controller.extend({
     let ns = get(this, 'model.namespaces');
     let pId = get(this, 'scope.currentProject.id');
 
-    return ns.filter( (n) => get(n, 'projectId') === pId || isEmpty(get(n, 'projectId')));
+    const allNamespace = ns.filter( (n) => get(n, 'projectId') === pId || isEmpty(get(n, 'projectId')));
+
+    if (this.hideRemovingNs) {
+      return allNamespace.filter((ns) => ns.state !== 'removing');
+    }
+
+    return allNamespace;
   }),
 
   projectNamespaces: computed('model.namespaces', function() {
@@ -66,4 +72,11 @@ export default Controller.extend({
     return get(this, 'model.namespaces').filter( (ns) => isEmpty(get(ns, 'projectId')) );
   }),
 
+  hideRemovingNs: computed('access.me.hasAdmin', 'access.me.clusterRoleBindings.@each.roleTemplateId', function() {
+    if (get(this, 'access.me.hasAdmin') || (get(this, 'access.me.clusterRoleBindings') || []).some((rb) => rb.roleTemplateId === 'cluster-owner')) {
+      return false;
+    }
+
+    return true;
+  }),
 });

@@ -4,6 +4,7 @@ import { computed, get } from '@ember/object';
 
 export default Controller.extend({
   scope:       service(),
+  access:      service(),
   queryParams: { group: 'group', },
   group:       'project',
 
@@ -13,7 +14,13 @@ export default Controller.extend({
     },
   },
 
-  rows: computed('model.namespaces.@each.displayName', 'model.projects.@each.clusterId', 'scope.currentCluster.id', function() {
+  rows: computed('model.namespaces.@each.state', 'model.namespaces.@each.displayName', 'model.projects.@each.clusterId', 'scope.currentCluster.id', function() {
+    if (this.hideRemovingNs) {
+      return get(this, 'model.namespaces')
+        .filterBy('displayName')
+        .filter((ns) => ns.state !== 'removing');
+    }
+
     return get(this, 'model.namespaces')
       .filterBy('displayName');
   }),
@@ -29,6 +36,14 @@ export default Controller.extend({
       return get(namespaces, 'length') <= 0;
     })
       .sortBy('displayName');
+  }),
+
+  hideRemovingNs: computed('access.me.hasAdmin', 'access.me.clusterRoleBindings.@each.roleTemplateId', function() {
+    if (get(this, 'access.me.hasAdmin') || (get(this, 'access.me.clusterRoleBindings') || []).some((rb) => rb.roleTemplateId === 'cluster-owner')) {
+      return false;
+    }
+
+    return true;
   }),
 
 });
