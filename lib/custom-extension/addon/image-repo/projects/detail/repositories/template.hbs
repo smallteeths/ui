@@ -17,7 +17,7 @@
     {{!-- <li>
       {{#link-to "image-repo.projects.detail.replications" model.imageList.projectId}}复制{{/link-to}}
     </li> --}}
-    {{#if (and (or isProjectAdmin isSystemAdmin) (not isLimitedGuest))}}
+    {{#if (and (or isProjectAdmin isProjectMaster isSystemAdmin) (not isLimitedGuest))}}
     <li>
       {{#link-to "image-repo.projects.detail.labels" model.imageList.projectId model.currentUserRoleId}}{{t "harborConfig.tab.tag"}}{{/link-to}}
     </li>
