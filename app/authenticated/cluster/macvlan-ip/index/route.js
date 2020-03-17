@@ -25,13 +25,12 @@ export default Route.extend({
       resp:      this.vlansubnet.fetchMacvlanIp(clusterId, p),
       projects:  this.globalStore.findAll('project'),
     }).then((hash) => {
-      let data = hash.resp.body.data;
+      const data = hash.resp.body.data;
 
-      data.map((item) => {
-        item.fullProjectId = `${ clusterId }:${ item.projectId }`
-        item.projectName = hash.projects.filterBy('id', item.fullProjectId)[0].name;
-        item.workloadName = item.workloadId.split(`-${ item.namespace }-`)[1];
+      data.forEach((item) => {
+        item.workloadName = item.workloadId ? item.workloadId.split(`-${ item.namespace }-`)[1] : '';
       });
+
       let projectOptions = hash.projects.map((project) => {
         return {
           value: project.id.substr(clusterId.length + 1),
