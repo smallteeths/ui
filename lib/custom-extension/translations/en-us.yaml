@@ -337,6 +337,8 @@ auditLog:
       day5: "The last 5 days"
       day10: "The last 10 days"
       day15: "The last 15 days"
+    operator:
+      placeholder: operator
   table:
     user: Operator
     operation: Operation

@@ -3,7 +3,14 @@
 </section>
 <section>
   <div class="row">
-    <div class="col span-3">
+    <div class="col span-2">
+      {{input
+        class="form-control"
+        value=form.userdisplayname
+        placeholder=(t 'auditLog.form.operator.placeholder')
+      }}
+    </div>
+    <div class="col span-2">
       {{input
         class="form-control"
         value=form.fieldValue
@@ -53,7 +60,7 @@
     {{#if (eq kind "row")}}
       <tr class="main-row">
         <td data-title="{{dt.username}}">
-          {{obj.userName}}
+          {{obj.userDisplayName}}
         </td>
         <td data-title="{{dt.operation}}">
           {{#if obj.requestAction}}

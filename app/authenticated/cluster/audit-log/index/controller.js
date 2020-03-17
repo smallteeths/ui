@@ -62,13 +62,14 @@ export default Controller.extend({
   availableActions: [],
   loading:          false,
   form:             {
-    field:          'requestResId',
-    fieldValue:     '',
-    next:           '',
-    operation:      '',
-    operationLabel: '',
-    dateRange:      -1,
-    order:          '',
+    field:           'requestResId',
+    fieldValue:      '',
+    userdisplayname: '',
+    next:            '',
+    operation:       '',
+    operationLabel:  '',
+    dateRange:       -1,
+    order:           '',
   },
   queryForm: {},
   actions:          {
@@ -309,6 +310,10 @@ export default Controller.extend({
     const pagesize = get(this, 'prefs.tablePerPage');
     const q = { pagesize };
 
+    if (f.userdisplayname) {
+      q.userdisplayname = f.userdisplayname;
+    }
+
     if (f.field && f.fieldValue) {
       q[f.field] = f.fieldValue;
     }
@@ -335,13 +340,14 @@ export default Controller.extend({
 
     set(this, 'queryForm', { pagesize });
     set(this, 'form', {
-      field:          'requestResId',
-      fieldValue:     '',
-      next:           '',
-      operation:      '',
-      operationLabel: '',
-      dateRange:      -1,
-      order:          '',
+      field:           'requestResId',
+      fieldValue:      '',
+      userdisplayname: '',
+      next:            '',
+      operation:       '',
+      operationLabel:  '',
+      dateRange:       -1,
+      order:           '',
     });
   },
 })

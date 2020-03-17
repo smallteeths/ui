@@ -291,6 +291,8 @@ auditLog:
       day5: 最近5天
       day10: 最近10天
       day15: 最近15天
+    operator:
+      placeholder: 操作人
   table:
     user: 操作人
     operation: 操作
