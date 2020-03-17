@@ -3,15 +3,13 @@
 </section>
 <section class="header has-tabs clearfix pb-0">
   <ul class="tab-nav">
-    {{#if (or isSystemAdmin isMember)}}
     <li>
       {{#link-to "image-repo.projects.detail.summary" model.projectId model.currentUserRoleId}}{{t "harborConfig.tab.summary"}}{{/link-to}}
     </li>
-    {{/if}}
     <li>
       {{#link-to "image-repo.projects.detail.repositories" model.projectId model.currentUserRoleId}}{{t "harborConfig.tab.store"}}{{/link-to}}
     </li>
-    {{#if (or isSystemAdmin isMember)}}
+    {{#if (and (or isSystemAdmin isMember) (not isLimitedGuest))}}
       <li>
         {{#link-to "image-repo.projects.detail.members" model.projectId model.currentUserRoleId}}{{t "harborConfig.tab.member"}}{{/link-to}}
       </li>
@@ -19,17 +17,17 @@
     {{!-- <li>
       {{#link-to "image-repo.projects.detail.replications" model.projectId}}复制{{/link-to}}
     </li> --}}
-    {{#if (or isProjectAdmin isSystemAdmin)}}
+    {{#if (and (or isProjectAdmin isSystemAdmin) (not isLimitedGuest))}}
       <li>
         {{#link-to "image-repo.projects.detail.labels" model.projectId model.currentUserRoleId}}{{t "harborConfig.tab.tag"}}{{/link-to}}
       </li>
     {{/if}}
-    {{#if (or isSystemAdmin isMember)}}
+    {{#if (and (or isSystemAdmin isMember) (not isLimitedGuest))}}
       <li>
         {{#link-to "image-repo.projects.detail.logs" model.projectId model.currentUserRoleId}}{{t "harborConfig.tab.log"}}{{/link-to}}
       </li>
     {{/if}}
-    {{#if (or isSystemAdmin isMember)}}
+    {{#if (and (or isSystemAdmin isMember) (not isLimitedGuest))}}
       <li>
         {{#link-to "image-repo.projects.detail.configs" model.projectId model.currentUserRoleId}}{{t "harborConfig.tab.accessLevel"}}{{/link-to}}
       </li>
@@ -46,7 +44,8 @@
         <span class="pl-40">{{model.summary.repo_count}}</span>
       </div>
     </div>
-    <div class="project-summary__members clearfix">
+    {{#if (and (or isSystemAdmin isMember) (not isLimitedGuest))}}
+      <div class="project-summary__members clearfix">
       <div class="col span-6 clearfix" style="padding-top: 1em;">
         <span><b>{{t "harborConfig.summary.projectMember"}}</b></span>
       </div>
@@ -56,11 +55,14 @@
           <li>{{model.summary.master_count}} {{t "harborConfig.table.roleItem.master"}}</li>
           <li>{{model.summary.developer_count}} {{t "harborConfig.table.roleItem.developer"}}</li>
           <li>{{model.summary.guest_count}} {{t "harborConfig.table.roleItem.visitor"}}</li>
+          <li>{{model.summary.limited_guest_count}} {{t "harborConfig.table.roleItem.limitedGuest"}}</li>
         </ul>
       </div>
     </div>
+    {{/if}}
   </section>
-  <section class="col span-4 offset-4 project-summary__quota">
+  {{#if (or isSystemAdmin isMember)}}
+    <section class="col span-4 offset-4 project-summary__quota">
     <div class="col span-4">
       <span><b>{{t "harborConfig.summary.projectQuota"}}</b></span>
     </div>
@@ -100,4 +102,5 @@
     </div>
 
   </section>
+  {{/if}}
 </div>

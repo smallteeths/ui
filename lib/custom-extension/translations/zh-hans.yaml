@@ -171,6 +171,7 @@ harborConfig:
       visitor: 访客
       user: 用户
       master: 维护人员
+      limitedGuest: 受限访客
     storeStatus:
       public: 公开
       private: 私有

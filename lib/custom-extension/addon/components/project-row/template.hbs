@@ -28,6 +28,8 @@
     {{t "harborConfig.table.roleItem.visitor"}}
   {{else if (eq model.current_user_role_id 4)}}
     {{t "harborConfig.table.roleItem.master"}}
+  {{else if (eq model.current_user_role_id 5)}}
+    {{t "harborConfig.table.roleItem.limitedGuest"}}
   {{/if}}
 </td>
 <td data-title="{{dt.repoCount}}">

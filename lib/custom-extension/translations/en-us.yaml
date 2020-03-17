@@ -171,6 +171,7 @@ harborConfig:
       visitor: Visitors
       user: User
       master: Master
+      limitedGuest: Limited Guest
     storeStatus:
       public: Public
       private: Private
