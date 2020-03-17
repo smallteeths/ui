@@ -2095,6 +2095,40 @@ globalMonitoringPage:
         label: Aliyun OSS Secret Key
         placeholder: Your Aliyun secret key
         provided: Provided
+    tencentcloudcos:
+      label: "Tencent COS"
+      bucketName:
+        label: "Bucket Name"
+        placeholder: "e.g. backups"
+      region:
+        label: "Region"
+        placeholder: "e.g. cos.ap-beijing-1.myqcloud.com"
+      appid:
+        label: "APP ID"
+        placeholder: "e.g. 1250000000"
+      secretKey:
+        label: "Secret Key"
+        placeholder: "Your Secret Key"
+      secretId:
+        label: "Secret Id"
+        placeholder: "Your Secret Id"
+    azure:
+      label: "Azure Storage"
+      bucketName:
+        label: "Container Name"
+        placeholder: "e.g. mycontainer"
+      endpoint:
+        label: "Endpoint"
+        placeholder: "e.g. http://mystorageaccount.blob.core.windows.net"
+      storageAccount:
+        label: "Storage Account"
+        placeholder: "Your Azure Storage Account"
+      storageAccountKey:
+        label: "Storage Account Key"
+        placeholder: "Your Azure Storage Account Key"
+      maxRetries:
+        label: "Max Retries"
+        placeholder: "e.g. 0"
   grafana:
     title: Global Dashboard
     detail: Global Grafana and {appName} Global Dashboard configuration.

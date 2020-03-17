@@ -1,0 +1,93 @@
+<div class="row">
+  <div class="col span-6">
+    <label
+      class="acc-label"
+      for="input-tencentcloudcos-bucket-name"
+    >
+      {{t "globalMonitoringPage.store.tencentcloudcos.bucketName.label"}}
+      <FieldRequired/>
+    </label>
+    {{input
+      id="input-tencentcloudcos-bucket-name"
+      type="text"
+      value=bucketName
+      class="form-control"
+      placeholder=(t "globalMonitoringPage.store.tencentcloudcos.bucketName.placeholder")
+    }}
+  </div>
+
+  <div class="col span-6">
+    <label
+      class="acc-label"
+      for="input-tencentcloudcos-region"
+    >
+      {{t "globalMonitoringPage.store.tencentcloudcos.region.label"}}
+      <FieldRequired/>
+    </label>
+    {{input
+      type="text"
+      name="region"
+      id="input-tencentcloudcos-region"
+      class="form-control"
+      placeholder=(t "globalMonitoringPage.store.tencentcloudcos.region.placeholder")
+      value=region
+    }}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col span-6">
+    <label
+      class="acc-label"
+      for="input-tencentcloudcos-secret-id"
+    >
+      {{t "globalMonitoringPage.store.tencentcloudcos.secretId.label"}}
+      <FieldRequired/>
+    </label>
+    {{input
+      name="secretId"
+      id="input-tencentcloudcos-secret-id"
+      class="form-control"
+      placeholder=(t "globalMonitoringPage.store.tencentcloudcos.secretId.placeholder")
+      value=secretId
+    }}
+  </div>
+
+  <div class="col span-6">
+    <label
+      class="acc-label"
+      for="input-tencentcloudcos-secrect-key"
+    >
+      {{t "globalMonitoringPage.store.tencentcloudcos.secretKey.label"}}
+      <FieldRequired/>
+    </label>
+    {{input
+      type="password"
+      name="secretKey"
+      id="input-tencentcloudcos-secrect-key"
+      class="form-control"
+      placeholder=(t "globalMonitoringPage.store.tencentcloudcos.secretKey.placeholder")
+      value=secretKey
+    }}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col span-6">
+    <label
+      class="acc-label"
+      for="input-tencentcloudcos-appid"
+    >
+      {{t "globalMonitoringPage.store.tencentcloudcos.appid.label"}}
+      <FieldRequired/>
+    </label>
+    {{input
+      type="text"
+      name="appid"
+      id="input-tencentcloudcos-appid"
+      class="form-control"
+      placeholder=(t "globalMonitoringPage.store.tencentcloudcos.appid.placeholder")
+      value=appid
+    }}
+  </div>
+</div>

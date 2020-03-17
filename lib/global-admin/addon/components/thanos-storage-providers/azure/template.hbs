@@ -1,0 +1,94 @@
+<div class="row">
+  <div class="col span-6">
+    <label
+      class="acc-label"
+      for="input-azure-bucket-name"
+    >
+      {{t "globalMonitoringPage.store.azure.bucketName.label"}}
+      <FieldRequired/>
+    </label>
+    {{input
+      id="input-azure-bucket-name"
+      type="text"
+      value=bucketName
+      class="form-control"
+      placeholder=(t "globalMonitoringPage.store.azure.bucketName.placeholder")
+    }}
+  </div>
+
+  <div class="col span-6">
+    <label
+      class="acc-label"
+      for="input-azure-endpoint"
+    >
+      {{t "globalMonitoringPage.store.azure.endpoint.label"}}
+      <FieldRequired/>
+    </label>
+    {{input
+      type="text"
+      name="endpoint"
+      id="input-azure-endpoint"
+      class="form-control"
+      placeholder=(t "globalMonitoringPage.store.azure.endpoint.placeholder")
+      value=endpoint
+    }}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col span-6">
+    <label
+      class="acc-label"
+      for="input-azure-storage-account"
+    >
+      {{t "globalMonitoringPage.store.azure.storageAccount.label"}}
+      <FieldRequired/>
+    </label>
+    {{input
+      type="text"
+      name="storageAccount"
+      id="input-azure-storage-account"
+      class="form-control"
+      placeholder=(t "globalMonitoringPage.store.azure.storageAccount.placeholder")
+      value=storageAccount
+    }}
+  </div>
+
+  <div class="col span-6">
+    <label
+      class="acc-label"
+      for="input-azure-storage-account-key"
+    >
+      {{t "globalMonitoringPage.store.azure.storageAccountKey.label"}}
+      <FieldRequired/>
+    </label>
+    {{input
+      type="password"
+      name="storageAccountKey"
+      id="input-azure-storage-account-key"
+      class="form-control"
+      placeholder=(t "globalMonitoringPage.store.azure.storageAccountKey.placeholder")
+      value=storageAccountKey
+    }}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col span-6">
+    <label
+      class="acc-label"
+      for="input-azure-max-retries"
+    >
+      {{t "globalMonitoringPage.store.azure.maxRetries.label"}}
+      <FieldRequired/>
+    </label>
+    {{input
+      type="number"
+      name="maxRetries"
+      id="input-azure-max-retries"
+      class="form-control"
+      placeholder=(t "globalMonitoringPage.store.azure.maxRetries.placeholder")
+      value=maxRetries
+    }}
+  </div>
+</div>

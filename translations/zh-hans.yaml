@@ -2130,6 +2130,40 @@ globalMonitoringPage:
         label: 阿里云 Secret Key
         placeholder: 你的阿里云 secret key
         provided: 已提供
+    tencentcloudcos:
+      label: "腾讯云COS"
+      bucketName:
+        label: "存储桶名称"
+        placeholder: "例如：backups"
+      region:
+        label: "区域"
+        placeholder: "例如：cos.ap-beijing-1.myqcloud.com"
+      appid:
+        label: "APP ID"
+        placeholder: "例如：1250000000"
+      secretId:
+        label: "密钥 ID"
+        placeholder: "腾讯云密钥 ID"
+      secretKey:
+        label: "密钥 Key"
+        placeholder: "腾讯云密钥 Key"
+    azure:
+      label: "Azure 存储"
+      bucketName:
+        label: "Container 名称"
+        placeholder: "例如：mycontainer"
+      endpoint:
+        label: "Endpoint"
+        placeholder: "例如：http://mystorageaccount.blob.core.windows.net"
+      storageAccount:
+        label: "Storage Account"
+        placeholder: "你的 Storage Account"
+      storageAccountKey:
+        label: "Storage Account Key"
+        placeholder: "你的Storage Account Key"
+      maxRetries:
+        label: "最大重试次数"
+        placeholder: "例如：0"
   grafana:
     title: 监控大屏
     detail: 全局Grafana和{appName}监控大屏的配置。
