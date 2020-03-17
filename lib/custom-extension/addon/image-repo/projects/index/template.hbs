@@ -30,7 +30,7 @@
     as |sortable kind row dt|
   }}
   {{#if (eq kind "row")}}
-      {{project-row model=row hasAdminRole=model.currentUser.has_admin_role command=(action "handleCommand")}}
+      {{project-row model=row harborVersion=model.harborVersion hasAdminRole=model.currentUser.has_admin_role command=(action "handleCommand")}}
     {{else if (eq kind "nomatch")}}
       <tr>
         <td

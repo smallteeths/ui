@@ -55,7 +55,9 @@
           <li>{{model.summary.master_count}} {{t "harborConfig.table.roleItem.master"}}</li>
           <li>{{model.summary.developer_count}} {{t "harborConfig.table.roleItem.developer"}}</li>
           <li>{{model.summary.guest_count}} {{t "harborConfig.table.roleItem.visitor"}}</li>
+          {{#if model.harborVersion.supportRoleLimitedGuest}}
           <li>{{model.summary.limited_guest_count}} {{t "harborConfig.table.roleItem.limitedGuest"}}</li>
+          {{/if}}
         </ul>
       </div>
     </div>

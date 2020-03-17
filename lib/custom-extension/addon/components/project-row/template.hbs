@@ -6,9 +6,15 @@
   {{!-- <a href="{{href-to 'custom-extension.image-repo.projects.detail.repositories' model.project_id}}">
     {{model.name}}
   </a> --}}
-  {{#link-to 'image-repo.projects.detail.summary' model.project_id model.current_user_role_id class="clip project-link"}}
-    {{model.name}}
-  {{/link-to}}
+  {{#if harborVersion.supportSummary}}
+    {{#link-to 'image-repo.projects.detail.summary' model.project_id model.current_user_role_id class="clip project-link"}}
+      {{model.name}}
+    {{/link-to}}
+  {{else}}
+    {{#link-to 'image-repo.projects.detail.repositories' model.project_id model.current_user_role_id class="clip project-link"}}
+      {{model.name}}
+    {{/link-to}}
+  {{/if}}
 </td>
 <td data-title="{{dt.public}}">
   {{#if (eq model.metadata.public "true")}}
