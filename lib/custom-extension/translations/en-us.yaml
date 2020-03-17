@@ -20,7 +20,7 @@ imageRepoSection:
       noMatch: No Data Match
   adminConfigPage:
     saveHarborConfig: "SAVE"
-    removeHarborConfig: "REMOVE"
+    removeHarborConfig: "REMOVE Harbor Config"
     testEmailServer: "Test mail server"
     gcSchedule: "Clean up"
   userConfigPage:

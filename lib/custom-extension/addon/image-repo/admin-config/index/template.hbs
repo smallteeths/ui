@@ -63,7 +63,18 @@
     {{save-cancel save=(action "confirmChangePwd") cancel=(action "cancelChangePwd") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
     {{/if}}
     {{#if harborConfigEditable}}
-    {{save-cancel save=(action "saveHarboConfig") cancel=(action "cancelHarborConfig") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
+      {{#if harborAccountValid}}
+        <div class="row">
+          <div class="col span-6">
+            {{save-cancel save=(action "saveHarboConfig") cancel=(action "cancelHarborConfig") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" class="pull-right"}}
+          </div>
+          <div class="col span-6">
+            {{save-cancel save=(action "removeHarboConfig") cancelDisabled=true cancelLabel="imageRepoSection.common.reset" createLabel="imageRepoSection.adminConfigPage.removeHarborConfig" class="pull-left"}}
+          </div>
+        </div>
+      {{else}}
+        {{save-cancel save=(action "saveHarboConfig") cancel=(action "cancelHarborConfig") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
+      {{/if}}
     {{/if}}
     {{!-- {{#if harborAccountValid}}
       <div class="row">

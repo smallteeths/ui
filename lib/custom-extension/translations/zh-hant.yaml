@@ -20,7 +20,7 @@ imageRepoSection:
       noMatch: 暫無數據
   adminConfigPage:
     saveHarborConfig: 保存
-    removeHarborConfig: 刪除
+    removeHarborConfig: 移除Harbor配置
     testEmailServer: 測試郵件服務區
     gcSchedule: 立即清理垃圾
   userConfigPage:
