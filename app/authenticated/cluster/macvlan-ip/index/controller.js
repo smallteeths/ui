@@ -95,8 +95,12 @@ export default Controller.extend({
       get(this, 'vlansubnet').fetchMacvlanIp(clusterId, p).then((resp) => {
         set(this, 'loading', false);
         const data = [...get(this, 'model.macvlanIps.data')];
+        let newData = resp.body.data;
 
-        data.push(...resp.body.data);
+        newData.forEach((item) => {
+          item.workloadName = item.workloadId ? item.workloadId.split(`-${ item.namespace }-`)[1] : '';
+        });
+        data.push(...newData);
 
         set(this, 'model.macvlanIps', {
           data,
