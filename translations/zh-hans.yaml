@@ -4495,6 +4495,7 @@ clusterNew:
       label: 容器网卡 MTU
       help: "自定义容器网卡MTU值，0 表示使用网络驱动默认配置的MTU值。常规网络通信MTU为1500，对于非标准的网络驱动，可通过这个参数来自定义容器的MTU值。"
       detail: '例如: 1500'
+      help: '仅当值非0时应用。应用后将为选定的网络提供商显式配置MTU值(禁用自动发现)。替代值必须通过主机的MTU减去CNI插件所需的开销来计算。'
     version:
       label: Kubernetes版本
     registry:
