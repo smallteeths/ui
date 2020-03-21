@@ -6102,8 +6102,10 @@ stacksPage:
 featureFlags:
   warningHeader: '您应该谨慎地启用这些功能，它们应该被视为可能会给您的系统带来问题的beta功能'
   features:
-   istioVirtualServiceUi: "启用此功能将为Istio公开额外的UI页面"
-   unsupportedStorageDrivers: "启用此功能将为持久卷和存储类公开不受支持的存储驱动程序选项。"
+    istioVirtualServiceUi: "启用此功能将为 Istio 公开额外的 UI 页面"
+    unsupportedStorageDrivers: "启用此功能将为持久卷和存储类公开不受支持的存储驱动程序选项。"
+    projectMonitoringServiceUI: "启用此功能将显示项目监控导航菜单"
+    projectPipelineServiceUI: "启用此功能将显示项目流水线导航菜单"
   table:
     description: 描述
     name: 名称

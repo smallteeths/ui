@@ -6043,8 +6043,10 @@ stacksPage:
 featureFlags:
   warningHeader: "Feature flags allow Rancher to gate certain features behind flags. You should enable these features with caution, and they should be considered beta functionality, which could cause problems for your system. Additionally, some features require a restart of the Rancher server to be enabled."
   features:
-   istioVirtualServiceUi: "Enabling this feature exposes additional UI pages for Istio."
-   unsupportedStorageDrivers: "Enabling this feature exposes unsupported storage driver options for persistent volumes and storage classes."
+    istioVirtualServiceUi: "Enabling this feature exposes additional UI pages for Istio."
+    unsupportedStorageDrivers: "Enabling this feature exposes unsupported storage driver options for persistent volumes and storage classes."
+    projectMonitoringServiceUI: "Enabling this feature will display the project monitoring menu"
+    projectPipelineServiceUI: "Enabling this feature will display the project pipeline menu"
   table:
     description: Description
     name: Name

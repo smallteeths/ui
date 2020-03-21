@@ -1,5 +1,6 @@
 import { getProjectId, getClusterId, bulkAdd } from 'ui/utils/navigation-tree';
 import { get } from '@ember/object';
+import C from 'ui/utils/constants';
 
 const rootNav = [
   // Project
@@ -42,7 +43,10 @@ const rootNav = [
         ctx:            [getProjectId],
         resource:       [],
         resourceScope:  'project',
-        initExpand:     'authenticated.project.pipeline.pipelines.index'
+        initExpand:     'authenticated.project.pipeline.pipelines.index',
+        condition() {
+          return enableProjectMenus.call(this, 'pipeline')
+        }
       },
       {
         id:             'istio',
@@ -164,7 +168,10 @@ const rootNav = [
         resourceScope:  'global',
         resource:       [],
         ctx:            [getProjectId],
-        initExpand:     'authenticated.project.monitoring.project-setting'
+        initExpand:     'authenticated.project.monitoring.project-setting',
+        condition() {
+          return enableProjectMenus.call(this, 'monitoring')
+        }
       },
       {
         id:             'tools-pipeline',
@@ -173,7 +180,10 @@ const rootNav = [
         resource:       ['sourcecodeproviderconfig'],
         resourceScope:  'project',
         ctx:            [getProjectId],
-        initExpand:     'authenticated.project.pipeline.settings'
+        initExpand:     'authenticated.project.pipeline.settings',
+        condition() {
+          return enableProjectMenus.call(this, 'pipeline')
+        }
       },
     ]
   },
@@ -596,7 +606,30 @@ const rootNav = [
 //    route: 'global-admin.settings.advanced',
 //    disabled: true,
 //  },
-]
+];
+
+const enableProjectMenus = function(name) {
+  const { [name]: menu } = {
+    monitoring: {
+      label: 'project.feature.pandaria.io/monitoring',
+      key:   C.FEATURES.PROJECT_MONITORING_SERVICE_UI
+    },
+    pipeline: {
+      label: 'project.feature.pandaria.io/pipeline',
+      key:   C.FEATURES.PROJECT_PIPELINE_SERVICE_UI
+    }
+  };
+  const labels = get(this, 'project.labels');
+
+  if (labels && labels[menu.label] !== undefined) {
+    return labels[menu.label] === 'true'
+  }
+
+  const features        = get(this, 'globalStore').all('feature');
+  const enableByFeature = features.filterBy('name', menu.key).get('firstObject.value');
+
+  return enableByFeature !== false;
+};
 
 export function initialize(/* appInstance*/) {
   bulkAdd(rootNav);
