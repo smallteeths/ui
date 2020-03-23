@@ -16,6 +16,9 @@ export default Route.extend({
     const projectId = params.projectId;
     const p = { limit: this.prefs.tablePerPage, };
     let q = [];
+    let  projects = this.globalStore.findAll('project').then((projects) => {
+      return projects.filterBy('clusterId', clusterId);
+    });
 
     subnet && q.push(encodeURIComponent(`subnet=${ subnet }`));
     projectId && q.push(encodeURIComponent(`field.cattle.io/projectId=${ projectId }`));
@@ -23,7 +26,7 @@ export default Route.extend({
 
     return hash({
       resp:      this.vlansubnet.fetchMacvlanIp(clusterId, p),
-      projects:  this.globalStore.findAll('project'),
+      projects,
     }).then((hash) => {
       const data = hash.resp.body.data;
 
