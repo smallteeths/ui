@@ -124,7 +124,7 @@ export default Component.extend({
     if (!num) {
       return;
     }
-    let podNum = scale || get(this, 'pod.pod_num') || 0;
+    let podNum = scale || parseInt(get(this, 'pod.pod_num'), 10) || 0;
     let newPodNum = Math.max(podNum + num, 0);
 
     set(this, 'pod.pod_num', newPodNum);
