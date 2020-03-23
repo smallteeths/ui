@@ -12,7 +12,7 @@ export default Component.extend({
   layout,
   tagName:               'div',
   classNames:            ['custom-kubeshell-toolbox-modal-popover not-select '],
-  classNameBindings:     ['modalVisible:modal-open:modal-closed', 'cluster:dis-block:dis-none', 'zh-hans:zh-hans:en-us'],
+  classNameBindings:     ['modalVisible:modal-open:modal-closed', 'cluster::hide', 'zh-hans:zh-hans:en-us'],
   modalVisible:          false,
   mouseTimer:            null,
   attributeBindings:     ['style'],
@@ -31,6 +31,18 @@ export default Component.extend({
       this.get('modalService').toggleModal('modal-kubeconfig', { escToClose: true, });
     },
   },
+  classKubeshellToolbox: computed('cluster', 'cluster.isReady', function(){
+    let toolboxClass = 'custom-kubeshell-toolbox-popover__reference'
+
+    if (!this.cluster){
+      return toolboxClass;
+    }
+    if (!this.cluster.isReady){
+      toolboxClass = 'custom-kubeshell-toolbox-popover__reference custom-kubeshell-toolbox-popover__disabled';
+    }
+
+    return toolboxClass
+  }),
   'zh-hans': computed('intl.locale', function() {
     const intl = get(this, 'intl.locale');
 
@@ -38,7 +50,9 @@ export default Component.extend({
   }),
   mouseEnter(){
     clearTimeout(get(this, 'mouseTimer'));
-    set(this, 'modalVisible', true);
+    if ( this.cluster && this.cluster.isReady ){
+      set(this, 'modalVisible', true);
+    }
 
     return true;
   },

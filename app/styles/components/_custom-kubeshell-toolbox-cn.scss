@@ -6,14 +6,9 @@
     -khtml-user-select:none;
     user-select:none;
   }
-  &.dis-none{
-    display: none;
-  }
-  &.dis-block{
-    display: block;
-  }
-  &.dis-inline-block{
-    display: inline-block;
+  .custom-kubeshell-toolbox-popover__disabled{
+    background: #8b969d;
+    cursor: not-allowed;
   }
 }
 .custom-kubeshell-toolbox-popover{
