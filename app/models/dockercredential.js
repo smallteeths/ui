@@ -15,14 +15,19 @@ Object.keys(PRESETS).forEach((key) => {
 });
 
 var DockerCredential = Resource.extend({
-  intl:     service(),
-  router:   service(),
+  intl:   service(),
+  router: service(),
+  access: service(),
 
   state:    'active',
   canClone: true,
 
   firstRegistry: alias('asArray.firstObject'),
   registryCount: alias('asArray.length'),
+
+  canEdit: computed('links.update', function() {
+    return !!get(this, 'links.update') && (get(this, 'access.me.hasAdmin') || get(this, 'access.me.id') === this.creatorId);
+  }),
 
   asArray: computed('registries', function() {
     const all = get(this, 'registries') || {};
@@ -88,7 +93,10 @@ var DockerCredential = Resource.extend({
           type: get(this, 'type')
         }
       });
-    }
+    },
+    edit() {
+      this.modalService.toggleModal('modal-edit-docker-credential-password', { model: this });
+    },
   },
 
 });

@@ -1,0 +1,55 @@
+<div class="header">
+  <h2>{{t 'modalEditPassword.edit.title' appName=settings.appName}}</h2>
+</div>
+<form class="horizontal-form container-fluid text-left" {{action "save" on="submit"}}>
+  <div class="content">
+      <div class="row">
+        <div class="col span-12">
+          <label class="acc-label">
+            {{t "generic.name"}}
+          </label>
+          {{input
+            value=model.name
+            classNames="form-control start"
+            disabled="true"
+          }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col span-12">
+          <label class="acc-label">
+            {{t "modalEditPassword.new"}}
+          </label>
+          {{input
+            type="password"
+            value=password
+            classNames="form-control start"
+          }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col span-12">
+          <label class="acc-label">
+            {{t "modalEditPassword.confirm"}}
+          </label>
+          {{input
+            type="password"
+            value=confirm
+            classNames="form-control"
+            focusOut=(action "blurredConfirm")
+          }}
+        </div>
+      </div>
+  </div>
+
+  {{top-errors errors=errors}}
+  {{save-cancel
+    saveDisabled=saveDisabled
+    save=(action "save")
+    editing=true
+    editLabel='modalEditPassword.actionButton'
+    cancel=(action "cancel")
+    cancelDisabled=cancelDisabled
+  }}
+</form>
+
