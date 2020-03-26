@@ -3,7 +3,14 @@
 </section>
 <section>
   <div class="row">
-    <div class="col span-3">
+    <div class="col span-2">
+      {{input
+        class="form-control"
+        value=form.userdisplayname
+        placeholder=(t 'auditLog.form.operator.placeholder')
+      }}
+    </div>
+    <div class="col span-2">
       {{input
         class="form-control"
         value=form.fieldValue

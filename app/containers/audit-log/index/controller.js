@@ -66,13 +66,14 @@ export default Controller.extend({
   availableActions: [],
   loading:          false,
   form:             {
-    field:          'requestResId',
-    fieldValue:     '',
-    next:           '',
-    operation:      '',
-    operationLabel: '',
-    dateRange:      -1,
-    order:          '',
+    field:           'requestResId',
+    fieldValue:      '',
+    userdisplayname: '',
+    next:            '',
+    operation:       '',
+    operationLabel:  '',
+    dateRange:       -1,
+    order:           '',
   },
   queryForm: {},
 
@@ -301,6 +302,10 @@ export default Controller.extend({
       q[f.field] = f.fieldValue;
     }
 
+    if (f.userdisplayname) {
+      q.userdisplayname = f.userdisplayname;
+    }
+
     const dateRange = parseInt(f.dateRange, 10);
 
     if (dateRange > 0) {
@@ -323,13 +328,14 @@ export default Controller.extend({
 
     set(this, 'queryForm', { pagesize });
     set(this, 'form', {
-      field:          'requestResId',
-      fieldValue:     '',
-      next:           '',
-      operation:      '',
-      operationLabel: '',
-      dateRange:      -1,
-      order:          '',
+      field:           'requestResId',
+      fieldValue:      '',
+      userdisplayname: '',
+      next:            '',
+      operation:       '',
+      operationLabel:  '',
+      dateRange:       -1,
+      order:           '',
     });
   },
 })
