@@ -209,6 +209,19 @@ export default Component.extend({
       return true;
     });
 
+    const extraMenus = get(this, 'settings.extra-menus') || '';
+
+    extraMenus.split(';').forEach((menu) => {
+      const [menuScope, menuLabel, menuUrl] = menu.split(',');
+
+      if ( menuScope === currentScope ) {
+        out.push({
+          url:   menuUrl,
+          label: menuLabel,
+        })
+      }
+    })
+
     const old = JSON.stringify(get(this, 'navTree'));
     const neu = JSON.stringify(out);
 

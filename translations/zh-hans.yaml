@@ -5876,6 +5876,7 @@ dangerZone:
     'ui-banners': '分类条幅用于在标题中显示自定义固定条幅, 页脚, 或者两者同时显示。该设置使用包含 3 个根参数的 JSON 对象; <code>banner</code>, <code>showHeader</code>, <code>showFooter</code>. <code>banner</code> is an object containing; <code>textColor</code>, <code>background</code>, and <code>text</code>, where <code>textColor</code> and <code>background</code> are any valid CSS color value.'
     'ui-footer-text': '额外的页脚内容'
     'ui-footer-url': '额外页脚内容对应的链接'
+    'extra-menus': '配置扩展菜单'
 
 deleteEksCluster:
   title: "确定删除集群{clusterName}吗?"
@@ -10904,3 +10905,18 @@ selectValueCheck:
       =1 {请选择新的值。以下内容不再有效:}
       other {请选择新的值。以下内容不再有效:}
     }
+  
+customMenus:
+  index:
+    header: 自定义菜单
+    globalMenu: 全局级别自定义菜单
+    clusterMenu: 集群级别自定义菜单
+    projectMenu: 项目级别自定义菜单
+
+formMenu:
+  menu:
+    add: 添加菜单
+  name:
+    label: 菜单名称
+  link:
+    label: 链接地址

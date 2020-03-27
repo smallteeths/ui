@@ -36,11 +36,19 @@
         </div>
         <div class="accordion-content row"> {{!-- content-section --}}
           {{#if row.hide}}
-            <div class="row ml-10 mt-10">
-              <div class="btn bg-primary btn-sm" {{action "showNode" row}}>
-                {{t "dangerZone.show"}} {{row.key}}
+            {{#if (eq row.key "extra-menus")}}
+              <div class="row ml-10 mt-10">
+                <div class="btn bg-primary btn-sm" {{action "editMenu" row}}>
+                  {{t "generic.edit"}} {{row.key}}
+                </div>
               </div>
-            </div>
+            {{else}}
+              <div class="row ml-10 mt-10">
+                <div class="btn bg-primary btn-sm" {{action "showNode" row}}>
+                  {{t "dangerZone.show"}} {{row.key}}
+                </div>
+              </div>
+            {{/if}}
           {{else}}
             <div class="">
               {{#if (eq row.kind "json" )}}

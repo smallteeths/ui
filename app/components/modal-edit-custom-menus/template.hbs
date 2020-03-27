@@ -1,0 +1,49 @@
+<section class="header">
+  <h1>
+    {{t "modalEditSetting.title"}}
+  </h1>
+</section>
+<section class="horizontal-form container-fluid">
+  <div class="row">
+    <label>
+      {{t "modalEditSetting.name.label"}}
+    </label>
+    <div class="text-mono">
+      {{model.key}}
+    </div>
+    <p class="text-info">
+      {{t model.descriptionKey appName=settings.appName}}
+    </p>
+  </div>
+</section>
+
+<div class="box">
+  {{form-menu
+    editing=true
+    arrays=globalMenus
+    title=(t "customMenus.index.globalMenu")
+  }}
+</div>
+
+<div class="box mt-30">
+  {{form-menu
+    editing=true
+    arrays=clusterMenus
+    title=(t "customMenus.index.clusterMenu")
+  }}
+</div>
+
+<div class="box mt-30">
+  {{form-menu
+    editing=true
+    arrays=projectMenus
+    title=(t "customMenus.index.projectMenu")
+  }}
+</div>
+
+{{top-errors errors=errors}}
+{{save-cancel
+  editing=true
+  save=(action "save")
+  cancel=(action "cancel")
+}}

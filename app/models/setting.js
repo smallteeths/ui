@@ -8,6 +8,8 @@ import C from 'ui/utils/constants';
 export default Resource.extend({
   modalService: service('modal'),
   settings:     service(),
+  router:       service(),
+
   type:         'setting',
   canRemove:    false,
 
@@ -43,14 +45,23 @@ export default Resource.extend({
       let obj =  this.get('settings').findByName(key);
       let details = this.get('allowed')[key];
 
-      this.get('modalService').toggleModal('modal-edit-setting', {
-        key,
-        descriptionKey: `dangerZone.description.${ get(this, 'id') }`,
-        kind:           details.kind,
-        options:        details.options,
-        canDelete:      obj && !obj.get('isDefault'),
-        obj,
-      });
+      if (get(this, 'id') === C.SETTING.EXTRA_MENUS) {
+        this.get('modalService').toggleModal('modal-edit-custom-menus', {
+          key:            C.SETTING.EXTRA_MENUS,
+          descriptionKey: `dangerZone.description.${ C.SETTING.EXTRA_MENUS }`,
+          kind:           'value',
+          canDelete:      false,
+        });
+      } else {
+        this.get('modalService').toggleModal('modal-edit-setting', {
+          key,
+          descriptionKey: `dangerZone.description.${ get(this, 'id') }`,
+          kind:           details.kind,
+          options:        details.options,
+          canDelete:      obj && !obj.get('isDefault'),
+          obj,
+        });
+      }
     },
 
     revert() {

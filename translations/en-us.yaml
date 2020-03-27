@@ -5817,6 +5817,7 @@ dangerZone:
     'ui-banners': 'Classification banner is used to display a custom fixed banner in the header, footer, or both. The setting takes JSON object containing 3 root parameters; <code>banner</code>, <code>showHeader</code>, <code>showFooter</code>. <code>banner</code> is an object containing; <code>textColor</code>, <code>background</code>, and <code>text</code>, where <code>textColor</code> and <code>background</code> are any valid CSS color value.'
     'ui-footer-text': 'Extra text in footer.'
     'ui-footer-url': 'URL for the extra text in footer.'
+    'extra-menus': 'Configure custom menus.'
 
 deleteEksCluster:
   title: "Delete {clusterName}?"
@@ -10542,3 +10543,18 @@ selectValueCheck:
       =1 {Please select a new value. The following is no longer valid:}
       other {Please select new values. The following are no longer valid:}
     }
+
+customMenus:
+  index:
+    header: Extra Menus
+    globalMenu: Global level Menu
+    clusterMenu: Cluster level Menu
+    projectMenu: Project level Menu
+
+formMenu:
+  menu:
+    add: Add Menus
+  name:
+    label: Menu Name
+  link:
+    label: Menu Link

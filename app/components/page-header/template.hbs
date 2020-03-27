@@ -93,6 +93,10 @@
           </li>
         {{/if}}
 
+      {{else if item.url}}
+        <li class="nav-item">
+          <a href="{{item.url}}" target="_blank">{{item.label}}</a>
+        </li>
       {{else}}
 
         {{! Just a label }}

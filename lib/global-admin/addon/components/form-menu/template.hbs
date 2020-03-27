@@ -1,0 +1,81 @@
+<div>
+  <label class="acc-label">
+    {{title}}
+  </label>
+</div>
+
+{{#if array.length}}
+  <table class="table fixed no-lines mb-20">
+    {{#if editing}}
+      <thead>
+        <tr>
+          <th class="acc-label">
+            {{t "formMenu.name.label"}}
+            {{field-required}}
+          </th>
+          <th width="40"></th>
+          <th class="acc-label">
+            {{t "formMenu.link.label"}}
+            {{field-required}}
+          </th>
+          <th width="10">&nbsp;</th>
+          <th width="40"></th>
+        </tr>
+      </thead>
+    {{/if}}
+    <tbody>
+      {{#each array as |item|}}
+        <tr>
+          <td>
+            {{#input-or-display
+              editable=editing
+              value=item.label
+            }}
+              {{input
+                type="text"
+                class="form-control input-sm"
+                value=item.label
+              }}
+            {{/input-or-display}}
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td>
+            {{#input-or-display
+              editable=editing
+              value=item.url
+            }}
+              {{input
+                type="text"
+                class="form-control input-sm"
+                value=item.url
+              }}
+            {{/input-or-display}}
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          {{#if editing}}
+            <div class="input-group-btn">
+              <button class="btn bg-primary btn-sm" {{action "removeItem" item}}>
+                <i class="icon icon-minus"/>
+              </button>
+            </div>
+          {{/if }}
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{/if}}
+
+{{#if editing}}
+  <button class="btn bg-link icon-btn" {{action "addItem"}}>
+    <span class="darken">
+      <i class="icon icon-plus text-small"/>
+    </span>
+    <span>
+      {{t "formMenu.menu.add"}}
+    </span>
+  </button>
+{{/if}}
