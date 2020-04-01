@@ -312,6 +312,7 @@ formVlan:
       eth0: eth0
   defaultGateway:
     label: "The eth1 as the container's default gateway"
+    info: canal-macvlan default gateway setting eth1 requires manual editing of macvlan subnet YAML. Some routing information in subnet needs to be set according to the host network environment.
     serviceCidr:
       label: ServiceCidr
       placeholder: "e.g. 10.43.0.0/16"

@@ -265,6 +265,7 @@ formVlan:
       eth0: eth0
   defaultGateway:
     label: eth1作为容器默认网关
+    info: canal-macvlan默認網關設置eth1，需要手動編輯macvlan subnet YAML，subnet中的部分路由信息需要根據主机網絡環境設置。
     serviceCidr:
       label: ServiceCidr
       placeholder: "例如: 10.43.0.0/16"

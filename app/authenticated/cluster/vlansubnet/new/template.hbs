@@ -203,6 +203,14 @@
         }}
       </div>
     </div>
+    {{#if (and isCanalMacvlan form.spec.podDefaultGateway.enable)}}
+      <div class="banner bg-info">
+        <div class="banner-icon"><i class="icon icon-info"></i></div>
+        <div class="banner-message">
+          <p>{{t "formVlan.defaultGateway.info"}}</p>
+        </div>
+      </div>
+    {{/if}}
   </div>
 </div>
 {{/if}}

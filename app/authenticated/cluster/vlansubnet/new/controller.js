@@ -177,9 +177,23 @@ export default Controller.extend({
     if (network.plugin === 'none'){
       let options = network.options;
 
-      return options && options.pandariaExtraPluginName === 'multus-flannel-macvlan';
+      return options && (options.pandariaExtraPluginName === 'multus-flannel-macvlan' || options.pandariaExtraPluginName === 'multus-canal-macvlan');
     } else {
-      return network.plugin === 'multus-flannel-macvlan';
+      return (network.plugin === 'multus-flannel-macvlan' || network.plugin === 'multus-canal-macvlan');
+    }
+  }),
+  isCanalMacvlan: computed('scope.currentCluster.rancherKubernetesEngineConfig.network.plugin', 'scope.currentCluster.rancherKubernetesEngineConfig.network.options', function() {
+    let network = get(this, 'scope.currentCluster.rancherKubernetesEngineConfig.network');
+
+    if (!network){
+      return false;
+    }
+    if (network.plugin === 'none'){
+      let options = network.options;
+
+      return options &&  options.pandariaExtraPluginName === 'multus-canal-macvlan';
+    } else {
+      return network.plugin === 'multus-canal-macvlan';
     }
   }),
   hasVlan(master, vlan) {
