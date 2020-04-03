@@ -15,6 +15,13 @@
   </div>
   <div class="accordion-content">
     {{top-errors errors=harborAccountErrors}}
+     {{#if (and harborConfigEditable harborAccountValid (not savingHarborConfig))}}
+     <div class="clearfix pull-right">
+      <button class="btn bg-error" {{action "promptDelete"}}>
+      {{t "imageRepoSection.adminConfigPage.removeHarborConfig"}}
+      </button>
+    </div>
+    {{/if}}
     {{#if (not changePwd)}}
     <div class="row">
       <div class="col span-12">
@@ -64,15 +71,6 @@
     {{/if}}
     {{#if harborConfigEditable}}
       {{#if harborAccountValid}}
-        <div class="row">
-          <div class="col span-6">
-            {{save-cancel save=(action "saveHarboConfig") cancel=(action "cancelHarborConfig") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" class="pull-right"}}
-          </div>
-          <div class="col span-6">
-            {{save-cancel save=(action "removeHarboConfig") cancelDisabled=true cancelLabel="imageRepoSection.common.reset" createLabel="imageRepoSection.adminConfigPage.removeHarborConfig" class="pull-left"}}
-          </div>
-        </div>
-      {{else}}
         {{save-cancel save=(action "saveHarboConfig") cancel=(action "cancelHarborConfig") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
       {{/if}}
     {{/if}}
@@ -90,10 +88,6 @@
     {{/if}} --}}
   </div>
 </div>
-
-
-
-
 </section>
 {{#if harborAccountValid}}
 <p>{{t "harborConfig.advanced.titleLeft"}}<a class="clip project-link" target="_blank" href="{{model.harborServer}}">Harbor</a>{{t "harborConfig.advanced.titleRight"}}</p>
@@ -110,6 +104,7 @@
     {{/accordion-list}}
   </section>
 {{/if}}
+{{#custom-modal-confirm-remove-harbor-account confirm=(action 'removeHarboConfig') resources=harborConfig modalVisible=showConfirmDeleteModal}}{{/custom-modal-confirm-remove-harbor-account}}
 {{!-- {{#if harborAccountValid}}
 <section>
 {{#accordion-list as | al expandFn | }}

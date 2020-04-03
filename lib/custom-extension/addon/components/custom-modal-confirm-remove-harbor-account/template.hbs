@@ -1,0 +1,29 @@
+{{#if modalVisible}}
+<div class="modal-container medium-modal">
+  <div class="container-header-text">
+    <h3>{{t 'confirmDelete.clearHarborConfig'}}</h3>
+    <hr/>
+    <div class="display-name">
+      <div class="row">
+         <div class="col span-12">
+            <label class="acc-label">{{t "harborConfig.form.address.label"}}:</label>
+            <span>{{resource.url}}</span>
+          </div>
+          <div class="col span-12">
+            <label class="acc-label">{{t "harborConfig.form.username.label"}}:</label>
+            <span>{{resource.username}}</span>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-actions">
+    <button {{action "confirm"}} class="btn bg-error" disabled={{btnDisabled}}>
+      {{t 'confirmDelete.confirmAction'}}
+      {{#if btnDisabled}}
+        (<span style="width: 12px;display:inline-block;">{{awaitSeconds}}</span>)
+      {{/if}}
+      </button>
+    <button {{action "cancel"}} class="btn bg-transparent">{{t 'confirmDelete.cancelAction'}}</button>
+  </div>
+</div>
+{{/if}}
