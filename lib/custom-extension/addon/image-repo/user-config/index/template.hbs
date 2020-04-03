@@ -50,13 +50,13 @@
         <div class="col span-6">
           <label class="acc-label">{{t "harborConfig.form.email.label"}}{{field-required}}</label>
           {{#input-or-display editable=accountEditable value=account.email}}
-            {{input type="text" class="form-control" value=account.email placeholder=(t "harborConfig.form.email.placeholder")}}
+            {{input autocomplete="off" type="text" class="form-control" value=account.email placeholder=(t "harborConfig.form.email.placeholder")}}
           {{/input-or-display}}
         </div>
         <div class="col span-6">
           <label class="acc-label">{{t "harborConfig.form.pw.label"}}{{field-required}}</label>
           {{#input-or-display editable=accountEditable value=""}}
-            {{input type="password" class="form-control" value=account.password placeholder=(t "harborConfig.form.pw.placeholder")}}
+            {{input autocomplete="off" type="password" class="form-control" value=account.password placeholder=(t "harborConfig.form.pw.placeholder")}}
           {{/input-or-display}}
         </div>
       </div>
@@ -79,13 +79,13 @@
         <div class="row">
           <div class="col span-12">
             <label class="acc-label">{{t "harborConfig.form.email.label"}}{{field-required}}</label>
-            {{input type="text" class="form-control" value=changeHarborAccountForm.email placeholder=(t "harborConfig.form.email.placeholder")}}
+            {{input autocomplete="off" type="text" class="form-control" value=changeHarborAccountForm.email placeholder=(t "harborConfig.form.email.placeholder")}}
           </div>
         </div>
         <div class="row">
           <div class="col span-12">
             <label class="acc-label">{{t "harborConfig.form.newPw.label"}}</label>
-            {{input type="password" class="form-control" value=changeHarborAccountForm.newPwd placeholder=(t "harborConfig.form.newPw.placeholder")}}
+            {{input autocomplete="off" type="password" class="form-control" value=changeHarborAccountForm.newPwd placeholder=(t "harborConfig.form.newPw.placeholder")}}
           </div>
         </div>
         <div class="row">
