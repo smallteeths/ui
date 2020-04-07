@@ -72,6 +72,8 @@
     {{#if harborConfigEditable}}
       {{#if harborAccountValid}}
         {{save-cancel save=(action "saveHarboConfig") cancel=(action "cancelHarborConfig") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
+      {{else}}
+        {{save-cancel save=(action "saveHarboConfig") cancel=(action "cancelHarborConfig") cancelLabel="imageRepoSection.common.reset" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig"}}
       {{/if}}
     {{/if}}
     {{!-- {{#if harborAccountValid}}
