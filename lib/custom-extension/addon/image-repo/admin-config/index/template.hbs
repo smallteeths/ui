@@ -106,7 +106,7 @@
     {{/accordion-list}}
   </section>
 {{/if}}
-{{#custom-modal-confirm-remove-harbor-account confirm=(action 'removeHarboConfig') resources=harborConfig modalVisible=showConfirmDeleteModal}}{{/custom-modal-confirm-remove-harbor-account}}
+{{#custom-modal-confirm-remove-harbor-account confirm=(action 'removeHarboConfig') resource=harborConfig modalVisible=showConfirmDeleteModal}}{{/custom-modal-confirm-remove-harbor-account}}
 {{!-- {{#if harborAccountValid}}
 <section>
 {{#accordion-list as | al expandFn | }}
