@@ -1,7 +1,7 @@
 import { later, cancel } from '@ember/runloop';
 import { computed, get, set } from '@ember/object';
 import Grafana from 'shared/mixins/grafana';
-import { alias, gt, not } from '@ember/object/computed';
+import { alias, gt } from '@ember/object/computed';
 import Resource from '@rancher/ember-api-store/models/resource';
 import { sortableNumericSuffix } from 'shared/utils/util';
 import { formatSi } from 'shared/utils/parse-unit';
@@ -40,11 +40,11 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
   canHaveHealthCheck:  true,
   isBalancer:          false,
   canBalanceTo:        true,
+  canClone:            true,
 
   grafanaResourceId:    alias('name'),
 
   namespace:    reference('namespaceId', 'namespace', 'clusterStore'),
-  canClone:  not('hasSidekicks'),
 
   hasSidekicks: gt('containers.length', 1),
 

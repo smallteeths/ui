@@ -158,9 +158,9 @@ export default Route.extend({
             containerNames,
             selectLaunchConfig: true,
           });
-        } else {
-          // Clone with multiple containers not supported yet
-          return Ember.RVP.reject('Cloning a workload with multiple containers not supported');
+        // } else {
+        //   // Clone with multiple containers not supported yet
+        //   return Ember.RVP.reject('Cloning a workload with multiple containers not supported');
         }
       } else {
         // Otherwise use primary
