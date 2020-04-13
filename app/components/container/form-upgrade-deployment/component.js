@@ -23,6 +23,7 @@ export default Component.extend({
   _strategy:      null,
   workloadConfig: null,
   batchSize:      null,
+  toggleMacvlan:  false,
 
   didReceiveAttrs() {
     const config = get(this, 'workloadConfig');
@@ -96,6 +97,18 @@ export default Component.extend({
         strategy:       'Recreate',
         maxSurge:       null,
         maxUnavailable: null,
+      });
+    }
+  }),
+  toggleMacvlanChanged: observer('toggleMacvlan', 'editing', function() {
+    if (get(this, 'editing') && get(this, 'toggleMacvlan') && get(this, '_strategy') !== 'stopFirst') {
+      const config    = get(this, 'workloadConfig');
+      const batchSize = maybeInt(get(this, 'batchSize'));
+
+      setProperties(config, {
+        strategy:       'RollingUpdate',
+        maxSurge:       0,
+        maxUnavailable: batchSize,
       });
     }
   }),

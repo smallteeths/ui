@@ -9,6 +9,8 @@ export default Component.extend({
   editing:   null,
   isUpgrade: null,
 
+  toggleMacvlan: false,
+
   classNames: ['accordion-wrapper'],
 
   didReceiveAttrs() {
