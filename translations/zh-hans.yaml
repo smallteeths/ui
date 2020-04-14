@@ -5874,6 +5874,7 @@ dangerZone:
     'auth-user-session-ttl-minutes': '用户验证会话上的自定义 TTL(以分钟为单位)。'
     'rke-metadata-config': '配置 RKE 元数据刷新参数。'
     'ui-banners': '分类条幅用于在标题中显示自定义固定条幅, 页脚, 或者两者同时显示。该设置使用包含 3 个根参数的 JSON 对象; <code>banner</code>, <code>showHeader</code>, <code>showFooter</code>. <code>banner</code> is an object containing; <code>textColor</code>, <code>background</code>, and <code>text</code>, where <code>textColor</code> and <code>background</code> are any valid CSS color value.'
+    'none-operate-session-time': '用户超过配置时间没有任何操作将自动注销(以秒为单位)'
     'ui-footer-text': '额外的页脚内容'
     'ui-footer-url': '额外页脚内容对应的链接'
     'extra-menus': '配置扩展菜单'
@@ -10379,6 +10380,9 @@ growl:
       warning: 无法建立到服务器的WebSocket连接。如果服务器位于代理或SSL终端设备后面，则浏览器无法连接到WebSocket。如果您在代理后面运行服务器，请确保代理支持WebSockets。在解决问题之前，流量统计、日志、shell/控制台和资源状态的自动更新可能无法正常工作。
       safariCertWarning: 另一个可能的原因是Safari不允许使用无法识别的证书进行WebSocket连接，即使您继续绕过警告也是如此。服务器必须拥有由Safari自动信任的认可机构签署的证书。
       disconnectedWarning: "断开与服务器的连接，尝试重新连接..."
+  autoLogout:
+    title: 自动注销
+    message: "您在最近30分钟内没有操作，因此我们将自动注销"
 
 storageClass:
   aws-ebs:
@@ -10905,7 +10909,7 @@ selectValueCheck:
       =1 {请选择新的值。以下内容不再有效:}
       other {请选择新的值。以下内容不再有效:}
     }
-  
+
 customMenus:
   index:
     header: 自定义菜单

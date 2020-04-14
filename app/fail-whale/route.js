@@ -1,9 +1,11 @@
 import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
+import { get } from '@ember/object';
 
 export default Route.extend({
   storeReset: service(),
   settings:   service(),
+  autoLogout: service(),
 
   model() {
     return this.controllerFor('application').get('error');
@@ -19,10 +21,12 @@ export default Route.extend({
   actions: {
     activate() {
       $('BODY').addClass('farm'); // eslint-disable-line
+      get(this, 'autoLogout').stop()
     },
 
-    deactivate() {
+    deactivate(params, transition) {
       $('BODY').removeClass('farm'); // eslint-disable-line
+      get(this, 'autoLogout').start(transition)
     },
   },
 

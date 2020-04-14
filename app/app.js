@@ -21,6 +21,7 @@ const App = Application.extend({
           'session',
           'settings',
           'user-language',
+          'auto-logout',
         ],
         externalRoutes: {
           index:                      'index',

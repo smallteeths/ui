@@ -6,8 +6,9 @@ import C from 'ui/utils/constants';
 import { isDevBuild } from 'shared/utils/parse-version';
 
 export default Route.extend({
-  access:       service(),
-  settings: service(),
+  access:     service(),
+  settings:   service(),
+  autoLogout: service(),
 
   model() {
     let promise;
@@ -44,10 +45,12 @@ export default Route.extend({
 
   activate() {
     $('BODY').addClass('container-farm'); // eslint-disable-line
+    get(this, 'autoLogout').stop()
   },
 
-  deactivate() {
+  deactivate(params, transition) {
     $('BODY').removeClass('container-farm'); // eslint-disable-line
+    get(this, 'autoLogout').start(transition)
   },
 
 });
