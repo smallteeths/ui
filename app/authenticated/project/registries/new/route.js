@@ -16,20 +16,20 @@ export default Route.extend({
           harborAccount: '',
         };
       }
-      if (!!get(this, 'access.me.hasAdmin')) {
+      if (get(this, 'access.me.hasAdmin')) {
         return get(this, 'harbor').fetchHarborUserInfo().then((resp) => {
           return {
             harborServer,
-            harborAccount: AWS.util.base64.decode(resp.body.value).toString(),
+            harborAccount: resp.body.value,
           }
         });
       } else {
         const a = get(this, 'access.me.annotations');
-        const account = a && a['authz.management.cattle.io.cn/harborauth'];
+        const enableHarborService = a && a['management.harbor.pandaria.io/synccomplete'] === 'true';
 
         return {
-          harborServer,
-          harborAccount: account ? AWS.util.base64.decode(account).toString() : '',
+          harborServer:  enableHarborService ? harborServer : '',
+          harborAccount: get(this, 'access.principal.loginName') || get(this, 'access.principal.name')
         }
       }
     });

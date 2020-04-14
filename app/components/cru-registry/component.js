@@ -7,6 +7,8 @@ import  { PRESETS_BY_NAME } from  'ui/models/dockercredential';
 import { inject as service } from '@ember/service'
 import { isEmpty } from '@ember/utils';
 import { alias } from '@ember/object/computed';
+const harborAuthKey = 'rancher.cn/registry-harbor-auth'
+const harborAdminAuthKey = 'rancher.cn/registry-harbor-admin-auth'
 
 
 const TEMP_NAMESPACE_ID = '__TEMP__';
@@ -16,6 +18,7 @@ export default Component.extend(ViewNewEdit, OptionallyNamespaced, {
   clusterStore: service(),
   scopeService: service('scope'),
   harbor:       service(),
+  access:       service(),
 
   layout,
 
@@ -27,8 +30,8 @@ export default Component.extend(ViewNewEdit, OptionallyNamespaced, {
   projectType:    'dockerCredential',
   namespacedType: 'namespacedDockerCredential',
 
-  harborAccount: alias('harborConfig.harborAccount'),
-  harborServer:  alias('harborConfig.harborServer'),
+  harborUsername: alias('harborConfig.harborAccount'),
+  harborServer:   alias('harborConfig.harborServer'),
 
   init() {
     this._super(...arguments);
@@ -56,7 +59,7 @@ export default Component.extend(ViewNewEdit, OptionallyNamespaced, {
       })
     }
 
-    const isHarborCred = get(this, 'model.labels') && get(this, 'model.labels')['rancher.cn/registry-harbor-auth'] === 'true';
+    const isHarborCred = get(this, 'model.labels') && get(this, 'model.labels')[harborAuthKey] === 'true';
 
     if (isHarborCred) {
       asArray.forEach((item) => {
@@ -80,16 +83,15 @@ export default Component.extend(ViewNewEdit, OptionallyNamespaced, {
 
       let val = {};
 
-      if (preset === 'harbor' && get(this, 'hasHarborAccount')) {
-        const [username, password] = get(this, 'harborAccount').split(':');
-
-        val.username = username;
-        val.password = password;
+      if (preset === 'harbor' && this.enabledHarborService) {
         key = get(this, 'harborServer');
         key = key.indexOf('://') > -1 ? key.substr(key.indexOf('://') + 3) : key;
         const labels = get(this, 'model.labels') || {};
 
-        labels['rancher.cn/registry-harbor-auth'] = 'true';
+        labels[harborAuthKey] = 'true';
+        if (get(this, 'access.me.hasAdmin')) {
+          labels[harborAdminAuthKey] = 'true';
+        }
         set(this, 'model.labels', labels);
       } else {
         const labels = get(this, 'model.labels');
@@ -97,12 +99,14 @@ export default Component.extend(ViewNewEdit, OptionallyNamespaced, {
         if (labels) {
           const keys = Object.keys(labels);
 
-          if (keys.indexOf('rancher.cn/registry-harbor-auth') > -1) {
-            if (keys.length === 1) {
-              delete get(this, 'model').labels;
-            } else {
-              delete labels['rancher.cn/registry-harbor-auth'];
-            }
+          if (keys.indexOf(harborAuthKey) > -1) {
+            delete labels[harborAuthKey];
+          }
+          if (keys.indexOf(harborAdminAuthKey) > -1) {
+            delete labels[harborAdminAuthKey]
+          }
+          if (Object.keys(labels).length === 0) {
+            delete get(this, 'model').labels
           }
         }
         ['username', 'password', 'auth'].forEach((k) => {
@@ -122,18 +126,19 @@ export default Component.extend(ViewNewEdit, OptionallyNamespaced, {
     return this._super(...arguments);
   }),
 
-  hasHarborAccount: computed('harborAccount', function() {
-    return !!get(this, 'harborAccount');
-  }),
+  enabledHarborService: computed('harborServer', 'access.me.hasAdmin', 'access.me.annotations', function() {
+    if (get(this, 'harborServer')) {
+      if (get(this, 'access.me.hasAdmin')) {
+        return true;
+      }
+      const a = get(this, 'access.me.annotations')
 
-  harborUsername: computed('harborAccount', function() {
-    const account = get(this, 'harborAccount');
-
-    if (!account) {
-      return null;
+      if (a && a['management.harbor.pandaria.io/synccomplete'] === 'true') {
+        return true;
+      }
     }
 
-    return account.split(':')[0];
+    return false;
   }),
 
   hostname:  window.location.host,

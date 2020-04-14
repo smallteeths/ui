@@ -57,6 +57,12 @@
     </div>
     <div class="row">
       <div class="col span-12">
+        <label class="acc-label">{{t "modalEditPassword.current"}}{{field-required}}</label>
+        {{input type="password" class="form-control" value=changePwdForm.oldPwd placeholder=(t "modalEditPassword.current")}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col span-12">
         <label class="acc-label">{{t "harborConfig.form.newPw.label"}}{{field-required}}</label>
         {{input type="password" class="form-control" value=changePwdForm.newPwd placeholder=(t "harborConfig.form.newPw.placeholder")}}
       </div>
@@ -71,22 +77,22 @@
     {{/if}}
     {{#if harborConfigEditable}}
       {{#if harborAccountValid}}
-        {{save-cancel save=(action "saveHarboConfig") cancel=(action "cancelHarborConfig") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
+        {{save-cancel save=(action "saveHarborConfig") cancel=(action "cancelHarborConfig") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
       {{else}}
-        {{save-cancel save=(action "saveHarboConfig") cancel=(action "cancelHarborConfig") cancelLabel="imageRepoSection.common.reset" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig"}}
+        {{save-cancel save=(action "saveHarborConfig") cancel=(action "cancelHarborConfig") cancelLabel="imageRepoSection.common.reset" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig"}}
       {{/if}}
     {{/if}}
     {{!-- {{#if harborAccountValid}}
       <div class="row">
         <div class="col span-6">
-          {{save-cancel save=(action "saveHarboConfig") cancel=(action "cancelHarborConfig") cancelLabel="imageRepoSection.common.reset" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" class="pull-right"}}
+          {{save-cancel save=(action "saveHarborConfig") cancel=(action "cancelHarborConfig") cancelLabel="imageRepoSection.common.reset" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" class="pull-right"}}
         </div>
         <div class="col span-6">
           {{save-cancel save=(action "removeHarboConfig") cancelDisabled=true cancelLabel="imageRepoSection.common.reset" createLabel="imageRepoSection.adminConfigPage.removeHarborConfig" class="pull-left"}}
         </div>
       </div>
     {{else}}
-      {{save-cancel save=(action "saveHarboConfig") cancel=(action "cancelHarborConfig") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
+      {{save-cancel save=(action "saveHarborConfig") cancel=(action "cancelHarborConfig") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
     {{/if}} --}}
   </div>
 </div>

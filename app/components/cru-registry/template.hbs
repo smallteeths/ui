@@ -71,7 +71,7 @@
               {{t "cruRegistry.address.quay"}}
             </label>
           </div>
-          {{#if hasHarborAccount}}
+          {{#if enabledHarborService}}
           <div>
             <label>
               {{radio-button
@@ -128,7 +128,7 @@
       {{#if (eq row.preset "harbor")}}
       <div class="col span-6">
         <label class="acc-label">{{t 'cruRegistry.username.label'}}</label>
-        <div>{{harborUsername}}</div>
+        <div>{{#if harborUsername}}{{harborUsername}}{{else}}{{row.username}}{{/if}}</div>
         <label class="acc-label">{{t 'cruRegistry.password.label'}}</label>
         <div>{{t 'cruRegistry.password.saved'}}</div>
       </div>

@@ -23,6 +23,7 @@ imageRepoSection:
     removeHarborConfig: 移除Harbor配置
     testEmailServer: 测试邮件服务器
     gcSchedule: 立即清理垃圾
+    methodNotSupported:  rancher本地认证暂不支持对接ldap类型认证的harbor服务
   userConfigPage:
     syncAccount: 同步账号
     reSyncAccount: 重新同步账号
@@ -67,7 +68,7 @@ harborConfig:
   title: "Harbor 配置"
   sync:
     title: "Harbor 账号同步"
-    subtitle: "将当前的用户信息同步到"
+    subtitle: "将当前的用户信息同步到 Harbor 中"
   setting:
     title: "Harbor 账号设置"
     subtitle: 对邮箱和访问密码进行设置

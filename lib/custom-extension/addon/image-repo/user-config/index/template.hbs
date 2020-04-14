@@ -6,7 +6,7 @@
   <div class="accordion-header">
     <div class="expand"></div>
     <div class="title">
-      {{#if (and hasHarborRegistry (not accountSynced))}}
+      {{#if (eq harborAccountState "syncAccount")}}
       <span class="m-0">{{t "harborConfig.sync.title"}}</span>
       <p class="help-block">{{t "harborConfig.sync.subtitle"}}</p>
       {{else}}
@@ -20,12 +20,15 @@
     {{/if}}
   </div>
   <div class="accordion-content">
-    {{#if (not hasHarborRegistry)}}
+
+    {{#if (eq harborAccountState "waiting")}}
       <section>
         <p>{{t "harborConfig.wait"}}</p>
       </section>
-      {{/if}}
-      {{#if (and hasHarborRegistry accountSynced (not changeHarborAccount))}}
+    {{/if}}
+
+
+    {{#if (eq harborAccountState "syncedAccount")}}
       <section>
         {{top-errors errors=harborAccountErrors}}
         <div class="row">
@@ -42,29 +45,57 @@
           {{save-cancel save=(action "reSyncAccount") cancelDisabled=true createLabel="imageRepoSection.userConfigPage.reSyncAccount" }}
         {{/if}}
       </section>
-      {{/if}}
-      {{#if (and hasHarborRegistry (not accountSynced))}}
+    {{/if}}
+
+    {{#if (eq harborAccountState 'syncAccount')}}
       <section>
       {{top-errors errors=errors}}
       <div class="row">
-        <div class="col span-6">
-          <label class="acc-label">{{t "harborConfig.form.email.label"}}{{field-required}}</label>
-          {{#input-or-display editable=accountEditable value=account.email}}
-            {{input autocomplete="off" type="text" class="form-control" value=account.email placeholder=(t "harborConfig.form.email.placeholder")}}
-          {{/input-or-display}}
-        </div>
-        <div class="col span-6">
-          <label class="acc-label">{{t "harborConfig.form.pw.label"}}{{field-required}}</label>
-          {{#input-or-display editable=accountEditable value=""}}
-            {{input autocomplete="off" type="password" class="form-control" value=account.password placeholder=(t "harborConfig.form.pw.placeholder")}}
-          {{/input-or-display}}
+        <div class="col span-12">
+          <label class="acc-label">{{t "harborConfig.form.username.label"}}</label>
+          {{account.username}}
         </div>
       </div>
+      {{#if isLdapAuthMode}}
+        {{#if requiredAuth}}
+          <div class="row">
+            <div class="col span-12">
+              <label class="acc-label">{{t "harborConfig.form.pw.label"}}{{field-required}}</label>
+                {{input autocomplete="off" type="password" class="form-control" value=account.password placeholder=(t "harborConfig.form.pw.placeholder")}}
+            </div>
+          </div>
+        {{/if}}
 
+      {{else}}
+
+        {{#if requiredAuth}}
+          <div class="row">
+            <div class="col span-12">
+              <label class="acc-label">{{t "harborConfig.form.email.label"}}{{field-required}}</label>
+              {{input autocomplete="off" type="text" class="form-control" value=account.email placeholder=(t "harborConfig.form.email.placeholder")}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col span-12">
+              <label class="acc-label">{{t "harborConfig.form.pw.label"}}{{field-required}}</label>
+              {{input autocomplete="off" type="password" class="form-control" value=account.password placeholder=(t "harborConfig.form.pw.placeholder")}}
+            </div>
+          </div>
+        {{else}}
+          <div class="row">
+            <div class="col span-12">
+              <label class="acc-label">{{t "harborConfig.form.email.label"}}{{field-required}}</label>
+              {{input autocomplete="off" type="text" class="form-control" value=account.email placeholder=(t "harborConfig.form.email.placeholder")}}
+            </div>
+          </div>
+        {{/if}}
+
+      {{/if}}
       {{save-cancel save=(action "syncAccount") cancelDisabled=true createLabel="imageRepoSection.userConfigPage.syncAccount" }}
       </section>
-      {{/if}}
-      {{#if changeHarborAccount}}
+    {{/if}}
+
+    {{#if (eq harborAccountState 'changeAccountPwd')}}
       {{top-errors errors=changeAccountErrors}}
         <div class="row">
           <div class="col span-12">
@@ -76,21 +107,27 @@
             <span>{{currentAccount.username}}</span>
           </div>
         </div>
-        <div class="row">
+        {{!-- <div class="row">
           <div class="col span-12">
             <label class="acc-label">{{t "harborConfig.form.email.label"}}{{field-required}}</label>
             {{input autocomplete="off" type="text" class="form-control" value=changeHarborAccountForm.email placeholder=(t "harborConfig.form.email.placeholder")}}
           </div>
+        </div> --}}
+        <div class="row">
+          <div class="col span-12">
+            <label class="acc-label">{{t "modalEditPassword.current"}}{{field-required}}</label>
+            {{input type="password" class="form-control" value=changeHarborAccountForm.oldPassword placeholder=(t "modalEditPassword.current")}}
+          </div>
         </div>
         <div class="row">
           <div class="col span-12">
-            <label class="acc-label">{{t "harborConfig.form.newPw.label"}}</label>
+            <label class="acc-label">{{t "harborConfig.form.newPw.label"}}{{field-required}}</label>
             {{input autocomplete="off" type="password" class="form-control" value=changeHarborAccountForm.newPwd placeholder=(t "harborConfig.form.newPw.placeholder")}}
           </div>
         </div>
         <div class="row">
           <div class="col span-12">
-            <label class="acc-label">{{t "harborConfig.form.confirmPw.label"}}</label>
+            <label class="acc-label">{{t "harborConfig.form.confirmPw.label"}}{{field-required}}</label>
             {{input type="password" class="form-control" value=changeHarborAccountForm.confirmPwd placeholder=(t "harborConfig.form.confirmPw.placeholder")}}
           </div>
         </div>

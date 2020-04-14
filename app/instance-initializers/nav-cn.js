@@ -446,7 +446,7 @@ const rootNav = [
           } else {
             const a = get(this, 'access.me.annotations');
 
-            return !!(a && a['authz.management.cattle.io.cn/harborauth']);
+            return !!(a && a['management.harbor.pandaria.io/synccomplete'] === 'true');
           }
         }
       },
@@ -463,7 +463,7 @@ const rootNav = [
           } else {
             const a = get(this, 'access.me.annotations');
 
-            return !!(a && a['authz.management.cattle.io.cn/harborauth']);
+            return !!(a && a['management.harbor.pandaria.io/synccomplete'] === 'true');
           }
         }
       },
