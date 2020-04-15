@@ -3172,8 +3172,8 @@ notifierPage:
       label: 签名名称
       placeholder: 签名管理中配置的签名名称
     templateCode:
-      label: 模版名称
-      placeholder: 模版管理中配置的模版
+      label: 模版CODE
+      placeholder: 模版管理中配置的模版对应的CODE
     to:
       label: 手机号
       action: 添加手机号
