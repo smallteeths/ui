@@ -10079,7 +10079,7 @@ growl:
       disconnectedWarning: "Disconnected from server, attempting to reconnect..."
   autoLogout:
     title: Auto logout
-    message: "You have not operated in the last 30 minutes, so we will auto log out"
+    message: "You have not operated in the last {autoLogoutTime} minutes, so we will auto log out"
 
 storageClass:
   aws-ebs:

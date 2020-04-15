@@ -10382,7 +10382,7 @@ growl:
       disconnectedWarning: "断开与服务器的连接，尝试重新连接..."
   autoLogout:
     title: 自动注销
-    message: "您在最近30分钟内没有操作，因此我们将自动注销"
+    message: "您在最近{autoLogoutTime}分钟内没有操作，因此我们将自动注销"
 
 storageClass:
   aws-ebs:
