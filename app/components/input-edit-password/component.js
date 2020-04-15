@@ -5,6 +5,8 @@ import { inject as service } from '@ember/service';
 import { later, run } from '@ember/runloop';
 import { randomStr } from 'shared/utils/util';
 import { resolve, all } from 'rsvp';
+import AESEncrypt from 'shared/utils/crypto';
+
 
 const CHANGE = 'change';
 const SET = 'set';
@@ -51,9 +53,12 @@ export default Component.extend({
 
     save(cb) {
       const user = get(this, 'user');
-      const old = get(this, 'currentPassword') || '';
-      const neu = get(this, 'password') || '';
+      const neu = AESEncrypt(get(this, 'password').trim()) || '';
+      let old = get(this, 'currentPassword').trim() || '';
 
+      if (get(this, 'showCurrent')) {
+        old = AESEncrypt(get(this, 'currentPassword').trim()) || '';
+      }
       set(this, 'serverErrors', []);
 
       const setOrChange = get(this, 'setOrChange');
@@ -65,12 +70,12 @@ export default Component.extend({
           url:    '/v3/users?action=changepassword',
           method: 'POST',
           data:   {
-            currentPassword: old.trim(),
-            newPassword:     neu.trim()
+            currentPassword: old,
+            newPassword:     neu
           }
         });
       } else if ( setOrChange === SET ) {
-        promise = user.doAction('setpassword', { newPassword: neu.trim(), });
+        promise = user.doAction('setpassword', { newPassword: neu, });
       }
 
       return promise.then(() => get(this, 'access').loadMe().then(() => {

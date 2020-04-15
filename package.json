@@ -34,6 +34,7 @@
     "babel-eslint": "^9.0.0",
     "broccoli-asset-rev": "^3.0.0",
     "card": "2.4.0",
+    "crypto-js": "^4.0.0",
     "cytoscape": "3.3.2",
     "d3": "3.5.17",
     "dot-object": "^1.7.0",

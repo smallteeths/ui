@@ -5,6 +5,7 @@
   ],
   "dependencies": {
     "async": "*",
+    "crypto-js": "*",
     "d3": "*",
     "dompurify": "*",
     "echarts": "*",
