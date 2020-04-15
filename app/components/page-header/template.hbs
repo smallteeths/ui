@@ -76,7 +76,6 @@
         {{/hover-dropdown}}
 
       {{else if item.route}}
-
         {{#if (or (not item.resource) (rbac-allows resource=item.resource scope=item.resourceScope))}}
           {{! No submenu }}
           <li class="nav-item {{if (and item.disableIfClusterNotReady (not cluster.isReady)) "pointer-events-none"}}">
@@ -95,7 +94,14 @@
 
       {{else if item.url}}
         <li class="nav-item">
-          <a href="{{item.url}}" target="_blank">{{item.label}}</a>
+          {{#link-to-as-attrs
+              ourRoute=item.customRoute
+              activeParent="LI"
+              class="nav-link"
+              ctx=item.ctx
+          }}
+            {{item.label}}
+          {{/link-to-as-attrs}}
         </li>
       {{else}}
 

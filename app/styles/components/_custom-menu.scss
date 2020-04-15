@@ -1,0 +1,12 @@
+#iframe-div {
+  &.loading {
+    opacity: 0;
+  }
+}
+
+#iframe-content {
+  height: calc(90vh);
+  width: 1px;
+  min-width: 100%;
+  overflow: hidden;
+}

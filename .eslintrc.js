@@ -49,6 +49,7 @@ module.exports = {
     'jQuery':         true,
     'navigator':      true,
     'window':         true,
+    'iFrameResize':   true,
   },
   env: {
     browser: true,

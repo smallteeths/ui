@@ -104,12 +104,18 @@
         {{/if}}
       {{else if item.url}}
         <li class="nav-item">
-          <a href="{{item.url}}" target="_blank">
+          {{#link-to-as-attrs
+              ourRoute=item.customRoute
+              activeParent="LI"
+              class="nav-link"
+              ctx=item.ctx
+          }}
             <img class="icon-chevron-describe" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/external-link-icon.svg" width="16" height="16" />
+            <img class="icon-chevron-describe-active" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/external-link-icon-active.svg" width="16" height="16" />
             <span class="clip">
               {{item.label}}
             </span>
-          </a>
+          {{/link-to-as-attrs}}
         </li>
       {{else}}
 

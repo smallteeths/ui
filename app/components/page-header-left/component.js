@@ -149,12 +149,32 @@ export default Component.extend({
     const extraMenus = get(this, 'settings.extra-menus') || '';
 
     extraMenus.split(';').forEach((menu) => {
-      const [menuScope, menuLabel, menuUrl] = menu.split(',');
+      const [menuScope, menuLabel, menuUrl = ''] = menu.split(',');
 
       if ( menuScope === currentScope ) {
+        let url = menuUrl
+
+        if (menuUrl.startsWith('http://') || menuUrl.startsWith('https://')) {
+          url = `/iframe/${ encodeURIComponent(menuUrl) }`
+        }
+
+        let customRoute
+        let ctx
+
+        if (menuScope === 'global') {
+          customRoute = `global-admin.iframe.detail`
+          ctx = [encodeURIComponent(menuUrl)]
+        } else {
+          customRoute = `authenticated.${ menuScope }.iframe.detail`
+          ctx = [...get(this, 'currentItemContext'), encodeURIComponent(menuUrl)]
+        }
+
         out.push({
-          url:   menuUrl,
-          label: menuLabel,
+          url,
+          label:       menuLabel,
+          scope:       menuScope,
+          customRoute,
+          ctx,
         })
       }
     })
