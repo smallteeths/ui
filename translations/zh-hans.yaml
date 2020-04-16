@@ -3183,6 +3183,9 @@ notifierPage:
     placeholder: '例如: http://my-proxy/'
   sendResolved:
     label: 发送已解决告警
+  bearerToken:
+    label: Bearer Token
+    placeholder: Bearer token
 
   webhook:
     url: URL

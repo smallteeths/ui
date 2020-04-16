@@ -454,6 +454,22 @@
     </div>
   </div>
   <div class="row">
+    <div class="col span-12">
+      <label
+        class="acc-label text-capitalize"
+        for="input-webhook-config-bearer-token"
+      >
+        {{t "notifierPage.bearerToken.label"}}
+      </label>
+      {{input
+        classNames="form-control"
+        id="input-webhook-config-bearer-token"
+        value=model.webhookConfig.bearer_token
+        placeholder=(t "notifierPage.bearerToken.placeholder")
+      }}
+    </div>
+  </div>
+  <div class="row">
     <div class="col span-6">
       <label class="acc-label">
         {{t "notifierPage.sendResolved.label"}}
