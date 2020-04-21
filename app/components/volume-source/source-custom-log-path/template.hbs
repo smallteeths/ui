@@ -36,12 +36,12 @@
         {{config.options.format}}
       {{/if}}
     {{else}}
-      {{new-select
-          classNames="form-control"
-          content=formats
-          value=config.options.format
-          disabled=(not editing)
-      }}
+        {{new-select
+            classNames="form-control"
+            content=formats
+            value=config.options.format
+            disabled=(not editing)
+        }}
     {{/if}}
   </div>
 </div>
