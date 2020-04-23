@@ -144,6 +144,7 @@ harborConfig:
     projectNameReq: "请输入项目名称"
     projectNameFormatError: "项目名称由小写字符、数字、和._-组成，且至少有两个字符并以字母或数字开头"
     projectNameExist: "项目名称已经存在"
+    pwdError: 密码错误
   table:
     name: 仓倉庫項目名稱
     level: 訪問級別

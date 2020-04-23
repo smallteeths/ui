@@ -154,6 +154,7 @@ harborConfig:
     projectNameReq: "Please enter the project name"
     projectNameFormatError: 'The project name consists of a lowercase character number and "._-", and has at least two characters beginning with a letter or number'
     projectNameExist: "The project name already exists"
+    pwdError: Password incorrect
   table:
     projectName: "Project name"
     level: "Access Level"
