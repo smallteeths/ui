@@ -116,6 +116,8 @@ export default Component.extend({
       const itemRoute = fnOrValue(get(item, 'route'), this);
       const itemContext = (get(item, 'ctx') || []).map( (prop) =>  fnOrValue(prop, this));
 
+      set(this, 'currentItemContext', itemContext)
+
       setProperties(item, {
         localizedLabel: fnOrValue(get(item, 'localizedLabel'), this),
         label:          fnOrValue(get(item, 'label'), this),
