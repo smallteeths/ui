@@ -10,6 +10,8 @@ export default Route.extend({
   auditLog:    service(),
   prefs:       service(),
   globalStore: service(),
+  intl:        service(),
+
   model() {
     const appRoute = window.l('route:application');
     const project = appRoute.modelFor('authenticated.project').get('project');

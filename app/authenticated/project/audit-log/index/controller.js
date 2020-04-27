@@ -104,51 +104,7 @@ export default Controller.extend({
       });
     },
     operationsChanged() {
-      let resourceTypeObject = null;
-      let resourceActions = null;
-      const intl = get(this, 'intl');
-
-      if (!get(this, 'form.operationLabel')) {
-        resourceActions = [
-          {
-            label: intl.t('auditLog.form.operation.all'),
-            value: ''
-          },
-          {
-            label: intl.t('auditLog.form.operation.create'),
-            value: 'Create'
-          },
-          {
-            label: intl.t('auditLog.form.operation.update'),
-            value: 'Update'
-          },
-          {
-            label: intl.t('auditLog.form.operation.delete'),
-            value: 'Delete'
-          }
-        ]
-      } else {
-        get(this, 'model.selectionResources.resources').forEach((item) => {
-          if (item.resourceType === get(this, 'form.operationLabel')) {
-            resourceTypeObject = item
-          }
-        })
-        if (resourceTypeObject) {
-          resourceActions = resourceTypeObject.resourceActions.map((item) => {
-            return {
-              label: item,
-              value: item
-            }
-          })
-          resourceActions.unshift({
-            label: intl.t('auditLog.form.operation.all'),
-            value: ''
-          })
-        }
-      }
-
       set(this, 'form.operation', '')
-      set(this, 'operations', resourceActions)
     },
     clear() {
       this.resetForm();
@@ -223,25 +179,51 @@ export default Controller.extend({
 
     return arr;
   }),
-  operations: computed('intl.locale', function() {
+  operations: computed('intl.locale', 'form.operationLabel', function() {
     const intl = get(this, 'intl');
 
-    let arr = [{
+    if (!get(this, 'form.operationLabel')) {
+      return [
+        {
+          label: intl.t('auditLog.form.operation.all'),
+          value: ''
+        },
+        {
+          label: 'Create',
+          value: 'Create'
+        },
+        {
+          label: 'Update',
+          value: 'Update'
+        },
+        {
+          label: 'Delete',
+          value: 'Delete'
+        }
+      ];
+    }
+
+    const arr = [{
       label: intl.t('auditLog.form.operation.all'),
       value: ''
-    },
-    {
-      label: 'Create',
-      value: 'Create'
-    },
-    {
-      label: 'Update',
-      value: 'Update'
-    },
-    {
-      label: 'Delete',
-      value: 'Delete'
-    }]
+    }];
+    let resourceTypeObject = null;
+
+    get(this, 'model.selectionResources.resources').forEach((item) => {
+      if (item.resourceType === get(this, 'form.operationLabel')) {
+        resourceTypeObject = item
+      }
+    })
+    if (resourceTypeObject) {
+      const resourceActions = resourceTypeObject.resourceActions.map((item) => {
+        return {
+          label: item,
+          value: item
+        }
+      });
+
+      arr.push(...resourceActions);
+    }
 
     return arr;
   }),
