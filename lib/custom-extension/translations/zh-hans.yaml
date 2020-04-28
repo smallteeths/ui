@@ -23,7 +23,7 @@ imageRepoSection:
     removeHarborConfig: 移除Harbor配置
     testEmailServer: 测试邮件服务器
     gcSchedule: 立即清理垃圾
-    methodNotSupported:  rancher本地认证暂不支持对接ldap类型认证的harbor服务
+    methodNotSupported: "暫不支持對接當前{auth}認證的harbor服務"
   userConfigPage:
     syncAccount: 同步账号
     reSyncAccount: 重新同步账号

@@ -23,7 +23,7 @@ imageRepoSection:
     removeHarborConfig: "REMOVE Harbor Config"
     testEmailServer: "Test mail server"
     gcSchedule: "Clean up"
-    methodNotSupported: "Rancher (local auth) doesn't support Harbor server with LDAP/AD auth"
+    methodNotSupported: "Does not support harbor server with {auth} authorization"
   userConfigPage:
     syncAccount: "Synchronous Account"
     reSyncAccount: "Resynchronize Account"
