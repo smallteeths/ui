@@ -2982,6 +2982,10 @@ userPreferencesPage:
       label: Email
     password:
       text: Change Password
+  menu:
+    header: Menu Position
+    left: Left
+    top: Top
 
 verifyPage:
   header: "You've successfully verified your email!"
