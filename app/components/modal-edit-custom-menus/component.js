@@ -15,6 +15,7 @@ export default Component.extend(ModalBase, {
   globalStore:       service(),
   router:            service(),
   growl:             service(),
+  intl:              service(),
 
   layout,
   classNames:        ['modal-edit-setting', 'span-8', 'offset-2'],
@@ -72,6 +73,16 @@ export default Component.extend(ModalBase, {
       const {
         globalMenus = [], clusterMenus = [], projectMenus = [], globalStore
       } = this
+
+      const allMenus = [...globalMenus, ...clusterMenus, ...projectMenus]
+      const filter = allMenus.filter((m) => (get(m, 'url') || '').startsWith('http://'))
+
+      if (get(filter, 'length') > 0) {
+        set(this, 'errors', [get(this, 'intl').t('customMenus.index.protocalInvalid')])
+        cb(false)
+
+        return
+      }
 
       const globalStr = globalMenus.map((m) => {
         return `${ GLOBAL },${ m.label },${ m.url }`

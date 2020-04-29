@@ -10922,6 +10922,7 @@ customMenus:
     globalMenu: 全局级别自定义菜单
     clusterMenu: 集群级别自定义菜单
     projectMenu: 项目级别自定义菜单
+    protocalInvalid: 'HTTP协议不合法, HTTPS网站无法嵌入HTTP iframe'
 
 formMenu:
   menu:

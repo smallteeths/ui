@@ -10564,6 +10564,7 @@ customMenus:
     globalMenu: Global level Menu
     clusterMenu: Cluster level Menu
     projectMenu: Project level Menu
+    protocalInvalid: 'HTTP protocol is invalid, HTTPS website cannot embed with HTTP iframe'
 
 formMenu:
   menu:
