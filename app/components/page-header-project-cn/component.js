@@ -199,10 +199,14 @@ export default Component.extend(ThrottledResize, {
 
     function setCurrentClusterToFirst() {
       const currentClusterIndex = out.findIndex((cluster) => get(cluster, 'clusterId') === currentClusterId);
-      const firstCluster = out.splice(currentClusterIndex, 1)[0];
 
-      if (firstCluster) {
-        out.splice(0, 0, firstCluster);
+      // makesure currentCluster exist
+      if (currentClusterIndex > -1) {
+        const firstCluster = out.splice(currentClusterIndex, 1)[0];
+
+        if (firstCluster) {
+          out.splice(0, 0, firstCluster);
+        }
       }
     }
   }),
