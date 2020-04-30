@@ -144,7 +144,7 @@ export default Controller.extend({
       return {
         name,
         used:    data[key],
-        percent: `${ Math.floor( (used / total) * 100 ) }%`,
+        percent: `${ Math.floor( (used / total) * 100 ) || 0 }%`,
         label:   key,
       }
     } else {
