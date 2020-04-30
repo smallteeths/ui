@@ -19,12 +19,14 @@ export const headers = [
     label:          'Master',
     sort:           ['master'],
     searchField:    'master',
+    width:          70
   },
   {
     name:           'vlan',
     label:          'VLAN',
     sort:           ['vlan'],
     searchField:    'vlan',
+    width:          70
   },
   {
     name:           'cidr',
@@ -36,7 +38,7 @@ export const headers = [
   {
     name:           'ipRanges',
     translationKey: 'formVlan.ipRange.label',
-    width:          210,
+    width:          190,
   },
   {
     name:           'routes',
@@ -56,13 +58,13 @@ export const headers = [
     sort:           ['gateway'],
     searchField:    'gateway',
   },
-  {
+  /* {
     classNames:     'text-right pr-20',
     name:           'creationTimestamp',
     translationKey: 'generic.created',
     sort:           ['creationTimestamp'],
     searchField:    false,
-  },
+  }, */
 ];
 
 export default Controller.extend({
@@ -75,12 +77,13 @@ export default Controller.extend({
   sortBy:                 'name',
   headers,
   data:                   [],
-  infoTotal:                1000,
+  infoTotal:              1000,
   loading:                false,
   showConfirmDeleteModal: false,
   selectedData:           null,
-  infos:                  [],
-  deleteTime:               null,
+  infos:                  null,
+  infosLoading:           false,
+  deleteTime:             null,
   availableActions:       [
     {
       action:         'remove',
@@ -88,7 +91,7 @@ export default Controller.extend({
       label:          'action.remove',
     },
   ],
-  rowActions: [
+  rowActions:             [
     {
       action:         'edit',
       icon:           'icon icon-edit',
@@ -170,46 +173,23 @@ export default Controller.extend({
       set(this, 'data', data);
     },
     promptDelete(data) {
-      const intl = get(this, 'intl');
       const clusterId = get(this, 'model.clusterId');
       const timestamp = new Date().getTime();
-      let nameList = '';
-      const promisAll = data.map(({ name }, index) => {
-        if (index <= 5) {
-          nameList += `${ name };`
-        }
-
+      const promiseAll = data.map(({ name }) => {
         return this.getPods(clusterId, name);
       });
 
-      if (data.length > 5){
-        // nameList = `${ data.firstObject.name }及${ data.length - 1 }其他`;
-        nameList = intl.t('vlansubnetPage.deleteVlanAboutVlans', {
-          vlan:   data.firstObject.name,
-          others: data.length - 1
-        });
-      }
+      set(this, 'infos', null);
+      set(this, 'infosLoading', true);
       set(this, 'showConfirmDeleteModal', true);
-      set(this, 'infos', [{
-        displayName: nameList,
-        resources:   data,
-        kind:        'MacvlanSubnet'
-      }]);
       set(this, 'selectedData', data);
       set(this, 'deleteTime', timestamp);
-      this.getPodInfoList(promisAll, timestamp).then(({ pods, timestamp }) => {
+      this.getPodInfoList(promiseAll, timestamp).then(({ pods, timestamp }) => {
         if (get(this, 'deleteTime') !== timestamp){
           return;
         }
-        let length = pods.length - 1;
-
-        if (pods.length > 14){
-          pods.length = 14;
-          get(this, 'infos').push(...pods, { displayName: `············` }, { displayName: `${ length > 200 ? intl.t('vlansubnetPage.deleteVlanAboutPodsTotalThan', { total: 200 }) : intl.t('vlansubnetPage.deleteVlanAboutPodsTotal', { total: length }) }` });
-        } else {
-          get(this, 'infos').push(...pods, { displayName: intl.t('vlansubnetPage.deleteVlanAboutPodsTotal', { total: length }) });
-        }
-        set(this, 'infos', JSON.parse(JSON.stringify(get(this, 'infos'))));
+        set(this, 'infos', pods);
+        set(this, 'infosLoading', false)
       });
     },
     confirmDelete() {
@@ -260,14 +240,10 @@ export default Controller.extend({
   next: computed('model.vlansubnets.continue', function() {
     return get(this, 'model.vlansubnets.continue');
   }),
-  async getPodInfoList(promisAll, timestamp){
-    return await Promise.all(promisAll).then((results) => {
-      let pods = results.reduce((a, b) => {
-        return a.concat(b);
-      }, [{ displayName: '-----------------------------' }]);
-
+  async getPodInfoList(promiseAll, timestamp){
+    return await Promise.all(promiseAll).then((results) => {
       return {
-        pods,
+        pods: results,
         timestamp
       };
     }).catch((err) => {
@@ -308,12 +284,28 @@ export default Controller.extend({
         return [];
       }
 
-      return Array.from(resp.body.items).filter(({ metadata }) => metadata && metadata.annotations && this.displayMacvlanIp(metadata.annotations)
-      ).map(({ metadata, displayName }) => {
-        displayName = `${ metadata.namespace }/${ metadata.name } [${ this.displayMacvlanIp(metadata.annotations) }]`
-
-        return { displayName }
+      let more  = false;
+      let morePods = [];
+      const pods     = Array.from(resp.body.items).filter(({ metadata }) => metadata && metadata.annotations && this.displayMacvlanIp(metadata.annotations)
+      ).map(({ metadata }) => {
+        return {
+          namespace: metadata.namespace,
+          name:      metadata.name,
+          ip:        this.displayMacvlanIp(metadata.annotations)
+        }
       });
+
+      if (pods.length > 5) {
+        more = true;
+        morePods = pods.splice(5, pods.length - 1)
+      }
+
+      return {
+        subnet: name,
+        pods,
+        more,
+        morePods
+      };
     }).catch((err) => {
       get(this, 'growl').fromError(err && err.body && err.body.message);
 

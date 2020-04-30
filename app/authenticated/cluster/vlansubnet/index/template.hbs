@@ -70,9 +70,9 @@
         <td data-title="{{dt.gateway}}">
           {{obj.gateway}}
         </td>
-        <td class="text-right pr-20">
+        <!--<td class="text-right pr-20">
           {{date-calendar obj.creationTimestamp}}
-        </td>
+        </td>-->
         <td data-title="{{dt.actions}}" class="actions">
         {{custom-action-menu model=obj resourceActions=rowActions menuClick=(action 'handleMenuClick')}}
         </td>
@@ -89,4 +89,4 @@
   {{model.vlansubnets.errorMsg}}
   {{/banner-message}}
 {{/if}}
-{{#custom-modal-confirm-delete confirm=(action 'confirmDelete') resources=infos totalLimit=infoTotal modalVisible=showConfirmDeleteModal}}{{/custom-modal-confirm-delete}}
+{{#custom-modal-confirm-delete confirm=(action 'confirmDelete') resources=infos infosLoading=infosLoading totalLimit=infoTotal modalVisible=showConfirmDeleteModal}}{{/custom-modal-confirm-delete}}

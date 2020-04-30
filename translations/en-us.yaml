@@ -4779,6 +4779,9 @@ confirmDelete:
     namespace: 'namespace'
     project: 'project'
     cluster: 'cluster'
+    workload: 'workload'
+    ip: 'IP'
+  emptyPod: '0 pod'
   environmentNote: 'Note: All resources inside this Project will be permanently removed, including any namespaces that were created through {appName}.'
   clusterNote: 'Note: Associated resources such as volumes, balancers, and networks that were created in the cloud provider will not be automatically removed.'
   clusterRoleTemplateBindingNote: "Note: User's project permissions will not be removed."
