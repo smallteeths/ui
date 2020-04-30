@@ -13,6 +13,8 @@ const harborAdminAuthKey = 'rancher.cn/registry-harbor-admin-auth'
 
 const TEMP_NAMESPACE_ID = '__TEMP__';
 
+const TEMP_NAMESPACE_ID = '__TEMP__';
+
 export default Component.extend(ViewNewEdit, OptionallyNamespaced, {
   globalStore:  service(),
   clusterStore: service(),
@@ -144,8 +146,10 @@ export default Component.extend(ViewNewEdit, OptionallyNamespaced, {
   hostname:  window.location.host,
 
   willSave() {
-    const { primaryResource: pr } = this;
-    const nsId = this.namespace && this.namespace.id;
+    const {
+      namespace: { id: nsId },
+      primaryResource: pr,
+    } = this;
 
     set(pr, 'namespaceId', nsId ? nsId : TEMP_NAMESPACE_ID);
 
@@ -168,6 +172,10 @@ export default Component.extend(ViewNewEdit, OptionallyNamespaced, {
   },
 
   doSave() {
+    let self = this;
+    let sup  = self._super;
+
+    return this.namespacePromise().then(() => sup.apply(self, arguments));
     let self                       = this;
     let sup                        = self._super;
     const { primaryResource: { namespaceId } } = this;
