@@ -4834,7 +4834,7 @@ confirmDelete:
   titleWithResourceType: '您确定要删除<b>{resourceType}</b>吗？'
   resourceType:
     namespace: '命名空间'
-    project: '项目'
+    subnet: 'Subnet'
     cluster: '集群'
     workload: '工作负载'
     ip: 'IP'

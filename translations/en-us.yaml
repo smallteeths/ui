@@ -4777,7 +4777,7 @@ confirmDelete:
   titleWithResourceType: 'Are you sure you want to delete the <b>{resourceType}</b>:'
   resourceType:
     namespace: 'namespace'
-    project: 'project'
+    subnet: 'Subnet'
     cluster: 'cluster'
     workload: 'workload'
     ip: 'IP'
