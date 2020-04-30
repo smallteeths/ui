@@ -171,7 +171,10 @@ export default Component.extend(ThrottledResize, {
       entry.projects = entry.projects.sortBy('sortName');
     });
 
-    return out.sortBy('cluster.sortName');
+    out.sortBy('cluster.sortName');
+    setCurrentClusterToFirst();
+
+    return out;
 
     function getOrAddCluster(cluster) {
       const clusterId = get(cluster, 'id');
@@ -192,6 +195,15 @@ export default Component.extend(ThrottledResize, {
       }
 
       return entry;
+    }
+
+    function setCurrentClusterToFirst() {
+      const currentClusterIndex = out.findIndex((cluster) => get(cluster, 'clusterId') === currentClusterId);
+      const firstCluster = out.splice(currentClusterIndex, 1)[0];
+
+      if (firstCluster) {
+        out.splice(0, 0, firstCluster);
+      }
     }
   }),
 
