@@ -94,14 +94,20 @@
 
       {{else if item.url}}
         <li class="nav-item">
-          {{#link-to-as-attrs
+          {{#if item.customRoute}}
+            {{#link-to-as-attrs
               ourRoute=item.customRoute
               activeParent="LI"
               class="nav-link"
               ctx=item.ctx
-          }}
-            {{item.label}}
-          {{/link-to-as-attrs}}
+            }}
+              {{item.label}}
+            {{/link-to-as-attrs}}
+          {{else}}
+            <a href="{{item.url}}">
+              {{item.label}}
+            </a>
+          {{/if}}
         </li>
       {{else}}
 

@@ -154,21 +154,22 @@ export default Component.extend({
       const [menuScope, menuLabel, menuUrl = ''] = menu.split(',');
 
       if ( menuScope === currentScope ) {
-        let url = menuUrl
-
-        if (menuUrl.startsWith('http://') || menuUrl.startsWith('https://')) {
-          url = `/iframe/${ encodeURIComponent(menuUrl) }`
-        }
-
+        let url = `https://${  menuUrl }`
         let customRoute
         let ctx
 
-        if (menuScope === 'global') {
-          customRoute = `global-admin.iframe.detail`
-          ctx = [encodeURIComponent(menuUrl)]
+        const isRancherUrl = url.startsWith(window.location.origin)
+
+        if (isRancherUrl) {
+          url = url.replace(window.location.origin, '')
         } else {
-          customRoute = `authenticated.${ menuScope }.iframe.detail`
-          ctx = [...get(this, 'currentItemContext'), encodeURIComponent(menuUrl)]
+          if (menuScope === 'global') {
+            customRoute = `global-admin.iframe.detail`
+            ctx = [encodeURIComponent(url)]
+          } else {
+            customRoute = `authenticated.${ menuScope }.iframe.detail`
+            ctx = [...get(this, 'currentItemContext'), encodeURIComponent(url)]
+          }
         }
 
         out.push({
