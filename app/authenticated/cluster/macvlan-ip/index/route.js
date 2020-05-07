@@ -43,7 +43,7 @@ export default Route.extend({
 
       projectOptions.unshift({
         value: '',
-        label: '所有项目',
+        label: 'All Projects',
         projectOptions,
       });
 
