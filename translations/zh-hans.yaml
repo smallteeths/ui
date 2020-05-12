@@ -972,6 +972,36 @@ authPage:
       buttonText:
         pre: 启用本地认证
         post: '启用中...'
+  cas:
+    header:
+      disabled:
+        label: CAS 没有配置
+    notAuthenticated:
+      form:
+        header: 配置Rancher以使用CAS进行身份验证
+        hostUrl:
+          label: CAS 主机
+          placeholder: 例如：cas-server.com
+        port:
+          label: 端口
+          placeholder: 例如： 6379
+        callbackURL:
+          label: 服务回调地址
+          placeholder: CAS 服务回调地址
+        connectionTimeout:
+          label: 服务连接超时时间
+          placeholder: 例如：5000
+    authenticated:
+      disableAccess:
+        disable: 禁用 CAS 访问
+    testAuth:
+      header: 测试并启用身份验证
+      subtext: 通过测试应用程序的身份验证，来检查应用程序配置是否正确：
+      buttonText:
+        pre: 通过CAS验证配置
+        post: 等待CAS响应
+      authError: 未授权访问CAS
+      popupError: 请禁用弹出窗口阻止程序，然后再次单击“验证”。
 
 backupsPage:
   header: Etcd 备份
@@ -7590,6 +7620,9 @@ loginGithub:
 
 loginGoogle:
   buttonText: 用Google登录
+
+loginCAS:
+  buttonText: 用CAS登录
 
 loginAzure:
   buttonText: 用Azure AD登录

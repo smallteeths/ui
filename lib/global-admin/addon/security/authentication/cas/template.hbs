@@ -1,0 +1,174 @@
+<section>
+  {{#unless isEnabled}}
+    <div class="banner bg-warning">
+      <div class="banner-icon"><span class="icon icon-alert"></span></div>
+      <div class="banner-message">
+        <p>{{t 'authPage.cas.header.disabled.label'}}</p>
+      </div>
+    </div>
+  {{/unless}}
+</section>
+
+{{#accordion-list showExpandAll=false  as |al expandFn|}}
+  {{#if isEnabled}}
+    {{#accordion-list-item
+         expand=(action expandFn)
+         expandAll=al.expandAll
+         expandOnInit=true
+         expanded=true
+         showExpand=false
+         title=(t 'authPage.github.authenticated.header.text')
+    }}
+      <section class="">
+        <div class="clearfix">
+          <div class="pull-right">
+            <button class="btn btn-sm right-divider-btn bg-error" {{action "disable"}}>
+              {{t 'authPage.cas.authenticated.disableAccess.disable'}}
+            </button>
+          </div>
+        </div>
+        <hr/>
+        <div class="row">
+          <div class="col span-6">
+            <b>{{t 'authPage.cas.notAuthenticated.form.hostUrl.label'}}</b> <span class="text-muted">{{authConfig.hostname}}</span>
+          </div>
+          <div class="col span-6">
+            <b>{{t 'authPage.github.notAuthenticated.form.isGHEnterprise.labelText'}}(<code>https://</code>)</b> <span class="text-muted">{{authConfig.tls}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col span-6">
+            <b>{{t 'authPage.cas.notAuthenticated.form.port.label'}}</b> <span class="text-muted">{{authConfig.port}}</span>
+          </div>
+          <div class="col span-6">
+            <b>{{t 'authPage.cas.notAuthenticated.form.connectionTimeout.label'}}</b> <span class="text-muted">{{authConfig.connectionTimeout}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col span-6">
+            <b>{{t 'authPage.cas.notAuthenticated.form.callbackURL.label'}}</b> <span class="text-muted">{{authConfig.service}}</span>
+          </div>
+          <div class="col span-6">
+            <b>{{t 'authPage.cas.notAuthenticated.form.loginEndpoint.label'}}</b> <span class="text-muted">{{authConfig.loginEndpoint}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col span-6">
+            <b>{{t 'authPage.cas.notAuthenticated.form.logoutEndpoint.label'}}</b> <span class="text-muted">{{authConfig.logoutEndpoint}}</span>
+          </div>
+        </div>
+      </section>
+    {{/accordion-list-item}}
+  {{/if}}
+
+  {{#unless isEnabled}}
+    {{#accordion-list-item
+         expand=(action expandFn)
+         expandAll=al.expandAll
+         expandOnInit=true
+         expanded=true
+         showExpand=false
+         title=(t 'authPage.cas.notAuthenticated.form.header' appName=settings.appName)
+    }}
+      <form autcomplete="on">
+        <section class="">
+          <div class="row">
+            <div class="col span-6">
+              <div class="inline-form">
+                <label class="acc-label pb-5">{{t 'authPage.cas.notAuthenticated.form.hostUrl.label'}}{{field-required}}</label>
+                {{input type="text"
+                        value=authConfig.hostname
+                        classNames="form-control"
+                        placeholder=(t 'authPage.cas.notAuthenticated.form.hostUrl.placeholder')
+                }}
+                <div class="checkbox pt-10">
+                  <label class="acc-label pb-5">{{input type="checkbox" checked=authConfig.tls}} {{t 'authPage.github.notAuthenticated.form.isGHEnterprise.labelText'}} (<code>https://</code>).</label>
+                </div>
+              </div>
+            </div>
+            <div class="col span-6">
+              <div class="inline-form">
+                <label class="acc-label pb-5">{{t 'authPage.cas.notAuthenticated.form.port.label'}}{{field-required}}</label>
+                 {{input-integer
+                  value=authConfig.port
+                  min=1
+                  max=65535
+                  classNames="form-control"
+                }}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col span-6">
+              <label class="acc-label pb-5">
+                {{t "authPage.cas.notAuthenticated.form.connectionTimeout.label"}}{{field-required}}
+              </label>
+              <div class="input-group">
+                {{input-integer
+                  value=authConfig.connectionTimeout
+                  min=1
+                  classNames="form-control"
+                  placeholder=(t "authPage.cas.notAuthenticated.form.connectionTimeout.placeholder")
+                }}
+                <span class="input-group-addon bg-default">
+                  <label>
+                    {{t "generic.milliseconds"}}
+                  </label>
+                </span>
+              </div>
+            </div>
+            <div class="col span-6">
+              <div class="inline-form">
+                <label class="acc-label pb-5">{{t 'authPage.cas.notAuthenticated.form.callbackURL.label'}}{{field-required}}</label>
+                {{input type="text"
+                  value=redirectURI
+                  classNames="form-control"
+                  disabled=true
+                  placeholder=(t 'authPage.cas.notAuthenticated.form.callbackURL.placeholder')
+                }}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col span-6">
+              <div class="inline-form">
+                <label class="acc-label pb-5">{{t 'authPage.cas.notAuthenticated.form.loginEndpoint.label'}}</label>
+                {{input type="text"
+                  value=authConfig.loginEndpoint
+                  classNames="form-control"
+                  placeholder=(t 'authPage.cas.notAuthenticated.form.loginEndpoint.placeholder')
+                }}
+              </div>
+            </div>
+            <div class="col span-6">
+              <div class="inline-form">
+                <label class="acc-label pb-5">{{t 'authPage.cas.notAuthenticated.form.logoutEndpoint.label'}}</label>
+                {{input type="text"
+                  value=authConfig.logoutEndpoint
+                  classNames="form-control"
+                  placeholder=(t 'authPage.cas.notAuthenticated.form.logoutEndpoint.placeholder')
+                }}
+              </div>
+            </div>
+          </div>
+
+          {{top-errors errors=errors}}
+
+          <div class="row mt-20">
+            <div class="inline-form">
+              <button class="btn bg-primary" style="display: block;margin: 0 auto;" {{action "save"}}>
+                {{#if saving}}
+                  <i class="icon icon-spinner icon-spin"></i> {{t 'authPage.cas.testAuth.buttonText.post'}}
+                {{else if doneSaving}}
+                  {{t 'generic.saved'}}
+                {{else}}
+                  {{t 'authPage.cas.testAuth.buttonText.pre'}}
+                {{/if}}
+              </button>
+            </div>
+          </div>
+        </section>
+      </form>
+    {{/accordion-list-item}}
+  {{/unless}}
+{{/accordion-list}}

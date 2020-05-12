@@ -13,6 +13,7 @@ export default Mixin.create({
   queryParams: {
     config:            { refreshModel: false },
     code:              { refreshModel: false },
+    ticket:            { refreshModel: false },
     forward:           { refreshModel: false },
     state:             { refreshModel: false },
     authProvider:      { refreshModel: false },

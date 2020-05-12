@@ -71,6 +71,11 @@
   &.googleoauth {
     background-image: url('images/providers/provider-google.svg');
   }
+
+  &.cas {
+    background-image: url('images/providers/provider-cas.png');
+    background-size: contain;
+  }
 }
 
 .advanced-setting {

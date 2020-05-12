@@ -4693,6 +4693,9 @@ loginShibboleth:
 loginGithub:
   buttonText: 用GitHub登錄
 
+loginCAS:
+  buttonText: 用CAS登錄
+
 loginAzure:
   buttonText: 用Azure AD登錄
 

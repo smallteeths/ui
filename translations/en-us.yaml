@@ -974,6 +974,49 @@ authPage:
       buttonText:
         pre: Enable Local Auth
         post: 'Enabling...'
+  cas:
+    header:
+      disabled:
+        label: CAS is not configured
+    notAuthenticated:
+      form:
+        header: Configure Rancher to use CAS to authentication
+        hostUrl:
+          label: CAS Host
+          placeholder: e.g. cas-server.com
+        port:
+          label: Port
+          placeholder: e.g. 6379
+        callbackURL:
+          label: Service Callback URL
+          placeholder: Your CAS Service Callback URL
+        connectionTimeout:
+          label: Server Connection Timeout
+          placeholder: e.g. 5000
+        loginEndpoint:
+          label: Login Endpoint
+          placeholder: e.g. /cas/login
+        logoutEndpoint:
+          label: Logout Endpoint
+          placeholder: e.g. /cas/logout
+        usernameField:
+          label: User Name Field
+          placeholder: e.g. username
+        passwordField:
+          label: Password Field
+          placeholder: e.g. password
+
+    authenticated:
+      disableAccess:
+        disable: Disable CAS access
+    testAuth:
+      header: 'Test and enable authentication'
+      subtext: 'Check that your application is configured correctly by testing authentication with it:'
+      buttonText:
+        pre: Authenticate with CAS
+        post: Waiting to hear back from CAS
+      authError: 'CAS access was not authorized'
+      popupError: 'Please disable your pop-up blocker and click "Authenticate" again.'
 
 backupsPage:
   header: etcd Snapshots
@@ -7534,6 +7577,9 @@ loginGoogle:
 
 loginAzure:
   buttonText: Log In with Azure AD
+
+loginCAS:
+  buttonText: Log In with CAS
 
 loginSaml:
   ping:

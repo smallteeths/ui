@@ -106,6 +106,10 @@
               socketId=socketId
             }}
           {{/if}}
+
+          {{#if isCAS}}
+            {{login-cas action="started"}}
+          {{/if}}
         {{/if}}
 
         {{#unless onlyLocal}}
