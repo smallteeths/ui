@@ -9431,13 +9431,20 @@ nodeDriver:
       label: 存储IO优化
       optimized: 优化
       none: 不优化
+    diskCategory:
+      cloudEfficiency: 高效云盘
+      cloudEssd: ESSD云盘
+      cloudSsd: SSD云盘
     systemDiskCategory:
       label: 系统盘种类
+    systemDiskSize:
+      label: 系统磁盘大小
+      placeholder: "容量范围: 20 ~ 500"
     dataDiskCategory:
       label: 数据盘种类
     dataDiskSize:
       label: 数据磁盘大小
-      placeholder: 磁盘大小
+      placeholder: "容量范围: 0 ~ 32768"
     region:
       label: 区域
       placeholder: 区域
@@ -9462,7 +9469,10 @@ nodeDriver:
       label: 私有IP
       placeholder: 专用网络中的私有 IP
     privateAddressOnly:
-      label: 仅私网IP
+      label: 仅私网 IP
+    internetChargeTypes:
+      payByTraffic: 按使用流量计费
+      payByBandwidth: 按固定带宽计费
     securitySection:
       label: 安全
       detail: 选择实例所需要配置的安全组。
@@ -9480,6 +9490,7 @@ nodeDriver:
       valueLabel: 标签
       placeholder: '例如: dev'
     errors:
+      zoneIdRequired: 请选择可用区
       vpcIdRequired: 请选择专有网络
       vswitchIdRequired: 请选择交换机
       accessKeyRequired: 请输入访问秘钥

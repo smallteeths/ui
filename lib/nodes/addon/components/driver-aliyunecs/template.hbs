@@ -108,7 +108,7 @@
         </div>
         <div class="col span-6">
           <label class="acc-label">
-            {{t "nodeDriver.aliyunecs.zone.label"}}
+            {{t "nodeDriver.aliyunecs.zone.label"}}{{field-required}}
           </label>
           {{#input-or-display editable=(eq step 2) value=config.zone}}
             {{new-select
@@ -126,7 +126,7 @@
       <div class="row">
         <div class="col span-6">
           <label class="acc-label">
-            {{t "nodeDriver.aliyunecs.vpcId.label"}}
+            {{t "nodeDriver.aliyunecs.vpcId.label"}}{{field-required}}
           </label>
           {{#input-or-display editable=(eq step 2) value=config.vpcId}}
             {{new-select
@@ -166,7 +166,7 @@
       <div class="row">
         <div class="col span-6">
           <label class="acc-label">
-            {{t "nodeDriver.aliyunecs.vswitchId.label"}}
+            {{t "nodeDriver.aliyunecs.vswitchId.label"}}{{field-required}}
           </label>
           {{#input-or-display editable=(eq step 2) value=config.vswitchId}}
             {{new-select
@@ -194,6 +194,24 @@
           {{/input-or-display}}
         </div>
       </div>
+
+      <div class="row">
+        <div class="col span-6 {{unless (eq config.privateAddressOnly false) "hide"}}">
+          <label class="acc-label">
+            {{t "nodeDriver.aliyunecs.internetChargeType.label"}}
+          </label>
+          {{#input-or-display editable=(eq step 2) value=config.internetChargeType}}
+            {{new-select
+              classNames="form-control"
+              content=internetChargeTypes
+              optionLabelPath="label"
+              optionValuePath="value"
+              value=config.internetChargeType
+              localizedPrompt=true
+            }}
+          {{/input-or-display}}
+        </div>
+      </div>
     {{/accordion-list-item}}
 
     {{#if (eq step 2)}}
@@ -218,38 +236,33 @@
       <div class="row">
         <div class="col span-6">
           <label class="acc-label">
-            {{t "nodeDriver.aliyunecs.ioOptimized.label"}}
-          </label>
-          {{#input-or-display editable=(eq step 3) value=config.ioOptimized}}
-            <div>
-              <label class="mr-20 hand">
-                {{radio-button
-                  selection=config.ioOptimized
-                  value="optimized"
-                }}
-                {{t "nodeDriver.aliyunecs.ioOptimized.optimized"}}
-              </label>
-              <label class="hand">
-                {{radio-button
-                  selection=config.ioOptimized
-                  value="none"
-                }}
-                {{t "nodeDriver.aliyunecs.ioOptimized.none"}}
-              </label>
-            </div>
-          {{/input-or-display}}
-        </div>
-        <div class="col span-6">
-          <label class="acc-label">
             {{t "nodeDriver.aliyunecs.systemDiskCategory.label"}}
           </label>
           {{#input-or-display editable=(eq step 3) value=config.systemDiskCategory}}
             {{new-select
               classNames="form-control"
               content=diskCategoryChoices
-              optionLabelPath="value"
+              optionLabelPath="label"
+              optionValuePath="value"
               value=config.systemDiskCategory
             }}
+          {{/input-or-display}}
+        </div>
+        <div class="col span-6">
+          <label class="acc-label">
+            {{t "nodeDriver.aliyunecs.systemDiskSize.label"}}
+          </label>
+          {{#input-or-display editable=(eq step 3) value=config.systemDiskSize}}
+            <div class="input-group">
+              {{input-integer
+                min=20
+                max=500
+                class="form-control"
+                value=config.systemDiskSize
+                placeholder=(t "nodeDriver.aliyunecs.systemDiskSize.placeholder")
+              }}
+              <div class="input-group-addon bg-default">GB</div>
+            </div>
           {{/input-or-display}}
         </div>
       </div>
@@ -263,7 +276,8 @@
             {{new-select
               classNames="form-control"
               content=diskCategoryChoices
-              optionLabelPath="value"
+              optionLabelPath="label"
+              optionValuePath="value"
               value=config.diskCategory
             }}
           {{/input-or-display}}
@@ -274,11 +288,12 @@
           </label>
           {{#input-or-display editable=(eq step 3) value=config.diskSize}}
             <div class="input-group">
-              {{input
-                type="text"
+              {{input-integer
+                min=0
+                max=32768
                 class="form-control"
                 value=config.diskSize
-                placeholder=(t "nodeDriver.aliyunecs.dataDiskSize.placeholder")
+                placeholder=(t "nodeDriver.aliyunecs.diskSize.placeholder")
               }}
               <div class="input-group-addon bg-default">GB</div>
             </div>

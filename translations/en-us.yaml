@@ -9133,13 +9133,20 @@ nodeDriver:
       label: Instance Storage I/O Optimized
       optimized: Optimized
       none: None
+    diskCategory:
+      cloudEfficiency: Ultra Disk
+      cloudEssd: Enhanced SSD (ESSD)
+      cloudSsd: Standard SSD
     systemDiskCategory:
       label: System Disk Category
+    systemDiskSize:
+      label: System Disk Size
+      placeholder: "Disk Capacity: 20 ~ 500"
     dataDiskCategory:
       label: Data Disk Category
     dataDiskSize:
       label: Data Disk Size
-      placeholder: Disk Size
+      placeholder: "Disk Capacity: 20 ~ 32768"
     region:
       label: Region
       placeholder: Region
@@ -9165,6 +9172,12 @@ nodeDriver:
       placeholder: Private IP in Private Network
     privateAddressOnly:
       label: Private Address Only
+    internetChargeType:
+      label: Bandwidth Billing
+      prompt: Choose Bandwidth Billing...
+    internetChargeTypes:
+      payByTraffic: "Pay-By-Traffic"
+      payByBandwidth: "Pay-By-Bandwidth"
     securitySection:
       label: Security
       detail: Choose the security groups that will be applied to Instances
@@ -9182,6 +9195,7 @@ nodeDriver:
       valueLabel: Tags
       placeholder: e.g. dev
     errors:
+      zoneIdRequired: Available Zone is required.
       vpcIdRequired: VPC is required.
       vswitchIdRequired: VSwitch is required.
       accessKeyRequired: Access Key is required.
