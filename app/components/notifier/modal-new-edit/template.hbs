@@ -309,6 +309,7 @@
         {{t "notifierPage.wechat.secret.label"}}{{field-required}}
       </div>
       {{input
+        type="password"
         classNames="form-control"
         value=model.wechatConfig.secret
         placeholder=(t "notifierPage.wechat.secretPlaceholder")
@@ -516,6 +517,7 @@
         {{t "notifierPage.dingtalk.secret"}}
       </div>
       {{input
+        type="password"
         classNames="form-control"
         value=model.dingtalkConfig.secret
         placeholder=(t "notifierPage.dingtalk.secretPlaceholder")
@@ -640,6 +642,7 @@
         {{t "notifierPage.aliyunsms.accessKeySecret.label"}}{{field-required}}
       </div>
       {{input
+        type="password"
         classNames="form-control"
         value=model.aliyunsmsConfig.accessKeySecret
         placeholder=(t "notifierPage.aliyunsms.accessKeySecret.placeholder")
