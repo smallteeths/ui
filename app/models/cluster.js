@@ -458,11 +458,17 @@ export default Resource.extend(Grafana, ResourceUsage, {
           } else if (!isEmpty(services.cachedConfig.s3BackupConfig)) {
             return 's3';
           }
+        } else if (get(services, 'backupConfig')){
+          if (isEmpty(services.backupConfig.s3BackupConfig)) {
+            return 'local';
+          } else if (!isEmpty(services.backupConfig.s3BackupConfig)) {
+            return 's3';
+          }
         }
       }
 
       const backupType     = getBackupType();
-      const successTitle   = this.intl.t('action.backupEtcdMessage.success.title');
+      const successTitle   = this.intl.t('action.backupEtcdMessage.success.start');
       const successMessage = this.intl.t('action.backupEtcdMessage.success.message', {
         clusterId: this.displayName || this.id,
         backupType
