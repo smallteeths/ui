@@ -23,7 +23,7 @@ imageRepoSection:
     removeHarborConfig: 移除Harbor配置
     testEmailServer: 測試郵件服務區
     gcSchedule: 立即清理垃圾
-    methodNotSupported: "暫不支持對接當前{auth}認證的harbor服務"
+    methodNotSupported: "暫不支持對接{auth}認證類型的harbor服務，普通用戶同步功能僅支持本地/LDAP認證，admin用戶使用不受影響。"
   userConfigPage:
     syncAccount: 同步帳號
     reSyncAccount: 重新同步帳號
@@ -120,6 +120,7 @@ harborConfig:
     addressError: 访问地址错误
     unableAccess: 无法访问Harbor服务
     harborInfoError: "Harbor地址、用户名或密码错误"
+    harborNeedUpdate: "本次版本優化了對接harbor服務的體驗，為了更好的使用本功能，請重新保存壹次harbor配置。"
     numAndReq: "令牌过期时间必填，且为数字"
     formatError: "密码长度在8到20之间且需包含至少一个大写字符，一个小写字符和一个数字。"
     confirmError: "新密码和确认密码必须相同"

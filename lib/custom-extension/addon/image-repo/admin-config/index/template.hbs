@@ -14,8 +14,15 @@
     {{/if}}
   </div>
   <div class="accordion-content">
+    {{#if methodNotSupported}}
+      {{banner-message
+        icon="icon-alert"
+        color="bg-warning mb-10"
+        message=(t "imageRepoSection.adminConfigPage.methodNotSupported" auth=authMode)
+      }}
+    {{/if}}
     {{top-errors errors=harborAccountErrors}}
-     {{#if (and harborConfigEditable harborAccountValid (not savingHarborConfig))}}
+     {{#if (and harborConfigEditable hasHarborServer (not savingHarborConfig))}}
      <div class="clearfix pull-right">
       <button class="btn bg-error" {{action "promptDelete"}}>
       {{t "imageRepoSection.adminConfigPage.removeHarborConfig"}}
