@@ -200,8 +200,6 @@ export default Resource.extend(Grafana, ResourceUsage, {
       return intl.t('clusterNew.googlegke.shortLabel');
     case 'tencentEngineConfig':
       return intl.t('clusterNew.tencenttke.shortLabel');
-    case 'aliyunEngineConfig':
-      return intl.t('clusterNew.aliyunack.shortLabel');
     case 'huaweiEngineConfig':
       return intl.t('clusterNew.huaweicce.shortLabel');
     case 'okeEngineConfig':
