@@ -27,6 +27,13 @@
       </section>
     {{/if}}
 
+    {{#if methodNotSupported}}
+      {{banner-message
+        icon="icon-alert"
+        color="bg-warning mb-10"
+        message=(t "imageRepoSection.userConfigPage.methodNotSupported" auth=authMode rancherAuthMode=rancherAuthMode)
+      }}
+    {{/if}}
 
     {{#if (eq harborAccountState "syncedAccount")}}
       <section>
@@ -47,7 +54,7 @@
       </section>
     {{/if}}
 
-    {{#if (eq harborAccountState 'syncAccount')}}
+    {{#if (and (eq harborAccountState 'syncAccount') (not methodNotSupported))}}
       <section>
       {{top-errors errors=errors}}
       <div class="row">
@@ -56,7 +63,7 @@
           {{account.username}}
         </div>
       </div>
-      {{#if isLdapAuthMode}}
+      {{#if (not isDBAuthMode)}}
         {{#if requiredAuth}}
           <div class="row">
             <div class="col span-12">

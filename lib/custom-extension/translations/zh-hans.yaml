@@ -23,10 +23,11 @@ imageRepoSection:
     removeHarborConfig: 移除Harbor配置
     testEmailServer: 测试邮件服务器
     gcSchedule: 立即清理垃圾
-    methodNotSupported: "暂不支持对接{auth}认证类型的harbor服务，普通用户同步功能仅支持本地/LDAP认证，admin用户使用不受影响。"
+    methodNotSupported: "Rancher {rancherAuthMode}认证暂不支持对接{auth}认证类型的harbor服务，暂不支持普通用户同步，admin用户使用不受影响。"
   userConfigPage:
     syncAccount: 同步账号
     reSyncAccount: 重新同步账号
+    methodNotSupported: "Rancher {rancherAuthMode}认证暂不支持对接{auth}认证类型的harbor服务。"
   labelPage:
     table:
       noMatch: 没有Label匹配当前搜索

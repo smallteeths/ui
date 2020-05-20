@@ -18,7 +18,7 @@
       {{banner-message
         icon="icon-alert"
         color="bg-warning mb-10"
-        message=(t "imageRepoSection.adminConfigPage.methodNotSupported" auth=authMode)
+        message=(t "imageRepoSection.adminConfigPage.methodNotSupported" auth=authMode rancherAuthMode=rancherAuthMode)
       }}
     {{/if}}
     {{top-errors errors=harborAccountErrors}}

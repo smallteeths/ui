@@ -23,10 +23,11 @@ imageRepoSection:
     removeHarborConfig: "REMOVE Harbor Config"
     testEmailServer: "Test mail server"
     gcSchedule: "Clean up"
-    methodNotSupported: "Does not support harbor server with {auth} authorization, only support sync other harbor user with db/ldap authorization."
+    methodNotSupported: "Rancher({rancherAuthMode}) does not support harbor server with {auth} authorization, does not support sync with harbor user."
   userConfigPage:
     syncAccount: "Synchronous Account"
     reSyncAccount: "Resynchronize Account"
+    methodNotSupported: "Rancher({rancherAuthMode}) does not support harbor server with {auth} authorization."
   labelPage:
     table:
       noMatch: 没有Label匹配当前搜索
