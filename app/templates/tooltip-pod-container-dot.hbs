@@ -1,0 +1,31 @@
+<div class="tooltip-content-inner tooltip-dot">
+  <ActionMenu 
+    @model={{model}} 
+    @showPrimary={{false}} 
+    @inTooltip={{true}} 
+    class="pull-right tooltip-more-actions"
+  />
+
+  <div class="display-name">
+    <a href="{{model.detailPageUrl}}">{{displayName}}</a>
+  </div>
+
+  <div class="clearfix">
+    <div class="pull-right">
+      <BadgeState 
+        @classNames="btn-xs" 
+        @model={{model}}
+      />
+    </div>
+    <div class="display-ip pull-left pr-5">{{format-ip model.displayIp}}</div>
+    {{#if model.nodeDisplayName}}
+      <div class="display-ip pull-left pr-5">
+        {{model.nodeDisplayName}}
+      </div>
+    {{/if}}
+  </div>
+
+  {{#if model.showTransitioningMessage}}
+    <div class="text-small bg-body p-5 mt-5 force-wrap {{model.stateColor}}">{{uc-first model.transitioningMessage}}</div>
+  {{/if}}
+</div>

@@ -3384,6 +3384,10 @@ taintsSection:
   noData: 没有Taints
   noMatch: 没有符合当前搜索的Taints
 
+podSection:
+  title: Pods
+  detail: 当前主机的Pods
+
 billingInfo:
   header: 账单信息
   addNew: 添加支付方式

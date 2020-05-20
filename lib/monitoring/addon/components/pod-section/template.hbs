@@ -1,0 +1,117 @@
+<AccordionListItem
+  @title={{t 'podSection.title'}}
+  @detail={{t 'podSection.detail' resourceType=resourceType}}
+  @expandAll={{expandAll}}
+  @expand={{action expandFn}}
+  @expanded={{expanded}}
+  as | parent |
+>
+  {{#if (and (or expanded expandAll) (not loading))}}
+    <SortableTable
+      @tableClassNames="double-rows"
+      class="grid fixed mb-0 sortable-table"
+      @bulkActions={{false}}
+      @paging={{true}}
+      @search={{true}}
+      @sortBy={{sortBy}}
+      @pagingLabel={{pagination.workload}}
+      @stickyHeader={{true}}
+      @extraSearchFields={{extraSearchFields}}
+      @extraSearchSubFields={{extraSearchSubFields}}
+      @headers={{headers}}
+      @body={{workloads}}
+      as |sortable kind row|
+    >
+      {{#if (eq kind "row")}}
+        <tr class="main-row">
+          {{#if row.canExpand}}
+            <td valign="middle">
+              <i role="button" {{action "toggle" row}} class="icon icon-play eased text-small text-muted {{if row.expanded 'icon-rotate-90'}}"><span class="visually-hidden">Open accordion</span></i>
+            </td>
+          {{else}}
+            <td valign="middle">
+            </td>
+          {{/if}}
+          <td data-title="{{t 'annotationsSection.key'}}" class="state">
+            <BadgeState @model={{row}} />
+          </td>
+          <td data-title="{{t 'annotationsSection.key'}}">
+            {{row.projectName}}
+          </td>
+          <td data-title="{{t 'annotationsSection.key'}}">
+            {{row.namespace}}
+          </td>
+          <td data-title="{{t 'annotationsSection.key'}}" class="clip">
+            <a href="{{row.detailPageUrl}}">{{row.displayName}}</a>
+          </td>
+          <td class="clip top-half">
+            <TooltipElement
+              @type="tooltip-basic"
+              @tooltipTemplate="tooltip-static"
+              @model={{row.displayImages}}
+              @inlineBlock={{true}}
+            >
+              <span class="text-small">{{row.displayImage}}</span>
+            </TooltipElement>
+            <p data-title="{{t "generic.details"}}" class="text-small text-muted m-0 clip">
+              {{#if row.podIP}}
+                <CopyInline @clipboardText={{row.podIP}}>{{format-ip row.podIP}}</CopyInline> /
+              {{/if}}
+              {{#if row.hostIP}}
+                ip-{{row.hostIP}} /
+              {{/if}}
+              {{t "generic.createdDate"
+                date=(date-from-now row.startTime)
+                htmlSafe=true
+              }} / 
+              {{t "generic.podRestarts"}}: {{row.restartCount}}
+            </p>
+          </td>
+          {{#if row.showActions}}
+            <td data-title="{{t "generic.details"}}" class="actions">
+              <ActionMenu @model={{row}} />
+            </td>
+          {{/if}}
+        </tr>
+        {{#if row.canExpand}}
+          <tr class="sub-row {{unless row.expanded 'hide'}}">
+            <td colspan="2">{{! checkbox and expand}}</td>
+            <td colspan="2">
+              {{#if row.expanded}}
+                <NodePodDots
+                  @pod={{row}}
+                  @searchText={{searchText}}
+                  @groupByPod={{row.hasSidekicks}}
+                />
+              {{/if}}
+            </td>
+            <td class="text-center">{{! scale }}</td>
+            <td>{{! actions}}</td>
+          </tr>
+
+          {{#if row.expanded}}
+            <tr class="separator-row">
+              <td colspan="6"></td>
+            </tr>
+          {{/if}}
+        {{/if}}
+      {{else if (eq kind "nomatch")}}
+        <tr>
+          <td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">
+            {{t "containersPage.table.noMatch"}}
+          </td>
+        </tr>
+      {{else if (eq kind "norows")}}
+        <tr>
+          <td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">
+            {{t "containersPage.table.noData"}}
+          </td>
+        </tr>
+      {{/if}}
+    </SortableTable>
+  {{else}}
+    <div class="text-center mt-20">
+      <i class="icon icon-spinner icon-spin icon-3x"></i>
+    </div>
+  {{/if}}
+</AccordionListItem>

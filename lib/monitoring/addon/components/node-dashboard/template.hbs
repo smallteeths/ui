@@ -62,6 +62,12 @@
         {{node-metrics resourceId=model.node.id}}
       {{/metrics-summary}}
     {{/if}}
+    <PodSection
+      @taints={{model.node.taints}}
+      @expandAll={{al.expandAll}}
+      @expandFn={{expandFn}}
+      @model={{model}}
+    />
     {{resource-condition-list
       resourceType=(t "generic.node")
       conditions=model.node.conditions

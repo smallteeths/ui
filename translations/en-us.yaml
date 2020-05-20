@@ -3321,6 +3321,10 @@ taintsSection:
   noData: No taints
   noMatch: No taints match the current search
 
+podSection:
+  title: Pods
+  detail: Pods of current Node
+
 billingInfo:
   header: Billing Info
   addNew: Add Payment Method
