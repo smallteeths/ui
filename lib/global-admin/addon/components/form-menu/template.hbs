@@ -49,10 +49,12 @@
               value=item.url
             }}
               {{#unless item.iframeEnabled}}
-                {{input
+                {{input-url-prefix
                   type="text"
                   class="form-control input-sm"
                   value=item.url
+                  placeholder=(t "formMenu.link.placeholder")
+                  canAdd=iframeEnabledChanged
                 }}
               {{else}}
                 <div class="input-group">
