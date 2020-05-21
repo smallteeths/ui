@@ -19,6 +19,8 @@
             {{field-required}}
           </th>
           <th width="10">&nbsp;</th>
+          <th width="130"/>
+          <th width="10">&nbsp;</th>
           <th width="40"></th>
         </tr>
       </thead>
@@ -46,20 +48,41 @@
               editable=editing
               value=item.url
             }}
-              <div class="input-group">
-                <span class="input-group-addon bg-default">
-                  <label>{{scheme}}</label>
-                </span>
-
-                {{input-url
-                  classNames="form-control input-sm"
+              {{#unless item.iframeEnabled}}
+                {{input
+                  type="text"
+                  class="form-control input-sm"
                   value=item.url
-                  isInvalid=(action (mut urlInvalid))
-                  urlWarning=(action (mut urlWarning))
-                  urlError=(action (mut urlError))
                 }}
-              </div>
+              {{else}}
+                <div class="input-group">
+                  <span class="input-group-addon bg-default">
+                    <label>
+                      {{scheme}}
+                    </label>
+                  </span>
+                  {{input-url
+                    classNames="form-control input-sm"
+                    value=item.url
+                    isInvalid=(action (mut urlInvalid))
+                    urlWarning=(action (mut urlWarning))
+                    urlError=(action (mut urlError))
+                  }}
+                </div>
+              {{/unless}}
             {{/input-or-display}}
+          </td>
+          <td>
+            &nbsp;
+          </td>
+          <td>
+            <label class="block">
+              {{input 
+                type="checkbox" 
+                checked=item.iframeEnabled
+              }}
+              {{t 'formMenu.iframeEnabled.label'}}
+            </label>
           </td>
           <td>
             &nbsp;

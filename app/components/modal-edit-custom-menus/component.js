@@ -34,25 +34,29 @@ export default Component.extend(ModalBase, {
       const menus = extraMenus.split(';')
 
       menus.map((menu) => {
-        const [scope, label, url] = menu.split(',');
+        const [scope, label, url, strIframeEnabled] = menu.split(',');
+        const iframeEnabled = strIframeEnabled === 'true' ? true : false
 
         switch (scope) {
         case 'global':
           globalMenus.pushObject({
             label,
             url,
+            iframeEnabled,
           })
           break;
         case 'cluster':
           clusterMenus.pushObject({
             label,
             url,
+            iframeEnabled,
           })
           break;
         case 'project':
           projectMenus.pushObject({
             label,
             url,
+            iframeEnabled,
           })
           break;
         default:
@@ -85,15 +89,15 @@ export default Component.extend(ModalBase, {
       }
 
       const globalStr = globalMenus.map((m) => {
-        return `${ GLOBAL },${ m.label },${ m.url }`
+        return `${ GLOBAL },${ m.label },${ m.url },${ m.iframeEnabled }`
       }).join(';')
 
       const clusterStr = clusterMenus.map((m) => {
-        return `${ CLUSTER },${ m.label },${ m.url }`
+        return `${ CLUSTER },${ m.label },${ m.url },${ m.iframeEnabled }`
       }).join(';')
 
       const projectStr = projectMenus.map((m) => {
-        return `${ PROJECT },${ m.label },${ m.url }`
+        return `${ PROJECT },${ m.label },${ m.url },${ m.iframeEnabled }`
       }).join(';')
 
       const out = [globalStr, clusterStr, projectStr].filter((str) => str !== '').join(';')

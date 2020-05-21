@@ -151,7 +151,8 @@ export default Component.extend({
     const extraMenus = get(this, 'settings.extra-menus') || '';
 
     extraMenus.split(';').forEach((menu) => {
-      const [menuScope, menuLabel, menuUrl = ''] = menu.split(',');
+      const [menuScope, menuLabel, menuUrl = '', strIframeEnabled] = menu.split(',');
+      const iframeEnabled = strIframeEnabled === 'true' ? true : false
 
       if ( menuScope === currentScope ) {
         let url = `https://${  menuUrl }`
@@ -173,11 +174,12 @@ export default Component.extend({
         }
 
         out.push({
-          url,
+          url:         iframeEnabled ? url : menuUrl,
           label:       menuLabel,
           scope:       menuScope,
           customRoute,
           ctx,
+          iframeEnabled,
         })
       }
     })

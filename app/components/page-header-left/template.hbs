@@ -104,21 +104,30 @@
         {{/if}}
       {{else if item.url}}
         <li class="nav-item">
-          {{#if item.customRoute}}
-            {{#link-to-as-attrs
-              ourRoute=item.customRoute
-              activeParent="LI"
-              class="nav-link"
-              ctx=item.ctx
-            }}
-              <img class="icon-chevron-describe" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/external-link-icon.svg" width="16" height="16" />
-              <img class="icon-chevron-describe-active" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/external-link-icon-active.svg" width="16" height="16" />
-              <span class="clip">
-                {{item.label}}
-              </span>
-            {{/link-to-as-attrs}}
+          {{#if item.iframeEnabled}}
+            {{#if item.customRoute}}
+              {{#link-to-as-attrs
+                ourRoute=item.customRoute
+                activeParent="LI"
+                class="nav-link"
+                ctx=item.ctx
+              }}
+                <img class="icon-chevron-describe" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/external-link-icon.svg" width="16" height="16" />
+                <img class="icon-chevron-describe-active" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/external-link-icon-active.svg" width="16" height="16" />
+                <span class="clip">
+                  {{item.label}}
+                </span>
+              {{/link-to-as-attrs}}
+            {{else}}
+              <a href="{{item.url}}">
+                <img class="icon-chevron-describe" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/external-link-icon.svg" width="16" height="16" />
+                <span class="clip">
+                  {{item.label}}
+                </span>
+              </a>
+            {{/if}}
           {{else}}
-            <a href="{{item.url}}">
+            <a href="{{item.url}}" target="_blank">
               <img class="icon-chevron-describe" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/external-link-icon.svg" width="16" height="16" />
               <span class="clip">
                 {{item.label}}
