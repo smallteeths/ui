@@ -79,7 +79,15 @@ export default Component.extend(ModalBase, {
       } = this
 
       const allMenus = [...globalMenus, ...clusterMenus, ...projectMenus]
-      const filter = allMenus.filter((m) => (get(m, 'url') || '').startsWith('http://'))
+      const filter = allMenus.filter((m) => {
+        const { url = '', iframeEnabled } = m
+
+        if (!iframeEnabled && (!url.startsWith('http://') && !url.startsWith('https://'))) {
+          return true
+        } else {
+          return false
+        }
+      })
 
       if (get(filter, 'length') > 0) {
         set(this, 'errors', [get(this, 'intl').t('customMenus.index.protocalInvalid')])

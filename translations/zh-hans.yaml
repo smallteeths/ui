@@ -10813,7 +10813,7 @@ customMenus:
     globalMenu: 全局级别自定义菜单
     clusterMenu: 集群级别自定义菜单
     projectMenu: 项目级别自定义菜单
-    protocalInvalid: 'HTTP协议不合法, HTTPS网站无法嵌入HTTP iframe'
+    protocalInvalid: '"链接地址"应该以"http://"或者"https://"开头。'
 
 formMenu:
   menu:
@@ -10822,5 +10822,6 @@ formMenu:
     label: 菜单名称
   link:
     label: 链接地址
+    placeholder: "e.g. https://www.example.com"
   iframeEnabled:
     label: 使用iframe
