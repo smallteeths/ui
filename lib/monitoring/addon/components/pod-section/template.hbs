@@ -14,7 +14,7 @@
       @paging={{true}}
       @search={{true}}
       @sortBy={{sortBy}}
-      @pagingLabel={{pagination.workload}}
+      @pagingLabel="pagination.pod"
       @stickyHeader={{true}}
       @extraSearchFields={{extraSearchFields}}
       @extraSearchSubFields={{extraSearchSubFields}}
@@ -63,7 +63,7 @@
               {{t "generic.createdDate"
                 date=(date-from-now row.startTime)
                 htmlSafe=true
-              }} / 
+              }} /
               {{t "generic.podRestarts"}}: {{row.restartCount}}
             </p>
           </td>
