@@ -4,6 +4,7 @@ import { get } from '@ember/object';
 import { inject as service } from '@ember/service';
 import C from 'shared/utils/constants';
 import VerifyAuth from 'ui/mixins/verify-auth';
+import Errors from 'ui/utils/errors';
 
 
 export default Route.extend(VerifyAuth, {
@@ -36,6 +37,15 @@ export default Route.extend(VerifyAuth, {
         responseType: 'cookie',
         description:  C.SESSION.DESCRIPTION,
         ttl:          C.SESSION.TTL,
+      }).catch((err) => {
+        this.controllerFor('application').set('error', {
+          message:      Errors.stringify(err),
+          providerName: ghProvider.id.toUpperCase(),
+          logoutUrl:    ghProvider.logoutUrl
+        })
+        this.replaceWith('failWhale');
+
+        return RSVP.reject(err)
       }).then(() => {
         return get(this, 'access').detect()
           .then(() => this.transitionTo('authenticated'));
