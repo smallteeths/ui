@@ -457,9 +457,9 @@ export default Component.extend(ThrottledResize, {
 
   onResize() {
     var boundingWidth = document.documentElement.getBoundingClientRect().width > 1920 ? 1920 : document.documentElement.getBoundingClientRect().width
-    var fontSize = boundingWidth / 137
+    var fontSize = boundingWidth / 128
 
-    document.getElementById('js-responsive-nav-left').style.fontSize =  `${ fontSize < 12 ? 12 : fontSize }px`
+    document.getElementById('js-responsive-nav-left').style.fontSize =  `${ fontSize < 14 ? 14 : fontSize }px`
     if ( !get(this, 'open') ) {
       return;
     }
