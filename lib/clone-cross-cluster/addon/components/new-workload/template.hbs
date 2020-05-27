@@ -1,0 +1,433 @@
+
+<div class="row">
+  <div class="col span-11-of-23 mt-0 mb-0">
+    <label
+      for="add-project-target"
+      class="acc-label"
+    >
+      {{t "cloneCrossCluster.newContainer.target.label"}}
+    </label>
+    {{field-required}}
+    {{searchable-select
+      classNames="form-control"
+      content=allProjectsGroupedByCluster
+      optionLabelPath="name"
+      optionValuePath="value"
+      optionGroupPath="clusterDisplayName"
+      placeholder=(t "cloneCrossCluster.newContainer.target.prompt")
+      value=targetForm.project
+    }}
+  </div>
+  <div class="col span-11-of-23 mt-0 mb-0 offset-1-of-23">
+    <label
+      for="add-project-target"
+      class="acc-label"
+    >
+      {{t "cloneCrossCluster.newContainer.formNamespace.label"}}
+    </label>
+    {{field-required}}
+    {{new-select
+      content=namespaceChoices
+      prompt=(t "formNamespace.reuse.prompt")
+      optionLabelPath="displayName"
+      optionValuePath="id"
+      value=targetForm.namespace
+    }}
+  </div>
+</div>
+{{top-errors errors=loadDepDataErrors}}
+{{#if showWorkloadConfigView}}
+  <hr class="mt-30 mb-30" />
+  {{#if (gt service.containers.length 1)}}
+    <div class="row nav nav-boxes checked-active">
+    {{#each service.containers as |container index|}}
+      {{#if (eq index 0)}}
+        <a href="#" class="col span-2 nav-box-item {{if (eq activeConfig index) "active" ""}}" {{action "activateContainerConfig" index}}>
+          <div class="darken p-20 m-0">
+            <i class="icon icon-service"/>
+          </div>
+          <span class="text-muted">
+            {{container.name}}
+          </span>
+          <p class="help-block mb-10">
+            {{t "newContainer.sidekick.primary"}}
+          </p>
+        </a>
+      {{else}}
+        <a href="#" class="col span-2 nav-box-item {{if (eq activeConfig index) "active" ""}}" {{action "activateContainerConfig" index}}>
+          <div class="darken p-20 m-0">
+            <i class="icon icon-container"/>
+          </div>
+          <div>
+          <span>
+            {{container.name}}
+          </span>
+          </div>
+          <p class="help-block mb-10">
+            {{t "newContainer.sidekick.sidekick"}}
+          </p>
+          {{!-- <button
+            class="btn btn-sm bg-error"
+            {{action "promptRemoveContainer" index}}
+          >
+            {{t "action.remove"}}
+          </button> --}}
+        </a>
+      {{/if}}
+    {{/each}}
+    </div>
+  {{/if}}
+
+  {{#each service.containers as |container index|}}
+  <div class="clone-cross-cluster__container {{if (eq activeConfig index) '' 'hide'}}">
+    <div class="row">
+      <div class="col span-11-of-23 mt-0 mb-0">
+        {{#if (eq index 0)}}
+          {{form-name-description
+            name=container.name
+            nameDisabled=false
+            nameRequired=true
+            bothColClass="col span-12 mt-0"
+            colClass="col span-12 mt-0"
+            description=service.description
+            namePlaceholder="newContainer.name.placeholder"
+            descriptionPlaceholder="newContainer.description.placeholder"
+          }}
+        {{else}}
+          {{form-name-description
+            name=container.name
+            nameDisabled=false
+            nameRequired=true
+            descriptionShown=false
+            bothColClass="col span-12 mt-0"
+            colClass="col span-12 mt-0"
+            namePlaceholder="newContainer.name.placeholder"
+            descriptionPlaceholder="newContainer.description.placeholder"
+          }}
+        {{/if}}
+      </div>
+      <div class="col span-11-of-23 mt-0 mb-0 offset-1-of-23">
+        {{#if (eq index 0)}}
+          {{container/form-scale
+            initialScale=service.scale
+            isGlobal=false
+            launchConfigIndex=index
+            workload=service
+            isUpgrade=true
+            errors=scaleErrors
+            scaleMode=service.type
+            setScale=(action (mut service.scale))
+          }}
+        {{else}}
+          <label class="acc-label">
+            {{t "newContainer.containerType.title"}}
+          </label>
+          <div class="radio">
+            <label>
+              {{radio-button
+                selection=container.initContainer
+                value=false
+              }} {{t "newContainer.containerType.standard"}}
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              {{radio-button
+                selection=container.initContainer
+                value=true
+              }} {{t "newContainer.containerType.init"}}
+            </label>
+          </div>
+        {{/if}}
+      </div>
+    </div>
+    <hr class="mt-30 mb-30" />
+    <div class="row">
+      <div class="col span-11-of-23 mt-0 mb-0">
+        {{container/form-image
+          initialValue=container.image
+          errors=imageErrors
+          changed=(action (mut container.image))
+        }}
+      </div>
+    </div>
+    <hr class="mt-30 mb-30" />
+    <div class="row">
+      {{container/form-ports
+      initialPorts=container.ports
+      showWarning=(not service.isCreatedByRancher)
+      rkeConfig=targetCluster.rancherKubernetesEngineConfig
+      changed=(action (mut container.ports))
+      errors=portErrors
+      editing=true
+    }}
+    </div>
+    <hr class="mt-30 mb-30" />
+    {{#accordion-list as | al expandFn | }}
+      {{#if (or (eq service.type "job") (eq service.type "cronJob"))}}
+        {{container/form-job-config
+          workload=service
+          scaleMode=service.type
+          editing=true
+          expandAll=al.expandAll
+          expandFn=expandFn
+        }}
+      {{/if}}
+      {{#accordion-list-item
+        title=(t "newContainer.environment.label")
+        detail=(t "newContainer.environment.detail" appName=settings.appName)
+        expandAll=al.expandAll
+        expand=(action expandFn)
+      }}
+        {{form-key-value
+          initialMap=container.environment
+          changed=(action (mut container.environment))
+          allowEmptyValue=true
+          editing=true
+          header=(t "newContainer.environment.label")
+          addActionLabel="newContainer.environment.addAction"
+          keyLabel="newContainer.environment.keyLabel"
+          keyPlaceholder="newContainer.environment.keyPlaceholder"
+          valueLabel="newContainer.environment.valueLabel"
+          valuePlaceholder="newContainer.environment.valuePlaceholder"
+        }}
+        <hr class="mt-30 mb-30" />
+        {{container/form-new-sources
+          namespace=namespace
+          targetNamespace=targetNamespace
+          classNames="accordion-wrapper"
+          sources=(get environmentFromMap container._originName)
+          updateSecret=(action 'updateSecret')
+          updateConfigMap=(action 'updateConfigMap')
+          errors=secretErrors
+        }}
+        {{container/form-sources
+          namespace=targetNamespace
+          classNames="accordion-wrapper"
+          sources=(get targetEnvironmentFromMap container._originName)
+          errors=secretErrors
+          editing=true
+          projectSecrets=targetProjectSecrets
+          namespaceSecrets=targetNamespaceSecrets
+          namespaceConfigMaps=targetNamespaceConfigMaps
+        }}
+      {{/accordion-list-item}}
+      {{#if (and showCredentialConfig (eq index 0))}}
+        {{#accordion-list-item
+          title=(t "cloneCrossCluster.newContainer.imagePullSecret.label")
+          detail=(t "cloneCrossCluster.newContainer.imagePullSecret.detail" appName=settings.appName)
+          expandAll=al.expandAll
+          expand=(action expandFn)
+        }}
+          {{container/form-new-image-pull-secrets
+          credentialList=credentialList
+          }}
+        {{/accordion-list-item}}
+      {{/if}}
+      {{#if (and showIngressConfig (eq index 0))}}
+        {{#accordion-list-item
+          title=(t "cloneCrossCluster.newContainer.ingress.label")
+          detail=(t "cloneCrossCluster.newContainer.ingress.detail" appName=settings.appName)
+          expandAll=al.expandAll
+          expand=(action expandFn)
+        }}
+          {{#each ingressList as |ingress|}}
+          {{new-edit-ingress
+            certificates=certificates
+            namespacedCertificates=namespacedCertificates
+            namespace=targetNamespace
+            clusterId=targetCluster.id
+            isGKE=targetCluster.isGKE
+            supportVlansubnet=supportVlansubnet
+            errors=ingressErrors
+            ingress=ingress
+            workload=service
+            remove=(action 'removeIngress')
+          }}
+        {{/each}}
+        {{/accordion-list-item}}
+      {{/if}}
+      {{#if (eq index 0)}}
+        {{container/form-scheduling
+          isGlobal=false
+          initialHostId=service.scheduling.node.nodeId
+          service=service
+          scheduling=service.scheduling
+          clusterId=targetCluster.id
+          setErrors=(action (mut schedulingErrors))
+          editing=true
+          expandAll=null
+          setRequestedHost=(action (mut container.requestedHostId))
+          expandAll=al.expandAll
+          expandFn=expandFn
+        }}
+      {{/if}}
+      {{#accordion-list-item
+        title=(t "formHealthCheck.title")
+        detail=(t "formHealthCheck.detail" appName=settings.appName)
+        status=status
+        statusClass=statusClass
+        expandAll=al.expandAll
+        expand=(action expandFn)
+      }}
+        <div class="row">
+          <div class="col span-6 mt-0 mb-0">
+            <label class="acc-label">
+              {{t "formHealthCheck.readiness"}}
+            </label>
+          </div>
+          <div class="col span-6 mt-0 mb-0">
+            {{#if separateLivenessCheck}}
+              <label class="acc-label">
+                {{t "formHealthCheck.liveness"}}
+              </label>
+              <div class="pull-right text-small">
+                <button class="btn bg-transparent p-0" {{action "toggleSeparateLivenessCheck" index}}>{{t "formHealthCheck.combinedLivenessCheck"}}</button>
+              </div>
+            {{else}}
+              <div class="pull-right text-small">
+                <button class="btn bg-transparent p-0" {{action "toggleSeparateLivenessCheck" index}}>{{t "formHealthCheck.separateLivenessCheck"}}</button>
+              </div>
+            {{/if}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col {{if separateLivenessCheck "span-6" "span-12"}}">
+            {{form-healthcheck
+              initialCheck=container.readinessProbe
+              changed=(action (mut container.readinessProbe))
+              errors=readyCheckErrors
+              editing=true
+            }}
+          </div>
+          {{#if separateLivenessCheck}}
+            <div class="col span-6">
+              {{form-healthcheck
+                initialCheck=container.livenessProbe
+                changed=(action (mut container.livenessProbe))
+                errors=liveCheckErrors
+                editing=true
+                successMustBeOne=true
+                isLiveness=true
+              }}
+            </div>
+          {{/if}}
+        </div>
+      {{/accordion-list-item}}
+      {{container/form-volumes
+        errors=volumeErrors
+        expandAll=al.expandAll
+        expandFn=expandFn
+        loggingEnabled=loggingEnabled
+        namespace=namespace
+        targetNamespace=targetNamespace
+        targetProjectId=targetForm.project
+        project=targetProject
+        cluster=targetCluster
+        scaleMode=service.type
+        persistentVolumes=targetPersistentVolumes
+        persistentVolumeClaims=targetPersistentVolumeClaims
+        storageClasses=targetStorageClasses
+        projectCertificates=targetProjectCertificates
+        namespaceCertificates=targetNamespaceCertificates
+        namespaceConfigMaps=targetNamespaceConfigMaps
+        volumesArray=targetVolumesArray
+        newVolumesArray=volumesArray
+        projectSecrets=targetProjectSecrets
+        namespaceSecrets=targetNamespaceSecrets
+        containerName=container._originName
+        updateSecret=(action 'updateSecret')
+        updateConfigMap=(action 'updateConfigMap')
+        updatePvc=(action 'updatePvc')
+      }}
+
+      {{#if (eq index 0)}}
+        {{container/form-upgrade
+          workload=service
+          scaleMode=service.type
+          editing=true
+          isUpgrade=false
+          expandAll=al.expandAll
+          expandFn=expandFn
+          toggleMacvlan=toggleMacvlan
+        }}
+      {{/if}}
+
+      {{#advanced-section}}
+        {{container/form-command
+          classNames="accordion-wrapper"
+          instance=container
+          scaleMode=service.type
+          errors=commandErrors
+          service=service
+          isSidekick=(gt index 0)
+          expandAll=al.expandAll
+          expandFn=expandFn
+        }}
+
+        {{#if (eq index 0)}}
+          {{container/form-networking
+            classNames="accordion-wrapper"
+            instance=container
+            errors=networkingErrors
+            service=service
+            scaleMode=service.type
+            editing=true
+            supportVlansubnet=supportVlansubnet
+            clusterId=targetCluster.id
+            projectId=targetProject.id
+            expandAll=al.expandAll
+            expandFn=expandFn
+            toggleMacvlan=(action "handleToggleMacvlan")
+          }}
+
+          {{form-labels-annotations
+            classNames="accordion-wrapper"
+            labelErrors=labelErrors
+            initialLabels=service.labels
+            expandAll=al.expandAll
+            expandFn=expandFn
+            model=service
+            annotationErrors=annotationErrors
+          }}
+        {{/if}}
+
+        {{container/form-security
+          instance=container
+          service=service
+          errors=securityErrors
+          isSidekick=(gt index 0)
+          editing=true
+          expandAll=al.expandAll
+          expandFn=expandFn
+          expanded=securitySectionExpanded
+        }}
+
+        {{#if (eq index 0)}}
+          {{#if (or (and targetProject.isSystemProject targetCluster.enableClusterMonitoring) targetProject.enableProjectMonitoring)}}
+            {{container/form-custom-metrics
+              classNames="accordion-wrapper"
+              workload=service
+              editing=true
+              expandAll=al.expandAll
+              expandFn=expandFn
+            }}
+          {{/if}}
+        {{/if}}
+      {{/advanced-section}}
+    {{/accordion-list}}
+  </div>
+  {{/each}}
+
+  {{top-errors errors=errors}}
+  <div style="display: flex;justify-content: center;">
+    {{save-cancel
+      createLabel="newContainer.saveNew"
+      save=(action "save")
+      cancel=(action "cancel")
+    }}
+    <div class="pt-20 ml-5">
+      <button class="btn bg-transparent" {{action "resetForm"}}>{{t 'cloneCrossCluster.newContainer.reset'}}</button>
+    </div>
+  </div>
+{{/if}}

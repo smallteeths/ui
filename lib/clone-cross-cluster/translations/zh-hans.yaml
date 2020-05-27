@@ -1,0 +1,35 @@
+cloneCrossCluster:
+  newContainer:
+    title: 跨集群应用克隆
+    configWorkload: 下一步：配置workload
+    reset: 重置
+    target:
+      label: 目标项目
+      prompt: 选择目标项目
+    formNamespace:
+      label: 命名空间
+      prompt: 选择命名空间...
+    environment:
+      newFrom: 新建并引用其他资源
+      from: 引用目其他资源
+    imagePullSecret:
+      label: 镜像库凭证
+      detail: 私有镜像库凭证信息
+      delete: 删除凭证
+      nameRequired: 镜像库凭证名称不能为空
+      addressRequired: 镜像库凭证地址不能为空
+      usernameRequired: 镜像库凭证用户名不能为空
+      passwordRequired: 镜像库凭证密码不能为空
+    ingress:
+      label: 负载均衡(Ingress)
+      detail: 应用提供的对外访问方式
+      delete: 删除负载均衡(Ingress)
+    scheduling:
+      host:
+        prompt: 选择主机...
+    
+    errors:
+      storageClassNotExist: 数据卷中新增PVC（{pvcName}）所引用的StorageClass，在目标集群中不存在，请点击编辑并修改
+      pvNotExist: 数据卷中新增PVC（{pvcName}）所引用的持久卷, 在目标集群中不存在，请点击编辑并修改
+      noPermissionAccessResource: "无权访问{type}: {name}"
+      hostRequired: 请选择要调度的主机

@@ -1,0 +1,46 @@
+<section class="header clearfix">
+  <h1>{{title}}</h1>
+</section>
+
+<div class="row">
+  <div class="col span-6">
+    {{form-name-description
+      nameDisabled=false
+      model=model
+      rowClass=""
+      colClass=""
+      nameRequired=true
+      namePlaceholder="newConfigMap.name.placeholder"
+      descriptionPlaceholder="newConfigMap.description.placeholder"
+    }}
+  </div>
+
+  <div class="col span-6">
+    <label class="acc-label pb-5">
+      {{t "formNamespace.label.reuse"}}
+    </label>
+    <p class="mt-0">
+      {{namespace.displayName}}
+    </p>
+  </div>
+</div>
+
+<div class="box mt-10 mb-20">
+  {{form-key-value
+    initialMap=model.data
+    allowEmptyValue=true
+    header=(t "newConfigMap.values.label")
+    allowUpload=true
+    addActionLabel="newConfigMap.addActionLabel"
+    addInitialEmptyRow=true
+    editing=true
+    changed=(action "updateData")
+  }}
+</div>
+
+{{top-errors errors=errors}}
+{{save-cancel
+  editing=true
+  save=(action "save")
+  cancel=(action "cancel")
+}}

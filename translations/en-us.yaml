@@ -9595,6 +9595,7 @@ action:
   disableAutoInject: Disable Istio Auto Injection
   auditlog: Audit Log
   downloadFile: Download File
+  cloneCrossCluster: Clone Cross Cluster
 
 ##############################
 # Resource Actions

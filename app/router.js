@@ -155,6 +155,9 @@ Router.map(function() {
       this.mount('monitoring');
       this.mount('istio');
 
+      // clone cross cluster
+      this.mount('clone-cross-cluster');
+
       // Workload
       this.route('containers', {
         path:           '/workloads',

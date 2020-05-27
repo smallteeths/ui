@@ -1,0 +1,171 @@
+{{#accordion-list-item
+     title=(t 'formNetwork.title')
+     detail=(t 'formNetwork.detail' appName=settings.appName)
+     status=status
+     statusClass=statusClass
+     expandAll=expandAll
+     expand=(action expandFn)
+}}
+  <div class="row box">
+    <div class="col span-6">
+      <label class="acc-label">{{t 'formNetwork.netMode.label'}}</label>
+      {{#input-or-display editable=editing value=service.hostNetwork}}
+        <div class="radio">
+          <label>{{radio-button selection=service.hostNetwork value=false}} {{t 'formNetwork.netMode.disable'}}</label>
+        </div>
+        <div class="radio">
+          <label>{{radio-button selection=service.hostNetwork value=true}} {{t 'formNetwork.netMode.enable'}}</label>
+        </div>
+      {{/input-or-display}}
+    </div>
+    <div class="col span-6">
+      <label class="acc-label">{{t 'formNetwork.dnsPolicy.label'}}</label>
+      {{#input-or-display editable=editing value=service.dnsPolicy}}
+        <div class="radio">
+          <label>{{radio-button selection=service.dnsPolicy value="ClusterFirst"}} {{t 'formNetwork.dnsPolicy.clusterFirst'}}</label>
+        </div>
+        <div class="radio">
+          <label>{{radio-button selection=service.dnsPolicy value="ClusterFirstWithHostNet"}} {{t 'formNetwork.dnsPolicy.clusterFirstWithHostNet'}}</label>
+        </div>
+      {{/input-or-display}}
+    </div>
+  </div>
+  <div class="row mt-20">
+      <div class="col box span-6">
+        <label class="acc-label">{{t 'formNetwork.hostname.label'}}</label>
+        {{#input-or-display editable=editing value=service.hostname}}
+          {{input type="text" value=service.hostname classNames="form-control" placeholder=(t 'formNetwork.hostname.placeholder')}}
+        {{/input-or-display}}
+      </div>
+      <div class="col box span-6">
+        <label class="acc-label">{{t 'formNetwork.subdomain.label'}}</label>
+        {{#input-or-display editable=editing value=service.subdomain}}
+          {{input type="text" value=service.subdomain classNames="form-control" placeholder=(t 'formNetwork.subdomain.placeholder')}}
+        {{/input-or-display}}
+      </div>
+  </div>
+  <div class="row box mt-20">
+    {{form-key-value
+        editing=editing
+        allowEmptyValue=false
+        initialArray=initHostAliasesArray
+        changedArray=(action "hostAliasesChanged")
+        header=(t 'formNetwork.hostAlias.label')
+        valueLabel="formNetwork.hostAlias.host.label"
+        keyLabel="formNetwork.hostAlias.ip.label"
+        valuePlaceholder="formNetwork.hostAlias.host.placeholder"
+        keyPlaceholder="formNetwork.hostAlias.ip.placeholder"
+        addActionLabel="formNetwork.hostAlias.addActionLabel"
+    }}
+  </div>
+
+  <div class="row mt-20">
+    <div class="col box span-6">
+      {{form-value-array
+        initialValues=service.dnsConfig.nameservers
+        editing=editing
+        valueLabel="formNetwork.dnsConfig.nameservers.label"
+        valuePlaceholder="formNetwork.dnsConfig.nameservers.placeholder"
+        addActionLabel="formNetwork.dnsConfig.nameservers.addActionLabel"
+        changed=(action "updateNameservers")
+      }}
+    </div>
+
+    <div class="col box span-6">
+      {{form-value-array
+        initialValues=service.dnsConfig.searches
+        editing=editing
+        valueLabel="formNetwork.dnsConfig.searches.label"
+        valuePlaceholder="formNetwork.dnsConfig.searches.placeholder"
+        addActionLabel="formNetwork.dnsConfig.searches.addActionLabel"
+        changed=(action "updateSearches")
+      }}
+    </div>
+  </div>
+
+  <div class="row box mt-20">
+    {{form-key-value
+        editing=editing
+        allowEmptyValue=false
+        initialArray=initOptionsArray
+        changedArray=(action "optionsChanged")
+        header=(t 'formNetwork.dnsConfig.options.label')
+        valueLabel="formNetwork.dnsConfig.options.value.label"
+        keyLabel="formNetwork.dnsConfig.options.name.label"
+        valuePlaceholder="formNetwork.dnsConfig.options.value.placeholder"
+        keyPlaceholder="formNetwork.dnsConfig.options.name.placeholder"
+        addActionLabel="formNetwork.dnsConfig.options.addActionLabel"
+    }}
+  </div>
+  <div class="row box mt-20">
+    <div class="col span-4">
+      <label class="acc-label">{{t 'nav.cluster.vlansubnet'}}</label>
+        {{#input-or-display editable=editing value=enableStaticPodLabel}}
+          <div class="radio">
+            <label>{{radio-button selection=staticPod value=false}} {{t 'generic.disable'}}</label>
+          </div>
+          <div class="radio">
+            <label style={{vlansubnetdisabledStyle}}>{{radio-button selection=staticPod disabled=unsupportVlansubnet value=true}} {{t 'generic.enable'}}</label>
+          </div>
+        {{/input-or-display}}
+    </div>
+    <div class="col span-8">
+      {{#if enableStaticPod}}
+        <div class="row">
+          <div class="col span-6">
+            <label class="acc-label">Interface</label>
+            <div>{{netInterface}}</div>
+          </div>
+          <div class="col span-6">
+            <label class="acc-label">{{t "formNetwork.subnet.form.ip.label"}}</label>
+            {{#input-or-display editable=editing value=staticPodAnnotation.ip classesForDisplay="force-wrap"}}
+            {{input
+                class="form-control"
+                maxlength=250
+                value=staticPodForm.ip
+                placeholder=(t "formNetwork.subnet.form.ip.placeholder")
+                change=(action 'updateStaticPod')
+            }}
+            {{/input-or-display}}
+          </div>
+        </div>
+        <div class="row">
+         <div class="col span-6">
+            <label class="acc-label">{{t "formNetwork.subnet.form.mac.label"}}</label>
+            {{#input-or-display editable=editing value=staticPodAnnotation.mac classesForDisplay="force-wrap"}}
+            {{input
+                class="form-control"
+                maxlength=250
+                value=staticPodForm.mac
+                placeholder=(t "formNetwork.subnet.form.mac.placeholder")
+                change=(action 'updateStaticPod')
+            }}
+            {{/input-or-display}}
+          </div>
+          <div class="col span-6">
+            <label class="acc-label">Subnet{{field-required}}</label>
+            {{#input-or-display editable=editing value=staticPodAnnotation.subnet}}
+            {{!-- {{input
+                class="form-control"
+                value=staticPodForm.vlan
+                change=(action 'updateStaticPod')
+            }} --}}
+            {{new-select
+                classNames="form-control"
+                content=vlansubnets
+                value=staticPodForm.subnet
+                prompt=(t "formNetwork.subnet.form.subnet.placeholder")
+                change=(action 'updateStaticPod')
+              }}
+            {{/input-or-display}}
+          </div>
+        </div>
+      {{/if}}
+    </div>
+  </div>
+  {{#if (and enableStaticPod isStopFirstChange)}}
+    {{#banner-message color='bg-success mb-0 mt-10'}}
+      {{t "formNetwork.subnet.msg"}}
+    {{/banner-message}}
+  {{/if}}
+{{/accordion-list-item}}

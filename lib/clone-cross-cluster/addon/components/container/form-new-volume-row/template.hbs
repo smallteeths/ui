@@ -1,0 +1,196 @@
+<div class="box mb-20">
+  {{#if (eq model.mode "customLogPath")}}
+    <div class="row">
+      <div class="col span-10">
+        {{t "formVolumeRow.customLogPath.helpText"}}
+      </div>
+      <div class="col span-2 text-right mt-0">
+        <button class="btn bg-link icon-btn" {{action "remove"}}>
+          <span class="darken"><i class="icon icon-minus text-small"/></span>
+          <span>{{t "formVolumeRow.remove"}}</span>
+        </button>
+      </div>
+    </div>
+  {{else}}
+    <div class="row">
+      {{#if (eq model.mode "newVolumeClaimTemplate")}}
+        {{banner-message
+          icon="icon-alert"
+          color="bg-warning mb-10 mt-10"
+          message=(t "formVolumeRow.volumeClaimTemplateName.vctWarning" htmlSafe=true)
+        }}
+      {{/if}}
+      <div class="col span-6">
+        {{#if (eq model.mode "newVolumeClaimTemplate")}}
+          <label class="acc-label">
+            {{t "formVolumeRow.volumeClaimTemplateName.label"}}
+          </label>
+          {{input
+            type="text"
+            value=model.vct.name
+            placeholder=(t "formVolumeRow.volumeClaimTemplateName.placeholder")
+          }}
+        {{else}}
+          <label class="acc-label">
+            {{t "formVolumeRow.name.label"}}
+          </label>
+          {{input
+            type="text"
+            value=model.volume.name
+            placeholder=(t "formVolumeRow.name.placeholder")
+          }}
+        {{/if}}
+      </div>
+      <div class="col span-4">
+        <label class="acc-label">
+          {{t "formVolumeRow.mode.label"}}
+        </label>
+        <div class="form-control-static">
+          {{t (concat "formVolumeRow.mode." model.mode)}}
+          {{#if (eq model.mode "newPvc")}}
+            <button class="btn bg-transparent" {{action "defineNewPvc"}}>
+              <i class="icon icon-edit"/>
+              {{t "generic.edit"}}
+            </button>
+          {{else if (eq model.mode "newVolumeClaimTemplate")}}
+            <button class="btn bg-transparent" {{action "defineNewVct"}}>
+              <i class="icon icon-edit"/>
+              {{t "generic.edit"}}
+            </button>
+          {{else if (or (eq model.mode "existingVolume") (eq model.mode "newVolume"))}}
+            <button class="btn bg-transparent" {{action "defineNewVolume"}}>
+              <i class="icon icon-edit"/>
+              {{t "generic.edit"}}
+            </button>
+          {{/if}}
+        </div>
+      </div>
+      <div class="col span-2 text-right mt-0">
+        <button class="btn bg-link icon-btn" {{action "remove"}}>
+          <span class="darken"><i class="icon icon-minus text-small"/></span>
+          <span>{{t "formVolumeRow.remove"}}</span>
+        </button>
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if (eq model.mode "existingPvc")}}
+    <div class="row">
+      <div class="col span-6">
+        <label class="acc-label">
+          {{t "formVolumeRow.mode.existingPvc"}} {{field-required}}
+        </label>
+        {{new-select
+          value=model.volume.persistentVolumeClaim.persistentVolumeClaimId
+          content=pvcChoices
+          prompt=(t "formVolumeRow.prompt")
+          localizedLabel=false
+        }}
+      </div>
+    </div>
+  {{else if (eq model.mode "bindMount")}}
+    {{volume-source/source-host-path
+      volume=model.volume
+      editing=true
+    }}
+  {{else if (eq model.mode "customLogPath")}}
+    {{volume-source/source-custom-log-path
+      remove=(action "remove")
+      model=model
+      volume=model.volume
+      mounts=model.mounts
+      editing=true
+    }}
+  {{else if (eq model.mode "secret")}}
+    {{volume-source/source-new-secret
+      namespace=namespace
+      targetNamespace=targetNamespace
+      volume=model.volume
+      secret=model.secret
+      editing=true
+      projectSecrets=projectSecrets
+      namespaceSecrets=namespaceSecrets
+      updateSecret=updateSecret
+      updateConfigMap=updateConfigMap
+    }}
+  {{else if (eq model.mode "certificate")}}
+    {{volume-source/source-new-certificate
+      namespace=namespace
+      targetNamespace=targetNamespace
+      volume=model.volume
+      secret=model.secret
+      editing=true
+      updateSecret=updateSecret
+      projectCertificates=projectCertificates
+      namespaceCertificates=namespaceCertificates
+    }}
+  {{else if (eq model.mode "configmap")}}
+    {{volume-source/source-new-config-map
+      namespace=namespace
+      targetNamespace=targetNamespace
+      volume=model.volume
+      configMap=model.configMap
+      editing=true
+      namespaceConfigMaps=namespaceConfigMaps
+      updateSecret=updateSecret
+      updateConfigMap=updateConfigMap
+    }}
+  {{/if}}
+  {{#if (eq model.mode "customLogPath")}}
+  {{else}}
+    <hr class="mt-20">
+    <div class="row">
+      <div class="col span-12">
+        {{#if mounts.length}}
+          <table class="table fixed no-lines">
+            <thead>
+              <tr>
+                <th>{{t "formVolumeRow.mounts.mountPoint"}}{{field-required}}</th>
+                <th width="20">&nbsp;</th>
+                <th>{{t "formVolumeRow.mounts.subPath"}}</th>
+                <th width="20">&nbsp;</th>
+                <th width="100" class="text-center">{{t "formVolumeRow.mounts.readOnly"}}</th>
+                <th width="40">&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each mounts as |mnt|}}
+                <tr>
+                  <td>
+                    {{input value=mnt.mountPath}}
+                  </td>
+                  <td></td>
+                  <td>
+                    {{input value=mnt.subPath}}
+                  </td>
+                  <td></td>
+                  <td class="text-center">
+                    {{input
+                      type="checkbox"
+                      classNames="form-control"
+                      checked=mnt.readOnly
+                    }}
+                  </td>
+                  <td>
+                    <button class="btn bg-primary btn-sm" {{action "removeMount" mnt}}>
+                      <i class="icon icon-minus"/>
+                      <span class="sr-only">{{t "generic.remove"}}</span>
+                    </button>
+                  </td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        {{else}}
+          {{t "formVolumeRow.mounts.helper"}}
+        {{/if}}
+        <div class="mt-20">
+          <button class="btn bg-link icon-btn" {{action "addMount"}}>
+            <span class="darken"><i class="icon icon-plus text-small"/></span>
+            <span>{{t "formVolumeRow.addMount"}}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</div>

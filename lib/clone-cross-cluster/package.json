@@ -1,0 +1,23 @@
+{
+  "name": "clone-cross-cluster",
+  "keywords": [
+    "ember-addon",
+    "ember-engine"
+  ],
+  "dependencies": {
+    "ember-auto-import": "*",
+    "ember-intl": "*",
+    "ember-cli": "*",
+    "ember-cli-htmlbars": "*",
+    "ember-cli-babel": "*",
+    "ember-href-to": "*",
+    "ember-drag-drop": "*",
+    "prettycron": "*",
+    "shell-quote": "*"
+  },
+  "ember-addon": {
+    "paths": [
+      "../shared"
+    ]
+  }
+}

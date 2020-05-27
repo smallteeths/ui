@@ -9684,6 +9684,7 @@ action:
   disableAutoInject: 禁用 Istio 自动注入
   auditlog: 审计日志
   downloadFile: 下载文件
+  cloneCrossCluster: 跨集群克隆
 
 ##############################
 # Resource Actions

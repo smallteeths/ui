@@ -1,0 +1,31 @@
+<div>
+  <label class="acc-label">
+    {{t 'formImage.label'}}{{field-required}}
+  </label>
+</div>
+<div>
+  {{input-suggest
+    popperClass='select-dropdown-list'
+    horizontalPosition='left'
+    value=userInput
+    grouped=suggestions
+    placeholder=(t 'formImage.container.placeholder')
+  }}
+</div>
+{{#if (gt harborImageTags.length 0)}}
+<div>
+  <label class="acc-label">
+    Tags
+  </label>
+</div>
+<div>
+  {{new-select
+    value= imageTag
+    content= harborImageTags
+    optionValuePath="name"
+    optionLabelPath="name"
+    prompt=(t 'formImage.tag.placeholder')
+    localizedLabel=false
+  }}
+</div>
+{{/if}}

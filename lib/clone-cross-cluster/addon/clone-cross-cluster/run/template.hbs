@@ -1,0 +1,23 @@
+
+<section class="header clearfix">
+  <h1>
+    {{t 'cloneCrossCluster.newContainer.title'}}
+  </h1>
+</section>
+{{new-workload
+  service=model.workload
+  projects=model.projects
+  clusters=model.clusters
+  namespaceSecrets=model.namespaceSecrets
+  projectSecrets=model.projectSecrets
+  namespaceConfigMaps=model.namespaceConfigMaps
+  namespacedCertificates=model.namespacedCertificates
+  persistentVolumeClaims=model.persistentVolumeClaims
+  certificates=model.certificates
+  namespacedDockerCredentials=model.namespacedDockerCredentials
+  projectDockerCredentials=model.projectDockerCredentials
+  loggingEnabled=model.loggingEnabled
+  allServices=model.allServices
+  allIngresses=model.allIngresses
+  serviceId=model.serviceId
+}}

@@ -16,7 +16,7 @@ const VALID_ROUTES = ['apps-tab', 'catalog-tab.index', 'authenticated.project.se
   'authenticated.project.istio.project-istio.destination-rules', 'authenticated.project.istio.project-istio.virtual-services',
   'authenticated.project.istio.project-istio.gateways',
   'authenticated.project.hpa', 'authenticated.project.pipeline.pipelines',
-  'authenticated.project.audit-log.index'
+  'authenticated.project.audit-log.index', 'authenticated.project.clone-cross-cluster.clone-cross-cluster.run'
 ];
 
 export default Route.extend(Preload, {

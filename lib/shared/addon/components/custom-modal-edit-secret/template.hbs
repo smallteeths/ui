@@ -1,0 +1,43 @@
+<section class="header clearfix">
+  <h1>
+    {{title}}
+  </h1>
+</section>
+{{form-name-description
+  nameDisabled=false
+  model=model
+  nameRequired=true
+  namePlaceholder="newSecret.name.placeholder"
+  descriptionPlaceholder="newSecret.description.placeholder"
+}}
+
+<div>
+{{#if model.namespaceId}}
+  {{t 'optionallyNamespaced.scope.namespace'}}: {{namespace.displayName}}
+{{else}}
+  {{t 'optionallyNamespaced.scope.project'}}
+{{/if}}
+</div>
+
+<div class="box mt-10 mb-20">
+  <label class="acc-label">
+    {{t "newSecret.values.label"}}
+  </label>
+  {{form-key-value
+    allowEmptyValue=true
+    initialMap=model.data
+    addActionLabel="newSecret.addActionLabel"
+    addInitialEmptyRow=true
+    base64Value=true
+    concealValue=true
+    editing=true
+    changed=(action "updateData")
+  }}
+</div>
+
+{{top-errors errors=errors}}
+{{save-cancel
+  editing=true
+  save=(action "save")
+  cancel=(action "cancel" )
+}}

@@ -1,0 +1,128 @@
+{{#accordion-list-item
+  title=(t "formVolumes.title")
+  detail=(t "formVolumes.detail" appName=settings.appName)
+  expandAll=expandAll
+  expandOnInit=expandOnInit
+  expand=(action expandFn)
+  everExpanded=true
+}}
+  {{#if newVolumesArray.length}}
+    {{#each newVolumesArray as |row|}}
+      {{#unless (and (eq row.mode 'customLogPath') (not (eq row.volume.flexVolume.options.containerName containerName)))}}
+        {{container/form-new-volume-row
+          model=row
+          namespace=namespace
+          targetNamespace=targetNamespace
+          targetProjectId=targetProjectId
+          remove=(action "removeNew")
+          loggingEnabled=loggingEnabled
+          persistentVolumes=persistentVolumes
+          persistentVolumeClaims=persistentVolumeClaims
+          storageClasses=storageClasses
+          projectCertificates=projectCertificates
+          namespaceCertificates=namespaceCertificates
+          namespaceConfigMaps=namespaceConfigMaps
+          updateSecret=updateSecret
+          updateConfigMap=updateConfigMap
+          updatePvc=updatePvc
+          containerName=containerName
+        }}
+      {{/unless}}
+    {{/each}}
+  {{/if}}
+  {{#if volumesArray.length}}
+    {{#each volumesArray as |row|}}
+      {{#unless row.hidden}}
+        {{container/form-volume-row
+          model=row
+          namespace=targetNamespace
+          targetProjectId=targetProjectId
+          remove=(action "remove")
+          loggingEnabled=loggingEnabled
+          persistentVolumes=persistentVolumes
+          persistentVolumeClaims=persistentVolumeClaims
+          storageClasses=storageClasses
+          projectCertificates=projectCertificates
+          namespaceCertificates=namespaceCertificates
+          namespaceConfigMaps=namespaceConfigMaps
+          projectSecrets=projectSecrets
+          namespaceSecrets=namespaceSecrets
+          containerName=containerName
+        }}
+      {{/unless}}
+    {{/each}}
+  {{/if}}
+
+  {{#basic-dropdown
+        horizontalPosition="left"
+        as |dd|}}
+    {{#dd.trigger
+          class="btn bg-link p-0 icon-btn pl-10"
+    }}
+      <span>
+        {{t "formVolumes.add.label"}}
+      </span>
+      <span class="darken">
+        <i class="icon icon-chevron-down"></i>
+      </span>
+    {{/dd.trigger}}
+
+    {{#dd.content}}
+      <li>
+        <a {{action "addVolume"}}>
+          {{t "formVolumes.add.newVolume"}}
+        </a>
+      </li>
+      <li>
+        <a {{action "addNewPvc"}}>
+          {{t "formVolumes.add.newPvc"}}
+        </a>
+      </li>
+      <li>
+        <a {{action "addPvc" dd}}>
+          {{t "formVolumes.add.existingPvc"}}
+        </a>
+      </li>
+      <li>
+        <a {{action "addBindMount" dd}}>
+          {{t "formVolumes.add.bindMount"}}
+        </a>
+      </li>
+      <li class="hide">
+        <a {{action "addTmpfs" dd}}>
+          {{t "formVolumes.add.tmpfs"}}
+        </a>
+      </li>
+      <li>
+        <a {{action "addSecret" dd}}>
+          {{t "formVolumes.add.secret"}}
+        </a>
+      </li>
+      <li>
+        <a {{action "addConfigMap" dd}}>
+          {{t "formVolumes.add.configMap"}}
+        </a>
+      </li>
+      <li>
+        <a {{action "addCertificate" dd}}>
+          {{t "formVolumes.add.certificate"}}
+        </a>
+      </li>
+      {{#if (and loggingEnabled (not isWindows))}}
+        <li>
+          <a {{action "addCustomLogPath" dd}}>
+            {{t "formVolumes.add.customLogPath"}}
+          </a>
+        </li>
+      {{/if}}
+      {{#if isStatefulSet}}
+        <li>
+          <a {{action "addVolumeClaimTemplate"}}>
+            {{t "formVolumes.add.vct"}}
+          </a>
+        </li>
+      {{/if}}
+    {{/dd.content}}
+  {{/basic-dropdown}}
+
+{{/accordion-list-item}}

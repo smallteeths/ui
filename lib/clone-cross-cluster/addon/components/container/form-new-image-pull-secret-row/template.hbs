@@ -1,0 +1,67 @@
+<div class="box mb-20">
+  {{#if model._originName}}
+    <div class="row">
+      <div class="col span-6">
+        {{form-name-description
+          nameDisabled=false
+          nameRequired=true
+          model=model
+        }}
+      </div>
+      <div class="col span-4">
+        <label class="acc-label">{{t 'optionallyNamespaced.scope.label'}}</label>
+        <div>
+          {{#if model.namespaceId}}
+            {{t 'optionallyNamespaced.scope.namespace'}}: {{namespace.displayName}}
+          {{else}}
+            {{t 'optionallyNamespaced.scope.project'}}
+          {{/if}}
+        </div>
+      </div>
+      <div class="col span-2">
+        <button class="btn bg-link icon-btn" {{action "remove"}}>
+          <span class="darken"><i class="icon icon-minus text-small"/></span>
+          <span>{{t "cloneCrossCluster.newContainer.imagePullSecret.delete"}}</span>
+        </button>
+      </div>
+    </div>
+    {{#each model.asArray as |row|}}
+    <div class="row">
+      <div class="col span-6">
+        <label class="acc-label">
+          {{t "cruRegistry.address.label"}}{{field-required}}
+        </label>
+        {{input
+          value=row.address
+          placeholder=(t "cruRegistry.address.placeholder")
+        }}
+      </div>
+      <div class="col span-6">
+        <div>
+          <label class="acc-label">
+            {{t "cruRegistry.username.label"}}{{field-required}}
+          </label>
+          {{input value=row.username}}
+        </div>
+        <div>
+          <label class="acc-label">
+            {{t "cruRegistry.password.label"}}{{field-required}}
+          </label>
+          {{input
+            type="password"
+            placeholder="******"
+            value=row.password
+            class="conceal"
+          }}
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  {{else}}
+  <div class="row">
+    <div class="col span-12">
+      {{t "cloneCrossCluster.newContainer.errors.noPermissionAccessResource" type=(t "cloneCrossCluster.newContainer.imagePullSecret.label") name=model.name}}
+    </div>
+  </div>
+  {{/if}}
+</div>

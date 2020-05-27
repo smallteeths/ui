@@ -1,0 +1,110 @@
+<section class="header clearfix">
+  <h1>
+    {{title}}
+  </h1>
+</section>
+
+<div class="row">
+  <div class="col span-6">
+    {{form-name-description
+      model=model
+      nameRequired=false
+      nameDisabled=false
+      namePlaceholder="cruPersistentVolume.name.placeholder"
+      descriptionPlaceholder="cruPersistentVolume.description.placeholder"
+      editing=true
+      bothColClass="col span-12 mt-0"
+      colClass="col span-12 mt-0"
+    }}
+  </div>
+</div>
+<div class="row">
+  <div class="col span-6">
+    <label class="acc-label">
+      {{t "cruPersistentVolumeClaim.source.label"}}
+    </label>
+    <div class="radio">
+      <label class="{{unless canUseStorageClass "text-muted"}}">
+        {{radio-button
+          selection=useStorageClass
+          value=true
+          disabled=(not canUseStorageClass)
+        }}
+        {{t "cruPersistentVolumeClaim.source.storageClass"}}
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        {{radio-button
+          selection=useStorageClass
+          value=false
+        }}
+        {{t "cruPersistentVolumeClaim.source.pv"}}
+      </label>
+    </div>
+  </div>
+  <div class="col span-6">
+    {{#if useStorageClass}}
+      <label class="acc-label">
+        {{t "cruPersistentVolumeClaim.storageClass.label"}}
+      </label>
+      {{new-select
+        content=storageClasses
+        prompt="cruPersistentVolumeClaim.storageClass.prompt"
+        localizedPrompt=true
+        optionLabelPath="displayName"
+        optionValuePath="id"
+        required=true
+        value=model.storageClassId
+      }}
+
+      <label class="acc-label mt-20">
+        {{t "cruPersistentVolumeClaim.capacity.label"}}{{field-required editing=editing}}
+      </label>
+      <div class="input-group">
+        {{input-number
+          classNames="form-control"
+          value=capacity
+        }}
+        <span class="input-group-addon bg-default">
+          {{t "cruPersistentVolumeClaim.capacity.unit"}}
+        </span>
+      </div>
+    {{else}}
+      <label class="acc-label">
+        {{t "cruPersistentVolumeClaim.pv.label"}}
+      </label>
+      {{new-select
+        content=persistentVolumeChoices
+        prompt="cruPersistentVolumeClaim.pv.prompt"
+        localizedPrompt=true
+        required=true
+        value=model.volumeId
+      }}
+    {{/if}}
+  </div>
+</div>
+{{#accordion-list showExpandAll=false as | al expandFn |}}
+  {{#accordion-list-item
+     title=(t "cruPersistentVolume.customize.title")
+     detail=(t "cruPersistentVolume.customize.detail")
+     expandAll=expandAll
+     expand=(action expandFn)
+     everExpanded=true
+  }}
+    <div class="row">
+      <div class="col span-6">
+        {{form-access-modes
+          model=model
+          mode=mode
+        }}
+      </div>
+    </div>
+  {{/accordion-list-item}}
+{{/accordion-list}}
+{{top-errors errors=errors}}
+{{save-cancel
+  createLabel="cruPersistentVolumeClaim.define.addActionLabel"
+  save=(action "save")
+  cancel=(action "cancel")
+}}

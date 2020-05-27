@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col span-11-of-23 mt-0 mb-0">
+    {{form-name-description
+      descriptionPlaceholder="servicePage.newIngress.form.description.placeholder"
+      model=ingress
+      nameDisabled=false
+      namePlaceholder="servicePage.newIngress.form.name.placeholder"
+    }}
+  </div>
+
+  <div class="col span-7-of-23 mt-0 mb-0">
+    <label class="acc-label pb-5">
+      {{t "formNamespace.label.reuse"}}
+    </label>
+    <p class="mt-0">
+      {{namespace.name}}
+    </p>
+  </div>
+  <div class="col span-4-of-23">
+    <button class="btn bg-link icon-btn" {{action "removeIngress" ingress}}>
+      <span class="darken"><i class="icon icon-minus text-small"/></span>
+      <span>{{t "cloneCrossCluster.newContainer.ingress.delete"}}</span>
+    </button>
+  </div>
+</div>
+{{#if supportVlansubnet}}
+<div class="row">
+  <div class="col span-11-of-23 mt-0 mb-0">
+    <label class="acc-label">{{t "servicePage.newIngress.form.load.label"}}</label>
+    {{schema/input-boolean value=enableVlansubnet}}
+  </div>
+</div>
+{{/if}}
+<section class="mt-40 horizontal-form container-fluid">
+  {{form-ingress-rule
+    editing=true
+    ingress=ingress
+    namespace=namespace
+    workload=workload
+  }}
+  <hr class="mt-30 mb-30" />
+</section>
+
+{{#accordion-list as | al expandFn | }}
+  {{form-ssl-termination
+    certificates=certificates
+    editing=true
+    expandAll=al.expandAll
+    expandFn=expandFn
+    ingress=ingress
+    errors=certErrors
+    namespace=namespace
+    namespacedCertificates=namespacedCertificates
+  }}
+
+  {{form-labels-annotations
+    annotationErrors=annotationErrors
+    classNames="accordion-wrapper"
+    expandAll=al.expandAll
+    expandFn=expandFn
+    initialLabels=ingress.labels
+    labelErrors=labelErrors
+    model=ingress
+    setLabels=(action "setLabels")
+  }}
+{{/accordion-list}}
+
+{{#if isGKE}}
+  <div class="banner bg-warning">
+    <div class="banner-icon"><span class="icon icon-alert"></span></div>
+    <div class="banner-message">
+      <p>{{t "ingressPage.gkeIngressWarning"}}</p>
+    </div>
+  </div>
+{{/if}}
+

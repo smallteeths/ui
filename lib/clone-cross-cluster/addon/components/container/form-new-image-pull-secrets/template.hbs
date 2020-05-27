@@ -1,0 +1,6 @@
+{{#each credentialList as |imagePullSecret|}}
+  {{container/form-new-image-pull-secret-row
+    model=imagePullSecret
+    remove=(action "remove")
+  }}
+{{/each}}
