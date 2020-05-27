@@ -58,7 +58,6 @@ export default Component.extend({
       set(setting, 'value', `${ SCHEME }${ get(this, 'serverUrl') }`);
       setting.save().then(() => {
         if ( !get(this, 'popupMode') ) {
-          this.activeDrivers();
           get(this, 'router').replaceWith('authenticated');
         } else {
           this.send('cancel');
@@ -71,37 +70,5 @@ export default Component.extend({
         this.cancel();
       }
     }
-  },
-  activeDrivers() {
-    Promise.all([
-      this.get('globalStore').findAll('kontainerDriver'),
-      this.get('globalStore').findAll('nodeDriver')
-    ]).then(([kDrivers, nDrivers]) => {
-      const cnKDrivers = ['aliyunkubernetescontainerservice', 'huaweicontainercloudengine', 'baiducloudcontainerengine', 'tencentkubernetesengine', 'azurekubernetesservice', 'rancherkubernetesengine'];
-      const cnNDrivers = ['aliyunecs', 'pinganyunecs', 'vmwarevsphere', 'openstack'];
-
-      kDrivers.forEach((kd) => {
-        if (cnKDrivers.indexOf(kd.id) !== -1) {
-          if (kd.state !== 'active' && kd.state !== 'downloading') {
-            kd.doAction('activate');
-          }
-        } else {
-          if (kd.state === 'active') {
-            kd.doAction('deactivate');
-          }
-        }
-      });
-      nDrivers.forEach((nd) => {
-        if (cnNDrivers.indexOf(nd.id) !== -1) {
-          if (nd.state !== 'active' && nd.state !== 'downloading') {
-            nd.doAction('activate');
-          }
-        } else {
-          if (nd.state === 'active') {
-            nd.doAction('deactivate');
-          }
-        }
-      });
-    });
   },
 });
