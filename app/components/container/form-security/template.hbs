@@ -153,29 +153,45 @@
     </div>
 
     <div class="col box span-4">
-      <label class="acc-label">{{t 'formSecurity.gpuReservation.label'}}</label>
-      {{#input-or-display editable=editing value=gpuDisplayValue classesForDisplay="text-muted form-control-static"}}
-        <div class="radio">
-          <label>{{radio-button selection=gpuMode value="shared"}} {{t 'formSecurity.gpuReservation.shared'}}</label>
-          <span class="with-input" style="width: 175px;">
+      <ul class="form-security__inner-tab-nav">
+        {{#each gpuNavs as |nav|}}
+        <li class="{{if (eq activeGpuNav nav.value) 'active'}}" onclick={{action "switchGpuNav" nav.value}}><label class="acc-label">{{nav.label}}</label></li>
+        {{/each}}
+      </ul>
+      {{#if (eq activeGpuNav 'NVIDIA')}}
+        {{#input-or-display editable=editing value=gpuDisplayValue classesForDisplay="text-muted form-control-static"}}
+          <div class="radio">
+            <label>{{radio-button selection=gpuMode value="shared"}} {{t 'formSecurity.gpuReservation.shared'}}</label>
+            <span class="with-input" style="width: 175px;">
             <div class="input-group input-sm">
               {{input-integer min="0" step="1" value=gpuMemoryGb disabled=(not-eq gpuMode 'shared') placeholder=(t 'formSecurity.gpuReservation.placeholder')}}
               <div class="input-group-addon bg-default">{{t 'formSecurity.gpuReservation.memUnit'}}</div>
             </div>
           </span>
-        </div>
-        <div class="radio">
-          <label>
-            {{radio-button selection=gpuMode value="set"}} {{t 'formSecurity.gpuReservation.set'}}
-            <span class="with-input" style="width: 175px;">
+          </div>
+          <div class="radio">
+            <label>
+              {{radio-button selection=gpuMode value="set"}} {{t 'formSecurity.gpuReservation.set'}}
+              <span class="with-input" style="width: 175px;">
               <div class="input-group input-sm">
                 {{input-integer min="0" step="1" value=gpuReservation disabled=(not-eq gpuMode 'set') classNames="form-control" placeholder=(t 'formSecurity.gpuReservation.placeholder')}}
                 <div class="input-group-addon bg-default">{{t 'formSecurity.gpuReservation.unit'}}</div>
               </div>
             </span>
-          </label>
-        </div>
-      {{/input-or-display}}
+            </label>
+          </div>
+        {{/input-or-display}}
+      {{/if}}
+      {{#if (eq activeGpuNav 'ORIONX')}}
+        {{#input-or-display editable=editing value=vGpuReservation classesForDisplay="text-muted form-control-static"}}
+          <span class="with-input">
+          <div class="input-group">
+            {{input-integer min="0" step="1" value=vGpuReservation classNames="form-control" placeholder=(t 'formSecurity.vGpuReservation.placeholder')}}
+            <div class="input-group-addon bg-default">{{t 'formSecurity.vGpuReservation.unit'}}</div>
+          </div>
+        </span>
+        {{/input-or-display}}
+      {{/if}}
     </div>
   </div>
 

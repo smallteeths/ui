@@ -6105,6 +6105,7 @@ featureFlags:
     unsupportedStorageDrivers: "Enabling this feature exposes unsupported storage driver options for persistent volumes and storage classes."
     projectMonitoringServiceUI: "Enabling this feature will display the project monitoring menu"
     projectPipelineServiceUI: "Enabling this feature will display the project pipeline menu"
+    virtaitechGpuServiceUI: "Enabling this feature will allow users to set the number of vGpus replacement instances when deploying services"
   table:
     description: Description
     name: Name
@@ -7049,6 +7050,10 @@ formSecurity:
     memUnit: GiB
     shared: Shared GPU Memory
     set: Limit to
+  vGpuReservation:
+    label: Orion X GPU Reservation
+    placeholder: e.g. 1
+    unit: vGPUs
   isolation:
     label: Isolation
     default: Default (Container)

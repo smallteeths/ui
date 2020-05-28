@@ -6148,6 +6148,7 @@ featureFlags:
     unsupportedStorageDrivers: "启用此功能将为持久卷和存储类公开不受支持的存储驱动程序选项。"
     projectMonitoringServiceUI: "启用此功能将显示项目监控导航菜单"
     projectPipelineServiceUI: "启用此功能将显示项目流水线导航菜单"
+    virtaitechGpuServiceUI: "启用此功能将在部署服务时允许用户设置vGpus的预留实例数量"
   table:
     description: 描述
     name: 名称
@@ -7092,6 +7093,10 @@ formSecurity:
     memUnit: GiB
     shared: 共享GPU内存
     set: 限制为
+  vGpuReservation:
+    label: Orion X GPU预留
+    placeholder: '例如: 1'
+    unit: vGPUs
   isolation:
     label: 隔离
     default: 默认(容器)
