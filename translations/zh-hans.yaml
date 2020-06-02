@@ -4872,6 +4872,7 @@ confirmDelete:
     cluster: '集群'
     workload: '工作负载'
     ip: 'IP'
+    project: '项目'
   emptyPod: '0 个 pod'
   environmentNote: '注意: 该项目中的所有资源都将被永久删除，包括通过 {appName} 创建的所有命名空间。'
   clusterNote: '注意: 通过云提供商驱动创建的相关资源(如卷、负载均衡器和网络)不会自动删除。'

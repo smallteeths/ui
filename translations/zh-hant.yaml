@@ -2483,6 +2483,13 @@ resourceEventList:
 
 confirmDelete:
   titleWithoutResourceType: '是否確認要刪除'
+  resourceType:
+    namespace: '命名空間'
+    subnet: 'Subnet'
+    cluster: '集群'
+    workload: '工作負載'
+    ip: 'IP'
+    project: '项目'
   environmentNote: '注意: 此環境內的所有資源都將被永久性的刪除，包括通過{appName}創建的主機。'
   clusterNote: '注意: 在雲平台中創建的關聯資源(如卷，負載均衡器和網絡)不會自動刪除。'
   clusterRoleTemplateBindingNote: "注意: 此用戶的權限直接添加到項目中將不會被刪除."
