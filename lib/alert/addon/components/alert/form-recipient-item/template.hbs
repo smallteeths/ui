@@ -21,7 +21,7 @@
   </div>
 
   <div class="col mt-0 span-9-of-24">
-    {{#unless (or (eq model.notifierType "dingtalk") (eq model.notifierType "msteams") (eq model.notifierType "aliyunsms"))}}
+    {{#unless (or (eq model.notifierType "dingtalk") (eq model.notifierType "msteams") (eq model.notifierType "aliyunsms") (eq model.notifierType "servicenow"))}}
       {{input
           classNames="form-control"
           placeholder=recipientPlaceholder

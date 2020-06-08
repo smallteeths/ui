@@ -3119,6 +3119,7 @@ notifierPage:
     dingtalk: 钉钉
     msteams: Microsoft Teams
     aliyunsms: 阿里云短信
+    servicenow: ServiceNow
   slack:
     url: 访问URL
     urlPlaceholder: '例如: https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX'
@@ -3208,6 +3209,15 @@ notifierPage:
       label: 手机号
       action: 添加手机号
       placeholder: 你要添加的手机号码
+  servicenow:
+    url: Webhook 地址
+    urlPlaceholder: Webhook 地址
+    proxyUrl: Proxy URL
+    proxyUrlPlaceholder: Proxy URL
+    username: 用户名
+    usernamePlaceholder: 用户名
+    password: 密码
+    passwordPlaceholder: 密码
   proxyUrl:
     label: Proxy URL
     placeholder: '例如: http://my-proxy/'

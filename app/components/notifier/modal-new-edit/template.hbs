@@ -699,6 +699,82 @@
       </div>
     </div>
   </div>
+{{else if (eq currentType "servicenow")}}
+  <div class="row">
+    <div class="col span-12 mt-0 mb-0">
+      {{form-name-description
+              name=model.name
+              nameDisabled=false
+              nameRequired=true
+              description=model.description
+              bothColClass="col span-6 mt-0"
+              colClass="col span-12 mt-0"
+      }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col span-12">
+      <div class="acc-label text-capitalize">
+        {{t "notifierPage.servicenow.url"}}{{field-required}}
+      </div>
+      {{input
+              classNames="form-control"
+              value=model.servicenowConfig.url
+              placeholder=(t "notifierPage.servicenow.urlPlaceholder")
+      }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col span-12">
+      <div class="acc-label text-capitalize">
+        {{t "notifierPage.servicenow.proxyUrl"}}
+      </div>
+      {{input
+              classNames="form-control"
+              value=model.servicenowConfig.proxyUrl
+              placeholder=(t "notifierPage.servicenow.proxyUrlPlaceholder")
+      }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col span-6">
+      <div class="acc-label text-capitalize">
+        {{t "notifierPage.servicenow.username"}}
+      </div>
+      {{input
+              classNames="form-control"
+              value=model.servicenowConfig.username
+              placeholder=(t "notifierPage.servicenow.usernamePlaceholder")
+      }}
+    </div>
+    <div class="col span-6">
+      <div class="acc-label text-capitalize">
+        {{t "notifierPage.servicenow.password"}}{{#if model.servicenowConfig.username}}{{field-required}}{{/if}}
+      </div>
+      {{input
+              classNames="form-control"
+              type="password"
+              value=model.servicenowConfig.password
+              placeholder=(t "notifierPage.servicenow.passwordPlaceholder")
+      }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col span-6">
+      <label class="acc-label">
+        {{t "notifierPage.sendResolved.label"}}
+      </label>
+      <div class="checkbox">
+        <label>
+          {{input
+                  type="checkbox"
+                  checked=model.sendResolved
+          }}
+          {{t "generic.enable"}}
+        </label>
+      </div>
+    </div>
+  </div>
 {{/if}}
 
 {{#if (eq currentType "slack")}}

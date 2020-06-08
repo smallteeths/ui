@@ -57,6 +57,12 @@ const TYPES = [
     css:      'aliyunsms',
     disabled: false,
   },
+  {
+    type:     'servicenow',
+    label:    'notifierPage.notifierTypes.servicenow',
+    css:      'servicenow',
+    disabled: false,
+  },
 ];
 
 const RECIPIENT_TYPES = [
@@ -76,6 +82,7 @@ const RECIPIENT_TYPES = [
 const WECHAT_ENDPOINT_DEFAULT = 'default';
 const WECHAT_ENDPOINT_CUSTOM = 'custom';
 const WECHAT = 'wechat';
+const SERVICENOW = 'servicenow';
 
 export default Component.extend(ModalBase, NewOrEdit, {
   scope:          service('scope'),
@@ -103,10 +110,16 @@ export default Component.extend(ModalBase, NewOrEdit, {
     const mode = get(this, 'mode');
 
     if (mode === 'edit' || mode === 'clone') {
-      const t = get(this, 'currentType');
+      const t                   = get(this, 'currentType');
+      const servicenowBasicAuth = get(this, 'model.servicenowConfig.basic_auth');
 
       if ( t === WECHAT && get(this, 'model.wechatConfig.apiUrl') ) {
         this.wechatEndpointMode = WECHAT_ENDPOINT_CUSTOM;
+      }
+
+      if ( t === SERVICENOW && get(servicenowBasicAuth, 'username') ) {
+        set(this, 'model.servicenowConfig.username', get(servicenowBasicAuth, 'username'))
+        set(this, 'model.servicenowConfig.password', get(servicenowBasicAuth, 'password'))
       }
 
       this.set('types', TYPES.filterBy('type', t));
@@ -171,6 +184,21 @@ export default Component.extend(ModalBase, NewOrEdit, {
 
   wechatEndpointModeChanged: observer('wechatEndpointMode', function() {
     set(this, 'model.wechatConfig.apiUrl', '');
+  }),
+
+  servicenowAccountChanged: observer('model.servicenowConfig.username', 'model.servicenowConfig.password', function() {
+    const config = get(this, 'model.servicenowConfig');
+
+    if ( !config ) {
+      return;
+    }
+
+    if ( !get(this, 'model.servicenowConfig.basic_auth') ) {
+      set(this, 'model.servicenowConfig.basic_auth', {})
+    }
+
+    set(this, 'model.servicenowConfig.basic_auth.username', get(config, 'username'));
+    set(this, 'model.servicenowConfig.basic_auth.password', get(config, 'password'));
   }),
 
   addBtnLabel: computed('mode', function() {
@@ -240,6 +268,10 @@ export default Component.extend(ModalBase, NewOrEdit, {
 
     if ( notifierType === WECHAT && this.wechatEndpointMode === WECHAT_ENDPOINT_CUSTOM && !get(this, 'model.wechatConfig.apiUrl') ) {
       errors.push(intl.t('validation.required', { key: intl.t('notifierPage.wechat.endpoint.label') }));
+    }
+
+    if ( notifierType === 'servicenow' && get(this, 'model.servicenowConfig.basic_auth.username') && !get(this, 'model.servicenowConfig.basic_auth.password')) {
+      errors.push(intl.t('validation.required', { key: intl.t('notifierPage.servicenow.password') }))
     }
 
     set(this, 'errors', errors);

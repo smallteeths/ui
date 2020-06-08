@@ -3074,6 +3074,7 @@ notifierPage:
     dingtalk: DingTalk
     msteams: Microsoft Teams
     aliyunsms: Aliyun SMS
+    servicenow: ServiceNow
   slack:
     url: URL
     urlPlaceholder: e.g. https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
@@ -3158,6 +3159,15 @@ notifierPage:
       label: Phone Number
       action: Add Phone Number
       placeholder: e.g. 112314
+  servicenow:
+    url: Webhook Url
+    urlPlaceholder: Webhook Url
+    proxyUrl: Proxy URL
+    proxyUrlPlaceholder: Proxy URL
+    username: Username
+    usernamePlaceholder: Username
+    password: Password
+    passwordPlaceholder: Password
   proxyUrl:
     label: Proxy URL
     placeholder: e.g. http://my-proxy/

@@ -21,7 +21,7 @@ export default Resource.extend({
     return `${ get(this, 'displayName') } (${ upperCaseType })`
   }),
 
-  notifierTableLabel: computed('slackConfig', 'pagerdutyConfig', 'emailConfig', 'webhookConfig', 'wechatConfig', 'dingtalkConfig', 'msteamsConfig', 'aliyunsmsConfig', function(){
+  notifierTableLabel: computed('slackConfig', 'pagerdutyConfig', 'emailConfig', 'webhookConfig', 'wechatConfig', 'dingtalkConfig', 'msteamsConfig', 'aliyunsmsConfig', 'servicenowConfig', function(){
     const sc = get(this, 'slackConfig');
     const pc = get(this, 'pagerdutyConfig');
     const ec = get(this, 'smtpConfig');
@@ -30,6 +30,7 @@ export default Resource.extend({
     const dtc = get(this, 'dingtalkConfig');
     const msc = get(this, 'msteamsConfig');
     const asc = get(this, 'aliyunsmsConfig');
+    const snc = get(this, 'servicenowConfig');
 
     if ( sc ) {
       return C.NOTIFIER_TABLE_LABEL.SLACK;
@@ -55,11 +56,14 @@ export default Resource.extend({
     if ( asc ) {
       return C.NOTIFIER_TABLE_LABEL.ALIYUN_SMS;
     }
+    if ( snc ) {
+      return C.NOTIFIER_TABLE_LABEL.SERVICENOW;
+    }
 
     return C.NOTIFIER_TABLE_LABEL.DEFAULT;
   }),
 
-  notifierType: computed('slackConfig', 'pagerdutyConfig', 'emailConfig', 'webhookConfig', 'wechatConfig', 'dingtalkConfig', 'msteamsConfig', 'aliyunsmsConfig', function(){
+  notifierType: computed('slackConfig', 'pagerdutyConfig', 'emailConfig', 'webhookConfig', 'wechatConfig', 'dingtalkConfig', 'msteamsConfig', 'aliyunsmsConfig', 'servicenowConfig', function(){
     const sc = get(this, 'slackConfig');
     const pc = get(this, 'pagerdutyConfig');
     const ec = get(this, 'smtpConfig');
@@ -68,6 +72,7 @@ export default Resource.extend({
     const dtc = get(this, 'dingtalkConfig');
     const msc = get(this, 'msteamsConfig');
     const asc = get(this, 'aliyunsmsConfig');
+    const snc = get(this, 'servicenowConfig');
 
     if ( sc ) {
       return 'slack';
@@ -92,6 +97,9 @@ export default Resource.extend({
     }
     if ( asc ) {
       return 'aliyunsms';
+    }
+    if ( snc ) {
+      return 'servicenow';
     }
 
     return null;
@@ -129,7 +137,7 @@ export default Resource.extend({
     return moment(d).fromNow();
   }),
 
-  notifierLabel: computed('slackConfig', 'pagerdutyConfig', 'emailConfig', 'webhookConfig', 'wechartConfig', 'dingtalkConfig', 'msteamsConfig', 'aliyunsmsConfig', function(){
+  notifierLabel: computed('slackConfig', 'pagerdutyConfig', 'emailConfig', 'webhookConfig', 'wechartConfig', 'dingtalkConfig', 'msteamsConfig', 'aliyunsmsConfig', 'servicenowConfig', function(){
     const sc = get(this, 'slackConfig');
     const pc = get(this, 'pagerdutyConfig');
     const ec = get(this, 'smtpConfig');
