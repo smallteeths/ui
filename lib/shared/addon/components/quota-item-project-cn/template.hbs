@@ -115,10 +115,10 @@
               </div>
             </td>
             <td class="pl-10">
-              {{row.used}}
+              {{row.used}} ({{row.percent}})
             </td>
             <td class="text-right pr-30">
-              {{row.percent}}
+              {{row.usedInNS}} ({{row.percentInNS}})
             </td>
           </tr>
         {{else if (eq kind "nomatch")}}

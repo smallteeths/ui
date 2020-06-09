@@ -51,7 +51,7 @@ quotasCn:
   headers:
     namespace: Namespace
     used: Allocated
-    percent: Percent
+    percentInNS: Used in namespace
   common:
     limit: Limit
     reserved: Reserved

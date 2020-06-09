@@ -96,10 +96,15 @@ export default Controller.extend({
     if (nsQuotasArray && nsQuotasArray.length > 0) {
       nsQuotasArray.forEach((item) => {
         if (item && item.resourceQuota && item.resourceQuota.limit) {
-          let itemQuotas = item.resourceQuota.limit;
+          let itemQuotas    = item.resourceQuota.limit;
+          let itemQuotaUsed = undefined
+
+          if (item.annotations[C.QUOTA_USED]) {
+            itemQuotaUsed = JSON.parse(item.annotations[C.QUOTA_USED])
+          }
 
           C.QUOTA_TPYE_CN.forEach((key) => {
-            let formatData = this.formartQuotas(key, itemQuotas, item.name);
+            let formatData = this.formartQuotas(key, itemQuotaUsed, itemQuotas, item.name);
 
             if (formatData) {
               namespacesData[key].push(formatData)
@@ -136,16 +141,28 @@ export default Controller.extend({
     return false;
   }),
 
-  formartQuotas(key, data, name) {
+  formartQuotas(key, dataInNS, data, name) {
     if (data[key] && get(this, `model.quotaSetting.limit.${ key }`)) {
-      let used = parseInt(convertToLimit(key, data[key]), 10)
-      let total = parseInt(convertToLimit(key, get(this, `model.quotaSetting.limit.${ key }`)), 10);
+      let used        = parseInt(convertToLimit(key, data[key]), 10);
+      let total       = parseInt(convertToLimit(key, get(this, `model.quotaSetting.limit.${ key }`)), 10);
+      let usedInNS    = 0;
+      let totalInNS   = used;
+
+      if (dataInNS) {
+        usedInNS = parseInt(convertToLimit(key, dataInNS[key]), 10)
+      }
+
+      if (totalInNS === 0) {
+        totalInNS = 1
+      }
 
       return {
         name,
-        used:    data[key],
-        percent: `${ Math.floor( (used / total) * 100 ) || 0 }%`,
-        label:   key,
+        used:        data[key],
+        usedInNS,
+        percent:     `${ Math.floor( (used / total) * 100 ) || 0 }%`,
+        percentInNS: `${ Math.floor( (usedInNS / totalInNS) * 100 ) || 0 }%`,
+        label:       key,
       }
     } else {
       return null

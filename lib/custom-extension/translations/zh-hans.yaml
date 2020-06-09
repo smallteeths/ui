@@ -51,7 +51,7 @@ quotasCn:
   headers:
     namespace: 命名空间
     used: 已分配
-    percent: 百分比
+    percentInNS: 命名空间内已使用
   common:
     limit: 限制
     reserved: 预留
