@@ -92,7 +92,7 @@
       {{#accordion-list-item
               title=(t "cruPrivateRegistry.title.label")
               detail=(t "cruPrivateRegistry.title.detail")
-              expandOnInit=(or (or (eq mode "edit" true false) forceExpandOnInit) applyClusterTemplate)
+              expandOnInit=false
               expandAll=al.expandAll
               expand=(action expandFn)
       }}
@@ -105,7 +105,7 @@
       {{#accordion-list-item
               title=(t "clusterNew.rke.advanced.label")
               detail=(t "clusterNew.rke.advanced.detail")
-              expandOnInit=(or (or (eq mode "edit" true false) forceExpandOnInit) applyClusterTemplate)
+              expandOnInit=false
               expandAll=al.expandAll
               expand=(action expandFn)
       }}
