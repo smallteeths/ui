@@ -102,6 +102,47 @@
                 classNames="form-control"
         }}
       {{/accordion-list-item}}
+      {{#accordion-list-item
+              title=(t "clusterNew.rke.advanced.label")
+              detail=(t "clusterNew.rke.advanced.detail")
+              expandOnInit=(or (or (eq mode "edit" true false) forceExpandOnInit) applyClusterTemplate)
+              expandAll=al.expandAll
+              expand=(action expandFn)
+      }}
+        <div class="row">
+          <div class="col span-4">
+            <label class="acc-label">
+              {{t "loggingPage.dockerRootDir.label"}}
+              {{#if clusterTemplateCreate}}
+                <ClusterTemplateOverrideToggle
+                        @path="dockerRootDir"
+                        @configVariable={{cluster.dockerRootDir}}
+                        @addOverride={{action "addOverride"}}
+                        @questions={{model.clusterTemplateRevision.questions}}
+                />
+              {{/if}}
+            </label>
+            <CheckOverrideAllowed
+                    @paramName="dockerRootDir"
+                    @applyClusterTemplate={{applyClusterTemplate}}
+                    @clusterTemplateRevision={{model.clusterTemplateRevision.clusterConfig}}
+                    @questions={{model.clusterTemplateRevision.questions}}
+            >
+              {{#input-or-display
+                      editable=notView
+                      value=model.cluster.dockerRootDir
+              }}
+                {{input
+                        type="text"
+                        value=model.cluster.dockerRootDir
+                        className="form-control"
+                        placeholder=(t "clusterNew.rke.dockerRootDir.placeholder" dir=defaultDockerRootDir)
+                }}
+              {{/input-or-display}}
+            </CheckOverrideAllowed>
+          </div>
+        </div>
+      {{/accordion-list-item}}
     {{/if}}
   {{/accordion-list}}
 {{/if}}
