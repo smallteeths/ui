@@ -2003,7 +2003,8 @@ cruVolumeClaimTemplate:
 cruPrivateRegistry:
   title:
     label: Private Registry
-    detail: "Configure a default private registry for this cluster. When enabled, all images required for cluster provisioning and system add-ons startup will be pulled from this registry(Notice: This config will override system-default-registry in global config)."
+    detail: "Configure a default private registry for this cluster. When enabled, all images required for cluster provisioning and system add-ons startup will be pulled from this registry."
+    detailAtImportCluster: "Configure a default private registry for this cluster. When enabled, all images required for cluster provisioning and system add-ons startup will be pulled from this registry(Notice: This config will override system-default-registry in global config)."
   noData: This cluster does not have a private registry defined
   defaultError: You must designate one private registry as the default
   add:
