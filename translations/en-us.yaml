@@ -342,6 +342,7 @@ alertPage:
     notifierPlaceholder: Choose a Notifier
     nodePlaceholder: Choose a Node
     systemServicePlaceholder: Choose a System Service
+    nameRequired: Name required
     nodeRequired: Node required
     nodeSelectorRequired: Node Selector required
     recipient:
@@ -351,6 +352,11 @@ alertPage:
       noData: No metric graph data.
       error: Failed to fetch metric graph data.
       placeholder: Input Expression
+    commonRules:
+      label: Common Rules
+      noData: No metric graph data.
+      error: Failed to fetch metric graph data.
+      placeholder: Choose Alert Rule
     removeAlert: Remove this Alert
     alertRule: Alert Rule
     groupWaitSeconds:
@@ -387,6 +393,7 @@ alertPage:
     systemService: System Service
     nodeSelector: Node Selector
     workloadSelector: Workload Selector
+    podRebootTimes: Pod Reboot Times
     metric: Metric
     cisScan: CIS Scan
     undefined: None
@@ -427,6 +434,20 @@ alertPage:
     greater-or-equal: Greater Or Equal
     less-or-equal: Less Or Equal
     has-value: Not Null
+  commonRules:
+    diskRemainingPercent: Disk remaining percent
+    inodesUsagePercent: Inodes usage percent
+    diskReadIOPS: Disk read IOPS
+    diskWriteIOPS: Disk write IOPS
+    diskReadThroughput: Disk read throughput
+    diskWriteThroughput: Disk write throughput
+    diskReadDelay: Disk read delay
+    etcdSnapDelay: Etcd snap delay
+    etcdDiskWal: Etcd latency distributions of fsync called by wal
+    etcdDiskBackend: Etcd latency distributions of commit called by backend
+    fileDescriptorUsagePercent: File descriptor usage percent
+    cpuUsagePercent: CPU usage percent
+    podRebootTimes: POD reboot times
 
 podSecurityPoliciesPage:
   index:

@@ -4,7 +4,7 @@
       content=operatorContent
       class="form-control"
       value=model.metricRule.comparison
-      readOnly=(not-eq model._targetType "metric")
+      readOnly=(and (not-eq model._targetType "metric") (not-eq model._targetType "commonRules") (not-eq model._targetType "podRebootRule"))
     }}
   </div>
   <div class="col span-2 mt-5">
@@ -12,7 +12,7 @@
       {{input-number
         class="form-control"
         value=model.metricRule.thresholdValue
-        readOnly=(not-eq model._targetType "metric")
+        readOnly=(and (not-eq model._targetType "metric") (not-eq model._targetType "commonRules") (not-eq model._targetType "podRebootRule"))
         placeholder="e.g. 10"
         min=0
       }}
@@ -28,7 +28,7 @@
       content=durationContent
       class="form-control"
       value=model.metricRule.duration
-      readOnly=(not-eq model._targetType "metric")
+      readOnly=(and (not-eq model._targetType "metric") (not-eq model._targetType "commonRules") (not-eq model._targetType "podRebootRule"))
     }}
   </div>
 </div>

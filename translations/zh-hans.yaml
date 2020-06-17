@@ -342,6 +342,7 @@ alertPage:
     notifierPlaceholder: 选择通知
     nodePlaceholder: 选择主机
     systemServicePlaceholder:  选择系统服务
+    nameRequired: 需要填写告警标题
     nodeRequired: 需要选择主机
     nodeSelectorRequired: 需要主机选择器
     recipient:
@@ -351,6 +352,11 @@ alertPage:
       noData: 图表无数据
       error: 获取图表数据失败
       placeholder: 输入表达式
+    commonRules:
+      label: 常用规则
+      noData: 图表无数据
+      error: 获取图表数据失败
+      placeholder: 选择告警规则
     removeAlert: 删除告警规则
     alertRule: 告警规则
     groupWaitSeconds:
@@ -387,6 +393,7 @@ alertPage:
     systemService: System Service
     nodeSelector: Node Selector
     workloadSelector: Workload Selector
+    podRebootTimes: Pod 重启次数
     metric: Metric
     cisScan: CIS 扫描
     undefined: None
@@ -427,6 +434,20 @@ alertPage:
     greater-or-equal: 大于或等于
     less-or-equal: 小于或等于
     has-value: 不为空
+  commonRules:
+    diskRemainingPercent: 磁盘剩余可用率
+    inodesUsagePercent: inodes使用率
+    diskReadIOPS: 磁盘读取IOPS
+    diskWriteIOPS: 磁盘写入IOPS
+    diskReadThroughput: 磁盘读取吞吐量
+    diskWriteThroughput: 磁盘写入吞吐量
+    diskReadDelay: 磁盘读取延迟
+    etcdSnapDelay: etcd快照延迟时间
+    etcdDiskWal: Etcd latency distributions of fsync called by wal
+    etcdDiskBackend: Etcd latency distributions of commit called by backend
+    fileDescriptorUsagePercent: 文件描述符使用率
+    cpuUsagePercent: CPU使用率
+    podRebootTimes: POD重启次数
 
 podSecurityPoliciesPage:
   index:

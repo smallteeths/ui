@@ -163,7 +163,7 @@
             {{radio-button
               selection=model._targetType
               value="metric"
-              disabled=(not monitoringEnabled)
+              disabled=(or (not monitoringEnabled) graphLoading)
             }}
             {{t "alertPage.newOrEdit.expression.label"}}
           </label>
@@ -177,11 +177,43 @@
             placeholder="Select a metric"
             allowCustom=true
           }}
-          {{#if (eq graphStatus "noData")}}
-            <p class="text-muted text-small mt-0 mb-0">
+          {{#if (and (eq graphStatus "noData") (eq model._targetType "metric"))}}
+            <p class="text-error text-small mt-0 mb-0">
               {{t "alertPage.newOrEdit.expression.noData"}}
             </p>
-          {{else if (eq graphStatus "error")}}
+          {{else if (and (eq graphStatus "error") (eq model._targetType "metric"))}}
+            <p class="text-error text-small mt-0 mb-0">
+              {{t "alertPage.newOrEdit.expression.error"}}
+            </p>
+          {{/if}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col span-2">
+          <label class="acc-label" style={{expressionStyle}}>
+            {{radio-button
+                    selection=model._targetType
+                    value="commonRules"
+                    disabled=(or (not monitoringEnabled) graphLoading)
+            }}
+            {{t "alertPage.newOrEdit.commonRules.label"}}
+          </label>
+        </div>
+        <div class="col span-9 mt-0">
+          {{searchable-select
+                  content=commonRulesContent
+                  class="form-control"
+                  value=model.metricRule.commonRule
+                  readOnly=(or (not-eq model._targetType "commonRules") graphLoading)
+                  placeholder="Select a rule"
+                  localizedLabel=true
+                  allowCustom=false
+          }}
+          {{#if (and (eq graphStatus "noData") (eq model._targetType "commonRules"))}}
+            <p class="text-error text-small mt-0 mb-0">
+              {{t "alertPage.newOrEdit.expression.noData"}}
+            </p>
+          {{else if (and (eq graphStatus "error") (eq model._targetType "commonRules"))}}
             <p class="text-error text-small mt-0 mb-0">
               {{t "alertPage.newOrEdit.expression.error"}}
             </p>
@@ -197,7 +229,7 @@
         {{if isEventTarget (t "alertPage.newOrEdit.happens") (t "alertPage.newOrEdit.is")}}
       </div>
     </div>
-    {{#if (eq model._targetType "metric")}}
+    {{#if (or (eq model._targetType "metric") (eq model._targetType "commonRules"))}}
       {{alert/form-comparison-row
         model=model
       }}
