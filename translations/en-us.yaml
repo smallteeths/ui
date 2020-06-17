@@ -347,6 +347,13 @@ alertPage:
     nodeSelectorRequired: Node Selector required
     recipient:
       helpText: The value set in the Notifier is used by default. You can override this with another value.
+    unit:
+      timesPerSecond: 'Times/S'
+      second: S
+      percent: '%'
+      times: Times
+      millisecond: MS
+      mbPerSecond: 'MB/S'
     expression:
       label: Expression
       noData: No metric graph data.

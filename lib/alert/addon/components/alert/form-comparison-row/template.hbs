@@ -5,9 +5,10 @@
       class="form-control"
       value=model.metricRule.comparison
       readOnly=(and (not-eq model._targetType "metric") (not-eq model._targetType "commonRules") (not-eq model._targetType "podRebootRule"))
+      localizedLabel=true
     }}
   </div>
-  <div class="col span-2 mt-5">
+  <div class="col span-{{if (or (eq model._targetType "commonRules") (eq model._targetType "podRebootRule")) "1" "2"}} mt-5">
     {{#unless (eq model.metricRule.comparison hasValue)}}
       {{input-number
         class="form-control"
@@ -18,6 +19,13 @@
       }}
     {{/unless}}
   </div>
+  {{#if (or (eq model._targetType "commonRules") (eq model._targetType "podRebootRule"))}}
+    <div class="col span-1 text-left">
+      <div style={{verbStyles}}>
+        {{unit}}
+      </div>
+    </div>
+  {{/if}}
   <div class="col span-1 text-right">
     <div style={{verbStyles}}>
       {{t "alertPage.newOrEdit.for"}}

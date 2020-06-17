@@ -347,6 +347,13 @@ alertPage:
     nodeSelectorRequired: 需要主机选择器
     recipient:
       helpText: 默认情况下使用通知程序中设置的值,您可以用另一个值覆盖它。
+    unit:
+      timesPerSecond: '次/秒'
+      second: S
+      percent: '%'
+      times: 次
+      millisecond: MS
+      mbPerSecond: 'MB/S'
     expression:
       label: 表达式
       noData: 图表无数据
