@@ -354,6 +354,7 @@ alertPage:
       times: 次
       millisecond: MS
       mbPerSecond: 'MB/S'
+      bytes: Bytes
     expression:
       label: 表达式
       noData: 图表无数据
@@ -449,12 +450,20 @@ alertPage:
     diskReadThroughput: 磁盘读取吞吐量
     diskWriteThroughput: 磁盘写入吞吐量
     diskReadDelay: 磁盘读取延迟
+    leaderChanges: etcd集群中正在发生大量的leader变更
+    databaseUsage: 数据库使用率接近配额500M
+    noDiskIsRunning: 节点磁盘在24小时内已满载
+    highCpuLoad: 高CPU负载
+    highNodeMemoryUtilization: 节点内存利用率高
+    ramUsagePercent: 内存使用率
     etcdSnapDelay: etcd快照延迟时间
+    noLeader: Etcd member has no leader
     etcdDiskWal: Etcd latency distributions of fsync called by wal
     etcdDiskBackend: Etcd latency distributions of commit called by backend
     fileDescriptorUsagePercent: 文件描述符使用率
     cpuUsagePercent: CPU使用率
     podRebootTimes: POD重启次数
+    customClusterBackupFailed: 自定义集群Etcd备份失败告警
 
 podSecurityPoliciesPage:
   index:

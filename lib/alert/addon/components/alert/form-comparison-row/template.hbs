@@ -19,7 +19,7 @@
       }}
     {{/unless}}
   </div>
-  {{#if (or (eq model._targetType "commonRules") (eq model._targetType "podRebootRule"))}}
+  {{#if (and (or (eq model._targetType "commonRules") (eq model._targetType "podRebootRule")) (not-eq model.metricRule.comparison hasValue))}}
     <div class="col span-1 text-left">
       <div style={{verbStyles}}>
         {{unit}}
