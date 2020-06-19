@@ -46,6 +46,40 @@ module.exports = ECS
 // import ECS constuctor
 var ECS = require('./define.js')
 
+/**
+ * fetch all regions
+ *
+ * @path GET /v3/regions/
+ * @see https://support.huaweicloud.com/api-iam/iam_05_0001.html
+ * @method getRegions
+ * @param {Function}  callback Function to be called when request done
+ * @return
+ */
+ECS.prototype.getRegions = function (callback) {
+  var _callback = this.logging(callback, 'ECS.getRegions')
+  this.validated(function () {
+    var resource = '/v3/regions'
+    this.requestor.get(resource, null, _callback)
+  }, _callback)
+}
+
+/**
+ * fetch all kubernetes versions
+ *
+ * @path GET /api/v3/clusters/versions
+ * @see https://support.huaweicloud.com/api-cce/cce_02_0358.html
+ * @method getVersions
+ * @param {Function}  callback Function to be called when request done
+ * @return
+ */
+ECS.prototype.getVersions = function (callback) {
+  var _callback = this.logging(callback, 'ECS.getVersions')
+  this.validated(function () {
+    var resource = '/api/v3/clusters/versions'
+    this.requestor.get(resource, null, _callback)
+  }, _callback)
+}
+
 ECS.prototype.getVpcs = function (callback) {
   var _callback = this.logging(callback, 'ECS.getVpcs')
   this.validated(function () {
@@ -214,8 +248,8 @@ var ECS = require('./define.js')
 ECS.prototype.listCloudServerFlavors = function (callback) {
   var _callback = this.logging(callback, 'ECS.listCloudServerFlavors')
   this.validated(function () {
-    var resource = '/v1/' + this.projectId + '/cloudservers/flavors'
-    this.requestor.get(resource, null, _callback)
+    var resource = `/v1/${ this.projectId }/cloudservers/flavors`
+    this.requestor.get(resource, { "availability_zone": this.availabilityZone }, _callback)
   }, _callback)
 }
 
@@ -1440,7 +1474,7 @@ class V4 {
    * just in case it changeds
    *
    * @method getHeaders
-   * @param {Object} super-agent request object
+   * @param {String} super-agent request object
    * @return {Array}
    */
   getRequestHeaders (request) {
@@ -1544,7 +1578,7 @@ class V4 {
     // request parameters are in the query string. Query string values must
     // be URL-encoded (space=%20). The parameters must be sorted by name.
     // For this example, the query string is pre-formatted in the request_parameters variable.
-    var canonicalQueryString = QS.stringify(Utils.JSON.sort(request.qs || {}))
+    var canonicalQueryString = (request._query || []).sort().join('&')
 
     // Step 4: Create the list of signed headers. This lists the headers
     // in the canonical_headers list, delimited with ";" and in alpha order.

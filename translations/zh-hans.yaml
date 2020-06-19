@@ -4104,144 +4104,6 @@ clusterNew:
     errors:
       concurrency:
         negative: 只有非负和非零的并发值是有效的。
-  huaweicce:
-    label: 华为云容器引擎
-    shortLabel: Huawei CCE
-    name:
-      label: 集群名称
-      required: 集群名称必须填写
-    access:
-      title: 帐户访问
-      detail: 选择用于启动华为云容器引擎的区域和API KEY。
-    accessKey:
-      label: 访问密钥ID
-      placeholder: CCE访问密钥ID
-      help: 创建访问密钥ID参考<a href="https://support.huaweicloud.com/usermanual-ca/zh-cn_topic_0046606340.html" target="_blank">这里</a>。
-    secretKey:
-      label: 访问密钥
-      placeholder: CCE访问密钥
-      help: 获取访问密钥参考<a href="https://support.huaweicloud.com/usermanual-ca/zh-cn_topic_0046606340.html" target="_blank">这里</a>。
-    projectId:
-      label: 项目ID
-      placeholder: CCE项目ID
-      help: 获取项目ID参考<a href="https://support.huaweicloud.com/usermanual-ca/zh-cn_topic_0046606344.html" target="_blank">这里</a>。
-      required: 项目ID必须填写
-    region:
-      label: 区域
-      helpText: 获取区域参考<a href="https://developer.huaweicloud.com/endpoint" target="_blank">这里</a>。
-      required: 区域必须填写
-    business:
-      label: 业务
-    checkAccount: '下一步: 配置集群'
-    checkingAccount: 用户校验中...
-    configureNode: '下一步: 配置节点'
-    configuringNode: 配置中...
-    clusterOption:
-      title: 集群选项
-      detail: 为集群自定义Kubernetes选项
-    clusterType:
-      label: 集群类型
-    clusterFlavor:
-      label: Cluster Flavor
-    masterVersion:
-      label: 版本
-    vpcId:
-      label: 虚拟私有云
-    subnetId:
-      label: 所在子网
-      none: 无可用子网
-    highwaySubnet:
-      label: 高速网卡
-      placeholder: 高速子网
-      none: 没有高速子网被使用
-    nodeOption:
-      title: 节点选项
-      detail: 为节点自定义选项
-    dataVolumeType:
-      label: 数据盘类型
-    dataVolumeSize:
-      label: 数据盘大小
-    description:
-      label: 描述
-      placeholder: '例如: 华为CCE集群'
-    eipBandwidthSize:
-      label: 带宽
-    eipChargeMode:
-      label: 计费模式
-    eipCount:
-      label: 数量
-    availableZone:
-      label: 当前区域
-    billingMode:
-      label: 计费模式
-      payPerUse: 按需计费
-      yearly: '包年/包月'
-    containerNetworkCidr:
-      label: 容器网段
-      placeholder: '例如: 172.16.0.0/16'
-    containerNetworkMode:
-      label: 网络模型
-      none: 无配置
-    rootVolumeType:
-      label: 系统盘类型
-    rootVolumeSize:
-      label: 系统盘大小
-    nodeCount:
-      label: 节点个数
-    nodeFlavor:
-      label: 节点规格
-    ssh:
-      label: 密钥对
-    eip:
-      label: 弹性IP
-    eipSelection:
-      none: 暂不使用
-      new: 创建新的
-      exist: 使用已有
-    eipIds:
-      label: 弹性 IP
-      none: 无可用弹性 IP
-    eipType:
-      label: Eip 类型
-    clusterLabels:
-      label: 集群标签
-      none: 无标签
-    nodeLabels:
-      label: 主机标签
-    clusterEipId:
-      label: Cluster Eip
-      prompt: 选择Eip...
-    externalServerEnabled:
-      label: 外部服务器
-      enabled: 启用 - 只支持内网
-      disabled: 禁用 - CCE集群将部署在Rancher所在的VPC
-    highAvailability:
-      label: 高可用
-    managementScale:
-      label: 集群管理规模
-    nodeOperationSystem:
-      label: 操作系统
-    authenticatingProxyCa:
-      label: CA根证书
-    validityPeriod:
-      label: 有效期
-    bmsIsAutoRenew:
-      label: 自动更新
-    loginMode:
-      label: 登录方式
-      password: 密码
-      keyPair: 密钥对
-    password:
-      label: 密码
-      placeholder: 请输入密码
-    userName:
-      label: 用户名
-    authentiactionMode:
-      label: 认证模式
-      rbac: RBAC
-      authenticating_proxy: 认证代理
-    eipShareType:
-      label: EIP Share Type
   oracleoke:
     label: Oracle Container Engine long
     shortLabel: Oracle OKE
@@ -4347,7 +4209,6 @@ clusterNew:
       quick: 快速创建
       custom: 自定义创建
       existing: 现有的
-
   rke:
     upgradeStrategy:
       maximumWorkersDown:
@@ -8654,7 +8515,7 @@ nodeDriver:
     digitalocean: DigitalOcean
     exoscale: Exoscale
     googlegke: Google GKE
-    huaweicce: Huawei CCE
+    huawei: Huawei CCE
     linode: Linode
     oci: Oracle Cloud 基础设施
     openstack: OpenStack
