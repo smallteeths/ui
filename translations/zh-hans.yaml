@@ -365,6 +365,7 @@ alertPage:
       noData: 图表无数据
       error: 获取图表数据失败
       placeholder: 选择告警规则
+      podRebootTimesTips: 请将键(Key)中的特殊符号转换为下划线(_)
     removeAlert: 删除告警规则
     alertRule: 告警规则
     groupWaitSeconds:

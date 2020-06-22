@@ -364,6 +364,7 @@ alertPage:
       noData: No metric graph data.
       error: Failed to fetch metric graph data.
       placeholder: Choose Alert Rule
+      podRebootTimesTips: Please convert symbol in keys to underline(_)
     removeAlert: Remove this Alert
     alertRule: Alert Rule
     groupWaitSeconds:

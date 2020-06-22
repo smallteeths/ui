@@ -205,6 +205,10 @@
                     initialMap=model.metricRule.podRebootRuleLabels
                     changed=(action 'transformRulelabel')
             }}
+            {{banner-message
+                    color="bg-warning"
+                    message=(t "alertPage.newOrEdit.commonRules.podRebootTimesTips")
+            }}
           {{else}}
             <button {{action "noop"}} style="cursor:not-allowed;" class="btn bg-disabled icon-btn">
               <span class="darken">
@@ -215,6 +219,7 @@
               </span>
             </button>
           {{/if}}
+
           {{#if (and (eq graphStatus "noData") (eq model._targetType "podRebootRule"))}}
             <p class="text-error text-small mt-0 mb-0">
               {{t "alertPage.newOrEdit.expression.noData"}}
