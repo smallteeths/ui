@@ -9,10 +9,12 @@ export const headers = [
     sort:           ['displayName'],
     searchField:    'displayName',
     translationKey: 'generic.name',
+    width:          100
   },
   {
     name:           'project',
     translationKey: 'generic.project',
+    width:          70
   },
   {
     name:           'master',
@@ -33,24 +35,16 @@ export const headers = [
     label:          'CIDR',
     sort:           ['cidr'],
     searchField:    'cidr',
-    width:          120,
   },
   {
     name:           'ipRanges',
     translationKey: 'formVlan.ipRange.label',
-    width:          190,
+    width:          240,
   },
   {
     name:           'routes',
     translationKey: 'formVlan.route.label',
-    width:          180,
-  },
-  {
-    name:           'mode',
-    translationKey: 'formVlan.mode.label',
-    sort:           ['mode'],
-    searchField:    'mode',
-    width:          80
+    width:          170,
   },
   {
     name:           'gateway',
@@ -58,13 +52,6 @@ export const headers = [
     sort:           ['gateway'],
     searchField:    'gateway',
   },
-  /* {
-    classNames:     'text-right pr-20',
-    name:           'creationTimestamp',
-    translationKey: 'generic.created',
-    sort:           ['creationTimestamp'],
-    searchField:    false,
-  }, */
 ];
 
 export default Controller.extend({

@@ -25,20 +25,36 @@
             {{obj.name}}
           </span>
         </td>
+        <td data-title="{{dt.subnet}}">
+          {{obj.subnet}}
+        </td>
         <td data-title="{{dt.namespace}}">
           {{obj.namespace}}
         </td>
         <td data-title="{{dt.cidr}}">
           {{obj.cidr}}
         </td>
+        <td data-title="{{dt.ipType}}">
+          {{#if obj.ipType}}
+            {{t (concat 'vlansubnetPage.ipType.' obj.ipType)}}
+          {{else}}
+            {{obj.ipType}}
+          {{/if}}
+        </td>
         <td data-title="{{dt.mac}}">
           {{obj.mac}}
         </td>
-        <td data-title="{{dt.podId}}">
-          {{obj.podId}}
-        </td>
-        <td data-title="{{dt.subnet}}">
-          {{obj.subnet}}
+        <td data-title="{{dt.podId}}" class="clip">
+          {{#tooltip-element
+              classNames="clip block"
+              type="tooltip-basic"
+              tooltipTemplate='tooltip-static'
+              model=obj.podId
+              inlineBlock=true
+              placement="top"
+          }}
+            {{obj.podId}}
+          {{/tooltip-element}}
         </td>
         <td data-title="{{dt.workloadName}}">
           {{obj.workloadName}}

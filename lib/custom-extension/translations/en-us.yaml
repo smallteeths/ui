@@ -249,7 +249,11 @@ vlansubnetPage:
   deleteVlanAboutPodsTotal: "There are {total} Pods in use"
   deleteVlanAboutPodsTotalThan: "More than {total} Pods are in use"
   deleteVlanAboutVlans: '"{vlan}" and {others} others'
-  macvlanIpCount: Total IP number：{total}
+  macvlanIpCount: "<div class='text-left'>{name}<br>Total IP number：{total}</div>"
+  ipType:
+    label: IP Type
+    auto: auto
+    specific: specific
 formVlan:
   name:
     label: Name

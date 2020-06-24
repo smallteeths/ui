@@ -212,10 +212,10 @@ export default Controller.extend({
     } else {
       form.spec.ranges.forEach((r) => {
         if (this.comapreIP4(r.rangeStart, r.rangeEnd) > 0) {
-          errors.push(intl.t('formVlan.ipRange.IPRangeError'), {
+          errors.push(intl.t('formVlan.ipRange.IPRangeError', {
             min: r.rangeStart,
             max: r.rangeEnd
-          });
+          }));
         }
       });
     }

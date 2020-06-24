@@ -202,7 +202,11 @@ vlansubnetPage:
   deleteVlanAboutPodsTotal: "正在使用的pod 共 {total} 条"
   deleteVlanAboutPodsTotalThan: "正在使用的pod 共 {total} 条以上"
   deleteVlanAboutVlans: "{vlan} 及 {others} 其他"
-  macvlanIpCount: 共使用IP數：{total}
+  macvlanIpCount: "<div class='text-left'>{name}<br>共使用IP數：{total}</div>"
+  ipType:
+    label: IP 類型
+    auto: 自動分配IP
+    specific: 固定IP
 formVlan:
   name:
     label: 名稱

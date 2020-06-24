@@ -108,9 +108,12 @@
   {{page-numbers content=pagedContent class="text-center mt-10 mb-10 no-select" indexTo=indexTo indexFrom=indexFrom totalCount=totalCount textLabel=pagingLabel action=(action "pageChange")}}
 {{/if}}
 {{#if (and paging hasNextData)}}
-  <div class="pagination-container">
-    <div class="btn-group btn-group-sm">
-      <a class="arrow next enabled-arrow btn btn-sm bg-default" disabled={{unless hasNextData 'disabled'}} {{action "pageChange" nextData}}><span class="icon icon-chevron-right"></span></a>
+  <div class="pagination-container mt-10">
+    <div class="btn-group btn-group-sm block">
+      <a class="arrow next enabled-arrow btn btn-sm bg-primary" disabled={{unless hasNextData 'disabled'}} {{action "pageChange" nextData}}>
+        <img class="icon-double-down" style="margin-bottom: -4px;" src="{{app.baseAssets}}assets/images/icon-double-down.svg" width="16" height="16" />
+        加载更多
+      </a>
     </div>
   </div>
 {{/if}}

@@ -12,6 +12,11 @@ const headers = [
     translationKey: 'generic.name',
   },
   {
+    name:           'subnet',
+    label:          'Subnet',
+    width:          70,
+  },
+  {
     name:           'namespace',
     sort:           ['namespace'],
     searchField:    'namespace',
@@ -25,6 +30,13 @@ const headers = [
     width:          150,
   },
   {
+    name:           'ipType',
+    sort:           ['ipType'],
+    label:          'IP 类型',
+    translationKey: 'vlansubnetPage.ipType.label',
+    width:          90,
+  },
+  {
     name:           'mac',
     label:          'MAC',
     sort:           ['mac'],
@@ -35,21 +47,18 @@ const headers = [
     label:          'Pod ID',
     sort:           ['podId'],
     searchField:    'podId',
-  },
-  {
-    name:           'subnet',
-    label:          'Subnet',
+    width:          110,
   },
   {
     name:           'workloadName',
     label:          'Workload',
+    width:          70,
   },
   {
     classNames:     'text-right pr-20',
     name:           'creationTimestamp',
     translationKey: 'generic.created',
     searchField:    false,
-    width:          180,
   },
 ];
 

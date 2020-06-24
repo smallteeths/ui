@@ -1,0 +1,24 @@
+<div class="tooltip-border">
+  <table class="table fixed tooltip-table tooltip-table-line" style="max-width: 144px;">
+    <tbody>
+      {{#each model as |tt|}}
+        <tr>
+          <td>
+              <div class="text-small text-left">
+                <span class="inline-block" style="width: 28px;color: #BAD545;">DST</span>
+                {{tt.dst}}
+              </div>
+              <div class="text-small text-left">
+                <span style="width: 28px;" class="text-warning inline-block">GW</span>
+                {{tt.gw}}
+              </div>
+              <div class="text-small text-left">
+                <span style="width: 28px;" class="text-primary inline-block">Iface</span>
+                {{tt.iface}}
+              </div>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
