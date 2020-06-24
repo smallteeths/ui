@@ -350,7 +350,7 @@ export default Component.extend({
         return C.VOLUME_TYPES.CERTIFICATE;
       }
     } else {
-      found = store.all('namespacedSecret').findBy('type', secretName);
+      found = store.all('namespacedSecret').findBy('name', secretName);
       if ( found && get(found, 'type') === 'namespacedCertificate' ) {
         return C.VOLUME_TYPES.CERTIFICATE;
       }
