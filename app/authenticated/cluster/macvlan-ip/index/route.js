@@ -30,10 +30,6 @@ export default Route.extend({
     }).then((hash) => {
       const data = hash.resp.body.data;
 
-      data.forEach((item) => {
-        item.workloadName = item.workloadId ? item.workloadId.split(`-${ item.namespace }-`)[1] : '';
-      });
-
       let projectOptions = hash.projects.map((project) => {
         return {
           value: project.id.substr(clusterId.length + 1),

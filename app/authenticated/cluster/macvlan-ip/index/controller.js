@@ -97,11 +97,7 @@ export default Controller.extend({
         const data = [...get(this, 'model.macvlanIps.data')];
         let newData = resp.body.data;
 
-        newData.forEach((item) => {
-          item.workloadName = item.workloadId ? item.workloadId.split(`-${ item.namespace }-`)[1] : '';
-        });
         data.push(...newData);
-
         set(this, 'model.macvlanIps', {
           data,
           continue: resp.body.metadata.continue,
