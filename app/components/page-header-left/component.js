@@ -7,6 +7,7 @@ import layout from './template';
 import C from 'shared/utils/constants';
 import { get as getTree } from 'shared/utils/navigation-tree';
 import { run } from '@ember/runloop';
+import CustomMenu from 'ui/mixins/custom-menu';
 
 function fnOrValue(val, ctx) {
   if ( typeof val === 'function' ) {
@@ -16,8 +17,7 @@ function fnOrValue(val, ctx) {
   }
 }
 
-
-export default Component.extend({
+export default Component.extend(CustomMenu, {
   // Injections
   intl:             service(),
   scope:            service(),
@@ -148,41 +148,7 @@ export default Component.extend({
       return true;
     });
 
-    const extraMenus = get(this, 'settings.extra-menus') || '';
-
-    extraMenus.split(';').forEach((menu) => {
-      const [menuScope, menuLabel, menuUrl = '', strIframeEnabled] = menu.split(',');
-      const iframeEnabled = strIframeEnabled === 'true' ? true : false
-
-      if ( menuScope === currentScope ) {
-        let url = `https://${  menuUrl }`
-        let customRoute
-        let ctx
-
-        const isRancherUrl = url.startsWith(window.location.origin)
-
-        if (isRancherUrl) {
-          url = url.replace(window.location.origin, '')
-        } else {
-          if (menuScope === 'global') {
-            customRoute = `global-admin.iframe.detail`
-            ctx = [encodeURIComponent(url)]
-          } else {
-            customRoute = `authenticated.${ menuScope }.iframe.detail`
-            ctx = [...get(this, 'currentItemContext'), encodeURIComponent(url)]
-          }
-        }
-
-        out.push({
-          url:         iframeEnabled ? url : menuUrl,
-          label:       menuLabel,
-          scope:       menuScope,
-          customRoute,
-          ctx,
-          iframeEnabled,
-        })
-      }
-    })
+    this.addExtraMenus(out)
 
     out.forEach((item) => {
       if (item.submenu && !item.route) {
