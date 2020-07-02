@@ -1,0 +1,26 @@
+$table-header-blue: #3497da;
+$table-row-grey:    #fafafb;
+
+.confirm-delete {
+  &__table-header {
+    border-bottom: 2px solid $table-header-blue;
+    line-height: 2rem;
+    font-size: 1rem;
+    color: $table-header-blue;
+    text-align: center;
+  }
+  &__table-body {
+    max-height: 320px;
+    overflow: auto;
+    text-align: center;
+  }
+  &__table-items {
+    font-size: 1rem;
+    line-height: 2rem;
+  }
+  &__table-body > &__table-items {
+    &:nth-of-type(even) {
+      background: $table-row-grey
+    }
+  }
+}

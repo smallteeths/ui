@@ -1,53 +1,53 @@
 {{#if modalVisible}}
-<div class="modal-container medium-modal confirm-delete">
+<div class="modal-container medium-modal macvlanips-delete">
   <div class="container-header-text">
     <h3>{{t 'confirmDelete.titleWithoutResourceType'}}</h3>
     <hr/>
   </div>
-  <div class="confirm-delete__table-container">
-    <div class="confirm-delete__table-header">
-      <div class="confirm-delete__table-row">
+  <div class="macvlanips-delete__table-container">
+    <div class="macvlanips-delete__table-header">
+      <div class="macvlanips-delete__table-row">
         {{#each headers as |header|}}
-        <div class="confirm-delete__table-col">
+        <div class="macvlanips-delete__table-col">
           <span>{{header}}</span>
         </div>
         {{/each}}
       </div>
     </div>
-    <div class="confirm-delete__table-body">
+    <div class="macvlanips-delete__table-body">
       {{#if infosLoading}}
       <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
       {{/if}}
       {{#each resources as |resource index|}}
-      <div class="confirm-delete__table-row">
-        <div class="confirm-delete__table-col confirm-delete__table-col--category">
+      <div class="macvlanips-delete__table-row">
+        <div class="macvlanips-delete__table-col macvlanips-delete__table-col--category">
           <span>{{resource.subnet}}</span>
         </div>
-        <div class="confirm-delete__table-items">
+        <div class="macvlanips-delete__table-items">
           {{#if (eq resource.pods.length 0)}}
-            <div class="confirm-delete__table-row">
-              <div class="confirm-delete__table-col">
+            <div class="macvlanips-delete__table-row">
+              <div class="macvlanips-delete__table-col">
                 <span>{{t 'confirmDelete.emptyPod'}}</span>
               </div>
             </div>
           {{else}}
           {{#each resource.pods as |pod|}}
-          <div class="confirm-delete__table-row">
-            <div class="confirm-delete__table-col">
+          <div class="macvlanips-delete__table-row">
+            <div class="macvlanips-delete__table-col">
               <span>{{pod.namespace}}</span>
             </div>
-            <div class="confirm-delete__table-col">
+            <div class="macvlanips-delete__table-col">
               <span>{{pod.name}}</span>
             </div>
-            <div class="confirm-delete__table-col">
+            <div class="macvlanips-delete__table-col">
               <span>{{pod.ip}}</span>
             </div>
           </div>
           {{/each}}
           {{/if}}
           {{#if resource.more}}
-          <div class="confirm-delete__table-row">
-            <div {{action "loadMore" index on="mouseUp"}} class="confirm-delete__table-col confirm-delete__table-col--more">
+          <div class="macvlanips-delete__table-row">
+            <div {{action "loadMore" index on="mouseUp"}} class="macvlanips-delete__table-col macvlanips-delete__table-col--more">
               <span>....</span>
             </div>
           </div>

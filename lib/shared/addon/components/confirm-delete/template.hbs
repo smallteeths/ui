@@ -38,7 +38,7 @@
       {{/banner-message}}
     </div>
   {{/if}}
-  <div class="display-name">
+  {{!-- <div class="display-name">
     {{#if (lte resources.length 10)}}
       {{#each resources as |resource|}}
         <div>
@@ -50,6 +50,24 @@
         {{t "confirmDelete.largeDeleteText" key=resources.firstObject.displayName othersCount=(sub resources.length 1)}}
       </div>
     {{/if}}
+  </div> --}}
+  <div class="confirm-delete">
+    <div class="confirm-delete__table-header">
+      {{#if resourceType}}
+      {{t 
+        (concat "confirmDelete.resourceType." resourceType)
+      }}{{t "batchDelete.headerSuffix"}}
+    {{else}}
+      {{t "batchDelete.headerSuffix"}}
+    {{/if}}
+    </div>
+    <div class="confirm-delete__table-body">
+      {{#each resources as |resource|}}
+        <div class="confirm-delete__table-items">
+          {{resource.displayName}}
+        </div>
+      {{/each}}
+    </div>
   </div>
 </div>
 
