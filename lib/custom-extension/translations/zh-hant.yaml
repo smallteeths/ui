@@ -205,8 +205,8 @@ vlansubnetPage:
   macvlanIpCount: "<div class='text-left'>{name}<br>共使用IP數：{total}</div>"
   ipType:
     label: IP 類型
-    auto: 自動分配IP
-    specific: 固定IP
+    auto: 自動
+    specific: 固定
 formVlan:
   name:
     label: 名稱

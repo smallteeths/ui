@@ -30,7 +30,7 @@
         </td>
         <td data-title="{{dt.name}}">
           {{#tooltip-element
-              classNames="block"
+              classNames="max-full-width"
               type="tooltip-basic"
               tooltipTemplate='tooltip-static'
               model=(t 'vlansubnetPage.macvlanIpCount' total=obj.macvlanIpCount name=obj.name htmlSafe=true)
@@ -50,7 +50,18 @@
           {{/if}}
         </td>
         <td data-title="{{dt.master}}">
-          {{obj.master}}
+          {{#tooltip-element
+              classNames="max-full-width"
+              type="tooltip-basic"
+              tooltipTemplate='tooltip-static'
+              model=obj.master
+              inlineBlock=true
+              placement="top"
+          }}
+            <div class="clip">
+              {{obj.master}}
+            </div>
+          {{/tooltip-element}}
         </td>
         <td data-title="{{dt.vlan}}">
           {{#if obj.vlan}}
@@ -61,7 +72,9 @@
           {{obj.cidr}}
         </td>
         <td data-title="{{dt.ipRanges}}">
-          {{#if obj.ipRanges.length}}
+          {{#if (eq obj.ipRanges.length 1)}}
+            {{obj.ipRanges.firstObject.rangeStart}}-{{obj.ipRanges.firstObject.rangeEnd}}
+          {{else if (gt obj.ipRanges.length 1)}}
             {{#tooltip-element
                 type="tooltip-basic"
                 model=obj.ipRanges
@@ -69,26 +82,36 @@
                 aria-describedby="tooltip-base"
                 tooltipFor="progress-bar"
                 inlineBlock=true
-                classNames="full-width"
+                baseClass="pl-0 pr-0"
                 placement="top"
             }}
-              <span class="inline-block" style="color: #3497DA">
-                {{#each obj.ipRanges as |ipRange index|}}
-                  {{#if (lte index 0)}}
-                      {{ipRange.rangeStart}}-{{ipRange.rangeEnd}}
-                  {{/if}}
-                {{/each}}
-                {{#if (gt obj.ipRanges.length 1)}}
-                  <div class="text-center">
-                    ...
-                  </div>
-                {{/if}}
+              <span class="inline-block">
+                {{obj.ipRanges.firstObject.rangeStart}}-{{obj.ipRanges.firstObject.rangeEnd}}
+              </span>
+              <span>
+                ···
               </span>
             {{/tooltip-element}}
           {{/if}}
         </td>
         <td data-title="{{dt.routes}}">
-          {{#custom-tooltip-element
+          {{#if (eq obj.routeList.length 1)}}
+            <div class="pull-left" style="width: 150px;">
+              <div class="text-small">
+                <span class="badge-state vertical-middle" style="background: #BAD545;color: #fff;width: 37px;height:16px;">DST</span>
+                {{obj.routeList.firstObject.dst}}
+              </div>
+              <div class="text-small">
+                <span class="bg-warning badge-state vertical-middle" style="color: #fff;width: 37px;height:16px;">GW</span>
+                {{obj.routeList.firstObject.gw}}
+              </div>
+              <div class="text-small">
+                <span class="bg-primary badge-state vertical-middle" style="width: 37px;height:16px;">Iface</span>
+                {{obj.routeList.firstObject.iface}}
+              </div>
+            </div>
+          {{else if (gt obj.routeList.length 1)}}
+          {{#tooltip-element
             type="tooltip-basic"
             model=obj.routeList
             tooltipTemplate='-macvlan-subnet-custom-route'
@@ -96,28 +119,26 @@
             tooltipFor="progress-bar"
             inlineBlock=true
             classNames="full-width"
-            placement="bottom"
-            baseClass="macvlan-custom-route-class p-0"
+            placement="top"
+            baseClass="macvlan-custom-route-class pl-0 pr-0"
           }}
-            {{#each obj.routeList as |route index|}}
-              {{#if (lte index 0)}}
-                <div style="background-color: #f0f9fa;margin-top: 2px;">
-                  <div class="text-small">
-                    <span class="badge-state vertical-middle" style="background: #BAD545;color: #fff;width: 37px;height:16px;">DST</span>
-                    {{route.dst}}
-                  </div>
-                  <div class="text-small">
-                    <span class="bg-warning badge-state vertical-middle" style="color: #fff;width: 37px;height:16px;">GW</span>
-                    {{route.gw}}
-                  </div>
-                  <div class="text-small">
-                    <span class="bg-primary badge-state vertical-middle" style="width: 37px;height:16px;">Iface</span>
-                    {{route.iface}}
-                  </div>
-                </div>
-              {{/if}}
-            {{/each}}
-          {{/custom-tooltip-element}}
+            <div class="pull-left" style="max-width: 150px;">
+              <div class="text-small">
+                <span class="badge-state vertical-middle" style="background: #BAD545;color: #fff;width: 37px;height:16px;">DST</span>
+                {{obj.routeList.firstObject.dst}}
+              </div>
+              <div class="text-small">
+                <span class="bg-warning badge-state vertical-middle" style="color: #fff;width: 37px;height:16px;">GW</span>
+                {{obj.routeList.firstObject.gw}}
+              </div>
+              <div class="text-small">
+                <span class="bg-primary badge-state vertical-middle" style="width: 37px;height:16px;">Iface</span>
+                {{obj.routeList.firstObject.iface}}
+              </div>
+            </div>
+            <div class="text-center pull-left" style="line-height: 63px; width: 20px;">···</div>
+          {{/tooltip-element}}
+          {{/if}}
         </td>
         {{!-- <td data-title="{{dt.mode}}" style="text-align: center;">
           {{obj.mode}}
@@ -144,4 +165,4 @@
   {{model.vlansubnets.errorMsg}}
   {{/banner-message}}
 {{/if}}
-{{#custom-modal-confirm-delete confirm=(action 'confirmDelete') resources=infos infosLoading=infosLoading totalLimit=infoTotal modalVisible=showConfirmDeleteModal}}{{/custom-modal-confirm-delete}}
+{{#custom-modal-macvlanips-delete confirm=(action 'confirmDelete') resources=infos infosLoading=infosLoading totalLimit=infoTotal modalVisible=showConfirmDeleteModal}}{{/custom-modal-macvlanips-delete}}

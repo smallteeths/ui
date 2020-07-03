@@ -1,9 +1,12 @@
-<table class="table fixed tooltip-table tooltip-table-line" style="max-width: 190px;">
-  <tbody>
-    {{#each model as |tt|}}
-      <tr>
-        <td>{{tt.rangeStart}}-{{tt.rangeStart}}</td>
-      </tr>
-    {{/each}}
-  </tbody>
-</table>
+<div class="pl-10 pr-10" style="max-height:210px;overflow:scroll;">
+  <table class="table fixed tooltip-table tooltip-table-line" style="max-width: 190px;">
+    <tbody>
+      {{#each model as |tt|}}
+        <tr>
+          <td>{{tt.rangeStart}}-{{tt.rangeStart}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+

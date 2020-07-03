@@ -21,12 +21,28 @@
     {{#if (eq kind "row")}}
       <tr class="main-row">
         <td data-title="{{dt.name}}">
-          <span style="padding-right: 5px;">
+          {{#tooltip-element
+              classNames="clip max-full-width"
+              type="tooltip-basic"
+              tooltipTemplate='tooltip-static'
+              model=obj.name
+              inlineBlock=true
+              placement="top"
+          }}
             {{obj.name}}
-          </span>
+          {{/tooltip-element}}
         </td>
         <td data-title="{{dt.subnet}}">
-          {{obj.subnet}}
+          {{#tooltip-element
+              classNames="clip block pr-5"
+              type="tooltip-basic"
+              tooltipTemplate='tooltip-static'
+              model=obj.subnet
+              inlineBlock=true
+              placement="top"
+          }}
+            {{obj.subnet}}
+          {{/tooltip-element}}
         </td>
         <td data-title="{{dt.namespace}}">
           {{obj.namespace}}
@@ -42,11 +58,20 @@
           {{/if}}
         </td>
         <td data-title="{{dt.mac}}">
-          {{obj.mac}}
-        </td>
-        <td data-title="{{dt.podId}}" class="clip">
           {{#tooltip-element
-              classNames="clip block"
+              classNames="clip block pr-5"
+              type="tooltip-basic"
+              tooltipTemplate='tooltip-static'
+              model=obj.podId
+              inlineBlock=true
+              placement="top"
+          }}
+            {{obj.mac}}
+          {{/tooltip-element}}
+        </td>
+        <td data-title="{{dt.podId}}">
+          {{#tooltip-element
+              classNames="clip block pr-5"
               type="tooltip-basic"
               tooltipTemplate='tooltip-static'
               model=obj.podId

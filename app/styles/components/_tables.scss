@@ -420,27 +420,3 @@ TABLE {
     }
   }
 }
-
-.macvlan-custom-route-class{
-  margin-top: -71px;
-  margin-left: -8px;
-  > .tooltip-border{
-    overflow-y: scroll;
-    padding: 5px 10px;
-    max-height: 201px;
-  }
-  &.bottom > div.tooltip-caret {
-    @include tooltip-triangle;
-    border-top: 5px solid transparent !important;
-    border-left: 10px solid  rgba($text-color,.8) !important;
-    border-bottom: 5px solid transparent !important;
-    right: -14px;
-    top: 34px;
-    left: auto;
-  }
-  &.last{
-    .tooltip-border{
-      max-height: 136px;
-    }
-  }
-}

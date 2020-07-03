@@ -9,19 +9,16 @@ export const headers = [
     sort:           ['displayName'],
     searchField:    'displayName',
     translationKey: 'generic.name',
-    width:          100
   },
   {
     name:           'project',
     translationKey: 'generic.project',
-    width:          70
   },
   {
     name:           'master',
     label:          'Master',
     sort:           ['master'],
     searchField:    'master',
-    width:          70
   },
   {
     name:           'vlan',
@@ -35,11 +32,12 @@ export const headers = [
     label:          'CIDR',
     sort:           ['cidr'],
     searchField:    'cidr',
+    width:          140,
   },
   {
     name:           'ipRanges',
     translationKey: 'formVlan.ipRange.label',
-    width:          240,
+    width:          260,
   },
   {
     name:           'routes',
@@ -51,6 +49,7 @@ export const headers = [
     translationKey: 'formVlan.gateway.label',
     sort:           ['gateway'],
     searchField:    'gateway',
+    width:          120,
   },
 ];
 
