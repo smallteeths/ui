@@ -254,6 +254,7 @@ vlansubnetPage:
     label: IP Type
     auto: auto
     specific: specific
+  moreBtn: MORE
 formVlan:
   name:
     label: Name

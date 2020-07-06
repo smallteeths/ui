@@ -32,7 +32,6 @@ const headers = [
   {
     name:           'ipType',
     sort:           ['ipType'],
-    label:          'IP 类型',
     translationKey: 'vlansubnetPage.ipType.label',
     width:          80,
   },

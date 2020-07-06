@@ -207,6 +207,7 @@ vlansubnetPage:
     label: IP 類型
     auto: 自動
     specific: 固定
+  moreBtn: 加載更多
 formVlan:
   name:
     label: 名稱

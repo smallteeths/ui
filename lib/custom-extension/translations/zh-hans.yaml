@@ -254,6 +254,7 @@ vlansubnetPage:
     label: IP 类型
     auto: 自动
     specific: 固定
+  moreBtn: 加载更多
 formVlan:
   name:
     label: 名称
