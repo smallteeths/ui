@@ -42,7 +42,13 @@
             {{row.namespace}}
           </td>
           <td data-title="{{t 'annotationsSection.key'}}" class="clip">
-            <a href="{{row.detailPageUrl}}">{{row.displayName}}</a>
+            {{#if row.projectId}}
+              <a href="{{row.detailPageUrl}}">
+                {{row.displayName}}
+              </a>
+            {{else}}
+              {{row.displayName}}
+            {{/if}}
           </td>
           <td class="clip top-half">
             <TooltipElement
