@@ -452,7 +452,6 @@ alertPage:
     diskReadDelay: Disk read delay
     leaderChanges: A high number of leader changes within the etcd cluster are happening
     databaseUsage: Database usage close to the quota 500M
-    noLeader: Etcd member has no leader
     noDiskIsRunning: Node disk is running full within 24 hours
     highCpuLoad: High cpu load
     highNodeMemoryUtilization: High node memory utilization

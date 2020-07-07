@@ -458,7 +458,6 @@ alertPage:
     highNodeMemoryUtilization: 节点内存利用率高
     ramUsagePercent: 内存使用率
     etcdSnapDelay: etcd快照延迟时间
-    noLeader: Etcd member has no leader
     etcdDiskWal: Etcd latency distributions of fsync called by wal
     etcdDiskBackend: Etcd latency distributions of commit called by backend
     fileDescriptorUsagePercent: 文件描述符使用率
