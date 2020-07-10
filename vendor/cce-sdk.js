@@ -96,6 +96,14 @@ ECS.prototype.getSubnet = function (callback) {
   }, _callback)
 }
 
+ECS.prototype.getVipSubnet = function (callback) {
+  var _callback = this.logging(callback, 'ECS.getVipSubnet')
+  this.validated(function () {
+    var resource = '/v2.0/subnets'
+    this.requestor.get(resource, null, _callback)
+  }, _callback)
+}
+
 ECS.prototype.getPublicips = function (callback) {
   var _callback = this.logging(callback, 'ECS.getPublicips')
   this.validated(function () {
