@@ -7620,12 +7620,6 @@ loggingPage:
       label: 包含系统日志
     jsonParsing:
       label: 支持JSON解析
-    enableMultiLineFilter:
-      label: 启用多行日志合并
-    multiLineStartRegexp:
-      label: 起始行正则表达式
-    multiLineEndRegexp:
-      label: 结束行正则表达式
   advanced:
     file: 以文件形式编辑
     cancel: 以表单形式编辑
