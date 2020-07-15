@@ -19,12 +19,12 @@
   </label>
 </div>
 <div>
-  {{new-select
+  {{searchable-select
     value= imageTag
     content= harborImageTags
     optionValuePath="name"
     optionLabelPath="name"
-    prompt=(t 'formImage.tag.placeholder')
+    placeholder=(t 'formImage.tag.placeholder')
     localizedLabel=false
   }}
 </div>
