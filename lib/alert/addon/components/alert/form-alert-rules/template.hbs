@@ -5,11 +5,7 @@
 
 {{#unless monitoringEnabled}}
   {{#banner-message color='bg-info mb-10 mt-10'}}
-    {{#if (eq pageScope 'cluster')}}
-      <p>{{t 'alertPage.newOrEdit.monitoringDisabled'}} {{#link-to-external 'authenticated.cluster.monitoring.cluster-setting'}} {{t 'alertPage.newOrEdit.enableMonitoring'}} {{/link-to-external}}.</p>
-    {{else}}
-      <p>{{t 'alertPage.newOrEdit.monitoringDisabled'}} {{#link-to-external 'authenticated.project.monitoring.project-setting'}} {{t 'alertPage.newOrEdit.enableMonitoring'}} {{/link-to-external}}.</p>
-    {{/if}}
+    <p>{{t 'alertPage.newOrEdit.monitoringDisabled'}} {{#link-to-external 'authenticated.cluster.monitoring.cluster-setting' scope.currentCluster.id}} {{t 'alertPage.newOrEdit.enableMonitoring'}} {{/link-to-external}}.</p>
   {{/banner-message}}
 {{/unless}}
 
