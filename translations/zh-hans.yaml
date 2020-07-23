@@ -1722,25 +1722,20 @@ metricsAction:
 metrics:
   cluster-cpu-usage: CPU使用率
   cluster-cpu-load: 集群负载
-  cluster-memory-usage: 内存使用率
   cluster-fs-usage-percent: 磁盘使用率
   cluster-disk-io: 磁盘I/O
-  cluster-fs-usage-percent: 磁盘使用率
   cluster-memory-usage: 内存使用率
   cluster-network-io: 网络I/O
   cluster-network-packet: 网络数据包
-  container-cpu-usage: CPU
   container-disk-io: '磁盘I/O'
-  container-memory-usage-bytes-sum: 内存
-  controllermanager-queue-depth: 控制器队列深度
-  etcd-db-bytes-sum: 数据库大小
   etcd-disk-operate: 磁盘操作
-  etcd-grpc-client: GRPC客户端流量
   etcd-leader-change: Leader变更
-  etcd-peer-traffic: 传输流量
   etcd-raft-proposals: Raft提议
-  etcd-rpc-rate: RPC速率
   etcd-stream: 活动流
+  etcd-db-bytes-sum: 数据库大小
+  etcd-grpc-client: GRPC 客户端流量
+  etcd-peer-traffic: 传输流量
+  etcd-rpc-rate: RPC 速率
   etcd-sync-duration: 磁盘同步周期
   global-cluster-cpu-usage: 集群CPU使用量Top 5
   global-cluster-memory-usage: 集群内存使用量Top 5
@@ -1758,9 +1753,8 @@ metrics:
   scheduler-e-2-e-scheduling-latency-seconds-quantile: 调度器e2e调度延迟
   scheduler-pod-unscheduler: 调度失败的Pod
   scheduler-total-preemption-attempts: 调度器尝试调度次数
-  controllermanager-queue-depth: 控制器队列深度
-  ingresscontroller-nginx-connection: Ingress控制器连接数
-  ingresscontroller-request-process-time: Ingress控制器请求处理时长
+  ingresscontroller-nginx-connection: Ingress 控制器连接数
+  ingresscontroller-request-process-time: Ingress 控制器请求处理时长
   istio-4xxs-top10: 服务4xx错误代码计数
   istio-4xxs: 项目4xx错误代码计数
   istio-5xxs-top10: 服务5xx错误代码计数
@@ -1779,54 +1773,17 @@ metrics:
   node-network-io: 网络I/O
   node-network-packet: 网络数据包
   pod-cpu-usage: CPU
-  pod-disk-io: '磁盘I/O'
+  pod-disk-io: '磁盘 I/O'
   pod-memory-usage-bytes-sum: 内存
-  pod-network-io: 网络I/O
+  pod-network-io: 网络 I/O
   pod-network-packet: 网络数据包
   container-cpu-usage: CPU
-  container-disk-io: '磁盘I/O'
   container-memory-usage-bytes-sum: 内存
   controllermanager-queue-depth: 控制器队列深度
-  etcd-db-bytes-sum: 数据库大小
-  etcd-disk-operate: 磁盘操作
-  etcd-grpc-client: GRPC客户端流量
-  etcd-leader-change: Leader变更
-  etcd-peer-traffic: 传输流量
-  etcd-raft-proposals: Raft提议
-  etcd-rpc-rate: RPC速率
-  etcd-stream: 活动流
-  etcd-sync-duration: 磁盘同步周期
-  fluentd-buffer-queue-length: Fluentd缓存区队列长度
-  fluentd-input-record-number: Fluentd输入速率
-  fluentd-output-errors: Fluentd输出错误速率
-  fluentd-output-record-number: Fluentd输出速率
-  ingresscontroller-nginx-connection: Ingress控制器连接数
-  ingresscontroller-request-process-time: Ingress控制器请求处理时长
-  istio-4xxs-top10: 服务4xx错误代码计数
-  istio-4xxs: 项目4xx错误代码计数
-  istio-5xxs-top10: 服务5xx错误代码计数
-  istio-5xxs: 项目5xx错误代码计数
-  istio-global-request-volume-top10: Request Volume by Service
-  istio-global-request-volume: Project Request Volume
-  istio-global-success-rate: 项目成功率
-  istio-request-duration-p99-top10: P99 Request Latency by Service
-  istio-request-duration-p90-top10: P90 Request Latency by Service
-  istio-request-duration-p50-top10: P50 Request Latency by Service
-  node-cpu-load: 节点负载
-  node-cpu-usage: CPU使用率
-  node-disk-io: 磁盘I/O
-  node-fs-usage-percent: 磁盘使用率
-  node-memory-usage: 内存使用率
-  node-network-io: 网络I/O
-  node-network-packet: 网络数据包
-  pod-cpu-usage: CPU
-  pod-disk-io: '磁盘I/O'
-  pod-memory-usage-bytes-sum: 内存
-  pod-network-io: 网络I/O
-  pod-network-packet: 网络数据包
-  scheduler-e-2-e-scheduling-latency-seconds-quantile: 调度器e2e调度延迟
-  scheduler-pod-unscheduler: 调度失败的Pod
-  scheduler-total-preemption-attempts: 调度器尝试调度次数
+  fluentd-buffer-queue-length: Fluentd 缓存区队列长度
+  fluentd-input-record-number: Fluentd 输入速率
+  fluentd-output-errors: Fluentd 输出错误速率
+  fluentd-output-record-number: Fluentd 输出速率
   workload-cpu-usage: CPU
   workload-disk-io: '磁盘I/O'
   workload-memory-usage-bytes-sum: 内存
@@ -2696,31 +2653,7 @@ istio:
   table:
     template: 模板
     host: Host
-  kiali: 由Kiali提供支持
-  trafficMonitoring:
-    duration: Last {time}
-  nav:
-    graph: 流量图
-    metrics: 流量指标
-    rules: 流量规则
-    destinationRules:
-      label: 目标规则
-      add: 添加目标规则
-    virtualServices:
-      label: 虚拟服务
-      add: 添加虚拟服务
-    gateways:
-      label: 网关
-      add: 添加网关
-
-istio:
-  refreshGraph: 刷新视图
-  noData: 没有足够的数据来绘制图表
-  period: Period
-  table:
-    template: 模板
-    host: Host
-  kiali: 由Kiali提供支持
+  kiali: 由 Kiali 提供支持
   trafficMonitoring:
     duration: Last {time}
   nav:
@@ -3916,7 +3849,11 @@ clusterNew:
     region:
       label: 区域
     enableHttpApplicationRouting:
-      label: HTTP应用程序路由
+      label: HTTP 应用程序路由
+    loadBalancerSku:
+      label: 负载均衡器
+      standard: 标准
+      basic: 基本
     enableMonitoring:
       label: 监控
     networkPolicy:
