@@ -357,6 +357,15 @@ const rootNav = [
         ctx:                      [getClusterId],
         initExpand:               'authenticated.cluster.istio.cluster-setting',
       },
+      {
+        id:                       'cluster-tools-cis-scan',
+        localizedLabel:           'nav.tools.cisScans',
+        route:                    'authenticated.cluster.cis/scan',
+        resourceScope:            'global',
+        resource:                 [],
+        ctx:                      [getClusterId],
+        initExpand:               'authenticated.cluster.cis/scan',
+      },
     ],
   },
   {
@@ -471,15 +480,6 @@ const rootNav = [
   },
   {
     scope:          'global',
-    id:             'global-accounts',
-    icon:           'user-icon',
-    localizedLabel: 'nav.admin.accounts',
-    route:          'global-admin.accounts',
-    resource:       ['user'],
-    resourceScope:  'global',
-  },
-  {
-    scope:          'global',
     id:             'global-settings',
     icon:           'settings-icon',
     localizedLabel: 'nav.settings.tab',
@@ -492,6 +492,22 @@ const rootNav = [
     icon:           'security-icon',
     localizedLabel: 'nav.admin.security.tab',
     submenu:        [
+      {
+        scope:          'global',
+        id:             'global-accounts',
+        localizedLabel: 'nav.admin.security.accounts',
+        route:          'global-admin.security.accounts.users',
+        resource:       ['user'],
+        resourceScope:  'global',
+      },
+      {
+        scope:          'global',
+        id:             'global-group-accounts',
+        localizedLabel: 'nav.admin.security.groupAccounts',
+        route:          'global-admin.security.accounts.groups',
+        resource:       ['globalrolebinding'],
+        resourceScope:  'global',
+      },
       {
         id:             'global-security-roles',
         localizedLabel: 'nav.admin.security.roles',

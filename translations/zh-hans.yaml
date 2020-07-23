@@ -7139,8 +7139,6 @@ formVersions:
   eks:
     label: "(minor version >1 not allowed by EKS)"
     helpBlock: "Because Amazon EKS runs a highly available control plane, you can update only one minor version at a time."
-  helpBlock:
-    label: 升级 Kubernetes 版本时，请查看<a href="https://groups.google.com/forum/#!forum/kubernetes-announce" target="_blank" rel="nofollow noreferrer noopener">Kubernetes release notes</a>了解功能变化。
 
 formIstioHost:
   prompt: 选择节点...

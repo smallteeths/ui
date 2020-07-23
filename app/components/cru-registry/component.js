@@ -10,9 +10,6 @@ import { alias } from '@ember/object/computed';
 const harborAuthKey = 'rancher.cn/registry-harbor-auth'
 const harborAdminAuthKey = 'rancher.cn/registry-harbor-admin-auth'
 
-
-const TEMP_NAMESPACE_ID = '__TEMP__';
-
 const TEMP_NAMESPACE_ID = '__TEMP__';
 
 export default Component.extend(ViewNewEdit, OptionallyNamespaced, {
@@ -172,10 +169,6 @@ export default Component.extend(ViewNewEdit, OptionallyNamespaced, {
   },
 
   doSave() {
-    let self = this;
-    let sup  = self._super;
-
-    return this.namespacePromise().then(() => sup.apply(self, arguments));
     let self                       = this;
     let sup                        = self._super;
     const { primaryResource: { namespaceId } } = this;
