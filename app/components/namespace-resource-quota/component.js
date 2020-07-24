@@ -156,7 +156,7 @@ export default Component.extend({
         case 'limitsCpu':
         case 'requestsCpu':
           value     = convertToMillis(value);
-          usedValue = convertToMillis(projectUse);
+          usedValue = convertToMillis(new String(['k', 'M', 'G'].includes(projectUse[projectUse.length - 1]) ? this.convertToDec(projectUse) : projectUse));
           max       = convertToMillis(get(currentProjectLimit, key));
           break;
         case 'limitsMemory':
@@ -236,7 +236,8 @@ export default Component.extend({
     const last    = str[str.length - 1];
     const mapping = {
       k: 1000,
-      m: 1000000
+      M: 1000000,
+      G: 1000000000
     }
 
     if (mapping[last]) {
