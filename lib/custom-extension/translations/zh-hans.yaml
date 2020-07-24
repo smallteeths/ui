@@ -46,6 +46,7 @@ imageRepoSection:
 quotasCn:
   quotas: 配额
   remain: 剩余可分配
+  usable: 剩余可使用
   editProjectModal: 修改项目配额
   editNamespaceModal: 修改命名空间配额
   headers:

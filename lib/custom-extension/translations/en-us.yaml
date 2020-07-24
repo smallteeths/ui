@@ -46,6 +46,7 @@ imageRepoSection:
 quotasCn:
   quotas: Quotas
   remain: Assignable
+  usable: Usable 
   editProjectModal: Edit project quotas
   editNamespaceModal: Edit namespace quotas
   headers:
