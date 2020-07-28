@@ -121,9 +121,15 @@ export default Route.extend({
       }
       if ( clone.selector && clone.selector.matchLabels) {
         delete clone.selector.matchLabels['workload.user.cattle.io/workloadselector'];
+        delete clone.selector.matchLabels['controller-uid'];
         if ( !Object.keys(clone.selector.matchLabels).length ) {
           delete clone.selector['matchLabels'];
         }
+      }
+      if ( clone.labels ) {
+        delete clone.labels['controller-uid'];
+        delete clone.labels['job-name'];
+        delete clone.labels['job.saic.pandaria.io/workloadselector'];
       }
     }
 
