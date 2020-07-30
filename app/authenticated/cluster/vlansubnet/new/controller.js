@@ -3,6 +3,7 @@ import { get, set, computed } from '@ember/object';
 import Controller from '@ember/controller';
 import CIDRMatcher from 'cidr-matcher';
 import { debouncedObserver } from 'ui/utils/debounce';
+import { validateIdentifierCustom } from 'shared/utils/parse-label';
 
 const ipv4RegExp = /^(((\d{1,2})|(1\d{2})|(2[0-4]\d)|(25[0-5]))\.){3}((\d{1,2})|(1\d{2})|(2[0-4]\d)|(25[0-5]))$/;
 
@@ -215,17 +216,8 @@ export default Controller.extend({
     const errors = [];
     const intl = get(this, 'intl');
 
-    if (form.metadata.name === '') {
-      errors.push(intl.t('formVlan.name.nameReq'));
-    }
-    const nameReg = /^[a-z0-9A-Z][a-z0-9A-Z_.-]{0,60}[a-z0-9A-Z]$/;
-
-    if (form.metadata.name !== '' && !nameReg.test(form.metadata.name)) {
-      errors.push(intl.t('formVlan.name.nameFormatError'));
-    }
-    if (form.spec.master === '') {
-      errors.push(intl.t('formVlan.master.masterReq'));
-    }
+    validateIdentifierCustom(form.metadata.name, intl.t('formVlan.name.label'), intl, errors, { specials: ['-', '.'] });
+    validateIdentifierCustom(form.spec.master, intl.t('formVlan.master.label'), intl, errors);
 
     if (form.spec.vlan !== '' && (!/^\d+$/.test(form.spec.vlan) || form.spec.vlan < 2 || form.spec.vlan > 4095)) {
       errors.push(intl.t('formVlan.vlan.vlanRangeError'));

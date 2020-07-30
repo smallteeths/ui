@@ -44,7 +44,18 @@
         </td>
         <td data-title="{{dt.project}}">
           {{#if obj.project}}
-          {{obj.project}}
+          {{#tooltip-element
+              classNames="max-full-width"
+              type="tooltip-basic"
+              tooltipTemplate='-tooltip-break-all'
+              model=obj.project
+              inlineBlock=true
+              placement="top"
+          }}
+            <div class="clip">
+              {{obj.project}}
+            </div>
+          {{/tooltip-element}}
           {{else}}
             All
           {{/if}}
@@ -53,7 +64,7 @@
           {{#tooltip-element
               classNames="max-full-width"
               type="tooltip-basic"
-              tooltipTemplate='tooltip-static'
+              tooltipTemplate='-tooltip-break-all'
               model=obj.master
               inlineBlock=true
               placement="top"

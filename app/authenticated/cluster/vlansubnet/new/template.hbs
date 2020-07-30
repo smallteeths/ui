@@ -10,7 +10,7 @@
       {{input
         class="form-control"
         value=form.metadata.name
-        maxlength=62
+        maxlength=63
         placeholder=(t "formVlan.name.placeholder")
       }}
   </div>
@@ -19,15 +19,15 @@
       {{input
         class="form-control"
         value=form.spec.master
+        maxlength=63
         placeholder=(t "formVlan.master.placeholder")
       }}
   </div>
   <div class="col span-4">
       <label class="acc-label">{{t "formVlan.vlan.label"}}</label>
-      {{input
+      {{input-integer
           class="form-control"
           value=form.spec.vlan
-          type="number"
           max="4095"
           min="2"
           step="1"

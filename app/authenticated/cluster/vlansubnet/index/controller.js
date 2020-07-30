@@ -1,6 +1,8 @@
 import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
-import { get, set, computed, observer } from '@ember/object';
+import {
+  get, set, computed, observer, setProperties
+} from '@ember/object';
 import { all } from 'rsvp';
 
 export const headers = [
@@ -60,6 +62,7 @@ export default Controller.extend({
   router:                 service(),
   session:                service(),
   intl:                   service(),
+  prefs:                  service(),
   sortBy:                 'name',
   headers,
   data:                   [],
@@ -117,9 +120,14 @@ export default Controller.extend({
         set(this, 'loading', false);
         const data = [...get(this, 'model.vlansubnets.data')];
 
-        data.push(...resp.body.data);
+        data.push(...resp.body.data.map((item) => {
+          item.displayName = item.name;
+          item.macvlanIpCount = (item.rawData && item.rawData.metadata && item.rawData.metadata.annotations && item.rawData.metadata.annotations.macvlanipCount) || 0;
 
-        set(this, 'model.vlansubnets', {
+          return item;
+        }));
+
+        setProperties(get(this, 'model.vlansubnets'), {
           data,
           continue: resp.body.metadata.continue,
         });
@@ -144,7 +152,7 @@ export default Controller.extend({
       set(this, 'data', result);
     },
     sortChanged(sort) {
-      const data = [...get(this, 'model.vlansubnets.data')];
+      const data = [...get(this, 'data')];
 
       data.sort((a, b) => {
         if (a[sort.sortBy] > b[sort.sortBy]) {
