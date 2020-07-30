@@ -14,6 +14,7 @@
         class="form-control"
         value=model.metricRule.thresholdValue
         readOnly=(and (not-eq model._targetType "metric") (not-eq model._targetType "commonRules") (not-eq model._targetType "podRebootRule"))
+        disabled=(and (eq model.metricRule.onlyReadThresholdValue true) (eq model._targetType "commonRules"))
         placeholder="e.g. 10"
         min=0
       }}
