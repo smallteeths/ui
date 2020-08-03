@@ -125,15 +125,21 @@ var Pod = Resource.extend(Grafana, DisplayImage, {
   }),
 
   displayMacvlanIp: computed('macvlanIpWithoutType', function() {
-    const labels = get(this, 'labels');
-    const type = labels && labels['macvlan.panda.io/macvlanIpType'];
     let macvlanIpWithoutType = get(this, 'macvlanIpWithoutType');
+    let macvlanIpv6 = get(this, 'macvlanIpv6');
+    let divide = ''
 
-    if (!macvlanIpWithoutType){
-      return ''
+    if (macvlanIpWithoutType && macvlanIpv6){
+      divide = ` / `
     }
 
-    return `${ macvlanIpWithoutType }${ type ? ` (${ type })` : '' }`;
+    return `${ macvlanIpWithoutType }${ divide }${ macvlanIpv6 }`;
+  }),
+  macvlanIpType: computed('annotations.[]', function() {
+    const labels = get(this, 'labels');
+    const type = labels && labels['macvlan.panda.io/macvlanIpType'];
+
+    return type || '';
   }),
   macvlanIpWithoutType: computed('annotations.[]', function() {
     const a = get(this, 'annotations');
@@ -153,6 +159,28 @@ var Pod = Resource.extend(Grafana, DisplayImage, {
       const macvlan = networkStatus.find((n) => n.interface === 'eth1');
 
       return `${ (macvlan && macvlan.ips && macvlan.ips[0]) || '' }`;
+    }
+
+    return '';
+  }),
+  macvlanIpv6: computed('annotations.[]', function() {
+    const a = get(this, 'annotations');
+    const networkStatusStr = a && a['k8s.v1.cni.cncf.io/networks-status'];
+
+    if (!networkStatusStr) {
+      return '';
+    }
+    let networkStatus;
+
+    try {
+      networkStatus = JSON.parse(networkStatusStr);
+    } catch (err) {
+      return '';
+    }
+    if (networkStatus) {
+      const macvlan = networkStatus.find((n) => n.interface === 'eth1');
+
+      return `${ (macvlan && macvlan.ips && macvlan.ips[1]) || '' }`;
     }
 
     return '';

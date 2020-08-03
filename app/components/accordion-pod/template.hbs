@@ -45,11 +45,13 @@
               {{inst.displayIp}} /
             {{/if}}
             {{t 'generic.createdDate' date=(date-from-now inst.created) htmlSafe=true}} / {{t 'generic.restarts'}}: {{inst.restarts}}
-            {{#if inst.displayMacvlanIp}}
-            <br/>
-            {{inst.displayMacvlanIp}}
-            {{/if}}
           </p>
+          {{#if inst.displayMacvlanIp}}
+            <div style="vertical-align: middle;" class="text-small text-muted m-0 clip">
+              <span class="pull-left badge-state bg-primary pt-0 pb-0 mr-5" style="line-height: 1.1;">{{ inst.macvlanIpType }}</span>
+                {{inst.displayMacvlanIp}}
+            </div>
+          {{/if}}
         </td>
         <td data-title="{{dt.node}}">
           {{#if (and inst.node.id inst.node.clusterId)}}

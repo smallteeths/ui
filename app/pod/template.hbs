@@ -61,13 +61,26 @@
     {{else}}
       {{t "generic.none"}}
     {{/if}}
-    {{#if model.displayMacvlanIp}}
-      <div class="text-small text-muted clip"> 
-      {{#copy-inline clipboardText=model.macvlanIpWithoutType size="small"}}
-        {{format-ip model.displayMacvlanIp}}
-      {{/copy-inline}}
+    <div>
+      {{#if model.macvlanIpType}}
+        <span class="badge-state bg-primary inline-block" style="font-size:12px;line-height: 1;padding:0 5px;height:13px;position: relative;top: -5px;">{{ model.macvlanIpType }}</span>
+      {{/if}}
+      <div class="text-small text-muted clip inline-block">
+        {{#if model.macvlanIpWithoutType}}
+          {{#copy-inline clipboardText=model.macvlanIpWithoutType size="small"}}
+            {{format-ip model.macvlanIpWithoutType}}
+          {{/copy-inline}}
+        {{/if}}
+        {{#if (and model.macvlanIpWithoutType model.macvlanIpv6)}}
+          <span>/</span>
+        {{/if}}
+        {{#if model.macvlanIpv6}}
+          {{#copy-inline clipboardText=model.macvlanIpv6 size="small"}}
+            {{format-ip model.macvlanIpv6}}
+          {{/copy-inline}}
+        {{/if}}
       </div>
-    {{/if}}
+    </div>
   </div>
   <div class="vertical-middle">
     <label class="acc-label vertical-middle p-0">{{t "podPage.nodeIp"}}:</label>
