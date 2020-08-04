@@ -4648,7 +4648,7 @@ confirmDelete:
   clearHarborConfig: Are you sure you want to remove harbor configuration
   
 batchDelete:
-  headerSuffix: 名称
+  headerSuffix: Name
 
 containerLogs:
   download: Download Logs
