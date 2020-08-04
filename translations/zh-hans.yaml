@@ -4693,6 +4693,7 @@ conditionSections:
     lastUpdate: 最后更新
     reason: 状态原因
     message: 消息
+    lastState: 上一次状态
   noData: 没有条件
   noMatch: 没有条件与当前搜索匹配
 

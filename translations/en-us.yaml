@@ -4598,6 +4598,7 @@ conditionSections:
     lastUpdate: Last Update
     reason: Reason
     message: Message
+    lastState: Last State
   noData: No Conditions
   noMatch: No conditions match the current search
 

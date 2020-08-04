@@ -171,6 +171,25 @@
     }
   }
 
+  // container-condition-tooltip
+  .container-statues {
+    display: flex;
+    flex-direction: row;
+    line-height: 22px;
+    &__key {
+      min-width: 80px;
+      padding-right: 10px;
+      display: flex;
+      align-items: center;
+    }
+    
+    &__value {
+      flex: 1;
+      max-width: 260px;
+      @include force-wrap;
+    }
+  }
+
 }
 
 .tooltip-warning-container {

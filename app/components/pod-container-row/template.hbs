@@ -1,0 +1,55 @@
+<tr class="main-row">
+  <td data-title="{{dt.displayState}}" class="state">
+    {{#if containerStatus.stateTooltip}}
+      {{#tooltip-element
+        type="tooltip-basic"
+        tooltipTemplate='tooltip-container-condition'
+        model=containerStatus.stateTooltip
+        inlineBlock=true
+      }}
+        {{badge-state model=model}}
+      {{/tooltip-element}}
+    {{else}}
+      {{badge-state model=model}}
+    {{/if}}
+  </td>
+  <td data-title="{{dt.name}}">
+    <a href="{{href-to "container" model.podId model.name}}">{{model.displayName}}</a>
+    {{#if model.initContainer}}
+      <div>
+        <small class="text-muted">{{t 'containersSection.initContainer'}}</small>
+      </div>
+    {{/if}}
+  </td>
+  <td data-title="{{dt.image}}">
+    {{model.image}}
+  </td>
+  <td data-title="{{dt.lastState}}">
+    {{#if (and containerStatus.displayLastState containerStatus.lastStateTooltip)}}
+      {{#tooltip-element
+        type="tooltip-basic"
+        tooltipTemplate='tooltip-container-condition'
+        model=containerStatus.lastStateTooltip
+        inlineBlock=true
+      }}
+        <span class="badge-state vertical-middle text-capitalize {{containerStatus.displayLastState.color}}">{{containerStatus.displayLastState.label}}</span>
+      {{/tooltip-element}}
+    {{/if}}
+  </td>
+  <td data-title="{{dt.restarts}}:">
+    {{containerStatus.restartCount}}
+  </td>
+  <td data-title="{{dt.actions}}" class="actions">
+    {{action-menu model=model}}
+  </td>
+</tr>
+{{#if model.showTransitioningMessage}}
+  <tr class="sub-row no-top auto-height">
+    <td class="pb-5" colspan="4">
+      <div>
+        <small class="text-small {{model.stateColor}}">{{uc-first model.transitioningMessage}}</small>
+      </div>
+    </td>
+    <td colspan="1"></td>
+  </tr>
+{{/if}}
