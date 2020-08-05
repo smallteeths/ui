@@ -323,6 +323,12 @@ $project-nav-active: $dropdown-link-hover-bg !default;
       }
     }
   }
+  .try-dashboard {
+    display: inline-block;
+    padding: 12px 0 0 12px;
+    height: 60px;
+    background-color: #355599;
+  }
 }
 
 .project-menu {

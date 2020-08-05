@@ -102,7 +102,11 @@
       {{/if}}
     {{/each}}
   </ul>
-
+  {{#if dashboardLink}}
+    <div class="try-dashboard bg-secondary">
+      <a href="{{dashboardLink}}" {{action "clickDashboard"}} class="btn bg-warning">{{t "nav.dashboard.try"}}</a>
+    </div>
+  {{/if}}
   {{#hover-dropdown
      tagName="ul"
      class="nav-user"
