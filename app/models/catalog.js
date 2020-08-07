@@ -46,6 +46,7 @@ const Catalog = Resource.extend({
       get(catalogNames, 'HELM_STABLE_KEY'),
       get(catalogNames, 'LIBRARY_KEY'),
       get(catalogNames, 'SYSTEM_LIBRARY_KEY'),
+      get(catalogNames, 'FINOGEEKS_KEY'),
     ];
 
     return !builtIn.includes(name);
