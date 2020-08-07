@@ -1,4 +1,3 @@
-
 <div class="row">
   <div class="col span-11-of-23 mt-0 mb-0">
     <label
@@ -404,7 +403,7 @@
         }}
 
         {{#if (eq index 0)}}
-          {{#if (or (and targetProject.isSystemProject targetCluster.enableClusterMonitoring) targetProject.enableProjectMonitoring)}}
+          {{#if targetCluster.enableClusterMonitoring}}
             {{container/form-custom-metrics
               classNames="accordion-wrapper"
               workload=service

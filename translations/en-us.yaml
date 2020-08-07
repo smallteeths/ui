@@ -6523,8 +6523,16 @@ formCustomMetrics:
     placeholder: e.g. /metrics
   protocol:
     label: Protocol
+  label:
+    placeholder: e.g. (^id$|^image$|^name$|^cpu$)
   noPorts: No Endpoints
   addActionLabel: Add Metrics Endpoint
+  addActionregex: Add Tag Name
+  regex:
+    label: Tag name
+    description: Enter the tag name or match the tag name by expression
+  delete:
+    label: Delete
 
 formServicePorts:
   header: Port Mapping

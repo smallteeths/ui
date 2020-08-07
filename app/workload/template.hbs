@@ -303,7 +303,7 @@
     }}
   {{/if}}
 
-  {{#if (or (and scope.currentProject.isSystemProject scope.currentCluster.enableClusterMonitoring) scope.currentProject.enableProjectMonitoring)}}
+  {{#if scope.currentCluster.enableClusterMonitoring}}
     {{container/form-custom-metrics
       classNames="accordion-wrapper"
       workload=service

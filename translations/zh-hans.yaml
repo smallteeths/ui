@@ -6615,8 +6615,16 @@ formCustomMetrics:
     placeholder: '例如: /metrics'
   protocol:
     label: 协议
+  label:
+    placeholder: "例如: (^id$|^image$|^name$|^cpu$)"
   noPorts: 没有自定义指标
   addActionLabel: 添加自定义指标
+  addActionregex: 添加标签名
+  regex:
+    label: 删除标签
+    description: 可以输入标签名称或者通过表达式匹配标签名
+  delete:
+    label: 删除指标
 
 formServicePorts:
   header: 端口映射

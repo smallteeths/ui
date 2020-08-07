@@ -6,58 +6,91 @@
 }}
 <div class="clearfix {{unless editing 'box'}}">
   {{#if metrics.length}}
-    <table class="table fixed no-lines small mb-10">
-      <thead>
-        <tr class="hidden-sm">
-          <th class="{{unless editing 'acc-label'}}">{{t 'formCustomMetrics.port.label'}}{{#if editing}}{{field-required}}{{/if}}</th>
-          <th width="10"></th>
-          <th class="{{unless editing 'acc-label'}}">{{t 'formCustomMetrics.path.label'}}</th>
-          <th width="10"></th>
-          <th class="{{unless editing 'acc-label'}}" width="80">{{t 'formCustomMetrics.protocol.label'}}</th>
-          <th width="40">&nbsp;</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each metrics as |metric|}}
-          <tr>
-            <td data-title="{{t 'formCustomMetrics.port.label'}}">
-              {{#if editing}}
-                {{input-integer class="form-control input-sm public" min="1" max="65535" value=metric.port placeholder=(t 'formCustomMetrics.port.placeholder')}}
-              {{else}}
-                {{metric.port}}
-              {{/if}}
-            </td>
-            <td>&nbsp;</td>
+    {{#each metrics as |metric|}}
+      <div class="box mb-20">
+        <div class="row">
+          <div class="col span-4 acc-label">{{t 'formCustomMetrics.port.label'}}{{#if editing}}{{field-required}}{{/if}}</div>
+          <div class="col span-4 acc-label">{{t 'formCustomMetrics.path.label'}}</div>
+          <div class="col span-2 acc-label">{{t 'formCustomMetrics.protocol.label'}}</div>
+          <div class="col span-2">
+            {{#if editing}}
+              <button class="btn bg-link icon-btn" {{action "remove" metric}}>
+                <span class="darken"><i class="icon icon-minus"/></span>
+                <span>{{t 'formCustomMetrics.delete.label'}}</span>
+              </button>
+            {{/if}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col span-4">
+            {{#if editing}}
+              {{input-integer class="form-control input-sm public" min="1" max="65535" value=metric.port placeholder=(t 'formCustomMetrics.port.placeholder')}}
+            {{else}}
+              {{metric.port}}
+            {{/if}}
+          </div>
 
-            <td data-title="{{t 'formCustomMetrics.path.label'}}">
-              {{#input-or-display editable=editing value=metric.path}}
-                {{input class="form-control input-sm" type="text" value=metric.path placeholder=(t 'formCustomMetrics.path.placeholder')}}
-              {{/input-or-display}}
-            </td>
-            <td>&nbsp;</td>
-            <td data-title="{{t 'formCustomMetrics.protocol.label'}}">
-              {{#if editing}}
-                {{new-select
-                    class="form-control input-sm"
-                    content=protocolOptions
-                    value=metric.schema
-                }}
-              {{else}}
-                {{metric.schema}}
-              {{/if}}
-            </td>
+          <div class="col span-4">
+            {{#input-or-display editable=editing value=metric.path}}
+              {{input class="form-control input-sm" type="text" value=metric.path placeholder=(t 'formCustomMetrics.path.placeholder')}}
+            {{/input-or-display}}
+          </div>
 
-            <td>
+          <div class="col span-4">
+            {{#if editing}}
+              {{new-select
+                  class="form-control input-sm"
+                  content=protocolOptions
+                  value=metric.schema
+              }}
+            {{else}}
+              {{metric.schema}}
+            {{/if}}
+          </div>
+
+        </div>
+        <hr class="mt-20">
+        <div class="row">
+            <div class="row">
+              <div class="col span-11 acc-label">{{t 'formCustomMetrics.regex.label'}}<span style="margin-left: 10px" class="protip">{{t 'formCustomMetrics.regex.description'}}</span></div>
+            </div>
+          {{#if metric.workloadMetricRelabelConfig.length}}
+            {{#each metric.workloadMetricRelabelConfig as |babel|}}
+              <div class="row">
+
+                <div class="col span-11">
+                  {{#if editing}}
+                    {{input input=(action "regexChange") class="form-control input-sm public" value=babel.regex placeholder=(t 'formCustomMetrics.label.placeholder')}}
+                  {{else}}
+                    {{babel.regex}}
+                  {{/if}}
+                </div>
+
+                <div class="col span-1">
+                  {{#if editing}}
+                    <button class="btn bg-primary btn-sm" {{action "removeLabel" metric babel}}>
+                      <i class="icon icon-minus"/><span class="sr-only">{{t 'generic.remove'}}</span>
+                    </button>
+                  {{/if}}
+                </div>
+              </div>
+            {{/each}}
+          {{/if}}
+        </div>
+        <div class="row">
+          <div class="col span-2 offset-10">
+            <div>
               {{#if editing}}
-                <button class="btn bg-primary btn-sm" {{action "remove" metric}}>
-                  <i class="icon icon-minus"/><span class="sr-only">{{t 'generic.remove'}}</span>
+                <button class="btn bg-link icon-btn p-0" {{action "addLabel" metric}}>
+                  <span class="darken"><i class="icon icon-plus text-small"/></span>
+                  <span>{{t 'formCustomMetrics.addActionregex'}}</span>
                 </button>
               {{/if}}
-            </td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/each}}
   {{else}}
     {{#unless editing}}
       <span class="text-center text-muted">{{t 'formCustomMetrics.noPorts'}}</span>
