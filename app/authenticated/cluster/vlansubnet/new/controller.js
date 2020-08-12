@@ -216,7 +216,11 @@ export default Controller.extend({
     const errors = [];
     const intl = get(this, 'intl');
 
-    validateIdentifierCustom(form.metadata.name, intl.t('formVlan.name.label'), intl, errors, { specials: ['-', '.'] });
+    validateIdentifierCustom(form.metadata.name, intl.t('formVlan.name.label'), intl, errors, {
+      specials: ['-', '.'],
+      max:      62,
+      min:      2
+    });
     validateIdentifierCustom(form.spec.master, intl.t('formVlan.master.label'), intl, errors);
 
     if (form.spec.vlan !== '' && (!/^\d+$/.test(form.spec.vlan) || form.spec.vlan < 2 || form.spec.vlan > 4095)) {
