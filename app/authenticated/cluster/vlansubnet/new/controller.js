@@ -221,7 +221,7 @@ export default Controller.extend({
       max:      62,
       min:      2
     });
-    validateIdentifierCustom(form.spec.master, intl.t('formVlan.master.label'), intl, errors);
+    validateIdentifierCustom(form.spec.master, intl.t('formVlan.master.label'), intl, errors, { min: 1 });
 
     if (form.spec.vlan !== '' && (!/^\d+$/.test(form.spec.vlan) || form.spec.vlan < 2 || form.spec.vlan > 4095)) {
       errors.push(intl.t('formVlan.vlan.vlanRangeError'));
