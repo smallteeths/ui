@@ -164,8 +164,6 @@ export default Resource.extend(Grafana, ResourceUsage, {
       return 'azureaks';
     case 'googleKubernetesEngineConfig':
       return 'googlegke';
-    case 'tencentEngineConfig':
-      return 'tencenttke';
     case 'rancherKubernetesEngineConfig':
       if ( !pools.length ) {
         return 'custom';
@@ -194,8 +192,6 @@ export default Resource.extend(Grafana, ResourceUsage, {
       return intl.t('clusterNew.azureaks.shortLabel');
     case 'googleKubernetesEngineConfig':
       return intl.t('clusterNew.googlegke.shortLabel');
-    case 'tencentEngineConfig':
-      return intl.t('clusterNew.tencenttke.shortLabel');
     case 'rancherKubernetesEngineConfig':
       if ( !!pools ) {
         if ( firstPool ) {
