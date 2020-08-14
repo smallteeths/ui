@@ -1,0 +1,83 @@
+<div class="row">
+  <hr />
+  <div class="col span-10">
+    <label class="col span-5 ml-50">
+      {{t "alertPage.customLabel.title"}}
+    </label>
+  </div>
+  {{#if extraAlertDatas}}
+    {{#each extraAlertDatas as |extraAlertData|}}
+      <div class="col span-11 offset-1" style="margin-top: 0px; margin-bottom: 0px;">
+        <div class="row">
+          <span class="acc-label col mr-5 ml-5" style="line-height: 35.6px;">{{t "alertPage.customLabel.table.stepOne"}}</span>
+          <div class="col span-2 mr-5 ml-5">
+            {{new-select
+              content=customStepOneOption
+              value=extraAlertData.targetType
+              change=(action "targetTypeChanged" extraAlertData)
+            }}
+          </div>
+          <span class="acc-label col mr-5 ml-5" style="line-height: 35.6px;">{{t "alertPage.customLabel.table.stepTwo"}}</span>
+          <div class="col span-2 mr-5 ml-5">
+            {{#if isExpressionOrRules}}
+              {{new-select
+                content=customStepTwoOption
+                value=extraAlertData.sourceType
+                disabled=true
+              }}
+            {{else}}
+              {{new-select
+                content=customStepTwoOption
+                value=extraAlertData.sourceType
+                change=(action "sourceTypeChanged" extraAlertData)
+              }}
+            {{/if}}
+          </div>
+          <span class="acc-label col mr-5 ml-5" style="line-height: 35.6px;">{{t "alertPage.customLabel.table.stepThree"}}</span>
+          <div class="col span-2 mr-5 ml-5">
+            {{input
+              class="form-control"
+              placeholder='key'
+              value=extraAlertData.targetKey
+            }}
+          </div>
+          <div class="col span-3 mr-5 ml-5">
+            {{#if (eq extraAlertData.sourceType 'labels')}}
+              {{new-select
+                placeholder='value'
+                content=customStepThreeOptionLabels
+                prompt='Please select label'
+                value=extraAlertData.sourceValue
+              }}
+            {{else if (eq extraAlertData.sourceType 'annotations')}}
+              {{new-select
+                placeholder='value'
+                content=customStepThreeOptionAnnotations
+                prompt='Please select annotation'
+                value=extraAlertData.sourceValue
+              }}
+            {{else if (eq extraAlertData.sourceType 'static')}}
+              {{input
+                placeholder='value'
+                class="form-control"
+                value=extraAlertData.sourceValue
+              }}
+            {{/if}}
+          </div>
+          <div class="col span-1 mt-14" style="display: flex; align-item: center; margin-top: 14px; margin-left:5px; margin-right: 5px;">
+            <button class="btn bg-primary btn-sm" {{action "removeLabel" extraAlertData}}>
+              <i class="icon icon-minus"/>
+            </button>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  {{/if}}
+
+  <div class="col span-10 offset-1">
+    <button class="btn bg-link icon-btn p-0" disabled={{disabledExtraAlertData}} {{action "addLabel"}}>
+      <span class="darken"><i class="icon icon-plus text-small"/></span>
+      <span>{{t "alertPage.customLabel.addText"}}</span>
+    </button>	
+  </div>
+</div>

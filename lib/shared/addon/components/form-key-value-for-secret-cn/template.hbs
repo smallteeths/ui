@@ -1,0 +1,119 @@
+<div class="clearfix">
+  {{#if header}}
+    <div class="pull-left">
+      <label class="acc-label">{{header}}</label>
+    </div>
+  {{/if}}
+
+  {{#if (and allowUpload editing)}}
+    <div class="pull-right">
+      <button class="btn btn-sm bg-primary" {{action "upload"}}>{{t "uploadFile.label"}} <span class="icon icon-upload"></span></button>
+    </div>
+  {{/if}}
+</div>
+
+{{#if ary.length}}
+  <table class="table fixed no-lines">
+    <thead>
+      <tr class="hidden-sm">
+        <th>{{t keyLabel}}{{#if (and editing allowEditKey)}}{{field-required}}{{/if}}</th>
+        <th width="30">&nbsp;</th>
+        <th>{{t valueLabel}}</th>
+        <th width="10">&nbsp;</th>
+        <th width="30">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+    {{#each ary as |row|}}
+      <tr>
+        <td data-title="{{t keyLabel}}:">
+          {{#if editing}}
+            {{#if keyContent}}
+              <NewSelect
+                @content={{keyContent}}
+                @class="form-control input-sm key"
+                @useContentForDefaultValue={{true}}
+                @value={{row.key}}
+                @placeholder={{keyPlaceholder}}
+                @disabled={{not (and allowEditKey (not-eq row.editable false))}}
+              />
+            {{else}}
+              {{input-paste
+                separators=separators
+                pasted=(action "pastedValues")
+                class="form-control input-sm key"
+                type="text"
+                value=row.key
+                placeholder=keyPlaceholder
+                disabled=(not (and allowEditKey (not-eq row.editable false)))
+              }}
+            {{/if}}
+          {{else}}
+            {{row.key}}
+          {{/if}}
+        </td>
+
+        <td class="valign-top text-center">
+          {{#if editing}}
+            {{t "formKeyValue.separator"}}
+          {{/if}}
+        </td>
+
+        <td data-title="{{t valueLabel}}:">
+          {{#if editing}}
+            {{#if valueContent}}
+              <NewSelect
+                @content={{valueContent}}
+                @class="form-control input-sm key"
+                @useContentForDefaultValue={{true}}
+                @value={{row.value}}
+                @placeholder={{keyPlaceholder}}
+                @disabled={{not (and allowEditKey (not-eq row.editable false))}}
+              />
+            {{else}}
+              {{#if allowMultilineValue}}
+                {{textarea-autogrow class=(concat "form-control input-sm value" (if concealValue " conceal")) spellcheck="false" required=true value=row.value placeholder=valuePlaceholder disabled=(eq row.editable false)}}
+              {{else}}
+                {{input class=(concat "form-control input-sm value" (if concealValue " conceal")) spellcheck="false" type="text" value=row.value placeholder=valuePlaceholder disabled=(eq row.editable false)}}
+              {{/if}}
+            {{/if}}
+          {{else}}
+            <span class="{{if concealValue "conceal"}}">{{nl-to-br row.value}}</span>
+          {{/if}}
+          {{#if (eq row.key 'notification.tmpl')}}
+            <div class="protip mt-10">{{t "alertPage.customLabel.note"}}</div>
+          {{/if}}
+        </td>
+        <td>&nbsp;</td>
+        <td class="valign-top text-right">
+          {{#if (and editing allowRemove)}}
+            <button class="btn bg-primary btn-sm" {{action "remove" row}} disabled={{eq row.editable false}}><i class="icon icon-minus"/><span class="sr-only">{{t "generic.remove"}}</span></button>
+          {{/if}}
+        </td>
+      </tr>
+      {{#unless editing}}
+        <div class="pb-10"></div>
+      {{/unless}}
+    {{/each}}
+    </tbody>
+  </table>
+{{else if showNoneLabel}}
+  {{#unless editing}}
+    <div>{{t "generic.none"}}</div>
+  {{/unless}}
+{{/if}}
+
+{{#if (and editing allowAdd)}}
+  {{#if ary.length}}
+    <div class="protip mb-5">
+      {{t "formKeyValue.protip"}}
+    </div>
+  {{/if}}
+  <div>
+    <button class="btn bg-link icon-btn p-0" {{action "add"}}>
+      <span class="darken"><i class="icon icon-plus text-small"/></span>
+      <span>{{t addActionLabel}}</span>
+    </button>
+  </div>
+{{/if}}
+<input type="file" accept="text/*" class="hide">

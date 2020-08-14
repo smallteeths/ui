@@ -251,6 +251,25 @@ alertPage:
   cluster: 集群
   project: 項目
   alerts: 告警
+  customLabel:
+    title: 自定义告警标签和注释
+    addText: 添加标签和注释
+    note: "注意: notification.tmpl 模板目前不支持webhook，如需配置自动告警标签和消息请前往“工具->告警”添加相关配置。"
+    error:
+      key: 不符合自定义标签 key 规则
+      value: 自定义标签 value 不能为空
+      uneq: 相同类型的自定义消息 key 不能相同
+    table:
+      stepOne: 添加自定义
+      stepTwo: 选择
+      stepThree: 添加
+    customStepOneOption:
+      label: 标签
+      message: 注释
+    customStepTwoOption:
+      annotations: 注释
+      label: 标签
+      custom: 自定义
   newOrEdit:
     showAdvanced: 顯示高級選項
     initialWait: 等待時間

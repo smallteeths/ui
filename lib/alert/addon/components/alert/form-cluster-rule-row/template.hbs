@@ -359,6 +359,12 @@
     {{/if}}
   </section>
 
+  <section class="row">
+    {{alert/form-cluster-custom-alarm-message
+      model=model
+      nodes=nodes
+    }}
+  </section>
   {{#if (and (eq mode "edit") (eq level "group"))}}
     <hr/>
     <div class="row">
