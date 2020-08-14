@@ -304,21 +304,24 @@ alertPage:
   alertGroups: Alerts
   customLabel:
     title: Customize alert labels and annotations
-    addText: Add label and annotations
+    addText: Add Label and Annotation
     note: "Note: The notification.tmpl template currently does not support webhooks. If you need to configure automatic alert labels and messages, please go to 'Tools -> Alerts' to add related configurations."
     error:
       key: Custom label key is invalid
       value: Custom label value cannot be empty
       uneq: Custom message keys of the same type cannot be the same
+    placeholder:
+      key: Key
+      value: Value
     table:
       stepOne: Add custom
       stepTwo: Select
       stepThree: Add
     customStepOneOption:
       label: Label
-      message: Annotations
+      message: Annotation
     customStepTwoOption:
-      annotations: Annotations
+      annotations: Annotation
       label: Label
       custom: Custom
   newOrEdit:

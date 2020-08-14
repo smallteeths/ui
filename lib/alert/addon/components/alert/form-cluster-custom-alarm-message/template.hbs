@@ -11,7 +11,7 @@
         <div class="row">
           <span class="acc-label col mr-5 ml-5" style="line-height: 35.6px;">{{t "alertPage.customLabel.table.stepOne"}}</span>
           <div class="col span-2 mr-5 ml-5">
-            {{new-select
+            {{searchable-select
               content=customStepOneOption
               value=extraAlertData.targetType
               change=(action "targetTypeChanged" extraAlertData)
@@ -20,13 +20,13 @@
           <span class="acc-label col mr-5 ml-5" style="line-height: 35.6px;">{{t "alertPage.customLabel.table.stepTwo"}}</span>
           <div class="col span-2 mr-5 ml-5">
             {{#if isExpressionOrRules}}
-              {{new-select
+              {{searchable-select
                 content=customStepTwoOption
                 value=extraAlertData.sourceType
                 disabled=true
               }}
             {{else}}
-              {{new-select
+              {{searchable-select
                 content=customStepTwoOption
                 value=extraAlertData.sourceType
                 change=(action "sourceTypeChanged" extraAlertData)
@@ -37,28 +37,26 @@
           <div class="col span-2 mr-5 ml-5">
             {{input
               class="form-control"
-              placeholder='key'
+              placeholder=(t "alertPage.customLabel.placeholder.key")
               value=extraAlertData.targetKey
             }}
           </div>
           <div class="col span-3 mr-5 ml-5">
             {{#if (eq extraAlertData.sourceType 'labels')}}
-              {{new-select
-                placeholder='value'
+              {{searchable-select
+                placeholder=(t "alertPage.customLabel.placeholder.value")
                 content=customStepThreeOptionLabels
-                prompt='Please select label'
                 value=extraAlertData.sourceValue
               }}
             {{else if (eq extraAlertData.sourceType 'annotations')}}
-              {{new-select
-                placeholder='value'
+              {{searchable-select
+                placeholder=(t "alertPage.customLabel.placeholder.value")
                 content=customStepThreeOptionAnnotations
-                prompt='Please select annotation'
                 value=extraAlertData.sourceValue
               }}
             {{else if (eq extraAlertData.sourceType 'static')}}
               {{input
-                placeholder='value'
+                placeholder=(t "alertPage.customLabel.placeholder.value")
                 class="form-control"
                 value=extraAlertData.sourceValue
               }}
