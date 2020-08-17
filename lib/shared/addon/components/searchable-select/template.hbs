@@ -1,6 +1,6 @@
 {{#outside-click onOutsideClick=(action "hide")}}
   {{input
-    disabled=(or readOnly asyncContent.loading)
+    disabled=(or readOnly asyncContent.loading disabled)
     class=(concat "form-control input-search search " class " " inputClass)
     placeholder=placeholder
     type="text"
