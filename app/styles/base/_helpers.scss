@@ -214,6 +214,11 @@
   white-space: normal;
 }
 
+@mixin break-all {
+  word-break: break-all;
+  white-space: normal;
+}
+
 .list-small {
   line-height: 14px;
   padding: 0 0 0 22px;
@@ -226,6 +231,7 @@
 .fixed { @include fixed }
 .clip { @include clip }
 .force-wrap { @include force-wrap }
+.break-all { @include break-all }
 
 // Only display content to screen readers
 //

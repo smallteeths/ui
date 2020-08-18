@@ -168,11 +168,10 @@
         <div class="col span-8 mt-0">
           {{searchable-select
                   content=commonRulesContent
-                  class="form-control"
+                  class="form-control text-left break-all"
                   value=model.metricRule.commonRule
                   readOnly=(or (not-eq model._targetType "commonRules") graphLoading)
                   placeholder="Select a rule"
-                  localizedLabel=true
                   allowCustom=false
           }}
           {{#if (and (eq graphStatus "noData") (eq model._targetType "commonRules"))}}
