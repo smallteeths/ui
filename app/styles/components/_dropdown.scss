@@ -32,9 +32,10 @@ $ember-basic-dropdown-content-z-index: 1500;
   text-align: left; // Ensures proper alignment if parent has it changed (e.g., modal footer)
   border: 1px solid $dropdown-border; // IE8 fallback
   border: 1px solid $dropdown-border;
-  border-top: 0;
+  // border-top: 0;
   background-clip: padding-box;
-
+  max-height: 600px;
+  overflow: auto;
 
   .nav-user {
     display:table-cell;
@@ -59,7 +60,7 @@ $ember-basic-dropdown-content-z-index: 1500;
 
   &.lang-select {
     max-height: 300px;
-    overflow: scroll;
+    overflow: auto;
   }
 
   // Links within the dropdown menu
