@@ -71,6 +71,7 @@ var Principal = Resource.extend({
     case C.PROJECT.TYPE_OPENLDAP_GROUP_UID:
     case C.PROJECT.TYPE_PING_GROUP:
     case C.PROJECT.TYPE_SHIBBOLETH_GROUP:
+    case C.PROJECT.TYPE_SHIBBOLETH_GROUP_UID:
     case C.PROJECT.TYPE_GOOGLE_GROUP:
       return C.PROJECT.ORG;
     }
@@ -119,6 +120,7 @@ var Principal = Resource.extend({
     case C.PROJECT.TYPE_OPENLDAP_GROUP_UID:
     case C.PROJECT.TYPE_PING_GROUP:
     case C.PROJECT.TYPE_SHIBBOLETH_GROUP:
+    case C.PROJECT.TYPE_SHIBBOLETH_GROUP_UID:
     case C.PROJECT.TYPE_GOOGLE_GROUP:
       key = 'model.identity.displayType.group';
       break;
