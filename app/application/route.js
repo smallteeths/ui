@@ -3,7 +3,6 @@ import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
 import C from 'ui/utils/constants';
 import { get, set, observer } from '@ember/object';
-import { all } from 'rsvp';
 
 export default Route.extend({
   access:     service(),
@@ -152,20 +151,8 @@ export default Route.extend({
     logout(transition, errorMsg) {
       let session = get(this, 'session');
       let access = get(this, 'access');
-      const p = []
 
-      if (errorMsg && errorMsg.logoutUrl && errorMsg.providerName) {
-        const clearThirdToken = get(this, 'access').thirdAuthLogout(errorMsg.logoutUrl);
-
-        errorMsg = null;
-        p.push(clearThirdToken)
-      }
-
-      const clearRancherToken = access.clearToken();
-
-      p.push(clearRancherToken);
-
-      all(p).finally(() => {
+      access.clearToken().finally(() => {
         let url =  `${ window.location.origin }/login`;
 
         get(this, 'tab-session').clear();
