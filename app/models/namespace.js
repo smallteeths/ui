@@ -198,11 +198,11 @@ var Namespace = Resource.extend(StateCounts, {
 
     if ( total ) {
       Object.keys(resourceQuota).forEach((key) => {
-        if ( !resourceQuota[key] && parseInt(resourceQuota[key], 10) !== 0 ) {
+        if ( !parseInt(resourceQuota[key], 10) && parseInt(resourceQuota[key], 10) !== 0 ) {
           errors.push(intl.t('formResourceQuota.errors.limitRequired', { resource: intl.t(`formResourceQuota.resources.${ key }`) }));
         }
 
-        if ( resourceQuota[key] ) {
+        if ( parseInt(resourceQuota[key], 10) ) {
           const t = convertResourceQuota(key, total[key]);
           const u = convertResourceQuota(key, used[key] || 0);
           const v = convertResourceQuota(key, resourceQuota[key]);

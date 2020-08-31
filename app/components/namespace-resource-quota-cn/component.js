@@ -139,6 +139,9 @@ export default Component.extend({
         let newUse    = null;
         let projectUse = get(used, key) || '0';
 
+        if (limit && limit[key] === 0){
+          limit[key] = '0'
+        }
         if ( limit && !limit[key] ) {
           array.push({
             key,
