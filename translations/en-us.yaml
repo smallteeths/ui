@@ -997,6 +997,7 @@ authPage:
       authError: 'Azure access was not authorized'
       popupError: 'Please disable your pop-up blocker and click "Authenticate" again.'
   localAuth:
+    warning: "When enabling external authentication, {appName} will associate the external principal with the current user's local identity.  The associated principal will receive all global permissions, as well as the project and cluster roles bindings of the current user."
     header:
       enabled: 'Local Authentication is enabled'
       disabled: 'Local Authentication is not configured'
@@ -3663,6 +3664,11 @@ clusterNew:
     access:
       title: Account Access
       detail: Choose the region and API Key that will be used to launch Amazon EKS
+    secretsEncryption:
+      label: Secrets Encryption
+      disabled: None
+      kms: "KMS Key: Select or Enter KMS Key that will be used to encrypt secrets"
+      kmsHelpLabel: KMS Key ARN
   azureaks:
     label: Azure Container Service
     shortLabel: Azure AKS
@@ -5608,6 +5614,7 @@ dangerZone:
     'auth-user-session-ttl-minutes': 'Custom TTL (in minutes) on a user auth session.'
     'ui-session-logout-minutes': 'User will automatically logout without any operation after the configured time (in minutes)'
     'auditlog-server-url': 'Configure the audit log service url'
+    'auth-token-max-ttl-minutes': 'Custom max TTL (in minutes) on an auth token.'
     'rke-metadata-config': 'Configure RKE metadata refresh parameters.'
     'ui-banners': 'Classification banner is used to display a custom fixed banner in the header, footer, or both. The setting takes JSON object containing 3 root parameters; <code>banner</code>, <code>showHeader</code>, <code>showFooter</code>. <code>banner</code> is an object containing; <code>textColor</code>, <code>background</code>, and <code>text</code>, where <code>textColor</code> and <code>background</code> are any valid CSS color value.'
     'ui-footer-text': 'Extra text in footer.'
@@ -5695,6 +5702,15 @@ editApiKey:
     day: A day from now
     month: A month from now
     year: A year from now
+    max: 
+      label: "{time} - Maximum allowed"
+      unit:
+        minutes: "{count, plural, =1 {# Minute} other {# Minutes}}"
+        hours: "{count, plural, =1 {# Hour} other {# Hours}}" 
+        days: "{count, plural, =1 {# Day} other {# Days}}"
+        years: "{count, plural, =1 {# Year} other {# Years}}"
+        
+    custom: Custom
   description:
     placeholder: "Optional: e.g. This key is used by the app servers to deploy containers"
   saveWarning1: Save the info above!  This is the only time you'll be able to see it.
@@ -5837,7 +5853,7 @@ stacksPage:
     instanceStateWithIcon: States
 
 featureFlags:
-  warningHeader: "Feature flags allow Rancher to gate certain features behind flags. You should enable these features with caution, and they should be considered beta functionality, which could cause problems for your system. Additionally, some features require a restart of the Rancher server to be enabled."
+  warningHeader: "Feature flags allow {appName} to gate certain features behind flags. You should enable these features with caution, and they should be considered beta functionality, which could cause problems for your system. Additionally, some features (non-dynamic) require a restart of the {appName} server to be enabled. Changing non-dynamic features will restart {appName} pods, which will result in a short outage."
   features:
     istioVirtualServiceUi: "Enabling this feature exposes additional UI pages for Istio."
     unsupportedStorageDrivers: "Enabling this feature exposes unsupported storage driver options for persistent volumes and storage classes."
@@ -6410,6 +6426,13 @@ formKeyValue:
     label: Value
     placeholder: Value
   protip: 'ProTip: Paste lines of key=value pairs into any key field for easy bulk entry.'
+  binary:
+    byte: |
+      {length, plural,
+      =1 {# byte}
+      other {# bytes}
+      }
+
 
 formImage:
   label: Docker Image
@@ -7116,9 +7139,25 @@ formHostPortsPodSecurityPolicy:
       label: Min
       placeholder: e.g. 6000
 
+formRunAsGroupPodSecurityPolicy:
+  title: Run As Group Policy
+  detail: Controls which primary group ID the containers are run with.
+  rule:
+    mustRunAs: MustRunAs - Requires a range to be configured. Uses the first value of the range as the default. Validates against the configured range.
+    mayRunAs: MayRunAs - Does not require that RunAsGroup be specified. However, when RunAsGroup is specified, they have to fall in the defined range.
+    runAsAny: RunAsAny - No default provided. Allows any runAsGroup to be specified.
+  range:
+    addLabel: Add Range
+    max:
+      label: Max
+      placeholder: e.g. 65535
+    min:
+      label: Min
+      placeholder: e.g. 1
+
 formRunAsUserPodSecurityPolicy:
   title: Run As User Policy
-  detail: The user ID
+  detail: Controls which user ID the containers are run with.
   rule:
     mustRunAs: MustRunAs - Requires a range to be configured. Uses the first value of the range as the default. Validates against the configured range.
     mustRunAsNonRoot: MustRunAsNonRoot - Requires that the pod be submitted with a non-zero runAsUser or have the USER directive defined in the image. No default provided.
@@ -8443,84 +8482,95 @@ nodeDriver:
       label: Region
   amazonec2:
     access:
-      title: 1. Account Access
       detail: Choose the region and API Key that will be used to launch EC2 Instances
-      next: "Next: Authenticate & configure nodes"
+      help: Paste in your AWS key pair here. We'll use this key to create your new Instances.
       loading: Loading Availability Zone and VPC info from EC2...
-      help: "Paste in your AWS key pair here. We'll use this key to create your new Instances."
-    zone:
-      title: 2. Zone and Network
-      detail: Select the Availability Zone and VPC/Subnet for Instances
-      next: "Next: Select a Security Group"
-      loading: Loading security group info from EC2...
+      next: 'Next: Authenticate & configure nodes'
+      title: 1. Account Access
     accessKey:
       label: Access Key
       placeholder: Your AWS access key
-    secretKey:
-      label: Secret Key
-      placeholder: Your AWS secret key
-      provided: Provided
-    region:
-      label: Region
-    availabilityZone: Availability Zone
-    subnet: VPC/Subnet
-    noSubnet: There are no subnets to choose from
-    securityGroup:
-      title: 3. Security Groups
-      detail: Choose the security groups that will be applied to Instances
-      choose:  Choose one or more existing groups
-      defaultExisting: "Standard: Use the existing <code>{groupName}</code> group"
-      defaultCreate: "Standard: Automatically create a <code>{groupName}</code> group"
-      next: "Next: Set Instance options"
-      loading: Loading Instance options...
-    tags:
-      addActionLabel: Add AWS Tag
-      valueLabel: Tags
-      placeholder: e.g. dev
-    instance:
-      title: 4. Instance
-      detail: Customize the EC2 Instance that will be created.
-    portHelp:
-      link: Learn more
-      text: about the ports that will be opened.
-    needs:
-      label: "For {appName} to work correctly your security group will need to allow traffic:"
-      item1: From the {appName} server to <code>TCP</code> port <code>22</code> <span class="text-muted">(SSH to install and configure Docker)</span>
-      item2: From and To all other hosts on <code>UDP</code> ports <code>500</code> and <code>4500</code> <span class="text-muted">(for IPsec networking)</span></li>
-      item3: These rules will <b>not</b> be added automatically.
-    instanceType:
-      label: Instance Type
-    rootSize:
-      label: Root Disk Size
-      unit: GB
-    encryptEbsVolume:
-      label: Encryption
-      radioLabel: Encrypt EBS Volume
-    volumeType:
-      label: Amazon EBS volume type
-    useEbsOptimizedInstance:
-      label: Optimized Instance
-      radioLabel: Create EBS optimized instance
     ami:
       label: AMI
       placeholder: An Ubuntu AMI
       rancherList: RancherOS AMI List
-    sshUser:
-      label: SSH User
-      placeholder: e.g. ubuntu
+    availabilityZone: Availability Zone
+    encryptEbsVolume:
+      label: Encryption
+      radioLabel: Encrypt EBS Volume
     iam:
       label: IAM Instance Profile Name
       placeholder: my-k8s-profile
-    privateIp:
-      label: Private IP
+    instance:
+      detail: Customize the EC2 Instance that will be created.
+      title: 4. Instance
+    instanceType:
+      label: Instance Type
+    metadata:
+      httpEndpoint:
+        label: HTTP Endpoint
+        enabled: Enabled
+        disabled: Disabled
+        protip: Enables or disables the HTTP metadata endpoint on your instances
+      httpTokens:
+        label: HTTP Tokens
+        required: Required
+        optional: Optional
+        protip: Use HTTP Tokens for Instance Metadata Requests
+    needs:
+      item1: 'From the {appName} server to <code>TCP</code> port <code>22</code> <span class="text-muted">(SSH to install and configure Docker)</span>'
+      item2: From and To all other hosts on <code>UDP</code> ports <code>500</code> and <code>4500</code> <span class="text-muted">(for IPsec networking)</span></li>
+      item3: These rules will <b>not</b> be added automatically.
+      label: 'For {appName} to work correctly your security group will need to allow traffic:'
+    noSubnet: There are no subnets to choose from
     onlyPrivate:
       label: Use only private IP address
+    portHelp:
+      link: Learn more
+      text: about the ports that will be opened.
+    privateIp:
+      label: Private IP
+    region:
+      label: Region
     requestSpotInstance:
-      label: Spot Instance
       enable: Request spot instance
+      label: Spot Instance
+    rootSize:
+      label: Root Disk Size
+      unit: GB
+    secretKey:
+      label: Secret Key
+      placeholder: Your AWS secret key
+      provided: Provided
+    securityGroup:
+      choose: Choose one or more existing groups
+      defaultCreate: 'Standard: Automatically create a <code>{groupName}</code> group'
+      defaultExisting: 'Standard: Use the existing <code>{groupName}</code> group'
+      detail: Choose the security groups that will be applied to Instances
+      loading: Loading Instance options...
+      next: 'Next: Set Instance options'
+      title: 3. Security Groups
     spotPrice:
       label: Spot Price
       unit: $
+    sshUser:
+      label: SSH User
+      placeholder: e.g. ubuntu
+    subnet: VPC/Subnet
+    tags:
+      addActionLabel: Add AWS Tag
+      placeholder: e.g. dev
+      valueLabel: Tags
+    useEbsOptimizedInstance:
+      label: Optimized Instance
+      radioLabel: Create EBS optimized instance
+    volumeType:
+      label: Amazon EBS volume type
+    zone:
+      detail: Select the Availability Zone and VPC/Subnet for Instances
+      loading: Loading security group info from EC2...
+      next: 'Next: Select a Security Group'
+      title: 2. Zone and Network
   digitalocean:
     droplet:
       title: Droplet Options

@@ -40,7 +40,9 @@
             {{login-saml
               action=(action "started")
               provider="shibboleth"
-              socketId=socketId
+              requestId=requestId
+              publicKey=publicKey
+              responseType=responseType
             }}
           {{/if}}
 
@@ -79,7 +81,9 @@
             {{login-saml
               action=(action "started")
               provider="ping"
-              socketId=socketId
+              requestId=requestId
+              publicKey=publicKey
+              responseType=responseType
             }}
           {{/if}}
 
@@ -87,7 +91,9 @@
             {{login-saml
               action=(action "started")
               provider="adfs"
-              socketId=socketId
+              requestId=requestId
+              publicKey=publicKey
+              responseType=responseType
             }}
           {{/if}}
 
@@ -95,7 +101,9 @@
             {{login-saml
               action=(action "started")
               provider="okta"
-              socketId=socketId
+              requestId=requestId
+              publicKey=publicKey
+              responseType=responseType
             }}
           {{/if}}
 
@@ -103,7 +111,9 @@
             {{login-saml
               action=(action "started")
               provider="keycloak"
-              socketId=socketId
+              requestId=requestId
+              publicKey=publicKey
+              responseType=responseType
             }}
           {{/if}}
 
