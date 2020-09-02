@@ -68,6 +68,9 @@ export default Route.extend({
         // console.log('Loading Show', id);
 
         schedule('afterRender', () => {
+          if (!get(this, 'loadingShown')) {
+            return;
+          }
           $('#loading-underlay').stop().show().fadeIn({// eslint-disable-line
             duration: 100,
             queue:    false,
