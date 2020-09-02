@@ -22,12 +22,13 @@
 
   <div class="col mt-0 span-9-of-24">
     {{#unless (or (eq model.notifierType "dingtalk") (eq model.notifierType "msteams") (eq model.notifierType "aliyunsms") (eq model.notifierType "servicenow"))}}
-      {{input
-          classNames="form-control"
-          placeholder=recipientPlaceholder
-          value=model.recipient
-          showSearch=showSearch
-      }}
+      <Input
+        @type="text"
+        @value={{model.recipient}}
+        @placeholder={{recipientPlaceholder}}
+        @classNames="form-control"
+        @showSearch={{showSearch}}
+      />
       <p class="help-block text-info text-small">{{t 'alertPage.newOrEdit.recipient.helpText'}}</p>
     {{/unless}}
   </div>

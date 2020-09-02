@@ -504,11 +504,12 @@
       <div class="acc-label text-capitalize">
         {{t "notifierPage.dingtalk.url"}}{{field-required}}
       </div>
-      {{input
-        classNames="form-control"
-        value=model.dingtalkConfig.url
-        placeholder=(t "notifierPage.dingtalk.urlPlaceholder")
-      }}
+      <Input
+        @type="text"
+        @value={{model.dingtalkConfig.url}}
+        @placeholder={{t "notifierPage.dingtalk.urlPlaceholder"}}
+        @classNames="form-control"
+      />
     </div>
   </div>
    <div class="row">
@@ -516,12 +517,12 @@
       <div class="acc-label text-capitalize">
         {{t "notifierPage.dingtalk.secret"}}
       </div>
-      {{input
-        type="password"
-        classNames="form-control"
-        value=model.dingtalkConfig.secret
-        placeholder=(t "notifierPage.dingtalk.secretPlaceholder")
-      }}
+      <Input
+        @type="text"
+        @value={{model.dingtalkConfig.secret}}
+        @placeholder={{t "notifierPage.dingtalk.secretPlaceholder"}}
+        @classNames="form-control"
+      />
     </div>
   </div>
   <div class="row">
@@ -532,12 +533,13 @@
       >
         {{t "notifierPage.proxyUrl.label"}}
       </label>
-      {{input
-        classNames="form-control"
-        id="input-dingtalk-config-proxy-url"
-        value=model.dingtalkConfig.proxyUrl
-        placeholder=(t "notifierPage.proxyUrl.placeholder")
-      }}
+      <Input
+        @type="text"
+        @value={{model.dingtalkConfig.proxyUrl}}
+        @id="input-dingtalk-config-proxy-url"
+        @placeholder={{t "notifierPage.proxyUrl.placeholder"}}
+        @classNames="form-control"
+      />
     </div>
   </div>
   <div class="row">
@@ -547,10 +549,10 @@
       </label>
       <div class="checkbox">
         <label>
-          {{input
-            type="checkbox"
-            checked=model.sendResolved
-          }}
+          <Input
+            @type="checkbox"
+            @checked={{model.sendResolved}}
+          />
           {{t "generic.enable"}}
         </label>
       </div>
@@ -574,11 +576,12 @@
       <div class="acc-label text-capitalize">
         {{t "notifierPage.msteams.url"}}{{field-required}}
       </div>
-      {{input
-        classNames="form-control"
-        value=model.msteamsConfig.url
-        placeholder=(t "notifierPage.msteams.urlPlaceholder")
-      }}
+      <Input
+        @type="text"
+        @value={{model.msteamsConfig.url}}
+        @placeholder={{t "notifierPage.msteams.urlPlaceholder"}}
+        @classNames="form-control"
+      />
     </div>
   </div>
   <div class="row">
@@ -589,12 +592,13 @@
       >
         {{t "notifierPage.proxyUrl.label"}}
       </label>
-      {{input
-        classNames="form-control"
-        id="input-msteams-config-proxy-url"
-        value=model.msteamsConfig.proxyUrl
-        placeholder=(t "notifierPage.proxyUrl.placeholder")
-      }}
+      <Input
+          @type="text"
+          @value={{model.msteamsConfig.proxyUrl}}
+          @id="input-msteams-config-proxy-url"
+          @placeholder={{t "notifierPage.proxyUrl.placeholder"}}
+          @classNames="form-control"
+        />
     </div>
   </div>
   <div class="row">
@@ -766,10 +770,10 @@
       </label>
       <div class="checkbox">
         <label>
-          {{input
-                  type="checkbox"
-                  checked=model.sendResolved
-          }}
+           <Input
+            @type="checkbox"
+            @checked={{model.sendResolved}}
+           />
           {{t "generic.enable"}}
         </label>
       </div>

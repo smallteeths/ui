@@ -170,7 +170,7 @@ export default Component.extend(ModalBase, NewOrEdit, {
             testOk:  false,
             tested:  true,
             testing: false,
-            errors:  [xhr.body.message || xhr.body.code],
+            errors:  [get(xhr, 'body.message') || get(xhr, 'body.code')],
           });
           setTimeout(() => {
             this.setProperties({ tested: false, });
