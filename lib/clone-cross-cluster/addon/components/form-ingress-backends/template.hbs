@@ -46,7 +46,7 @@
 
           <td class="divided p-5" data-title="{{t (concat 'formIngressBackends.' path.backendType '.label')}}">
             {{#if (eq path.backendType 'workload')}}
-              {{workload.displayName}} 
+              {{get workload.containers 'firstObject.name'}}
             {{/if}}
           </td>
 
