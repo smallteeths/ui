@@ -51,7 +51,7 @@
   }
 
   .searchable-options {
-    overflow-y: scroll;
+    overflow: auto;
     background: $dropdown-bg;
     position: absolute;
     box-sizing: border-box;
@@ -84,6 +84,8 @@
     position: relative;
     padding: 8px 18px;
     font-size: 14px;
+    text-align: left;
+    word-break: break-all;
 
     .icon-check {
       margin-left: -15px;
