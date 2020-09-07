@@ -61,11 +61,11 @@
     {{else}}
       {{t "generic.none"}}
     {{/if}}
-    <div>
+    <div class="text-small">
       {{#if model.macvlanIpType}}
-        <span class="badge-state bg-primary inline-block" style="font-size:12px;line-height: 1;padding:0 5px;height:13px;position: relative;top: -5px;">{{ model.macvlanIpType }}</span>
+        <i class="badge-state bg-primary vertical-middle " style="font-size:12px;line-height: 13px;padding:0 5px;font-style: normal">{{ model.macvlanIpType }}</i>
       {{/if}}
-      <div class="text-small text-muted clip inline-block">
+      <div class="text-muted clip inline-block">
         {{#if model.macvlanIpWithoutType}}
           {{#copy-inline clipboardText=model.macvlanIpWithoutType size="small"}}
             {{format-ip model.macvlanIpWithoutType}}
