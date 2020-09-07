@@ -174,7 +174,7 @@ export default Component.extend({
           break;
         default:
           value     = parseInt(value, defaultRadix);
-          usedValue = parseInt(projectUse, defaultRadix);
+          usedValue = this.convertToDec(projectUse);
           max       = parseInt(get(currentProjectLimit, key), defaultRadix);
           break;
         }
@@ -233,5 +233,20 @@ export default Component.extend({
     });
 
     set(this, 'quotaArray', array);
+  },
+
+  convertToDec(str) {
+    const last    = str[str.length - 1];
+    const mapping = {
+      k: 1000,
+      M: 1000000,
+      G: 1000000000
+    }
+
+    if (mapping[last]) {
+      return parseInt(str.substring(0, str.length - 1), defaultRadix) * mapping[last]
+    }
+
+    return parseInt(str, defaultRadix)
   }
 });
