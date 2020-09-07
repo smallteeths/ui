@@ -6260,7 +6260,7 @@ formResourceQuota:
     noData: 没有配置资源配额
   errors:
     projectLimitRequired: "项目中 {resource} 必须设置。"
-    nsDefaultLimitRequired: 命令空间中 {resource} 默认限制必需设置。
+    nsDefaultLimitRequired: 命名空间中 {resource} 默认限制必需设置。
     limitRequired: '{resource} 需要设置。'
     invalidLimit: '{resource} 配额总共 {total}，已使用 {used}。该已使用应小于或等于 {left}。'
   resources:
