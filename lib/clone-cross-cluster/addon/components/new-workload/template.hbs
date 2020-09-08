@@ -276,7 +276,7 @@
             </label>
           </div>
           <div class="col span-6 mt-0 mb-0">
-            {{#if separateLivenessCheck}}
+            {{#if (get separateLivenessCheckMap container._originName)}}
               <label class="acc-label">
                 {{t "formHealthCheck.liveness"}}
               </label>
@@ -291,7 +291,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col {{if separateLivenessCheck "span-6" "span-12"}}">
+          <div class="col {{if (get separateLivenessCheckMap container._originName) "span-6" "span-12"}}">
             {{form-healthcheck
               initialCheck=container.readinessProbe
               changed=(action (mut container.readinessProbe))
@@ -299,7 +299,7 @@
               editing=true
             }}
           </div>
-          {{#if separateLivenessCheck}}
+          {{#if (get separateLivenessCheckMap container._originName)}}
             <div class="col span-6">
               {{form-healthcheck
                 initialCheck=container.livenessProbe
