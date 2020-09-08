@@ -59,7 +59,7 @@ export default Component.extend({
   }),
 
   convertToString(key, value) {
-    if ( !value ) {
+    if ( !value && value !== 0 ) {
       return '';
     }
 
