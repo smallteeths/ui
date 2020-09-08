@@ -69,12 +69,12 @@
 
     {{#dd.content}}
       <li>
-        <a {{action "addVolume"}}>
+        <a {{action "addVolume" dd}}>
           {{t "formVolumes.add.newVolume"}}
         </a>
       </li>
       <li>
-        <a {{action "addNewPvc"}}>
+        <a {{action "addNewPvc" dd}}>
           {{t "formVolumes.add.newPvc"}}
         </a>
       </li>
@@ -117,7 +117,7 @@
       {{/if}}
       {{#if isStatefulSet}}
         <li>
-          <a {{action "addVolumeClaimTemplate"}}>
+          <a {{action "addVolumeClaimTemplate" dd}}>
             {{t "formVolumes.add.vct"}}
           </a>
         </li>
