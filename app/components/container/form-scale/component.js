@@ -106,6 +106,9 @@ export default Component.extend({
     if ( !get(workload, config) ) {
       set(workload, config, get(this, 'store').createRecord(getDefaultConfig(scaleMode)));
     }
+    if (scaleMode === 'cronJob' && !get(workload, 'cronJobConfig.jobConfig')) {
+      set(workload, 'cronJobConfig.jobConfig', {});
+    }
   }),
 
   canAdvanced: computed('advancedShown', 'isUpgrade', 'scaleMode', function() {
