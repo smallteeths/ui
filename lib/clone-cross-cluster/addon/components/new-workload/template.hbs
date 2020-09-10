@@ -368,11 +368,12 @@
           {{container/form-networking
             classNames="accordion-wrapper"
             instance=container
-            errors=networkingErrors
+            setErrors=(action (mut networkingErrors))
             service=service
             scaleMode=service.type
             editing=true
             supportVlansubnet=supportVlansubnet
+            macvlanSubnetEnabled=macvlanSubnetEnabled
             clusterId=targetCluster.id
             projectId=targetProject.id
             expandAll=al.expandAll

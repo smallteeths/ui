@@ -1,7 +1,6 @@
 cloneCrossCluster:
   newContainer:
     title: 跨集群应用克隆
-    configWorkload: 下一步：配置workload
     reset: 重置
     target:
       label: 目标项目
@@ -27,9 +26,9 @@ cloneCrossCluster:
     scheduling:
       host:
         prompt: 选择主机...
-    
     errors:
       storageClassNotExist: 数据卷中新增PVC（{pvcName}）所引用的StorageClass，在目标集群中不存在，请点击编辑并修改
       pvNotExist: 数据卷中新增PVC（{pvcName}）所引用的持久卷, 在目标集群中不存在，请点击编辑并修改
       noPermissionAccessResource: "无权访问{type}: {name}"
       hostRequired: 请选择要调度的主机
+      vlansubnetRequired: 已经启用扁平网络，请选择一个 MacvlanSubnet

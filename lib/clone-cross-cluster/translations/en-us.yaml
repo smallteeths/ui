@@ -1,3 +1,34 @@
 cloneCrossCluster:
   newContainer:
-    title: Clone Workload Cross Cluster
+    title: Clone workload cross cluster
+    reset: Reset
+    target:
+      label: Target Project
+      prompt: Select a target project
+    formNamespace:
+      label: Namespace
+      prompt: Select a namespace...
+    environment:
+      newFrom: New And Inject Values From Another Resource
+      from: Inject Values From Another Resource
+    imagePullSecret:
+      label: Registry Credential
+      detail: Private Registry Credential Information
+      delete: Delete Credential
+      nameRequired: Registry Credential Name Required
+      addressRequired: Registry Credential Address Required
+      usernameRequired: Registry Credential User Name Required
+      passwordRequired: Registry Credential Password Required
+    ingress:
+      label: Load Balancing(Ingress)
+      detail: External Access Provided By The Application
+      delete: Delete Load Balancing(Ingress)
+    scheduling:
+      host:
+        prompt: Select a host...
+    errors:
+      storageClassNotExist: The StorageClass referenced by the newly added PVC ({pvcName}) in the data volume does not exist in the target cluster, please click edit and modify
+      pvNotExist: he persistent volume referenced by the newly added PVC ({pvcName}) in the data volume does not exist in the target cluster, please click edit and modify
+      noPermissionAccessResource: "No access to {type}: {name}"
+      hostRequired: Please select the host to be scheduled
+      vlansubnetRequired: Flat network has been enabled, please select a MacvlanSubnet
