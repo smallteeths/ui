@@ -15,7 +15,6 @@
       complete=(action (action complete))
       user=model.user
       showCurrent=showCurrent
-      forceSaveDisabled=(and firstLogin (not agreedToEula))
       currentPassword=currentPassword
       editButton=(if firstLogin 'modalEditPassword.firstLogin.actionButton' 'modalEditPassword.actionButton')
       cancelDisabled=true
@@ -24,9 +23,9 @@
       <div>
         <label class="text-small">{{input type="checkbox" checked=model.optIn}} {{t 'telemetryOpt.label'}}</label> <a href="{{settings.docsBase}}/faq/telemetry" class="text-small" target="_blank" rel="noopener nofollow">{{t 'telemetryOpt.learnMore.label'}}</a>
       </div>
-      <div>
+      {{!-- <div>
         <label class="text-small">{{input type="checkbox" checked=agreedToEula}} {{t 'telemetryOpt.eula.prefix' appName=settings.appName}} <a href="{{settings.eulaLink}}" target="_blank" rel="noopener nofollow">{{t 'telemetryOpt.eula.link' appName=settings.appName}}</a> {{t 'telemetryOpt.eula.suffix' appName=settings.appName}}</label>
-      </div>
+      </div> --}}
     {{/if}}
   {{/input-edit-password}}
 </div>
