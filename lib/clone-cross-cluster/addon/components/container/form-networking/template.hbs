@@ -105,7 +105,7 @@
             <label>{{radio-button selection=staticPod value=false}} {{t 'generic.disable'}}</label>
           </div>
           <div class="radio">
-            <label style={{vlansubnetdisabledStyle}}>{{radio-button selection=staticPod disabled=unsupportVlansubnet value=true}} {{t 'generic.enable'}}</label>
+            <label style={{vlansubnetdisabledStyle}}>{{radio-button selection=staticPod disabled=(not supportVlansubnet) value=true}} {{t 'generic.enable'}}</label>
           </div>
         {{/input-or-display}}
     </div>
