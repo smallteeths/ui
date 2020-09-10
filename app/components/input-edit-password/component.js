@@ -145,7 +145,7 @@ export default Component.extend({
   errors: computed('passwordsMatch', 'confirm', 'confirmBlurred', 'serverErrors.[]', function() {
     let out = get(this, 'serverErrors') || [];
 
-    if ( get(this, 'confirmBlurred') && get(this, 'confirm') && !get(this, 'passwordsMatch') ) {
+    if ( !get(this, 'generate') && get(this, 'confirmBlurred') && get(this, 'confirm') && !get(this, 'passwordsMatch') ) {
       out.push(get(this, 'intl').t('modalEditPassword.mismatch'));
     }
 
