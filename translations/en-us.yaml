@@ -3248,10 +3248,19 @@ notifierPage:
   clone: Clone
   index:
     addActionLabel: Add Notifier
+    addAlertTemplate: Add Alarm Template
     table:
       created: Created
       noData: There are no notifiers defined
       noMatch: No Match
+  alertTemplate:
+    defaultTemplate: Default Template  
+    customTemplate: Custom template
+    error: Failed to add alert template
+    note: "Note: The custom alarm template will use the current configuration item after a successful save."
+    enable: 'ON'
+    disabled: 'OFF'
+    link: Click to configure custom alarm templates
 ##############################
 # Partials
 ##############################

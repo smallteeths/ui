@@ -59,7 +59,7 @@
           {{/if}}
         </td>
 
-        <td data-title="{{t valueLabel}}:">
+        <td class="pt-5 pd-5" data-title="{{t valueLabel}}:">
           {{#if editing}}
             {{#if valueContent}}
               <NewSelect
@@ -80,8 +80,13 @@
           {{else}}
             <span class="{{if concealValue "conceal"}}">{{nl-to-br row.value}}</span>
           {{/if}}
-          {{#if (eq row.key 'notification.tmpl')}}
-            <div class="protip mt-10">{{t "alertPage.customLabel.note"}}</div>
+          {{#if (and (eq row.key 'notification.tmpl') (eq secretName 'alertmanager-cluster-alerting'))}}
+            <div class="protip mt-10">
+              {{t "alertPage.customLabel.note"}}
+              {{#link-to "authenticated.cluster.notifier" scope.currentCluster.id scope="cluster"}}
+                {{t "notifierPage.alertTemplate.link"}}
+              {{/link-to}}
+            </div>
           {{/if}}
         </td>
         <td>&nbsp;</td>

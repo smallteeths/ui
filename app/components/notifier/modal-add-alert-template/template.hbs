@@ -1,0 +1,33 @@
+<div style="display: flex;">
+  <ClusterTemplateOverrideToggleForAlertTemplate @checked={{enabled}} />
+  <span class="protip ml-10 mt-5">{{t "notifierPage.alertTemplate.note"}}</span>
+</div>
+<div style="display: flex; justify-content: space-between">
+  <div style="width: 49%">
+    {{textarea-autogrow maxHeight=600 minHeight=600 class=(concat "form-control input-sm value" (if concealValue " conceal")) value=tmpl  disabled=true}}
+    <p style="text-align: center; position: relative">
+      <span>{{t 'notifierPage.alertTemplate.defaultTemplate'}}</span>
+      <span style="position: absolute; left: -12px; top: -9px;">
+        {{copy-to-clipboard
+          tooltipText=""
+          buttonText="copyToClipboard.tooltip"
+          clipboardText=tmpl
+          class="with-clip"
+        }}
+      </span>
+    </p>
+  </div>
+  <div style="width: 49%">
+    {{textarea-autogrow maxHeight=600 minHeight=600 class=(concat "form-control input-sm value" (if concealValue " conceal")) value=tmplByUser disabled=false}}
+    <p style="text-align: center;"><span>{{t 'notifierPage.alertTemplate.customTemplate'}}</span></p>
+  </div>
+</div>
+
+<div class="footer-actions">
+  {{save-cancel
+    createLabel=addBtnLabel
+    saving=saving
+    save=(action "save")
+    cancel=(action "cancel")
+  }}
+</div>

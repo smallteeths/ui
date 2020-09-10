@@ -3233,10 +3233,19 @@ notifierPage:
   clone: 克隆
   index:
     addActionLabel: 添加通知
+    addAlertTemplate: 添加告警模版
     table:
       created: 创建时间
       noData: 没有配置通知
       noMatch: 不匹配
+  alertTemplate:
+    defaultTemplate: 默认模版  
+    customTemplate: 自定义模版
+    error: 添加告警模版失败
+    note: 注意：保存成功后告警模板会使用当前配置
+    enable: 启用
+    disabled: 禁用
+    link: 点击配置自定义告警模板
 ##############################
 # Partials
 ##############################
