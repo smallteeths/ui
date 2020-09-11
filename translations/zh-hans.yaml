@@ -3245,7 +3245,10 @@ notifierPage:
     note: 注意：保存成功后告警模板会使用当前配置
     enable: 启用
     disabled: 禁用
-    link: 点击配置自定义告警模板
+    linkToAlert: 点击配置自定义告警标签和注释
+    linkToNotifier: 点击配置自定义告警模板
+    validateError: 自定义模板不能为空
+    placeholder: 请填入自定义模板
 ##############################
 # Partials
 ##############################

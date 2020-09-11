@@ -17,6 +17,7 @@ export default Component.extend(ModalBase, {
   tmpl:       '',
   tmplByUser: '',
   enabled:    true,
+  errors:     null,
 
   callback: alias('modalService.modalOpts.callback'),
   mode:     alias('modalService.modalOpts.mode'),
@@ -42,9 +43,15 @@ export default Component.extend(ModalBase, {
 
   actions: {
     save() {
-      let secretValue = get(this, 'tmplByUser')
+      let secretValue = get(this, 'tmplByUser');
+      const intl = get(this, 'intl');
 
-      get(this, 'callback')(secretValue, get(this, 'enabled'), this)
+      if (!get(this, 'tmplByUser')) {
+        set(this, 'errors', [intl.t('notifierPage.alertTemplate.validateError')]);
+        set(this, 'saving', false);
+      } else {
+        get(this, 'callback')(secretValue, get(this, 'enabled'), this);
+      }
     },
   },
 

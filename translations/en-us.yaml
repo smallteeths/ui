@@ -3260,7 +3260,10 @@ notifierPage:
     note: "Note: The custom alarm template will use the current configuration item after a successful save."
     enable: 'ON'
     disabled: 'OFF'
-    link: Click to configure custom alarm templates
+    linkToAlert: Click to configure custom alert labels and notes
+    linkToNotifier: Click to configure custom alert templates
+    validateError: Custom template cannot be empty
+    placeholder: Please fill in custom template
 ##############################
 # Partials
 ##############################

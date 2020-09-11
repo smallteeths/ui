@@ -34,7 +34,7 @@ export default Controller.extend({
           if (get(this, 'model.notificationtemplate') && get(this, 'model.notificationtemplate.clusterId')) {
             let params = get(this, 'model.notificationtemplate')
 
-            if (params && params.content) {
+            if (params) {
               params.content = tmpl
               params.enabled = enabled
             }

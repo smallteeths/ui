@@ -26,7 +26,7 @@
     <tbody>
     {{#each ary as |row|}}
       <tr>
-        <td data-title="{{t keyLabel}}:">
+        <td class="pb-20" data-title="{{t keyLabel}}:">
           {{#if editing}}
             {{#if keyContent}}
               <NewSelect
@@ -53,13 +53,13 @@
           {{/if}}
         </td>
 
-        <td class="valign-top text-center">
+        <td class="valign-top text-center pb-20">
           {{#if editing}}
             {{t "formKeyValue.separator"}}
           {{/if}}
         </td>
 
-        <td class="pt-5 pd-5" data-title="{{t valueLabel}}:">
+        <td class="pb-20" style="position: relative;" data-title="{{t valueLabel}}:">
           {{#if editing}}
             {{#if valueContent}}
               <NewSelect
@@ -81,16 +81,18 @@
             <span class="{{if concealValue "conceal"}}">{{nl-to-br row.value}}</span>
           {{/if}}
           {{#if (and (eq row.key 'notification.tmpl') (eq secretName 'alertmanager-cluster-alerting'))}}
-            <div class="protip mt-10">
-              {{t "alertPage.customLabel.note"}}
+            <div class="protip mt-10" style="position: absolute; bottom: 0px">
+              {{#link-to "authenticated.cluster.alert" scope.currentCluster.id scope="cluster"}}
+                {{t "notifierPage.alertTemplate.linkToAlert"}}
+              {{/link-to}}
               {{#link-to "authenticated.cluster.notifier" scope.currentCluster.id scope="cluster"}}
-                {{t "notifierPage.alertTemplate.link"}}
+                {{t "notifierPage.alertTemplate.linkToNotifier"}}
               {{/link-to}}
             </div>
           {{/if}}
         </td>
         <td>&nbsp;</td>
-        <td class="valign-top text-right">
+        <td class="valign-top text-right pb-20">
           {{#if (and editing allowRemove)}}
             <button class="btn bg-primary btn-sm" {{action "remove" row}} disabled={{eq row.editable false}}><i class="icon icon-minus"/><span class="sr-only">{{t "generic.remove"}}</span></button>
           {{/if}}
