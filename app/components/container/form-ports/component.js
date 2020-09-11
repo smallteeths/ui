@@ -116,6 +116,8 @@ export default Component.extend({
         }
 
         setProperties(obj, toSet);
+      } else { // fix hostPort not changed
+        obj.hostPort = 0;
       }
     });
 
