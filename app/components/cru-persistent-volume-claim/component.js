@@ -49,7 +49,7 @@ export default Component.extend(ViewNewEdit, ChildHook, {
         set(this, 'capacity', gib);
       }
 
-      if ( !get(this, 'canUseStorageClass')) {
+      if ( !get(this, 'canUseStorageClass') || get(this, 'primaryResource.volumeId')) {
         set(this, 'useStorageClass', false);
       }
     } else {
