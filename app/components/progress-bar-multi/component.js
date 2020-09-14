@@ -108,7 +108,7 @@ export default Component.extend({
   },
 
   zIndexDidChange: observer('zIndex', function() {
-    $().css('zIndex', get(this, 'zIndex') || 'inherit');
+    $(this.element).css('zIndex', get(this, 'zIndex') || 'inherit');
   }),
 
 });
