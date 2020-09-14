@@ -49,7 +49,7 @@ export default Component.extend({
 
     defineNewPvc() {
       get(this, 'modalService').toggleModal('modal-new-pvc', {
-        model:     get(this, 'model.pvc'),
+        model:     get(this, 'model.pvc').clone(),
         namespace: get(this, 'namespace'),
         callback:  (pvc) => {
           set(this, 'model.pvc', pvc);
@@ -64,7 +64,7 @@ export default Component.extend({
       const { modalService } = this;
 
       modalService.toggleModal('modal-new-vct', {
-        model:     get(this, 'model.vct'),
+        model:     get(this, 'model.vct').clone(),
         namespace: get(this, 'namespace'),
         callback:  (vct) => {
           set(this, 'model.vct', vct);
