@@ -18,7 +18,7 @@ export default Component.extend({
     let accessROX = false;
     let accessRWX = false;
 
-    if ( get(this, 'mode') !== 'new' ) {
+    if ( get(this, 'mode') !== 'new' || get(this, 'model.accessModes.length') > 0) {
       const modes = get(this, 'model.accessModes') || [];
 
       accessRWO = modes.includes('ReadWriteOnce');
