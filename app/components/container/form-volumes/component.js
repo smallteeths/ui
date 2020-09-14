@@ -320,7 +320,10 @@ export default Component.extend({
       out.push({
         mode,
         hidden,
-        volume,
+        volume: this.store.createRecord({
+          ...volume,
+          type: volume.isVolumeClaimTemplate ? 'persistentVolumeClaim' : 'volume',
+        }),
         mounts: []
       });
     });
