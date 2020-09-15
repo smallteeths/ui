@@ -180,7 +180,7 @@
   line-height: 1.6rem;
 }
 
-#setting-ui-header-banner + div.container-nav-left {
+#setting-ui-header-banner:not(.hide) + div.container-nav-left {
   margin-top: 25px !important;
 }
 
