@@ -5726,7 +5726,7 @@ dangerZone:
     'auditlog-server-url': '配置审计日志服务地址。'
     'auth-token-max-ttl-minutes': '自定义认证 token 最大 TTL 分钟数 。'
     'rke-metadata-config': '配置 RKE 元数据刷新参数。'
-    'ui-banners': '分类条幅用于在标题中显示自定义固定条幅, 页脚, 或者两者同时显示。该设置使用包含 3 个根参数的 JSON 对象; <code>banner</code>, <code>showHeader</code>, <code>showFooter</code>. <code>banner</code> is an object containing; <code>textColor</code>, <code>background</code>, and <code>text</code>, where <code>textColor</code> and <code>background</code> are any valid CSS color value.'
+    'ui-banners': '分类标语用于在页眉，页脚或两者中显示自定义的固定标语。 该设置采用包含3个根参数的JSON对象； <code> banner </ code>，<code> showHeader </ code>，<code> showFooter </ code>。 <code> banner </ code>是一个包含以下内容的对象： <code> textColor </ code>，<code> background </ code>和<code> text </ code>，其中<code> textColor </ code>和<code> background </ code>是任何有效的CSS 颜色值。'
     'none-operate-session-time': '用户超过配置时间没有任何操作将自动注销(以秒为单位)'
     'ui-footer-text': '额外的页脚内容'
     'ui-footer-url': '额外页脚内容对应的链接'
