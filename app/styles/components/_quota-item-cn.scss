@@ -59,7 +59,6 @@
       }
       tr {
         border-bottom: 1px solid #dee0e2 !important;
-        background: #fff;
         font-size: 12px
       }
       tr:last-child {
@@ -70,10 +69,10 @@
       }
       th {
         padding: 10px;
-        background: rgb(249, 251, 253);
+        background: $table-quota-bg-accent;
         border: none !important;
         a {
-          color: #3c3c3c !important;
+          color: $text-color;
         }
       }
       tr {

@@ -70,10 +70,10 @@
   font-size: 12px;
 }
 .custom-kubeshell-toolbox-button--info {
-  color: #555555;
-  background-color: #ffffff;
+  color: #777777;
+  background-color: $nav-left-bg;
   &:hover {
-    background-color: rgba(53,85,153,0.10);
-    color: #355599;
+    background-color: $nav-hover-bg;
+    color: #777777;
   }
 }

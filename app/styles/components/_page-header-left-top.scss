@@ -22,7 +22,7 @@ $project-nav-active: $dropdown-link-hover-bg !default;
   .logo-oss {
     height: 40px !important;
     width: 200px !important;
-    background-color: #355599 !important;
+    background-color: $nav-header-bg;
     background-image: url('images/logos/rancher-logo-cow-white.svg') !important;
     background-position: left center;
     background-repeat: no-repeat;
@@ -67,7 +67,7 @@ $project-nav-active: $dropdown-link-hover-bg !default;
     .responsive-nav {
       display: block !important;
       position: relative !important;
-      background-color: #355599 !important;
+      background-color: $nav-header-bg;
     }
     .nav-main {
       li {
@@ -106,7 +106,7 @@ $project-nav-active: $dropdown-link-hover-bg !default;
 
     > ul {
       height: 60px;
-      background-color: #355599;
+      background-color: $nav-header-bg;
       padding: 0;
       vertical-align: middle;
       display: flex;
@@ -183,7 +183,7 @@ $project-nav-active: $dropdown-link-hover-bg !default;
     }
 
     > div:hover {
-      background: #1b4398;
+      background: $nav-header-dropdown-trigger-bg;
     }
   }
 
@@ -201,8 +201,6 @@ $project-nav-active: $dropdown-link-hover-bg !default;
       }
 
       &.text-white:hover {
-        background: #1b4398;
-
         &::after {
           border-left-color: mix($user-btn, black, 80%);
         }
@@ -216,7 +214,7 @@ $project-nav-active: $dropdown-link-hover-bg !default;
 
     .ember-basic-dropdown-trigger {
       max-width: 300px;
-      background: #1b4398;
+      background: $nav-header-dropdown-trigger-bg;
       @include clip;
       @include hand;
 
@@ -280,7 +278,7 @@ $project-nav-active: $dropdown-link-hover-bg !default;
     max-width: 260px;
     min-width: 160px;
     width: 16%;
-    background-color: #355599;
+    background-color: $nav-header-bg;
     background-image: url('images/logos/rancher-logo-cow-white.svg');
     background-position: 40% center !important;
     background-repeat: no-repeat;

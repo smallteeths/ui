@@ -31,7 +31,7 @@ export default Component.extend(CustomMenu, {
 
   // Component options
   tagName:          'aside',
-  classNames:       ['page-header-left page-header-left-dark'],
+  classNames:       ['page-header-left'],
   dropdownSelector: '.navbar .dropdown',
 
   stacks:           null,

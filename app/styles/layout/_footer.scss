@@ -22,6 +22,11 @@
     }
 
   }
+
+  .footer-cn {
+    background-color: $nav-header-bg;
+    box-shadow: 0 0 0 15px $nav-header-bg;
+  }
 }
 
 .custom-footer {

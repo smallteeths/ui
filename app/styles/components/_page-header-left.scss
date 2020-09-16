@@ -40,7 +40,7 @@ $project-nav-active: $dropdown-link-hover-bg !default;
     bottom: 60px;
     overflow: auto;
     @include no-select;
-    padding: 0px 0 60px 0;
+    background-color: $nav-left-bg;
   }
   .sidebar {
     margin-left: 0px !important;
@@ -69,8 +69,8 @@ $project-nav-active: $dropdown-link-hover-bg !default;
   bottom: 60px;
   overflow: auto;
   @include no-select;
-  padding: 0px 0 60px 0;
-  box-shadow: 10px 10px 16px #ebebeb;
+  background-color: $nav-left-bg;
+  box-shadow: 10px 10px 16px $nav-left-shadow;
   NAV {
     font-size: .9em;
     width: 100%;
@@ -94,7 +94,6 @@ $project-nav-active: $dropdown-link-hover-bg !default;
     }
 
     > ul {
-      background-color: #fff;
       border-radius: 3px 0 0 3px;
       padding: 0 0;
       vertical-align: middle;
