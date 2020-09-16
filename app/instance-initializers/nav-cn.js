@@ -401,12 +401,9 @@ const rootNav = [
         scope:          'global',
         id:             'global-image-repo-admin-config',
         localizedLabel: 'nav.admin.imageRepo.config',
-        route:          'custom-extension.image-repo.admin-config',
+        route:          'custom-extension.image-repo.image-router',
         resource:       [],
-        initExpand:     'custom-extension.image-repo.admin-config',
-        condition() {
-          return !!get(this, 'access.me.hasAdmin');
-        }
+        initExpand:     'custom-extension.image-repo.image-router',
       },
       // {
       //   scope:          'global',
@@ -421,22 +418,11 @@ const rootNav = [
       // },
       {
         scope:          'global',
-        id:             'global-image-repo-user-config',
-        localizedLabel: 'nav.admin.imageRepo.config',
-        route:          'custom-extension.image-repo.user-config',
-        resource:       [],
-        initExpand:     'custom-extension.image-repo.user-config',
-        condition() {
-          return !get(this, 'access.me.hasAdmin');
-        }
-      },
-      {
-        scope:          'global',
         id:             'global-image-repo-projects',
         localizedLabel: 'nav.admin.imageRepo.projects',
-        route:          'custom-extension.image-repo.projects',
+        route:          'custom-extension.image-repo.projects-router',
         resource:       [],
-        initExpand:     'custom-extension.image-repo.projects',
+        initExpand:     'custom-extension.image-repo.projects-router',
         condition() {
           if (get(this, 'access.me.hasAdmin')) {
             return true
@@ -451,9 +437,9 @@ const rootNav = [
         scope:          'global',
         id:             'global-image-repo-logs',
         localizedLabel: 'nav.admin.imageRepo.logs',
-        route:          'custom-extension.image-repo.logs',
+        route:          'custom-extension.image-repo.logs-router',
         resource:       [],
-        initExpand:     'custom-extension.image-repo.logs',
+        initExpand:     'custom-extension.image-repo.logs-router',
         condition() {
           if (get(this, 'access.me.hasAdmin')) {
             return true

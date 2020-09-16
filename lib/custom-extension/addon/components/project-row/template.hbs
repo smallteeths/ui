@@ -7,11 +7,11 @@
     {{model.name}}
   </a> --}}
   {{#if harborVersion.supportSummary}}
-    {{#link-to 'image-repo.projects.detail.summary' model.project_id model.current_user_role_id class="clip project-link"}}
+    {{#link-to 'image-repo.projects-router.projects-v1.detail.summary' model.project_id model.current_user_role_id class="clip project-link"}}
       {{model.name}}
     {{/link-to}}
   {{else}}
-    {{#link-to 'image-repo.projects.detail.repositories' model.project_id model.current_user_role_id class="clip project-link"}}
+    {{#link-to 'image-repo.projects-router.projects-v1.detail.repositories' model.project_id model.current_user_role_id class="clip project-link"}}
       {{model.name}}
     {{/link-to}}
   {{/if}}

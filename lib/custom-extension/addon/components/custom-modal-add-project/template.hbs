@@ -1,12 +1,12 @@
 {{#if modalVisible}}
-<form class="modal-container large-modal alert">
+<form class="modal-container large-modal alert" style="max-width: 450px;">
   {{top-errors errors=errors}}
   <h2 class="alert-header">{{t "harborConfig.newProject"}}</h2>
   <hr/>
   <div class="row">
     <div class="col span-12">
       <label class="acc-label">{{t "harborConfig.form.projectName.label"}}{{field-required}}</label>
-      {{input
+      {{textarea
           class="form-control"
           value=project.project_name
       }}
@@ -14,14 +14,15 @@
   </div>
   <div class="row">
     <div class="col span-12">
-      <label class="acc-label">{{t "harborConfig.form.accessLevel.label"}}</label>
-      <label>
-      {{input type="checkbox" class="form-control" checked=project.metadata.public label="ddd"}}{{t "harborConfig.form.accessLevel.checkPublic"}}
-      </label>
+      <label style="margin: 5px 0px 5px;" class="acc-label">{{t "harborConfig.form.accessLevel.label"}}</label>
+      <ClusterTemplateOverrideToggleForHarbor
+        @checked={{project.metadata.public}}
+      />
     </div>
-  <br/>
-  <span class="text-info">{{t "harborConfig.form.accessLevel.info"}}</span>
-</div>
+  </div>
+  <div class="row mt-10">
+   <div class="acc-label">{{t "harborConfig.form.accessLevel.info"}}</div>
+ </div>
 {{save-cancel editing=editing save=(action "save") cancel=(action "cancel")}}
 </form>
 {{/if}}

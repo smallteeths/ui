@@ -92,6 +92,8 @@ harborConfig:
     username:
       label: Username
       placeholder: "The username of access the Harbor."
+    version:
+      label: Version
     pw:
       label: Password
       placeholder: "The password to access the Harbor."
@@ -111,11 +113,16 @@ harborConfig:
       store: Store
       tag: Tag
       operation: Operation
+      resource: Resource
+      type: Resource Type
     projectName:
       label: "Project Name"
+    storage:
+      label: Storage quota
     accessLevel:
       label: "Access Level"
-      checkPublic: Public
+      checkPublic: Pub
+      checkPrivate: Priv
       info: 'When the project is set to public, anyone with read access to the image under this item can pull the image under this item without "docker login".'
     creator:
       all: All
@@ -170,6 +177,14 @@ harborConfig:
     timestamp: Timestamp
     entityName: Name
     entityType: "Member Type"
+    type: Resource Type
+    tags: Tags
+    artifacts: Artifacts
+    annotations: Annotations
+    pullTime: Pull Time
+    pushTime: Push Time
+    labels: Labels
+    resource: Resource
     roleItem:
       admin: Manager
       developer: Developer

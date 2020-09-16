@@ -11,8 +11,9 @@ const WINDOWS_LAST_CONTAINER = 'mcr.microsoft.com/dotnet/core/samples:aspnetapp'
 var lastContainer;
 
 export default Component.extend({
-  scope:  service(),
-  harbor: service(),
+  scope:    service(),
+  harbor:   service(),
+  harborV2: service(),
 
   layout,
   // Inputs
@@ -31,6 +32,7 @@ export default Component.extend({
   harborImageTags: [],
   imageTag:        null,
   latestQuery:     null,
+  harborVersion:   '',
 
   init() {
     this._super(...arguments);
@@ -255,6 +257,8 @@ export default Component.extend({
     }
     const harborRepo = get(this, 'harborRepo');
 
+    const harborServer = get(this, 'harborVersion') === 'v2.0' ? get(this, 'harborV2') : get(this, 'harbor');
+
     if (input.startsWith(`${ harborRepo }/`)) {
       input = input.replace(`${ harborRepo }/`, '')
     }
@@ -264,7 +268,7 @@ export default Component.extend({
     }
     set(this, 'latestQuery', input);
 
-    return get(this, 'harbor').fetchProjectsAndImages(input).then((resp) => {
+    return harborServer.fetchProjectsAndImages(input).then((resp) => {
       const repos = resp.body.repository;
       const repo = get(this, 'harborRepo');
       const urls = repos.map((r) => {
@@ -288,6 +292,7 @@ export default Component.extend({
   loadHarborImageVersions() {
     const input = get(this, 'userInput');
     const harborRepo = get(this, 'harborRepo');
+    const harborServer = get(this, 'harborVersion') === 'v2.0' ? get(this, 'harborV2') : get(this, 'harbor');
 
     if (!input.startsWith(harborRepo)) {
       set(this, 'harborImageTags', []);
@@ -304,25 +309,56 @@ export default Component.extend({
 
       return;
     }
-    get(this, 'harbor').fetchTags(repo.project_id, repo.repository_name).then((resp) => {
-      let names = [];
-      let tags = [];
-
-      try {
-        Array.from(resp.body).forEach(({ name }) => {
-          names.push(name);
-        });
-        tags = this.tagsResultFormat(this.tagsSortingInit(names));
-      } catch (err) {
-        console.log(err)
-        tags = resp.body;
+    if (get(this, 'harborVersion') === 'v2.0') {
+      const param = {
+        project_id:      repo.project_id,
+        project_name:    repo.project_name,
+        repository_name: repo.repository_name,
       }
-      const input = get(this, 'userInput');
-      const imageTag = input.indexOf(':') > -1 ? input.substr(input.indexOf(':') + 1) : null;
-      const tag = tags.find((t) => t.name === imageTag);
 
-      set(this, 'imageTag', tag && tag.name);
-      set(this, 'harborImageTags', tags);
-    });
+      harborServer.fetchTags(param).then((resp) => {
+        let names = [];
+        let tags = [];
+
+        try {
+          Array.from(resp.body).forEach((artifact) => {
+            artifact.tags && artifact.tags.forEach(({ name }) => {
+              names.push(name);
+            })
+          });
+          tags = this.tagsResultFormat(this.tagsSortingInit(names));
+        } catch (err) {
+          console.log(err)
+          tags = resp.body;
+        }
+        const input = get(this, 'userInput');
+        const imageTag = input.indexOf(':') > -1 ? input.substr(input.indexOf(':') + 1) : null;
+        const tag = tags.find((t) => t.name === imageTag);
+
+        set(this, 'imageTag', tag && tag.name);
+        set(this, 'harborImageTags', tags);
+      });
+    } else {
+      harborServer.fetchTags(repo.project_id, repo.repository_name).then((resp) => {
+        let names = [];
+        let tags = [];
+
+        try {
+          Array.from(resp.body).forEach(({ name }) => {
+            names.push(name);
+          });
+          tags = this.tagsResultFormat(this.tagsSortingInit(names));
+        } catch (err) {
+          console.log(err)
+          tags = resp.body;
+        }
+        const input = get(this, 'userInput');
+        const imageTag = input.indexOf(':') > -1 ? input.substr(input.indexOf(':') + 1) : null;
+        const tag = tags.find((t) => t.name === imageTag);
+
+        set(this, 'imageTag', tag && tag.name);
+        set(this, 'harborImageTags', tags);
+      });
+    }
   },
 });

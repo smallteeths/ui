@@ -1,0 +1,102 @@
+<section style="width: 100%;">
+  <div style="font-size: 1.5em;height: 30px;" class="clip">{{model.repo.name}}</div>
+</section>
+<section class="header has-tabs clearfix pb-0">
+  <ul class="tab-nav">
+    <li>
+      {{#link-to "image-repo.projects-router.projects-v1.detail.summary" model.projectId model.currentUserRoleId}}{{t "harborConfig.tab.summary"}}{{/link-to}}
+    </li>
+    <li>
+      {{#link-to "image-repo.projects-router.projects-v1.detail.repositories" model.projectId model.currentUserRoleId}}{{t "harborConfig.tab.store"}}{{/link-to}}
+    </li>
+    {{#if (and (or isSystemAdmin isMember) (not isLimitedGuest))}}
+      <li>
+        {{#link-to "image-repo.projects-router.projects-v1.detail.members" model.projectId model.currentUserRoleId}}{{t "harborConfig.tab.member"}}{{/link-to}}
+      </li>
+    {{/if}}
+    {{!-- <li>
+      {{#link-to "image-repo.projects-router.projects-v1.detail.replications" model.projectId}}复制{{/link-to}}
+    </li> --}}
+    {{#if (and (or isProjectAdmin isProjectMaster isSystemAdmin) (not isLimitedGuest))}}
+      <li>
+        {{#link-to "image-repo.projects-router.projects-v1.detail.labels" model.projectId model.currentUserRoleId}}{{t "harborConfig.tab.tag"}}{{/link-to}}
+      </li>
+    {{/if}}
+    {{#if (and (or isSystemAdmin isMember) (not isLimitedGuest))}}
+      <li>
+        {{#link-to "image-repo.projects-router.projects-v1.detail.logs" model.projectId model.currentUserRoleId}}{{t "harborConfig.tab.log"}}{{/link-to}}
+      </li>
+    {{/if}}
+    {{#if (and (or isSystemAdmin isMember) (not isLimitedGuest))}}
+      <li>
+        {{#link-to "image-repo.projects-router.projects-v1.detail.configs" model.projectId model.currentUserRoleId}}{{t "harborConfig.tab.accessLevel"}}{{/link-to}}
+      </li>
+    {{/if}}
+  </ul>
+</section>
+<div class="row project-summary">
+  <section class="col span-9">
+    <div style="background-color: #F3F5F5; border: 1px solid #DDE6EF;" class="project-summary__repo pt-5 clearfix">
+      <div class="col span-12 pl-40 pt-5 pb-5">
+        <div style="line-height: 30px; display: flex; align-item: center">
+          <img src="{{app.baseAssets}}assets/images/harbor-repo.svg" width="30" height="30" />
+          <span style="line-height: 30px;" class="ml-30">{{t "harborConfig.summary.projectImageRepo"}}</span>
+          <span style="line-height: 30px;" class="pl-30">{{model.summary.repo_count}}</span>
+        </div>
+      </div>
+    </div>
+
+    {{#if (or isSystemAdmin isMember)}}
+      <section class="col span-12 project-summary__quota mt-20">
+        <div class="col span-12 mt-10">
+          <span>{{t "harborConfig.summary.projectQuota"}}</span>
+        </div>
+        <div class="col span-12 mt-10" style="font-size: 12px; border: 1px solid #D6DBE7; padding: 15px 15px;">
+          <div class="col span-6 mb-10">
+            <div class="col span-12">
+              <span>{{t "harborConfig.summary.storage"}}</span>
+            </div>
+            <div class="col span-12 mt-10 mb-10">
+              <span style="text-align: right;"><b>{{transformStorageUsed}}</b> of <b>{{transformStorageMax}}</b></span>
+            </div>
+            <div class="col span-12">
+              {{progress-bar
+                percent=storagePercent
+                color='primary'
+              }}
+            </div>
+          </div>
+          <div class="col span-6 mb-10">
+            <div class="col span-12">
+              <span>{{t "harborConfig.summary.count"}}</span>
+            </div>
+            <div class="col span-12 mt-10 mb-10">
+              <span style="text-align: right;"><b>{{model.summary.quota.used.count}}</b> of <b>{{transformCountMax}}</b></span>
+            </div>
+            <div class="col span-12">
+              {{progress-bar
+                percent=countPercent
+                color='primary'
+              }}
+            </div>
+          </div>
+        </div>
+      </section>
+    {{/if}}
+  </section>
+  <section class="col span-3">
+    {{#if (and (or isSystemAdmin isMember) (not isLimitedGuest))}}
+      <div class="col span-12">
+        <ul class="harbor-member-list-cn" style="list-style-type: none">
+          <li><span>{{t "harborConfig.table.roleItem.admin"}}</span><b>{{model.summary.project_admin_count}}</b></li>
+          <li><span>{{t "harborConfig.table.roleItem.master"}}</span><b>{{model.summary.master_count}}</b></li>
+          <li><span>{{t "harborConfig.table.roleItem.developer"}}</span><b>{{model.summary.developer_count}}</b></li>
+          <li><span>{{t "harborConfig.table.roleItem.visitor"}}</span><b>{{model.summary.guest_count}}</b></li>
+          {{#if model.harborVersion.supportRoleLimitedGuest}}
+          <li><span>{{t "harborConfig.table.roleItem.limitedGuest"}}</span><b>{{model.summary.limited_guest_count}}</b></li>
+          {{/if}}
+        </ul>
+      </div>
+    {{/if}}
+  </section>
+</div>

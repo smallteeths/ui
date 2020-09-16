@@ -1,0 +1,275 @@
+<section class="header clearfix">
+  <h1>{{t "harborConfig.title"}}</h1>
+</section>
+<section>
+<div class="accordion">
+  <div class="accordion-header">
+    <div class="expand"></div>
+    <div class="title">
+      <span class="m-0">{{t "harborConfig.access.title"}}</span>
+      <p class="help-block">{{t "harborConfig.access.subtitle"}}</p>
+    </div>
+    {{#if showActionMenu}}
+    {{#custom-action-menu class="btn bg-transparent pull-right" resourceActions=configActions menuClick=(action 'handleMenuClick')}} {{/custom-action-menu}}
+    {{/if}}
+  </div>
+  <div class="accordion-content">
+    {{#if methodNotSupported}}
+      {{banner-message
+        icon="icon-alert"
+        color="bg-warning mb-10"
+        message=(t "imageRepoSection.adminConfigPage.methodNotSupported" auth=authMode rancherAuthMode=rancherAuthMode)
+      }}
+    {{/if}}
+    {{top-errors errors=harborAccountErrors}}
+     {{#if (and harborConfigEditable hasHarborServer (not savingHarborConfig))}}
+     <div class="clearfix pull-right">
+      <button class="btn bg-error" {{action "promptDelete"}}>
+      {{t "imageRepoSection.adminConfigPage.removeHarborConfig"}}
+      </button>
+    </div>
+    {{/if}}
+    {{#if (not changePwd)}}
+    <div class="row">
+      <div class="col span-12">
+        <label class="acc-label">{{t "harborConfig.form.address.label"}}{{field-required}}</label>
+        {{#input-or-display editable=harborConfigEditable value=harborConfig.url}}
+          {{input type="text" class="form-control" value=harborConfig.url placeholder=(t "harborConfig.form.address.placeholder")}}
+        {{/input-or-display}}
+      </div>
+      <div class="col span-6">
+        <label class="acc-label">{{t "harborConfig.form.username.label"}}{{field-required}}</label>
+        {{#input-or-display editable=harborConfigEditable value=harborConfig.username}}
+          {{input type="text" class="form-control" value=harborConfig.username placeholder=(t "harborConfig.form.username.placeholder")}}
+        {{/input-or-display}}
+      </div>
+      <div class="col span-6" style="margin-right: 0px">
+        <label class="acc-label">{{t "harborConfig.form.pw.label"}}{{field-required}}</label>
+        {{#input-or-display editable=harborConfigEditable value="******"}}
+          {{input type="password" class="form-control" value=harborConfig.password placeholder=(t "harborConfig.form.pw.placeholder")}}
+        {{/input-or-display}}
+      </div>
+      <div class="col span-12">
+        <label class="acc-label">{{t "harborConfig.form.version.label"}}</label>
+        <div class="radio">
+          <label>
+            {{radio-button disabled=(not harborConfigEditable) selection=harborConfig.version value=""}} v1
+          </label>
+          <label>
+            {{radio-button disabled=(not harborConfigEditable) selection=harborConfig.version value="v2.0"}} v2
+          </label>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+    {{#if (and changePwd (not harborConfigEditable))}}
+    <div class="row">
+      <div class="col span-12">
+        <label class="acc-label">{{t "harborConfig.form.address.label"}}:</label>
+        <span>{{harborConfig.url}}</span>
+      </div>
+      <div class="col span-6">
+        <label class="acc-label">{{t "harborConfig.form.username.label"}}:</label>
+        <span>{{harborConfig.username}}</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col span-12">
+        <label class="acc-label">{{t "modalEditPassword.current"}}{{field-required}}</label>
+        {{input type="password" class="form-control" value=changePwdForm.oldPwd placeholder=(t "modalEditPassword.current")}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col span-12">
+        <label class="acc-label">{{t "harborConfig.form.newPw.label"}}{{field-required}}</label>
+        {{input type="password" class="form-control" value=changePwdForm.newPwd placeholder=(t "harborConfig.form.newPw.placeholder")}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col span-12">
+        <label class="acc-label">{{t "harborConfig.form.confirmPw.label"}}{{field-required}}</label>
+        {{input type="password" class="form-control" value=changePwdForm.confirmPwd placeholder=(t "harborConfig.form.confirmPw.placeholder")}}
+      </div>
+    </div>
+    {{save-cancel save=(action "confirmChangePwd") cancel=(action "cancelChangePwd") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
+    {{/if}}
+    {{#if harborConfigEditable}}
+      {{#if harborAccountValid}}
+        {{save-cancel save=(action "saveHarborConfig") cancel=(action "cancelHarborConfig") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
+      {{else}}
+        {{save-cancel save=(action "saveHarborConfig") cancel=(action "cancelHarborConfig") cancelLabel="imageRepoSection.common.reset" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig"}}
+      {{/if}}
+    {{/if}}
+    {{!-- {{#if harborAccountValid}}
+      <div class="row">
+        <div class="col span-6">
+          {{save-cancel save=(action "saveHarborConfig") cancel=(action "cancelHarborConfig") cancelLabel="imageRepoSection.common.reset" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" class="pull-right"}}
+        </div>
+        <div class="col span-6">
+          {{save-cancel save=(action "removeHarboConfig") cancelDisabled=true cancelLabel="imageRepoSection.common.reset" createLabel="imageRepoSection.adminConfigPage.removeHarborConfig" class="pull-left"}}
+        </div>
+      </div>
+    {{else}}
+      {{save-cancel save=(action "saveHarborConfig") cancel=(action "cancelHarborConfig") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" }}
+    {{/if}} --}}
+  </div>
+</div>
+</section>
+{{#if harborAccountValid}}
+<p>{{t "harborConfig.advanced.titleLeft"}}<a class="clip project-link" target="_blank" href="{{model.harborServer}}">Harbor</a>{{t "harborConfig.advanced.titleRight"}}</p>
+  <section>
+    {{#accordion-list showExpandAll=false as | al expandFn |}}
+      {{#accordion-list-item
+        title=(t "harborConfig.advanced.label.title")
+        detail=(t "harborConfig.advanced.label.subtitle")
+        expandAll=al.expandAll
+        expand=(action expandFn)
+      }}
+        {{#if isV2}}
+          {{#custom-labels-v2 labelParam=labelParam }}{{/custom-labels-v2}}
+        {{else}}
+          {{#custom-labels labelParam=labelParam }}{{/custom-labels}}
+        {{/if}}
+      {{/accordion-list-item}}
+    {{/accordion-list}}
+  </section>
+{{/if}}
+{{#custom-modal-confirm-remove-harbor-account confirm=(action 'removeHarboConfig') resource=harborConfig modalVisible=showConfirmDeleteModal}}{{/custom-modal-confirm-remove-harbor-account}}
+{{!-- {{#if harborAccountValid}}
+<section>
+{{#accordion-list as | al expandFn | }}
+  {{#accordion-list-item
+      title="邮箱"
+      detail="邮件服务器配置"
+      expandAll=al.expandAll
+      expand=(action expandFn)
+  }}
+  {{top-errors errors=emailServerConfigErrors}}
+  <div class="row">
+    <div class="col span-6">
+      <label class="acc-label">邮件服务器{{field-required}}</label>
+      {{#input-or-display editable=emailConfigEditble value=configurations.email_host}}
+        {{input type="text" class="form-control" value=configurations.email_host placeholder="邮件服务器地址"}}
+      {{/input-or-display}}
+    </div>
+    <div class="col span-6">
+      <label class="acc-label">邮件服务器端口{{field-required}}</label>
+      {{#input-or-display editable=emailConfigEditble value=configurations.email_port}}
+        {{input type="text" class="form-control" value=configurations.email_port placeholder="邮件服务器端口"}}
+      {{/input-or-display}}
+    </div>
+    </div>
+    <div class="row">
+    <div class="col span-6">
+      <label class="acc-label">用户名</label>
+      {{#input-or-display editable=emailConfigEditble value=configurations.email_username}}
+        {{input type="text" class="form-control" value=configurations.email_username placeholder="用户名"}}
+      {{/input-or-display}}
+    </div>
+    <div class="col span-6">
+      <label class="acc-label">密码</label>
+      {{#input-or-display editable=emailConfigEditble value="***"}}
+        {{input type="password" class="form-control" value=configurations.email_password placeholder="密码"}}
+      {{/input-or-display}}
+    </div>
+    </div>
+    <div class="row">
+    <div class="col span-6">
+      <label class="acc-label">邮件来源{{field-required}}</label>
+      {{#input-or-display editable=emailConfigEditble value=configurations.email_from}}
+        {{input type="text" class="form-control" value=configurations.email_from placeholder="邮件来源"}}
+      {{/input-or-display}}
+    </div>
+    </div>
+   <div class="row">
+    <div class="col span-6">
+      <label class="acc-label">邮件 SSL{{field-required}}</label>
+      <br>
+      {{#input-or-display editable=emailConfigEditble value=configurations.email_ssl}}
+        {{input type="checkbox" class="form-control" checked=configurations.email_ssl placeholder="邮件 SSL"}}
+      {{/input-or-display}}
+      <div class="text-info">启用SSL到邮件服务器连接。</div>
+    </div>
+    <div class="col span-6">
+      <label class="acc-label">验证证书{{field-required}}</label>
+      <br>
+      {{#input-or-display editable=emailConfigEditble value=configurations.email_insecure}}
+        {{input type="checkbox" class="form-control" checked=configurations.email_insecure placeholder="验证证书"}}
+      {{/input-or-display}}
+      <div class="text-info">确定是否要验证邮件服务器的证书。如果邮件服务器使用的是自签或者非信任证书，不要勾选此项。</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col span-6">
+      {{save-cancel save=(action "saveEmailConfig") cancel=(action "cancelEmailConfig") createLabel="imageRepoSection.adminConfigPage.saveHarborConfig" class="pull-right"}}
+    </div>
+    <div class="col span-6">
+      {{save-cancel save=(action "testEmailServer") cancelDisabled=true createLabel="imageRepoSection.adminConfigPage.testEmailServer" class="pull-left"}}
+    </div>
+
+
+  </div>
+{{/accordion-list-item}}
+
+  {{#accordion-list-item
+      title="系统"
+      detail="系统设置"
+      expandAll=al.expandAll
+      expand=(action expandFn)
+  }}
+  {{top-errors errors=systemConfigErrors}}
+  <div class="row">
+    <div class="col span-4">
+      <label class="acc-label">项目创建</label>
+      <br>
+      {{#input-or-display editable=systemConfigEditble value=configurations.project_creation_restriction}}
+        {{new-select
+          class="form-control input-sm"
+          content=projectCreationOptions
+          value=configurations.project_creation_restriction
+        }}
+      {{/input-or-display}}
+      <div class="text-info">由令牌服务创建的令牌的过期时间（分钟），默认为30分钟。</div>
+    </div>
+    <div class="col span-4">
+      <label class="acc-label">令牌过期时间（分钟）{{field-required}}</label>
+      <br>
+      {{#input-or-display editable=systemConfigEditble value=configurations.token_expiration}}
+        {{input type="number" class="form-control" value=configurations.token_expiration placeholder="令牌过期时间（分钟）"}}
+      {{/input-or-display}}
+      <div class="text-info">由令牌服务创建的令牌的过期时间（分钟），默认为30分钟。</div>
+    </div>
+    <div class="col span-4">
+      <label class="acc-label">仓库只读</label>
+      <br>
+      {{#input-or-display editable=systemConfigEditble value=configurations.read_only}}
+        {{input type="checkbox" class="form-control" checked=configurations.read_only placeholder="仓库只读"}}
+      {{/input-or-display}}
+      <div class="text-info">用户在此模式下无法对仓库执行任何操作。</div>
+    </div>
+  </div>
+  {{save-cancel save=(action "saveSystemConfig") cancel=(action "cancelSystemConfigy") cancelLabel="imageRepoSection.common.reset" createLabel="imageRepoSection.adminConfigPage.saveHarborConfig"}}
+  {{/accordion-list-item}}
+
+  {{#accordion-list-item
+      title="标签"
+      detail="标签管理"
+      expandAll=al.expandAll
+      expand=(action expandFn)
+  }}
+
+  {{#custom-labels labelParam=labelParam}}{{/custom-labels}}
+  {{/accordion-list-item}}
+
+ {{#accordion-list-item
+      title="垃圾清理"
+      detail="垃圾清理配置"
+      expandAll=al.expandAll
+      expand=(action expandFn)
+  }}
+
+  {{#custom-gc-schedule}}{{/custom-gc-schedule}}
+  {{/accordion-list-item}}
+{{/accordion-list}}
+</section>
+{{/if}} --}}

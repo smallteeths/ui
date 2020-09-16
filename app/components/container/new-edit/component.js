@@ -63,6 +63,7 @@ export default Component.extend(NewOrEdit, ChildHook, {
   showTargetOS: false,
 
   toggleMacvlan: false,
+  harborVersion: '',
 
   isSidekick:    equal('scaleMode', 'sidekick'),
   init() {

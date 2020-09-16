@@ -1,44 +1,36 @@
 {{#if modalVisible}}
-<form class="modal-container large-modal alert">
+<form class="modal-container large-modal alert" style="max-width: 450px;">
   {{top-errors errors=errors}}
   <h2 class="alert-header">{{t "harborConfig.formTag.titleAdd"}}</h2>
   <hr/>
   <div class="row">
-    <div class="col span-4">
-      <label class="acc-label">{{t "harborConfig.formTag.name.label"}}{{field-required}}</label>
-      {{input
+    <div class="col span-12">
+      <label style="margin: 0px 0px 12px;" class="acc-label">{{t "harborConfig.formTag.name.label"}}{{field-required}}</label>
+      {{textarea
           class="form-control"
           value=label.name
           maxlength=42
       }}
     </div>
-    <div class="col span-4">
-      <label class="acc-label">{{t "harborConfig.formTag.color.label"}}</label>
-      {{#basic-dropdown
-         horizontalPosition="left"
-         as |dd|}}
-      {{#dd.trigger
-           class="form-control"
-      }}
-      <div style="line-height: 24px;padding: 5px 10px;">
-        {{t "harborConfig.formTag.color.label"}}<span class="darken"><i class="icon icon-chevron-down"></i></span>
-        {{label.color}}
-      </div>
-
-      {{/dd.trigger}}
-
-      {{#dd.content}}
-       <div style="width: 180px;">
+  </div>
+  <div class="row">
+    <div class="col span-12">
+      <label style="margin: 5px 0px 10px;" class="acc-label">{{t "harborConfig.formTag.color.label"}}{{field-required}}</label>
+      <div style="border: 1px solid #dde4e6;line-height: 24px;padding: 10px 10px;">
         {{#each labelColors as |color|}}
-        <div  onclick={{action "changeColor" color}} {{action dd.actions.close}} style="cursor: pointer;display: inline-block;margin: 2px 4px;padding: 0;width: 30px;height: 24px;text-align: center;line-height: 24px;border: 0;font-size: 12px;background-color:{{color.color}};color:{{color.textColor}};">Aa</div>
+          {{#if (eq label.color color.color)}}
+            <div  style="display: inline-block;margin: 2px 4px;padding: 0;width: 30px;height: 24px;text-align: center;line-height: 24px;border: 0;font-size: 12px;background-color: #000;color: #fff;"><i class="icon icon-check"/></div>
+          {{else}}
+            <div  onclick={{action "changeColor" color}} style="cursor: pointer;display: inline-block;margin: 2px 4px;padding: 0;width: 30px;height: 24px;text-align: center;line-height: 24px;border: 0;font-size: 12px;background-color:{{color.color}};color:{{color.textColor}};">Aa</div>
+          {{/if}}
         {{/each}}
-       </div>
-      {{/dd.content}}
-    {{/basic-dropdown}}
+      </div>
     </div>
-    <div class="col span-4">
-      <label class="acc-label">{{t "harborConfig.formTag.description"}}</label>
-      {{input
+  </div>
+  <div class="row">
+    <div class="col span-12">
+      <label style="margin: 5px 0px 12px;" class="acc-label">{{t "harborConfig.formTag.description"}}</label>
+      {{textarea
           class="form-control"
           value=label.description
       }}

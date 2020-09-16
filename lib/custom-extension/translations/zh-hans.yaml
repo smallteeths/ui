@@ -92,6 +92,8 @@ harborConfig:
     username:
       label: 用户名
       placeholder: 访问Harbor的用户名
+    version:
+      label: Version    
     pw:
       label: 密码
       placeholder: 访问Harbor的密码
@@ -111,12 +113,17 @@ harborConfig:
       store: 仓库
       tag: 标签
       operation: 操作
+      resource: 资源
+      type: 资源类型
     projectName:
       label: 项目名称
+    storage:
+      label: 存储容量
     accessLevel:
       label: 访问级别
       checkPublic: 公开
-      info: "当项目设为公开后，任何人都有此项目下镜像的读权限。命令行用户不需要“docker login”就可以拉取此项目下的镜像。"
+      checkPrivate: 私有
+      info: "注: 当项目设为公开后，任何人都有此项目下镜像的读权限。命令行用户不需要“docker login”就可以拉取此项目下的镜像。"
     creator:
       all: 所有人
       admin: 仅管理员
@@ -170,6 +177,14 @@ harborConfig:
     timestamp: 时间戳
     entityName: 姓名
     entityType: 成员类型
+    type: 资源类型
+    tags: Tags
+    artifacts: Artifacts
+    annotations: 注解
+    pullTime: 推送时间
+    pushTime: 拉取时间
+    labels: 标签
+    resource: 资源
     roleItem:
       admin: 项目管理员
       developer: 开发人员

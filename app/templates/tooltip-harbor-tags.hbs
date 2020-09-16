@@ -1,0 +1,18 @@
+<table class="table fixed tooltip-table" style="max-width: 300px;">
+  <thead>
+    <tr style="border-bottom: 1px solid #fff">
+      <td style="text-align: left; padding-left: 10px">{{t "harborConfig.table.tags"}}</td>
+      <td style="text-align: left; padding-left: 20px">{{t "harborConfig.table.pullTime"}}</td>
+      <td style="text-align: left; padding-left: 20px">{{t "harborConfig.table.pushTime"}}</td>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model as |tt|}}
+      <tr>
+        <td>{{tt.name}}</td>
+        <td>{{tt.pullTime}}</td>
+        <td>{{tt.pushTime}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

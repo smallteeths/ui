@@ -65,13 +65,19 @@ export default Route.extend({
       promise = resolve(this.modelForNew(params));
     }
 
+    const harborVersion = get(this, 'globalStore').rawRequest({ url: '/v3/settings/harbor-version' }).then((resp) => {
+      return resp && resp.body && resp.body.value ? resp.body.value : ''
+    });
+
     return hash({
       dataMap: promise,
       clusterLogging,
       projectLogging,
+      harborVersion,
     }).then((hash) => ({
       loggingEnabled: hash.clusterLogging || hash.projectLogging,
       dataMap:        hash.dataMap,
+      harborVersion:  hash.harborVersion,
     }))
   },
 
