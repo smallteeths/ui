@@ -129,6 +129,7 @@
       model=model.splunk
       parentModel=model
       targetType=targetType
+      originalModel=originalModel
     }}
   {{else if (eq targetType "kafka")}}
     {{logging/target-kafka
