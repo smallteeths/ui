@@ -63,7 +63,7 @@ export default Controller.extend({
     },
   },
 
-  rows: computed('group', 'model.workloads.@each.{namespaceId,isBalancer}', 'model.pods.@each.{workloadId,namespaceId}', function() {
+  rows: computed('group', 'model.workloads.@each.{namespaceId,isBalancer}', function() {
     const groupBy = this.get('group');
     let out = [];
 
