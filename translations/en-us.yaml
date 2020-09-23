@@ -4196,6 +4196,7 @@ clusterNew:
       title: Networking
       detail: Configure the networking for the cluster
       label: Network Provider
+      none: None
       flannel: Flannel
       flannelCustom: Flannel
       calico: Calico

@@ -2374,6 +2374,7 @@ clusterNew:
       title: 網絡驅動
       detail: 為集群配置網絡驅動
       label: 網絡組件
+      none: None
       flannel: Flannel
       flannelCustom: Flannel
       calico: Calico
