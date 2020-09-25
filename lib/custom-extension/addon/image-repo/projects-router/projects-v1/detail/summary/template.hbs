@@ -60,7 +60,7 @@
               <span style="text-align: right;"><b>{{transformStorageUsed}}</b> of <b>{{transformStorageMax}}</b></span>
             </div>
             <div class="col span-12">
-              {{progress-bar
+              {{progress-bar-without-tooltip
                 percent=storagePercent
                 color='primary'
               }}
@@ -74,7 +74,7 @@
               <span style="text-align: right;"><b>{{model.summary.quota.used.count}}</b> of <b>{{transformCountMax}}</b></span>
             </div>
             <div class="col span-12">
-              {{progress-bar
+              {{progress-bar-without-tooltip
                 percent=countPercent
                 color='primary'
               }}

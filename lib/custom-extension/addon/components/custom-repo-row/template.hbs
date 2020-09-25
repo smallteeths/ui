@@ -3,7 +3,7 @@
 </td>
 <td data-title="{{dt.name}}">
   {{#link-to 'image-repo.projects-router.projects-v1.detail.repository' model.project_id currentUserRoleId model.name class="clip project-link"}}
-    {{model.name}}
+    <span style="word-wrap: break-word; white-space: normal">{{model.name}}</span>
   {{/link-to}}
 </td>
 <td data-title="{{dt.tags_count}}">

@@ -72,6 +72,14 @@
         <label class="acc-label">{{t "harborConfig.form.username.label"}}:</label>
         <span>{{harborConfig.username}}</span>
       </div>
+      <div class="col span-6">
+        <label class="acc-label">{{t "harborConfig.form.version.label"}}:</label>
+        {{#if isV2}}
+          <span>v2</span>
+        {{else}}
+          <span>v1</span>
+        {{/if}}
+      </div>
     </div>
     <div class="row">
       <div class="col span-12">

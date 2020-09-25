@@ -157,6 +157,7 @@ harborConfig:
     updateSystemError: "Failed to update system Settings, error"
     emailPortReq: "Please enter the mail server port"
     errorAndResetHarbor: "The original account or password is wrong, the password cannot be changed, please reconfigure the Harbor account."
+    errorOldPwdSameAsNew: "The new password can not be same with the old one."
     validateEmailServerOk: "Verify that the mail server was successful"
     accountUnavailable: "Harbor Account unavailable"
     emailReq: "Please enter your email address"

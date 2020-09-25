@@ -7,7 +7,7 @@
     headers=headers
     data=data
     availableActions=availableActions
-    totalCount=data.length
+    totalCount=model.tagstotalCount
     searchText=searchText
     primaryKeyName="id"
     remove=(action "promptDelete")
@@ -18,6 +18,7 @@
     addLabel=(action "addLabel")
     copyDigest=(action "copyDigest")
     model=model
+    page=model.page
     hasRowActions=true
     as |sortable kind row dt|
   }}

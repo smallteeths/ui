@@ -90,7 +90,7 @@
     as |sortable kind row dt|
   }}
   {{#if (eq kind "row")}}
-    {{custom-repo-row-v2 model=row currentUserRoleId=model.currentUserRoleId hasAdminRole=model.currentUser.has_admin_role command=(action "handleCommand")}}
+    {{custom-repo-row-v2 model=row currentUserRoleId=model.currentUserRoleId hasAdminRole=model.currentUser.sysadmin_flag command=(action "handleCommand")}}
     {{else if (eq kind "nomatch")}}
       <tr>
         <td

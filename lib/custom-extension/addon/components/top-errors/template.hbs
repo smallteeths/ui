@@ -5,10 +5,10 @@
     {{#each errors as |error|}}
       {{#if (is-array error)}}
         {{#each error as |line|}}
-          <p>{{line}}</p>
+          <p style="word-break: break-all;">{{line}}</p>
         {{/each}}
       {{else}}
-        <p>{{error}}</p>
+        <p style="word-break: break-all;">{{error}}</p>
       {{/if}}
     {{/each}}
 </div>

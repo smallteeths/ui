@@ -35,6 +35,7 @@ imageRepoSection:
   tagPage:
     copyDigest: 复制摘要
     copy: 复制
+    addLabel: 添加标签
     table:
       noMatch: 没有TAG匹配当前搜索
       noData: 暂无数据
@@ -93,7 +94,7 @@ harborConfig:
       label: 用户名
       placeholder: 访问Harbor的用户名
     version:
-      label: Version    
+      label: 版本    
     pw:
       label: 密码
       placeholder: 访问Harbor的密码
@@ -157,6 +158,7 @@ harborConfig:
     updateSystemError: "更新系统设置失败, 错误"
     emailPortReq: "请输入邮件服务器端口"
     errorAndResetHarbor: "原始账号或密码错误, 无法修改密码，请重新配置Harbor账号."
+    errorOldPwdSameAsNew: "新密码不能与旧密码相同."
     validateEmailServerOk: "验证邮件服务器成功"
     accountUnavailable: "Harbor 账号无法使用"
     emailReq: "请输入邮箱地址"
@@ -181,8 +183,8 @@ harborConfig:
     tags: Tags
     artifacts: Artifacts
     annotations: 注解
-    pullTime: 推送时间
-    pushTime: 拉取时间
+    pullTime: 拉取时间
+    pushTime: 推送时间
     labels: 标签
     resource: 资源
     roleItem:

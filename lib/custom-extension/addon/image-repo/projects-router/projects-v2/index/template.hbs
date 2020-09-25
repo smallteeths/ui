@@ -26,11 +26,12 @@
     pageChange=(action "pageChange")
     sortChanged=(action "sortChanged")
     model=model
+    page=model.page
     hasRowActions=true
     as |sortable kind row dt|
   }}
   {{#if (eq kind "row")}}
-      {{project-row-v2 model=row harborVersion=model.harborVersion hasAdminRole=model.currentUser.has_admin_role command=(action "handleCommand")}}
+      {{project-row-v2 model=row harborVersion=model.harborVersion hasAdminRole=model.currentUser.sysadmin_flag command=(action "handleCommand")}}
     {{else if (eq kind "nomatch")}}
       <tr>
         <td

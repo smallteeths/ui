@@ -36,7 +36,7 @@
   {{#if labels}}
     {{#each labels as |label|}}
     <div style={{label.cssStyle}}>
-      <img src="{{app.baseAssets}}assets/images/harbor-label.svg" width="10" height="10" style={{label.iconCssStyle}} /><span>{{label.name}}</span>
+      <img src="{{app.baseAssets}}assets/images/harbor-label.svg" width="10" height="10" style={{label.iconCssStyle}} /><span style="word-break: break-all">{{label.name}}</span>
     </div>
     {{/each}}
   {{/if}}
