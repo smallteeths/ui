@@ -44,14 +44,14 @@
 <td data-title="{{dt.annotations}}">
   {{model.annotations}}
 </td>
-<td data-title="{{dt.pullTime}}">
-  {{#if hasPullTime}}
-    {{date-from-now model.pull_time}}
-  {{/if}}
-</td>
 <td data-title="{{dt.pushTime}}">
   {{#if hasPushTime}}
     {{date-from-now model.push_time}}
+  {{/if}}
+</td>
+<td data-title="{{dt.pullTime}}">
+  {{#if hasPullTime}}
+    {{date-from-now model.pull_time}}
   {{/if}}
 </td>
 <td data-title="{{dt.actions}}" class="actions">

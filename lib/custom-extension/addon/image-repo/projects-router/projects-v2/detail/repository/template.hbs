@@ -23,7 +23,7 @@
     as |sortable kind row dt|
   }}
   {{#if (eq kind "row")}}
-    {{custom-Artifacts-row model=row labelColors=labelColors currentUserRoleId=model.currentUserRoleId currentUser=model.currentUser harborServer=model.harborServer repo=model.repository command=(action "handleCommand")}}
+    {{custom-artifacts-cn-row model=row labelColors=labelColors currentUserRoleId=model.currentUserRoleId currentUser=model.currentUser harborServer=model.harborServer repo=model.repository command=(action "handleCommand")}}
     {{else if (eq kind "nomatch")}}
       <tr>
         <td

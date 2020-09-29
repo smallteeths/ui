@@ -73,7 +73,7 @@ harborConfig:
     subtitle: "Synchronizes the current user information to Harbor"
   setting:
     title: "Harbor Account Settings"
-    subTitle: "Set the mailbox and access password"
+    subtitle: "Set the mailbox and access password"
   wait: "Please wait for the administrator to configure the mirror library."
   info: "Please configure your Harbor account before visiting this page."
   log: "Logs"
@@ -156,7 +156,7 @@ harborConfig:
     updateSystemOk: "System Settings were updated successfully"
     updateSystemError: "Failed to update system Settings, error"
     emailPortReq: "Please enter the mail server port"
-    errorAndResetHarbor: "The original account or password is wrong, the password cannot be changed, please reconfigure the Harbor account."
+    errorAndResetHarbor: "The original password is wrong, and the password cannot be changed."
     errorOldPwdSameAsNew: "The new password can not be same with the old one."
     validateEmailServerOk: "Verify that the mail server was successful"
     accountUnavailable: "Harbor Account unavailable"

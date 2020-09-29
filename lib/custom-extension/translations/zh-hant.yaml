@@ -145,7 +145,7 @@ harborConfig:
     updateSystemOk: "更新系统设置成功"
     updateSystemError: "更新系统设置失败, 错误"
     emailPortReq: "请输入邮件服务器端口"
-    errorAndResetHarbor: "原始账号或密码错误, 无法修改密码，请重新配置Harbor账号."
+    errorAndResetHarbor: "原始密码错误, 无法修改密码."
     errorOldPwdSameAsNew: "新密码不能与旧密码相同."
     validateEmailServerOk: "验证邮件服务器成功"
     accountUnavailable: "Harbor 账号无法使用"
