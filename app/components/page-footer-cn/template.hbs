@@ -19,23 +19,10 @@
 
   <div class="pull-right">
     <div class="compose-download inline-block dropup">
-      {{#basic-dropdown
-          verticalPosition="above"
-          horizontalPosition="right"
-          as |dd|}}
-        {{#dd.trigger
-            class="hand btn btn-sm bg-transparent"
-            style=style
-        }}
-          <i class="icon icon-download"></i> {{t 'pageFooter.download.link'}} <i class="icon icon-chevron-down"></i>
-        {{/dd.trigger}}
-
-        {{#dd.content class="text-right"}}
-          <li><a href="{{cli.darwin}}">{{t 'pageFooter.download.mac'}} <i class="icon icon-fw icon-apple"></i></a></li>
-          <li><a href="{{cli.windows}}">{{t 'pageFooter.download.windows'}} <i class="icon icon-fw icon-windows"></i></a></li>
-          <li><a href="{{cli.linux}}">{{t 'pageFooter.download.linux'}} <i class="icon icon-fw icon-linux"></i></a></li>
-        {{/dd.content}}
-      {{/basic-dropdown}}
+      <a style="color: #fff" role="button" class="btn btn-sm bg-transparent" target="blank" rel="noreferrer noopener" href="{{mirrorBase}}">
+        <i class="icon icon-download"></i>
+        {{t 'pageFooter.downloadMirror'}}
+      </a>
     </div>
   </div>
   <div class="pull-right">

@@ -9080,6 +9080,7 @@ pageFooter:
     mac: macOS
     windows: Windows
     linux: Linux
+  downloadMirror: Download Mirror
   showSystem: Show System
 
 pagination:

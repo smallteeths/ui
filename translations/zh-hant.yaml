@@ -5968,6 +5968,7 @@ pageFooter:
     mac: macOS
     windows: Windows
     linux: Linux
+  downloadMirror: 下載Rancher資源
   showSystem: 顯示系統容器
 
 pagination:

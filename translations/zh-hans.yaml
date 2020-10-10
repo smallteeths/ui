@@ -9219,6 +9219,7 @@ pageFooter:
     mac: MacOS
     windows: Windows
     linux: Linux
+  downloadMirror: 下载Rancher资源
   showSystem: 显示系统容器
 
 pagination:
