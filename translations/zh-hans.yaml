@@ -6457,6 +6457,36 @@ shareMemberRow:
     member: '成员'
     'read-only': '只读用户'
 
+formContainerLifecycle:
+  title: 容器生命周期回调
+  detail: 回调使容器能够了解其管理生命周期中的事件，并在执行相应的生命周期回调时运行在处理程序中实现的代码。
+  postStartHook: PostStart
+  preStopHook: PreStop
+  hookType:
+    none: 无
+    tcp: TCP 端口检查
+    command: 在容器的 cgroups 和名称空间中执行特定的命令
+    http: 对容器上的特定端点执行 HTTP 请求
+    https: 对容器上的特定端点执行 HTTPS 请求
+  command:
+    label: 命令
+    placeholder: '例如: pre-stop.sh'
+  httpHeaders:
+    label: 其他的 HTTP Headers
+    addActionLabel: 添加 Headers
+    keyLabel: Http 头字段
+    keyPlaceholder: '例如: User-Agent'
+    valuePlaceholder: '例如: value'
+  host:
+    label: Host Header
+    placeholder: '例如: example.com'
+  port:
+    label: 容器端口
+    placeholder: '例如: 80'
+  path:
+    label: HTTP(S)服务器上的访问路径
+    placeholder: '例如: /test'
+
 formHealthCheck:
   title: 健康检查
   detail: 周期性向容器发出请求，以检测其健康状态。默认设置下，readiness 和 liveness 使用相同的配置参数。对于应用初始化较长的容器，需要增加就绪检测时间。

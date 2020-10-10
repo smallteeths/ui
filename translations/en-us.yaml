@@ -6360,6 +6360,36 @@ shareMemberRow:
     member: 'Member'
     'read-only': 'User'
 
+formContainerLifecycle:
+  title: Container Lifecycle Hooks
+  detail: The hooks enable Containers to be aware of events in their management lifecycle and run code implemented in a handler when the corresponding lifecycle hook is executed.
+  postStartHook: PostStart
+  preStopHook: PreStop
+  hookType:
+    none: None
+    tcp: TCPSocket specifies an action involving a TCP port.
+    command: Executes a specific command, inside the cgroups and namespaces of the Container
+    http: Executes an HTTP request against a specific endpoint on the Container
+    https: Executes an HTTPS request against a specific endpoint on the Container
+  command:
+    label: Command
+    placeholder: e.g. pre-stop.sh
+  httpHeaders:
+    label: Additional Headers
+    addActionLabel: Add Header
+    keyLabel: Header Name
+    keyPlaceholder: e.g. User-Agent
+    valuePlaceholder: e.g. Health-Check
+  host:
+    label: Host Header
+    placeholder: e.g. example.com
+  port:
+    label: Target Container Port
+    placeholder: e.g. 80
+  path:
+    label: Path to access on the HTTP(S) server.
+    placeholder: e.g. /test
+
 formHealthCheck:
   title: Health Check
   detail: Periodically make a request to the container to see if it is alive and responding correctly.

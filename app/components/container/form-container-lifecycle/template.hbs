@@ -1,0 +1,146 @@
+<div class="radio input">
+  <label>
+    {{radio-button selection=checkType value="none"}} {{t "formContainerLifecycle.hookType.none"}}
+  </label>
+</div>
+<div class="radio input">
+  <label>
+    {{radio-button selection=checkType value="tcp"}} {{t "formContainerLifecycle.hookType.tcp"}}
+  </label>
+</div>
+<div class="radio input">
+  <label>
+    {{radio-button selection=checkType value="http"}} {{t "formContainerLifecycle.hookType.http"}}
+  </label>
+</div>
+<div class="radio input">
+  <label>
+    {{radio-button selection=checkType value="https"}} {{t "formContainerLifecycle.hookType.https"}}
+  </label>
+</div>
+<div class="radio input">
+  <label>
+    {{radio-button selection=checkType value="command"}} {{t "formContainerLifecycle.hookType.command"}}
+  </label>
+</div>
+
+{{#if isCommand}}
+  <div class="row">
+    <div class="col span-12 box">
+      <label class="acc-label">
+        {{t "formContainerLifecycle.command.label"}}{{field-required}}
+      </label>
+      {{#input-or-display
+         editable=editing
+         value=command
+         classesForDisplay="clip"
+      }}
+        {{input-command
+          class="form-control"
+          type="text"
+          changed=(action (mut command))
+          initialValue=command
+          placeholder=(t "formContainerLifecycle.command.placeholder")
+        }}
+      {{/input-or-display}}
+    </div>
+  </div>
+{{/if}}
+{{#if (or isHttp isHttps)}}
+  <div class="row">
+    <div class="col span-12 box">
+      <label class="acc-label">
+        {{t "formContainerLifecycle.path.label"}}{{field-required}}
+      </label>
+      {{#input-or-display editable=editing value=path}}
+        <div class="input-group">
+          <span class="input-group-addon bg-default">GET</span>
+          {{input
+            type="text"
+            classNames="form-control"
+            placeholder=(t "formContainerLifecycle.path.placeholder")
+            value=path
+          }}
+          <span class="input-group-addon bg-default">HTTP/1.1</span>
+        </div>
+      {{/input-or-display}}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col span-12 box">
+      <label class="acc-label">
+        {{t "formContainerLifecycle.host.label"}}
+      </label>
+      {{#input-or-display editable=editing value=host}}
+        {{input
+          type="text"
+          classNames="form-control"
+          placeholder=(t "formContainerLifecycle.host.placeholder")
+          value=host
+        }}
+      {{/input-or-display}}
+
+      <label class="acc-label mt-10">
+        {{t "formContainerLifecycle.httpHeaders.label"}}
+      </label>
+      {{form-key-value
+        initialMap=headers
+        changed=(action (mut headers))
+        addActionLabel="formContainerLifecycle.httpHeaders.addActionLabel"
+        keyHeader="formContainerLifecycle.httpHeaders.keyLabel"
+        keyPlaceholder="formContainerLifecycle.httpHeaders.keyPlaceholder"
+        valuePlaceholder="formContainerLifecycle.httpHeaders.valuePlaceholder"
+        editing=editing
+      }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col span-12 box">
+      <label class="acc-label">
+        {{t "formContainerLifecycle.port.label"}}{{field-required}}
+      </label>
+      {{#input-or-display editable=editing value=lifecycleHandler.port}}
+        {{input-integer
+          min="1"
+          max="65535"
+          classNames="form-control"
+          placeholder=(t "formContainerLifecycle.port.placeholder")
+          value=lifecycleHandler.port
+        }}
+      {{/input-or-display}}
+    </div>
+  </div>
+{{/if}}
+
+{{#if isTcp}}
+<div class="row">
+  {{!-- <div class="col span-6 box">
+    <label class="acc-label">
+      {{t "formContainerLifecycle.host.label"}}
+    </label>
+    {{#input-or-display editable=editing value=host}}
+      {{input
+        type="text"
+        classNames="form-control"
+        placeholder=(t "formContainerLifecycle.host.placeholder")
+        value=host
+      }}
+    {{/input-or-display}}
+  </div> --}}
+  <div class="col span-12 box">
+    <label class="acc-label">
+      {{t "formContainerLifecycle.port.label"}}{{field-required}}
+    </label>
+    {{#input-or-display editable=editing value=lifecycleHandler.port}}
+      {{input-integer
+        min="1"
+        max="65535"
+        classNames="form-control"
+        placeholder=(t "formContainerLifecycle.port.placeholder")
+        value=lifecycleHandler.port
+      }}
+    {{/input-or-display}}
+  </div>
+</div>
+{{/if}}
