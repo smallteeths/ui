@@ -194,6 +194,7 @@ harborConfig:
       user: 用户
       master: 维护人员
       limitedGuest: 受限访客
+      maintainer: 维护人员
     storeStatus:
       public: 公开
       private: 私有

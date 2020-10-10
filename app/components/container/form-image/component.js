@@ -316,6 +316,12 @@ export default Component.extend({
         repository_name: repo.repository_name,
       }
 
+      // We want to load all the artifacts but harbor2.0 returns 10 by default, so pass 10000 to make sure they are all returned.
+      param.q = {
+        page_size: 100,
+        page:      1,
+      }
+
       harborServer.fetchTags(param).then((resp) => {
         let names = [];
         let tags = [];

@@ -192,6 +192,7 @@ harborConfig:
       visitor: Visitors
       user: User
       master: Master
+      maintainer: Maintainer
       limitedGuest: Limited Guest
     storeStatus:
       public: Public

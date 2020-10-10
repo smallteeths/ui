@@ -77,7 +77,7 @@
       <div class="col span-12">
         <ul class="harbor-member-list-cn" style="list-style-type: none">
           <li><span>{{t "harborConfig.table.roleItem.admin"}}</span><b>{{model.summary.project_admin_count}}</b></li>
-          <li><span>{{t "harborConfig.table.roleItem.master"}}</span><b>{{model.summary.master_count}}</b></li>
+          <li><span>{{t "harborConfig.table.roleItem.master"}}</span><b>{{maintainerCount}}</b></li>
           <li><span>{{t "harborConfig.table.roleItem.developer"}}</span><b>{{model.summary.developer_count}}</b></li>
           <li><span>{{t "harborConfig.table.roleItem.visitor"}}</span><b>{{model.summary.guest_count}}</b></li>
           {{#if model.harborVersion.supportRoleLimitedGuest}}
