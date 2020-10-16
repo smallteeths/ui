@@ -8270,6 +8270,8 @@ newCatalog:
     default: '当前默认(当前版本 {version})'
   error:
     appData: 数据加载错误
+  warning:
+    monitoring: 进行监控相关内容的配置请前往 <b>集群->工具->监控</b>，在当前页面做的修改可能会被覆盖。
 
 newMultiClusterApp:
   answers:

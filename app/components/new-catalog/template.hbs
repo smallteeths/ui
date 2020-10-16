@@ -1,3 +1,14 @@
+{{#if (and isSystemProject (or (eq catalogApp.name 'cluster-monitoring') (eq catalogApp.name 'monitoring-operator')))}}
+  {{#banner-message 
+    color='bg-warning m-0'
+    class="mt-10"
+  }}
+    <p>
+      {{t 'newCatalog.warning.monitoring' htmlSafe=true}}
+    </p>
+  {{/banner-message}}
+{{/if}}
+
 {{#if showHeader}}
   <section class="header clearfix">
     <h1>

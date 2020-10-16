@@ -8173,6 +8173,8 @@ newCatalog:
     default: The default at the time (currently {version})
   error:
     appData: Error loading app data
+  warning:
+    monitoring: Configuration of monitoring should go to <b>cluster->tools->monitoring</b>，changes made on the current page may be overridden.
 
 newMultiClusterApp:
   answers:

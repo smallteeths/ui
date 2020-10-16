@@ -72,6 +72,7 @@ export default Component.extend(NewOrEdit, CatalogApp, ChildHook, {
   primaryResource:          alias('namespaceResource'),
   editing:                  notEmpty('catalogApp.id'),
   requiredNamespace:        alias('selectedTemplateModel.requiredNamespace'),
+  isSystemProject:          alias('scope.currentProject.isSystemProject'),
 
   init() {
     this._super(...arguments);
