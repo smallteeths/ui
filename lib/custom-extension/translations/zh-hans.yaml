@@ -77,6 +77,7 @@ harborConfig:
     subtitle: 对邮箱和访问密码进行设置
   wait: 请等待管理员配置镜像库
   info: 请先配置Harbor账号再访问此页面
+  errorInfo: 服务器连接出错请重新配置Harbor账号
   log: 日志
   image: 仓库项目
   newProject: 新建项目

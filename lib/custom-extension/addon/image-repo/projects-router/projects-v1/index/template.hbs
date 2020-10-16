@@ -1,5 +1,5 @@
 <section class="header clearfix">
-  {{#if hasHarborServer}}
+  {{#if (and hasHarborServer (not model.harborServerError))}}
   <div class="right-buttons">
     <button class="btn btn-sm bg-primary right-divider-btn" {{action 'addNewProject'}}>{{t "harborConfig.btn.createProject"}}</button>
   </div>
@@ -8,7 +8,7 @@
   <h1>{{t "harborConfig.image"}}</h1>
 
 </section>
-{{#if hasHarborServer}}
+{{#if (and hasHarborServer (not model.harborServerError))}}
 <section class="instances pt-5 pb-5">
   {{#custom-table
     classNames="grid sortable-table"
@@ -58,5 +58,9 @@
 {{/custom-modal-confirm-delete}}
 {{#custom-modal-add-project modalVisible=showAddProjectModal saved=(action "refresh")}}{{/custom-modal-add-project }}
 {{else}}
-  {{t "harborConfig.info"}}
+  {{#if model.harborServerError}}
+    {{t "harborConfig.errorInfo"}}
+  {{else}}
+    {{t "harborConfig.info"}}
+  {{/if}}
 {{/if}}

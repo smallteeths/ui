@@ -1,7 +1,7 @@
 <section class="header clearfix">
   <h1>{{t "harborConfig.log"}}</h1>
 </section>
-{{#if hasHarborServer}}
+{{#if (and hasHarborServer (not model.harborServerError))}}
 <section>
   <div class="fixed-header-actions row clearfix">
     <div class="pull-right" style="display: flex;">
@@ -65,5 +65,9 @@
   {{/custom-table}}
 </section>
 {{else}}
-  {{t "harborConfig.info"}}
+  {{#if model.harborServerError}}
+    {{t "harborConfig.errorInfo"}}
+  {{else}}
+    {{t "harborConfig.info"}}
+  {{/if}}
 {{/if}}

@@ -76,6 +76,7 @@ harborConfig:
     subtitle: "Set the mailbox and access password"
   wait: "Please wait for the administrator to configure the mirror library."
   info: "Please configure your Harbor account before visiting this page."
+  errorInfo: "Server connection error. Please reconfigure Harbor account."
   log: "Logs"
   image: "Image Management"
   newProject: "New Project"
