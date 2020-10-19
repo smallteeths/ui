@@ -7463,6 +7463,16 @@ loggingPage:
       label: Include System Log
     jsonParsing:
       label: Enable JSON Parsing
+    enableMultiLineMerge:
+      label: Enable MultiLine Filter
+    enableExceptionStackMatch:
+      label: Enable Exception Stack Match
+    enableMultiLineFilter:
+      label: Custom Multi Line Filter 
+    multiLineStartRegexp:
+      label: Line Start Regexp
+    multiLineEndRegexp:
+      label: Line End Regexp
   advanced:
     file: Edit as File
     cancel: Edit as a Form

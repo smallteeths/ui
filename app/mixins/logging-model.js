@@ -51,13 +51,27 @@ export default Mixin.create({
 
     this.setProperties(map);
     if (t && t !== 'none') {
+      const {
+        multiLineStartRegexp, multiLineEndRegexp, enableExceptionStackMatch, enableMultiLineFilter
+      } = this
+
       setProperties(this, {
-        [`${ t }.config`]:                 get(this, `${ t }Config`),
-        [`${ t }.outputFlushInterval`]:    get(this, `outputFlushInterval`),
-        [`${ t }.outputTags`]:             get(this, `outputTags`),
-        [`${ t }.dockerRootDir`]:          get(this, 'dockerRootDir'),
-        [`${ t }.includeSystemComponent`]: get(this, 'includeSystemComponent'),
+        [`${ t }.config`]:                    get(this, `${ t }Config`),
+        [`${ t }.outputFlushInterval`]:       get(this, `outputFlushInterval`),
+        [`${ t }.outputTags`]:                get(this, `outputTags`),
+        [`${ t }.dockerRootDir`]:             get(this, 'dockerRootDir'),
+        [`${ t }.includeSystemComponent`]:    get(this, 'includeSystemComponent'),
+        [`${ t }.enableMultiLineFilter`]:     enableMultiLineFilter,
+        [`${ t }.multiLineStartRegexp`]:      multiLineStartRegexp,
+        [`${ t }.multiLineEndRegexp`]:        multiLineEndRegexp,
+        [`${ t }.enableExceptionStackMatch`]: enableExceptionStackMatch,
       })
+
+      if (enableMultiLineFilter || enableExceptionStackMatch) {
+        set(this, `${ t }.enableMultiLineMerge`, true)
+      } else {
+        set(this, `${ t }.enableMultiLineMerge`, false)
+      }
     }
 
     return this;

@@ -42,30 +42,102 @@
       {{/if}}
 
       {{#if (eq pageScope "cluster")}}
-        <div class="row">
-          <label for="include-system-component">
-            <Input
-              @type="checkbox"
-              class="form-control"
-              id="include-system-component"
-              @checked={{model.includeSystemComponent}}
-            />
-            {{t "loggingPage.additional.includeSystemComponent.label"}}
-          </label>
-        </div>
-      {{/if}}
-
-      <div class="row">
-        <label for="enable-json-parsing">
+        <label 
+          class="row flex-align-center" 
+          for="include-system-component"
+        >
           <Input
             @type="checkbox"
-            class="form-control"
-            id="enable-json-parsing"
-            @checked={{loggingModel.enableJSONParsing}}
+            class="form-control mr-5"
+            id="include-system-component"
+            @checked={{model.includeSystemComponent}}
           />
-          {{t "loggingPage.additional.jsonParsing.label"}}
+          {{t "loggingPage.additional.includeSystemComponent.label"}}
         </label>
-      </div>
+      {{/if}}
+
+      <label 
+        class="row flex-align-center"
+        for="enable-json-parsing"
+      >
+        <Input
+          @type="checkbox"
+          class="form-control mr-5"
+          id="enable-json-parsing"
+          @checked={{loggingModel.enableJSONParsing}}
+        />
+        {{t "loggingPage.additional.jsonParsing.label"}}
+      </label>
+
+      {{#if (and (not-eq targetType "syslog") (not-eq customType "syslog"))}}
+        <label 
+          class="row flex-align-center"
+          for="enable-multi-line-merge"
+        >
+          {{input
+            type="checkbox"
+            classNames="form-control mr-5"
+            checked=model.enableMultiLineMerge
+            id="enable-multi-line-merge"
+          }}
+          {{t "loggingPage.additional.enableMultiLineMerge.label"}}
+        </label>
+
+        {{#if model.enableMultiLineMerge}}
+          <div class="ml-10">
+            <label 
+              class="row flex-align-center"
+              for="enable-exception-stack-match"
+            >
+              {{input
+                type="checkbox"
+                classNames="form-control mr-5"
+                checked=model.enableExceptionStackMatch
+                id="enable-exception-stack-match"
+              }}
+              {{t "loggingPage.additional.enableExceptionStackMatch.label"}}
+            </label>
+
+            <label 
+              class="row flex-align-center"
+              for="enable-multi-line-filter"
+            >
+              {{input
+                type="checkbox"
+                classNames="form-control mr-5"
+                checked=model.enableMultiLineFilter
+                id="enable-multi-line-filter"
+              }}
+              {{t "loggingPage.additional.enableMultiLineFilter.label"}}
+            </label>
+
+            {{#if model.enableMultiLineFilter}}
+              <div classNames="row">
+                <div classNames="col">
+                  <label class="acc-label">
+                    {{t "loggingPage.additional.multiLineStartRegexp.label"}}
+                    </label>
+                    {{input
+                      value=model.multiLineStartRegexp
+                      class="form-control"
+                    }}
+                </div>
+              </div>
+              <div classNames="row">
+                <div classNames="col">
+                  <label class="acc-label">
+                    {{t "loggingPage.additional.multiLineEndRegexp.label"}}
+                    </label>
+                    {{input
+                      value=model.multiLineEndRegexp
+                      class="form-control"
+                    }}
+                </div>
+              </div>
+            {{/if}}
+          </div>
+        {{/if}}
+      {{/if}}
     </section>
   </div>
 

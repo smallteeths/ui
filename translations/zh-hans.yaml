@@ -7560,6 +7560,16 @@ loggingPage:
       label: 包含系统日志
     jsonParsing:
       label: 支持 JSON 解析
+    enableMultiLineMerge:
+      label: 启用多行日志合并
+    enableExceptionStackMatch:
+      label: 自动合并常用语言的异常堆栈信息
+    enableMultiLineFilter:
+      label: 自定义多行日志合并策略
+    multiLineStartRegexp:
+      label: 起始行正则表达式
+    multiLineEndRegexp:
+      label: 结束行正则表达式
   advanced:
     file: 以文件形式编辑
     cancel: 以表单形式编辑
