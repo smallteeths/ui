@@ -38,7 +38,7 @@
 </section>
 <section>
   <div style="position: relative;">
-    <div style="display: flex; position: absolute;top: 5px; right: 0px; z-index: 1;">
+    <div style="display: flex; position: absolute;top: 5px; right: 0px; z-index: 2;">
       <div style="width: 115px;margin-right:10px;">
         {{#basic-dropdown
           horizontalPosition="right"
@@ -80,6 +80,7 @@
     data=data
     search=false
     page=page
+    bulkActions=true
     primaryKeyName="id"
     totalCount=model.imageList.totalCount
     remove=(action "promptDelete")
