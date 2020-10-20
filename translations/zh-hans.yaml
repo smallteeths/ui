@@ -7564,8 +7564,10 @@ loggingPage:
       label: 启用多行日志合并
     enableExceptionStackMatch:
       label: 自动合并常用语言的异常堆栈信息
+      description: 包括Java, JavaScript, C#, Python, Go, Ruby, PHP
     enableMultiLineFilter:
       label: 自定义多行日志合并策略
+      required: 需要配置起始行正则表达式或结束行正则表达式
     multiLineStartRegexp:
       label: 起始行正则表达式
     multiLineEndRegexp:

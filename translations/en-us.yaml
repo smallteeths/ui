@@ -7467,8 +7467,10 @@ loggingPage:
       label: Enable MultiLine Filter
     enableExceptionStackMatch:
       label: Enable Exception Stack Match
+      description: Includes Java, JavaScript, C#, Python, Go, Ruby, and PHP
     enableMultiLineFilter:
       label: Custom Multi Line Filter 
+      required: '"Line Start Regexp" or "Line End Regexp" is required'
     multiLineStartRegexp:
       label: Line Start Regexp
     multiLineEndRegexp:
