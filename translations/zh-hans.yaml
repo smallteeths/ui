@@ -10508,3 +10508,6 @@ formMenu:
     placeholder: "e.g. https://www.example.com"
   iframeEnabled:
     label: 使用 iframe
+
+modalConfirmYamlMonitoring2Form:
+  helpText: '请注意，当切换回表单编辑时，非表单数据可能会发生数据丢失。在点击确认之前，请确认不会受影响。'
