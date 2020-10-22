@@ -27,6 +27,7 @@ export default Resource.extend({
   description:       null,
   isMonitoringReady: false,
   canEditQoutaKey:   null,
+  canClone:          true,
 
   cluster:                     reference('clusterId', 'cluster'),
   // 2.0 bug projectId is wrong in the ptrb should be <cluster-id>:<project-id> instead of just <project-id>
@@ -115,6 +116,10 @@ export default Resource.extend({
         originalModel: this,
         action:        'deactivate'
       });
+    },
+
+    clone() {
+      get(this, 'router').transitionTo('authenticated.cluster.projects.new', { queryParams: { projectId: get(this, 'id'), } });
     },
   },
 
