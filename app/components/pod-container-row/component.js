@@ -10,6 +10,10 @@ export default Component.extend({
   containerStatus: computed('containerStatuses', 'model', function() {
     const status = get(this, 'containerStatuses')[get(this, 'model.name')]
 
+    if (!status) {
+      return status;
+    }
+
     if (status.stateTooltip) {
       set(status, 'stateTooltip', this.factory(get(status, 'stateTooltip')));
     }

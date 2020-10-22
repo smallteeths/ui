@@ -47,7 +47,13 @@ export default Component.extend({
     const statuses = {};
 
     containers.forEach((c) => {
-      statuses[c.name] = statusesTemp.find((s) => s.name === c.name);
+      const result = statusesTemp.find((s) => s.name === c.name);
+
+      if (!result) {
+        return;
+      }
+
+      statuses[c.name] = result;
     })
 
     Object.keys(statuses).forEach((k) => {
