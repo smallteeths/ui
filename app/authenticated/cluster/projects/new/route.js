@@ -1,5 +1,5 @@
 import { hash } from 'rsvp';
-import { get } from '@ember/object';
+import { get, set } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
 import Ember from 'ember';
@@ -33,6 +33,12 @@ export default Route.extend({
     });
   },
 
+  resetController(controller, isExiting/* , transition*/) {
+    if (isExiting) {
+      set(controller, 'projectId', null);
+    }
+  },
+
   modelForNew(params) {
     const store = get(this, 'globalStore');
     const cluster = this.modelFor('authenticated.cluster');
@@ -43,7 +49,7 @@ export default Route.extend({
           return Ember.RVP.reject('Project not found');
         }
 
-        return p.clone();
+        return p.cloneForNew();
       });
     }
 
