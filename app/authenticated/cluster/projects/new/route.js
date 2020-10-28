@@ -48,8 +48,22 @@ export default Route.extend({
         if (!p) {
           return Ember.RVP.reject('Project not found');
         }
+        const newProject = p.cloneForNew();
 
-        return p.cloneForNew();
+        if (newProject.annotations) {
+          Object.keys(newProject.annotations).filter((k) => k.startsWith('authz.management.cattle.io/') || k.startsWith('lifecycle.cattle.io/'))
+            .forEach((k) => {
+              delete newProject.annotations[k];
+            });
+        }
+        if (newProject.labels) {
+          Object.keys(newProject.labels).filter((k) => k === 'cattle.io/creator')
+            .forEach((k) => {
+              delete newProject.labels[k];
+            });
+        }
+
+        return newProject;
       });
     }
 
