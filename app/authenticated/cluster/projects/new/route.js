@@ -51,13 +51,13 @@ export default Route.extend({
         const newProject = p.cloneForNew();
 
         if (newProject.annotations) {
-          Object.keys(newProject.annotations).filter((k) => k.startsWith('authz.management.cattle.io/') || k.startsWith('lifecycle.cattle.io/'))
+          Object.keys(newProject.annotations).filter((k) => k.startsWith('authz.management.cattle.io/') || k.startsWith('lifecycle.cattle.io/') || k.startsWith('field.cattle.io/'))
             .forEach((k) => {
               delete newProject.annotations[k];
             });
         }
         if (newProject.labels) {
-          Object.keys(newProject.labels).filter((k) => k === 'cattle.io/creator')
+          Object.keys(newProject.labels).filter((k) => k === 'cattle.io/creator' || k.startsWith('authz.management.cattle.io/'))
             .forEach((k) => {
               delete newProject.labels[k];
             });
