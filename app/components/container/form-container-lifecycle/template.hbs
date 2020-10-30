@@ -1,3 +1,4 @@
+{{#if editing}}
 <div class="radio input">
   <label>
     {{radio-button selection=checkType value="none"}} {{t "formContainerLifecycle.hookType.none"}}
@@ -23,6 +24,13 @@
     {{radio-button selection=checkType value="command"}} {{t "formContainerLifecycle.hookType.command"}}
   </label>
 </div>
+{{else}}
+  <div>
+    <label class="acc-label">
+      {{t "generic.type"}}:</label>
+    {{t (concat "formContainerLifecycle.hookType." checkType)}}
+  </div>
+{{/if}}
 
 {{#if isCommand}}
   <div class="row">

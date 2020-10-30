@@ -313,6 +313,41 @@
     }}
   {{/if}}
 
+  {{#accordion-list-item
+    title=(t "formContainerLifecycle.title")
+    detail=(t "formContainerLifecycle.detail" appName=settings.appName)
+    expandAll=al.expandAll
+    expand=(action expandFn)
+  }}
+
+  <div class="row">
+    <div class="col span-6 mt-0 mb-0">
+      <label class="acc-label">
+        {{t "formContainerLifecycle.postStartHook"}}
+      </label>
+    </div>
+    <div class="col span-6 mt-0 mb-0">
+      <label class="acc-label">
+        {{t "formContainerLifecycle.preStopHook"}}
+      </label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col span-6 mt-0 mb-0">
+      {{container/form-container-lifecycle
+        initialHandler=launchConfig.postStart
+        editing=false
+      }}
+    </div>
+    <div class="col span-6 mt-0 mb-0">
+      {{container/form-container-lifecycle
+        initialHandler=launchConfig.preStop
+        editing=false
+      }}
+    </div>
+  </div>
+  {{/accordion-list-item}}
+
 {{/accordion-list}}
 
 {{#custom-modal-adjust-pod
