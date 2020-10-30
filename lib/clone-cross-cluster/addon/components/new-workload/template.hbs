@@ -438,7 +438,7 @@
             {{container/form-container-lifecycle
               initialHandler=container.postStart
               changed=(action (mut container.postStart))
-              etErrors=(action (mut lifecycleErrors))
+              setErrors=(action (mut lifecycleErrors))
               editing=true
             }}
           </div>
