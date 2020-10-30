@@ -2451,6 +2451,7 @@ globalDnsPage:
       noAccessMulti: You do not have access to the target app
       noAccessProvider: You do not have access to the provider
       noAccessProject: You do not have access to the target project
+      noAccessAddProvider: You do not have access to add a provider
     projectHelp: "To finalize configuring this Global DNS entry, you must add the following annotation ( <code>rancher.io/globalDNS.hostname</code> ) on the ingress in your application or in your project. The value of this annotation should be the hostname used in the routing rules of your ingress and match the FQDN of this Global DNS entry."
     istioHelp: "To make catalog template visable in Traffic Rules Catalog, you must add the following label ( <code>io.rancher.istio=true</code> ) in <code>questions.yaml</code> file of your catalog template."
     table:

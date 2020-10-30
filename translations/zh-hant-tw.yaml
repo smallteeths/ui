@@ -2161,6 +2161,7 @@ globalDnsPage:
       noAccessMulti: 您無法訪問目標應用程式
       noAccessProvider: 您没有全線訪問此供應商
       noAccessProject: 您無法訪問目標項目
+      noAccessAddProvider: 您没有全線添加應商
     projectHelp: "要完成項目的全域DNS紀錄設置，必須在應用或項目的ingress規則中添加註解(<code>rancher.io/globalDNS.hostname='hostname'</code>)，其中<code>'hostname'</code>是路由規則中使用註解机名，這個<code>'hostname'</code>也必須匹配這個全域DNS項目的FQDN。"
     istioHelp: "要使模板在流量規則商店中可見，必須在應用商店模板<code>questions.yaml</code>文件中添加標籤( <code>io.rancher.istio=true</code> )"
     table:
