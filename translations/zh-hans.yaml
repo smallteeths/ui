@@ -6296,6 +6296,8 @@ formResourceQuota:
     servicesNodePorts: 服务节点端口
     requestsGpuMemory: GPU Memory
     requestsGpuCount: GPU Count
+    requestsStorageClassStorage: 'StorageClass存储'
+    requestsStorageClassPVC: 'StorageClassPVC'
 
 formEnvVar:
   title: 环境变量

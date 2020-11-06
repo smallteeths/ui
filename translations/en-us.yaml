@@ -6199,6 +6199,8 @@ formResourceQuota:
     servicesNodePorts: Services Node Ports
     requestsGpuMemory: GPU Memory
     requestsGpuCount: GPU Count
+    requestsStorageClassStorage: 'Storage Class'
+    requestsStorageClassPVC: 'Storage Class PVC'
 
 formEnvVar:
   title: Environment Variables

@@ -27,6 +27,8 @@ export default Component.extend({
 
   quotaArray: null,
 
+  storageClassKey: ['requestsStorageClassStorage', 'requestsStorageClassPVC'],
+
   init() {
     this._super(...arguments);
 
@@ -38,9 +40,15 @@ export default Component.extend({
 
   quotaDidChange: observer('quotaArray.@each.{key,value}', function() {
     const out = {};
+    const storageClassKey = get(this, 'storageClassKey');
 
     (get(this, 'quotaArray') || []).forEach((quota) => {
       if ( quota.key ) {
+        if (storageClassKey.find((scKey) => scKey === quota.key)){
+          this.setStorageClassSubmitQuota(quota, out);
+
+          return;
+        }
         let value      = parseInt(get(quota, 'value'), defaultRadix);
         let max        = get(quota, 'max');
         let currentUse = get(quota, 'currentProjectUse.firstObject.value');
@@ -132,6 +140,12 @@ export default Component.extend({
     const array               = [];
 
     Object.keys(nsDefaultQuota).forEach((key) => {
+      const storageClassKey = get(this, 'storageClassKey');
+
+      if (storageClassKey.find((scKey) => scKey === key)){
+        this.initStorageClassQuota(key, array);
+      }
+
       if ( key !== 'type' && typeof nsDefaultQuota[key] ===  'string') {
         let value, currentProjectUse, totalLimits, remaining;
         let usedValue = '';
@@ -248,5 +262,115 @@ export default Component.extend({
     }
 
     return parseInt(str, defaultRadix)
-  }
+  },
+  initStorageClassQuota(key, array){
+    const intl                = get(this, 'intl');
+    const limit               = get(this, 'limit');
+    const nsDefaultQuota      = get(this, 'nsDefaultQuota');
+    const used                = get(this, 'usedLimit');
+    const currentProjectLimit = get(this, 'projectLimit')
+    const scDefaultQuota      = nsDefaultQuota[key];
+
+    Object.keys(scDefaultQuota).forEach((subKey) => {
+      let value, currentProjectUse, totalLimits, remaining, usedValue, max, newUse;
+      let projectUse = get(used, key) || '0';
+      let scLimit = limit && limit[key] && limit[key][subKey];
+
+      if (scLimit === 0){
+        scLimit = '0'
+      }
+
+      value = scLimit ? scLimit : scDefaultQuota[subKey];
+
+      if ( !scLimit ) {
+        array.push({
+          key,
+          value:             '',
+          currentProjectUse: [],
+        });
+
+        return;
+      }
+
+      value     = parseInt(value, defaultRadix);
+      usedValue = this.convertToDec(projectUse[subKey]);
+      max       = parseInt(get(currentProjectLimit, key)[subKey], defaultRadix);
+
+      if ( !get(this, 'isNew') ) {
+        usedValue = usedValue - value
+      }
+
+      newUse = usedValue + value;
+
+      remaining = ( max - newUse ) > 0 ? ( max - newUse ) : 0;
+
+      currentProjectUse = [
+        {
+          // current use
+          color: 'bg-primary',
+          label: key,
+          value: usedValue,
+        },
+        {
+          // only need the new value here because progress-multi-bar adds this to the previous
+          color: 'bg-info',
+          label: key,
+          value,
+        }
+      ];
+
+      totalLimits = [
+        {
+          label: intl.t('formResourceQuota.table.resources.reserved'),
+          value: this.quotaWithUnits(nsDefaultQuota[key], usedValue, true),
+        },
+        {
+          label: intl.t('formResourceQuota.table.resources.namespace'),
+          value: this.quotaWithUnits(nsDefaultQuota[key], value, true),
+        },
+        {
+          label: intl.t('formResourceQuota.table.resources.available'),
+          value: this.quotaWithUnits(nsDefaultQuota[key], remaining, true),
+        },
+        {
+          label: intl.t('formResourceQuota.table.resources.max'),
+          value: this.quotaWithUnits(nsDefaultQuota[key], max, true),
+        }
+      ];
+
+      array.push({
+        key,
+        subKey,
+        value,
+        currentProjectUse,
+        max,
+        totalLimits,
+        editing: subKey === get(this, 'canEditQuotaSubKey') && key === get(this, 'canEditQuotaKey'),
+      });
+    });
+  },
+  setStorageClassSubmitQuota(quota, out){
+    out[quota.key]          = out[quota.key] || {};
+
+    if (quota.subKey){
+      let value          = parseInt(get(quota, 'value'), defaultRadix);
+      let max            = get(quota, 'max');
+      let currentUse     = get(quota, 'currentProjectUse.firstObject.value');
+      const classStorage = out[quota.key]
+
+
+      if ( value === undefined || value === null ) {
+        classStorage[quota.subKey] = '';
+
+        return;
+      }
+
+      if (value > max || (( currentUse + value ) > max)) {
+        value = set(quota, 'value', max - currentUse);
+      }
+
+
+      classStorage[quota.subKey] = this.quotaWithUnits(quota, value);
+    }
+  },
 });

@@ -14,6 +14,8 @@ export default Component.extend({
   quotaArray:      null,
   canEditQuotaKey: '',
 
+  storageClassKey: ['requestsStorageClassStorage', 'requestsStorageClassPVC'],
+
   init() {
     this._super(...arguments);
 
@@ -37,9 +39,15 @@ export default Component.extend({
   quotaDidChange: observer('quotaArray.@each.{key,projectLimit,namespaceLimit}', function() {
     const limit = {};
     const nsDefaultLimit = {};
+    const storageClassKey = get(this, 'storageClassKey');
 
     (get(this, 'quotaArray') || []).forEach((quota) => {
       if ( quota.key && (quota.projectLimit || quota.namespaceLimit) ) {
+        if (storageClassKey.find((scKey) => scKey === quota.key)){
+          this.setStorageClassSubmitQuota(quota, limit, nsDefaultLimit)
+
+          return;
+        }
         limit[quota.key] = this.convertToString(quota.key, quota.projectLimit);
         nsDefaultLimit[quota.key] = this.convertToString(quota.key, quota.namespaceLimit);
       }
@@ -111,9 +119,40 @@ export default Component.extend({
           namespaceLimit,
           editing: key === get(this, 'canEditQuotaKey'),
         });
+      } else {
+        this.initStorageClassQuota(key, array);
       }
     });
 
     set(this, 'quotaArray', array);
+  },
+  initStorageClassQuota(key, array){
+    const storageClassKey   = get(this, 'storageClassKey');
+    const limit             = get(this, 'limit') || {};
+    const nsDefaultLimit    = get(this, 'nsDefaultLimit') || {};
+
+    if (storageClassKey.find((scKey) => scKey === key)){
+      Object.keys(limit[key]).forEach((subKey) => {
+        const projectLimit = this.convertToLimit(key, limit[key][subKey]);
+        const namespaceLimit = this.convertToLimit(key, nsDefaultLimit[key][subKey]);
+
+        array.push({
+          subKey,
+          key,
+          projectLimit,
+          namespaceLimit,
+          editing: subKey === get(this, 'canEditQuotaSubKey') && key === get(this, 'canEditQuotaKey'),
+        });
+      });
+    }
+  },
+  setStorageClassSubmitQuota(quota, limit, nsDefaultLimit){
+    limit[quota.key]          = limit[quota.key] || {};
+    nsDefaultLimit[quota.key] = nsDefaultLimit[quota.key] || {};
+
+    if (quota.subKey){
+      set(limit[quota.key], quota.subKey, this.convertToString(quota.key, quota.projectLimit));
+      set(nsDefaultLimit[quota.key], quota.subKey, this.convertToString(quota.key, quota.namespaceLimit));
+    }
   }
 });

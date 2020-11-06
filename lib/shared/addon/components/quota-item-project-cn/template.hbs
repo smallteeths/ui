@@ -37,6 +37,11 @@
       <span>
         {{quotaState}}
       </span>
+      {{#if quotaSubKey}}
+        <div title="{{quotaSubKey}}" class="text-small clip">
+          [{{quotaSubKey}}]
+        </div>
+      {{/if}}
     </div>
     <div class="quota-container">
       <span>

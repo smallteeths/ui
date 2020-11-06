@@ -1,6 +1,26 @@
+{{#if (or (eq quota.key 'requestsStorageClassStorage') (eq quota.key 'requestsStorageClassPVC'))}}
+<div class="row">
+  <div class="span-6 col">
+    {{searchable-select
+      content=resourceChoices
+      value=quota.key
+      localizedLabel=true
+      readOnly=(not editing)
+    }}
+  </div>
+  <div class="span-6 col">
+    {{searchable-select
+      content=storageClassChoices
+      value=quota.subKey
+      readOnly=(not editing)
+    }}
+  </div>
+</div>
+{{else}}
 {{searchable-select
   content=resourceChoices
   value=quota.key
   localizedLabel=true
   readOnly=(not editing)
 }}
+{{/if}}

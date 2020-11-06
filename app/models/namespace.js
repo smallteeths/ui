@@ -7,6 +7,7 @@ import { parseSi } from 'shared/utils/parse-unit';
 import C from 'ui/utils/constants';
 import { hasMany, reference } from '@rancher/ember-api-store/utils/denormalize';
 import StateCounts from 'ui/mixins/state-counts';
+import { isObject } from 'shared/utils/flat-map';
 const ISTIO_INJECTION = 'istio-injection'
 const ENABLED = 'enabled';
 
@@ -198,8 +199,16 @@ var Namespace = Resource.extend(StateCounts, {
 
     if ( total ) {
       Object.keys(resourceQuota).forEach((key) => {
-        if ( !parseInt(resourceQuota[key], 10) && parseInt(resourceQuota[key], 10) !== 0 ) {
-          errors.push(intl.t('formResourceQuota.errors.limitRequired', { resource: intl.t(`formResourceQuota.resources.${ key }`) }));
+        if (isObject(resourceQuota[key])){
+          Object.keys(resourceQuota[key]).forEach((subKey) => {
+            if (!parseInt(resourceQuota[key][subKey], 10) && parseInt(resourceQuota[key], 10) !== 0){
+              errors.push(`${ intl.t('formResourceQuota.errors.limitRequired', { resource: intl.t(`formResourceQuota.resources.${ key }`) }) }(${ subKey })`);
+            }
+          })
+        } else {
+          if ( !parseInt(resourceQuota[key], 10) && parseInt(resourceQuota[key], 10) !== 0 ) {
+            errors.push(intl.t('formResourceQuota.errors.limitRequired', { resource: intl.t(`formResourceQuota.resources.${ key }`) }));
+          }
         }
 
         if ( parseInt(resourceQuota[key], 10) ) {

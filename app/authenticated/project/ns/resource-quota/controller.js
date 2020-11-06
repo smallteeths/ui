@@ -20,6 +20,9 @@ export const quotaName = {
   replicationControllers: 'Replication Controllers',
   requestsGpuMemory:      'GPU Memory',
   requestsGpuCount:       'GPU Count',
+
+  requestsStorageClassStorage: 'StorageClass Storage',
+  requestsStorageClassPVC:     'StorageClassPVC',
 }
 
 export default Controller.extend({
@@ -28,13 +31,21 @@ export default Controller.extend({
   router:  service(),
   intl:    service(),
 
+  storageClassKey: ['requestsStorageClassStorage', 'requestsStorageClassPVC'],
+
   quotaTypeArray: computed('C.QUOTA_TPYE_CN.[]', 'model.quotaSetting.limit', 'model.namespaces.[]', function() {
     let quotaData = [];
     const intl = get(this, 'intl');
+    const storageClassKey = get(this, 'storageClassKey');
 
     C.QUOTA_TPYE_CN.forEach((key) => {
       let quotaState = 'limit';
 
+      if (storageClassKey.find((scKey) => scKey === key)){
+        this.initStorageClassQuota(key, quotaData);
+
+        return;
+      }
       if (key === 'requestsCpu' || key === 'requestsMemory' || key === 'requestsStorage') {
         quotaState = 'reserved';
       } else if (key === 'requestsGpuMemory' || key === 'requestsGpuCount'){
@@ -70,5 +81,24 @@ export default Controller.extend({
 
     return currentNamespace
   }),
+  initStorageClassQuota(key, quotaData){
+    const intl             = get(this, 'intl');
+    const limit            = get(this, 'model.quotaSetting.limit');
+    const used             = get(this, 'model.quotaSetting.used');
+    const scQuota          = limit[key];
+    const scUsed           = used[key];
 
+    Object.keys(scQuota).forEach((subKey) => {
+      if (get(this, 'model.quotaSetting') && get(this, 'model.quotaSetting.limit')  && get(this, 'model.quotaSetting.limit')[key]) {
+        quotaData.push({
+          usedProp:        scUsed ? scUsed[subKey] : '0',
+          quotaKey:        key,
+          quotaSubKey:     subKey,
+          quotaName:       quotaName[key],
+          quotaState:      intl.t(`quotasCn.common.limit`),
+          quotaTotal:      get(this, 'model.quotaSetting.limit')[key][subKey],
+        })
+      }
+    })
+  }
 });
