@@ -1,7 +1,7 @@
 import EmberObject from '@ember/object';
 import { inject as service } from '@ember/service';
 import { get, set } from '@ember/object';
-import { hash, resolve } from 'rsvp';
+import { hash, resolve, reject } from 'rsvp';
 import Route from '@ember/routing/route';
 import Ember from 'ember';
 import C from 'ui/utils/constants';
@@ -67,6 +67,12 @@ export default Route.extend({
 
     const harborVersion = get(this, 'globalStore').rawRequest({ url: '/v3/settings/harbor-version' }).then((resp) => {
       return resp && resp.body && resp.body.value ? resp.body.value : ''
+    }).catch((err) => {
+      if (err.status === 404){
+        return ''
+      } else {
+        return reject(err);
+      }
     });
 
     return hash({
