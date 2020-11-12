@@ -3823,7 +3823,7 @@ clusterNew:
     enableHttpApplicationRouting:
       label: HTTP Application Routing
     loadBalancerSku:
-      label: Load Balancer
+      label: LoadBalancer SKU
       standard: Standard
       basic: Basic
     enableMonitoring:
@@ -7716,12 +7716,12 @@ newCertificate:
     invalidFormat: Private Key is invalid.
     placeholder: "Paste in the private key, typically starting with -----BEGIN RSA PRIVATE KEY-----"
   cert:
-    label: CA Certificate
+    label: Certificate
     required: Certificate is required.
     invalidFormat: Certificate is invalid.
-    placeholder: "Paste in the CA certificate, starting with -----BEGIN CERTIFICATE-----"
+    placeholder: "Paste in the certificate, starting with -----BEGIN CERTIFICATE-----"
     protip: Please include any chain certificates that are needed.
-    tooltip: 'The CA certificate will be placed in the generated kubeconfig file(s) to validate the certificate (chain) presented by the load balancer which you have configured at the provided FQDN. <a href="https://rancher.com/docs/rancher/v2.x/en/cluster-provisioning/rke-clusters/options/#authorized-cluster-endpoint" target="blank"
+    tooltip: 'The certificate will be placed in the generated kubeconfig file(s) to validate the certificate (chain) presented by the load balancer which you have configured at the provided FQDN. <a href="https://rancher.com/docs/rancher/v2.x/en/cluster-provisioning/rke-clusters/options/#authorized-cluster-endpoint" target="blank"
     >More info here.</a>'
   certChain:
     label: Chain Certs
@@ -8997,6 +8997,54 @@ nodeDriver:
       placeholder: "e.g. AllowVnetOutBound"
       helpText: When using a Rancher managed or providing an existing NSG, all nodes using this template will use the supplied NSG. If no NSG is provided, a new NSG will be created for each node.
       openPorts: When using an existing NSG, Open Ports are ignored.
+  oci:
+    placement:
+      title: Placement
+      detail: Select placement for compute instance(s) created by this template.
+    access:
+      title: Account Access
+      detail: User Credentials will be used to launch OCI Instances.
+    network:
+      title: Virtual Cloud Network Details
+      detail: Configure the VCN for compute instances created by this template.
+    instance:
+      title: Instance Details
+      detail: Configure and customize the compute instance(s) that will be created.
+    image:
+      label: Image
+      placeholder: 'enter valid compartment to populate options...'
+    faultDomainCount:
+      label: Fault Domain
+      placeholder: e.g. 3
+      helpText: Each availability domain contains three fault domains.
+    shape:
+      label: Shape
+      placeholder: 'enter valid compartment to populate options...'
+    nodeCompartment:
+      label: OCID of compartment where compute instance(s) will be created
+      placeholder: 'ocid1.compartment.oc1....'
+    vcnCompartment:
+      label: OCID of compartment where VCN and subnet reside (if different than above)
+      placeholder: 'ocid1.compartment.oc1....'
+    vcn:
+      label: OCID of VCN where compute instance will be launched
+      placeholder: 'ocid1.vcn.oc1....'
+    subnet:
+      label: OCID of subnet (accessible to Rancher) that compute instance(s) will use
+      placeholder: 'ocid1.subnet.oc1....'
+      helpText: If subnet is AD-specific, it must match the AD of the node(s) created by this template.
+    usePrivateIp:
+      label: Use private IP address to connect to compute instances(s)
+    availabilityDomain:
+      label: Availability Domain
+      placeholder: 'select region to populate options...'
+      helpText: Must match availability domain of subnet if using AD-specific subnets.
+    openPort:
+      label: Open Port
+      placeholder: 'Comma-separated, e.g. 80,443'
+    region:
+      label: Region
+      placeholder: 'select cloud credential to populate options...'
   zstack:
     access:
       title: 1. Account Access

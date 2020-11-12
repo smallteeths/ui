@@ -3656,7 +3656,7 @@ clusterNew:
     none: 没有配置策略
     required: 启用时需要设置默认 Pod 安全策略
   amazoneks:
-    label: AWS 基于 Kubernetes 的弹性容器服务
+    label: 为 Kubernetes 提供的 Amazon 弹性容器服务
     shortLabel: Amazon EKS
     ingressWarning: '注意: 目前 Amazon EKS 不会在启动新的集群时创建传入控制器。如果需要此功能，则必须在集群创建后手动创建一个传入控制器。'
     access:
@@ -3667,6 +3667,7 @@ clusterNew:
       disabled: None
       kms: "KMS Key: Select or Enter KMS Key that will be used to encrypt secrets"
       kmsHelpLabel: KMS Key ARN
+      failure: There was a problem loading KMS Encryption keys but you may still enter a KeyARN if you know it.
   azureaks:
     label: Azure 容器服务
     shortLabel: Azure AKS
@@ -5815,13 +5816,14 @@ editApiKey:
     day: 从现在开始，有效期 1 天
     month: 从现在开始，有效期 1 个月
     year: 从现在开始，有效期 1 年
-    max: 
+    max:
       label: "{time} - 最大允许"
       unit:
         minutes: "{count, plural, =1 {# Minute} other {# Minutes}}"
+        hours: "{count, plural, =1 {# Hour} other {# Hours}}"
         days: "{count, plural, =1 {# Day} other {# Days}}"
         years: "{count, plural, =1 {# Year} other {# Years}}"
-        
+
     custom: 自定义
   description:
     placeholder: "可选: 例如: 此密钥由应用服务器使用，用于容器部署。"
@@ -6511,12 +6513,12 @@ formHealthCheck:
     placeholder: '例如: /health'
   httpHeaders:
     label: 其他的 HTTP Headers
-    addActionLabel: 添加 Headers
-    keyLabel: Http 头字段
+    addActionLabel: 添加 Header
+    keyLabel: Header 名称
     keyPlaceholder: '例如: 用户代理'
     valuePlaceholder: '例如: 健康检查'
   host:
-    label: 主机 Headers
+    label: 主机 Header
     placeholder: '例如: example.com'
   port:
     label: 容器端口
@@ -6752,7 +6754,7 @@ formPorts:
   dnsName:
     label: DNS 记录
     placeholder: '例如: example'
-  noPorts: 当前 Pod 没有映射端口
+  noPorts: 此容器没有端口映射。
   error:
     privateRequired: 每条映射规则必须设置容器端口。
     publicRequired: 如果指定了主机 IP，则需要源端口。
@@ -6765,7 +6767,7 @@ formPorts:
   showAdvanced: 显示端口命名选项
 
 formScale:
-  label: 类型
+  label: 工作负载类型
   showAdvanced: 更多选项
   scaleMode:
     deploymentPrefix: "Deployment: 部署无状态应用"
@@ -6833,8 +6835,8 @@ formScheduling:
     label: 优先级显示名称
     placeholder: '例如: 高'
   scheduler:
-    label: 调度名称
-    placeholder: '例如: MyScheduler'
+    label: 调度
+    placeholder: e.g. myScheduler
   nodeSelector:
     requireAll: "必须 "
     requireAny: "最好"
