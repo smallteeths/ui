@@ -12,7 +12,10 @@ export default Mixin.create({
     const t = get(this, 'targetType');
     const store = get(this, 'store');
 
-    const nue = store.createRecord({ type: this.get('type'), });
+    const nue = store.createRecord({
+      type:          this.get('type'),
+      fluentdLogDir: '/var/lib/rancher/fluentd/log/buffer',
+    });
 
     const map = EmberObject.create({});
 
@@ -52,7 +55,7 @@ export default Mixin.create({
     this.setProperties(map);
     if (t && t !== 'none') {
       const {
-        multiLineStartRegexp, multiLineEndRegexp, enableExceptionStackMatch, enableMultiLineFilter
+        multiLineStartRegexp, multiLineEndRegexp, enableExceptionStackMatch, enableMultiLineFilter, annotations = {}
       } = this
 
       setProperties(this, {
@@ -65,6 +68,7 @@ export default Mixin.create({
         [`${ t }.multiLineStartRegexp`]:      multiLineStartRegexp,
         [`${ t }.multiLineEndRegexp`]:        multiLineEndRegexp,
         [`${ t }.enableExceptionStackMatch`]: enableExceptionStackMatch,
+        [`${ t }.fluentdLogDir`]:             annotations['field.cattle.io/fluentdlogDir'] || '/var/lib/rancher/fluentd/log/buffer',
       })
 
       if (enableMultiLineFilter || enableExceptionStackMatch) {
