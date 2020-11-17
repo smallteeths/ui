@@ -12,7 +12,7 @@
         <div class="input-group-addon bg-default">{{t 'generic.mibibyte'}}</div>
       </div>
     {{/input-or-display}}
-  {{else if (eq quota.key 'requestsStorage')}}
+  {{else if (or (eq quota.key 'requestsStorage') (eq quota.key 'requestsStorageClassStorage'))}}
     {{#input-or-display editable=editing value=(get quota key) classesForDisplay="clip"}}
       <div class="input-group">
         {{input-integer min="0" step="1" value=(get quota key) classNames="form-control" placeholder=(t (concat 'formResourceQuota.table.' key '.placeholder'))}}

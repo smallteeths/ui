@@ -236,7 +236,7 @@ export default Controller.extend({
     const scQuota          = limit[key];
     const scUsed           = used[key];
 
-    Object.keys(scQuota).forEach((subKey) => {
+    scQuota && Object.keys(scQuota).forEach((subKey) => {
       const namespaceQuotas  = get(this, 'allNamespace')[key][subKey];
 
       if (get(this, 'model.quotaSetting') && get(this, 'model.quotaSetting.limit')  && get(this, 'model.quotaSetting.limit')[key]) {

@@ -80,7 +80,7 @@ export default Component.extend({
       return `${ value }${ cpuNotation }`;
     } else if ( quota.key === 'limitsMemory' || quota.key === 'requestsMemory' ) {
       return `${ value }${ memNotation }`;
-    } else if ( quota.key === 'requestsStorage' ) {
+    } else if ( quota.key === 'requestsStorage' || quota.key === 'requestsStorageClassStorage' ) {
       return `${ value }${ storageNotation }`;
     } else {
       return value;
@@ -141,10 +141,6 @@ export default Component.extend({
 
     Object.keys(nsDefaultQuota).forEach((key) => {
       const storageClassKey = get(this, 'storageClassKey');
-
-      if (storageClassKey.find((scKey) => scKey === key)){
-        this.initStorageClassQuota(key, array);
-      }
 
       if ( key !== 'type' && typeof nsDefaultQuota[key] ===  'string') {
         let value, currentProjectUse, totalLimits, remaining;
@@ -243,6 +239,10 @@ export default Component.extend({
           value,
           editing: key === get(this, 'canEditQuotaKey'),
         });
+      } else {
+        if (storageClassKey.find((scKey) => scKey === key)){
+          this.initStorageClassQuota(key, array);
+        }
       }
     });
 
@@ -271,9 +271,9 @@ export default Component.extend({
     const currentProjectLimit = get(this, 'projectLimit')
     const scDefaultQuota      = nsDefaultQuota[key];
 
-    Object.keys(scDefaultQuota).forEach((subKey) => {
+    scDefaultQuota && Object.keys(scDefaultQuota).forEach((subKey) => {
       let value, currentProjectUse, totalLimits, remaining, usedValue, max, newUse;
-      let projectUse = get(used, key) || '0';
+      let projectUse = get(used, key);
       let scLimit = limit && limit[key] && limit[key][subKey];
 
       if (scLimit === 0){
@@ -282,9 +282,10 @@ export default Component.extend({
 
       value = scLimit ? scLimit : scDefaultQuota[subKey];
 
-      if ( !scLimit ) {
+      if (limit && !scLimit ) {
         array.push({
           key,
+          subKey,
           value:             '',
           currentProjectUse: [],
         });
@@ -292,9 +293,18 @@ export default Component.extend({
         return;
       }
 
-      value     = parseInt(value, defaultRadix);
-      usedValue = this.convertToDec(projectUse[subKey]);
-      max       = parseInt(get(currentProjectLimit, key)[subKey], defaultRadix);
+      switch (key) {
+      case 'requestsStorageClassStorage':
+        value     = parseSi(value) / (defaultIncrement ** defaultMultiplier);
+        usedValue = parseSi(projectUse ? projectUse[subKey] : '0') / (defaultIncrement ** defaultMultiplier);
+        max       = parseSi(get(currentProjectLimit, key)[subKey] || '0') / (defaultIncrement ** defaultMultiplier);
+        break;
+      default:
+        value     = parseInt(value, defaultRadix);
+        usedValue = this.convertToDec(projectUse ? projectUse[subKey] : '0');
+        max       = parseInt(get(currentProjectLimit, key)[subKey] || '0', defaultRadix);
+        break;
+      }
 
       if ( !get(this, 'isNew') ) {
         usedValue = usedValue - value

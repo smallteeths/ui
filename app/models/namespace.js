@@ -24,6 +24,7 @@ export function convertResourceQuota(key, value) {
     out = parseSi(value, 1024) / 1048576;
     break;
   case 'requestsStorage':
+  case 'requestsStorageClassStorage':
     out = parseSi(value) / (1024 ** 3);
     break;
   default:
@@ -201,7 +202,7 @@ var Namespace = Resource.extend(StateCounts, {
       Object.keys(resourceQuota).forEach((key) => {
         if (isObject(resourceQuota[key])){
           Object.keys(resourceQuota[key]).forEach((subKey) => {
-            if (!parseInt(resourceQuota[key][subKey], 10) && parseInt(resourceQuota[key], 10) !== 0){
+            if (!parseInt(resourceQuota[key][subKey], 10) && parseInt(resourceQuota[key][subKey], 10) !== 0){
               errors.push(`${ intl.t('formResourceQuota.errors.limitRequired', { resource: intl.t(`formResourceQuota.resources.${ key }`) }) }(${ subKey })`);
             }
           })

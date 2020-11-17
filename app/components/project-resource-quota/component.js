@@ -35,7 +35,7 @@ export default Component.extend({
     }
   },
 
-  quotaDidChange: observer('quotaArray.@each.{key,projectLimit,namespaceLimit}', function() {
+  quotaDidChange: observer('quotaArray.@each.{key,projectLimit,namespaceLimit,subKey}', function() {
     const limit = {};
     const nsDefaultLimit = {};
     const storageClassKey = get(this, 'storageClassKey');
@@ -79,6 +79,7 @@ export default Component.extend({
     case 'requestsMemory':
       return `${ value }Mi`;
     case 'requestsStorage':
+    case 'requestsStorageClassStorage':
       return `${ value }Gi`;
     default:
       return value;
@@ -98,6 +99,7 @@ export default Component.extend({
     case 'requestsMemory':
       return parseSi(value, 1024) / 1048576;
     case 'requestsStorage':
+    case 'requestsStorageClassStorage':
       return parseSi(value) / (1024 ** 3);
     default:
       return value;
@@ -132,7 +134,7 @@ export default Component.extend({
     const nsDefaultLimit    = get(this, 'nsDefaultLimit') || {};
 
     if (storageClassKey.find((scKey) => scKey === key)){
-      Object.keys(limit[key]).forEach((subKey) => {
+      limit[key] && Object.keys(limit[key]).forEach((subKey) => {
         const projectLimit = this.convertToLimit(key, limit[key][subKey]);
         const namespaceLimit = this.convertToLimit(key, nsDefaultLimit[key][subKey]);
 
