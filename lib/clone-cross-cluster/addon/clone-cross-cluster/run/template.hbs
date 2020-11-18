@@ -4,8 +4,10 @@
     {{t 'cloneCrossCluster.newContainer.title'}}
   </h1>
 </section>
+{{#if supportClone}}
 {{new-workload
-  service=model.workload
+  service=model.workloadForNew.workload
+  serviceUUID=model.workloadForNew.uuid
   projects=model.projects
   clusters=model.clusters
   namespaceSecrets=model.namespaceSecrets
@@ -18,6 +20,10 @@
   projectDockerCredentials=model.projectDockerCredentials
   loggingEnabled=model.loggingEnabled
   allServices=model.allServices
-  allIngresses=model.allIngresses
   serviceId=model.serviceId
 }}
+{{else}}
+  {{#banner-message color='bg-error m-0'}}
+    {{t 'cloneCrossCluster.newContainer.errors.appCloneNotSupport'}}
+  {{/banner-message}}
+{{/if}}

@@ -77,7 +77,7 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
     return !!get(this, 'links.update') && ( lcType !== 'job' );
   }),
 
-  availableActions: computed('actionLinks.{activate,deactivate,pause,restart,rollback,garbagecollect}', 'links.{update,remove}', 'podForShell', 'isPaused', 'canEdit', function() {
+  availableActions: computed('actionLinks.{activate,deactivate,pause,restart,rollback,garbagecollect}', 'links.{update,remove}', 'podForShell', 'isPaused', 'canEdit', 'labels', function() {
     const a = get(this, 'actionLinks') || {};
 
     const podForShell = get(this, 'podForShell');
@@ -86,6 +86,12 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
     const canEdit = get(this, 'canEdit');
 
     let choices = [
+      {
+        label:    'action.cloneCrossCluster',
+        icon:     'icon icon-copy',
+        action:   'cloneCrossCluster',
+        enabled:  !(this.workloadLabels && this.workloadLabels['io.cattle.field/appId']),
+      },
       {
         label:    'action.redeploy',
         icon:     'icon icon-refresh',
@@ -135,14 +141,6 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
         enabled:  !!a.pause && isPaused,
       },
     ];
-
-    // if (this.canCloneCrossCluster) {
-    choices.unshift({
-      label:    'action.cloneCrossCluster',
-      icon:     'icon icon-copy',
-      action:   'cloneCrossCluster',
-    });
-    // }
 
     return choices;
   }),

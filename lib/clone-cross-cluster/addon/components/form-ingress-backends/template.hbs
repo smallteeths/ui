@@ -1,19 +1,19 @@
 {{#if hasServiceTargets}}
   {{banner-message color="bg-info" icon="icon-info" message=(t 'formIngressBackends.warning' htmlSafe=true)}}
 {{/if}}
-<div class="clearfix">
+{{!-- <div class="clearfix">
   {{#if editing}}
     <label class="acc-label">{{t 'formIngressBackends.label'}}</label>
-    {{!-- <button class="btn bg-link icon-btn" {{action "addPath" "service"}}>
+    <button class="btn bg-link icon-btn" {{action "addPath" "service"}}>
       <span class="darken"><i class="icon icon-plus text-small"></i></span>
       <span>{{t 'formIngressBackends.addServiceLabel'}}</span>
-    </button> --}}
+    </button>
     <button class="btn bg-link icon-btn ml-20" {{action "addPath" "workload"}}>
       <span class="darken"><i class="icon icon-plus text-small"></i></span>
       <span>{{t 'formIngressBackends.addWorkloadLabel'}}</span>
     </button>
   {{/if}}
-</div>
+</div> --}}
 
 {{#if pathArray.length}}
   <table class="fixed striped mt-20">
@@ -45,7 +45,9 @@
           {{/unless}}
 
           <td class="divided p-5" data-title="{{t (concat 'formIngressBackends.' path.backendType '.label')}}">
-            {{#if (eq path.backendType 'workload')}}
+            {{#if (eq path.backendType 'service')}}
+              {{find-value-by-id path.serviceId "name" serviceList}}
+            {{else if (eq path.backendType 'workload')}}
               {{get workload.containers 'firstObject.name'}}
             {{/if}}
           </td>

@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col span-11-of-23 mt-0 mb-0">
+  <div class="col span-6">
     {{form-name-description
       descriptionPlaceholder="servicePage.newIngress.form.description.placeholder"
       model=ingress
@@ -8,7 +8,7 @@
     }}
   </div>
 
-  <div class="col span-7-of-23 mt-0 mb-0">
+  <div class="col span-4">
     <label class="acc-label pb-5">
       {{t "formNamespace.label.reuse"}}
     </label>
@@ -16,7 +16,7 @@
       {{namespace.name}}
     </p>
   </div>
-  <div class="col span-4-of-23">
+  <div class="col span-2 text-right">
     <button class="btn bg-link icon-btn" {{action "removeIngress" ingress}}>
       <span class="darken"><i class="icon icon-minus text-small"/></span>
       <span>{{t "cloneCrossCluster.newContainer.ingress.delete"}}</span>
@@ -25,7 +25,7 @@
 </div>
 {{#if supportVlansubnet}}
 <div class="row">
-  <div class="col span-11-of-23 mt-0 mb-0">
+  <div class="col span-6">
     <label class="acc-label">{{t "servicePage.newIngress.form.load.label"}}</label>
     {{schema/input-boolean value=enableVlansubnet}}
   </div>
@@ -37,6 +37,8 @@
     ingress=ingress
     namespace=namespace
     workload=workload
+    defaultServiceList=defaultServiceList
+    customServiceList=customServiceList
   }}
   <hr class="mt-30 mb-30" />
 </section>

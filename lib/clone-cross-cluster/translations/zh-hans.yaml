@@ -23,6 +23,10 @@ cloneCrossCluster:
       label: 负载均衡(Ingress)
       detail: 应用提供的对外访问方式
       delete: 删除负载均衡(Ingress)
+    service:
+      label: 服务发现
+      detail: 应用提供的服务发现功能
+      delete: 删除服务(Service)
     scheduling:
       host:
         prompt: 选择主机...
@@ -32,3 +36,7 @@ cloneCrossCluster:
       noPermissionAccessResource: "无权访问{type}: {name}"
       hostRequired: 请选择要调度的主机
       vlansubnetRequired: 已经启用扁平网络，请选择一个 MacvlanSubnet
+      serviceExist: workload自动生成的service名称({name})在目标项目中已存在，请修改workload名称
+      selectorRequired: 服务{name}必须配置一个或多个"目标标签选择器"
+      selectorNotMatch: 服务{name}的"目标标签选择器"与当前workload不匹配
+      appCloneNotSupport: 暂时不支持当前类型的APP进行跨集群克隆

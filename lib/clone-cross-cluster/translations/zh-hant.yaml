@@ -1,0 +1,42 @@
+cloneCrossCluster:
+  newContainer:
+    title: 跨集群應用克隆
+    reset: 重置
+    target:
+      label: 目標項目
+      prompt: 選擇目標項目
+    formNamespace:
+      label: 命名空間
+      prompt: 選擇命名空間...
+    environment:
+      newFrom: 新建並引用其他資源
+      from: 引用目其他資源
+    imagePullSecret:
+      label: 鏡像庫憑證
+      detail: 私有鏡像庫憑證信息
+      delete: 刪除憑證
+      nameRequired: 鏡像庫憑證名稱不能為空
+      addressRequired: 鏡像庫憑證地址不能為空
+      usernameRequired: 鏡像庫憑證用戶名不能為空
+      passwordRequired: 鏡像庫憑證密碼不能為空
+    ingress:
+      label: 負載均衡(Ingress)
+      detail: 應用提供的對外訪問方式
+      delete: 刪除負載均衡(Ingress)
+    service:
+      label: 服務發現
+      detail: 應用提供的服務發現功能
+      delete: 刪除服務(Service)
+    scheduling:
+      host:
+        prompt: 選擇主機...
+    errors:
+      storageClassNotExist: 數據卷中新增PVC（{pvcName}）所引用的StorageClass，在目標集群中不存在，請點擊編輯並修改
+      pvNotExist: 數據卷中新增PVC（{pvcName}）所引用的持久卷, 在目標集群中不存在，請點擊編輯並修改
+      noPermissionAccessResource: "無權訪問{type}: {name}"
+      hostRequired: 請選擇要調度的主機
+      vlansubnetRequired: 已經啟用扁平網絡，請選擇壹個 MacvlanSubnet
+      serviceExist: workload自動生成的service名稱({name})在目標項目中已存在，請修改workload名稱
+      selectorRequired: 服務{name}必須配置壹個或多個"目標標簽選擇器"
+      selectorNotMatch: 服務{name}的"目標標簽選擇器"與當前workload不匹配
+      appCloneNotSupport: 暫時不支持當前類型的APP進行跨集群克隆

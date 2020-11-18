@@ -11,16 +11,18 @@
     rule=rule
     rules=rules
     workload=workload
+    defaultServiceList=defaultServiceList
+    customServiceList=customServiceList
   }}
 {{else}}
   <div class="p-20">{{t "formIngress.noRules"}}</div>
 {{/each}}
 
-{{#if editing}}
+{{!-- {{#if editing}}
   <div class="row">
     <button class="btn bg-link icon-btn pull-right" {{action "addRule"}}>
       <span class="darken"><i class="icon icon-plus text-small"></i></span>
       <span>{{t "formIngress.addRuleLabel"}}</span>
     </button>
   </div>
-{{/if}}
+{{/if}} --}}

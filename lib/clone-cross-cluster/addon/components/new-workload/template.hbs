@@ -223,7 +223,7 @@
           }}
         {{/accordion-list-item}}
       {{/if}}
-      {{#if (and showIngressConfig (eq index 0))}}
+      {{!-- {{#if (and showIngressConfig (eq index 0))}}
         {{#accordion-list-item
           title=(t "cloneCrossCluster.newContainer.ingress.label")
           detail=(t "cloneCrossCluster.newContainer.ingress.detail" appName=settings.appName)
@@ -241,7 +241,29 @@
             errors=ingressErrors
             ingress=ingress
             workload=service
+            defaultServiceList=defaultServiceList
+            customServiceList=customServiceList
             remove=(action 'removeIngress')
+          }}
+        {{/each}}
+        {{/accordion-list-item}}
+      {{/if}} --}}
+      {{#if (and (gt customServiceList.length 0) (eq index 0))}}
+        {{#accordion-list-item
+          title=(t "cloneCrossCluster.newContainer.service.label")
+          detail=(t "cloneCrossCluster.newContainer.service.detail" appName=settings.appName)
+          expandAll=al.expandAll
+          expand=(action expandFn)
+        }}
+        {{#each customServiceList as |customService|}}
+          {{cru-dns
+            model=customService
+            workload=service
+            namespace=targetNamespace
+            mode="new"
+            editing=true
+            remove=(action 'removeService')
+            classNames="box mb-20"
           }}
         {{/each}}
         {{/accordion-list-item}}
