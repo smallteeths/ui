@@ -7608,8 +7608,6 @@ loggingPage:
       label: 起始行正则表达式
     multiLineEndRegexp:
       label: 结束行正则表达式
-    fluentdLogDir:
-      label: fluentd的缓冲路径
   advanced:
     file: 以文件形式编辑
     cancel: 以表单形式编辑

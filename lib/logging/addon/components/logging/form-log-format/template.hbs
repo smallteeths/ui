@@ -41,16 +41,6 @@
         </div>
       {{/if}}
 
-      <div class="row mb-30">
-        <label class="acc-label">
-          {{t "loggingPage.additional.fluentdLogDir.label"}}{{field-required}}
-        </label>
-        {{input
-          value=model.fluentdLogDir
-          class="form-control"
-        }}
-      </div>
-
       {{#if (eq pageScope "cluster")}}
         <label 
           class="row flex-align-center" 

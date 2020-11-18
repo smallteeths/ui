@@ -7509,8 +7509,6 @@ loggingPage:
       label: Line Start Regexp
     multiLineEndRegexp:
       label: Line End Regexp
-    fluentdLogDir:
-      label: Fluentd Log Directory
   advanced:
     file: Edit as File
     cancel: Edit as a Form
