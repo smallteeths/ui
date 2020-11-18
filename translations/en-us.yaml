@@ -10398,5 +10398,5 @@ formContainerLog:
   detail: Configure container log
   excludeContainer:
     label: Container stdout log
-    'true': Collect
-    'false': Disable
+    'true': Disable
+    'false': Collect

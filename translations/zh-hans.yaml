@@ -10556,5 +10556,5 @@ formContainerLog:
   detail: 配置容器日志
   excludeContainer:
     label: 容器标准输出日志
-    'true': 采集
-    'false': 禁用
+    'true': 禁用
+    'false': 采集
