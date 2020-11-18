@@ -10547,3 +10547,11 @@ formMenu:
 
 modalConfirmYamlMonitoring2Form:
   helpText: '请注意，当切换回表单编辑时，非表单数据可能会发生数据丢失。在点击确认之前，请确认不会受影响。'
+
+formContainerLog:
+  title: 容器日志
+  detail: 配置容器日志
+  excludeContainer:
+    label: 容器标准输出日志
+    'true': 采集
+    'false': 禁用

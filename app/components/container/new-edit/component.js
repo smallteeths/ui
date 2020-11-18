@@ -123,6 +123,14 @@ export default Component.extend(NewOrEdit, ChildHook, {
     if ( get(this, 'showTargetOS') && get(this, `prefs.${ C.PREFS.TARGET_OS }`) ) {
       set(this, 'targetOs', get(this, `prefs.${ C.PREFS.TARGET_OS }`));
     }
+
+    if (get(this, 'loggingEnabled')) {
+      const annotations = get(this, 'primaryResource.annotations') || {}
+
+      const excludeContainer = annotations['field.cattle.io/excludeContainer'] === 'false' ? false : true
+
+      set(this, 'excludeContainer', excludeContainer)
+    }
   },
 
   didInsertElement() {
@@ -389,6 +397,15 @@ export default Component.extend(NewOrEdit, ChildHook, {
 
     set(this, 'primaryResource', pr);
     set(this, 'originalPrimaryResource', pr);
+
+    if (get(this, 'loggingEnabled')) {
+      const annotations = get(this, 'primaryResource.annotations') || {}
+
+      set(this, 'primaryResource.annotations', {
+        ...annotations,
+        'field.cattle.io/excludeContainer': get(this, 'excludeContainer')
+      })
+    }
 
     let errors = [];
 

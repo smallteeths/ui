@@ -10387,5 +10387,13 @@ formMenu:
   iframeEnabled:
     label: Use iframe
 
-  modalConfirmYamlMonitoring2Form:
-    helpText: "Data loss may occur when switching back to form based editing. Please make sure you intended to switch before selecting confirm."
+modalConfirmYamlMonitoring2Form:
+  helpText: "Data loss may occur when switching back to form based editing. Please make sure you intended to switch before selecting confirm."
+
+formContainerLog:
+  title: Container Log
+  detail: Configure container log
+  excludeContainer:
+    label: Container stdout log
+    'true': Collect
+    'false': Disable
