@@ -158,6 +158,7 @@ generic:
   bitbucket: Bitbucket
   required: '{key} 为必填项。'
   run: 运行
+  Gibibyte: 'GiB'
 
 realmNames:
   all: 全部

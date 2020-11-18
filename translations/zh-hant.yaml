@@ -128,6 +128,7 @@ generic:
   value: 值
   version: 版本
   yes: "是"
+  Gibibyte: 'GiB'
 
 realmNames:
   all: 全部

@@ -122,7 +122,7 @@ export default Controller.extend({
 
           C.QUOTA_TPYE_CN.forEach((key) => {
             if (storageClassKey.find((scKey) => scKey === key)){
-              Object.keys(itemQuotas[key]).forEach((subKey) => {
+              itemQuotas[key] && Object.keys(itemQuotas[key]).forEach((subKey) => {
                 let formatData = this.formatSCQuotas( key, itemQuotaUsed, itemQuotas, item.name, subKey);
 
                 if (formatData) {
