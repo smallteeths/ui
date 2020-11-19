@@ -6173,6 +6173,7 @@ formResourceQuota:
       placeholder: e.g. 50
       milliCpuPlaceholder: e.g. 2000
       memoryPlaceholder: e.g. 2048
+      stroageClassPlaceholder: storage class does not exist
     namespaceLimit:
       label: Namespace Default Limit
       placeholder: e.g. 10
@@ -6200,7 +6201,7 @@ formResourceQuota:
     servicesNodePorts: Services Node Ports
     requestsGpuMemory: GPU Memory
     requestsGpuCount: GPU Count
-    requestsStorageClassStorage: 'Storage Class'
+    requestsStorageClassStorage: 'Storage Class Storage'
     requestsStorageClassPVC: 'Storage Class PVC'
 
 formEnvVar:

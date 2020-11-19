@@ -148,10 +148,9 @@ export default Component.extend({
     }
   },
   setStorageClassSubmitQuota(quota, limit, nsDefaultLimit){
-    limit[quota.key]          = limit[quota.key] || {};
-    nsDefaultLimit[quota.key] = nsDefaultLimit[quota.key] || {};
-
     if (quota.subKey){
+      limit[quota.key]          = limit[quota.key] || {};
+      nsDefaultLimit[quota.key] = nsDefaultLimit[quota.key] || {};
       set(limit[quota.key], quota.subKey, this.convertToString(quota.key, quota.projectLimit));
       set(nsDefaultLimit[quota.key], quota.subKey, this.convertToString(quota.key, quota.namespaceLimit));
     }

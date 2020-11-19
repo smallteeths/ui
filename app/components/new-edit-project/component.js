@@ -8,6 +8,7 @@ import {
 import NewOrEdit from 'ui/mixins/new-or-edit';
 import ChildHook from 'shared/mixins/child-hook';
 import { isEmpty } from '@ember/utils';
+import { isObject } from 'shared/utils/flat-map';
 
 const M_CONFIG = {
   type:                  'projectRoleTemplateBinding',
@@ -124,6 +125,11 @@ export default Component.extend(NewOrEdit, ChildHook, {
     })
 
     Object.keys(resourceQuota).forEach((key) => {
+      if (isObject(resourceQuota[key])){
+        this.validateSubkey(key, errors);
+
+        return;
+      }
       if ( resourceQuota[key] && !nsResourceQuota[key] ) {
         errors.push(intl.t('formResourceQuota.errors.nsDefaultLimitRequired', { resource: intl.t(`formResourceQuota.resources.${ key }`) }));
       }
@@ -153,4 +159,22 @@ export default Component.extend(NewOrEdit, ChildHook, {
 
     return this._super(opt);
   },
+
+  validateSubkey(key, errors){
+    const intl = get(this, 'intl');
+    const resourceQuota = get(this, 'primaryResource.resourceQuota.limit')[key] || {};
+    const nsResourceQuota = get(this, 'primaryResource.namespaceDefaultResourceQuota.limit')[key] || {};
+
+    Object.keys(resourceQuota).forEach((subKey) => {
+      if (resourceQuota[subKey] && !nsResourceQuota[subKey]){
+        errors.push(`${ intl.t('formResourceQuota.errors.nsDefaultLimitRequired', { resource: intl.t(`formResourceQuota.resources.${ key }`) }) + intl.t('volumesPage.storageClass.label') }: ${ subKey }`);
+      }
+    })
+
+    Object.keys(resourceQuota).forEach((subKey) => {
+      if (!resourceQuota[subKey] && nsResourceQuota[subKey]){
+        errors.push(`${ intl.t('formResourceQuota.errors.projectLimitRequired', { resource: intl.t(`formResourceQuota.resources.${ key }`) }) + intl.t('volumesPage.storageClass.label') }: ${ subKey }`);
+      }
+    })
+  }
 });

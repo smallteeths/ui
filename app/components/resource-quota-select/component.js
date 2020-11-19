@@ -7,6 +7,7 @@ import { inject as service } from '@ember/service';
 
 export default Component.extend({
   clusterStore: service(),
+  intl:         service(),
 
   layout,
 
@@ -15,28 +16,46 @@ export default Component.extend({
 
   storageClassChoices:    null,
   allstorageClassChoices: null,
+  subkeyDisabled:         false,
+
+  storageClassKey: ['requestsStorageClassStorage', 'requestsStorageClassPVC'],
 
   init() {
     this._super(...arguments);
-    this.initResourceChoices();
     this.initStorageClassChoices();
+    this.initResourceChoices();
   },
 
-  currentQuotaDidChange: observer('currentQuota.@each.key', function() {
-    set(this, 'storageClassChoices', get(this, 'allstorageClassChoices').filter((choice) => this.doesExistStorageClass(choice)));
+  currentQuotaDidChange: observer('currentQuota.@each.{key,subKey}', function() {
+    !get(this, 'subkeyDisabled') && set(this, 'storageClassChoices', get(this, 'allstorageClassChoices').filter((choice) => this.doesExistStorageClass(choice, get(this, 'quota.key'))));
     set(this, 'resourceChoices', get(this, 'allResourceChoices').filter((choice) => this.doesExist(choice) || this.showStorageclassOption(choice)));
+  }),
+
+  quotaKeyDidChange: observer('storageClassChoices', function(){
+    let key = get(this, 'quota.key');
+
+    if (get(this, 'storageClassKey').find((scKey) => scKey === key)) {
+      if ( get(this, 'storageClassChoices.length') && !get(this, 'quota.subKey') ) {
+        next(() => {
+          set(this, 'quota.subKey', get(this, 'storageClassChoices.firstObject.value'));
+        });
+      }
+    }
   }),
 
   doesExist(choice) {
     return get(choice, 'value') === get(this, 'quota.key') || !(get(this, 'currentQuota') || []).findBy('key', get(choice, 'value'));
   },
 
-  doesExistStorageClass(choice) {
-    return get(choice, 'value') === get(this, 'quota.subKey') || !(get(this, 'currentQuota') || []).filter((resource) => resource.key === get(this, 'quota.key')).findBy('subKey', get(choice, 'value'));
+  doesExistStorageClass(choice, quotaKey) {
+    return get(choice, 'value') === get(this, 'quota.subKey') || !(get(this, 'currentQuota') || []).filter((resource) => resource.key === quotaKey).findBy('subKey', get(choice, 'value'));
   },
 
   showStorageclassOption(choice){
-    return get(choice, 'value') === 'requestsStorageClassStorage' || get(choice, 'value') === 'requestsStorageClassPVC';
+    return get(this, 'storageClassKey').find((scKey) => {
+      return scKey === get(choice, 'value') &&
+      get(this, 'allstorageClassChoices').filter((choice) => !(get(this, 'currentQuota') || []).filter((resource) => resource.key === scKey).findBy('subKey', get(choice, 'value'))).length;
+    });
   },
 
   initResourceChoices() {
@@ -69,8 +88,27 @@ export default Component.extend({
         value: item.id,
       });
     });
-
     set(this, 'allstorageClassChoices', choices);
-    set(this, 'storageClassChoices', choices.filter((choice) => this.doesExistStorageClass(choice)));
-  }
+    set(this, 'storageClassChoices', choices.filter((choice) => this.doesExistStorageClass(choice, get(this, 'quota.key'))));
+    this.setLabel();
+  },
+
+  setLabel(){
+    const subKey = get(this, 'quota.subKey');
+    const allstorageClassChoices = get(this, 'allstorageClassChoices');
+    const intl = get(this, 'intl')
+
+    if (!subKey){
+      return '';
+    }
+    const currentStorageClass = allstorageClassChoices.find((choice) => choice.value === get(this, 'quota.subKey'));
+
+    if (!currentStorageClass){
+      set(this, 'subkeyDisabled', true);
+      this.storageClassChoices && this.storageClassChoices.push({
+        value: subKey,
+        label: `${ get(this, 'quota.subKey') }(${ intl.t('formResourceQuota.table.projectLimit.stroageClassPlaceholder') })`
+      })
+    }
+  },
 });

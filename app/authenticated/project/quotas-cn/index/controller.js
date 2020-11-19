@@ -198,8 +198,8 @@ export default Controller.extend({
     }
   },
   formatSCQuotas(key, dataInNS, data, name, subKey){
-    const quotaLimit = data[key] && data[key][subKey];
-    const quotaUsed  = dataInNS[key] && dataInNS[key][subKey];
+    const quotaLimit = data && data[key] && data[key][subKey];
+    const quotaUsed  = dataInNS && dataInNS[key] && dataInNS[key][subKey];
     const quotaTotal = get(this, `model.quotaSetting.limit.${ key }`);
 
     if (quotaLimit && get(this, `model.quotaSetting.limit.${ key }`)) {

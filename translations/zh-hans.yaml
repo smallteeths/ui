@@ -6272,6 +6272,7 @@ formResourceQuota:
       placeholder: '例如: 50'
       milliCpuPlaceholder: '例如: 2000'
       memoryPlaceholder: '例如: 2048'
+      stroageClassPlaceholder: 存储类不存在
     namespaceLimit:
       label: 命名空间默认限制
       placeholder: '例如: 10'

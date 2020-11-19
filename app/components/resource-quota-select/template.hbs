@@ -5,14 +5,15 @@
       content=resourceChoices
       value=quota.key
       localizedLabel=true
-      readOnly=(not editing)
+      readOnly=(or (not editing) subkeyDisabled)
     }}
   </div>
   <div class="span-6 col">
     {{searchable-select
       content=storageClassChoices
       value=quota.subKey
-      readOnly=(not editing)
+      readOnly=(or (not editing) subkeyDisabled)
+      placeholder=subKeyPlaceholder
     }}
   </div>
 </div>
