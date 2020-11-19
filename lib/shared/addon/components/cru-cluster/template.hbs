@@ -141,6 +141,22 @@
               {{/input-or-display}}
             </CheckOverrideAllowed>
           </div>
+          <div class="col span-4">
+            <label class="acc-label">
+              {{t "loggingPage.additional.fluentdLogDir.label"}}
+              <FieldRequired/>
+            </label>
+            {{#input-or-display
+              editable=notView
+              value=model.cluster.fluentdLogDir
+            }}
+              {{input
+                type="text"
+                value=model.cluster.fluentdLogDir
+                className="form-control"
+              }}
+            {{/input-or-display}}
+          </div>
         </div>
       {{/accordion-list-item}}
     {{/if}}

@@ -131,7 +131,7 @@ const App = Application.extend({
           'store',
           'tooltip',
         ],
-        externalRoutes: {}
+        externalRoutes: { 'authenticated.cluster.edit': 'authenticated.cluster.edit', },
       }
     },
     alert: {

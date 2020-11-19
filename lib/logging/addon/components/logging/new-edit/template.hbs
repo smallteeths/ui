@@ -48,6 +48,23 @@
   </div>
 {{/if}}
 
+{{#if isRKE}}
+  {{#banner-message 
+    color="bg-info mb-0 mt-10"
+  }}
+    <p>
+      {{t 
+        "loggingPage.configureFluentdLogDir" 
+        htmlSafe=true 
+        path=currentFluentdLogDir
+      }} 
+      {{#link-to-external "authenticated.cluster.edit" clusterId}} 
+        {{t "loggingPage.editIt"}}
+      {{/link-to-external}}
+    </p>
+  {{/banner-message}}
+{{/if}}
+
 {{#if (not-eq targetType "none")}}
   <section class="header has-tabs clearfix p-0">
     <ul class="tab-nav">

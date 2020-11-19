@@ -7608,9 +7608,13 @@ loggingPage:
       label: 起始行正则表达式
     multiLineEndRegexp:
       label: 结束行正则表达式
+    fluentdLogDir:
+      label: Fluentd的缓冲路径
   advanced:
     file: 以文件形式编辑
     cancel: 以表单形式编辑
+  editIt : 修改.
+  configureFluentdLogDir: '"Fluentd的缓冲路径"目前是 <code>{path}</code>. 去"集群高级选项"'
 
   elasticsearch:
     header: Elasticsearch 配置
