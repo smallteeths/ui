@@ -3,17 +3,42 @@ import { get, computed } from '@ember/object'
 import { reference } from '@rancher/ember-api-store/utils/denormalize';
 import { parseSi, formatSi } from 'shared/utils/parse-unit';
 import { inject as service } from '@ember/service';
+import { isEmpty } from '@ember/utils';
 
 var PersistentVolumeClaim = Resource.extend({
-  clusterStore:     service(),
-  type:             'persistentVolumeClaim',
+  clusterStore: service(),
+  type:         'persistentVolumeClaim',
   canEdit:      false,
 
   storageClass:     reference('storageClassId', 'storageClass', 'clusterStore'),
   persistentVolume: reference('volumeId', 'persistentVolume', 'clusterStore'),
   namespace:        reference('namespaceId', 'namespace', 'clusterStore'),
 
-  workloads: computed('namespace.workloads.@each.volumes', function() {
+  availableActions: computed('canExpand', function() {
+    let out = [
+      {
+        label:    'action.resize',
+        icon:     'icon icon-hdd',
+        action:   'resize',
+        enabled:  this.canExpand,
+        bulkable: false
+      },
+    ];
+
+    return out;
+  }),
+
+  canExpand: computed('storageClass.allowVolumeExpansion', function() {
+    const { storageClass } = this;
+
+    if (!isEmpty(storageClass) && get(storageClass, 'allowVolumeExpansion')) {
+      return true;
+    }
+
+    return false;
+  }),
+
+  workloads: computed('id', 'namespace.workloads.@each.volumes', function() {
     return (get(this, 'namespace.workloads') || []).filter((workload) => (get(workload, 'volumes') || []).find((volume) => get(volume, 'persistentVolumeClaim.persistentVolumeClaimId') === get(this, 'id')));
   }),
 
@@ -32,6 +57,15 @@ var PersistentVolumeClaim = Resource.extend({
       return formatSi(bytes, 1024, 'iB', 'B');
     }
   }),
+
+  actions: {
+    resize() {
+      get(this, 'modalService').toggleModal('modal-resize-pvc', {
+        model:   this,
+      });
+    }
+  },
+
 });
 
 export default PersistentVolumeClaim;
