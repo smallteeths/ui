@@ -1,8 +1,7 @@
 import {  get, set, observer } from '@ember/object';
 import Component from '@ember/component';
-import { convertToMillis } from 'shared/utils/util';
-import { parseSi } from 'shared/utils/parse-unit';
 import layout from './template';
+import { convertToLimit } from 'shared/utils/quota-unit';
 
 export default Component.extend({
   layout,
@@ -86,26 +85,6 @@ export default Component.extend({
     }
   },
 
-  convertToLimit(key, value) {
-    if ( !value ) {
-      return '';
-    }
-
-    switch (key) {
-    case 'limitsCpu':
-    case 'requestsCpu':
-      return convertToMillis(value);
-    case 'limitsMemory':
-    case 'requestsMemory':
-      return parseSi(value, 1024) / 1048576;
-    case 'requestsStorage':
-    case 'requestsStorageClassStorage':
-      return parseSi(value) / (1024 ** 3);
-    default:
-      return value;
-    }
-  },
-
   initQuotaArray() {
     const limit = get(this, 'limit') || {};
     const nsDefaultLimit = get(this, 'nsDefaultLimit') || {};
@@ -113,8 +92,8 @@ export default Component.extend({
 
     Object.keys(limit).forEach((key) => {
       if ( key !== 'type' && typeof limit[key] ===  'string' ) {
-        const projectLimit = this.convertToLimit(key, limit[key]);
-        const namespaceLimit = this.convertToLimit(key, nsDefaultLimit[key]);
+        const projectLimit = convertToLimit(key, limit[key]);
+        const namespaceLimit = convertToLimit(key, nsDefaultLimit[key]);
 
         array.push({
           key,
@@ -135,8 +114,8 @@ export default Component.extend({
 
     if (storageClassKey.find((scKey) => scKey === key)){
       limit[key] && Object.keys(limit[key]).forEach((subKey) => {
-        const projectLimit = this.convertToLimit(key, limit[key][subKey]);
-        const namespaceLimit = this.convertToLimit(key, nsDefaultLimit[key][subKey]);
+        const projectLimit = convertToLimit(key, limit[key][subKey]);
+        const namespaceLimit = convertToLimit(key, nsDefaultLimit[key][subKey]);
 
         array.push({
           subKey,
