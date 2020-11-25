@@ -1,0 +1,13 @@
+<label class="acc-label">
+  {{t "loggingPage.additional.fluentdLogDir.label"}}
+  <FieldRequired/>
+</label>
+{{#if editable}}
+  {{input
+    type="text"
+    value=cluster.fluentdLogDir
+    class="form-control fluentdLogDir"
+  }}
+{{else}}
+  {{cluster.fluentdLogDir}}
+{{/if}}

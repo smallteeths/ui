@@ -599,20 +599,10 @@
               </CheckOverrideAllowed>
             </div>
             <div class="col span-4">
-              <label class="acc-label">
-                {{t "loggingPage.additional.fluentdLogDir.label"}}
-                <FieldRequired/>
-              </label>
-              {{#input-or-display
-                editable=notView
-                value=cluster.fluentdLogDir
-              }}
-                {{input
-                  type="text"
-                  value=cluster.fluentdLogDir
-                  className="form-control"
-                }}
-              {{/input-or-display}}
+              <FluentdLogDirInput 
+                @cluster={{cluster}}
+                @editable={{notView}}
+              />
             </div>
           </div>
           <div class="row">
