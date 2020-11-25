@@ -1,13 +1,13 @@
 <div class="container-header-text">
 <h3>
-  容器文件下载
+  {{t "modalDownLoadFileComponent.title"}}
 </h3>
 <hr/>
 </div>
 <section class="p-20 pt-0">
   <div class="row">
     <div class="col span-12">
-      <label class="acc-label">容器</label>
+      <label class="acc-label">{{t "modalDownLoadFileComponent.container"}}</label>
       {{new-select
         content=choices
         value=currentContainer
@@ -18,10 +18,28 @@
   </div>
   <div class="row">
     <div class="col span-12">
-      <label class="acc-label">文件路径</label>
-      {{input type="text" value=filePath classNames="form-control" placeholder="请输入容器中的文件路径"}}
+      <label class="acc-label">{{t "modalDownLoadFileComponent.filePath"}}</label>
+      {{input type="text" value=filePath classNames="form-control" placeholder=(t "modalDownLoadFileComponent.placeholder")}}
     </div>
   </div>
+  {{#if largeFileSize}}
+    {{banner-message
+      icon="icon-alert"
+      color="bg-warning mb-10"
+      message=(t "modalDownLoadFileComponent.notice" htmlSafe=true)
+    }}
+  {{/if}}
+  {{#if showProgress}}
+    <div class="row" style="display: flex; align-items: center;">
+      <div style="margin: 5px 5px 5px 0px;">{{percent}}%</div>
+      <div class="col span-12">
+        {{progress-bar-without-tooltip
+          percent=percent
+          color='primary'
+        }}
+      </div>
+    </div>
+  {{/if}}
 </section>
 {{top-errors errors=errors}}
 {{save-cancel save=(action "save") createLabel="generic.download"  cancel=(action "cancel")}}

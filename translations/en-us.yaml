@@ -7760,6 +7760,15 @@ modalAboutComponent:
   linuxImageList: Linux Image List
   windowsImageList: Windows Image List
 
+modalDownLoadFileComponent:
+  title: Container file download
+  container: Container
+  filePath: File Path
+  placeholder: Please enter the path of the file in the container
+  notice: Downloading files over 600MiB may cause your browser to crash.
+  validateContainer: Please select a container
+  validatePath: Please enter the path to the file you want to download.
+
 modalAddPayment:
   header: Add New Payment Method
   save: Save
