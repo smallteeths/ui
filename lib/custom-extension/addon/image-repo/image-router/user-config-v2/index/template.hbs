@@ -88,6 +88,13 @@
               {{input autocomplete="off" type="password" class="form-control" value=account.password placeholder=(t "harborConfig.form.pw.placeholder")}}
             </div>
           </div>
+          {{#if (and (eq rancherAuthMode "KEYCLOAK_USER") isDBAuthMode)}}
+            {{banner-message
+              icon="icon-alert"
+              color="bg-warning mb-10"
+              message=(t "imageRepoSection.userConfigPage.keyCloakAuthWarning")
+            }}
+          {{/if}}
         {{else}}
           <div class="row">
             <div class="col span-12">
@@ -95,6 +102,19 @@
               {{input autocomplete="off" type="text" class="form-control" value=account.email placeholder=(t "harborConfig.form.email.placeholder")}}
             </div>
           </div>
+          {{#if (and (eq rancherAuthMode "KEYCLOAK_USER") isDBAuthMode)}}
+          <div class="row">
+            <div class="col span-12">
+              <label class="acc-label">{{t "harborConfig.form.pw.label"}}{{field-required}}</label>
+              {{input autocomplete="off" type="password" class="form-control" value=account.password placeholder=(t "harborConfig.form.pw.placeholder")}}
+            </div>
+          </div>
+          {{banner-message
+            icon="icon-alert"
+            color="bg-warning mb-10"
+            message=(t "imageRepoSection.userConfigPage.keyCloakAuthWarning")
+          }}
+          {{/if}}
         {{/if}}
 
       {{/if}}

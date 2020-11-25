@@ -28,6 +28,7 @@ imageRepoSection:
     syncAccount: "Synchronous Account"
     reSyncAccount: "Resynchronize Account"
     methodNotSupported: "Rancher({rancherAuthMode}) does not support harbor server with {auth} authorization."
+    keyCloakAuthWarning: You need to use your KeyCloak account to synchronize in Harbor. Please enter your password to initialize (you can use your account and the initialized password to log in to the Harbor service later). If you have already synchronized your account in the Harbor service, enter your password to Synchronize
   labelPage:
     table:
       noMatch: 没有Label匹配当前搜索

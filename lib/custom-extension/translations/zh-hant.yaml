@@ -28,6 +28,7 @@ imageRepoSection:
     syncAccount: 同步帳號
     reSyncAccount: 重新同步帳號
     methodNotSupported: "Rancher {rancherAuthMode}認證暫不支持對接{auth}認證類型的harbor服務。"
+    keyCloakAuthWarning: 需要使用您的KeyCloak賬號在Harbor中同步，請輸入密碼以初始化(後續您可以使用您的賬號與初始化的密碼登錄Harbor服務)，如果您已經在Harbor服務中同步了賬戶，請輸入您的密碼以同步
   labelPage:
     table:
       noMatch: 沒有Label匹配當前搜索
