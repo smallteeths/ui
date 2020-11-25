@@ -127,7 +127,7 @@ export default Component.extend(NewOrEdit, ChildHook, {
     if (get(this, 'loggingEnabled')) {
       const annotations = get(this, 'primaryResource.annotations') || {}
 
-      const excludeContainer = annotations['field.cattle.io/excludeContainer'] === 'false' ? false : true
+      const excludeContainer = annotations['field.cattle.io/excludeContainer'] === 'true' ? true : false
 
       set(this, 'excludeContainer', excludeContainer)
     }
