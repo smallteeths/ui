@@ -53,7 +53,7 @@ export default Component.extend(ModalBase, {
       const filePath = get(this, 'filePath');
       const fileName = filePath.substr(filePath.lastIndexOf('/') + 1);
 
-      if (typeof XMLHttpRequest !== 'undefined' ) {
+      if ( typeof XMLHttpRequest !== 'undefined' ) {
         const csrf = this.getCookie('CSRF')
         const body =  JSON.stringify({
           containerName: get(this, 'currentContainer'),
@@ -70,6 +70,7 @@ export default Component.extend(ModalBase, {
         get(this, 'xhr').setRequestHeader('x-api-action-links', 'actionLinks');
         get(this, 'xhr').setRequestHeader('x-api-no-challenge', 'true');
         get(this, 'xhr').setRequestHeader('x-api-csrf', csrf);
+        get(this, 'xhr').responseType = 'arraybuffer'
         get(this, 'xhr').send(body)
         get(this, 'xhr').addEventListener('progress', get(this, 'inProgressFunction'));
 
@@ -98,6 +99,7 @@ export default Component.extend(ModalBase, {
             filePath,
           }),
         }).then((data) => {
+          this.growl.fromError('Error', 'If the browser version is low, there may be errors when downloading')
           if (data.status === 200) {
             cb(true);
             downloadFile(fileName, data.body, 'application/octet-stream');
