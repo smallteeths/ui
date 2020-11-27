@@ -7867,6 +7867,8 @@ modalDownLoadFileComponent:
   notice: 下载超过 600MiB 的文件有可能导致浏览器崩溃
   validateContainer: 请选择容器
   validatePath: 请输入要下载文件的路径
+  noSuchFile: 文件不存在
+  serverError: 服务端发生错误
 
 modalAddPayment:
   header: 添加新的付款方式

@@ -7768,6 +7768,8 @@ modalDownLoadFileComponent:
   notice: Downloading files over 600MiB may cause your browser to crash.
   validateContainer: Please select a container
   validatePath: Please enter the path to the file you want to download.
+  noSuchFile: File does not exist
+  serverError: An error occurred on the service break
 
 modalAddPayment:
   header: Add New Payment Method

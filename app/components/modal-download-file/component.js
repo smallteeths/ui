@@ -78,16 +78,23 @@ export default Component.extend(ModalBase, {
           if (resp && resp.target && resp.target.status === 200) {
             cb(true);
             downloadFile(fileName, resp.target.response, 'application/octet-stream');
-            this.send('cancel');
-          } else if (resp && resp.target && resp.target.status !== 200){
-            if (this.isJson(resp.target.response)) {
-              this.growl.fromError('Error', JSON.parse(resp.target.response).message)
-            } else {
-              this.growl.fromError('Error', 'Unknown Error')
+            if (!this.isDestroyed) {
+              this.send('cancel');
             }
-            cb(false);
+          } else if (resp && resp.target && resp.target.status !== 200){
+            if (resp.target.status === 404) {
+              this.growl.fromError('Error', get(this, 'intl').t('modalDownLoadFileComponent.noSuchFile'))
+            } else {
+              this.growl.fromError('Error', get(this, 'intl').t('modalDownLoadFileComponent.serverError'))
+            }
+            if (!this.isDestroyed) {
+              cb(false);
+            }
           } else {
             this.growl.fromError('Error', 'Unknown Error')
+            if (!this.isDestroyed) {
+              cb(false);
+            }
           }
         };
       } else {
