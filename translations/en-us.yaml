@@ -4321,6 +4321,9 @@ clusterNew:
       nodePort:
         label: NodePort for GPU Scheduler Extender
         placeholder: e.g. 1024
+    kubeProxy:
+      mode:
+        label: Kube Proxy Mode
   custom:
     label: From existing nodes (Custom)
     shortLabel: Custom

@@ -1,0 +1,36 @@
+<label class="acc-label">
+  {{t "clusterNew.rke.kubeProxy.mode.label"}}
+  {{#if clusterTemplateCreate}}
+    <ClusterTemplateOverrideToggle
+      @path="rancherKubernetesEngineConfig.services.kubeproxy.extraArgs.proxy-mode"
+      @configVariable={{form.proxy-mode}}
+      @addOverride={{addOverride}}
+      @questions={{questions}}
+    />
+  {{/if}}
+</label>
+<CheckOverrideAllowed
+  @paramName="rancherKubernetesEngineConfig.services.kubeproxy.extraArgs.proxy-mode"
+  @applyClusterTemplate={{applyClusterTemplate}}
+  @clusterTemplateRevision={{clusterTemplateRevision}}
+  @questions={{questions}}
+>
+  {{#input-or-display
+    editable=editing
+    value=form.proxy-mode
+  }}
+
+  <div class="radio input">
+    <label>
+      {{radio-button selection=form.proxy-mode value="iptables"}} iptables
+    </label>
+  </div>
+  {{#if supportIpvsMode}}
+  <div class="radio input">
+    <label>
+      {{radio-button selection=form.proxy-mode value="ipvs"}} ipvs
+    </label>
+  </div>
+  {{/if}}
+  {{/input-or-display}}
+</CheckOverrideAllowed>

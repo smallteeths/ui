@@ -1349,6 +1349,17 @@
             </div>
           </div>
           {{/if}}
+          <hr>
+          <CustomKubeProxyModeConfig
+            @editing={{notView}}
+            @rkeConfig={{cluster.rancherKubernetesEngineConfig}}
+            @clusterTemplateCreate={{clusterTemplateCreate}}
+            @applyClusterTemplate={{applyClusterTemplate}}
+            @clusterTemplateRevision={{model.clusterTemplateRevision.clusterConfig}}
+            @questions={{model.clusterTemplateRevision.questions}}
+            @addOverride={{action "addOverride"}}
+          >
+          </CustomKubeProxyModeConfig>
         {{/accordion-list-item}}
 
         {{#accordion-list-item
