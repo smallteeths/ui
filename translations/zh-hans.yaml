@@ -6982,6 +6982,7 @@ formSecurity:
     memUnit: GiB
     shared: 共享 GPU 内存
     set: 限制为
+    sharedTips: 设置共享 GPU 内存的同时，Rancher 会自动为工作负载设定 GPU 调度器名称
   vGpuReservation:
     label: Orion X GPU 预留
     placeholder: '例如: 1'

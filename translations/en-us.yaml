@@ -6879,6 +6879,7 @@ formSecurity:
     memUnit: GiB
     shared: Shared GPU Memory
     set: Limit to
+    sharedTips: While setting the shared GPU memory, Rancher will automatically set the GPU scheduler name for the workload
   vGpuReservation:
     label: Orion X GPU Reservation
     placeholder: e.g. 1
