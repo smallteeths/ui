@@ -32,7 +32,17 @@
         }}
       {{/input-or-display}}
     </CheckOverrideAllowed>
-
+    {{#if isEdit}}
+    <div>
+      <CustomMacvlanNetworkUpgradeBtn
+        @cluster={{cluster}}
+        @networkPlugin={{config.network.plugin}}
+        @networkOptions={{config.network.options}}
+        @networkPluginName={{configNetworkPluginDisplayName}}
+      >
+      </CustomMacvlanNetworkUpgradeBtn>
+    </div>
+    {{/if}}
   </div>
 
   {{!-- disabled for now --}}

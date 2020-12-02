@@ -1,0 +1,26 @@
+{{#if (eq status "available")}}
+  {{#tooltip-element
+    type="tooltip-basic"
+    tooltipTemplate='tooltip-static'
+    model=(t 'clusterNew.rke.network.macVlanStatus.availableTips')
+  }}
+    <button class="btn btn-sm bg-warning" {{action "showConfirmModal"}}>
+    {{t 'clusterNew.rke.network.macVlanStatus.available'}}
+  </button>
+  {{/tooltip-element}}
+{{else if (eq status "current")}}
+  <span class="btn btn-sm bg-default">
+  {{t 'clusterNew.rke.network.macVlanStatus.current'}}
+  </span>
+{{else if (eq status "sendingUpgradeRequest")}}
+  <span class="btn btn-sm btn-disabled">
+  <i class="icon icon-spinner icon-spin"></i>
+  {{t 'clusterNew.rke.network.macVlanStatus.sendingUpgradeRequest'}}
+  </span>
+{{else if (eq status "loading")}}
+  <span class="btn btn-sm btn-disabled">
+  <i class="icon icon-spinner icon-spin"></i>
+  {{t 'clusterNew.rke.network.macVlanStatus.loading'}}
+  </span>
+{{else}}
+{{/if}}

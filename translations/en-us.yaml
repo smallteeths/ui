@@ -4231,6 +4231,12 @@ clusterNew:
             label: Cloud Provider
       type:
         info: Only support "host-gw" backend
+      macVlanStatus:
+        loading: Checking upgrades...
+        available: Upgrade available
+        current: Up to date
+        sendingUpgradeRequest: Sending upgrade request...
+        availableTips: Click the button to upgrade to the latest version
     ingress:
       label: Nginx Ingress
     monitoring:
