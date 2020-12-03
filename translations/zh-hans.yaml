@@ -8158,6 +8158,15 @@ modalRestoreBackup:
     etcdAndK8sVersion: "恢复 etcd，Kubernetes 版本和 RKE 集群配置"
     k8sVersionUnknown: 我们无法还原此快照的 kubernetes 版本，因为该版本未知。
 
+modalResizePVC:
+  title: "扩容 PVC: {name}?"
+  requestedCapacity:
+    label: 容量
+    help: "更新PVCs容量可能不会在保存时立即反映出来。 卷扩容流程因storage class，PV Provisioner以及是否有任何工作负载附加到PVC而有所不同。在更改卷容量之前，强烈建议您访问<a href='https://rancher.com/docs/rancher/v2.x/en/cluster-admin/volumes-and-storage/' target='_blank' rel='nofollow noreferrer'>Rancher 存储文档</a> 和 <a href='https://kubernetes.io/docs/concepts/storage/persistent-volumes/' target='_blank' rel='nofollow noreferrer'>Kubernetes 持久卷文档</a>。"
+  currentValue:
+    label: 当前大小
+  protip: 卷扩容和调整大小是高级用例。强烈建议您阅读并充分了解存储提供商的要求。此外，在继续之前，您应该有一个灾难恢复计划。
+
 modalRotateCertificates:
   title: 更新集群证书
   caCerts: 更新集群 CA 证书和所有服务证书
