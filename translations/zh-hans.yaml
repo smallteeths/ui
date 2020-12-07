@@ -7272,6 +7272,7 @@ formSslTermination:
   notNeeded: 没有配置了有效的目标规则的 SSL/TLS 的监听端口。
   removeCertLabel: 删除此证书
   addCertLabel: 添加证书
+  certNotMatch: 检测到证书域名与规则域名不匹配，请确认选取的是否为有效证书
 
 formNamespace:
   label:

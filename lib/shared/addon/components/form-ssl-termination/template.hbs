@@ -13,9 +13,12 @@
           allCertificates=allCertificates
           editing=editing
           removeCert=(action "removeCert")
+          ingress=ingress
       }}
       <hr class="mt-20 mb-20" />
       {{form-ssl-rows
+          cert=cert
+          allCertificates=allCertificates
           editing=editing
           hosts=cert.hosts
       }}

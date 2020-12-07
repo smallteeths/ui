@@ -4331,6 +4331,7 @@ formSslTermination:
   notNeeded: 沒有配置了有效的目標規則的SSL/TLS的監聽端口。
   removeCertLabel: 刪除此證書
   addCertLabel: 添加證書
+  certNotMatch: 檢測到證書域名與規則域名不匹配，請確認選區的是否為有效證書
 
 formNamespace:
   label:

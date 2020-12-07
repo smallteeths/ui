@@ -7322,6 +7322,7 @@ formSslTermination:
   notNeeded: There are no SSL/TLS Listening Ports configured with a valid Target Rule.
   removeCertLabel: Remove this Certificate
   addCertLabel: Add Certificate
+  certNotMatch: A mismatch has been detected between the certificate hostname and the rule hostname. Please confirm that the selected is a valid certificate
 
 formNamespace:
   label:
