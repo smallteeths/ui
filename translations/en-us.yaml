@@ -8067,7 +8067,7 @@ modalRestoreBackup:
     k8sVersionUnknown: We cannot restore the kubernetes version for this snapshot because the version is unknown.
 
 modalResizePVC:
-  title: "Resize PVC: {name}?"
+  title: "Resize PVC: {name}"
   requestedCapacity:
     label: Requested Capacity
     help: "Updating the PVCs capacity may not immediatly be reflected upon save. Volume Expansion workflows vary depending on the storage class, PV Provisioner, and if any workloads are attached to the PVC. It is highly recommended you visit the <a href='https://rancher.com/docs/rancher/v2.x/en/cluster-admin/volumes-and-storage/' target='_blank' rel='nofollow noreferrer'>the Rancher Storage docs</a> and <a href='https://kubernetes.io/docs/concepts/storage/persistent-volumes/' target='_blank' rel='nofollow noreferrer'>the Kubernetes Persistent Volume docs</a> before changing the capacity of the volume."
