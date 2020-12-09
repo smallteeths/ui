@@ -9895,6 +9895,7 @@ action:
   rerun: 重新运行
   run: 运行
   runCISScan: 运行 CIS 扫描
+  resize: 扩容
   saveAsTemplate: 另存为 RKE 模板
   setDefault: 设置为默认值
   setDefaultRevision:
