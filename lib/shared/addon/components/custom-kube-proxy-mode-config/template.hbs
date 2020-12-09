@@ -9,6 +9,9 @@
     />
   {{/if}}
 </label>
+{{#if (and applyClusterTemplate (not (has-override questions=questions paramName="rancherKubernetesEngineConfig.services.kubeproxy.extraArgs.proxy-mode")))}}
+  <div>{{form.proxy-mode}}</div>
+{{else}}
 <CheckOverrideAllowed
   @paramName="rancherKubernetesEngineConfig.services.kubeproxy.extraArgs.proxy-mode"
   @applyClusterTemplate={{applyClusterTemplate}}
@@ -34,3 +37,4 @@
   {{/if}}
   {{/input-or-display}}
 </CheckOverrideAllowed>
+{{/if}}

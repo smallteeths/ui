@@ -1349,6 +1349,7 @@
             </div>
           </div>
           {{/if}}
+          {{#if cluster.rancherKubernetesEngineConfig}}
           <hr>
           <CustomKubeProxyModeConfig
             @editing={{notView}}
@@ -1360,6 +1361,7 @@
             @addOverride={{action "addOverride"}}
           >
           </CustomKubeProxyModeConfig>
+          {{/if}}
         {{/accordion-list-item}}
 
         {{#accordion-list-item
