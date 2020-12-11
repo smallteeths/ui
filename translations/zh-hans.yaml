@@ -3374,6 +3374,12 @@ ldap:
         labelText: 搜索属性
       searchFilter:
         labelText: 搜索过滤器
+      userUniqueIdAttribute:
+        labelText: 用户唯一标识
+        helpText: 请使用用户创建后全局唯一的用户属性，避免因该属性值变化导致用户权限丢失
+      groupUniqueIdAttribute:
+        labelText: 组唯一标识
+        helpText: 请使用用户组创建后全局唯一的属性，避免因该属性值变化导致用户权限丢失
     header: 2. 自定义模式
     helpText: '如果您的架构与标准 Active Directory 格式不匹配，您可以在这里自定义。'
     users:

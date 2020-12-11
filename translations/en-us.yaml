@@ -3387,6 +3387,12 @@ ldap:
         labelText: Search Attribute
       searchFilter:
         labelText: Search Filter
+      userUniqueIdAttribute:
+        labelText: Unique user id
+        helpText: Use the globally unique user attribute created by the user to avoid losing user permissions due to changes in the value of this attribute
+      groupUniqueIdAttribute:
+        labelText: Group unique id
+        helpText: Use a globally unique property created by a user group to avoid losing user privileges due to a change in the value of the property
     header: 2. Customize Schema
     helpText: 'If your schema does not match the standard ActiveDirectory format, you can customize it here.'
     users:
