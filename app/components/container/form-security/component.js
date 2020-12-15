@@ -165,14 +165,14 @@ export default Component.extend({
         delete requests[GPU_SHARED_KEY];
         delete limits[GPU_SHARED_KEY];
         // remove scheduler name
-        if (gpuSchedulerName && scheduler === gpuSchedulerName) {
+        if (this.editing && gpuSchedulerName && scheduler === gpuSchedulerName) {
           set(this, 'service.scheduling.scheduler', '');
         }
       } else {
         requests[GPU_SHARED_KEY] = `${ gpuMem }`;
         limits[GPU_SHARED_KEY] = `${ gpuMem }`;
         // set scheduler name
-        if (gpuSchedulerName && (!scheduler || 'default-scheduler' === scheduler)) {
+        if (this.editing && gpuSchedulerName && (!scheduler || 'default-scheduler' === scheduler)) {
           set(this, 'service.scheduling.scheduler', gpuSchedulerName);
         }
       }
@@ -191,7 +191,7 @@ export default Component.extend({
       limits[GPU_KEY] = `${ gpu }`;
     }
     // remove scheduler name
-    if (gpuSchedulerName && scheduler === gpuSchedulerName) {
+    if (this.editing && gpuSchedulerName && scheduler === gpuSchedulerName) {
       set(this, 'service.scheduling.scheduler', '');
     }
   }),
