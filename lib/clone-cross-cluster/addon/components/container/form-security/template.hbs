@@ -181,6 +181,13 @@
             </label>
           </div>
         {{/input-or-display}}
+        {{#if (and (eq activeGpuNav 'NVIDIA') (eq gpuMode 'shared'))}}
+          {{#banner-message color="bg-info"}}
+          <p>
+            {{t 'formSecurity.gpuReservation.sharedTips'}}
+          </p>
+          {{/banner-message}}
+        {{/if}}
       {{/if}}
       {{#if (eq activeGpuNav 'ORIONX')}}
         {{#input-or-display editable=editing value=vGpuReservation classesForDisplay="text-muted form-control-static"}}
