@@ -43,8 +43,8 @@
           <td data-title="{{dt.message}}">
             {{row.message}}
           </td>
-          <td data-title="{{dt.lastTimestamp}}">
-            {{date-from-now row.lastTimestamp}}
+          <td data-title="{{dt.eventTimestamp}}">
+            {{date-from-now row.eventTimestamp}}
           </td>
         </tr>
       {{else if (eq kind "norows")}}
