@@ -4328,17 +4328,6 @@ clusterNew:
             label: 云提供商
       type:
         info: '仅支持 host-gw 后端'
-      macVlanStatus:
-        loading: 正在检查更新...
-        available: 有可用更新
-        current: 已经是最新版本
-        sendingUpgradeRequest: 正在发送更新请求...
-        availableTips: 点击按钮升级到最新版本
-        upgradeModal:
-          title: 您确认要升级集群的网络驱动吗？
-          message: "集群: {clusterName}, 网络驱动: {networkPlugin}"
-          warning: 升级过程不可逆，请谨慎操作。
-          upgrade: 升级
     ingress:
       label: Nginx Ingress
     monitoring:
