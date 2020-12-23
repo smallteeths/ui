@@ -40,10 +40,16 @@ export default Component.extend(ModalBase, ChildHook, {
       let yaml = get(this, 'yaml');
       const lintError = [];
 
-      jsyaml.safeLoadAll(yaml, (y) => {
-        lintError.pushObjects(CodeMirror.lint.yaml(y));
-      });
+      try {
+        jsyaml.safeLoadAll(yaml, (y) => {
+          lintError.pushObjects(CodeMirror.lint.yaml(y));
+        });
+      } catch (error){
+        set(this, 'errors', [error.message || error.xhr]);
+        cb(false);
 
+        return;
+      }
       if ( lintError.length ) {
         set(this, 'errors', [get(this, 'intl').t('yamlPage.errors')]);
         cb(false);
