@@ -53,5 +53,5 @@ export default Component.extend({
   forumBase:    C.EXT_REFERENCES.FORUM,
   cnforumBase:  C.EXT_REFERENCES.CN_FORUM,
   slackBase:    C.EXT_REFERENCES.SLACK,
-
+  mirrorBase:   C.EXT_REFERENCES.MIRROR,
 });
