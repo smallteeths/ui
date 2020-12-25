@@ -2,6 +2,8 @@ cloneCrossCluster:
   newContainer:
     title: Clone workload cross cluster
     reset: Reset
+    workloadName: Workload Name(the name of the main container cannot be modified separately. It is the same as the name of the workload by default.)
+    containerName: Container Name
     target:
       label: Target Project
       prompt: Select a target project

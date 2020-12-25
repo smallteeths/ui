@@ -2,6 +2,8 @@ cloneCrossCluster:
   newContainer:
     title: 跨集群应用克隆
     reset: 重置
+    workloadName: 工作负载名称（不能单独修改主容器名，默认与工作负载名相同）
+    containerName: 容器名称
     target:
       label: 目标项目
       prompt: 选择目标项目
