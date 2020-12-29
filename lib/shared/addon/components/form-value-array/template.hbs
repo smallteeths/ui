@@ -1,6 +1,7 @@
-
 <label class="acc-label block">
-  {{t valueLabel}}
+  {{#if valueLabelEnabled}}
+    {{t valueLabel}}
+  {{/if}}
   {{#if (and editing required)}}
     {{field-required}}
   {{/if}}
@@ -27,8 +28,7 @@
       {{#if editing}}
         <span class="input-group-btn">
           <button
-            class="btn bg-primary btn-sm"
-            {{action "remove" row}}>
+            class="btn bg-primary btn-sm" type="button" {{action "remove" row}}>
             <i class="icon icon-minus"/>
             <span class="sr-only">
               {{t "generic.remove"}}
@@ -47,9 +47,7 @@
 {{/if}}
 {{#if editing}}
   <button
-    class={{addButtonClass}}
-    {{action "add"}}
-    disabled={{cannotAdd}}
+    class={{addButtonClass}} disabled={{not addButtonEnabled}} type="button" {{action "add"}}
   >
     <span class="darken">
       <i class="icon icon-plus text-small"/>

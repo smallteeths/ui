@@ -23,9 +23,9 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
   settings:      service(),
   clusterStore:  service(),
 
-  pods:          hasMany('id', 'pod', 'workloadId'),
+  pods: hasMany('id', 'pod', 'workloadId'),
 
-  scaleTimer:          null,
+  scaleTimer: null,
 
   // @TODO-2.0 cleanup all these...
   hasPorts:            true,
@@ -42,7 +42,7 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
   canBalanceTo:        true,
   canClone:            true,
 
-  grafanaResourceId:    alias('name'),
+  grafanaResourceId: alias('name'),
 
   namespace:    reference('namespaceId', 'namespace', 'clusterStore'),
 
@@ -200,6 +200,8 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
     if ( get(this, 'launchConfig.memoryReservation') ) {
       return formatSi(get(this, 'launchConfig.memoryReservation'), 1024, 'iB', 'B');
     }
+
+    return '';
   }),
 
   podForShell: computed('pods.@each.canShell', function() {

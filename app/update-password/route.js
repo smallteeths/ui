@@ -1,7 +1,6 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import { get } from '@ember/object';
-import { resolve } from 'rsvp';
 import C from 'ui/utils/constants';
 import { isDevBuild } from 'shared/utils/parse-version';
 
@@ -10,19 +9,17 @@ export default Route.extend({
   settings:   service(),
   autoLogout: service(),
 
+  globalStore: service(),
+
   model() {
-    let promise;
+    let promises = [];
 
     if ( get(this, 'access.firstLogin') ) {
-      promise = get(this, 'settings').load([
-        C.SETTING.VERSION_RANCHER,
-        C.SETTING.TELEMETRY
-      ]);
-    } else {
-      promise = resolve();
+      promises.push(get(this, 'globalStore').find('preference'));
+      promises.push(get(this, 'settings').loadAll());
     }
 
-    return promise.then(() => {
+    return Promise.all(promises).then(() => {
       const cur = get(this, `settings.${ C.SETTING.TELEMETRY }`);
       const version = get(this, `settings.${ C.SETTING.VERSION_RANCHER }`);
       let optIn;
@@ -52,5 +49,4 @@ export default Route.extend({
     $('BODY').removeClass('container-farm'); // eslint-disable-line
     get(this, 'autoLogout').start(transition)
   },
-
 });

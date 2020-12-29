@@ -8,11 +8,49 @@ import Grafana from 'shared/mixins/grafana';
 import { equal, alias } from '@ember/object/computed';
 import { resolve } from 'rsvp';
 import C from 'ui/utils/constants';
-import { isEmpty } from '@ember/utils';
+import { isEmpty, isEqual } from '@ember/utils';
 import moment from 'moment';
+import jsondiffpatch from 'jsondiffpatch';
+import { isArray } from '@ember/array';
+import Semver from 'semver';
+
 const TRUE = 'True';
 const CLUSTER_TEMPLATE_ID_PREFIX = 'cattle-global-data:';
 const SCHEDULE_CLUSTER_SCAN_QUESTION_KEY = 'scheduledClusterScan.enabled';
+
+export const DEFAULT_NODE_GROUP_CONFIG = {
+  desiredSize:   2,
+  diskSize:      20,
+  ec2SshKey:     '',
+  gpu:           false,
+  instanceType:  't3.medium',
+  maxSize:       2,
+  minSize:       2,
+  nodegroupName: '',
+  subnets:       [],
+  type:          'nodeGroup',
+};
+
+export const DEFAULT_EKS_CONFIG = {
+  amazonCredentialSecret: '',
+  displayName:            '',
+  imported:               false,
+  kmsKey:                 '',
+  kubernetesVersion:      '',
+  loggingTypes:           [],
+  nodeGroups:             [],
+  privateAccess:          false,
+  publicAccess:           true,
+  publicAccessSources:    [],
+  region:                 'us-west-2',
+  secretsEncryption:      false,
+  securityGroups:         [],
+  serviceRole:            '',
+  subnets:                [],
+  tags:                   {},
+  type:                   'eksclusterconfigspec',
+};
+
 
 export default Resource.extend(Grafana, ResourceUsage, {
   globalStore: service(),
@@ -57,14 +95,14 @@ export default Resource.extend(Grafana, ResourceUsage, {
     }
   })),
 
-  clusterTemplateDisplayName: computed('clusterTemplate.name', 'clusterTemplateId', function() {
+  clusterTemplateDisplayName: computed('clusterTemplate.{displayName,name}', 'clusterTemplateId', function() {
     const displayName = get(this, 'clusterTemplate.displayName');
     const clusterTemplateId = (get(this, 'clusterTemplateId') || '').replace(CLUSTER_TEMPLATE_ID_PREFIX, '');
 
     return displayName || clusterTemplateId;
   }),
 
-  clusterTemplateRevisionDisplayName: computed('clusterTemplateRevision.name', 'clusterTemplateRevisionId', function() {
+  clusterTemplateRevisionDisplayName: computed('clusterTemplateRevision.{displayName,name}', 'clusterTemplateRevisionId', function() {
     const displayName = get(this, 'clusterTemplateRevision.displayName');
     const revisionId = (get(this, 'clusterTemplateRevisionId') || '').replace(CLUSTER_TEMPLATE_ID_PREFIX, '')
 
@@ -151,19 +189,27 @@ export default Resource.extend(Grafana, ResourceUsage, {
     if ( configName ) {
       return get(this, `${ configName }.region`) || get(this, `${ configName }.regionId`) || get(this, `${ configName }.location`) || get(this, `${ configName }.zone`) || get(this, `${ configName }.zoneId`);
     }
+
+    return '';
   }),
 
-  provider: computed('configName', 'nodePools.@each.{driver,nodeTemplateId}', 'driver', function() {
+  clusterProvider: computed('configName', 'nodePools.@each.{driver,nodeTemplateId}', 'driver', function() {
     const pools = get(this, 'nodePools') || [];
     const firstPool = pools.objectAt(0);
 
     switch ( get(this, 'configName') ) {
     case 'amazonElasticContainerServiceConfig':
       return 'amazoneks';
+    case 'eksConfig':
+      return 'amazoneksv2';
     case 'azureKubernetesServiceConfig':
       return 'azureaks';
     case 'googleKubernetesEngineConfig':
       return 'googlegke';
+    case 'okeEngineConfig':
+      return 'oracleoke';
+    case 'rke2Config':
+      return 'rke2';
     case 'rancherKubernetesEngineConfig':
       if ( !pools.length ) {
         return 'custom';
@@ -184,20 +230,29 @@ export default Resource.extend(Grafana, ResourceUsage, {
     const intl = get(this, 'intl');
     const pools = get(this, 'nodePools');
     const firstPool = (pools || []).objectAt(0);
+    const configName = get(this, 'configName');
 
-    switch ( get(this, 'configName') ) {
+    switch ( configName ) {
     case 'amazonElasticContainerServiceConfig':
+    case 'eksConfig':
       return intl.t('clusterNew.amazoneks.shortLabel');
     case 'azureKubernetesServiceConfig':
       return intl.t('clusterNew.azureaks.shortLabel');
     case 'googleKubernetesEngineConfig':
       return intl.t('clusterNew.googlegke.shortLabel');
+    case 'okeEngineConfig':
+      return intl.t('clusterNew.oracleoke.shortLabel');
+    case 'k3sConfig':
+      return intl.t('clusterNew.k3simport.shortLabel');
+    case 'rke2Config':
     case 'rancherKubernetesEngineConfig':
+      var shortLabel = configName === 'rancherKubernetesEngineConfig' ? 'clusterNew.rke.shortLabel' : 'clusterNew.rke2.shortLabel';
+
       if ( !!pools ) {
         if ( firstPool ) {
-          return get(firstPool, 'displayProvider') ? get(firstPool, 'displayProvider') : intl.t('clusterNew.rke.shortLabel');
+          return get(firstPool, 'displayProvider') ? get(firstPool, 'displayProvider') : intl.t(shortLabel);
         } else {
-          return intl.t('clusterNew.rke.shortLabel');
+          return intl.t(shortLabel);
         }
       } else {
         return intl.t('clusterNew.custom.shortLabel');
@@ -217,7 +272,7 @@ export default Resource.extend(Grafana, ResourceUsage, {
     return get(projects, 'firstObject');
   }),
 
-  canSaveMonitor: computed('actionLinks.{editMonitoring,enableMonitoring}', function() {
+  canSaveMonitor: computed('actionLinks.{editMonitoring,enableMonitoring}', 'enableClusterMonitoring', function() {
     const action = get(this, 'enableClusterMonitoring') ?  'editMonitoring' : 'enableMonitoring';
 
     return !!this.hasAction(action)
@@ -245,6 +300,18 @@ export default Resource.extend(Grafana, ResourceUsage, {
 
     return out;
   }),
+
+  nodeGroupVersionUpdate: computed('eksStatus.upstreamSpec.kubernetesVersion', 'eksStatus.upstreamSpec.nodeGroups.@each.version', function() {
+    if (isEmpty(get(this, 'eksStatus.upstreamSpec.nodeGroups'))) {
+      return false;
+    }
+
+    const kubernetesVersion = get(this, 'eksStatus.upstreamSpec.kubernetesVersion');
+    const nodeGroupVersions = (get(this, 'eksStatus.upstreamSpec.nodeGroups') || []).getEach('version');
+
+    return nodeGroupVersions.any((ngv) => Semver.lt(Semver.coerce(ngv), Semver.coerce(kubernetesVersion)));
+  }),
+
 
   certsExpiring: computed('certificatesExpiration', function() {
     let { certificatesExpiration = {}, expiringCerts } = this;
@@ -278,7 +345,7 @@ export default Resource.extend(Grafana, ResourceUsage, {
     return false;
   }),
 
-  availableActions: computed('actionLinks.{rotateCertificates}', 'canSaveAsTemplate', function() {
+  availableActions: computed('actionLinks.rotateCertificates', 'canSaveAsTemplate', 'isClusterScanDisabled', function() {
     const a = get(this, 'actionLinks') || {};
 
     return [
@@ -332,7 +399,7 @@ export default Resource.extend(Grafana, ResourceUsage, {
       || get(this, 'isWindows');
   }),
 
-  isAddClusterScanScheduleDisabled: computed('isClusterScanDown', 'scheduledClusterScan.enabled', 'clusterTemplateRevision', 'clusterTemplateRevision.questions.@each', function() {
+  isAddClusterScanScheduleDisabled: computed('isClusterScanDown', 'scheduledClusterScan.enabled', 'clusterTemplateRevision', 'clusterTemplateRevision.questions.[]', function() {
     if (get(this, 'clusterTemplateRevision') === null) {
       return get(this, 'isClusterScanDown');
     }
@@ -405,15 +472,15 @@ export default Resource.extend(Grafana, ResourceUsage, {
     return out;
   }),
 
-  displayWarnings: computed('unhealthyNodes.[]', 'provider', 'inactiveNodes.[]', 'unhealthyComponents.[]', function() {
+  displayWarnings: computed('unhealthyNodes.[]', 'clusterProvider', 'inactiveNodes.[]', 'unhealthyComponents.[]', function() {
     const intl = get(this, 'intl');
     const out = [];
     const unhealthyComponents = get(this, 'unhealthyComponents') || [];
     const inactiveNodes = get(this, 'inactiveNodes') || [];
     const unhealthyNodes = get(this, 'unhealthyNodes') || [];
-    const provider = get(this, 'provider');
+    const clusterProvider = get(this, 'clusterProvider');
 
-    const grayOut = C.GRAY_OUT_SCHEDULER_STATUS_PROVIDERS.indexOf(provider) > -1;
+    const grayOut = C.GRAY_OUT_SCHEDULER_STATUS_PROVIDERS.indexOf(clusterProvider) > -1;
 
     unhealthyComponents.forEach((component) => {
       if ( grayOut && (get(component, 'name') === 'scheduler' || get(component, 'name') === 'controller-manager') ) {
@@ -487,13 +554,17 @@ export default Resource.extend(Grafana, ResourceUsage, {
     },
 
     edit(additionalQueryParams = {}) {
-      let provider = get(this, 'provider') || get(this, 'driver');
+      let provider = get(this, 'clusterProvider') || get(this, 'driver');
       let queryParams = {
         queryParams: {
           provider,
           ...additionalQueryParams
         }
       };
+
+      if (provider === 'amazoneks' && !isEmpty(get(this, 'eksConfig'))) {
+        set(queryParams, 'queryParams.provider', 'amazoneksv2');
+      }
 
       if (this.clusterTemplateRevisionId) {
         set(queryParams, 'queryParams.clusterTemplateRevision', this.clusterTemplateRevisionId);
@@ -632,5 +703,237 @@ export default Resource.extend(Grafana, ResourceUsage, {
 
     return true;
   },
+
+  save(opt) {
+    const { globalStore, eksConfig } = this;
+
+    if (get(this, 'driver') === 'EKS' || (this.isObject(get(this, 'eksConfig')) && !this.isEmptyObject(get(this, 'eksConfig')))) {
+      const options = ({
+        ...opt,
+        data: {
+          name:      this.name,
+          eksConfig: {},
+        }
+      });
+      const eksClusterConfigSpec = globalStore.getById('schema', 'eksclusterconfigspec');
+      const nodeGroupConfigSpec = globalStore.getById('schema', 'nodegroup');
+
+      if (isEmpty(this.id)) {
+        sanitizeConfigs(eksClusterConfigSpec, nodeGroupConfigSpec);
+
+        if (this.name !== get(this, 'eksConfig.displayName')) {
+          set(this, 'eksConfig.displayName', this.name);
+        }
+
+        return this._super(...arguments);
+      } else {
+        const config = jsondiffpatch.clone(get(this, 'eksConfig'));
+        const upstreamSpec = jsondiffpatch.clone(get(this, 'eksStatus.upstreamSpec'));
+
+        if (isEmpty(upstreamSpec)) {
+          sanitizeConfigs(eksClusterConfigSpec, nodeGroupConfigSpec);
+
+          return this._super(...arguments);
+        }
+
+        set(options, 'data.eksConfig', this.diffEksUpstream(upstreamSpec, config));
+
+        if (!isEmpty(get(options, 'data.eksConfig.nodeGroups'))) {
+          get(options, 'data.eksConfig.nodeGroups').forEach((ng) => {
+            replaceNullWithEmptyDefaults(ng, get(nodeGroupConfigSpec, 'resourceFields'));
+          });
+        }
+
+        if (get(options, 'qp._replace')) {
+          delete options.qp['_replace'];
+        }
+
+        return this._super(options);
+      }
+    } else {
+      return this._super(...arguments);
+    }
+
+    function sanitizeConfigs(eksClusterConfigSpec, nodeGroupConfigSpec) {
+      replaceNullWithEmptyDefaults(eksConfig, get(eksClusterConfigSpec, 'resourceFields'));
+
+      if (!isEmpty(get(eksConfig, 'nodeGroups'))) {
+        get(eksConfig, 'nodeGroups').forEach((ng) => {
+          replaceNullWithEmptyDefaults(ng, get(nodeGroupConfigSpec, 'resourceFields'));
+        });
+      }
+    }
+
+    function replaceNullWithEmptyDefaults(config, resourceFields) {
+      Object.keys(config).forEach((ck) => {
+        const configValue = get(config, ck);
+
+        if (configValue === null || typeof configValue === 'undefined') {
+          const resourceField = resourceFields[ck];
+
+          if (resourceField.type === 'string') {
+            set(config, ck, '');
+          } else if (resourceField.type.includes('array')) {
+            set(config, ck, []);
+          } else if (resourceField.type.includes('map')) {
+            set(config, ck, {});
+          } else if (resourceField.type.includes('boolean')) {
+            if (resourceField.default) {
+              set(config, ck, resourceField.default);
+            } else {
+              if ( !isEmpty(get(DEFAULT_EKS_CONFIG, ck)) || !isEmpty(get(DEFAULT_NODE_GROUP_CONFIG, ck)) ) {
+                let match = isEmpty(get(DEFAULT_EKS_CONFIG, ck)) ? get(DEFAULT_NODE_GROUP_CONFIG, ck) : get(DEFAULT_EKS_CONFIG, ck);
+
+                set(config, ck, match);
+              }
+              // we shouldn't get here, there are not that many fields in EKS and I've set the defaults for bools that are there
+              // but if we do hit this branch my some magic case imo a bool isn't something we can default cause its unknown...just dont do anything.
+            }
+          }
+        }
+      });
+
+      return config;
+    }
+  },
+
+  diffEksUpstream(lhs, rhs) {
+    // this is NOT a generic object diff.
+    // It tries to be as generic as possible but it does make certain assumptions regarding nulls and emtpy arrays/objects
+    // if LHS (upstream) is null and RHS (eks config) is empty we do not count this as a change
+    // additionally null values on the RHS will be ignored as null cant be sent in this case
+    const delta = {};
+    const rhsKeys = Object.keys(rhs);
+
+    rhsKeys.forEach((k) => {
+      if (k === 'type') {
+        return;
+      }
+
+      const lhsMatch = get(lhs, k);
+      const rhsMatch = get(rhs, k);
+
+      try {
+        if (isEqual(JSON.stringify(lhsMatch), JSON.stringify(rhsMatch))) {
+          return;
+        }
+      } catch (e){}
+
+      if (k === 'nodeGroups' || k === 'tags') {
+        if (!isEmpty(rhsMatch)) {
+          // node groups need ALL data so short circut and send it all
+          set(delta, k, rhsMatch);
+        } else {
+          // all node groups were deleted
+          set(delta, k, []);
+        }
+
+        return;
+      }
+
+      if (isEmpty(lhsMatch) || this.isEmptyObject(lhsMatch)) {
+        if (isEmpty(rhsMatch) || this.isEmptyObject(rhsMatch)) {
+          if (lhsMatch !== null && (isArray(rhsMatch) || this.isObject(rhsMatch))) {
+            // Empty Arrays and Empty Maps must be sent as such unless the upstream value is null, then the empty array or obj is just a init value from ember
+            set(delta, k, rhsMatch);
+          }
+
+          return;
+        } else {
+          // lhs is empty, rhs is not, just set
+          set(delta, k, rhsMatch);
+        }
+      } else {
+        if (rhsMatch !== null) {
+          // entry in og obj
+          if (isArray(lhsMatch)) {
+            if (isArray(rhsMatch)) {
+              if (!isEmpty(rhsMatch) && rhsMatch.every((m) => this.isObject(m))) {
+                // You have more diffing to do
+                rhsMatch.forEach((match) => {
+                  // our most likely candiate for a match is node group name, but lets check the others just incase.
+                  const matchId = get(match, 'name') || get(match, 'id') || false;
+
+                  if (matchId) {
+                    let lmatchIdx;
+
+                    // we have soime kind of identifier to find a match in the upstream, so we can diff and insert to new array
+                    const lMatch = lhsMatch.find((l, idx) => {
+                      const lmatchId = get(l, 'name') || get(l, 'id');
+
+                      if (lmatchId === matchId) {
+                        lmatchIdx = idx;
+
+                        return l;
+                      }
+                    });
+
+                    if (lMatch) {
+                      // we have a match in the upstream, meaning we've probably made updates to the object itself
+                      const diffedMatch = this.diffEksUpstream(lMatch, match);
+
+                      if (!isArray(get(delta, k))) {
+                        set(delta, k, [diffedMatch]);
+                      } else {
+                        // diff and push into new array
+                        delta[k].insertAt(lmatchIdx, diffedMatch);
+                      }
+                    } else {
+                      // no match in upstream, new entry
+                      if (!isArray(get(delta, k))) {
+                        set(delta, k, [match]);
+                      } else {
+                        delta[k].pushObject(match);
+                      }
+                    }
+                  } else {
+                    // no match id, all we can do is dumb add
+                    if (!isArray(get(delta, k))) {
+                      set(delta, k, [match]);
+                    } else {
+                      delta[k].pushObject(match);
+                    }
+                  }
+                })
+              } else {
+                set(delta, k, rhsMatch);
+              }
+            } else {
+              set(delta, k, rhsMatch);
+            }
+          } else if (this.isObject(lhsMatch)) {
+            if (!isEmpty(rhsMatch) && !this.isEmptyObject(rhsMatch)) {
+              if ((Object.keys(lhsMatch) || []).length > 0) {
+                // You have more diffing to do
+                set(delta, k, this.diffEksUpstream(lhsMatch, rhsMatch));
+              } else if (this.isEmptyObject(lhsMatch)) {
+                // we had a map now we have an empty map
+                set(delta, k, {});
+              }
+            }
+          } else { // lhsMatch not an array or object
+            set(delta, k, rhsMatch);
+          }
+        }
+      }
+    });
+
+    return delta;
+  },
+
+  /**
+   * True if obj is a plain object, an instantiated function/class
+   * @param {anything} obj
+   */
+  isObject(obj) {
+    return obj                   // Eliminates null/undefined
+      && obj instanceof Object   // Eliminates primitives
+      && typeof obj === 'object' // Eliminates class definitions/functions
+      && !Array.isArray(obj);    // Eliminates arrays
+  },
+
+  isEmptyObject(obj) {
+    return this.isObject(obj) && Object.keys(obj).length === 0;
+  }
 
 });

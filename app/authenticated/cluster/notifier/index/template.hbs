@@ -1,8 +1,14 @@
+{{#if scope.currentCluster.isReady}}
+  {{#banner-message color="bg-warning"}}
+    <p>{{t 'banner.notifiers' dashboardLink=scope.dashboardLink docsBase=scope.docsBase htmlSafe=true}}</p>
+  {{/banner-message}}
+{{/if}}
+
 <section class="header clearfix">
   <div class="pull-left pt-10"><h1>{{t 'notifierPage.notifiers'}}</h1></div>
   <div class="right-buttons">
     <button class="btn btn-sm bg-primary" disabled={{disabledAddNotificationSecret}} {{action "showAlertTemplate"}}>{{t 'notifierPage.index.addAlertTemplate'}}</button>
-    <button class="btn btn-sm bg-primary" {{action "showNewEditModal"}}>{{t 'notifierPage.index.addActionLabel'}}</button>
+    <button class="btn btn-sm bg-primary" type="button" {{action "showNewEditModal"}}>{{t 'notifierPage.index.addActionLabel'}}</button>
   </div>
 </section>
 

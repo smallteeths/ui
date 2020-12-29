@@ -47,11 +47,7 @@ export default Component.extend({
       initial = lastContainer;
     }
 
-    scheduleOnce('afterRender', () => {
-      this.send('setInput', initial);
-      this.userInputDidChange();
-      this.loadHarborServerUrl();
-    });
+    scheduleOnce('afterRender', this, 'setupComponent', initial);
   },
 
   actions: {
@@ -365,4 +361,10 @@ export default Component.extend({
       });
     }
   },
+  setupComponent(initial) {
+    this.send('setInput', initial);
+    this.userInputDidChange();
+    this.loadHarborServerUrl();
+  }
+
 });

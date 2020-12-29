@@ -5,7 +5,7 @@
     <button
       class="btn bg-primary btn-sm icon-btn ml-10"
       disabled={{not cluster.isReady}}
-      onClick={{action "kubectl" allowedKeys="meta"}}
+      onClick={{action "kubectl" allowedKeys="meta"}} type="button"
     >
       <span class="darken"><i class="icon icon-terminal"></i></span>
       <span>{{t "k8sPage.shell.button"}}</span>
@@ -13,8 +13,7 @@
 
     <button
       class="btn bg-primary btn-sm icon-btn ml-10"
-      disabled={{not cluster.isReady}}
-      {{action "kubeconfig"}}
+      disabled={{not cluster.isReady}} type="button" {{action "kubeconfig"}}
     >
       <span class="darken"><i class="icon icon-file"></i></span>
       <span>{{t "k8sPage.configFile.button"}}</span>
@@ -32,6 +31,12 @@
   <div class="row mb-30">
     {{banner-message color="bg-secondary mb-0 mt-10" message=(linkify cluster.description)}}
   </div>
+{{/if}}
+
+{{#if (and showBanner scope.currentCluster.isReady)}}
+  {{#banner-message color="bg-info" showClose=true close=(action "closeBanner")}}
+    <p>{{t 'banner.dashboard' dashboardLink=scope.dashboardLink docsBase=settings.docsBase htmlSafe=true}}</p>
+  {{/banner-message}}
 {{/if}}
 
 <section>

@@ -739,6 +739,9 @@ authPage:
       header: '1. Configure {providerName} Account'
       headerDetail: 'Enter your {providerName} account details'
       label: "{providerName} is not configured"
+      entityId:
+        labelText: Entity ID Field
+        display: "Entity ID Field:"
       name:
         labelText: Display Name Field
         display: "Display Name Field:"
@@ -1097,6 +1100,18 @@ balancerPage:
   table:
     target: Target
 
+banner:
+  alerting: Alerts in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="https://rancher.com/docs/rancher/v2.x/en/faq/deprecated-features-25x" target="_blank">FAQ</a>. Check out the updated alerts integration in Rancher <a href="{dashboardLink}/monitoring">monitoring</a> in Cluster Explorer Apps and Marketplace.
+  cis: CIS Scanning in Cluster Manager has been deprecated as of Rancher 2.5.0 - check out the <a href="https://rancher.com/docs/rancher/v2.x/en/faq/deprecated-features-25x" target="_blank">FAQ</a>. For CIS Scanning with benchmark version 1.5 and above, see the updated <a href="{dashboardLink}/cis">CIS scanning</a> functionality in Cluster Explorer Apps and Marketplace.
+  dashboard: Try out the <a href="{dashboardLink}">Cluster Explorer</a> for a new way to view and manage your Kubernetes resources.
+  istio: Istio v1.5 has been declared end of life by the upstream project and is now deprecated as of Rancher 2.5.0 - check out the <a href="https://rancher.com/docs/rancher/v2.x/en/faq/deprecated-features-25x" target="_blank">FAQ</a>. Checkout the new <a href="{dashboardLink}/istio">Istio</a> v1.7 integration in the new Cluster Explorer Apps and Marketplace.
+  logging: Logging in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="https://rancher.com/docs/rancher/v2.x/en/faq/deprecated-features-25x" target="_blank">FAQ</a>. Check out the updated version of <a href="{dashboardLink}/logging">logging</a> in Cluster Explorer Apps and Marketplace.
+  multiclusterapp: Multi-Cluster Apps have been deprecated as of Rancher v2.5.0 - check out the <a href="https://rancher.com/docs/rancher/v2.x/en/faq/deprecated-features-25x" target="_blank">FAQ</a>. Check out the new <a href="{dashboardBase}c/local/fleet">Rancher Continuous Delivery</a> capability to deploy apps across multiple clusters through GitOps.
+  monitoring: Monitoring in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="https://rancher.com/docs/rancher/v2.x/en/faq/deprecated-features-25x" target="_blank">FAQ</a>. Check out the updated version of <a href="{dashboardLink}/monitoring">monitoring</a> in Cluster Explorer Apps and Marketplace.
+  monitoringV2Warning:  Monitoring in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="https://rancher.com/docs/rancher/v2.x/en/faq/deprecated-features-25x" target="_blank">FAQ</a>. The updated version of <a href="{dashboardLink}/monitoring">monitoring</a> in Cluster Explorer Apps and Marketplace is currently deployed.
+  notifiers: Notifiers in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="https://rancher.com/docs/rancher/v2.x/en/faq/deprecated-features-25x" target="_blank">FAQ</a>. Check out the updated notifier integration in Rancher <a href="{dashboardLink}/monitoring">monitoring</a> in Cluster Explorer Apps and Marketplace.
+  pipeline: Pipelines has been deprecated as of Rancher 2.5.0 - check out the <a href="https://rancher.com/docs/rancher/v2.x/en/faq/deprecated-features-25x" target="_blank">FAQ</a>. For continuous delivery capabilities check out <a href="{dashboardBase}c/local/fleet">Rancher Continuous Delivery</a> in the new Cluster Explorer view.
+
 catalogPage:
   istio:
     header: Traffic Rules Catalog
@@ -1157,7 +1172,7 @@ cis:
     growl:
       success: Running CIS scan on '{clusterName}'
     header: CIS Scans
-    rkeOnly: CIS Scans are only available to RKE Clusters
+    rkeOnly: This version of CIS scanning is only available for RKE clusters.
     actions:
       delete: Delete
       download: Download
@@ -1469,6 +1484,9 @@ clustersPage:
   clusterLaunchDisabled: "You have not been granted access to any RKE Templates."
   launch:
     new: Add Cluster
+    import: Import Cluster
+    importEks: Import Amazon EKS
+    register: Register Cluster
   cluster:
     label: Cluster Name
   templateRevision:
@@ -2064,7 +2082,7 @@ cruVolumeClaimTemplate:
 cruPrivateRegistry:
   title:
     label: Private Registry
-    detail: "Configure a default private registry for this cluster. When enabled, all images required for cluster provisioning and system add-ons startup will be pulled from this registry."
+    detail: Configure a default private registry for provisioning RKE cluster components. When enabled, all system images required for RKE cluster provisioning and system add-ons startup will be pulled from this registry.
     detailAtImportCluster: "Configure a default private registry for this cluster. When enabled, all images required for cluster provisioning and system add-ons startup will be pulled from this registry(Notice: This config will override system-default-registry in global config)."
   noData: This cluster does not have a private registry defined
   defaultError: You must designate one private registry as the default
@@ -3467,7 +3485,7 @@ billingInfo:
       actions: Actions
 
 cloudProvider:
-  title: Cloud Provider
+  title: In-Tree Cloud Provider
   amazon: Amazon
   azure: Azure
   external:
@@ -3479,7 +3497,7 @@ cloudProvider:
     helpText: 'Please edit the YAML to add in any other <a href="http://rancher.com/docs/rke/v0.1.x/en/config-options/cloud-providers/" target="_blank" rel="nofollow noopener noreferrer">cloud providers</a>'
 
   helpText: |
-     Read more about the <a href="https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/" target="_blank" rel="nofollow noopener noreferrer">Kubernetes cloud providers</a>
+     Read more about the state of the <a href="https://kubernetes.io/blog/2019/04/17/the-future-of-cloud-providers-in-kubernetes/" target="_blank" rel="nofollow noopener noreferrer">Kubernetes in-tree cloud providers</a>
   warning:
     Configuring a Cloud Provider in your cluster without configuring the prerequisites will cause your cluster to not provision correctly. Prerequisites needed for supported cloud providers can be found in the documentation.
   azureCloudConfig:
@@ -3622,6 +3640,7 @@ clusterRow:
   addHost: Add Nodes
   importCluster: Use existing Kubernetes
   loginDefault: Login
+  explorer: Explorer
 
 clusterTemplateRow:
   label: 'RKE Template'
@@ -3673,18 +3692,146 @@ clusterNew:
     none: No policies are defined
     required: A Default Pod Security Policy is required when support is enabled.
   amazoneks:
+    errors:
+      clusterSpec: 'Unable to parse the clusters upstream spec. Is the cluster ready?'
     label: Amazon Elastic Container Service for Kubernetes
     shortLabel: Amazon EKS
     ingressWarning: "Note: Currently Amazon EKS will not create an ingress controller when launching a new cluster. If you need this functionality you will have to create an ingress controller manually after cluster creation."
     access:
       title: Account Access
       detail: Choose the region and API Key that will be used to launch Amazon EKS
+      region: Region
+      next: "Next: Configure Cluster"
+    clusterOption:
+      title: Cluster Options
+      detail: Customize the cluster that will be used to launch EKS Instances
+    kubernetesVersion:
+      label: Kubernetes Version
+      placeholder: Select the Kubernetes Version to install
+      warning: EKS only allows a Kubernetes version greater than 1 minor release. Please update node group versions before updating the cluster version.
     secretsEncryption:
       label: Secrets Encryption
       disabled: None
       kms: "KMS Key: Select or Enter KMS Key that will be used to encrypt secrets"
       kmsHelpLabel: KMS Key ARN
       failure: There was a problem loading KMS Encryption keys but you may still enter a KeyARN if you know it.
+    tags:
+      label: Tags
+      addActionLabel: Add Tag
+    nodeGroups:
+      title: Managed Node Groups
+      detail: Customize managed node groups.
+      addLabel: Add Node Group
+      noNodes: No Node Groups
+    role:
+      label: Service Role
+      noneSelected: "Rancher created role"
+      help: "You may choose to not select a Service Role and one will be created for you."
+      radio:
+        default: "Standard: Service role is automatically created"
+        custom: "Custom: Choose from your existing service roles"
+      next: "Next: Configure Network"
+      loading: "Loading network options from Amazon..."
+    vpc:
+      title: Networking
+      detail: Choose the network and access options that will be used for EKS Instances
+      next: "Next: Select Subnets"
+      loading: "Loading Subnets from Amazon..."
+      nextRancherDefault: "Next: Select Instance Options"
+      loadingRancherDefault: "Loading Instance options..."
+      noneSelected: "Rancher created VPC and Subnet"
+      radio:
+        default: "Standard: VPC and Subnet are automatically created"
+        custom: "Custom: Choose from your existing VPC and Subnets"
+      access:
+        title: API Server Endpoint Access
+        help: 'Configuring Public/Priavte API access is an advanced use case. Users are encouraged to read the EKS cluster endpoint access control <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html" target="_blank"  rel="nofollow noopener noreferrer">documentation</a>.'
+        public:
+          label: Public Access
+          tooltip: Rancher needs network access to the Kubernetes endpoint; disabling the public access will prevent Rancher from communicating with the endpoint if Rancher's network is not part of the private network.
+        private:
+          label: Private Access
+        endpoints:
+          label: Public Access Endpoints
+          valueLabel: Endpoints
+          addActionLabel: Add Endpoint
+          helpBlock: Optionally limit access to the public endpoint via explicit CIDR blocks. If you limit access to specific CIDR blocks, then it is recommended that you also enable the private access to avoid loosing network communitcation to the cluster.
+    logging:
+      title: Logging
+      detail: "Configure control plane logs to send to Amazon CloudWatch. You are charged the standard CloudWatch Logs data ingestion and storage costs for any logs sent to CloudWatch Logs from your clusters."
+      audit:
+        label: Audit
+        tooltip: "Kubernetes audit logs provide a record of the individual users, administrators, or system components that have affected your cluster."
+      api:
+        label: API
+        tooltip: "Your cluster's API server is the control plane component that exposes the Kubernetes API."
+      scheduler:
+        label: Scheduler
+        tooltip: "The scheduler component manages when and where to run pods in your cluster."
+      controllerManager:
+        label: Controller Manager
+        tooltip: "The controller manager manages the core control loops that are shipped with Kubernetes."
+      authenticator:
+        label: Authenticator
+        tooltip: "Authenticator logs are unique to Amazon EKS. These logs represent the control plane component that Amazon EKS uses for Kubernetes Role Based Access Control (RBAC) authentication using IAM credentials."
+    subnet:
+      title: Subnet
+      help: EKS requires at least 2 subnets. Subnets should span at least 2 availability zones.
+      next: "Next: Select Security Group"
+      loading: "Loading Security Groups from Amazon..."
+      noneSelected: "Rancher created VPC, Subnet, and Security Group"
+    associateWorkerNodePublicIp:
+      title: Public IP for Worker Nodes
+      radio:
+        default: Yes
+        off: 'No: Private IPs only'
+    securityGroup:
+      title: Security Groups
+      detail: Choose the security groups that will be applied to EKS Instances
+      choose:  Choose one or more existing groups
+      defaultExisting: "Standard: Use the existing <code>{groupName}</code> group"
+      defaultCreate: "Standard: Automatically create a new security group"
+      next: "Next: Set Instance options"
+      loading: Loading Instance options...
+    ami:
+      label: Custom AMI Override
+      help: "You may override the default AMI based on your region"
+    max:
+      label: Maximum ASG Size
+    min:
+      label: Minimum ASG Size
+    desired:
+      label: Desired ASG Size
+    userData:
+      label: User Data
+      help: Pass user-data to the nodes to perform automated configuration tasks
+      placeholder: Paste in the script
+    nodeVolumeSize:
+      label: Node Volume Size
+      placeholder: e.g. 20
+    accessKey:
+      label: Access Key
+      placeholder: Your AWS access key
+    secretKey:
+      label: Secret Key
+      placeholder: Your AWS secret key
+      provided: Provided
+    sessionToken:
+      label: "Session Token  <em class='text-muted'>Optional</em>"
+      placeholder: Your AWS session token
+      provided: Provided
+    region:
+      label: Region
+    import:
+      clusterSelect:
+        title: Choose Cluster
+        detail: Choose an EKS cluster to register
+        select:
+          label: Cluster To register
+        input:
+          label: Cluster Name To register
+        createLabel: Register Cluster
+
   azureaks:
     label: Azure Container Service
     shortLabel: Azure AKS
@@ -4045,6 +4192,120 @@ clusterNew:
         placeholder: Value
       required: 'Taint "key" and "value" are required.'
     tablesOnly: Tables Only
+  rke2:
+    label: Rancher RKE Government
+    shortLabel: RKE Government
+  k3simport:
+    label: Rancher K3S
+    shortLabel: K3S
+    errors:
+      concurrency:
+        negative: Only non-negative and non-zero concurrency values are valid.
+  oracleoke:
+    label: Oracle Container Engine long
+    shortLabel: Oracle OKE
+    access:
+      next: "Next: Authenticate & Configure Cluster"
+      loading: Loading values from Oracle Cloud Infrastructure
+      title: Choose the region and API Key that will be used to authenticate and configure Oracle Container Engine.
+      detail: Choose the region and API Key that will be used to authenticate and configure Oracle Container Engine.
+    region:
+      label: Region
+    tenancyOCID:
+      label: Tenancy OCID
+      placeholder: The OCID of the tenancy in which to create resources
+      required: Tenancy OCID is required
+    compartmentOCID:
+      label: Compartment OCID
+      placeholder: The OCID of the compartment in which to create the resources
+      required: Compartment OCID is required
+    userOcid:
+      label: User OCID
+      placeholder: The OCID of a user who has access to the specified tenancy/compartment
+      required: Tenancy OCID is required
+    userFingerprint:
+      label: User fingerprint
+      placeholder: The fingerprint corresponding to the specified user's private API Key
+      required: User private key fingerprint is required
+    secretKey:
+      label: User Private Key
+      placeholder: The private API key contents for the specified OCI user, in PEM format
+      provided: Provided
+      required: User Private API Key is required
+    secretKeyPassphrase:
+      label: User Private Key Passphrase
+      placeholder: The passphrase (if any) that protects private key file the specified OCI user
+      provided: Provided
+    cluster:
+      title: Cluster Configuration
+      detail: Choose the Kubernetes version and the number of nodes per availability-domain for the cluster.
+      next: "Next: Configure Virtual Cloud Network"
+      loading: Loading VCNs from Oracle Cloud Infrastructure
+    vcn:
+      title: Virtual Cloud Network
+      detail: Configure the virtual cloud network that will be used for your Kubernetes cluster.
+      label: Virtual Cloud Network
+      required: VCN is required
+    version:
+      label: Kubernetes Version
+      required: Kubernetes Version is required
+    cidr:
+      label: Virtual Cloud Network CIDR
+      placeholder: e.g. 172.16.0.0/16
+      required: Virtual Cloud Network CIDR is required
+      error: Virtual Cloud CIDR format error
+    existingVCNDetails:
+      compartmentOCID: OCID of the VCN's compartment
+      compartmentOCIDPlaceholder: e.g. ocid1.compartment.oc1..aaaaaaaa...
+      compartmentOCIDHelp: leave blank if it's the cluster compartment
+      vcnName: Name of the pre-existing VCN
+      vcnNamePlaceholder: e.g. my-vcn
+      lbSubnetName1: Name of first pre-existing LB subnet
+      lbSubnetName1Placeholder: e.g. my-lb-sub-1
+      lbSubnetName2: Name of second pre-existing LB subnet (if applicable)
+      lbSubnetName2Placeholder: e.g. my-lb-sub-2
+    quantityPerSubnet:
+      label: Nodes Per AD Count
+      placeholder: e.g. 1
+      required: Nodes per availability-domain is required
+      help: The quantity of nodes nodes to run in each availability domain in the region
+      error: The count of nodes should not be greater than {max}
+    nodeShape:
+      label: Instance Shape'
+      required: Instance Shape is required
+    nodeSSHKey:
+      label: SSH public key for nodes
+      placeholder: Optional SSH public key for the nodes
+    instanceConfig:
+      label: Instance Configuration(CPU/Memory)
+      gpuLabel: Instance Configuration(CPU/Memory/GPU Type/GPU Count)
+      required: Instance Configuration is required
+    subnet:
+      label: Subnet Access
+      required: Subnet access is required
+    node:
+      title: Node Type
+      detail: Choose the node type that will be used for this Kubernetes cluster
+      next: "Next: Configure Node Instances"
+      loading: Loading configuration from Oracle Cloud Infrastructure
+    instance:
+      title: Node Instance Configuration
+      detail: Configure the instance that will be used as nodes in the cluster.
+    os:
+      label: Operating System
+    storageType:
+      label: Default Persistent Volume Disk Type
+    storageSize:
+      label: Default Persistent Volume Disk Size
+      placeholder: e.g. 10
+      error: Default Persistent Volume Disk Size should be greater than 0
+    localDisk:
+      label: Local Disk
+      placeholder: size GB
+    subnetAccessOptions:
+      quick: Quick Create
+      custom: Custom Create
+      existing: Existing
   rke:
     upgradeStrategy:
       maximumWorkersDown:
@@ -4324,18 +4585,36 @@ clusterNew:
     kubeProxy:
       mode:
         label: Kube Proxy Mode
+  register:
+    title: Register an existing Kubernetes cluster
+    label: Register
+    shortLabel: Registered
+    helpBlock: Register an existing Rancher, <a href='https://k3s.io/' target='_blank' rel='nofollow noreferrer'>K3s</a> or EKS cluster. By registering these type of clusters, Rancher can manage some aspects of the cluster configuration, such as version upgrades.
   custom:
-    label: From existing nodes (Custom)
+    title: Create a new Kubernetes cluster
+    subtitle: With RKE and existing bare-metal servers or virtual machines.
+    label: Existing nodes
     shortLabel: Custom
     helpBlock: Create a new Kubernetes cluster using RKE, out of existing bare-metal servers or virtual machines.
   import:
-    label: Import an existing cluster
+    label: Other Cluster
     shortLabel: Imported
-    helpBlock: "Import an existing Kubernetes cluster. For <a id='k3s-info-external-link' href='https://k3s.io/' target='_blank' rel='nofollow noreferrer'>K3S backed clusters</a>, {appName} can manage some aspects of the cluster configuration, such as version upgrades. For standard Kubernetes clusters, the provider will manage provisioning and configuration."
+    helpBlock: Import an existing CNCF certified Kubernetes cluster. Kubernetes configuration and infrastructure management is managed outside of Rancher.
     command:
       instructionsAdminRole: "<b>Note:</b> If you want to import a Google Kubernetes Engine (GKE) cluster (or any cluster that does not supply you with a kubectl configuration file with the ClusterRole <b>cluster-admin</b> bound to it), you need to bind the ClusterRole <b>cluster-admin</b> using the command below.<br/><br/>Replace <b>[USER_ACCOUNT]</b> with your Google account address (you can retrieve this using <b>gcloud config get-value account</b>). If you are not importing a Google Kubernetes Engine cluster, replace <b>[USER_ACCOUNT]</b> with the executing user configured in your kubectl configuration file."
       instructions: "Run the kubectl command below on an existing Kubernetes cluster running a supported Kubernetes version to import it into {appName}:"
       instructionsInsecure: "If you get an error about 'certificate signed by unknown authority' because your {appName} installation is running with an untrusted/self-signed SSL certificate, run the command below instead to bypass the certificate check:"
+    select:
+      other:
+        title: Rancher or K3s
+        helpBlock: "Register existing Rancher or <a id='k3s-info-external-link' href='https://k3s.io/' target='_blank' rel='nofollow noreferrer'>K3s</a> backed cluster."
+      eks:
+        title: Amazon EKS
+        helpBlock: "Register an existing Amazon EKS cluster."
+  importEks:
+    label: Register an existing Amazon EKS cluster
+    shortLabel: Registered
+    helpBlock: "Register an existing Amazon EKS Kubernetes cluster."
 
 clusterTemplateNew:
   members:
@@ -5638,6 +5917,7 @@ dangerZone:
     'auth-token-max-ttl-minutes': 'Custom max TTL (in minutes) on an auth token.'
     'rke-metadata-config': 'Configure RKE metadata refresh parameters.'
     'ui-banners': 'Classification banner is used to display a custom fixed banner in the header, footer, or both. The setting takes JSON object containing 3 root parameters; <code>banner</code>, <code>showHeader</code>, <code>showFooter</code>. <code>banner</code> is an object containing; <code>textColor</code>, <code>background</code>, and <code>text</code>, where <code>textColor</code> and <code>background</code> are any valid CSS color value.'
+    'ui-default-landing': 'The default page users land on after login.'
     'ui-footer-text': 'Extra text in footer.'
     'ui-footer-url': 'URL for the extra text in footer.'
     'extra-menus': 'Configure custom menus.'
@@ -6244,6 +6524,9 @@ formGlobalRoles:
     custom:
       label: Built-in
       detail: Additional roles to define more fine-grain permissions model.
+    restrictedAdmin:
+      label: Restricted Administrator
+      detail: Restricted Admins have full control over all resources in all downstream clusters but no access to the local cluster.
   role:
     clusters-create:
       label: Create new Clusters
@@ -7360,6 +7643,38 @@ inputPassword:
 inputTextFile:
   tooltip: Read from a file
 
+nodeGroupRow:
+  name:
+    label: Node Group Name
+  instance:
+    label: Instance Type
+  gpu:
+    label: GPU Enabled Instance
+  max:
+    label: Maximum ASG Size
+  min:
+    label: Minimum ASG Size
+  desired:
+    label: Desired ASG Size
+  nodeVolumeSize:
+    label: Node Volume Size
+    placeholder: e.g. 20
+  ssh:
+    label: SSH Key
+  labels:
+    label: Labels
+    addLabel: Add Label
+  tags:
+    label: Tags
+    addLabel: Add Tag
+  remove:
+    label: Remove Node Group
+  version:
+    label: Kubernetes Version
+    upgrade: Upgrade Node Group Version from { from } to { version }
+    warning: A new cluster version has been selected. Once completed you may come back and upgrade the node group version.
+
+
 uploadFile:
   label: Read from File
 
@@ -7374,19 +7689,16 @@ containersSection:
   noMatch: No Containers match the current search
   initContainer: Init Container
 
-k3sClusterInfo:
-  title: K3s Options
-  detail: Customize the K3S cluster options
+managedImportClusterInfo:
+  title: "{provider} Options"
+  detail: "Customize the {provider} cluster options"
+  kubernetesVersion: Kubernetes Version
   workerConcurrency: Worker Concurrency
   serverConcurrency: Control Plane Concurrency
   drainServerNodes: Drain Control Plane Nodes
   drainWorkerNodes: Drain Worker Nodes
-  nodeInfo:
-    title: K3s Node Information
-    detail: Read-only view of K3S master node arguments and environment variables.
-    label: Control Plane Node
-    datail: Additional K3S control plane node details
-    selectPrompt: Select node
+  error:
+    int: Concurrency values must be integer values
 
 k3sNodeEnvVarSection:
   title: K3S Node Environment Variables
@@ -7410,6 +7722,13 @@ labelsSection:
   value: Value
   noData: No labels
   noMatch: No labels match the current search
+
+landingPage:
+  header: Login Landing Page
+  ember: Cluster Manager
+  vue: Cluster Explorer
+  emberLong: I want to create or manage multiple clusters
+  vueLong: I'm only going to use the cluster Rancher was installed on
 
 loginShibboleth:
   buttonText: Log In with Shibboleth
@@ -7967,7 +8286,8 @@ modalEditSetting:
 modalEditPassword:
   firstLogin:
     title: Welcome to {appName}
-    help: The first order of business is to set a strong password for the default <code>admin</code> user.
+    help: Set password for the default <code>admin</code> user
+    setView: Set Default View
     actionButton: Continue
   edit:
     title: Change Password
@@ -8460,10 +8780,11 @@ nodeDriver:
   cloudCredentialError: A cloud credential is required
   nameError: A name is required
   displayName:
-    aliyunecs: Aliyun ECS
     aliyun: Alibaba ACK
+    aliyunecs: Aliyun ECS
     amazonec2: Amazon EC2
     amazoneks: Amazon EKS
+    amazoneksv2: Amazon EKS
     azure: Azure
     azureaks: Azure AKS
     cloudca: Cloud.ca
@@ -8471,6 +8792,9 @@ nodeDriver:
     exoscale: Exoscale
     googlegke: Google GKE
     huawei: Huawei CCE
+    huaweicce: Huawei CCE
+    import: Other
+    importeks: Amazon EKS
     linode: Linode
     oci: Oracle Cloud Infrastructure
     openstack: OpenStack
@@ -9029,6 +9353,7 @@ nodeDriver:
       placeholder: "e.g. AllowVnetOutBound"
       helpText: When using a Rancher managed or providing an existing NSG, all nodes using this template will use the supplied NSG. If no NSG is provided, a new NSG will be created for each node.
       openPorts: When using an existing NSG, Open Ports are ignored.
+
   oci:
     placement:
       title: Placement
@@ -9077,6 +9402,7 @@ nodeDriver:
     region:
       label: Region
       placeholder: 'select cloud credential to populate options...'
+
   zstack:
     access:
       title: 1. Account Access
@@ -9469,6 +9795,7 @@ systemInfoSection:
   noData: No Data
   arch: Architecture
   dockerVersion: Docker Version
+  containerDVersion: Containerd Version
   kernelVersion: Kernel Version
   kubeletVersion: Kubelet Version
   kubeProxyVersion: Kube Proxy Version
@@ -9489,7 +9816,7 @@ telemetryOpt:
   eula:
     prefix: I agree to the
     link: Terms and Conditions
-    suffix: 'for using {appName}.'
+    suffix: 'for using {appName}'
 
 tooltipLink:
   list: List
@@ -9502,6 +9829,10 @@ tooltipWarning:
 tooltipExpire:
   label: 'This cluster has certs that are expiring or have expired.'
   link: 'Rotate Now'
+
+tooltipNodeGroupUpdate:
+  label: A node group Kubernetes version can be updated.
+  link: Edit Version
 
 tooltipToggleOverride:
   label: 'Allow user override?'
@@ -9720,14 +10051,17 @@ nav:
     tab: Tools
     istio: Istio
     cisScans: CIS Scans
+    backup: Rancher Backups
+    fleet: Continuous Delivery
+    gatekeeper: OPA Gatekeeper
+    rio: Rio
   project:
     none: Grouped Projects/Namespaces
     namespaces: Namespaces
   dashboard:
-    try: Try Dashboard
+    try: Cluster Explorer
   auditLog:
     tab: Audit Log
-
 
 ##############################
 # Resource Actions

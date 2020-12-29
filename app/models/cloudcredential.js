@@ -10,7 +10,7 @@ const cloudCredential = Resource.extend({
   globalStore:    service(),
   nodeTemplates: hasMany('id', 'nodetemplate', 'cloudCredentialId', 'globalStore'),
 
-  type:     'cloudCredential',
+  type: 'cloudCredential',
 
   canClone: false,
   canEdit:  true,
@@ -44,6 +44,8 @@ const cloudCredential = Resource.extend({
     } else if (isVMware) {
       return 'VMware vSphere';
     }
+
+    return '';
   }),
 
   numberOfNodeTemplateAssociations: computed('nodeTemplates.[]', function() {

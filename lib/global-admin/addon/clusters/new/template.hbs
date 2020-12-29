@@ -4,6 +4,12 @@
       {{t "clustersPage.select.provider.label"}}
     {{else if (eq router.currentRoute.localName "cluster-template")}}
       {{t "clustersPage.select.template.label"}}
+    {{else if (eq provider "import")}}
+      {{#if (eq router.currentRoute.queryParams.importProvider "eks")}}
+        {{t "clustersPage.launch.importEks"}}
+      {{else}}
+        {{t "clustersPage.launch.import"}}
+      {{/if}}
     {{else}}
       {{t "clustersPage.launch.new"}} - {{driver-name provider}}
     {{/if}}

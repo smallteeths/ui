@@ -65,6 +65,7 @@
   &.import { @include import; }
   &.aliyunecs { @include aliyunecs; }
   &.amazoneks { @include amazoneks; }
+  &.amazoneksv2 { @include amazoneks; }
   &.azureaks { @include azureaks; }
   &.googlegke { @include googlegke; }
   &.tencenttke { @include tencenttke; }
@@ -83,6 +84,7 @@
     padding: 15px 0px;
     max-height: 130px;
     text-decoration: none;
+    position: relative;
 
     &.small {
       max-height: 100px;
@@ -93,11 +95,31 @@
         border-right: none;
         background-size: 50px 50px;
       }
+      .custom-driver,
+      .import-driver {
+        background-size: 25px 25px;
+      }
     }
 
     &:hover {
       outline: 4px solid $link-color;
       border-color: $link-color;
+    }
+
+    &.active:after {
+      content: $icon-check;
+      top: -15px;
+      right: -15px;
+      font-family: 'rancher-icons';
+      font-size: 18px;
+      position: absolute;
+      background-color: $info;
+      height: 29px;
+      width: 29px;
+      line-height: 29px;
+      border-radius: 50%;
+      color: white;
+      padding-left: 5px;
     }
   }
   .machine-driver {
@@ -115,7 +137,7 @@
   }
   .driver-content {
     overflow: hidden;
-    padding-left: 10px;
+    padding-left: 5px;
   }
 }
 

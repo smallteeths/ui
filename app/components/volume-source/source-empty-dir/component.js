@@ -5,7 +5,7 @@ import { get, set, computed } from '@ember/object';
 
 export default Component.extend(VolumeSource, {
   layout,
-  field:     'emptyDir',
+  field: 'emptyDir',
 
   initValue: { medium: '' },
 

@@ -25,7 +25,7 @@ Router.map(function() {
   this.route('failWhale', { path: '/fail' });
   this.route('not-found', { path: '*path' });
 
-  this.route('signup', { path: '/signup' });
+  this.route('signup' );
   this.route('verify', { path: '/verify/:verify_token' });
   this.route('verify-reset-password', { path: '/verify-reset-password/:verify_token' });
 
@@ -38,6 +38,8 @@ Router.map(function() {
   this.route('update-critical-settings', { path: '/update-setting' });
 
   this.route('authenticated', { path: '/' }, function() {
+    this.route('dashboard', { path: '/dashboard/*path' });
+
     this.mount('nodes', {
       path:           '/n',
       resetNamespace: true
@@ -139,7 +141,7 @@ Router.map(function() {
     this.route('project', { path: '/p/:project_id' }, function() {
       this.route('index', { path: '/' });
 
-      this.route('ns', { path: '/ns' }, function() {
+      this.route('ns',  function() {
         this.route('index', { path: '/' });
         this.route('resource-quota', { path: '/:ns' });
       });
@@ -163,7 +165,7 @@ Router.map(function() {
         path:           '/workloads',
         resetNamespace: true
       }, function() {
-        this.route('run', { path: '/run' });
+        this.route('run' );
         this.route('index', { path: '/' });
 
         this.route('pod', {
@@ -187,7 +189,7 @@ Router.map(function() {
       });
 
       this.route('ingresses', { resetNamespace: true }, function() {
-        this.route('run', { path: '/run' });
+        this.route('run' );
         this.route('index', { path: '/' });
 
         this.route('ingress', {
@@ -212,10 +214,7 @@ Router.map(function() {
         });
       });
 
-      this.route('volumes', {
-        path:           '/volumes',
-        resetNamespace: true
-      }, function() {
+      this.route('volumes', { resetNamespace: true }, function() {
         this.route('index', { path: '/' });
         this.route('new', { path: '/add' });
         this.route('detail', { path: '/:volume_id' });

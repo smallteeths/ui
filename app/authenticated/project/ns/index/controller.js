@@ -51,7 +51,7 @@ export default Controller.extend({
     },
   },
 
-  allNamespace: computed('model.namespaces.@each.state', 'model.namespaces.[]', function() {
+  allNamespace: computed('model.namespaces.@each.state', 'model.namespaces.[]', 'scope.currentProject.id', function() {
     let ns = get(this, 'model.namespaces');
     let pId = get(this, 'scope.currentProject.id');
 
@@ -64,7 +64,7 @@ export default Controller.extend({
     return allNamespace;
   }),
 
-  projectNamespaces: computed('model.namespaces', function() {
+  projectNamespaces: computed('model.namespaces', 'scope.currentProject.id', function() {
     return get(this, 'model.namespaces').filter( (ns) => get(ns, 'projectId') === get(this, 'scope.currentProject.id'));
   }),
 

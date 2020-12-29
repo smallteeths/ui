@@ -293,6 +293,25 @@ const rootNav = [
         resource:                 [],
         ctx:                      [getClusterId],
       },
+      { divider: true },
+      {
+        id:                       'cluster-tools-backup',
+        localizedLabel:           'nav.tools.backup',
+        dashboardLink:            '/backup',
+        condition() {
+          return get(this, 'cluster.id') === 'local';
+        }
+      },
+      {
+        id:                       'cluster-tools-gatekeeper',
+        localizedLabel:           'nav.tools.gatekeeper',
+        dashboardLink:            '/gatekeeper',
+      },
+      // {
+      //   id:                       'cluster-tools-rio',
+      //   localizedLabel:           'nav.tools.rio',
+      //   dashboardLink:            '/rio',
+      // },
     ],
   },
 
@@ -425,6 +444,12 @@ const rootNav = [
         route:          'global-admin.cluster-templates',
         resource:       ['clustertemplate'],
         resourceScope:  'global',
+      },
+      { divider: true },
+      {
+        id:                'tools-fleet',
+        localizedLabel:    'nav.tools.fleet',
+        dashboardBaseLink:  '/c/local/fleet',
       },
     ],
   },

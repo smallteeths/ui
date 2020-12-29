@@ -71,10 +71,10 @@ Rancher UI supports localization via translations files. You can swap translatio
 If you want to customize the UI, re-packaging all of Rancher to distribute the UI is possible but not terribly convenient. Instead you can change Cattle to load the UI source from a remote web server:
 
 - Build with `./scripts/build-static -l -c 'your-server.com'`
-- Upload `./dist/static/latest-2.3` so that it's available at https://your-server.com/latest-2.3
+- Upload `./dist/static/latest-2.5` so that it's available at https://your-server.com/latest-2.5
   - It must be available over HTTPS.
-  - You can rename the "latest-2.3" part with the `-v` flag
-- Change the value of http[s]://your-rancher:8080/v3/settings/ui-index to the same `https://yourserver.com/latest-2.3` URL
+  - You can rename the "latest-2.5" part with the `-v` flag
+- Change the value of https://your-rancher/v3/settings/ui-index to the same `https://your-server.com/latest-2.5` URL
 
 ### Running Tests
 

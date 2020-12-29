@@ -1,31 +1,69 @@
-<a href="#" class="btn btn-sm bg-transparent" {{action "showAbout"}} aria-label="About Rancher">
-  {{if settings.rancherVersion settings.rancherVersion (t "pageFooter.notARelease")}}
+<a
+  href="#"
+  class="btn btn-sm bg-transparent"
+  aria-label="About Rancher"
+  {{action "showAbout"}}
+>
+  {{displayVersion}}
 </a>
-
 {{#if settings.isRancher}}
   {{#if projectId}}
-    <a href="{{href-to "authenticated.project.help" projectId}}" role="button" class="btn btn-sm bg-transparent">
+    <a
+      href="{{href-to "authenticated.project.help" projectId}}"
+      role="button"
+      class="btn btn-sm bg-transparent"
+    >
       {{t "pageFooter.help"}}
     </a>
   {{/if}}
-  <a role="button" class="btn btn-sm bg-transparent" target="blank" rel="noreferrer noopener" href="{{settings.docsBase}}">
+  <a
+    role="button"
+    class="btn btn-sm bg-transparent"
+    target="blank"
+    rel="noreferrer noopener"
+    href="{{settings.docsBase}}"
+  >
     {{t "pageFooter.help"}}
   </a>
-  <a role="button" class="btn btn-sm bg-transparent" target="blank" rel="noreferrer noopener" href="{{forumBase}}">
+  <a
+    role="button"
+    class="btn btn-sm bg-transparent"
+    target="blank"
+    rel="noreferrer noopener"
+    href="{{forumBase}}"
+  >
     {{t "pageFooter.forums"}}
   </a>
-  <a role="button" class="btn btn-sm bg-transparent" target="blank" rel="noreferrer noopener" href="{{slackBase}}">
+  <a
+    role="button"
+    class="btn btn-sm bg-transparent"
+    target="blank"
+    rel="noreferrer noopener"
+    href="{{slackBase}}"
+  >
     {{t "pageFooter.slack"}}
   </a>
   {{#if showWechat}}
-    <a role="button" class="btn btn-sm bg-transparent" target="blank" rel="noreferrer noopener" href="{{cnforumBase}}">
+    <a
+      role="button"
+      class="btn btn-sm bg-transparent"
+      target="blank"
+      rel="noreferrer noopener"
+      href="{{cnforumBase}}"
+    >
       {{t "pageFooter.cnforums"}}
     </a>
     <a class="btn btn-sm bg-transparent" {{action "showWechat"}}>
       {{t "modalWechat.wechat"}}
     </a>
   {{/if}}
-  <a role="button" class="btn btn-sm bg-transparent" target="blank" rel="noreferrer noopener" href="{{settings.issueUrl}}">
+  <a
+    role="button"
+    class="btn btn-sm bg-transparent"
+    target="blank"
+    rel="noreferrer noopener"
+    href="{{settings.issueUrl}}"
+  >
     {{t "pageFooter.issues"}}
   </a>
 {{/if}}
@@ -41,8 +79,5 @@
   </div>
 </div>
 <div class="pull-right">
-  {{language-dropdown
-    dropdownVertPosition="above"
-    classNames="dropup"
-  }}
+  {{language-dropdown dropdownVertPosition="above" classNames="dropup"}}
 </div>

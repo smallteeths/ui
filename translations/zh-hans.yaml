@@ -1083,6 +1083,18 @@ balancerPage:
   table:
     target: 目标
 
+banner:
+  alerting: Alerting is <a href="https://rancher.com/support-maintenance-terms/" target="_blank">deprecated</a> in Rancher v2.5+. Check out the updated version of alerting which is integrated with an <a href="{dashboardLink}/monitoring">updated monitoring</a>.
+  cis: CIS scans are <a href="https://rancher.com/support-maintenance-terms/" target="_blank">deprecated</a> in Rancher v2.5+. Check out the updated version of <a href="{dashboardLink}/cis">CIS scans</a>.
+  dashboard: Try out the <a href="{dashboardLink}">Cluster Explorer</a> for a new way to view and manage your Kubernetes resources.
+  istio: Istio is no longer being updated here. Check out the latest versions of <a href="{dashboardLink}/istio">Istio</a>.
+  logging: Logging is <a href="https://rancher.com/support-maintenance-terms/" target="_blank">deprecated</a> in Rancher v2.5+. Check out the updated version of <a href="{dashboardLink}/logging">logging</a>.
+  multiclusterapp: Multi-cluster apps are <a href="https://rancher.com/support-maintenance-terms/" target="_blank">deprecated</a> in Rancher v2.5+. Deploying apps to multiple clusters is available using <a href="{dashboardBase}c/local/fleet">Rancher Continuous Delivery</a>.
+  monitoring: Monitoring is <a href="https://rancher.com/support-maintenance-terms/" target="_blank">deprecated</a> in Rancher v2.5+. Check out the updated version of <a href="{dashboardLink}/monitoring">monitoring</a>.
+  monitoringV2Warning:  Monitoring is <a href="https://rancher.com/support-maintenance-terms/" target="_blank">deprecated</a> in Rancher v2.5+. The updated Rancher <a href="{dashboardLink}/monitoring">monitoring</a> chart is currently deployed.
+  notifiers: Notifiers are <a href="https://rancher.com/support-maintenance-terms/" target="_blank">deprecated</a> in Rancher v2.5+. Check out the updated version of notifiers which is integrated with an updated <a href="{dashboardLink}/monitoring">monitoring</a>.
+  pipeline: Pipelines are <a href="https://rancher.com/support-maintenance-terms/" target="_blank">deprecated</a> in Rancher v2.5+. Check out <a href="{dashboardBase}c/local/fleet">Rancher Continuous Delivery</a>.
+
 catalogPage:
   istio:
     header: 流量规则商店
@@ -1334,7 +1346,7 @@ certificatesPage:
     header: 添加证书
     form:
       name:
-        placeholder: '例如: Mydomain.com'
+        placeholder: e.g. mydomain.com
       description:
         placeholder: '例如: Mydomain.com 的 EV 证书'
 
@@ -1455,6 +1467,9 @@ clustersPage:
   clusterLaunchDisabled: "没有授予您访问集群模板的权限。"
   launch:
     new: 添加集群
+    import: 导入集群
+    importEks: Import Amazon EKS
+    register: 注册集群
   cluster:
     label: 集群名称
   templateRevision:
@@ -1559,9 +1574,9 @@ containersPage:
 
 clusterDashboard:
   systemProject: "这是包含所有 Kubernetes 和 {appName} 系统命名空间的系统项目，修改当前项目中的资源配置可能会导致系统无法正常运行。"
-  notActive: 当前集群<b>{state}</b>中...
-  notReady: 当前集群<b>{state}</b>中...，在 API 准备就绪之前，直接与 API 交互的功能将不可用。
-  used: 使用值
+  notActive: 当前集群< b>{state}</b> 中...
+  notReady: 当前集群 <b>{state}</b> 中...，在 API 准备就绪之前，直接与 API 交互的功能将不可用。
+  used: 已使用
   title: 仪表盘
   sections:
     cluster: 集群监控
@@ -2026,7 +2041,7 @@ cruVolumeClaimTemplate:
     label: 容量
     unit: GiB
   name:
-    placeholder: '例如: Myvol'
+    placeholder: e.g. myvol
   source:
     label: 来源
     pv: 使用已有的持久卷(PV)
@@ -2067,7 +2082,7 @@ cruVolume:
   define:
     addActionLabel: 确定
   name:
-    placeholder: '例如: Myvol'
+    placeholder: e.g. myvol
   source:
     label: 存储源
     title: 源配置
@@ -2449,7 +2464,7 @@ globalDnsPage:
       project: 项目
       fqdn:
         label: FQDN (域名)
-        placeholder: '例如: dev.example.com'
+        placeholder: dev.example.com
       multiCluster:
         label: 目标应用
         placeholder: 没有选择多集群应用
@@ -2890,20 +2905,20 @@ servicePage:
   new:
     form:
       name:
-        placeholder: '例如: Myapp'
+        placeholder: e.g. myapp
       description:
-        placeholder: '例如: 我的应用'
+        placeholder: e.g. My application
   newBalancer:
     upgradeImage: "负载均衡器镜像版本将由<code>{from}</code>升级到<code>{to}</code>。"
     form:
       name:
-        placeholder: '例如: website'
+        placeholder: e.g. website
       description:
         placeholder: '例如: Mycompany.com 的负载均衡'
   newIngress:
     form:
       name:
-        placeholder: '例如: website'
+        placeholder: e.g. website
       description:
         placeholder: '例如: Mycompany.com 的 Ingress'
       load:
@@ -2999,9 +3014,9 @@ stackPage:
 newStack:
   header: 导入 YAML
   name:
-    placeholder: '例如: Myapp'
+    placeholder: e.g. myapp
   description:
-    placeholder: '例如: MyApp Stack'
+    placeholder: e.g. MyApp Stack
   files:
     label: 额外的 Compose 文件
     addActionLabel: 添加文件
@@ -3123,7 +3138,7 @@ notifierPage:
     defaultRecipient:
       label: 默认频道
       helpText: 可选。默认情况下，通知被发送到默认频道。在配置告警时，可以覆盖该频道。
-    defaultRecipientPlaceholder: '例如: #example'
+    defaultRecipientPlaceholder: 'e.g. #example'
     helpText: |
       以下是 <a href="https://slack.com/apps/A0F7XDUAZ-incoming-webhooks" target="_blank" rel="nofollow noopener noreferrer"> 创建传入 WebHooks</a> 的方法。
   smtp:
@@ -3587,11 +3602,11 @@ catalogSettings:
     username:
       label: 用户名
       required: '用户名必须填写'
-      placeholder: "比如: admin"
+      placeholder: Your username
     password:
       label: 密码
       required: '密码必须填写'
-      placeholder:  password
+      placeholder: Your password
     helmVersion:
       label: Helm 版本
   errors:
@@ -3606,6 +3621,7 @@ clusterRow:
   addHost: 添加主机...
   importCluster: 使用已有的 Kubernetes
   loginDefault: 登录
+  explorer: 仪表盘
 
 clusterTemplateRow:
   label: '集群模板'
@@ -3649,26 +3665,152 @@ clusterNew:
     title: Kubernetes 选项
     detail: 自定义集群功能
   security:
-    title: 安全选项
-    detail: 自定义服务帐户和访问范围
+    title: 安全
+    detail: 自定义 GKE 服务账号和访问权限
   psp:
     label: 默认的 Pod 安全策略
     prompt: 选择 Pod 安全策略...
     none: 没有配置策略
     required: 启用时需要设置默认 Pod 安全策略
   amazoneks:
+    errors:
+      clusterSpec: 'Unable to parse the clusters upstream spec. Is the cluster ready?'
     label: 为 Kubernetes 提供的 Amazon 弹性容器服务
     shortLabel: Amazon EKS
     ingressWarning: '注意: 目前 Amazon EKS 不会在启动新的集群时创建传入控制器。如果需要此功能，则必须在集群创建后手动创建一个传入控制器。'
     access:
       title: 账户访问
       detail: 选择将用于启动 Amazon EKS 的区域和 API 密钥
+      region: 区域
+      next: "下一步: 配置集群"
+    clusterOption:
+      title: 集群配置选项
+      detail: 自定义将使用 EKS 实例启动的集群。
+    kubernetesVersion:
+      label: Kubernetes 版本
+      placeholder: 选择要安装的 Kubernetes 版本
+      warning: EKS 只允许 Kubernetes 版本大于 1 个小版本。在更新集群版本之前，请先更新节点组版本。
     secretsEncryption:
       label: Secrets Encryption
       disabled: None
-      kms: "KMS Key: Select or Enter KMS Key that will be used to encrypt secrets"
+      kms: "KMS Key: 选择或输入用于加密秘密的 KMS 密钥"
       kmsHelpLabel: KMS Key ARN
-      failure: There was a problem loading KMS Encryption keys but you may still enter a KeyARN if you know it.
+      failure: 在加载 KMS 加密密钥时出现问题。如果你知道密钥内容，你可以手动输入一个密钥。
+    tags:
+      label: 标签
+      addActionLabel: 添加标签
+    nodeGroups:
+      title: 管理节点组
+      detail: 自定义管理节点组
+      addLabel: 添加节点组
+      noNodes: 没有节点组
+    role:
+      label: 服务角色
+      noneSelected: "Rancher 创建的角色"
+      help: "您可以选择不选择服务角色，然后 rancher 将自动为您创建一个服务角色。"
+      radio:
+        default: "标准: 自动创建服务角色"
+        custom: "自定义: 从现有的服务角色中进行选择"
+      next: "下一步: 选择 VPC 和子网"
+      loading: "从 Amazon 加载vpc..."
+    vpc:
+      title: 网络
+      detail: 选择将用于 EKS 实例的网络
+      next: "下一步: 选择子网"
+      loading: "从 Amazon 加载子网…..."
+      nextRancherDefault: "下一步: 选择实例选项"
+      loadingRancherDefault: "加载实例选项……"
+      noneSelected: "Rancher 创建 VPC 和子网"
+      radio:
+        default: "标准: VPC 和子网自动创建"
+        custom: "自定义: 从现有的VPC和子网中选择"
+      access:
+        title: API Server 访问 Endpoint
+        help: '配置 公共/私有 API 访问是一个高级用例，建议阅读 EKS 集群端点访问控制 <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html" target="_blank"  rel="nofollow noopener noreferrer">文档</a>.'
+        public:
+          label: 公共访问
+        private:
+          label: 私有访问
+        endpoints:
+          label: 公共访问地址
+          valueLabel: Endpoints
+          addActionLabel: Add Endpoint
+          helpBlock: （可选）配置 CIDR IP 对公共访问地址的访问权限。如果您限制对特定 CIDR 段的访问，那么建议您还启用私有访问，以避免失去对集群的网络通信。
+    logging:
+      title: 日志收集
+      detail: "Configure control plane logs to send to Amazon CloudWatch. You are charged the standard CloudWatch Logs data ingestion and storage costs for any logs sent to CloudWatch Logs from your clusters."
+      audit:
+        label: 审计
+        tooltip: "Kubernetes 审计日志记录了影响集群的单个用户、管理员或系统组件的操作事件。"
+      api:
+        label: API
+        tooltip: "集群的 API 服务器是公开 Kubernetes API 控制平面组件。"
+      scheduler:
+        label: Scheduler
+        tooltip: "Scheduler 组件管理任何在集群中运行 Pods。"
+      controllerManager:
+        label: Controller Manager
+        tooltip: "The controller manager manages the core control loops that are shipped with Kubernetes."
+      authenticator:
+        label: 身份验证
+        tooltip: "Authenticator logs are unique to Amazon EKS. These logs represent the control plane component that Amazon EKS uses for Kubernetes Role Based Access Control (RBAC) authentication using IAM credentials."
+    subnet:
+      title: 子网
+      help: EKS requires at least 2 subnets. Subnets should span at least 2 availability zones.
+      next: "下一步: 选择安全组"
+      loading: "从 Amazon 加载安全组…..."
+      noneSelected: "Rancher 创建 VPC、子网和安全组"
+    associateWorkerNodePublicIp:
+      title: Worker 节点的公共IP
+      radio:
+        default: Yes
+        off: 'No: 只有私有 ip'
+    securityGroup:
+      title: 安全组
+      detail: 选择将应用于EKS实例的安全组
+      choose:  选择一个或多个现有组
+      defaultExisting: "标准: 使用现有的 <code>{groupName}</code> 组"
+      defaultCreate: "标准: 自动创建新的安全组"
+      next: "下一步: 设置实例选项"
+      loading: 加载实例选项...
+    ami:
+      label: Custom AMI Override
+      help: "您可以根据您的区域重写默认 AMI"
+    max:
+      label: Maximum ASG Size
+    min:
+      label: Minimum ASG Size
+    desired:
+      label: Desired ASG Size
+    userData:
+      label: User Data
+      help: 将用户数据传递给节点以执行自动配置任务
+      placeholder: 粘贴脚本
+    nodeVolumeSize:
+      label: Node Volume Size
+      placeholder: e.g. 20
+    accessKey:
+      label: Access Key
+      placeholder: Your AWS access key
+    secretKey:
+      label: Secret Key
+      placeholder: Your AWS secret key
+      provided: Provided
+    sessionToken:
+      label: "Session Token  <em class='text-muted'>Optional</em>"
+      placeholder: Your AWS session token
+      provided: Provided
+    region:
+      label: 区域
+    import:
+      clusterSelect:
+        title: 选择集群
+        detail: 选择要注册的EKS集群
+        select:
+          label: 集群注册
+        input:
+          label: 要注册的集群名
+        createLabel: 注册集群
   azureaks:
     label: Azure 容器服务
     shortLabel: Azure AKS
@@ -4029,8 +4171,11 @@ clusterNew:
       value:
         label: 值
         placeholder: Value
-      required: '污点的 "key" 和 "value"必须设置.'
+      required: '污点的 "key" 和 "value" 必须设置。'
     tablesOnly: Tables Only
+  rke2:
+    label: Rancher RKE Government
+    shortLabel: RKE Government
   k3simport:
     label: Rancher K3S
     shortLabel: K3S
@@ -4336,7 +4481,7 @@ clusterNew:
       label: 项目网络隔离
     networkMTU:
       label: 容器网卡 MTU
-      help: "自定义容器网卡 MTU 值，0 表示使用网络驱动默认配置的 MTU 值。常规网络通信 MTU 为 1500，对于非标准的网络驱动，可通过这个参数来自定义容器的 MTU 值。"
+      help: "自定义容器网卡 MTU 值。默认网络传输的 MTU 为 1500，对于有些网络驱动(比如 canal)，由于使用 vxlan 后端，会有 50bit 用于传输 vxlan 的 tag，所以在主机上创建的网桥 flannel.1 的 MTU 值是 1450。而默认创建的容器网卡 MTU 值是 1500，为了对应网桥 flannel.1 的 MTU 值，可通过这个参数来自定义容器网卡的 MTU 值。"
       detail: '例如: 1500'
     version:
       label: Kubernetes 版本
@@ -4421,7 +4566,14 @@ clusterNew:
     kubeProxy:
       mode:
         label: Kube Proxy Mode
+  register:
+    title: 使用现有的 Kubernetes 集群
+    label: 注册
+    shortLabel: 已注册
+    helpBlock: 注册现在的 Rancher、<a href='https://k3s.io/' target='_blank' rel='nofollow noreferrer'>K3s</a> 或者 EKS 集群。
   custom:
+    title: 创建新的 Kubernetes 集群
+    subtitle: 使用现有节点创建自定义（Custom）集群
     label: 自定义
     shortLabel: 自定义
     helpBlock: 使用 RKE 从现有的裸金属服务器或虚拟机中创建一个新的 Kubernetes 集群。
@@ -4430,9 +4582,20 @@ clusterNew:
     shortLabel: 导入
     helpBlock: 导入现有的 Kubernetes 集群。Kubernetes 集群的管理和配置继续由原提供商负责。
     command:
-      instructionsAdminRole: "<b>注意: </b> 如果想要导入 Google Kubernetes Engine(GKE)集群（或一些不提供绑定集群管理角色<b>cluster-admin</b>的 kubectl 配置文件的集群）, 需要通过以下命令来绑定集群管理角色<b>cluster-admin</b>。 用您的谷歌帐户地址替换<b>[USER_ACCOUNT]</b>（您可以使用<b>gcloud config get-value account</b>检索这个地址）。如果您不是导入谷歌 Kubernetes 集群，那么用 kubectl 配置文件中配置的执行用户替换<b>[USER_ACCOUNT]</b>。"
-      instructions: "在现有的受支持的 Kubernetes 集群上运行下面的 kubectl 命令，将其导入 {appName}: "
-      instructionsInsecure: "如果由于您的 {appName} 安装使用不受信任/自签名的 SSL 证书而出现“由未知权限签名的证书”错误，请运行下面的命令以绕过证书检查: "
+      instructionsAdminRole: "<b>注意: </b> 如果想要导入 Google Kubernetes Engine(GKE) 集群（或一些不提供绑定集群管理角色<b>cluster-admin</b>的 kubectl 配置文件的集群）, 需要通过以下命令来绑定集群管理角色<b>cluster-admin</b>。 用您的谷歌帐户地址替换<b>[USER_ACCOUNT]</b>（您可以使用<b>gcloud config get-value account</b>检索这个地址）。如果您不是导入谷歌 Kubernetes 集群，那么用 kubectl 配置文件中配置的执行用户替换<b>[USER_ACCOUNT]</b>。"
+      instructions: '在现有的受支持的 Kubernetes 集群上运行下面的 kubectl 命令，将其导入 {appName}: '
+      instructionsInsecure: "如果由于您的 {appName} 安装使用不受信任/自签名的 SSL 证书而出现 由未知权限签名的证书 错误，请运行下面的命令以绕过证书检查: "
+    select:
+      other:
+        title: Rancher or K3s
+        helpBlock: "注册现在的 Rancher or <a id='k3s-info-external-link' href='https://k3s.io/' target='_blank' rel='nofollow noreferrer'>K3s</a> 支持的集群。"
+      eks:
+        title: Amazon EKS
+        helpBlock: "注册现有的 Amazon EKS 集群。"
+  importEks:
+    label: 注册现有的Amazon EKS集群
+    shortLabel: 已注册
+    helpBlock: "注册一个现有的 Amazon EKS Kubernetes 集群。"
 
 clusterTemplateNew:
   members:
@@ -5398,7 +5561,7 @@ cruStorageClass:
   quobyte:
     quobyteAPIServer:
       label: Quobyte API 服务器
-      placeholder: "e.g. http://138.68.74.142:7860"
+      placeholder: '例如: https://138.68.74.142:7860'
     registry:
       label: 镜像库
       placeholder: "例如: 138.68.74.142"
@@ -5422,7 +5585,7 @@ cruStorageClass:
       placeholder: "例如: DEFAULT"
   rbd:
     monitors:
-      label: Monitors
+      label: "Ceph-Monitor 地址"
       placeholder: "例如: 10.16.153.105:6789"
     adminId:
       label: "管理员账号(ID)"
@@ -5497,7 +5660,7 @@ cruGateway:
     edit: 编辑网关
     view: "网关: {name}"
   name:
-    placeholder: ’例如：mygateway‘
+    placeholder: '例如：mygateway'
   selector:
     label: 选择器
     add: Add Key Value
@@ -5724,10 +5887,10 @@ dangerZone:
     'system-default-registry': '用于 RKE 部署系统服务时镜像的拉取，其他服务拉取镜像不生效。'
     'ui-index': 'UI HTML 索引位置。'
     'ui-pl': '企业名称专用标签'
-    'ui-issues': "使用一个 url 地址发送新的 “File an Issue” 报告，而不是跳转到 Github Issue 页面。"
+    'ui-issues': "使用一个 url 地址发送新的 'File an Issue' 报告，而不是将用户发送到 Github Issue 页面。"
     'telemetry-opt': '遥感报告设置。'
-    'auth-user-info-max-age-seconds': '在执行身份验证提供者组成员同步之前，用户身份验证令牌的最大有效期。'
     'auth-user-info-resync-cron': '用于重新同步身份验证提供者组成员关系的默认 cron 调度。'
+    'auth-user-info-max-age-seconds': '在执行身份验证提供者组成员同步之前，用户身份验证令牌的最大有效期。'
     'cluster-template-enforcement': '非管理员只能通过预先批准的集群模板启动集群。'
     'auth-user-session-ttl-minutes': '用户验证会话上的自定义 TTL (以分钟为单位)。'
     'ui-session-logout-minutes': '用户超过配置时间没有任何操作将自动注销(以分钟为单位)。'
@@ -5735,6 +5898,7 @@ dangerZone:
     'auth-token-max-ttl-minutes': '自定义认证 token 最大 TTL 分钟数 。'
     'rke-metadata-config': '配置 RKE 元数据刷新参数。'
     'ui-banners': '分类横幅用于在页眉、页脚或同时在页眉、页脚显示自定义固定的横幅。该设置使用包含 3 个根参数的 JSON 对象: <code>banner、showHeader、showFooter</code>。banner 对象包含: <code>textColor、background、text</code>。 其中 <code>textColor 和 background</code> 是任意有效的 CSS 颜色值。'
+    'ui-default-landing': '用户登录后访问的默认页面。'
     'none-operate-session-time': '用户超过配置时间没有任何操作将自动注销(以秒为单位)'
     'ui-footer-text': '额外的页脚内容'
     'ui-footer-url': '额外页脚内容对应的链接'
@@ -6340,8 +6504,11 @@ formGlobalRoles:
       detail: 非 Rancher 创建的角色。
       noDescription: 没有提供描述。
     custom:
-      label: 自定义
-      detail: 为这个用户选择独立的权限。
+      label: 内置
+      detail: 定义更细粒度权限的附加角色。
+    restrictedAdmin:
+      label: 受限管理员
+      detail: 受限制的管理员可以完全控制所有下游集群中的所有资源，但不能访问 local 集群。
   role:
     clusters-create:
       label: 创建新的集群
@@ -6577,7 +6744,7 @@ formKeyValue:
   value:
     label: 值
     placeholder: 值
-  protip: 'ProTip: Paste lines of key=value pairs into any key field for easy bulk entry.'
+  protip: '高级技巧: 在键(Key)输入栏中粘贴一行或多行的 key=value 键值对能够批量输入。'
   binary:
     byte: |
       {length, plural,
@@ -6742,7 +6909,7 @@ formPorts:
     LoadBalancerDisbaled: 'Layer-4 Load Balancer'
     HostPortDisbaled: 'HostPort'
   sourcePort:
-    label: 主机监听端口
+    label: 主机端口监听
     placeholder: '例如: 80'
     ipPlaceholder: '例如: 80 或 19.82.2.24:80'
     clusterIpDefault: '与容器端口相同'
@@ -6933,7 +7100,7 @@ formSecurity:
     label: Swappiness
     default: 使用主机的默认值
     none: 最小
-    set: 自定义(1-100)
+    set: 自定义 (1-100)
   cpuPinning:
     label: CPU 绑定
     placeholder: '例如: 0,1,3  默认: All'
@@ -7458,6 +7625,38 @@ inputPassword:
 inputTextFile:
   tooltip: 从文件读取
 
+nodeGroupRow:
+  name:
+    label: 节点组名称
+  instance:
+    label: 实例类型
+  gpu:
+    label: 启用GPU实例
+  max:
+    label: Maximum ASG Size
+  min:
+    label: Minimum ASG Size
+  desired:
+    label: Desired ASG Size
+  nodeVolumeSize:
+    label: Node Volume Size
+    placeholder: e.g. 20
+  ssh:
+    label: SSH Key
+  labels:
+    label: Labels
+    addLabel: Add Label
+  tags:
+    label: Tags
+    addLabel: Add Tag
+  remove:
+    label: 删除节点组
+  version:
+    label: Kubernetes 版本
+    upgrade: 将节点组版本从 { from } 升级到 { version }。
+    warning: 选择了一个新的集群版本。一旦完成，您可以返回并升级节点组版本。
+
+
 uploadFile:
   label: 从文件读取
 
@@ -7485,6 +7684,16 @@ k3sClusterInfo:
     label: Control Plane Node
     datail: 附加的 K3S 主节点详细信息
     selectPrompt: 选择节点
+managedImportClusterInfo:
+  title: "{provider} 选项"
+  detail: "自定义 {provider} 集群选项"
+  kubernetesVersion: Kubernetes 版本
+  workerConcurrency: Worker 并发数
+  serverConcurrency: Control Plane 并发数
+  drainServerNodes: Drain Control Plane Nodes
+  drainWorkerNodes: Drain Worker Nodes
+  error:
+    int: 并发数必须是整数值
 
 k3sNodeEnvVarSection:
   title: K3S 节点环境变量
@@ -7508,6 +7717,13 @@ labelsSection:
   value: 值
   noData: 没有标签
   noMatch: 没有标签与当前搜索匹配
+
+landingPage:
+  header: 默认登录页面
+  ember: 集群管理
+  vue: 仪表盘
+  emberLong: Rancher 多集群管理。
+  vueLong: Rancher 仪表盘。
 
 loginShibboleth:
   buttonText: 用 Shibboleth 登录
@@ -8063,7 +8279,8 @@ modalEditSetting:
 modalEditPassword:
   firstLogin:
     title: "欢迎使用 {appName}"
-    help: '第一步: 请为默认<code>admin</code>用户设置强密码'
+    help: '第一步: 请为默认 <code>admin</code> 用户设置强密码'
+    setView: 设置默认视图
     actionButton: 继续
   edit:
     title: 修改密码
@@ -8128,8 +8345,8 @@ drainNode:
     label: 强制
     helpText: "<b>永久删除</b> <ul class=m-0><li>独立 Pods 和它们的数据</li><li>配置了 Empty Dir 卷的 Pods 和它们的数据</li></ul>"
   gracePeriod:
-    title: 'Pods 延时终止时间: '
-    default: 使用每个 Pods 设置的默认延时终止时间
+    title: 'Pod 终止延时时间: '
+    default: 使用每个 Pod 中设置的默认延时时间
     placeholder: '例如: 30'
     custom: "自定义延时终止时间 "
     view:
@@ -8199,7 +8416,7 @@ modalRollbackService:
 
 modalRollbackApp:
   title: '回滚 "{appName}"'
-  protip: '“回滚”操作将创建一个与所选修订具有相同配置的新修订。'
+  protip: '"回滚"操作将创建一个与所选修订具有相同配置的新修订。'
   action: 回滚
   current:
     label: 当前版本
@@ -8358,8 +8575,8 @@ newMultiClusterApp:
   maintainedBy: 由社区成员维护
   maintainer: "维护人员:"
   newNamespace: 新的命名空间
-  customizeNamespace: "此应用程序将部署到<code>{namespaceId}</code>命名空间中。"
-  newAppDetail: 为应用程序选择应用程序版本和命名空间。
+  customizeNamespace: "此应用程序将部署到 <code>{namespaceId}</code> 命名空间中。"
+  newAppDetail: 为应用程序选择应用程序版本和名称空间。
   appInfo: 详细描述
   appInfoDetail: 应用程序信息和用户指南。
   noConfig: 此模板没有配置选项。
@@ -8475,7 +8692,7 @@ newContainer:
   all: Any
   os: Target OS
   name:
-    placeholder: '例如: Myapp'
+    placeholder: e.g. myapp
   description:
     placeholder: '例如: Myapp'
   environment:
@@ -8485,9 +8702,9 @@ newContainer:
     addAction: 添加变量
     addFrom: 添加附加资源
     keyLabel: 键
-    keyPlaceholder: '例如: FOO'
+    keyPlaceholder: e.g. FOO
     valueLabel: 值
-    valuePlaceholder: '例如: bar'
+    valuePlaceholder: e.g. bar
   sidekick:
     header: 升级服务
     title: 选择加载配置的服务来升级
@@ -8558,23 +8775,29 @@ nodeDriver:
   cloudCredentialError: 云凭证必须设置。
   nameError: 名称必须设置。
   displayName:
-    aliyunecs: Aliyun ECS
     aliyun: Alibaba ACK
+    aliyunecs: Aliyun ECS
     amazonec2: Amazon EC2
     amazoneks: Amazon EKS
+    amazoneksv2: Amazon EKS
     azure: Azure
     azureaks: Azure AKS
+    baidu: Baidu CCE
     cloudca: Cloud.ca
     digitalocean: DigitalOcean
     exoscale: Exoscale
     googlegke: Google GKE
     huawei: Huawei CCE
     huaweicce: Huawei CCE
+    import: Other
+    importeks: Amazon EKS
     linode: Linode
     oci: Oracle Cloud 基础设施
     openstack: OpenStack
+    oracleoke: Oracle OKE
     otc: Open Telekom Cloud
     packet: Packet
+    pinganyunecs: Pinganyun ECS
     rackspace: RackSpace
     rancherkubernetesengine: RKE
     softlayer: SoftLayer
@@ -8583,9 +8806,6 @@ nodeDriver:
     upcloud: UpCloud
     vmwarevsphere: vSphere
     zstack: ZStack
-    pinganyunecs: Pinganyun ECS
-    baidu: Baidu CCE
-    oracleoke: Oracle OKE
   driverOptions: "{driver} 选项"
   templateOptions: "{appName} 模板"
   amazoneks:
@@ -8692,10 +8912,10 @@ nodeDriver:
       label: Encryption
       radioLabel: Encrypt EBS Volume
     iam:
-      label: 实例配置文件名称
+      label: IAM 配置文件
       placeholder: my-k8s-profile
     instance:
-      detail: 自定义将要创建的 EC2 实例。
+      detail: 定制将要创建的EC2实例。
       title: 4. 实例
     instanceType:
       label: 实例类型
@@ -8707,20 +8927,20 @@ nodeDriver:
         protip: Enables or disables the HTTP metadata endpoint on your instances
       httpTokens:
         label: HTTP Tokens
-        required: Required
-        optional: Optional
-        protip: Use HTTP Tokens for Instance Metadata Requests
+        required: 必须
+        optional: 可选
+        protip: 对实例元数据请求使用 HTTP 令牌
     needs:
       item1: 'From the {appName} server to <code>TCP</code> port <code>22</code> <span class="text-muted">(SSH to install and configure Docker)</span>'
       item2: From and To all other hosts on <code>UDP</code> ports <code>500</code> and <code>4500</code> <span class="text-muted">(for IPsec networking)</span></li>
       item3: These rules will <b>not</b> be added automatically.
       label: 'For {appName} to work correctly your security group will need to allow traffic:'
-    noSubnet: There are no subnets to choose from
+    noSubnet: 没有子网可供选择
     onlyPrivate:
-      label: 只使用私有 I P 地址
+      label: 只使用私有IP地址
     portHelp:
       link: 了解更多
-      text: 关于需要开放的端口。
+      text: 了解哪些端口需要放行。
     privateIp:
       label: 私有 IP
     region:
@@ -8729,7 +8949,7 @@ nodeDriver:
       enable: Request spot instance
       label: Spot 实例
     rootSize:
-      label: root 磁盘大小
+      label: 根磁盘大小
       unit: GB
     secretKey:
       label: Secret Key
@@ -8802,7 +9022,7 @@ nodeDriver:
       valueLabel: 标签
       placeholder: '例如: dev'
     errors:
-      hostnamePrefix: 名称前缀不能包含"_"
+      hostnamePrefix: 名称前缀不能包含 "_"
   exoscale:
     accountSection: 账户访问
     apiKey:
@@ -8854,8 +9074,8 @@ nodeDriver:
       label: 项目
       placeholder: Packet 项目 ID
     apiKey:
-      label: API Key
-      placeholder: Packet API Key
+      label: Account API Key
+      placeholder: Your Packet API key
     apiKeyHelp: '由 Packet 的<a href="https://app.packet.net/portal#/api-keys" target="_blank">API Keys</a>页面获取。'
     instanceSection: 实例
     instanceOptionsSection: 实例选项
@@ -8998,7 +9218,7 @@ nodeDriver:
       help: 'VM 的文件夹。该文件夹必须已经存在于数据中心中'
     cfgparam:
       key:
-        placeholder: '例如: guestinfo.hostname'
+        placeholder: "e.g. guestinfo.hostname"
       value:
         placeholder: '例如: Myrancherhost'
       label: 用于 guestinfo 的配置参数
@@ -9010,7 +9230,7 @@ nodeDriver:
       manual: '使用自定义 vApp 配置'
     vappTransport:
       label: OVF environment transport
-      placeholder: '例如: com.vmware.guestInfo'
+      placeholder: "e.g. com.vmware.guestInfo"
       help: 'com.vmware.guestInfo 或 iso'
     vappIpprotocol:
       label: vApp IP 协议
@@ -9022,7 +9242,7 @@ nodeDriver:
       help: 'dhcp, fixed, transient 或 fixedAllocated'
     vappProperty:
       key:
-        placeholder: '例如: guestinfo.interface.0.ip.0.address'
+        placeholder: "e.g. guestinfo.interface.0.ip.0.address"
       value:
         placeholder: '例如: ip:VM Network, expression 或 string'
       label: vApp 属性
@@ -9168,6 +9388,7 @@ nodeDriver:
       placeholder: '逗号分隔, e.g. 80,443'
     region:
       label: 区域
+      placeholder: 'select cloud credential to populate options...'
   zstack:
     access:
       title: 1. 帐户访问
@@ -9561,9 +9782,10 @@ systemInfoSection:
   noData: 没有数据
   arch: 系统架构
   dockerVersion: Docker 版本
-  kernelVersion: Kernel 版本
+  containerDVersion: Containerd 版本
+  kernelVersion: 内核版本
   kubeletVersion: Kubelet 版本
-  kubeProxyVersion: Kube-Proxy 版本
+  kubeProxyVersion: Kube 代理版本
   operatingSystem: 操作系统映像
   osType: 系统类型
   noMatch: 没有与当前搜索匹配的系统信息。
@@ -9594,6 +9816,10 @@ tooltipWarning:
 tooltipExpire:
   label: '此集群证书即将过期。'
   link: '立即轮换证书'
+
+tooltipNodeGroupUpdate:
+  label: 一个节点组 Kubernetes 版本可以更新。
+  link: 编辑版本
 
 tooltipToggleOverride:
   label: '是否允许用户修改当前参数?'
@@ -9812,6 +10038,10 @@ nav:
     tab: 工具
     istio: Istio
     cisScans: CIS 扫描
+    backup: Rancher 备份
+    fleet: 持续交付
+    gatekeeper: OPA Gatekeeper
+    rio: Rio
   project:
     none: '项目/命名空间'
     namespaces: 命名空间
@@ -9933,11 +10163,11 @@ validation:
     min: '"{key}" 应当至少为 {count}{count, plural,=1{ 个字符 } other { 个字符 }}'
     max: '"{key}" 应当至多为 {count}{count, plural,=1{ 个字符 } other { 个字符 }}'
   number:
-    exactly: '"{key}"应当为{val}'
-    between: '"{key}"应当介于{min}和{max}之间'
-    min: '"{key}"应当至少为{val}'
-    max: '"{key}"应当至多为{val}'
-  chars: '"{key}"包含 {count, plural,=1{ 无效字符 } other {#个无效字符 }}: {chars}'
+    exactly: '"{key}" 应当为 {val}'
+    between: '"{key}" 应当介于 {min} 和 {max} 之间'
+    min: '"{key}" 应当至少为 {val}'
+    max: '"{key}" 应当至多为 {val}'
+  chars: '"{key}" 包含 {count, plural,=1{ 个无效字符 } other {#个无效字符 }}: {chars}'
   dns:
     doubleHyphen: 不能包含两个连续的连字符
     hostname:
@@ -9953,7 +10183,7 @@ validation:
     label:
       startHyphen: '"{key}" 必须以字母或数字开头'
       endHyphen: '"{key}" 必须以字母或数字结尾'
-      startNumber: '"{key}"不能以数字开头'
+      startNumber: '"{key}" 不能以数字开头'
       emptyLabel: '"{key}" 不能为空'
       tooLongLabel: '"{key}" 不能超过 {max} 字符'
   k8s:

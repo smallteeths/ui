@@ -1,3 +1,9 @@
+{{#if scope.currentCluster.isReady}}
+  {{#banner-message color="bg-warning"}}
+    <p>{{t 'banner.istio' dashboardLink=scope.dashboardLink docsBase=scope.docsBase htmlSafe=true}}</p>
+  {{/banner-message}}
+{{/if}}
+
 <section class="header clearfix">
   <h1 class="pull-left">
     {{t "clusterIstioPage.header"}}
@@ -17,7 +23,7 @@
     }}
   {{else}}
     {{banner-message
-      color="bg-warning"
+      color="bg-info"
       message=(t "clusterIstioPage.disabled")
     }}
   {{/if}}
@@ -504,7 +510,7 @@
      cancelDisabled=true
   }}
     {{#if (and enabled canEnable)}}
-      <button class="btn bg-error" {{action "disable"}}>
+      <button class="btn bg-error" type="button" {{action "disable"}}>
         {{t "clusterIstioPage.disable"}}
       </button>
     {{/if}}

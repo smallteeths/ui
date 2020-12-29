@@ -48,6 +48,8 @@ var PersistentVolumeClaim = Resource.extend({
     if ( str ) {
       return parseSi(str, 1024);
     }
+
+    return;
   }),
 
   displaySize: computed('sizeBytes', function() {
@@ -56,6 +58,8 @@ var PersistentVolumeClaim = Resource.extend({
     if ( bytes ) {
       return formatSi(bytes, 1024, 'iB', 'B');
     }
+
+    return;
   }),
 
   actions: {

@@ -65,7 +65,7 @@
 
       <FormMembers
         @creator={{model.me}}
-        @editing={{and notView (not isK3sCluster)}}
+        @editing={{and notView (not (or isK3sCluster isRke2Cluster))}}
         @expanded={{expanded}}
         @isNew={{newCluster}}
         @memberConfig={{memberConfig}}
@@ -85,7 +85,7 @@
       expandFn=expandFn
       initialLabels=model.cluster.labels
       model=model.cluster
-      editing=(and notView (not isK3sCluster))
+      editing=(and notView (not (or isK3sCluster isRke2Cluster)))
     }}
 
     {{#if (eq driverInfo.name "import")}}
@@ -153,33 +153,36 @@
   {{/accordion-list}}
 {{/if}}
 
-{{#unless routeLoading}}
-  {{#if driverInfo}}
-    {{component driverInfo.driverComponent
-      applyClusterTemplate=applyClusterTemplate
-      clusterTemplateQuestions=model.clusterTemplateRevision.questions
-      clusterTemplateRevisionId=clusterTemplateRevisionId
-      clusterErrors=errors
-      mode=mode
-      model=model
-      nodePoolErrors=nodePoolErrors
-      nodeWhich=driverInfo.nodeWhich
-      originalCluster=originalCluster
-      otherErrors=memberErrors
-      isEditCluster=isEdit
-      save=(action "save")
-      close=(action "close")
-      registerHook=(action "registerHook")
-      updateFromYaml=(action "updateFromYaml")
-    }}
-  {{/if}}
-{{/unless}}
+{{#if showDriverComponent}}
+  {{component driverInfo.driverComponent
+    applyClusterTemplate=applyClusterTemplate
+    clusterTemplateQuestions=model.clusterTemplateRevision.questions
+    clusterTemplateRevisionId=clusterTemplateRevisionId
+    clusterErrors=errors
+    mode=mode
+    model=model
+    nodePoolErrors=nodePoolErrors
+    nodeWhich=driverInfo.nodeWhich
+    originalCluster=originalCluster
+    otherErrors=memberErrors
+    isEditCluster=isEdit
+    save=(action "save")
+    close=(action "close")
+    registerHook=(action "registerHook")
+    updateFromYaml=(action "updateFromYaml")
+  }}
+{{/if}}
 
 {{#if (and isEdit (not provider))}}
   {{top-errors errors=errors}}
   {{save-cancel
     editing=isEdit
     save=(action "save" )
+    cancel=(action "close")
+  }}
+{{else if (not showDriverComponent)}}
+  {{save-cancel
+    saveDisabled=true
     cancel=(action "close")
   }}
 {{/if}}

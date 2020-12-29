@@ -8,6 +8,7 @@ export default Controller.extend({
   globalStore:  service(),
   growl:        service(),
   intl:         service(),
+  scope:        service(),
 
   queryParams: ['type'],
   currentType: 'slack',

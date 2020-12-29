@@ -9,7 +9,7 @@ import { scheduleOnce } from '@ember/runloop';
 export default Route.extend({
   access:                 service(),
   globalStore:            service(),
-  k3s:                    service(),
+  releaseVersions:        service(),
   clusterTemplateService: service('clusterTemplates'),
   roleTemplateService:    service('roleTemplate'),
 
@@ -20,6 +20,7 @@ export default Route.extend({
     let modelOut      = {
       originalCluster:            cluster,
       cluster:                    cluster.clone(),
+      cloudCredentials:           globalStore.findAll('cloudcredential'),
       kontainerDrivers:           globalStore.findAll('kontainerDriver'),
       nodeTemplates:              globalStore.findAll('nodeTemplate'),
       nodeDrivers:                globalStore.findAll('nodeDriver'),
@@ -30,8 +31,8 @@ export default Route.extend({
       me:                         get(this, 'access.principal'),
     };
 
-    if (cluster.driver === 'k3s') {
-      modelOut['k3sVersions'] = this.k3s.getAllVersions();
+    if (cluster.driver === 'k3s' || cluster.driver === 'rke2') {
+      this.releaseVersions.getAllVersions(cluster.driver);
     }
 
     if (!isEmpty(cluster.clusterTemplateRevisionId)) {
@@ -95,7 +96,7 @@ export default Route.extend({
     // load the css/js url here, if the url loads fail we should error the driver out
     // show the driver in the ui, greyed out, and possibly add error text "can not load comonent from url [put url here]"
     let { kontainerDrivers } = model;
-    let externalDrivers      = kontainerDrivers.filter( (d) => d.uiUrl !== '' && d.state === 'active' && d.name.includes(model.cluster.provider));
+    let externalDrivers      = kontainerDrivers.filter( (d) => d.uiUrl !== '' && d.state === 'active' && d.name.includes(model.cluster.clusterProvider));
     let promises             = {};
 
     externalDrivers.forEach( (d) => {
@@ -147,9 +148,7 @@ export default Route.extend({
   activate() {
     this._super(...arguments);
 
-    scheduleOnce('afterRender', this, function() {
-      set(this, 'controller.model.activated', true);
-    });
+    scheduleOnce('afterRender', this, 'activateModel');
   },
 
   actions: {
@@ -161,5 +160,9 @@ export default Route.extend({
   queryParams: {
     provider:                { refreshModel: true },
     clusterTemplateRevision: { refreshModel: true }
+  },
+
+  activateModel() {
+    set(this, 'controller.model.activated', true);
   },
 });
