@@ -7,6 +7,8 @@ import layout from './template';
 import C from 'shared/utils/constants';
 import { get as getTree } from 'shared/utils/navigation-tree';
 import { run } from '@ember/runloop';
+import $ from 'jquery';
+import CustomMenu from 'ui/mixins/custom-menu';
 
 function fnOrValue(val, ctx) {
   if ( typeof val === 'function' ) {
@@ -17,7 +19,7 @@ function fnOrValue(val, ctx) {
 }
 
 
-export default Component.extend({
+export default Component.extend(CustomMenu, {
   // Injections
   intl:             service(),
   scope:            service(),
@@ -25,25 +27,26 @@ export default Component.extend({
   settings:         service(),
   access:           service(),
   prefs:            service(),
+  router:           service(),
 
   layout,
   // Inputs
-  pageScope:        null,
+  pageScope: null,
 
   // Component options
   tagName:          'header',
   classNames:       ['page-header-left-top'],
   dropdownSelector: '.navbar .dropdown',
 
-  stacks:           null,
+  stacks: null,
 
   // This computed property generates the active list of choices to display
-  navTree:       null,
-  clusterId:        alias('scope.currentCluster.id'),
-  cluster:          alias('scope.currentCluster'),
-  projectId:        alias('scope.currentProject.id'),
-  project:          alias('scope.currentProject'),
-  accessEnabled:    alias('access.enabled'),
+  navTree:           null,
+  clusterId:         alias('scope.currentCluster.id'),
+  cluster:           alias('scope.currentCluster'),
+  projectId:         alias('scope.currentProject.id'),
+  project:           alias('scope.currentProject'),
+  accessEnabled:     alias('access.enabled'),
 
   init() {
     this._super(...arguments);
@@ -57,55 +60,11 @@ export default Component.extend({
 
     run.once(this, 'updateNavTree');
 
-    run.scheduleOnce('render', () => {
-      // responsive nav 63-87
-      var responsiveNav = document.getElementById('js-responsive-nav');
-
-      var toggleBtn = document.createElement('a');
-
-      toggleBtn.setAttribute('class', 'nav-toggle');
-      responsiveNav.insertBefore(toggleBtn, responsiveNav.firstChild);
-
-      function hasClass(e, t){
-        return (new RegExp(` ${ t } `)).test(` ${ e.className } `)
-      }
-
-      function toggleClass(e, t){
-        var n = ` ${  e.className.replace(/[\t\r\n]/g, ' ')  } `;
-
-        if (hasClass(e, t)){
-          while (n.indexOf(` ${ t } `) >= 0){
-            n = n.replace(` ${ t } `, ' ')
-          }e.className = n.replace(/^\s+|\s+$/g, '')
-        } else {
-          e.className += ` ${  t }`
-        }
-      }
-
-      toggleBtn.onclick = function() {
-        toggleClass(this.parentNode, 'nav-open');
-      }
-
-      // var root = document.documentElement;
-
-      // root.className = `${ root.className  } js`;
-    });
+    run.scheduleOnce('render', this, this.setupResponsiveNav);
   },
 
-  willRender() {
-    if ($('BODY').hasClass('touch') && $('header > nav').hasClass('nav-open')) {// eslint-disable-line
-      run.later(() => {
-        $('header > nav').removeClass('nav-open');// eslint-disable-line
-      });
-    }
-  },
-
-  actions: {
-    clickDashboard() {
-      // Regular click on the link will have Ember try to resolve /dashboard/c/<id>
-      // to an Ember route and show the error page.  That's bad.
-      window.location.href = get(this, 'dashboardLink');
-    },
+  didInsertElement() {
+    run.scheduleOnce('afterRender', this, this.setupTearDown);
   },
 
   shouldUpdateNavTree: observer(
@@ -132,12 +91,11 @@ export default Component.extend({
     return !!get(this, 'stackSchema.resourceFields.system.update');
   }),
 
-  dashboardLink: computed('pageScope', 'clusterId', function() {
-    if ( !get(this, 'features').isFeatureEnabled(C.FEATURES.DASHBOARD) ) {
-      // Only if Steve/dashboard are deployed
-      return;
-    }
+  dashboardBaseLink: computed('scope.dashboardBase', function() {
+    return get(this, 'scope.dashboardBase').replace(/\/+$/, '');
+  }),
 
+  dashboardLink: computed('cluster.isReady', 'clusterId', 'pageScope', 'scope.dashboardLink', function() {
     if ( get(this, 'pageScope') === 'global' || !this.clusterId ) {
       // Only inside a cluster
       return;
@@ -150,15 +108,7 @@ export default Component.extend({
       return;
     }
 
-    let link;
-
-    if ( get(this, 'app.environment') === 'development' ) {
-      link = `https://localhost:8005/c/${ escape(this.clusterId) }`;
-    } else {
-      link = `/dashboard/c/${ escape(this.clusterId) }`;
-    }
-
-    return link;
+    return get(this, 'scope.dashboardLink');
   }),
 
   updateNavTree() {
@@ -177,6 +127,8 @@ export default Component.extend({
 
       const itemRoute = fnOrValue(get(item, 'route'), this);
       const itemContext = (get(item, 'ctx') || []).map( (prop) =>  fnOrValue(prop, this));
+
+      set(this, 'currentItemContext', itemContext)
 
       setProperties(item, {
         localizedLabel: fnOrValue(get(item, 'localizedLabel'), this),
@@ -207,8 +159,98 @@ export default Component.extend({
       return true;
     });
 
-    set(this, 'navTree', out);
+    this.addExtraMenus(out)
+
+    const old = JSON.stringify(get(this, 'navTree'));
+    const neu = JSON.stringify(out);
+
+    if ( old !== neu ) {
+      set(this, 'navTree', out);
+    }
   },
 
-  // Utilities you can use in the condition() function to decide if an item is shown or hidden,
+  keyUp(e) {
+    const code            = e.keyCode;
+    let tabList           = $(`.nav-item a:first-of-type`);
+    let $target           = $(e.target).hasClass('ember-basic-dropdown-trigger') ? $(e.target).find('a') : e.target;
+    let currentFocusIndex = tabList.index($target);
+    let nextIndex;
+
+    switch (code) {
+    case 37: {
+      // left
+      nextIndex = currentFocusIndex - 1;
+
+      if (nextIndex >= tabList.length) {
+        tabList.eq(tabList.length).focus();
+      } else {
+        if (tabList.eq(nextIndex).parent().hasClass('ember-basic-dropdown-trigger')) {
+          tabList.eq(nextIndex).parent().focus();
+        } else {
+          tabList.eq(nextIndex).focus();
+        }
+      }
+
+      break;
+    }
+    case 39: {
+      // right
+      nextIndex = currentFocusIndex + 1;
+
+      if (nextIndex >= tabList.length) {
+        tabList.eq(0).focus();
+      } else {
+        if (tabList.eq(nextIndex).parent().hasClass('ember-basic-dropdown-trigger')) {
+          tabList.eq(nextIndex).parent().focus();
+        } else {
+          tabList.eq(nextIndex).focus();
+        }
+      }
+
+      break;
+    }
+    default:
+    }
+  },
+
+  setupResponsiveNav() {
+    // responsive nav 63-87
+    var responsiveNav = document.getElementById('js-responsive-nav');
+
+    var toggleBtn = document.createElement('a');
+
+    toggleBtn.setAttribute('class', 'nav-toggle');
+    responsiveNav.insertBefore(toggleBtn, responsiveNav.firstChild);
+
+    function hasClass(e, t){
+      return (new RegExp(` ${ t } `)).test(` ${ e.className } `)
+    }
+
+    function toggleClass(e, t){
+      var n = ` ${  e.className.replace(/[\t\r\n]/g, ' ')  } `;
+
+      if (hasClass(e, t)){
+        while (n.indexOf(` ${ t } `) >= 0){
+          n = n.replace(` ${ t } `, ' ')
+        }e.className = n.replace(/^\s+|\s+$/g, '')
+      } else {
+        e.className += ` ${  t }`
+      }
+    }
+
+    toggleBtn.onclick = function() {
+      toggleClass(this.parentNode, 'nav-open');
+    }
+
+    // var root = document.documentElement;
+
+    // root.className = `${ root.className  } js`;
+  },
+
+  setupTearDown() {
+    this.get('router').on('routeWillChange', () => {
+      $('header > nav').removeClass('nav-open');// eslint-disable-line
+    });
+  }
+
 });

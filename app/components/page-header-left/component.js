@@ -56,12 +56,8 @@ export default Component.extend(CustomMenu, {
 
     run.once(this, 'updateNavTree');
   },
-  willRender() {
-    if ($('BODY').hasClass('touch') && $('header > nav').hasClass('nav-open')) {// eslint-disable-line
-      run.later(() => {
-        $('header > nav').removeClass('nav-open');// eslint-disable-line
-      });
-    }
+  didInsertElement() {
+    run.scheduleOnce('afterRender', this, this.setupTearDown);
   },
 
   actions: {
@@ -97,6 +93,10 @@ export default Component.extend(CustomMenu, {
   // Hackery: You're an owner if you can write to the 'system' field of a stack
   isOwner: computed('stackSchema.resourceFields.system.update', function() {
     return !!get(this, 'stackSchema.resourceFields.system.update');
+  }),
+
+  dashboardBaseLink: computed('scope.dashboardBase', function() {
+    return get(this, 'scope.dashboardBase').replace(/\/+$/, '');
   }),
 
   updateNavTree() {
@@ -160,8 +160,17 @@ export default Component.extend(CustomMenu, {
       }
     })
 
-    set(this, 'navTree', out);
+    const old = JSON.stringify(get(this, 'navTree'));
+    const neu = JSON.stringify(out);
+
+    if ( old !== neu ) {
+      set(this, 'navTree', out);
+    }
   },
 
-  // Utilities you can use in the condition() function to decide if an item is shown or hidden,
+  setupTearDown() {
+    this.get('router').on('routeWillChange', () => {
+      $('header > nav').removeClass('nav-open');// eslint-disable-line
+    });
+  }
 });

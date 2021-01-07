@@ -8,10 +8,7 @@
    as |dd|
 }}
 
-  {{#dd.trigger
-     ariaLabel=(t "nav.projectDropdown.label")
-  }}
-
+  <dd.Trigger aria-label={{t "nav.projectDropdown.label"}}>
     <a class="{{if twoLine "two-line"}} text-white">
       {{#if (eq pageScope "project")}}
         <div class="clip">
@@ -39,12 +36,9 @@
 
     </a>
 
-  {{/dd.trigger}}
+  </dd.Trigger>
 
-  {{#dd.content
-     class="project-menu"
-     style=menuStyle
-  }}
+  <dd.Content class="project-menu" style={{menuStyle}}>
     <div class="global">
       <ul class="list-unstyled">
         <li class="item clip {{if (eq pageScope "global") "active selected" "inactive"}}">
@@ -176,5 +170,5 @@
         {{/if}}
       </ul>
     </div>
-  {{/dd.content}}
+  </dd.Content>
 {{/hover-dropdown}}

@@ -162,6 +162,14 @@ const rootNav = [
         initExpand:     'authenticated.project.logging.logging'
       },
       {
+        id:             'tools-monitoring',
+        localizedLabel: 'nav.tools.monitoring',
+        route:          'authenticated.project.monitoring.project-setting',
+        resourceScope:  'global',
+        resource:       [],
+        ctx:            [getProjectId],
+      },
+      {
         id:             'tools-pipeline',
         localizedLabel: 'nav.tools.pipeline',
         route:          'authenticated.project.pipeline.settings',
@@ -353,6 +361,20 @@ const rootNav = [
         resource:                 [],
         ctx:                      [getClusterId],
         initExpand:               'authenticated.cluster.cis/scan',
+      },
+      { divider: true },
+      {
+        id:                       'cluster-tools-backup',
+        localizedLabel:           'nav.tools.backup',
+        dashboardLink:            '/backup',
+        condition() {
+          return get(this, 'cluster.id') === 'local';
+        }
+      },
+      {
+        id:                       'cluster-tools-gatekeeper',
+        localizedLabel:           'nav.tools.gatekeeper',
+        dashboardLink:            '/gatekeeper',
       },
     ],
   },
@@ -575,6 +597,12 @@ const rootNav = [
         resource:       ['clustertemplate'],
         resourceScope:  'global',
         initExpand:     'global-admin.cluster-templates.index'
+      },
+      { divider: true },
+      {
+        id:                'tools-fleet',
+        localizedLabel:    'nav.tools.fleet',
+        dashboardBaseLink:  '/c/local/fleet',
       },
     ],
   },
