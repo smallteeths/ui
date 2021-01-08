@@ -167,6 +167,10 @@ $project-nav-active: $dropdown-link-hover-bg !default;
       width: 100% !important;
     }
 
+    .ember-basic-dropdown-trigger {
+      padding: 13px 15px;
+    }
+
     > li > a {
       display: block;
       padding: 4px 10px;
