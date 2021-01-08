@@ -203,6 +203,10 @@ $project-nav-active: $dropdown-link-hover-bg !default;
         text-decoration: none;
         margin: 0;
       }
+      li.divider {
+        height: 1px;
+        border-top: 1px solid $dropdown-divider-bg;
+      }
     }
   }
 
