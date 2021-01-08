@@ -3344,6 +3344,7 @@ ldap:
       objectClass: 'Object Class:'
       search: 'Search Attribute:'
       searchFilter: 'Search Filter:'
+      uniqueId: "Unique Id:"
     header: Authentication
     serviceAccountDistinguishedName:
       labelText: 'Service Account Distinguished Name:'
@@ -3357,6 +3358,7 @@ ldap:
       objectClass: 'Object Class:'
       search: 'Search Attribute:'
       searchFilter: 'Search Filter:'
+      uniqueId: "Unique Id:"
   customizeSchema:
     cert:
       helpText: 'If needed, enter a CA certificate'
@@ -3387,9 +3389,6 @@ ldap:
         labelText: Search Attribute
       searchFilter:
         labelText: Search Filter
-      userUniqueIdAttribute:
-        labelText: Unique user id
-        helpText: Use the globally unique user attribute created by the user to avoid losing user permissions due to changes in the value of this attribute
       groupUniqueIdAttribute:
         labelText: Group unique id
         helpText: Use a globally unique property created by a user group to avoid losing user privileges due to a change in the value of the property
@@ -3415,6 +3414,9 @@ ldap:
         labelText: Search Filter
       userMemberAttribute:
         labelText: User Member Attribute
+      userUniqueIdAttribute:
+        labelText: User unique id
+        helpText: Use the globally unique user attribute created by the user to avoid losing user permissions due to changes in the value of this attribute
   header:
     disabled:
       label: '{providerName} is not configured'

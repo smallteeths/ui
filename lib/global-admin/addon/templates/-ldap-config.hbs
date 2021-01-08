@@ -179,6 +179,9 @@
                 {{authConfig.userDisabledBitMask}}
               </span>
             </div>
+            <div>
+              <b>{{t "ldap.accessEnabled.users.uniqueId"}}</b> <span class="text-muted">{{authConfig.userUniqueIdAttribute}}</span>
+            </div>
           </div>
           <div class="col span-4 force-wrap">
             <h3>
@@ -226,6 +229,9 @@
                 </span>
               </div>
             {{/if}}
+            <div>
+              <b>{{t "ldap.accessEnabled.group.uniqueId"}}</b> <span class="text-muted">{{authConfig.groupUniqueIdAttribute}}</span>
+            </div>
           </div>
         </div>
       </section>
@@ -521,7 +527,7 @@
             </div>
             <div class="pb-20">
               <label class="acc-label pb-5">
-                {{t "ldap.customizeSchema.groups.userUniqueIdAttribute.labelText"}}（{{t "ldap.customizeSchema.groups.userUniqueIdAttribute.helpText"}}）
+                {{t "ldap.customizeSchema.users.userUniqueIdAttribute.labelText"}}（{{t "ldap.customizeSchema.users.userUniqueIdAttribute.helpText"}}）
               </label>
               {{input
                 value=authConfig.userUniqueIdAttribute

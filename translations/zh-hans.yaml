@@ -3331,6 +3331,7 @@ ldap:
       objectClass: '对象类:'
       search: '搜索属性:'
       searchFilter: '搜索过滤器:'
+      uniqueId: "唯一标识:"
     header: 身份验证
     serviceAccountDistinguishedName:
       labelText: '服务帐户识别名:'
@@ -3344,6 +3345,7 @@ ldap:
       objectClass: '对象类:'
       search: '搜索属性:'
       searchFilter: '搜索过滤器:'
+      uniqueId: "唯一标识:"
   customizeSchema:
     cert:
       helpText: '粘贴证书，以 -----BEGIN CERTIFICATE----- 开始。'
@@ -3374,9 +3376,6 @@ ldap:
         labelText: 搜索属性
       searchFilter:
         labelText: 搜索过滤器
-      userUniqueIdAttribute:
-        labelText: 用户唯一标识
-        helpText: 请使用用户创建后全局唯一的用户属性，避免因该属性值变化导致用户权限丢失
       groupUniqueIdAttribute:
         labelText: 组唯一标识
         helpText: 请使用用户组创建后全局唯一的属性，避免因该属性值变化导致用户权限丢失
@@ -3402,6 +3401,9 @@ ldap:
         labelText: 搜索过滤器
       userMemberAttribute:
         labelText: 用户成员属性
+      userUniqueIdAttribute:
+        labelText: 用户唯一标识
+        helpText: 请使用用户创建后全局唯一的用户属性，避免因该属性值变化导致用户权限丢失
   header:
     disabled:
       label: '{providerName} 未配置'
