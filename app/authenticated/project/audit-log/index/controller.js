@@ -179,7 +179,7 @@ export default Controller.extend({
 
     return arr;
   }),
-  operations: computed('intl.locale', 'form.operationLabel', function() {
+  operations: computed('form.operationLabel', 'intl.locale', 'model.selectionResources.resources', function() {
     const intl = get(this, 'intl');
 
     if (!get(this, 'form.operationLabel')) {
@@ -249,14 +249,14 @@ export default Controller.extend({
 
     return arr;
   }),
-  rows: computed('model.logs.content.data', function() {
+  rows: computed('model.logs.content.data', 'model.logs.status', function() {
     !get(this, 'model.logs.status') && this.messageError(get(this, 'model.logs.content'))
 
     return get(this, 'model.logs.status') ? get(this, 'model.logs.content.data').map((d) => {
       return d;
     }) : [];
   }),
-  fieldPlaceholder: computed('intl.locale', 'form.field', function() {
+  fieldPlaceholder: computed('form.field', 'intl.locale', 'searchFields', function() {
     const f = get(this, 'form.field');
     const fields = get(this, 'searchFields');
 

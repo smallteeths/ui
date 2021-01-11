@@ -33,7 +33,7 @@ export default Controller.extend({
 
   storageClassKey: ['requestsStorageClassStorage', 'requestsStorageClassPVC'],
 
-  quotaTypeArray: computed('C.QUOTA_TPYE_CN.[]', 'model.quotaSetting.limit', 'model.namespaces.[]', function() {
+  quotaTypeArray: computed('C.QUOTA_TPYE_CN.[]', 'model.namespaces.[]', 'model.quotaSetting.{limit,used}', 'storageClassKey', function() {
     let quotaData = [];
     const intl = get(this, 'intl');
     const storageClassKey = get(this, 'storageClassKey');
@@ -65,7 +65,7 @@ export default Controller.extend({
     return quotaData;
   }),
 
-  currentNamespace: computed('model.namespaces.[]', function() {
+  currentNamespace: computed('model.name', 'model.namespaces.[]', 'scope.currentProject.id', function() {
     let ns = get(this, 'model.namespaces');
     let pId = get(this, 'scope.currentProject.id');
     let nsQuotasArray = ns.filter( (n) => get(n, 'projectId') === pId || isEmpty(get(n, 'projectId')))

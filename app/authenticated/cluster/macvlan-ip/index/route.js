@@ -25,7 +25,7 @@ export default Route.extend({
     q.length && (p.labelSelector = q.join(','));
 
     return hash({
-      resp:      this.vlansubnet.fetchMacvlanIp(clusterId, p),
+      resp: this.vlansubnet.fetchMacvlanIp(clusterId, p),
       projects,
     }).then((hash) => {
       const data = hash.resp.body.data;

@@ -39,7 +39,7 @@ var Pod = Resource.extend(Grafana, DisplayImage, {
     return !!get(this, 'containers').findBy('canShell', true);
   }),
 
-  availableActions: computed('canShell', function() {
+  availableActions: computed('actionLinks.download', 'canShell', function() {
     const canShell = get(this, 'canShell');
 
     var choices = [
@@ -126,7 +126,7 @@ var Pod = Resource.extend(Grafana, DisplayImage, {
     return get(this, 'status.podIp') || null;
   }),
 
-  displayMacvlanIp: computed('macvlanIpWithoutType', function() {
+  displayMacvlanIp: computed('macvlanIpWithoutType', 'macvlanIpv6', function() {
     let macvlanIpWithoutType = get(this, 'macvlanIpWithoutType');
     let macvlanIpv6 = get(this, 'macvlanIpv6');
     let divide = ''
@@ -137,7 +137,7 @@ var Pod = Resource.extend(Grafana, DisplayImage, {
 
     return `${ macvlanIpWithoutType }${ divide }${ macvlanIpv6 }`;
   }),
-  macvlanIpType: computed('annotations.[]', function() {
+  macvlanIpType: computed('annotations.[]', 'labels', function() {
     const labels = get(this, 'labels');
     const type = labels && labels['macvlan.panda.io/macvlanIpType'];
 

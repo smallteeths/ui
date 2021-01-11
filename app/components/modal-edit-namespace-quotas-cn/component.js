@@ -57,21 +57,21 @@ export default Component.extend(ModalBase, NewOrEdit, {
 
   },
 
-  projectLimit: computed('primaryResource.resourceQuota.{limit}', 'primaryResource.projectId', function() {
+  projectLimit: computed('allProjects', 'primaryResource.projectId', 'primaryResource.resourceQuota.limit', function() {
     const projectId = get(this, 'primaryResource.projectId');
     const project   = get(this, 'allProjects').findBy('id', projectId);
 
     return get(project, 'resourceQuota.limit');
   }),
 
-  projectUsedLimit: computed('primaryResource.resourceQuota.{limit}', 'primaryResource.projectId', function() {
+  projectUsedLimit: computed('allProjects', 'primaryResource.projectId', 'primaryResource.resourceQuota.limit', function() {
     const projectId = get(this, 'primaryResource.projectId');
     const project   = get(this, 'allProjects').findBy('id', projectId);
 
     return get(project, 'resourceQuota.usedLimit');
   }),
 
-  nsDefaultQuota: computed('primaryResource.resourceQuota.{limit}', 'primaryResource.projectId', function() {
+  nsDefaultQuota: computed('allProjects', 'primaryResource.projectId', 'primaryResource.resourceQuota.limit', function() {
     const projectId = get(this, 'primaryResource.projectId');
     const project   = get(this, 'allProjects').findBy('id', projectId);
 

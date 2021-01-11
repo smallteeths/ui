@@ -142,7 +142,7 @@ export default Component.extend({
     return pass && confirm && pass === confirm;
   }),
 
-  errors: computed('passwordsMatch', 'confirm', 'confirmBlurred', 'serverErrors.[]', function() {
+  errors: computed('confirm', 'confirmBlurred', 'generate', 'passwordsMatch', 'serverErrors.[]', function() {
     let out = get(this, 'serverErrors') || [];
 
     if ( !get(this, 'generate') && get(this, 'confirmBlurred') && get(this, 'confirm') && !get(this, 'passwordsMatch') ) {

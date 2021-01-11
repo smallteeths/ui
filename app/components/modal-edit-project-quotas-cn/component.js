@@ -10,7 +10,7 @@ export default Component.extend(ModalBase, NewOrEdit, {
   scope: service(),
 
   layout,
-  classNames:    ['large-modal'],
+  classNames: ['large-modal'],
 
   callback:       alias('modalService.modalOpts.cb'),
   originalModel:  alias('modalService.modalOpts.model'),

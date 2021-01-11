@@ -66,7 +66,7 @@ export default Component.extend(NewOrEdit, ChildHook, {
   toggleMacvlan: false,
   harborVersion: '',
 
-  isSidekick:    equal('scaleMode', 'sidekick'),
+  isSidekick: equal('scaleMode', 'sidekick'),
   init() {
     window.nec = this;
     this._super(...arguments);

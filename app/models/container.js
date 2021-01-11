@@ -33,7 +33,7 @@ var Container = Resource.extend(Grafana, DisplayImage, {
     return C.CAN_SHELL_STATES.indexOf(get(this, 'state')) > -1
   }),
 
-  availableActions: computed('canShell', function() {
+  availableActions: computed('canShell', 'pod.actionLinks.download', function() {
     const canShell = get(this, 'canShell');
 
     var choices = [

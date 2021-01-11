@@ -41,7 +41,7 @@ export default Controller.extend({
       value: 'eth0',
     },
   ],
-  form:            computed.alias('model.form'),
+  form: computed.alias('model.form'),
   init() {
     this._super(...arguments);
   },

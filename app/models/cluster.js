@@ -421,7 +421,7 @@ export default Resource.extend(Grafana, ResourceUsage, {
       || get(this, 'isClusterScanDown');
   }),
 
-  isGlobalMonitoringCluster: computed('settings.globalMonitoringClusterId', function() {
+  isGlobalMonitoringCluster: computed('id', 'settings.globalMonitoringClusterId', function() {
     return this.settings.globalMonitoringClusterId === this.id;
   }),
 

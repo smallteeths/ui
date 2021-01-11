@@ -9,7 +9,7 @@ export default Component.extend(VolumeSource, {
 
   initValue: { medium: '' },
 
-  config: computed('field', function() {
+  config: computed('field', 'volume', function() {
     const volume = get(this, 'volume');
     const field = get(this, 'field');
 

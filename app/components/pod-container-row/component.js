@@ -7,7 +7,7 @@ export default Component.extend({
   model:   null,
   tagName: '',
 
-  containerStatus: computed('containerStatuses', 'model', function() {
+  containerStatus: computed('containerStatuses', 'model.name', function() {
     const status = get(this, 'containerStatuses')[get(this, 'model.name')]
 
     if (!status) {

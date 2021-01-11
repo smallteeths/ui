@@ -73,7 +73,7 @@ export default Controller.extend({
     },
   },
 
-  disabledAddNotificationSecret: computed('model.secret.notificationSecret', function(){
+  disabledAddNotificationSecret: computed('model.secret.notificationSecret.data', function(){
     return !(get(this, 'model.secret.notificationSecret') && get(this, 'model.secret.notificationSecret.data') && get(this, 'model.secret.notificationSecret.data')['notification.tmpl'])
   }),
 });

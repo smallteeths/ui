@@ -18,7 +18,7 @@ export default Component.extend(ModalBase, {
   intl:              service(),
 
   layout,
-  classNames:        ['modal-edit-setting', 'span-8', 'offset-2'],
+  classNames: ['modal-edit-setting', 'span-8', 'offset-2'],
 
   model:             alias('modalService.modalOpts'),
   extraMenus:        alias('settings.extraMenus'),

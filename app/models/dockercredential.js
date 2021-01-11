@@ -25,7 +25,7 @@ var DockerCredential = Resource.extend({
   firstRegistry: alias('asArray.firstObject'),
   registryCount: alias('asArray.length'),
 
-  canEdit: computed('links.update', function() {
+  canEdit: computed('access.me.{hasAdmin,id}', 'creatorId', 'links.update', function() {
     return !!get(this, 'links.update') && (get(this, 'access.me.hasAdmin') || get(this, 'access.me.id') === this.creatorId);
   }),
 

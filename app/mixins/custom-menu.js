@@ -3,7 +3,7 @@ import Mixin from '@ember/object/mixin';
 import { inject as service } from '@ember/service'
 
 export default Mixin.create({
-  settings:         service(),
+  settings: service(),
 
   addExtraMenus(out) {
     const extraMenus = get(this, 'settings.extra-menus') || '';

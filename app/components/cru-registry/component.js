@@ -140,7 +140,7 @@ export default Component.extend(ViewNewEdit, OptionallyNamespaced, {
     return false;
   }),
 
-  hostname:  window.location.host,
+  hostname: window.location.host,
 
   willSave() {
     const { primaryResource: pr } = this;

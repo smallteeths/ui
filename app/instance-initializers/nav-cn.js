@@ -58,7 +58,7 @@ const rootNav = [
         currentWhen:    [
           'authenticated.project.istio.project-istio',
         ],
-        initExpand:     'authenticated.project.istio.index'
+        initExpand: 'authenticated.project.istio.index'
       },
       {
         id:             'infra-secrets',
@@ -72,7 +72,7 @@ const rootNav = [
           'authenticated.project.registries',
           'authenticated.project.secrets',
         ],
-        initExpand:     'authenticated.project.secrets.index'
+        initExpand: 'authenticated.project.secrets.index'
       },
       {
         id:             'infra-config-maps',

@@ -27,14 +27,14 @@ export default Component.extend(CustomMenu, {
 
   layout,
   // Inputs
-  pageScope:        null,
+  pageScope: null,
 
   // Component options
   tagName:          'aside',
   classNames:       ['page-header-left'],
   dropdownSelector: '.navbar .dropdown',
 
-  stacks:           null,
+  stacks: null,
 
   // This computed property generates the active list of choices to display
   navTree:       null,

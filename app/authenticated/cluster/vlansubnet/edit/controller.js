@@ -136,7 +136,7 @@ export default Controller.extend({
 
     return projects;
   }),
-  ipRangesExistedMsg: computed('ipRangesExisted', function() {
+  ipRangesExistedMsg: computed('form.metadata.name', 'ipRangesExisted', function() {
     const ipRanges = get(this, 'ipRangesExisted') || [];
     const name = get(this, 'form.metadata.name');
 

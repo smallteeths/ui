@@ -39,7 +39,7 @@ export default Component.extend({
       width:          100
     },
   ],
-  containerStatuses: computed('containers.[]', 'status', function(){
+  containerStatuses: computed('containers.[]', 'status.{containerStatuses,initContainerStatuses}', function(){
     const containers = get(this, 'containers') || [];
     const containerStatuses = get(this, 'status.containerStatuses') || [];
     const initContainerStatuses = get(this, 'status.initContainerStatuses') || [];

@@ -88,7 +88,7 @@ export default Component.extend(ModalBase, {
     }
   },
 
-  disabled: computed('value', function() {
+  disabled: computed('model.key', 'removing', 'value', function() {
     let urlReg = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])?/;
     let subUrl = urlReg.exec( get(this, 'value') )
     let flag = subUrl && subUrl[0]

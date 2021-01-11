@@ -272,7 +272,7 @@ export default Component.extend({
       });
 
       set(this, 'harborImages', {
-        raw:  repos,
+        raw: repos,
         urls,
       });
       this.loadHarborImageVersions();

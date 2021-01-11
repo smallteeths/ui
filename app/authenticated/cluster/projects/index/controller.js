@@ -14,7 +14,7 @@ export default Controller.extend({
     },
   },
 
-  rows: computed('model.namespaces.@each.state', 'model.namespaces.@each.displayName', 'model.projects.@each.clusterId', 'scope.currentCluster.id', function() {
+  rows: computed('hideRemovingNs', 'model.namespaces.@each.{displayName,state}', 'model.projects.@each.clusterId', 'scope.currentCluster.id', function() {
     if (this.hideRemovingNs) {
       return get(this, 'model.namespaces')
         .filterBy('displayName')

@@ -51,7 +51,7 @@ export default Controller.extend({
     },
   },
 
-  allNamespace: computed('model.namespaces.@each.state', 'model.namespaces.[]', 'scope.currentProject.id', function() {
+  allNamespace: computed('hideRemovingNs', 'model.namespaces.@each.state', 'scope.currentProject.id', function() {
     let ns = get(this, 'model.namespaces');
     let pId = get(this, 'scope.currentProject.id');
 

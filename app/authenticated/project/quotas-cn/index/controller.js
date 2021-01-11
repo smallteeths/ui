@@ -61,7 +61,7 @@ export default Controller.extend({
 
   storageClassKey: ['requestsStorageClassStorage', 'requestsStorageClassPVC'],
 
-  quotaTypeArray: computed('C.QUOTA_TPYE_CN.[]', 'model.quotaSetting.limit', 'allNamespace', function() {
+  quotaTypeArray: computed('C.QUOTA_TPYE_CN.[]', 'allNamespace', 'model.quotaSetting.{limit,used}', 'storageClassKey', function() {
     let quotaData = [];
     const intl = get(this, 'intl');
     const storageClassKey = get(this, 'storageClassKey');
@@ -94,7 +94,7 @@ export default Controller.extend({
     return quotaData;
   }),
 
-  allNamespace: computed('model.namespaces.[]', function() {
+  allNamespace: computed('model.namespaces.[]', 'scope.currentProject.id', 'storageClassKey', function() {
     let ns = get(this, 'model.namespaces');
     let pId = get(this, 'scope.currentProject.id');
     let nsQuotasArray = ns.filter( (n) => get(n, 'projectId') === pId && !isEmpty(get(n, 'projectId')))
@@ -146,7 +146,7 @@ export default Controller.extend({
     return namespacesData;
   }),
 
-  projectNamespaces: computed('model.namespaces', function() {
+  projectNamespaces: computed('model.namespaces', 'scope.currentProject.id', function() {
     return get(this, 'model.namespaces').filter( (ns) => get(ns, 'projectId') === get(this, 'scope.currentProject.id'));
   }),
 
@@ -154,7 +154,7 @@ export default Controller.extend({
     return get(this, 'model.namespaces').filter( (ns) => isEmpty(get(ns, 'projectId')) );
   }),
 
-  hasPermissions: computed('model.users.[]', function() {
+  hasPermissions: computed('model.clusterId', 'model.users.[]', function() {
     let currentUser = get(this, 'model.users').filter( (item) => item.me ).length > 0 ? get(this, 'model.users').filter( (item) => item.me )[0] : null;
 
     if (currentUser && currentUser.clusterRoleBindings && currentUser.clusterRoleBindings.length > 0) {
