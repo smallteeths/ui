@@ -34,7 +34,7 @@ Router.map(function() {
   this.route('verify-auth');
   this.route('verify-auth-azure');
   this.route('verify-auth-cas');
-  this.route('update-password', { path: '/update-password' });
+  this.route('update-password');
   this.route('update-critical-settings', { path: '/update-setting' });
 
   this.route('authenticated', { path: '/' }, function() {
@@ -73,17 +73,17 @@ Router.map(function() {
         this.route('index', { path: '/' });
       });
       // vlansubnet
-      this.route('vlansubnet', { path: '/vlansubnet' }, function() {
+      this.route('vlansubnet', function() {
         this.route('index', { path: '/' });
         this.route('new', { path: '/add' });
         this.route('edit', { path: '/:macvlan_name' });
-        this.route('unsupport', { path: '/unsupport' });
+        this.route('unsupport');
       });
       this.route('macvlan-ip', function() {
         this.route('index', { path: '/' });
       });
       // audit log
-      this.route('audit-log', { path: '/audit-log' }, function() {
+      this.route('audit-log', function() {
         this.route('index', { path: '/' });
       });
       this.mount('monitoring');
@@ -132,7 +132,7 @@ Router.map(function() {
         });
       });
 
-      this.route('iframe', { path: '/iframe' }, function() {
+      this.route('iframe', function() {
         this.route('detail', { path: '/:url' });
       });
     });
@@ -146,7 +146,7 @@ Router.map(function() {
         this.route('resource-quota', { path: '/:ns' });
       });
 
-      this.route('quotas-cn', { path: '/quotas-cn' }, function() {
+      this.route('quotas-cn', function() {
         this.route('index', { path: '/' });
       });
       // alert/logging
@@ -179,12 +179,12 @@ Router.map(function() {
         })
 
         // audit log
-        this.route('audit-log', { path: '/audit-log' }, function() {
+        this.route('audit-log', function() {
           this.route('index', { path: '/' });
         });
       });
       // audit log
-      this.route('audit-log', { path: '/audit-log' }, function() {
+      this.route('audit-log', function() {
         this.route('index', { path: '/' });
       });
 
@@ -295,7 +295,7 @@ Router.map(function() {
 
       this.route('help');
 
-      this.route('iframe', { path: '/iframe' }, function() {
+      this.route('iframe', function() {
         this.route('detail', { path: '/:url' });
       });
 

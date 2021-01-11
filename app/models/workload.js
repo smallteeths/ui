@@ -44,7 +44,7 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
 
   grafanaResourceId: alias('name'),
 
-  namespace:    reference('namespaceId', 'namespace', 'clusterStore'),
+  namespace: reference('namespaceId', 'namespace', 'clusterStore'),
 
   hasSidekicks: gt('containers.length', 1),
 
@@ -77,7 +77,7 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
     return !!get(this, 'links.update') && ( lcType !== 'job' );
   }),
 
-  availableActions: computed('actionLinks.{activate,deactivate,pause,restart,rollback,garbagecollect}', 'links.{update,remove}', 'podForShell', 'isPaused', 'canEdit', 'labels', function() {
+  availableActions: computed('actionLinks.{activate,deactivate,garbagecollect,pause,restart,rollback}', 'canEdit', 'isPaused', 'labels', 'links.{remove,update}', 'podForShell', 'settings.asMap', 'workloadLabels', function() {
     const a = get(this, 'actionLinks') || {};
 
     const podForShell = get(this, 'podForShell');

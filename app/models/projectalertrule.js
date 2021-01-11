@@ -15,7 +15,7 @@ const projectAlertRule = Resource.extend(Alert, {
   type:        'projectAlertRule',
   _targetType: 'pod',
 
-  group:    reference('groupId', 'projectAlertGroup'),
+  group: reference('groupId', 'projectAlertGroup'),
 
   displayTargetType: computed('targetType', function() {
     return get(this, 'intl').t(`alertPage.targetTypes.${ get(this, 'targetType') }`);

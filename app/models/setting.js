@@ -17,7 +17,7 @@ export default Resource.extend({
     return get(this, 'default') === get(this, 'value');
   }),
 
-  canRevert: computed('default', 'isDefault', function() {
+  canRevert: computed('default', 'isDefault', 'links.update', function() {
     return !isEmpty(get(this, 'default')) && !get(this, 'isDefault') && !!get(this, 'links.update');
   }),
 
