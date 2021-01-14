@@ -56,7 +56,7 @@
 </section>
 {{#custom-modal-confirm-delete confirm=(action 'confirmDelete') resources=selectedProjects modalVisible=showConfirmDeleteModal}}
 {{/custom-modal-confirm-delete}}
-{{#custom-modal-add-project-v2 modalVisible=showAddProjectModal isAdmin=isAdmin saved=(action "refresh")}}{{/custom-modal-add-project-v2}}
+{{#custom-modal-add-project-v2 modalVisible=showAddProjectModal storageUnitValue=model.configurations.unit size=model.configurations.defaultProjectQuota isAdmin=isAdmin saved=(action "refresh")}}{{/custom-modal-add-project-v2}}
 {{else}}
   {{#if model.harborServerError}}
     {{t "harborConfig.errorInfo"}}
