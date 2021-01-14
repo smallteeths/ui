@@ -11,24 +11,26 @@
           value=project.project_name
       }}
     </div>
-    {{!-- <div class="col span-12">
-      <label style="margin: 5px 0px 10px;" class="acc-label">{{t "harborConfig.form.storage.label"}}</label>
-      <div class="row">
-        <div class="col span-9" style="margin: 0 1.5% 0 0">
-          {{input-integer
-            min=-1
-            classNames="form-control"
-            value=size
-          }}
-        </div>
-        <div class="col span-3" style="margin: 0">
-          {{new-select
-            value=storageUnitValue
-            content=storageUnit
-          }}
+    {{#if isAdmin}}
+      <div class="col span-12">
+        <label style="margin: 5px 0px 10px;" class="acc-label">{{t "harborConfig.form.storage.label"}}</label>
+        <div class="row">
+          <div class="col span-9" style="margin: 0 1.5% 0 0">
+            {{input-integer
+              min=-1
+              classNames="form-control"
+              value=size
+            }}
+          </div>
+          <div class="col span-3" style="margin: 0">
+            {{new-select
+              value=storageUnitValue
+              content=storageUnit
+            }}
+          </div>
         </div>
       </div>
-    </div> --}}
+    {{/if}}
   </div>
   <div class="row">
     <div class="col span-12">
