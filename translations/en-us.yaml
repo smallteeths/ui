@@ -1543,6 +1543,30 @@ ingressPage:
     noMatch: No ingresses match the current search.
     noData: There are no ingress rules defined
 
+f5CISPage:
+  title: F5 CIS
+  form:
+    version: F5 CIS Version
+    url: 
+      label: BIG-IP URL
+      placeholder: e.g. example.com
+    partition:
+      label: BIG-IP Partition
+    username:
+      label: BIG-IP Username
+      placeholder: e.g. John
+    password:
+      label: BIG-IP Password
+      placeholder: Your Password
+    type: Network Provider
+    pool: Pool Member Type
+    flannelName: Flannel Name
+  disabled: F5 CIS is disabled in the current cluster.
+  toUpdate: F5 CIS is enabled.
+  confirmDisable: "Are you sure?  Click again to disable F5 CIS."
+  disable: Disable
+  enableActionLabel: Enable
+
 containerPage:
   header: 'Container: {name}'
   initContainer:
@@ -10279,6 +10303,7 @@ nav:
     fleet: Continuous Delivery
     gatekeeper: OPA Gatekeeper
     rio: Rio
+    cisF5: CIS F5
   project:
     none: Grouped Projects/Namespaces
     namespaces: Namespaces

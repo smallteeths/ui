@@ -1529,6 +1529,30 @@ ingressPage:
     noMatch: 没有 ingresses 匹配当前搜索。
     noData: 没有配置 ingress 规则
 
+f5CISPage:
+  title: F5 负载均衡服务
+  form:
+    version: F5 负载均衡服务组件版本
+    url: 
+      label: BIG-IP URL
+      placeholder: e.g. example.com
+    partition:
+      label: BIG-IP Partition
+    username:
+      label: BIG-IP 用户名
+      placeholder: "例如: John"
+    password:
+      label: BIG-IP 密码
+      placeholder: 密码
+    type: 集群网络
+    pool: Pool 成员类型
+    flannelName: Flannel Name
+  disabled: F5 负载均衡服务在当前集群中为禁用状态。
+  toUpdate: F5 负载均衡服务已启动。
+  confirmDisable: "你确定吗？再次点击将会禁用 F5 负载均衡服务。"
+  disable: 禁用
+  enableActionLabel: 启用
+
 containerPage:
   header: '容器: {name}'
   initContainer:
@@ -10178,6 +10202,7 @@ nav:
     fleet: 持续交付
     gatekeeper: OPA Gatekeeper
     rio: Rio
+    cisF5: F5 负载均衡服务
   project:
     none: '项目/命名空间'
     namespaces: 命名空间

@@ -1,0 +1,146 @@
+<section class="header clearfix">
+  <h1 class="pull-left">
+    {{t (concat "f5CISPage.title")}}
+  </h1>
+</section>
+
+{{#banner-message color="bg-info"}}
+  <p>
+    {{#if enabled}}
+      {{t "f5CISPage.toUpdate"}}
+    {{else}}
+      {{t "f5CISPage.disabled"}}
+    {{/if}}
+  </p>
+{{/banner-message}}
+
+{{#if loading}}
+  <section class="row">
+    <div class="text-center">
+      <i class="icon icon-spinner icon-spin icon-3x"></i>
+    </div>
+  </section>
+{{else}}
+  <div class="box mb-10">
+    <div class="row">
+      <div class="col span-6">
+        <label class="acc-label">
+          {{t "f5CISPage.form.version"}}
+        </label>
+        {{new-select
+          classNames="form-control"
+          content=versionChoices
+          value=version
+        }}
+      </div>
+    </div>
+
+    <hr class="mt-15 mb-15"/>
+
+    <div class="row">
+      <div class="col span-6">
+        <label class="acc-label">
+          {{t "f5CISPage.form.url.label"}}
+          {{field-required}}
+        </label>
+        {{schema/input-string
+          value=url
+          placeholder=(t "f5CISPage.form.url.placeholder")
+        }}
+      </div>
+      <div class="col span-6">
+        <label class="acc-label">
+          {{t "f5CISPage.form.partition.label"}}
+          {{field-required}}
+        </label>
+        {{schema/input-string
+          value=partition
+        }}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col span-6">
+        <label class="acc-label">
+          {{t "f5CISPage.form.username.label"}}
+          {{field-required}}
+        </label>
+        {{schema/input-string
+          value=username
+          placeholder=(t "f5CISPage.form.username.placeholder")
+        }}
+      </div>
+      <div class="col span-6">
+        <label class="acc-label">
+          {{t "f5CISPage.form.password.label"}}
+          {{field-required}}
+        </label>
+        {{input
+          type="password"
+          value=password
+          placeholder=(t "f5CISPage.form.password.placeholder")
+        }}
+      </div>
+    </div>
+
+    <hr class="mt-15 mb-15"/>
+
+    <div class="row">
+      <div class="col span-6">
+        <label class="acc-label">
+          {{t "f5CISPage.form.type"}}
+        </label>
+        {{new-select
+          value=networkType
+          content=networkTypeChoises
+        }}
+      </div>
+      <div class="col span-6">
+        <label class="acc-label">
+          {{t "f5CISPage.form.pool"}}
+        </label>
+        {{new-select
+          value=poolMemberType
+          content=poolMemberTypeChoises
+        }}
+      </div>
+    </div>
+
+    {{#if networkTypeIsFlannel}}
+      <div class="row">
+        <div class="col span-6">
+          <label class="acc-label">
+            {{t "f5CISPage.form.flannelName"}}
+          </label>
+          {{schema/input-string
+            value=flannelName
+          }}
+        </div>
+      </div>
+    {{/if}}
+
+  </div>
+{{/if}}
+
+{{top-errors errors=errors}}
+<div class="text-center">
+  {{#save-cancel
+    saveDisabled=saveDisabled
+    cancelDisabled=true
+    editing=enabled
+    createLabel="f5CISPage.enableActionLabel"
+    save=(action "enable")
+  }}
+    {{#if (and enabled)}}
+      {{#if confirmDisable}}
+        <button class="btn bg-error" {{action "disable"}}>
+          <i class="icon icon-alert"></i> {{t "f5CISPage.confirmDisable"}}
+        </button>
+      {{else}}
+        <button class="btn bg-error" {{action "promptDisable"}}>
+            {{t "f5CISPage.disable"}}
+          </button>
+      {{/if}}
+    {{/if}}
+  {{/save-cancel}}
+</div>

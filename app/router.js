@@ -64,6 +64,8 @@ Router.map(function() {
       this.route('cis/scan');
       this.route('cis/scan/detail', { path: '/cis/scan/detail/:scan_id' });
 
+      this.route('cis/f5');
+
 
       this.route('backups', function() {
         this.route('index', { path: '/' });

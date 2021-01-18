@@ -354,6 +354,15 @@ const rootNav = [
         ctx:                      [getClusterId],
         initExpand:               'authenticated.cluster.cis/scan',
       },
+      {
+        id:                       'cluster-tools-cis-f5',
+        localizedLabel:           'nav.tools.cisF5',
+        route:                    'authenticated.cluster.cis/f5',
+        resourceScope:            'global',
+        resource:                 [],
+        ctx:                      [getClusterId],
+        initExpand:               'authenticated.cluster.cis/f5',
+      },
       { divider: true },
       {
         id:                       'cluster-tools-backup',
