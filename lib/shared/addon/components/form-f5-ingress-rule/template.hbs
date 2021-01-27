@@ -1,0 +1,27 @@
+<div class="row">
+  <label>{{t "formIngress.label"}}</label>
+</div>
+<hr/>
+{{#each pools as |pool|}}
+  {{form-f5-ingress-rows
+    editing=editing
+    mode=mode
+    f5=f5
+    namespace=namespace
+    isVirtualServer=isVirtualServer
+    removePool=(action "removePool")
+    pool=pool
+    pools=pools
+  }}
+{{else}}
+  <div class="p-20">{{t "formIngress.noRules"}}</div>
+{{/each}}
+
+{{#if (and editing isVirtualServer)}}
+  <div class="row">
+    <button class="btn bg-link icon-btn pull-right" {{action "addPool"}}>
+      <span class="darken"><i class="icon icon-plus text-small"></i></span>
+      <span>{{t "formIngress.addRuleLabel"}}</span>
+    </button>
+  </div>
+{{/if}}

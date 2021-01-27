@@ -1567,6 +1567,56 @@ f5CISPage:
   disable: Disable
   enableActionLabel: Enable
 
+f5CtlPage:
+  addCtl: Create F5 LB
+  header:
+    new: Create F5 LB
+    edit: Edit F5 LB
+    view: "F5 LB: {name}"
+  table:
+    noData: There are no F5 LB
+  form:
+    type: 
+      label: F5 LB Type
+      virtual: Virtual Server
+      transport: Transport
+    url: Url
+    name: Name
+    domain: Host
+    http: Http Port
+    https: Https Port
+    port: Port
+    mode: Mode
+    root: Rewrite APP Root
+    tls: TLS Profile
+    rewrite: Rewrite
+    monitor:
+      label: Enable Monitor
+      enable: Enable
+      disable: Disable
+    monitorType: Type
+    send: Send
+    receive: Receive
+    interval: Interval
+    timeout: Timeout
+
+f5TLSPage:
+  addTLS: Create TLS
+  header:
+    new: Create TLS
+    edit: Edit TLS
+    view: "TLS: {name}"
+  table:
+    noData: There are no TLS
+  form:
+    reference: Reference
+    termination: Termination
+    clientSSL: Client SSL
+    serverSSL: Server SSL
+    hosts:
+      add: Add Host
+      placeholder: 'e.g. example.com'
+
 containerPage:
   header: 'Container: {name}'
   initContainer:
@@ -9831,6 +9881,16 @@ pagination:
     =0 {No Ingresses}
     =1 {{count} {count, plural, =1 {Ingress} other {Ingresses}}}
     other {{from} - {to} of {count} Ingresses}}
+  f5Ctl: |
+    {pages, plural,
+    =0{ No F5 LB}
+    =1 {{count} {count, plural, =1 {F5 LB} other {F5 LB}}}
+    other {{from} - {to} of {count} F5 LB}}
+  f5Tls: |
+    {pages, plural,
+    =0{ No TLS}
+    =1 {{count} {count, plural, =1 {TLS} other {TLS}}}
+    other {{from} - {to} of {count} TLS}}
   member: |
     {pages, plural,
     =0 {No Members}
@@ -10210,6 +10270,9 @@ nav:
     addHpa: Add HPA
     addVolume: Add Volume
     importCompose: Import YAML
+  f5:
+    controllers: F5 Ingress Controllers
+    tls: TLS
   group:
     none: Flat List
     node: Group by Node
@@ -10240,6 +10303,7 @@ nav:
     members: Members
     hpa: HPA
     pipelines: Pipelines
+    f5Ingresses: F5 Ingress Controller
   admin:
     tab: Global
     clusters:

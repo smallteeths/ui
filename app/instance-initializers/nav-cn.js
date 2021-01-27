@@ -83,6 +83,22 @@ const rootNav = [
         resourceScope:  'project',
         initExpand:     'authenticated.project.config-maps.index'
       },
+      {
+        id:             'infra-f5-ingresses',
+        localizedLabel: 'nav.infra.f5Ingresses',
+        route:          'authenticated.project.f5.index',
+        ctx:            [getProjectId],
+        resource:       ['virtualserver', 'transportserver', 'pool', 'monitor'],
+        resourceScope:  'project',
+        currentWhen:    [
+          'authenticated.project.f5.controllers',
+          'authenticated.project.f5.tls',
+        ],
+        initExpand: 'authenticated.project.f5.controllers.index',
+        condition() {
+          return get(this, 'cluster.enableF5CIS')
+        }
+      },
     ],
   },
   {

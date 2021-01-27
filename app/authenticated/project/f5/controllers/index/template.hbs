@@ -1,0 +1,70 @@
+{{#f5-ingresses-header showGroup=false}}
+  {{!-- {{#link-to "authenticated.project.f5.controllers.run" scope.currentProject.id class="btn btn-sm bg-primary" disabled=(rbac-prevents resource="virtualserver" scope="project" permission="create")}}{{t 'f5CtlPage.addCtl'}}{{/link-to}} --}}
+  {{#link-to "authenticated.project.f5.controllers.run" scope.currentProject.id class="btn btn-sm bg-primary"}}{{t 'f5CtlPage.addCtl'}}{{/link-to}}
+{{/f5-ingresses-header}}
+
+<section class="pl-0 pr-0">
+  {{#sortable-table
+    classNames="grid sortable-table"
+    body=rows
+    searchText=searchText
+    sortBy=sortBy
+    descending=descending
+    bulkActions=true
+    groupByKey="namespaceId"
+    groupByRef="namespace"
+    pagingLabel="pagination.f5Ctl"
+    subSearchField="instances"
+    headers=headers as |sortable kind inst dt|
+  }}
+    {{#if (eq kind "row")}}
+      <tr class="main-row">
+        <td class="row-check" valign="middle" style="padding-top: 2px;">
+          {{check-box nodeId=inst.id}}
+        </td>
+        <td data-title="{{dt.name}}" class="clip">
+          {{#if (eq inst.type "service")}}
+            {{inst.displayName}}
+          {{else}}
+            <a href="#" onclick={{action 'goto' inst.type inst.id}}>{{inst.displayName}}</a>
+          {{/if}}
+          <div class="text-small text-muted text-capitalize">{{inst.type}}</div>
+        </td>
+        <td data-title="{{dt.targets}}" class="force-wrap">
+          {{#each inst.pools as |pool|}}
+            <div class="text-small">
+              <a href="http://{{inst.host}}/{{pool.path}}" target="_blank" rel="noopener noreferrer nofollow">{{inst.host}}{{if pool.path pool.path ''}}</a>
+
+              {{#if pool.service}}
+                <i class="icon icon-chevron-right"/>
+                <a href="{{href-to "authenticated.project.dns.detail" pool.service}}">{{pool.service}}</a>
+              {{!-- {{else if tgt.workload}}
+                <i class="icon icon-chevron-right"/>
+                <a href="{{href-to "workload" tgt.workload.id}}">{{pool.workload.displayName}}</a>
+              {{else}}
+                <i class="icon icon-chevron-right"/>
+                {{tgt.reference}} --}}
+              {{/if}}
+            </div>
+          {{/each}}
+        </td>
+        <td data-title="{{dt.created}}" class="text-right pr-20">
+          {{date-calendar inst.created}}
+        </td>
+        <td data-title="{{dt.actions}}" class="actions">
+          {{action-menu model=inst}}
+        </td>
+      </tr>
+    {{else if (eq kind "group")}}
+      {{namespace-group model=inst.ref fullColspan=sortable.fullColspan}}
+    {{else if (eq kind "nomatch")}}
+      <tr><td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">{{t 'ingressPage.table.noMatch'}}</td></tr>
+    {{else if (eq kind "norows")}}
+      <tr>
+        <td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">
+          {{t "f5CtlPage.table.noData"}}
+        </td>
+      </tr>
+    {{/if}}
+  {{/sortable-table}}
+</section>

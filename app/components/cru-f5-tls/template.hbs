@@ -1,0 +1,112 @@
+<section class="header clearfix">
+  <div class="pull-left">
+    <h1>
+      {{t (concat "f5TLSPage.header." mode) name=model.displayName}}
+    </h1>
+  </div>
+  {{#if viewMode}}
+    <div class="right-buttons">
+      {{action-menu
+        model=model
+        showPrimary=false
+        classNames="ml-10 inline-block"
+        size="sm"
+      }}
+    </div>
+  {{/if}}
+</section>
+
+<section class="header clearfix">
+  <h1>
+    {{t (concat "f5TLSPage.header." mode) name=model.displayName}}
+  </h1>
+</section>
+
+<div class="row">
+  <div class="col span-11-of-23 mt-0 mb-0">
+    {{form-name-description
+      descriptionPlaceholder="servicePage.newIngress.form.description.placeholder"
+      model=model
+      nameDisabled=(not addMode)
+      editing=(not viewMode)
+      namePlaceholder="servicePage.newIngress.form.name.placeholder"
+    }}
+  </div>
+
+  <div class="col span-11-of-23 mt-0 mb-0 offset-1-of-23">
+    {{form-namespace
+      editing=addMode
+      errors=namespaceErrors
+      namespace=namespace
+    }}
+  </div>
+</div>
+
+
+
+
+<div class="row">
+  <div class="col span-12">
+    {{form-value-array
+      initialValues=model.hosts
+      addActionLabel="f5TLSPage.form.hosts.add"
+      valueLabel="generic.domainName"
+      valuePlaceholder="f5TLSPage.form.hosts.placeholder"
+      changed=(action (mut model.hosts))
+      editing=(not viewMode)
+    }}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col span-6">
+    <label class="acc-label">{{t "f5TLSPage.form.reference"}}</label>
+    {{#input-or-display editable=(not viewMode) value=model.tls.reference}}
+      {{new-select
+        value=model.tls.reference
+        content=referenceChoices
+      }}
+    {{/input-or-display}}
+  </div>
+
+  <div class="col span-6">
+    <label class="acc-label">{{t "f5TLSPage.form.termination"}}</label>
+    {{#input-or-display editable=(not viewMode) value=model.tls.termination}}
+      {{input
+        class="form-control"
+        value=model.tls.termination
+      }}
+    {{/input-or-display}}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col span-6">
+    <label class="acc-label">{{t "f5TLSPage.form.clientSSL"}}{{field-required}}</label>
+    {{#input-or-display editable=(not viewMode) value=model.tls.clientSSL}}
+      {{input
+        class="form-control"
+        value=model.tls.clientSSL
+      }}
+    {{/input-or-display}}
+  </div>
+  {{#if (eq model.tls.reference 'bigip')}}
+    <div class="col span-6">
+      <label class="acc-label">{{t "f5TLSPage.form.serverSSL"}}</label>
+      {{#input-or-display editable=(not viewMode) value=model.tls.serverSSL}}
+        {{input
+          class="form-control"
+          value=model.tls.serverSSL
+        }}
+      {{/input-or-display}}
+    </div>
+  {{/if}}
+</div>
+{{#if (not viewMode)}}
+  {{top-errors errors=errors}}
+  {{save-cancel
+    editing=(not viewMode)
+    save=(action "save")
+    cancel=(action "cancel")
+  }}
+{{/if}}

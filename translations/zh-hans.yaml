@@ -1553,6 +1553,57 @@ f5CISPage:
   disable: 禁用
   enableActionLabel: 启用
 
+f5CtlPage:
+  addCtl: 添加负载均衡
+  header:
+    new: 添加F5负载均衡
+    edit: 编辑F5负载均衡
+    view: "F5负载均衡: {name}"
+  table:
+    noData: 没有配置F5负载均衡
+  form:
+    type: 
+      label: F5负载均衡类型
+      virtual: Virtual Server
+      transport: Transport
+    url: 地址
+    name: 名称
+    domain: 主机域名
+    http: Http 端口
+    https: Https 端口
+    port: 端口
+    mode: 模式
+    root: Rewrite APP Root
+    tls: TLS Profile
+    rewrite: Rewrite
+    monitor:
+      label: 启用监控
+      enable: 启用
+      disable: 禁用
+    monitorType: 类型
+    send: Send
+    receive: Receive
+    interval: Interval
+    timeout: Timeout
+
+f5TLSPage:
+  addTLS: 添加证书
+  header:
+    new: 添加证书
+    edit: 编辑证书
+    view: "证书: {name}"
+  table:
+    noData: 没有配置TLS证书
+  form:
+    reference: Reference
+    termination: Termination
+    clientSSL: Client SSL
+    serverSSL: Server SSL
+    hosts:
+      add: 添加域名
+      placeholder: '例如: example.com'
+
+
 containerPage:
   header: '容器: {name}'
   initContainer:
@@ -9730,6 +9781,16 @@ pagination:
     =0{ 无 Ingresses}
     =1{ 选中 {count}{count, plural,=1{ 个 Ingresses} other { 个 Ingresses}}}
     other { 当前显示 {count} 个 Ingresses 中的 {from} 到 {to} 个 }}
+  f5Ctl: |
+    {pages, plural,
+    =0{ 无 F5负载均衡}
+    =1{ 选中 {count}{count, plural,=1{ 个 F5负载均衡} other { 个 F5负载均衡}}}
+    other { 当前显示 {count} 个 F5负载均衡 中的 {from} 到 {to} 个 }}
+  f5Tls: |
+    {pages, plural,
+    =0{ 无 TLS证书}
+    =1{ 选中 {count}{count, plural,=1{ 个 TLS证书} other { 个 TLS证书}}}
+    other { 当前显示 {count} 个 TLS证书 中的 {from} 到 {to} 个 }}
   member: |
     {pages, plural,
     =0{ 无成员 }
@@ -10109,6 +10170,9 @@ nav:
     addHpa: 添加 HPA
     addVolume: 添加 PVC
     importCompose: 导入 YAML
+  f5:
+    controllers: F5 负载均衡
+    tls: TLS
   group:
     none: 列表视图
     node: 按主机分组
@@ -10139,6 +10203,7 @@ nav:
     members: 成员
     hpa: HPA
     pipelines: 流水线
+    f5Ingresses: F5 负载均衡
   admin:
     tab: 全局
     clusters:

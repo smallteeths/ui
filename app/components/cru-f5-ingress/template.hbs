@@ -1,0 +1,211 @@
+<section class="header clearfix">
+  <div class="pull-left">
+    <h1>
+      {{t (concat "f5CtlPage.header." mode) name=f5.displayName}}
+    </h1>
+  </div>
+  {{#if isView}}
+    <div class="right-buttons">
+      {{action-menu
+        model=f5
+        showPrimary=false
+        classNames="ml-10 inline-block"
+        size="sm"
+      }}
+    </div>
+  {{/if}}
+</section>
+
+<div class="row">
+  <div class="col span-11-of-23 mt-0 mb-0">
+    {{form-name-description
+      descriptionPlaceholder="servicePage.newIngress.form.description.placeholder"
+      model=f5
+      editing=isNew
+      namePlaceholder="servicePage.newIngress.form.name.placeholder"
+    }}
+  </div>
+
+  <div class="col span-11-of-23 mt-0 mb-0 offset-1-of-23">
+    {{form-namespace
+      editing=isNew
+      errors=namespaceErrors
+      namespace=namespace
+    }}
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col span-12">
+    <label class="acc-label mt-10 mb-10">{{t "f5CtlPage.form.type.label"}}</label>
+    <div class="radio">
+      <label>
+        {{radio-button selection=isVirtualServer value=true disabled=(not isNew)}}
+        {{t 'f5CtlPage.form.type.virtual'}}
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        {{radio-button selection=isVirtualServer value=false disabled=(not isNew)}}
+        {{t 'f5CtlPage.form.type.transport'}}
+      </label>
+    </div>
+  </div>
+</div>
+
+<hr class="mt-30 mb-30">
+
+{{!-- virtual server form --}}
+{{#if isVirtualServer}}
+  <div>
+    <div class="row">
+      <div class="col span-4">
+        <label class="acc-label">{{t "f5CtlPage.form.url"}}{{field-required}}</label>
+        {{#input-or-display editable=editing value=f5.virtualServerAddress}}
+          {{input
+            class="form-control"
+            value=f5.virtualServerAddress
+          }}
+        {{/input-or-display}}
+      </div>
+
+      <div class="col span-4">
+        <label class="acc-label">{{t "f5CtlPage.form.name"}}</label>
+        {{#input-or-display editable=editing value=f5.virtualServerName}}
+          {{input
+            class="form-control"
+            value=f5.virtualServerName
+          }}
+        {{/input-or-display}}
+      </div>
+
+      <div class="col span-4">
+        <label class="acc-label">{{t "f5CtlPage.form.domain"}}{{field-required}}</label>
+        {{#input-or-display editable=editing value=f5.host}}
+          {{input
+            class="form-control"
+            value=f5.host
+          }}
+        {{/input-or-display}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col span-4">
+        <label class="acc-label">{{t "f5CtlPage.form.http"}}{{field-required}}</label>
+        {{#input-or-display editable=editing value=f5.virtualServerHTTPPort}}
+          {{input-integer class="form-control" min="1" max="65535" value=f5.virtualServerHTTPPort}}
+        {{/input-or-display}}
+        
+      </div>
+
+      <div class="col span-4">
+        <label class="acc-label">{{t "f5CtlPage.form.https"}}{{field-required}}</label>
+        {{#input-or-display editable=editing value=f5.virtualServerHTTPSPort}}
+          {{input-integer class="form-control" min="1" max="65535" value=f5.virtualServerHTTPSPort}}
+        {{/input-or-display}}
+      </div>
+
+      <div class="col span-4">
+        <label class="acc-label">{{t "f5CtlPage.form.root"}}</label>
+        {{#input-or-display editable=editing value=f5.rewriteAppRoot}}
+          {{input
+            class="form-control"
+            value=f5.rewriteAppRoot
+          }}
+        {{/input-or-display}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col span-6">
+        <label class="acc-label">{{t "f5CtlPage.form.tls"}}</label>
+        {{#input-or-display editable=editing value=f5.tlsProfileName}}
+          {{new-select
+            value=f5.tlsProfileName
+            content=tlsProfileChoices
+          }}
+        {{/input-or-display}}
+      </div>
+    </div>
+  </div>
+{{/if}}
+
+{{#if (not isVirtualServer)}}
+  <div class="row">
+    <div class="col span-6">
+      <label class="acc-label">{{t "f5CtlPage.form.url"}}{{field-required}}</label>
+      {{#input-or-display editable=editing value=f5.virtualServerAddress}}
+        {{input
+          class="form-control"
+          value=f5.virtualServerAddress
+        }}
+      {{/input-or-display}}
+    </div>
+
+    <div class="col span-6">
+      <label class="acc-label">{{t "f5CtlPage.form.name"}}</label>
+      {{#input-or-display editable=editing value=f5.virtualServerName}}
+        {{input
+          class="form-control"
+          value=f5.virtualServerName
+        }}
+      {{/input-or-display}}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col span-6">
+      <label class="acc-label">{{t "f5CtlPage.form.mode"}}</label>
+      {{#input-or-display editable=editing value=f5.mode}}
+        {{new-select
+          value=f5.mode
+          content=transportModes
+        }}
+      {{/input-or-display}}
+    </div>
+
+    <div class="col span-6">
+      <label class="acc-label">{{t "f5CtlPage.form.port"}}{{field-required}}</label>
+      {{#input-or-display editable=editing value=f5.virtualServerPort}}
+        {{input-integer class="form-control" min="1" max="65535" value=f5.virtualServerPort}}
+      {{/input-or-display}}
+    </div>
+  </div>
+{{/if}}
+
+
+<section class="mt-40 horizontal-form container-fluid">
+  {{form-f5-ingress-rule
+    editing=editing
+    mode=mode
+    f5=f5
+    namespace=namespace
+    isVirtualServer=isVirtualServer
+  }}
+  <hr class="mt-30 mb-30" />
+</section>
+
+{{#accordion-list as | al expandFn | }}
+  {{form-labels-annotations
+    annotationErrors=annotationErrors
+    classNames="accordion-wrapper"
+    expandAll=al.expandAll
+    expandFn=expandFn
+    editing=editing
+    initialLabels=f5.labels
+    labelErrors=labelErrors
+    model=f5
+    setLabels=(action "setLabels")
+  }}
+{{/accordion-list}}
+
+{{#if editing}}
+  {{top-errors errors=errors}}
+  {{save-cancel
+    editing=editing
+    save=(action "save")
+    cancel=(action "cancel")
+  }}
+{{/if}}

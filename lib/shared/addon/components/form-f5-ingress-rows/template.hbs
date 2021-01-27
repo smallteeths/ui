@@ -1,0 +1,131 @@
+<div class="box mb-10">
+  <div class="row">
+    {{#if (and editing (gt pools.length 1))}}
+      <div class="pull-right">
+        {{#if (lte pools.length 1 )}}
+          <button class="btn btn-disabled-transparent text-small vertical-middle" disabled="true">
+            {{t 'formIngress.removeRuleLabel'}}
+          </button>
+        {{else}}
+          <button class="btn bg-transparent text-small vertical-middle" {{action "removePool" pool}}>
+            {{t 'formIngress.removeRuleLabel'}}
+          </button>
+        {{/if}}
+      </div>
+    {{else}}
+      <!-- 28px is the height of the button, no jumpy -->
+      <div style="height: 28px;" class="pull-right"></div>
+    {{/if}}
+  </div>
+
+  {{#if isVirtualServer}}
+    <div class="row">
+      <div class="col span-12">
+        <label class="acc-label">{{t "f5CtlPage.form.rewrite"}}</label>
+        {{#input-or-display
+          editable=editing
+          value=pool.rewrite
+        }}
+          {{input
+            type="text"
+            value=pool.rewrite
+            classNames="form-control"
+          }}
+        {{/input-or-display}}
+    </div>
+    </div>
+  {{/if}}
+
+  <div class="row">
+    <div class="col span-12" >
+      <label class="acc-label">{{t "f5CtlPage.form.monitor.label"}}</label>
+      <div class="radio">
+        <label>{{radio-button selection=enableMonitor value=true disabled=(not editing)}} {{t "f5CtlPage.form.monitor.enable"}}</label>
+        <label>{{radio-button selection=enableMonitor value=false disabled=(not editing)}} {{t "f5CtlPage.form.monitor.disable"}}</label>
+      </div>
+    </div>
+  </div>
+
+  {{#if enableMonitor}}
+    <div class="row">
+      <div class="col span-6">
+        <label class="acc-label">{{t "f5CtlPage.form.monitorType"}}</label>
+        {{#input-or-display
+          editable=editing
+          value=pool.monitor.type
+        }}
+          {{new-select
+            value=pool.monitor.type
+            content=monitorTypeChoices
+          }}
+        {{/input-or-display}}
+      </div>
+    </div>
+
+    {{#if isVirtualServer}}
+      <div class="row">
+        <div class="col span-6">
+          <label class="acc-label">{{t "f5CtlPage.form.send"}}{{field-required}}</label>
+          {{#input-or-display
+            editable=editing
+            value=pool.monitor.send
+          }}
+            {{input
+              type="text"
+              value=pool.monitor.send
+              classNames="form-control"
+            }}
+          {{/input-or-display}}
+        </div>
+        
+        <div class="col span-6">
+          <label class="acc-label">{{t "f5CtlPage.form.receive"}}</label>
+          {{#input-or-display
+            editable=editing
+            value=pool.monitor.recv
+          }}
+            {{input
+              type="text"
+              value=pool.monitor.recv
+              classNames="form-control"
+            }}
+          {{/input-or-display}}
+        </div>
+      </div>
+    {{/if}}
+
+    <div class="row">
+      <div class="col span-6">
+        <label class="acc-label">{{t "f5CtlPage.form.interval"}}{{field-required}}</label>
+        {{#input-or-display
+          editable=editing
+          value=pool.monitor.interval
+        }}
+          {{input-integer class="form-control" min="1" value=pool.monitor.interval}}
+        {{/input-or-display}}
+      </div>
+
+      <div class="col span-6">
+        <label class="acc-label">{{t "f5CtlPage.form.timeout"}}</label>
+        {{#input-or-display
+          editable=editing
+          value=pool.monitor.timeout
+        }}
+          {{input-integer class="form-control" min="1" value=pool.monitor.timeout}}
+        {{/input-or-display}}
+      </div>
+    </div>
+  {{/if}}
+  
+
+  <hr class="mt-20 mb-20" />
+
+  {{form-f5-ingress-backends
+      f5=f5
+      namespace=namespace
+      isVirtualServer=isVirtualServer
+      isDefault=isDefault
+      pool=pool
+      editing=editing
+  }}
+</div>
