@@ -19,11 +19,11 @@ const NETWORK_TYPE_CHOISES = [
 const POOL_MEMBER_TYPE_CHOISES = [
   {
     label: 'Cluster',
-    value: 'Cluster'
+    value: 'cluster'
   },
   {
     label: 'NodePort',
-    value: 'NodePort'
+    value: 'nodeport'
   },
 ]
 
@@ -41,8 +41,8 @@ export default Component.extend({
   networkTypeChoises:    NETWORK_TYPE_CHOISES,
   poolMemberTypeChoises: POOL_MEMBER_TYPE_CHOISES,
 
-  networkType: 'Flannel',
-  memberType:  'Cluster',
+  poolMemberType: 'cluster',
+  networkType:    'Flannel',
 
   cluster: alias('scope.currentCluster'),
   version: alias('versionConfig.defaultVersion'),
