@@ -120,11 +120,13 @@
 
     <div class="row">
       <div class="col span-6">
-        <label class="acc-label">{{t "f5CtlPage.form.tls"}}</label>
+        <label class="acc-label">{{t "f5CtlPage.form.tls.label"}}</label>
         {{#input-or-display editable=editing value=f5.tlsProfileName}}
           {{new-select
             value=f5.tlsProfileName
             content=tlsProfileChoices
+            prompt="f5CtlPage.form.tls.placeholder"
+            localizedPrompt=true
           }}
         {{/input-or-display}}
       </div>

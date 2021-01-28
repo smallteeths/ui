@@ -1564,8 +1564,8 @@ f5CtlPage:
   form:
     type: 
       label: F5负载均衡类型
-      virtual: Virtual Server
-      transport: Transport
+      virtual: 7层负载均衡(VirtualServer)
+      transport: 4层负载均衡(TransportServer)
     url: 地址
     name: 名称
     domain: 主机域名
@@ -1574,7 +1574,9 @@ f5CtlPage:
     port: 端口
     mode: 模式
     root: Rewrite APP Root
-    tls: TLS Profile
+    tls: 
+      label: TLS Profile
+      placeholder: 请选择
     rewrite: Rewrite
     monitor:
       label: 启用监控

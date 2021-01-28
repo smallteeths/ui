@@ -110,11 +110,10 @@ export default Component.extend(NewOrEdit, {
         rewriteAppRoot:         get(f5, 'rewriteAppRoot'),
         virtualServerHTTPPort:  get(f5, 'virtualServerHTTPPort'),
         virtualServerHTTPSPort: get(f5, 'virtualServerHTTPSPort'),
-        tlsProfileName:         get(f5, 'tlsProfileName')
       })
 
-      if (!get(f5, 'tlsProfileName')) {
-        set(pr, 'tlsProfileName', get(this, 'tlsProfileChoices.firstObject.value'))
+      if (get(f5, 'tlsProfileName')) {
+        set(pr, 'tlsProfileName', get(f5, 'tlsProfileName'))
       }
     } else {
       pr = store.createRecord({
@@ -158,8 +157,6 @@ export default Component.extend(NewOrEdit, {
 
     set(pr, 'namespaceId', nsId);
     // macvlan
-
-    // return ok;
 
     return ok;
   },

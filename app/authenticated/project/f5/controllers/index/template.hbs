@@ -24,7 +24,13 @@
         </td>
         <td data-title="{{dt.name}}" class="clip">
           <a href="#" onclick={{action 'goto' inst.type inst.id}}>{{inst.displayName}}</a>
-          <div class="text-small text-muted text-capitalize">{{inst.type}}</div>
+          <div class="text-small text-muted text-capitalize">
+            {{#if (eq inst.type 'virtualServer')}}
+              {{t "f5CtlPage.form.type.virtual"}}
+            {{else}}
+              {{t "f5CtlPage.form.type.transport"}}
+            {{/if}}
+          </div>
         </td>
         <td data-title="{{dt.targets}}" class="force-wrap">
           {{#each inst.targets as |pool|}}

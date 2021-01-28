@@ -1578,8 +1578,8 @@ f5CtlPage:
   form:
     type: 
       label: F5 LB Type
-      virtual: Virtual Server
-      transport: Transport
+      virtual: L7 (VirtualServer)
+      transport: L4 (TransportServer)
     url: Url
     name: Name
     domain: Host
@@ -1588,7 +1588,9 @@ f5CtlPage:
     port: Port
     mode: Mode
     root: Rewrite APP Root
-    tls: TLS Profile
+    tls: 
+      label: TLS Profile
+      placeholder: Choose...
     rewrite: Rewrite
     monitor:
       label: Enable Monitor
