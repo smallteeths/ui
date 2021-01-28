@@ -1585,6 +1585,8 @@ f5CtlPage:
     receive: Receive
     interval: Interval
     timeout: Timeout
+  validation:
+    pool: '规则[{index}]: "{key}" 必须设置'
 
 f5TLSPage:
   addTLS: 添加证书

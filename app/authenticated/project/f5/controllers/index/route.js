@@ -11,6 +11,10 @@ export default Route.extend({
     return hash({
       virtualservers:    store.findAll('virtualserver'),
       transportservers:  store.findAll('transportserver'),
+    }).then((hash) => {
+      console.log(hash);
+
+      return hash;
     });
   },
 

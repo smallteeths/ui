@@ -1599,6 +1599,8 @@ f5CtlPage:
     receive: Receive
     interval: Interval
     timeout: Timeout
+  validation:
+    pool: 'Pools[{index}]: "{key}" is required'
 
 f5TLSPage:
   addTLS: Create TLS

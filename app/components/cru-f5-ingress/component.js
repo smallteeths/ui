@@ -36,10 +36,6 @@ export default Component.extend(NewOrEdit, {
 
     if (!get(this, 'isAdd')) {
       set(this, 'namespace', get(this, 'existing.namespace'));
-
-      if (!get(this, 'isVirtualServer')) {
-        set(this, 'f5.pools', [get(this, 'f5.pool')])
-      }
     }
   },
   actions: {
@@ -158,14 +154,14 @@ export default Component.extend(NewOrEdit, {
     let nsId = get(pr, 'namespaceId');
 
     set(pr, 'namespaceId', '__TEMP__');
-    // let ok = this.validate();
+    let ok = this.validate();
 
     set(pr, 'namespaceId', nsId);
     // macvlan
 
     // return ok;
 
-    return true;
+    return ok;
   },
 
   doSave() {
@@ -194,32 +190,10 @@ export default Component.extend(NewOrEdit, {
   },
 
   validate() {
-    let intl = get(this, 'intl');
-
     let pr = get(this, 'primaryResource');
     let errors = pr.validationErrors() || [];
 
     errors.pushObjects(get(this, 'namespaceErrors') || []);
-    errors.pushObjects(get(this, 'certErrors') || []);
-
-    if (!get(this, 'ingress.rules.length') && !get(this, 'ingress.defaultBackend')) {
-      errors.push(intl.t('newIngress.error.noRules'));
-    }
-    if (get(this, 'ingress.rules.length')) {
-      const invalid = get(this, 'ingress.rules').some((rule) => {
-        const paths = [];
-
-        Object.keys(rule.paths).forEach((key) => {
-          paths.push(rule.paths[key]);
-        });
-
-        return paths.some((path) => !path.targetPort)
-      });
-
-      if (invalid) {
-        errors.push(intl.t('validation.required', { key: intl.t('generic.port') }));
-      }
-    }
 
     if (errors.length) {
       set(this, 'errors', errors.uniq());

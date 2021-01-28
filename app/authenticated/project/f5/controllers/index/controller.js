@@ -47,10 +47,7 @@ export default Controller.extend({
   rows: computed('model.virtualservers.[]', 'model.transportservers.[]', function() {
     const out = (get(this, 'model.virtualservers') || []).slice();
 
-    (get(this, 'model.transportservers') || []).forEach((item) => {
-      set(item, 'pools', [get(item, 'pool')])
-      out.addObject(item);
-    })
+    out.addObjects(get(this, 'model.transportservers') || []);
 
     return out;
   }),

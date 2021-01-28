@@ -23,28 +23,30 @@
           {{check-box nodeId=inst.id}}
         </td>
         <td data-title="{{dt.name}}" class="clip">
-          {{#if (eq inst.type "service")}}
-            {{inst.displayName}}
-          {{else}}
-            <a href="#" onclick={{action 'goto' inst.type inst.id}}>{{inst.displayName}}</a>
-          {{/if}}
+          <a href="#" onclick={{action 'goto' inst.type inst.id}}>{{inst.displayName}}</a>
           <div class="text-small text-muted text-capitalize">{{inst.type}}</div>
         </td>
         <td data-title="{{dt.targets}}" class="force-wrap">
-          {{#each inst.pools as |pool|}}
+          {{#each inst.targets as |pool|}}
             <div class="text-small">
-              <a href="http://{{inst.host}}/{{pool.path}}" target="_blank" rel="noopener noreferrer nofollow">{{inst.host}}{{if pool.path pool.path ''}}</a>
-
-              {{#if pool.service}}
-                <i class="icon icon-chevron-right"/>
-                <a href="{{href-to "authenticated.project.dns.detail" pool.service}}">{{pool.service}}</a>
+              {{#if (eq inst.type "virtualServer")}}
+                <a href="http://{{inst.host}}{{pool.path}}" target="_blank" rel="noopener noreferrer nofollow">{{inst.host}}{{if pool.path pool.path ''}}</a>
+              {{else}}
+                <a href="http://{{inst.virtualServerAddress}}:{{inst.virtualServerPort}}" target="_blank" rel="noopener noreferrer nofollow">{{inst.virtualServerAddress}}:{{inst.virtualServerPort}}</a>
+              {{/if}}
+              <i class="icon icon-chevron-right"/>
+              {{#if pool.isWorkload}}
+                <a href="{{href-to "workload" pool.workloadId}}">{{pool.workloadName}}</a>
+              {{else}}
+                <a href="{{href-to "authenticated.project.dns.detail" (concat inst.namespaceId ":" pool.service)}}">{{pool.service}}</a>
+              {{/if}}
               {{!-- {{else if tgt.workload}}
                 <i class="icon icon-chevron-right"/>
                 <a href="{{href-to "workload" tgt.workload.id}}">{{pool.workload.displayName}}</a>
               {{else}}
                 <i class="icon icon-chevron-right"/>
                 {{tgt.reference}} --}}
-              {{/if}}
+              
             </div>
           {{/each}}
         </td>

@@ -3,7 +3,7 @@ import { get, set } from '@ember/object'
 import Route from '@ember/routing/route';
 
 export default Route.extend({
-  model(params) {
+  model() {
     const store = get(this, 'store');
     const f5 = {
       virtualServerHTTPPort:  80,
