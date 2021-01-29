@@ -8,11 +8,11 @@ import layout from './template';
 
 const REFERENCE = [
   {
-    label: 'bigip',
+    label: 'BigIp',
     value: 'bigip'
   },
   {
-    label: 'secret',
+    label: 'Secret',
     value: 'secret'
   }
 ];

@@ -7,11 +7,11 @@ import layout from './template';
 
 const TRANSPORT_MODES = [
   {
-    label: 'standard',
+    label: 'Standard',
     value: 'standard'
   },
   {
-    label: 'performance',
+    label: 'Performance',
     value: 'performance',
   }
 ]

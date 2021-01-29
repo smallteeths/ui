@@ -1568,16 +1568,16 @@ f5CISPage:
   enableActionLabel: Enable
 
 f5CtlPage:
-  addCtl: Create F5 LB
+  addCtl: Create F5 Ingress
   header:
-    new: Create F5 LB
-    edit: Edit F5 LB
-    view: "F5 LB: {name}"
+    new: Create F5 Ingress
+    edit: Edit F5 Ingress
+    view: "F5 Ingress: {name}"
   table:
-    noData: There are no F5 LB
+    noData: There are no F5 Ingress
   form:
     type: 
-      label: F5 LB Type
+      label: F5 Ingress Type
       virtual: L7 (VirtualServer)
       transport: L4 (TransportServer)
     url: Url
