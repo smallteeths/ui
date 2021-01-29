@@ -23,10 +23,4 @@ export default Route.extend({
       set(controller, 'type', null);
     }
   },
-
-  actions: {
-    cancel() {
-      this.goToPrevious();
-    },
-  }
 });

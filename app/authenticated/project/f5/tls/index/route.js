@@ -13,6 +13,6 @@ export default Route.extend({
 
   setDefaultRoute: on('activate', function() {
     set(this, `session.${ C.SESSION.F5_ROUTE }`, 'authenticated.project.f5.tls');
-    set(this, `session.${ C.SESSION.PROJECT_ROUTE }`, undefined);
+    set(this, `session.${ C.SESSION.PROJECT_ROUTE }`, 'authenticated.project.f5');
   }),
 });

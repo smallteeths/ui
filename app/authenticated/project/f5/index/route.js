@@ -1,5 +1,7 @@
 import Route from '@ember/routing/route';
 import C from 'ui/utils/constants';
+import { on } from '@ember/object/evented';
+import { set } from '@ember/object';
 
 const DEFAULT_ROUTE = 'authenticated.project.f5.controllers';
 const VALID_ROUTES = [DEFAULT_ROUTE, 'authenticated.project.f5.tls'];
@@ -14,4 +16,8 @@ export default Route.extend({
 
     this.replaceWith(route);
   },
+
+  setDefaultRoute: on('activate', function() {
+    set(this, `session.${ C.SESSION.PROJECT_ROUTE }`, 'authenticated.project.f5');
+  }),
 });
