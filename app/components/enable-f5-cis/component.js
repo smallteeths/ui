@@ -12,7 +12,11 @@ import layout from './template';
 const NETWORK_TYPE_CHOISES = [
   {
     label: 'Flannel',
-    value: 'Flannel'
+    value: 'flannel'
+  },
+  {
+    label: 'Rancher Macvlan',
+    value: 'macvlan'
   }
 ]
 
@@ -42,7 +46,7 @@ export default Component.extend({
   poolMemberTypeChoises: POOL_MEMBER_TYPE_CHOISES,
 
   poolMemberType: 'cluster',
-  networkType:    'Flannel',
+  networkType:    'flannel',
 
   cluster: alias('scope.currentCluster'),
   version: alias('versionConfig.defaultVersion'),
@@ -121,7 +125,7 @@ export default Component.extend({
   }),
 
   networkTypeIsFlannel: computed('networkType', function() {
-    return get(this, 'networkType') === 'Flannel';
+    return get(this, 'networkType') === 'flannel';
   }),
 
   initSettings: on('init', observer('scope.currentProject.id', 'scope.currentCluster.id', function() {
@@ -191,9 +195,9 @@ export default Component.extend({
     set(this, 'username', answers['bigip.username']);
     set(this, 'password', answers['bigip.password']);
     set(this, 'networkType', answers['network.type']);
-    set(this, 'poolMemberType', answers['network.poolMemberType']);
 
-    if (this.networkType === 'Flannel') {
+    if (this.networkType === 'flannel') {
+      set(this, 'poolMemberType', answers['network.poolMemberType']);
       set(this, 'flannelName', answers['network.flannelName']);
     }
   },
@@ -206,12 +210,10 @@ export default Component.extend({
     answers['bigip.username'] = get(this, 'username');
     answers['bigip.password'] = get(this, 'password');
     answers['network.type'] = get(this, 'networkType');
-    answers['network.poolMemberType'] = get(this, 'poolMemberType');
 
     if (this.networkTypeIsFlannel) {
-      answers['network.flannelName'] = get(this, 'flannelName')
-    } else {
-      answers['network.flannelName'] && delete answers['network.flannelName']
+      answers['network.poolMemberType'] = get(this, 'poolMemberType');
+      answers['network.flannelName'] = get(this, 'flannelName');
     }
 
     return answers

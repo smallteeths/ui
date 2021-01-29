@@ -95,15 +95,17 @@
           content=networkTypeChoises
         }}
       </div>
-      <div class="col span-6">
-        <label class="acc-label">
-          {{t "f5CISPage.form.pool"}}
-        </label>
-        {{new-select
-          value=poolMemberType
-          content=poolMemberTypeChoises
-        }}
-      </div>
+      {{#if networkTypeIsFlannel}}
+        <div class="col span-6">
+          <label class="acc-label">
+            {{t "f5CISPage.form.pool"}}
+          </label>
+          {{new-select
+            value=poolMemberType
+            content=poolMemberTypeChoises
+          }}
+        </div>
+      {{/if}}
     </div>
 
     {{#if networkTypeIsFlannel}}
