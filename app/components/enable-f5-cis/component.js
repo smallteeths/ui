@@ -11,12 +11,8 @@ import layout from './template';
 
 const NETWORK_TYPE_CHOISES = [
   {
-    label: 'Flannel',
+    label: 'Flannel + Rancher Macvlan',
     value: 'flannel'
-  },
-  {
-    label: 'Rancher Macvlan',
-    value: 'macvlan'
   }
 ]
 
