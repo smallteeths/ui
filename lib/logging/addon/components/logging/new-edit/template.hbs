@@ -66,7 +66,7 @@
       }} 
       <LinkToExternal 
         @route="authenticated.cluster.edit" 
-        @clusterId="clusterId"
+        @model={{hash cluster_id=clusterId}}
         @query={{hash focus="fluentdLogDir"}}
       >
         {{t "loggingPage.editIt"}}
