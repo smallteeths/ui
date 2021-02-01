@@ -10,9 +10,6 @@ export default Resource.extend({
 
   type: 'tlsprofile',
 
-  // canClone:      true,
-  // canHaveLabels: true,
-
   namespace: reference('namespaceId', 'namespace', 'clusterStore'),
 
   actions:      {

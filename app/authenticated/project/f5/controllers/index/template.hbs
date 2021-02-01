@@ -1,6 +1,5 @@
 {{#f5-ingresses-header showGroup=false}}
-  {{!-- {{#link-to "authenticated.project.f5.controllers.run" scope.currentProject.id class="btn btn-sm bg-primary" disabled=(rbac-prevents resource="virtualserver" scope="project" permission="create")}}{{t 'f5CtlPage.addCtl'}}{{/link-to}} --}}
-  {{#link-to "authenticated.project.f5.controllers.run" scope.currentProject.id class="btn btn-sm bg-primary"}}{{t 'f5CtlPage.addCtl'}}{{/link-to}}
+  {{#link-to "authenticated.project.f5.controllers.run" scope.currentProject.id class="btn btn-sm bg-primary" disabled=(rbac-prevents resource="virtualserver" scope="project" permission="create")}}{{t 'f5CtlPage.addCtl'}}{{/link-to}}
 {{/f5-ingresses-header}}
 
 <section class="pl-0 pr-0">
@@ -46,13 +45,6 @@
               {{else}}
                 <a href="{{href-to "authenticated.project.dns.detail" (concat inst.namespaceId ":" pool.service)}}">{{pool.service}}</a>
               {{/if}}
-              {{!-- {{else if tgt.workload}}
-                <i class="icon icon-chevron-right"/>
-                <a href="{{href-to "workload" tgt.workload.id}}">{{pool.workload.displayName}}</a>
-              {{else}}
-                <i class="icon icon-chevron-right"/>
-                {{tgt.reference}} --}}
-              
             </div>
           {{/each}}
         </td>
