@@ -64,13 +64,9 @@
         htmlSafe=true 
         path=currentFluentdLogDir
       }} 
-      <LinkToExternal 
-        @route="authenticated.cluster.edit" 
-        @model={{hash cluster_id=clusterId}}
-        @query={{hash focus="fluentdLogDir"}}
-      >
+      {{#link-to-external 'authenticated.cluster.edit' clusterId (query-params focus="fluentdLogDir")}} 
         {{t "loggingPage.editIt"}}
-      </LinkToExternal>
+      {{/link-to-external}}
     </p>
   {{/banner-message}}
 {{/if}}
