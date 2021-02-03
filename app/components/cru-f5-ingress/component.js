@@ -35,7 +35,7 @@ export default Component.extend(NewOrEdit, {
     this._super(...arguments);
 
     if (!get(this, 'isAdd')) {
-      set(this, 'namespace', get(this, 'existing.namespace'));
+      set(this, 'namespace', get(this, 'f5.namespace'));
     }
   },
   actions: {
