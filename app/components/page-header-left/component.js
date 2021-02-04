@@ -99,6 +99,22 @@ export default Component.extend(CustomMenu, {
     return get(this, 'scope.dashboardBase').replace(/\/+$/, '');
   }),
 
+  dashboardLink: computed('cluster.isReady', 'clusterId', 'pageScope', 'scope.dashboardLink', function() {
+    if ( get(this, 'pageScope') === 'global' || !this.clusterId ) {
+      // Only inside a cluster
+      return;
+    }
+
+    const cluster = get(this, 'cluster');
+
+    if ( !cluster || !cluster.isReady ) {
+      // Only in ready/active clusters
+      return;
+    }
+
+    return get(this, 'scope.dashboardLink');
+  }),
+
   updateNavTree() {
     const currentScope = get(this, 'pageScope');
 
