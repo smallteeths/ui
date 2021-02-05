@@ -4475,6 +4475,8 @@ clusterNew:
         info: '仅支持 host-gw 后端'
     ingress:
       label: Nginx Ingress
+      defaultBackend:
+        label: Nginx Default Backend
     monitoring:
       label: 监控指标
     networkPolicy:
