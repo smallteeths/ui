@@ -1552,6 +1552,7 @@ f5CISPage:
   confirmDisable: "你确定吗？再次点击将会禁用 F5 负载均衡服务。"
   disable: 禁用
   enableActionLabel: 启用
+  warning: "请注意，当 Pool成员类型 选择 Cluster 时，每个集群需要使用独立的 F5 BIG IP，无法与其它集群共享 F5 BIG IP"
 
 f5CtlPage:
   addCtl: 添加负载均衡

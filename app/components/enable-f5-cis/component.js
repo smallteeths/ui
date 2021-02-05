@@ -209,7 +209,10 @@ export default Component.extend({
 
     if (this.networkTypeIsFlannel) {
       answers['network.poolMemberType'] = get(this, 'poolMemberType');
-      answers['network.flannelName'] = get(this, 'flannelName');
+
+      if (this.poolMemberType === 'cluster') {
+        answers['network.flannelName'] = get(this, 'flannelName');
+      }
     }
 
     return answers

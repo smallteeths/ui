@@ -108,7 +108,7 @@
       {{/if}}
     </div>
 
-    {{#if networkTypeIsFlannel}}
+    {{#if (and networkTypeIsFlannel (eq poolMemberType "cluster"))}}
       <div class="row">
         <div class="col span-6">
           <label class="acc-label">
@@ -122,6 +122,14 @@
     {{/if}}
 
   </div>
+{{/if}}
+
+{{#if (eq poolMemberType "cluster")}}
+  {{banner-message
+    icon="icon-alert"
+    color="bg-warning mb-10"
+    message=(t "f5CISPage.warning" htmlSafe=true)
+  }}
 {{/if}}
 
 {{top-errors errors=errors}}
