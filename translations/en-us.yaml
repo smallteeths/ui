@@ -4307,6 +4307,8 @@ clusterNew:
       custom: Custom Create
       existing: Existing
   rke:
+    secretsEncryption:
+      label: Secrets Encryption
     upgradeStrategy:
       maximumWorkersDown:
         view:

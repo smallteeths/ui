@@ -4288,6 +4288,8 @@ clusterNew:
       custom: 自定义创建
       existing: 现有的
   rke:
+    secretsEncryption:
+      label: 加密密文
     upgradeStrategy:
       maximumWorkersDown:
         view:
