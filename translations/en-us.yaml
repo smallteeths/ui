@@ -1593,6 +1593,8 @@ f5CtlPage:
       label: TLS Profile
       placeholder: Choose...
     rewrite: Rewrite
+    snat: SNAT
+    waf: WAF
     monitor:
       label: Enable Monitor
       enable: Enable

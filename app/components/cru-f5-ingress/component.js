@@ -105,6 +105,7 @@ export default Component.extend(NewOrEdit, {
     if (get(this, 'isVirtualServer')) {
       pr = store.createRecord({
         type:                   'virtualserver',
+        waf:                    get(f5, 'waf'),
         pools:                  get(f5, 'pools'),
         host:                   get(f5, 'host'),
         rewriteAppRoot:         get(f5, 'rewriteAppRoot'),
@@ -126,6 +127,7 @@ export default Component.extend(NewOrEdit, {
 
     setProperties(pr, {
       name:                 get(f5, 'name'),
+      snat:                 get(f5, 'snat'),
       namespaceId:          get(this, 'namespace.id'),
       description:          get(f5, 'description'),
       labels:               get(f5, 'labels'),

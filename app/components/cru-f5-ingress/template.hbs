@@ -119,7 +119,7 @@
     </div>
 
     <div class="row">
-      <div class="col span-6">
+      <div class="col span-4">
         <label class="acc-label">{{t "f5CtlPage.form.tls.label"}}</label>
         {{#input-or-display editable=editing value=f5.tlsProfileName}}
           {{new-select
@@ -127,6 +127,26 @@
             content=tlsProfileChoices
             prompt="f5CtlPage.form.tls.placeholder"
             localizedPrompt=true
+          }}
+        {{/input-or-display}}
+      </div>
+
+      <div class="col span-4">
+        <label class="acc-label">{{t "f5CtlPage.form.snat"}}</label>
+        {{#input-or-display editable=editing value=f5.snat}}
+          {{input
+            class="form-control"
+            value=f5.snat
+          }}
+        {{/input-or-display}}
+      </div>
+
+      <div class="col span-4">
+        <label class="acc-label">{{t "f5CtlPage.form.waf"}}</label>
+        {{#input-or-display editable=editing value=f5.waf}}
+          {{input
+            class="form-control"
+            value=f5.waf
           }}
         {{/input-or-display}}
       </div>
@@ -172,6 +192,18 @@
       <label class="acc-label">{{t "f5CtlPage.form.port"}}{{field-required}}</label>
       {{#input-or-display editable=editing value=f5.virtualServerPort}}
         {{input-integer class="form-control" min="1" max="65535" value=f5.virtualServerPort}}
+      {{/input-or-display}}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col span-6">
+      <label class="acc-label">{{t "f5CtlPage.form.snat"}}</label>
+      {{#input-or-display editable=editing value=f5.snat}}
+        {{input
+          class="form-control"
+          value=f5.snat
+        }}
       {{/input-or-display}}
     </div>
   </div>

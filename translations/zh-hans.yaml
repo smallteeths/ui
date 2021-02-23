@@ -1579,6 +1579,8 @@ f5CtlPage:
       label: TLS Profile
       placeholder: 请选择
     rewrite: Rewrite
+    snat: SNAT
+    waf: WAF
     monitor:
       label: 启用监控
       enable: 启用
