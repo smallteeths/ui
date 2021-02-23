@@ -178,6 +178,10 @@ export default Component.extend(InputAnswers, {
     const fields = ['url', 'partition', 'username', 'password'];
     const errors = [];
 
+    if ( get(this, 'pasteOrUpload') ) {
+      return true;
+    }
+
     fields.forEach((f) => {
       if (!get(this, f) || get(this, f).trim() === '') {
         errors.push(intl.t('validation.required', { key: intl.t(`f5CISPage.form.${ f }.label`) }))
