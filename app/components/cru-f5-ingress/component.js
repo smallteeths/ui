@@ -105,16 +105,22 @@ export default Component.extend(NewOrEdit, {
     if (get(this, 'isVirtualServer')) {
       pr = store.createRecord({
         type:                   'virtualserver',
-        waf:                    get(f5, 'waf'),
         pools:                  get(f5, 'pools'),
         host:                   get(f5, 'host'),
-        rewriteAppRoot:         get(f5, 'rewriteAppRoot'),
         virtualServerHTTPPort:  get(f5, 'virtualServerHTTPPort'),
         virtualServerHTTPSPort: get(f5, 'virtualServerHTTPSPort'),
       })
 
       if (get(f5, 'tlsProfileName')) {
         set(pr, 'tlsProfileName', get(f5, 'tlsProfileName'))
+      }
+
+      if (get(f5, 'rewriteAppRoot')) {
+        set(pr, 'rewriteAppRoot', get(f5, 'rewriteAppRoot'))
+      }
+
+      if (get(f5, 'waf')) {
+        set(pr, 'waf', get(f5, 'waf'))
       }
     } else {
       pr = store.createRecord({
@@ -127,14 +133,20 @@ export default Component.extend(NewOrEdit, {
 
     setProperties(pr, {
       name:                 get(f5, 'name'),
-      snat:                 get(f5, 'snat'),
       namespaceId:          get(this, 'namespace.id'),
       description:          get(f5, 'description'),
       labels:               get(f5, 'labels'),
       annotations:          get(f5, 'annotations'),
       virtualServerAddress: get(f5, 'virtualServerAddress'),
-      virtualServerName:    get(f5, 'virtualServerName'),
     })
+
+    if (get(f5, 'snat')) {
+      set(pr, 'snat', get(f5, 'snat'))
+    }
+
+    if (get(f5, 'virtualServerName')) {
+      set(pr, 'virtualServerName', get(f5, 'virtualServerName'))
+    }
 
     set(this, 'primaryResource', pr);
   },
