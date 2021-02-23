@@ -37,90 +37,141 @@
 
     <hr class="mt-15 mb-15"/>
 
-    <div class="row">
-      <div class="col span-6">
-        <label class="acc-label">
-          {{t "f5CISPage.form.url.label"}}
-          {{field-required}}
-        </label>
-        {{schema/input-string
-          value=url
-          placeholder=(t "f5CISPage.form.url.placeholder")
-        }}
+    <section class="clearfix">
+      <div class="right-buttons pull-right">
+        {{#if pasteOrUpload}}
+          <button 
+            {{action "cancel"}} 
+            type="button" 
+            class="btn btn-sm bg-primary" 
+          >
+            {{t "clusterNew.advanced.cancel"}}
+          </button>
+        {{else}}
+          <button 
+            class="btn btn-sm bg-primary" 
+            {{action "showPaste"}}
+          >
+            {{t "clusterNew.advanced.yaml"}} 
+            <span class="icon icon-copy" />
+          </button>
+        {{/if}}
       </div>
-      <div class="col span-6">
-        <label class="acc-label">
-          {{t "f5CISPage.form.partition.label"}}
-          {{field-required}}
-        </label>
-        {{schema/input-string
-          value=partition
-        }}
-      </div>
-    </div>
+    </section>
 
-    <div class="row">
-      <div class="col span-6">
-        <label class="acc-label">
-          {{t "f5CISPage.form.username.label"}}
-          {{field-required}}
-        </label>
-        {{schema/input-string
-          value=username
-          placeholder=(t "f5CISPage.form.username.placeholder")
+    {{#if pasteOrUpload}}
+        <div class="p-20">
+        {{input-yaml
+          showUpload=false
+          showDownload=false
+          canChangeName=false
+          value=pastedAnswers
+          autoResize=true
         }}
       </div>
-      <div class="col span-6">
-        <label class="acc-label">
-          {{t "f5CISPage.form.password.label"}}
-          {{field-required}}
-        </label>
-        {{input
-          type="password"
-          value=password
-          placeholder=(t "f5CISPage.form.password.placeholder")
-        }}
-      </div>
-    </div>
-
-    <hr class="mt-15 mb-15"/>
-
-    <div class="row">
-      <div class="col span-6">
-        <label class="acc-label">
-          {{t "f5CISPage.form.type"}}
-        </label>
-        {{new-select
-          value=networkType
-          content=networkTypeChoises
-        }}
-      </div>
-      {{#if networkTypeIsFlannel}}
-        <div class="col span-6">
-          <label class="acc-label">
-            {{t "f5CISPage.form.pool"}}
-          </label>
-          {{new-select
-            value=poolMemberType
-            content=poolMemberTypeChoises
-          }}
-        </div>
-      {{/if}}
-    </div>
-
-    {{#if (and networkTypeIsFlannel (eq poolMemberType "cluster"))}}
+      {{top-errors errors=yamlErrors}}
+    {{else}}
       <div class="row">
         <div class="col span-6">
           <label class="acc-label">
-            {{t "f5CISPage.form.flannelName"}}
+            {{t "f5CISPage.form.url.label"}}
+            {{field-required}}
           </label>
           {{schema/input-string
-            value=flannelName
+            value=url
+            placeholder=(t "f5CISPage.form.url.placeholder")
+          }}
+        </div>
+        <div class="col span-6">
+          <label class="acc-label">
+            {{t "f5CISPage.form.partition.label"}}
+            {{field-required}}
+          </label>
+          {{schema/input-string
+            value=partition
           }}
         </div>
       </div>
-    {{/if}}
 
+      <div class="row">
+        <div class="col span-6">
+          <label class="acc-label">
+            {{t "f5CISPage.form.username.label"}}
+            {{field-required}}
+          </label>
+          {{schema/input-string
+            value=username
+            placeholder=(t "f5CISPage.form.username.placeholder")
+          }}
+        </div>
+        <div class="col span-6">
+          <label class="acc-label">
+            {{t "f5CISPage.form.password.label"}}
+            {{field-required}}
+          </label>
+          {{input
+            type="password"
+            value=password
+            placeholder=(t "f5CISPage.form.password.placeholder")
+          }}
+        </div>
+      </div>
+
+      <hr class="mt-15 mb-15"/>
+
+      <div class="row">
+        <div class="col span-6">
+          <label class="acc-label">
+            {{t "f5CISPage.form.type"}}
+          </label>
+          {{new-select
+            value=networkType
+            content=networkTypeChoises
+          }}
+        </div>
+      </div>
+      
+      <div class="row">
+        {{#if networkTypeIsFlannel}}
+          <div class="col span-6">
+            <label class="acc-label">
+              {{t "f5CISPage.form.pool"}}
+            </label>
+            {{new-select
+              value=poolMemberType
+              content=poolMemberTypeChoises
+            }}
+          </div>
+        {{/if}}
+
+        {{#if (and networkTypeIsFlannel (eq poolMemberType "cluster"))}}
+          <div class="col span-6">
+            <label class="acc-label">
+              {{t "f5CISPage.form.flannelName"}}
+            </label>
+            {{schema/input-string
+              value=flannelName
+            }}
+          </div>
+        {{/if}}
+      </div>
+
+      {{#advanced-section advanced=advanced}}
+        {{form-key-value
+          initialMap=customAnswers
+          changed=(action (mut customAnswers))
+          allowEmptyValue=true
+          addInitialEmptyRow=true
+          editing=true
+          header=(t "newCatalog.answers.label")
+          addActionLabel="newCatalog.answers.addAction"
+          keyLabel="newContainer.environment.keyLabel"
+          keyPlaceholder="newContainer.environment.keyPlaceholder"
+          valueLabel="newContainer.environment.valueLabel"
+          valuePlaceholder="newContainer.environment.valuePlaceholder"
+        }}
+      {{/advanced-section}}
+    {{/if}}
   </div>
 {{/if}}
 
@@ -133,6 +184,7 @@
 {{/if}}
 
 {{top-errors errors=errors}}
+
 <div class="text-center">
   {{#save-cancel
     saveDisabled=saveDisabled
