@@ -20,7 +20,7 @@ export default Resource.extend({
     const multiClusterAppId = get(this, 'multiClusterAppId');
     const projectIds        = get(this, 'projectIds');
 
-    if (multiClusterAppId && !projectIds) {
+    if (multiClusterAppId && (!projectIds || !projectIds.length)) {
       setProperties(out, {
         type: 'single',
         data: multiClusterAppId
