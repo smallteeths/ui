@@ -10310,7 +10310,7 @@ nav:
     members: Members
     hpa: HPA
     pipelines: Pipelines
-    f5Ingresses: F5 Ingress Controller
+    f5Ingresses: F5 Ingress Controllers
   admin:
     tab: Global
     clusters:
@@ -10374,8 +10374,7 @@ nav:
     fleet: Continuous Delivery
     gatekeeper: OPA Gatekeeper
     rio: Rio
-    cisF5: CIS F5
-  project:
+    cisF5: F5 CIS
     none: Grouped Projects/Namespaces
     namespaces: Namespaces
   dashboard:

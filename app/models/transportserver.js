@@ -2,6 +2,7 @@ import { get, set, computed } from '@ember/object';
 import Resource from '@rancher/ember-api-store/models/resource';
 import { reference } from '@rancher/ember-api-store/utils/denormalize';
 import { inject as service } from '@ember/service';
+import { isEmptyObject } from 'shared/utils/flat-map';
 
 const TARGET = 'f5.cattle.io/targets';
 
@@ -66,7 +67,7 @@ export default Resource.extend({
   validationErrors() {
     const intl = get(this, 'intl');
     let errors = this._super(...arguments);
-    const pools = get(this, 'pools') || [];
+    const pool = get(this, 'pool') || {};
     const virtualServerAddress = get(this, 'virtualServerAddress');
     const virtualServerPort = get(this, 'virtualServerPort');
 
@@ -78,34 +79,32 @@ export default Resource.extend({
       errors.push(intl.t('validation.required', { key: intl.t('f5CtlPage.form.port') }));
     }
 
-    if (pools.length === 0) {
+    if (isEmptyObject(pool)) {
       errors.push(intl.t('validation.required', { key: intl.t('formIngress.label') }));
     }
 
-    pools.forEach((pool, index) => {
-      if (pool.monitor) {
-        if (!get(pool, 'monitor.interval')) {
-          errors.push(intl.t('f5CtlPage.validation.pool', {
-            index,
-            key: intl.t('f5CtlPage.form.interval')
-          }));
-        }
-      }
-
-      if (!pool.service) {
+    if (pool.monitor) {
+      if (!get(pool, 'monitor.interval')) {
         errors.push(intl.t('f5CtlPage.validation.pool', {
-          index,
-          key: intl.t('formIngressBackends.target')
+          index: 0,
+          key:   intl.t('f5CtlPage.form.interval')
         }));
       }
+    }
 
-      if (!pool.servicePort) {
-        errors.push(intl.t('f5CtlPage.validation.pool', {
-          index,
-          key: intl.t('f5CtlPage.form.port')
-        }));
-      }
-    });
+    if (!pool.service) {
+      errors.push(intl.t('f5CtlPage.validation.pool', {
+        index: 0,
+        key:   intl.t('formIngressBackends.target')
+      }));
+    }
+
+    if (!pool.servicePort) {
+      errors.push(intl.t('f5CtlPage.validation.pool', {
+        index: 0,
+        key:   intl.t('f5CtlPage.form.port')
+      }));
+    }
 
     return errors;
   },

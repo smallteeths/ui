@@ -1535,7 +1535,7 @@ f5CISPage:
     version: F5 负载均衡服务组件版本
     url: 
       label: BIG-IP URL
-      placeholder: e.g. example.com
+      placeholder: "例如: example.com"
     partition:
       label: BIG-IP Partition
     username:
@@ -1547,15 +1547,16 @@ f5CISPage:
     type: 集群网络
     pool: Pool 成员类型
     flannelName: Flannel Name
-  disabled: F5 负载均衡服务在当前集群中为禁用状态。
+  disabled: F5 负载均衡服务在当前集群中尚未开启。
   toUpdate: F5 负载均衡服务已启动。
   confirmDisable: "你确定吗？再次点击将会禁用 F5 负载均衡服务。"
   disable: 禁用
   enableActionLabel: 启用
-  warning: "请注意，当 Pool成员类型 选择 Cluster 时，每个集群需要使用独立的 F5 BIG IP，无法与其它集群共享 F5 BIG IP"
+  warning: "请注意，当 Pool成员类型 选择 Cluster 时，每个集群需要使用独立的 F5 BIG IP，无法与其它集群共享 F5 BIG IP。"
 
 f5CtlPage:
-  addCtl: 添加负载均衡
+  notEnabled: 'F5 负载均衡服务尚未启用。点击 <a href="/c/{clusterId}/cis/f5">此处</a> 启用它。'
+  addCtl: 添加 F5 负载均衡
   header:
     new: 添加F5负载均衡
     edit: 编辑F5负载均衡

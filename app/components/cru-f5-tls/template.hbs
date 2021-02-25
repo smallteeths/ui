@@ -16,18 +16,13 @@
   {{/if}}
 </section>
 
-<section class="header clearfix">
-  <h1>
-    {{t (concat "f5TLSPage.header." mode) name=model.displayName}}
-  </h1>
-</section>
-
 <div class="row">
   <div class="col span-11-of-23 mt-0 mb-0">
     {{form-name-description
       descriptionPlaceholder="servicePage.newIngress.form.description.placeholder"
       model=model
       nameDisabled=(not addMode)
+      descriptionShown=false
       editing=(not viewMode)
       namePlaceholder="servicePage.newIngress.form.name.placeholder"
     }}

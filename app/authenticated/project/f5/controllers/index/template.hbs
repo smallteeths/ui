@@ -1,70 +1,81 @@
-{{#f5-ingresses-header showGroup=false}}
-  {{#link-to "authenticated.project.f5.controllers.run" scope.currentProject.id class="btn btn-sm bg-primary" disabled=(rbac-prevents resource="virtualserver" scope="project" permission="create")}}{{t 'f5CtlPage.addCtl'}}{{/link-to}}
-{{/f5-ingresses-header}}
+{{#if scope.currentCluster.enableF5CIS}}
 
-<section class="pl-0 pr-0">
-  {{#sortable-table
-    classNames="grid sortable-table"
-    body=rows
-    searchText=searchText
-    sortBy=sortBy
-    descending=descending
-    bulkActions=true
-    groupByKey="namespaceId"
-    groupByRef="namespace"
-    pagingLabel="pagination.f5Ctl"
-    subSearchField="instances"
-    headers=headers as |sortable kind inst dt|
-  }}
-    {{#if (eq kind "row")}}
-      <tr class="main-row">
-        <td class="row-check" valign="middle" style="padding-top: 2px;">
-          {{check-box nodeId=inst.id}}
-        </td>
-        <td data-title="{{dt.name}}" class="clip">
-          <a href="#" onclick={{action 'goto' inst.type inst.id}}>{{inst.displayName}}</a>
-          <div class="text-small text-muted text-capitalize">
-            {{#if (eq inst.type 'virtualServer')}}
-              {{t "f5CtlPage.form.type.virtual"}}
-            {{else}}
-              {{t "f5CtlPage.form.type.transport"}}
-            {{/if}}
-          </div>
-        </td>
-        <td data-title="{{dt.targets}}" class="force-wrap">
-          {{#each inst.targets as |pool|}}
-            <div class="text-small">
-              {{#if (eq inst.type "virtualServer")}}
-                <a href="http://{{inst.host}}{{pool.path}}" target="_blank" rel="noopener noreferrer nofollow">{{inst.host}}{{if pool.path pool.path ''}}</a>
+  {{#f5-ingresses-header showGroup=false}}
+    {{#link-to "authenticated.project.f5.controllers.run" scope.currentProject.id class="btn btn-sm bg-primary" disabled=(rbac-prevents resource="virtualserver" scope="project" permission="create")}}{{t 'f5CtlPage.addCtl'}}{{/link-to}}
+  {{/f5-ingresses-header}}
+
+  <section class="pl-0 pr-0">
+    {{#sortable-table
+      classNames="grid sortable-table"
+      body=rows
+      searchText=searchText
+      sortBy=sortBy
+      descending=descending
+      bulkActions=true
+      groupByKey="namespaceId"
+      groupByRef="namespace"
+      pagingLabel="pagination.f5Ctl"
+      subSearchField="instances"
+      headers=headers as |sortable kind inst dt|
+    }}
+      {{#if (eq kind "row")}}
+        <tr class="main-row">
+          <td class="row-check" valign="middle" style="padding-top: 2px;">
+            {{check-box nodeId=inst.id}}
+          </td>
+          <td data-title="{{dt.name}}" class="clip">
+            <a href="#" onclick={{action 'goto' inst.type inst.id}}>{{inst.displayName}}</a>
+            <div class="text-small text-muted text-capitalize">
+              {{#if (eq inst.type 'virtualServer')}}
+                {{t "f5CtlPage.form.type.virtual"}}
               {{else}}
-                <a href="http://{{inst.virtualServerAddress}}:{{inst.virtualServerPort}}" target="_blank" rel="noopener noreferrer nofollow">{{inst.virtualServerAddress}}:{{inst.virtualServerPort}}</a>
-              {{/if}}
-              <i class="icon icon-chevron-right"/>
-              {{#if pool.isWorkload}}
-                <a href="{{href-to "workload" pool.workloadId}}">{{pool.workloadName}}</a>
-              {{else}}
-                <a href="{{href-to "authenticated.project.dns.detail" (concat inst.namespaceId ":" pool.service)}}">{{pool.service}}</a>
+                {{t "f5CtlPage.form.type.transport"}}
               {{/if}}
             </div>
-          {{/each}}
-        </td>
-        <td data-title="{{dt.created}}" class="text-right pr-20">
-          {{date-calendar inst.created}}
-        </td>
-        <td data-title="{{dt.actions}}" class="actions">
-          {{action-menu model=inst}}
-        </td>
-      </tr>
-    {{else if (eq kind "group")}}
-      {{namespace-group model=inst.ref fullColspan=sortable.fullColspan}}
-    {{else if (eq kind "nomatch")}}
-      <tr><td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">{{t 'ingressPage.table.noMatch'}}</td></tr>
-    {{else if (eq kind "norows")}}
-      <tr>
-        <td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">
-          {{t "f5CtlPage.table.noData"}}
-        </td>
-      </tr>
-    {{/if}}
-  {{/sortable-table}}
-</section>
+          </td>
+          <td data-title="{{dt.targets}}" class="force-wrap">
+            {{#each inst.targets as |pool|}}
+              <div class="text-small">
+                {{#if (eq inst.type "virtualServer")}}
+                  <a href="http://{{inst.host}}{{pool.path}}" target="_blank" rel="noopener noreferrer nofollow">{{inst.host}}{{if pool.path pool.path ''}}</a>
+                {{else}}
+                  <a href="http://{{inst.virtualServerAddress}}:{{inst.virtualServerPort}}" target="_blank" rel="noopener noreferrer nofollow">{{inst.virtualServerAddress}}:{{inst.virtualServerPort}}</a>
+                {{/if}}
+                <i class="icon icon-chevron-right"/>
+                {{#if pool.isWorkload}}
+                  <a href="{{href-to "workload" pool.workloadId}}">{{pool.workloadName}}</a>
+                {{else}}
+                  <a href="{{href-to "authenticated.project.dns.detail" (concat inst.namespaceId ":" pool.service)}}">{{pool.service}}</a>
+                {{/if}}
+              </div>
+            {{/each}}
+          </td>
+          <td data-title="{{dt.created}}" class="text-right pr-20">
+            {{date-calendar inst.created}}
+          </td>
+          <td data-title="{{dt.actions}}" class="actions">
+            {{action-menu model=inst}}
+          </td>
+        </tr>
+      {{else if (eq kind "group")}}
+        {{namespace-group model=inst.ref fullColspan=sortable.fullColspan}}
+      {{else if (eq kind "nomatch")}}
+        <tr><td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">{{t 'ingressPage.table.noMatch'}}</td></tr>
+      {{else if (eq kind "norows")}}
+        <tr>
+          <td colspan="{{sortable.fullColspan}}" class="text-center text-muted lacsso pt-20 pb-20">
+            {{t "f5CtlPage.table.noData"}}
+          </td>
+        </tr>
+      {{/if}}
+    {{/sortable-table}}
+  </section>
+
+  {{else}}
+
+  {{banner-message
+    color="bg-info"
+    message=(t "f5CtlPage.notEnabled" clusterId=scope.currentCluster.id htmlSafe=true)
+  }}
+
+{{/if}}

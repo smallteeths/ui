@@ -13,15 +13,10 @@ export default Route.extend({
   currentCluster: alias('scope.currentCluster'),
 
   redirect() {
-    const enabledF5 = get(this, 'currentCluster.enableF5CIS');
     let route = this.get(`session.${ C.SESSION.F5_ROUTE }`);
 
     if ( !VALID_ROUTES.includes(route) ) {
       route = DEFAULT_ROUTE;
-    }
-
-    if (!enabledF5) {
-      route = 'authenticated.project.index'
     }
 
     this.replaceWith(route);

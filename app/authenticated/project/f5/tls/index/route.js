@@ -1,14 +1,22 @@
 import { on } from '@ember/object/evented';
 import { hash } from 'rsvp';
-import { set } from '@ember/object';
+import { get, set } from '@ember/object';
 import Route from '@ember/routing/route';
 import C from 'ui/utils/constants';
+import { inject as service } from '@ember/service';
 
 export default Route.extend({
+  scope:  service(),
+
   model() {
     const store = this.get('store');
+    let _hash = {};
 
-    return hash({ tlsprofiles: store.findAll('tlsprofile') });
+    if (get(this, 'scope.currentCluster.enableF5CIS')) {
+      _hash = { tlsprofiles: store.findAll('tlsprofile') }
+    }
+
+    return hash(_hash);
   },
 
   setDefaultRoute: on('activate', function() {
