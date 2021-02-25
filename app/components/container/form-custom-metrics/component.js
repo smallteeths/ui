@@ -48,12 +48,16 @@ export default Component.extend({
           {
             action:  'labeldrop',
             regex:   '',
+
+            relabelType: 'metricRelabel',
           }
         ]);
       } else {
         get(metric, 'workloadMetricRelabelConfig').pushObject({
           action:  'labeldrop',
           regex:   '',
+
+          relabelType: 'metricRelabel',
         })
       }
     },

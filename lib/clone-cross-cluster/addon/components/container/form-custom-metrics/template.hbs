@@ -56,6 +56,7 @@
             </div>
           {{#if metric.workloadMetricRelabelConfig.length}}
             {{#each metric.workloadMetricRelabelConfig as |babel|}}
+            {{#if (and (eq babel.action 'labeldrop') (eq babel.relabelType 'metricRelabel'))}}
               <div class="row">
 
                 <div class="col span-11">
@@ -74,6 +75,7 @@
                   {{/if}}
                 </div>
               </div>
+              {{/if}}
             {{/each}}
           {{/if}}
         </div>
