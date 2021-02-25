@@ -43,17 +43,16 @@
     </div>
     <div class="pull-left" style="width: 115px;margin-left:10px;">
       {{#if model.refreshFlag}}
-        {{#basic-dropdown
-          horizontalPosition="right"
-          as |dd|
-        }}
-        {{#dd.trigger}}
-          <div style="margin-top:2px;height: 30px;display:flex;justify-content:center;align-items:center;margin-right:15px;">
-            <span>{{t "harborConfig.table.otherOperation.title"}}</span>
-            <span style="margin-left:10px;"><i class="icon icon-chevron-down"></i></span>
-          </div>
-        {{/dd.trigger}}
-          {{#dd.content}}
+        <BasicDropdown
+          @horizontalPosition="right" as |dd|
+        >
+          <dd.Trigger>
+            <div style="margin-top:2px;height: 30px;display:flex;justify-content:center;align-items:center;margin-right:15px;">
+              <span>{{t "harborConfig.table.otherOperation.title"}}</span>
+              <span style="margin-left:10px;"><i class="icon icon-chevron-down"></i></span>
+            </div>
+          </dd.Trigger>
+          <dd.Content>
             <div style = "width:115px;border: 1px solid #ccc;box-shadow: 0 1px 0.125rem rgba(115,115,115,.25);">
               <div style="margin-left:10px;font-weight:700;margin-top:10px">{{t "harborConfig.table.otherOperation.setRole"}}</div>
               <div>
@@ -71,8 +70,8 @@
               <div style="curser:pointer;padding-left:15px;line-height: 39px; border-top:1px solid rgb(216, 216, 216);color:rgb(216, 216, 216)" onclick={{action 'deleteMembersRole'}} onmouseover="this.style.background='#eee'" onmouseout="this.style.background='#fff'">{{t "harborConfig.table.otherOperation.removeMembers"}}</div>
               {{/if}}
             </div>
-          {{/dd.content}}
-        {{/basic-dropdown}}
+          </dd.Content>
+        </BasicDropdown>
       {{/if}}
     </div>
     <div class="pull-right search-group input-group">

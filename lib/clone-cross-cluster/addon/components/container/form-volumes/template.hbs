@@ -53,21 +53,19 @@
     {{/each}}
   {{/if}}
 
-  {{#basic-dropdown
-        horizontalPosition="left"
-        as |dd|}}
-    {{#dd.trigger
-          class="btn bg-link p-0 icon-btn pl-10"
-    }}
+  <BasicDropdown
+    @horizontalPosition="left" as |dd|
+  >
+    <dd.Trigger class="btn bg-link p-0 icon-btn pl-10">
       <span>
         {{t "formVolumes.add.label"}}
       </span>
       <span class="darken">
         <i class="icon icon-chevron-down"></i>
       </span>
-    {{/dd.trigger}}
+    </dd.Trigger>
 
-    {{#dd.content}}
+    <dd.Content>
       <li>
         <a {{action "addVolume" dd}}>
           {{t "formVolumes.add.newVolume"}}
@@ -122,7 +120,7 @@
           </a>
         </li>
       {{/if}}
-    {{/dd.content}}
-  {{/basic-dropdown}}
+    </dd.Content>
+  </BasicDropdown>
 
 {{/accordion-list-item}}
