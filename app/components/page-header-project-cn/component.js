@@ -69,8 +69,8 @@ export default Component.extend(ThrottledResize, {
       this.onResize();
 
       next(() => {
-        const menu = this.$('.project-menu');
-        const clusters = this.$('.clusters');
+        const menu = $('.project-menu');
+        const clusters = $('.clusters');
 
         $(document).on('mousemove', this.boundMouseMove);
 
@@ -80,19 +80,19 @@ export default Component.extend(ThrottledResize, {
         clusters.on('focus', 'LI', this.boundEnterCluster);
         clusters.on('mouseenter', 'LI', this.boundEnterCluster);
 
-        this.$('.clusters, .projects').on('mouseenter', this.boundEnterScrollers);
-        this.$('.clusters, .projects').on('mouseleave', this.boundLeaveScrollers);
+        $('.clusters, .projects').on('mouseenter', this.boundEnterScrollers);
+        $('.clusters, .projects').on('mouseleave', this.boundLeaveScrollers);
 
-        this.$('.search INPUT')[0].focus();
+        $('.search INPUT')[0].focus();
 
-        this.$('.clusters UL')[0].scrollTop = 0;
-        this.$('.projects UL')[0].scrollTop = 0;
+        $('.clusters UL')[0].scrollTop = 0;
+        $('.projects UL')[0].scrollTop = 0;
 
         const currentClusterId = get(this, 'cluster.id');
         const currentProjectId = get(this, 'project.id');
 
         if ( currentClusterId ) {
-          const li = this.$(`.clusters LI[data-cluster-id="${ currentClusterId }"]`)[0];
+          const li = $(`.clusters LI[data-cluster-id="${ currentClusterId }"]`)[0];
           const entry = get(this, 'byCluster').findBy('clusterId', currentClusterId);
 
           ensureVisible(li);
@@ -102,7 +102,7 @@ export default Component.extend(ThrottledResize, {
 
         if ( currentProjectId ) {
           next(() => {
-            const li = this.$(`.projects LI[data-project-id="${ currentProjectId }"]`)[0];
+            const li = $(`.projects LI[data-project-id="${ currentProjectId }"]`)[0];
 
             ensureVisible(li);
           });
@@ -118,11 +118,11 @@ export default Component.extend(ThrottledResize, {
       set(this, 'activeClusterEntry', null);
 
       $(document).off('mousemove', this.boundMouseMove);
-      this.$('.project-menu').off('click', this.boundClickMenu);
-      this.$('.project-menu').off('click', 'LI', this.boundClickItem);
-      this.$('.clusters').off('mouseenter', 'LI', this.boundEnterCluster);
-      this.$('.clusters, .projects').off('mouseenter', this.boundEnterScrollers);
-      this.$('.clusters, .projects').off('mouseleave', this.boundLeaveScrollers);
+      $('.project-menu').off('click', this.boundClickMenu);
+      $('.project-menu').off('click', 'LI', this.boundClickItem);
+      $('.clusters').off('mouseenter', 'LI', this.boundEnterCluster);
+      $('.clusters, .projects').off('mouseenter', this.boundEnterScrollers);
+      $('.clusters, .projects').off('mouseleave', this.boundLeaveScrollers);
     },
   },
 
@@ -357,7 +357,7 @@ export default Component.extend(ThrottledResize, {
   getHoverDelay() {
     const entry = get(this, 'activeClusterEntry');
     const points = this.mousePoints;
-    const $menu = this.$('.clusters');
+    const $menu = $('.clusters');
 
     if ( !entry ) {
       // console.log('No entry');
@@ -446,7 +446,7 @@ export default Component.extend(ThrottledResize, {
 
         if ( scrollToId ) {
           next(() => {
-            const li = this.$(`.projects LI[data-project-id="${ scrollToId }"]`)[0];
+            const li = $(`.projects LI[data-project-id="${ scrollToId }"]`)[0];
 
             ensureVisible(li);
           });
