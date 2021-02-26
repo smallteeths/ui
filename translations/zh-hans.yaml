@@ -1538,6 +1538,7 @@ f5CISPage:
       placeholder: "例如: example.com"
     partition:
       label: BIG-IP Partition
+      placeholder: "例如: Common"
     username:
       label: BIG-IP 用户名
       placeholder: "例如: John"
@@ -1546,7 +1547,9 @@ f5CISPage:
       placeholder: 密码
     type: 集群网络
     pool: Pool 成员类型
-    flannelName: Flannel Name
+    flannelName:
+      label: Flannel Name
+      placeholder: "例如: MyFlannel"
   disabled: F5 负载均衡服务在当前集群中尚未开启。
   toUpdate: F5 负载均衡服务已启动。
   confirmDisable: "你确定吗？再次点击将会禁用 F5 负载均衡服务。"
@@ -1568,29 +1571,57 @@ f5CtlPage:
       label: F5负载均衡类型
       virtual: 7层负载均衡(VirtualServer)
       transport: 4层负载均衡(TransportServer)
-    url: 地址
-    name: 名称
-    domain: 主机域名
-    http: Http 端口
-    https: Https 端口
-    port: 端口
+    url:
+      label: 地址
+      placeholder: "例如: 8.8.8.8"
+    name:
+      label: 名称
+      placeholder: "例如: F5 Ingress Name"
+    domain:
+      label: 主机域名
+      placeholder: "例如: example.com"
+    http:
+      label: Http 端口
+      placeholder: "例如: 80"
+    https:
+      label: Https 端口
+      placeholder: "例如: 443"
+    port:
+      label: 端口
+      placeholder: "例如: 8080"
     mode: 模式
-    root: Rewrite APP Root
+    root:
+      label: Rewrite APP Root
+      placeholder: "例如: /"
     tls: 
       label: TLS Profile
       placeholder: 请选择
-    rewrite: Rewrite
-    snat: SNAT
-    waf: WAF
+    rewrite:
+      label: Rewrite
+      placeholder: "例如: example.com/abc"
+    snat:
+      label: SNAT
+      placeholder: "例如: 8.8.8.8:88"
+    waf:
+      label: WAF
+      placeholder: "例如: 8.8.8.8:88"
     monitor:
       label: 启用监控
       enable: 启用
       disable: 禁用
     monitorType: 类型
-    send: Send
-    receive: Receive
-    interval: Interval
-    timeout: Timeout
+    send:
+      label: Send
+      placeholder: "例如: Send String"
+    receive:
+      label: Receive
+      placeholder: "例如: Response String"
+    interval:
+      label: Interval
+      placeholder: "例如: 20"
+    timeout:
+      label: Timeout
+      placeholder: "例如: 20"
   validation:
     pool: '规则[{index}]: "{key}" 必须设置'
 
@@ -1604,9 +1635,15 @@ f5TLSPage:
     noData: 没有配置TLS证书
   form:
     reference: Reference
-    termination: Termination
-    clientSSL: Client SSL
-    serverSSL: Server SSL
+    termination:
+      label: Termination
+      placeholder: "例如: edge"
+    clientSSL:
+      label: Client SSL
+      placeholder: "例如: /partition/profile_name"
+    serverSSL:
+      label: Server SSL
+      placeholder: "例如: /partition/profile_name"
     hosts:
       add: 添加域名
       placeholder: '例如: example.com'

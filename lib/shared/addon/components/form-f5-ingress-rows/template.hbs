@@ -21,7 +21,7 @@
   {{#if isVirtualServer}}
     <div class="row">
       <div class="col span-12">
-        <label class="acc-label">{{t "f5CtlPage.form.rewrite"}}</label>
+        <label class="acc-label">{{t "f5CtlPage.form.rewrite.label"}}</label>
         {{#input-or-display
           editable=editing
           value=pool.rewrite
@@ -30,6 +30,7 @@
             type="text"
             value=pool.rewrite
             classNames="form-control"
+            placeholder=(t "f5CtlPage.form.rewrite.placeholder")
           }}
         {{/input-or-display}}
     </div>
@@ -65,7 +66,7 @@
     {{#if isVirtualServer}}
       <div class="row">
         <div class="col span-6">
-          <label class="acc-label">{{t "f5CtlPage.form.send"}}{{field-required}}</label>
+          <label class="acc-label">{{t "f5CtlPage.form.send.label"}}{{field-required}}</label>
           {{#input-or-display
             editable=editing
             value=pool.monitor.send
@@ -74,12 +75,13 @@
               type="text"
               value=pool.monitor.send
               classNames="form-control"
+              placeholder=(t "f5CtlPage.form.send.placeholder")
             }}
           {{/input-or-display}}
         </div>
         
         <div class="col span-6">
-          <label class="acc-label">{{t "f5CtlPage.form.receive"}}</label>
+          <label class="acc-label">{{t "f5CtlPage.form.receive.label"}}</label>
           {{#input-or-display
             editable=editing
             value=pool.monitor.recv
@@ -88,6 +90,7 @@
               type="text"
               value=pool.monitor.recv
               classNames="form-control"
+              placeholder=(t "f5CtlPage.form.receive.placeholder")
             }}
           {{/input-or-display}}
         </div>
@@ -96,22 +99,22 @@
 
     <div class="row">
       <div class="col span-6">
-        <label class="acc-label">{{t "f5CtlPage.form.interval"}}{{field-required}}</label>
+        <label class="acc-label">{{t "f5CtlPage.form.interval.label"}}{{field-required}}</label>
         {{#input-or-display
           editable=editing
           value=pool.monitor.interval
         }}
-          {{input-integer class="form-control" min="1" value=pool.monitor.interval}}
+          {{input-integer class="form-control" min="1" value=pool.monitor.interval placeholder=(t "f5CtlPage.form.interval.placeholder")}}
         {{/input-or-display}}
       </div>
 
       <div class="col span-6">
-        <label class="acc-label">{{t "f5CtlPage.form.timeout"}}</label>
+        <label class="acc-label">{{t "f5CtlPage.form.timeout.label"}}</label>
         {{#input-or-display
           editable=editing
           value=pool.monitor.timeout
         }}
-          {{input-integer class="form-control" min="1" value=pool.monitor.timeout}}
+          {{input-integer class="form-control" min="1" value=pool.monitor.timeout placeholder=(t "f5CtlPage.form.timeout.placeholder")}}
         {{/input-or-display}}
       </div>
     </div>

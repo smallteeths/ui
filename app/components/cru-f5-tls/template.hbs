@@ -65,11 +65,12 @@
   </div>
 
   <div class="col span-6">
-    <label class="acc-label">{{t "f5TLSPage.form.termination"}}</label>
+    <label class="acc-label">{{t "f5TLSPage.form.termination.label"}}</label>
     {{#input-or-display editable=(not viewMode) value=model.tls.termination}}
       {{input
         class="form-control"
         value=model.tls.termination
+        placeholder=(t "f5TLSPage.form.termination.placeholder")
       }}
     {{/input-or-display}}
   </div>
@@ -77,21 +78,23 @@
 
 <div class="row">
   <div class="col span-6">
-    <label class="acc-label">{{t "f5TLSPage.form.clientSSL"}}{{field-required}}</label>
+    <label class="acc-label">{{t "f5TLSPage.form.clientSSL.label"}}{{field-required}}</label>
     {{#input-or-display editable=(not viewMode) value=model.tls.clientSSL}}
       {{input
         class="form-control"
         value=model.tls.clientSSL
+        placeholder=(t "f5TLSPage.form.clientSSL.placeholder")
       }}
     {{/input-or-display}}
   </div>
   {{#if (eq model.tls.reference 'bigip')}}
     <div class="col span-6">
-      <label class="acc-label">{{t "f5TLSPage.form.serverSSL"}}</label>
+      <label class="acc-label">{{t "f5TLSPage.form.serverSSL.label"}}</label>
       {{#input-or-display editable=(not viewMode) value=model.tls.serverSSL}}
         {{input
           class="form-control"
           value=model.tls.serverSSL
+        placeholder=(t "f5TLSPage.form.serverSSL.placeholder")
         }}
       {{/input-or-display}}
     </div>

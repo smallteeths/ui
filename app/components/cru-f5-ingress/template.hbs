@@ -62,31 +62,34 @@
   <div>
     <div class="row">
       <div class="col span-4">
-        <label class="acc-label">{{t "f5CtlPage.form.url"}}{{field-required}}</label>
+        <label class="acc-label">{{t "f5CtlPage.form.url.label"}}{{field-required}}</label>
         {{#input-or-display editable=editing value=f5.virtualServerAddress}}
           {{input
             class="form-control"
             value=f5.virtualServerAddress
+            placeholder=(t "f5CtlPage.form.url.placeholder")
           }}
         {{/input-or-display}}
       </div>
 
       <div class="col span-4">
-        <label class="acc-label">{{t "f5CtlPage.form.name"}}</label>
+        <label class="acc-label">{{t "f5CtlPage.form.name.label"}}</label>
         {{#input-or-display editable=editing value=f5.virtualServerName}}
           {{input
             class="form-control"
             value=f5.virtualServerName
+            placeholder=(t "f5CtlPage.form.name.placeholder")
           }}
         {{/input-or-display}}
       </div>
 
       <div class="col span-4">
-        <label class="acc-label">{{t "f5CtlPage.form.domain"}}{{field-required}}</label>
+        <label class="acc-label">{{t "f5CtlPage.form.domain.label"}}{{field-required}}</label>
         {{#input-or-display editable=editing value=f5.host}}
           {{input
             class="form-control"
             value=f5.host
+            placeholder=(t "f5CtlPage.form.domain.placeholder")
           }}
         {{/input-or-display}}
       </div>
@@ -94,26 +97,27 @@
 
     <div class="row">
       <div class="col span-4">
-        <label class="acc-label">{{t "f5CtlPage.form.http"}}{{field-required}}</label>
+        <label class="acc-label">{{t "f5CtlPage.form.http.label"}}{{field-required}}</label>
         {{#input-or-display editable=editing value=f5.virtualServerHTTPPort}}
-          {{input-integer class="form-control" min="1" max="65535" value=f5.virtualServerHTTPPort}}
+          {{input-integer class="form-control" min="1" max="65535" value=f5.virtualServerHTTPPort placeholder=(t "f5CtlPage.form.http.placeholder")}}
         {{/input-or-display}}
         
       </div>
 
       <div class="col span-4">
-        <label class="acc-label">{{t "f5CtlPage.form.https"}}{{field-required}}</label>
+        <label class="acc-label">{{t "f5CtlPage.form.https.label"}}{{field-required}}</label>
         {{#input-or-display editable=editing value=f5.virtualServerHTTPSPort}}
-          {{input-integer class="form-control" min="1" max="65535" value=f5.virtualServerHTTPSPort}}
+          {{input-integer class="form-control" min="1" max="65535" value=f5.virtualServerHTTPSPort placeholder=(t "f5CtlPage.form.https.placeholder")}}
         {{/input-or-display}}
       </div>
 
       <div class="col span-4">
-        <label class="acc-label">{{t "f5CtlPage.form.root"}}</label>
+        <label class="acc-label">{{t "f5CtlPage.form.root.label"}}</label>
         {{#input-or-display editable=editing value=f5.rewriteAppRoot}}
           {{input
             class="form-control"
             value=f5.rewriteAppRoot
+            placeholder=(t "f5CtlPage.form.root.placeholder")
           }}
         {{/input-or-display}}
       </div>
@@ -133,21 +137,23 @@
       </div>
 
       <div class="col span-4">
-        <label class="acc-label">{{t "f5CtlPage.form.snat"}}</label>
+        <label class="acc-label">{{t "f5CtlPage.form.snat.label"}}</label>
         {{#input-or-display editable=editing value=f5.snat}}
           {{input
             class="form-control"
             value=f5.snat
+            placeholder=(t "f5CtlPage.form.snat.placeholder")
           }}
         {{/input-or-display}}
       </div>
 
       <div class="col span-4">
-        <label class="acc-label">{{t "f5CtlPage.form.waf"}}</label>
+        <label class="acc-label">{{t "f5CtlPage.form.waf.label"}}</label>
         {{#input-or-display editable=editing value=f5.waf}}
           {{input
             class="form-control"
             value=f5.waf
+            placeholder=(t "f5CtlPage.form.waf.placeholder")
           }}
         {{/input-or-display}}
       </div>
@@ -158,21 +164,23 @@
 {{#if (not isVirtualServer)}}
   <div class="row">
     <div class="col span-6">
-      <label class="acc-label">{{t "f5CtlPage.form.url"}}{{field-required}}</label>
+      <label class="acc-label">{{t "f5CtlPage.form.url.label"}}{{field-required}}</label>
       {{#input-or-display editable=editing value=f5.virtualServerAddress}}
         {{input
           class="form-control"
           value=f5.virtualServerAddress
+          placeholder=(t "f5CtlPage.form.url.placeholder")
         }}
       {{/input-or-display}}
     </div>
 
     <div class="col span-6">
-      <label class="acc-label">{{t "f5CtlPage.form.name"}}</label>
+      <label class="acc-label">{{t "f5CtlPage.form.name.label"}}</label>
       {{#input-or-display editable=editing value=f5.virtualServerName}}
         {{input
           class="form-control"
           value=f5.virtualServerName
+          placeholder=(t "f5CtlPage.form.name.placeholder")
         }}
       {{/input-or-display}}
     </div>
@@ -190,20 +198,21 @@
     </div>
 
     <div class="col span-6">
-      <label class="acc-label">{{t "f5CtlPage.form.port"}}{{field-required}}</label>
+      <label class="acc-label">{{t "f5CtlPage.form.port.label"}}{{field-required}}</label>
       {{#input-or-display editable=editing value=f5.virtualServerPort}}
-        {{input-integer class="form-control" min="1" max="65535" value=f5.virtualServerPort}}
+        {{input-integer class="form-control" min="1" max="65535" value=f5.virtualServerPort placeholder=(t "f5CtlPage.form.port.placeholder")}}
       {{/input-or-display}}
     </div>
   </div>
 
   <div class="row">
     <div class="col span-6">
-      <label class="acc-label">{{t "f5CtlPage.form.snat"}}</label>
+      <label class="acc-label">{{t "f5CtlPage.form.snat.label"}}</label>
       {{#input-or-display editable=editing value=f5.snat}}
         {{input
           class="form-control"
           value=f5.snat
+          placeholder=(t "f5CtlPage.form.snat.placeholder")
         }}
       {{/input-or-display}}
     </div>

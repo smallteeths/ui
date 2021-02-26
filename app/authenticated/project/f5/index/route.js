@@ -2,7 +2,7 @@ import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import C from 'ui/utils/constants';
 import { on } from '@ember/object/evented';
-import { get, set } from '@ember/object';
+import { set } from '@ember/object';
 import { alias } from '@ember/object/computed';
 
 const DEFAULT_ROUTE = 'authenticated.project.f5.controllers';

@@ -89,6 +89,7 @@
           </label>
           {{schema/input-string
             value=partition
+            placeholder=(t "f5CISPage.form.partition.placeholder")
           }}
         </div>
       </div>
@@ -147,10 +148,11 @@
         {{#if (and networkTypeIsFlannel (eq poolMemberType "cluster"))}}
           <div class="col span-6">
             <label class="acc-label">
-              {{t "f5CISPage.form.flannelName"}}
+              {{t "f5CISPage.form.flannelName.label"}}
             </label>
             {{schema/input-string
               value=flannelName
+              placeholder=(t "f5CISPage.form.flannelName.placeholder")
             }}
           </div>
         {{/if}}
@@ -161,7 +163,7 @@
           initialMap=customAnswers
           changed=(action (mut customAnswers))
           allowEmptyValue=true
-          addInitialEmptyRow=true
+          addInitialEmptyRow=false
           editing=true
           header=(t "newCatalog.answers.label")
           addActionLabel="newCatalog.answers.addAction"

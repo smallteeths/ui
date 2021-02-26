@@ -1552,6 +1552,7 @@ f5CISPage:
       placeholder: e.g. example.com
     partition:
       label: BIG-IP Partition
+      placeholder: "e.g. Common"
     username:
       label: BIG-IP Username
       placeholder: e.g. John
@@ -1560,7 +1561,9 @@ f5CISPage:
       placeholder: Your Password
     type: Network Provider
     pool: Pool Member Type
-    flannelName: Flannel Name
+    flannelName:
+      label: Flannel Name
+      placeholder: "e.g. MyFlannel"
   disabled: F5 CIS is disabled in the current cluster.
   toUpdate: F5 CIS is enabled.
   confirmDisable: "Are you sure?  Click again to disable F5 CIS."
@@ -1581,29 +1584,57 @@ f5CtlPage:
       label: F5 Ingress Type
       virtual: L7 (VirtualServer)
       transport: L4 (TransportServer)
-    url: Url
-    name: Name
-    domain: Host
-    http: Http Port
-    https: Https Port
-    port: Port
+    url:
+      label: Url
+      placeholder: "e.g. 8.8.8.8"
+    name:
+      label: Name
+      placeholder: "e.g. F5 Ingress Name"
+    domain:
+      label: Host
+      placeholder: "e.g. example.com"
+    http:
+      label: Http Port
+      placeholder: "e.g. 80"
+    https:
+      label: Https Port
+      placeholder: "e.g. 443"
+    port:
+      label: Port
+      placeholder: "e.g. 8080"
     mode: Mode
-    root: Rewrite APP Root
+    root:
+      label: Rewrite APP Root
+      placeholder: "e.g. /"
     tls: 
       label: TLS Profile
       placeholder: Choose...
-    rewrite: Rewrite
-    snat: SNAT
-    waf: WAF
+    rewrite:
+      label: Rewrite
+      placeholder: "e.g. example.com/abc"
+    snat:
+      label: SNAT
+      placeholder: "e.g. 8.8.8.8:88"
+    waf:
+      label: WAF
+      placeholder: "e.g. 8.8.8.8:88"
     monitor:
       label: Enable Monitor
       enable: Enable
       disable: Disable
     monitorType: Type
-    send: Send
-    receive: Receive
-    interval: Interval
-    timeout: Timeout
+    send:
+      label: Send
+      placeholder: "e.g. Send String"
+    receive:
+      label: Receive
+      placeholder: "e.g. Response String"
+    interval:
+      label: Interval
+      placeholder: "e.g. 20"
+    timeout:
+      label: Timeout
+      placeholder: "e.g. 20"
   validation:
     pool: 'Pools[{index}]: "{key}" is required'
 
@@ -1617,9 +1648,15 @@ f5TLSPage:
     noData: There are no TLS
   form:
     reference: Reference
-    termination: Termination
-    clientSSL: Client SSL
-    serverSSL: Server SSL
+    termination:
+      label: Termination
+      placeholder: e.g. edge
+    clientSSL:
+      label: Client SSL
+      placeholder: "e.g. /partition/profile_name"
+    serverSSL:
+      label: Server SSL
+      placeholder: "e.g. /partition/profile_name"
     hosts:
       add: Add Host
       placeholder: 'e.g. example.com'
