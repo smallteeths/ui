@@ -1549,7 +1549,7 @@ f5CISPage:
     version: F5 CIS Version
     url: 
       label: BIG-IP URL
-      placeholder: e.g. example.com
+      placeholder: e.g. http://example.com
     partition:
       label: BIG-IP Partition
       placeholder: "e.g. Common"
@@ -1563,7 +1563,7 @@ f5CISPage:
     pool: Pool Member Type
     flannelName:
       label: Flannel Name
-      placeholder: "e.g. MyFlannel"
+      placeholder: "e.g. /Common/MyFlannel"
   disabled: F5 CIS is disabled in the current cluster.
   toUpdate: F5 CIS is enabled.
   confirmDisable: "Are you sure?  Click again to disable F5 CIS."
@@ -1605,19 +1605,19 @@ f5CtlPage:
     mode: Mode
     root:
       label: Rewrite APP Root
-      placeholder: "e.g. /"
+      placeholder: "e.g. /foo"
     tls: 
       label: TLS Profile
       placeholder: Choose...
     rewrite:
       label: Rewrite
-      placeholder: "e.g. example.com/abc"
+      placeholder: "e.g. /foo"
     snat:
       label: SNAT
-      placeholder: "e.g. 8.8.8.8:88"
+      placeholder: ""
     waf:
       label: WAF
-      placeholder: "e.g. 8.8.8.8:88"
+      placeholder: ""
     monitor:
       label: Enable Monitor
       enable: Enable
@@ -1625,10 +1625,10 @@ f5CtlPage:
     monitorType: Type
     send:
       label: Send
-      placeholder: "e.g. Send String"
+      placeholder: "e.g. GET /"
     receive:
       label: Receive
-      placeholder: "e.g. Response String"
+      placeholder: ""
     interval:
       label: Interval
       placeholder: "e.g. 20"
@@ -1653,10 +1653,10 @@ f5TLSPage:
       placeholder: e.g. edge
     clientSSL:
       label: Client SSL
-      placeholder: "e.g. /partition/profile_name"
+      placeholder: "e.g. /Common/clientssl"
     serverSSL:
       label: Server SSL
-      placeholder: "e.g. /partition/profile_name"
+      placeholder: "e.g. /Common/serverssl"
     hosts:
       add: Add Host
       placeholder: 'e.g. example.com'

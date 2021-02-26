@@ -1535,7 +1535,7 @@ f5CISPage:
     version: F5 负载均衡服务组件版本
     url: 
       label: BIG-IP URL
-      placeholder: "例如: example.com"
+      placeholder: "例如: http://example.com"
     partition:
       label: BIG-IP Partition
       placeholder: "例如: Common"
@@ -1549,7 +1549,7 @@ f5CISPage:
     pool: Pool 成员类型
     flannelName:
       label: Flannel Name
-      placeholder: "例如: MyFlannel"
+      placeholder: "例如: /Common/MyFlannel"
   disabled: F5 负载均衡服务在当前集群中尚未开启。
   toUpdate: F5 负载均衡服务已启动。
   confirmDisable: "你确定吗？再次点击将会禁用 F5 负载均衡服务。"
@@ -1592,19 +1592,19 @@ f5CtlPage:
     mode: 模式
     root:
       label: Rewrite APP Root
-      placeholder: "例如: /"
+      placeholder: "例如: /foo"
     tls: 
       label: TLS Profile
       placeholder: 请选择
     rewrite:
       label: Rewrite
-      placeholder: "例如: example.com/abc"
+      placeholder: "例如: /foo"
     snat:
       label: SNAT
-      placeholder: "例如: 8.8.8.8:88"
+      placeholder: ""
     waf:
       label: WAF
-      placeholder: "例如: 8.8.8.8:88"
+      placeholder: ""
     monitor:
       label: 启用监控
       enable: 启用
@@ -1612,10 +1612,10 @@ f5CtlPage:
     monitorType: 类型
     send:
       label: Send
-      placeholder: "例如: Send String"
+      placeholder: "例如: GET /"
     receive:
       label: Receive
-      placeholder: "例如: Response String"
+      placeholder: ""
     interval:
       label: Interval
       placeholder: "例如: 20"
@@ -1640,10 +1640,10 @@ f5TLSPage:
       placeholder: "例如: edge"
     clientSSL:
       label: Client SSL
-      placeholder: "例如: /partition/profile_name"
+      placeholder: "例如: /Common/clientssl"
     serverSSL:
       label: Server SSL
-      placeholder: "例如: /partition/profile_name"
+      placeholder: "例如: /Common/serverssl"
     hosts:
       add: 添加域名
       placeholder: '例如: example.com'
