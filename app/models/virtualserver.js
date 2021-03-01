@@ -3,7 +3,7 @@ import Resource from '@rancher/ember-api-store/models/resource';
 import { reference } from '@rancher/ember-api-store/utils/denormalize';
 import { inject as service } from '@ember/service';
 
-const TARGET = 'f5.cattle.io/targets';
+const TARGET = 'f5.pandaria.io/targets';
 
 export default Resource.extend({
   clusterStore:  service(),

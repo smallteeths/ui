@@ -4,7 +4,7 @@ import { reference } from '@rancher/ember-api-store/utils/denormalize';
 import { inject as service } from '@ember/service';
 import { isEmptyObject } from 'shared/utils/flat-map';
 
-const TARGET = 'f5.cattle.io/targets';
+const TARGET = 'f5.pandaria.io/targets';
 
 export default Resource.extend({
   clusterStore:  service(),

@@ -29,6 +29,8 @@ export default Component.extend(NewOrEdit, {
   editing:     null,
   tlsProfiles: null,
 
+  readonlyAnnotations: ['f5.pandaria.io/targets'],
+
   isVirtualServer: true,
   transportModes:  TRANSPORT_MODES,
   primaryResource: null,
@@ -116,10 +118,7 @@ export default Component.extend(NewOrEdit, {
         set(pr, 'tlsProfileName', '');
       }
 
-
       set(this, 'primaryResource', pr);
-
-      debugger;
 
       return;
     }
