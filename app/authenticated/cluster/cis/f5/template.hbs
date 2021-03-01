@@ -1,1 +1,9 @@
-{{enable-f5-cis versionConfig=model.versionConfig}}
+{{#if model.f5Ready}}
+  {{enable-f5-cis versionConfig=model.versionConfig}}
+{{else}}
+  {{#banner-message color="bg-warning"}}
+    <p>
+      {{t "f5CISPage.notReady" htmlSafe=true}}
+    </p>
+  {{/banner-message}}
+{{/if}}

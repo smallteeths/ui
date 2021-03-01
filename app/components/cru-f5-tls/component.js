@@ -19,15 +19,15 @@ const REFERENCE = [
 
 const TERMINATION = [
   {
-    label: 'edge',
+    label: 'Edge',
     value: 'edge'
   },
   {
-    label: 'reencrypt',
+    label: 'Reencrypt',
     value: 'reencrypt'
   },
   {
-    label: 'passthrough',
+    label: 'Passthrough',
     value: 'passthrough'
   }
 ];

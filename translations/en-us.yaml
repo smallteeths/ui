@@ -1566,12 +1566,14 @@ f5CISPage:
       placeholder: "e.g. /Common/MyFlannel"
   disabled: F5 CIS is disabled in the current cluster.
   toUpdate: F5 CIS is enabled.
+  notReady: 'F5 CIS Chart not found, check the <a href="/g/catalog">Catalog</a> Url please.'
   confirmDisable: "Are you sure?  Click again to disable F5 CIS."
   disable: Disable
   enableActionLabel: Enable
   warning: "If Pool Member Type is Cluster, each cluster needs to use an independent F5 BIG IP and cannot share with other clusters F5 BIG IP"
 
 f5CtlPage:
+  notEnabled: 'F5 CIS is disabled. Click <a href="/c/{clusterId}/cis/f5">here</a> to enable it。'
   addCtl: Create F5 Ingress
   header:
     new: Create F5 Ingress

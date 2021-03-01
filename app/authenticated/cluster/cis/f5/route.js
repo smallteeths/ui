@@ -12,13 +12,20 @@ export default Route.extend({
     const PREFIX = 'cattle-global-data';
     const F5CIS = 'system-library-rancher-f5cis';
 
-    return hash({
-      versionConfig: get(this, 'catalog').fetchTemplate(`${ PREFIX }:${ F5CIS }`).then(({ versionLinks, defaultVersion }) => {
+    return hash({ templates: get(this, 'catalog').fetchTemplates() }).then((hash) => {
+      const template = get(hash, 'templates.catalog').findBy('id', `${ PREFIX }:${ F5CIS }`);
+
+      if (template) {
         return {
-          versionLinks,
-          defaultVersion
-        };
-      })
+          versionConfig: {
+            versionLinks:   get(template, 'versionLinks'),
+            defaultVersion: get(template, 'defaultVersion'),
+          },
+          f5Ready: true
+        }
+      } else {
+        return { f5Ready: false }
+      }
     });
   },
 });
