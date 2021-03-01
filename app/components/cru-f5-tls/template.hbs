@@ -49,6 +49,7 @@
       valuePlaceholder="f5TLSPage.form.hosts.placeholder"
       changed=(action (mut model.hosts))
       editing=(not viewMode)
+      required=true
     }}
   </div>
 </div>
@@ -67,10 +68,9 @@
   <div class="col span-6">
     <label class="acc-label">{{t "f5TLSPage.form.termination.label"}}</label>
     {{#input-or-display editable=(not viewMode) value=model.tls.termination}}
-      {{input
-        class="form-control"
+      {{new-select
         value=model.tls.termination
-        placeholder=(t "f5TLSPage.form.termination.placeholder")
+        content=terminationChoices
       }}
     {{/input-or-display}}
   </div>

@@ -29,7 +29,7 @@ export default Resource.extend({
     }
 
     if ( !client || client.trim() === '' ) {
-      errors.push(intl.t('validation.required', { key: intl.t('f5TLSPage.form.clientSSL') }));
+      errors.push(intl.t('validation.required', { key: intl.t('f5TLSPage.form.clientSSL.label') }));
     }
 
     return errors;

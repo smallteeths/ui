@@ -1,5 +1,7 @@
 import { resolve } from 'rsvp';
-import { get, set, computed, setProperties } from '@ember/object';
+import {
+  get, set, computed, observer, setProperties
+} from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 import NewOrEdit from 'shared/mixins/new-or-edit';
@@ -61,6 +63,10 @@ export default Component.extend(NewOrEdit, {
     },
   },
 
+  namespaceChanged: observer('namespace.id', function() {
+    set(this, 'f5.tlsProfileName', null);
+  }),
+
   isNew: computed('mode', function() {
     return get(this, 'mode') === 'new';
   }),
@@ -73,10 +79,16 @@ export default Component.extend(NewOrEdit, {
     return get(this, 'mode') === 'view';
   }),
 
-  tlsProfileChoices: computed('tlsProfiles', function() {
+  tlsProfileChoices: computed('tlsProfiles', 'namespace.id', function() {
     const out = [];
 
-    (get(this, 'tlsProfiles') || []).forEach((f) => {
+    (get(this, 'tlsProfiles') || []).filter((f) => {
+      if (!get(this, 'namespace.id')) {
+        return false;
+      }
+
+      return f.namespaceId === get(this, 'namespace.id');
+    }).forEach((f) => {
       out.push({
         label: f.name,
         value: f.name
@@ -99,7 +111,17 @@ export default Component.extend(NewOrEdit, {
         set(pr, 'pools', null);
       }
 
-      return set(this, 'primaryResource', pr);
+
+      if (!get(pr, 'tlsProfileName')) {
+        set(pr, 'tlsProfileName', '');
+      }
+
+
+      set(this, 'primaryResource', pr);
+
+      debugger;
+
+      return;
     }
 
     if (get(this, 'isVirtualServer')) {
@@ -171,6 +193,8 @@ export default Component.extend(NewOrEdit, {
 
     set(pr, 'namespaceId', nsId);
     // macvlan
+
+    console.log(pr.tlsProfileName)
 
     return ok;
   },

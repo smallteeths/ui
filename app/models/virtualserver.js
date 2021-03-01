@@ -56,7 +56,7 @@ export default Resource.extend({
 
   validationErrors() {
     const intl = get(this, 'intl');
-    let errors = this._super(...arguments);
+    let errors = [];
     const pools = get(this, 'pools') || [];
     const virtualServerAddress = get(this, 'virtualServerAddress');
     const virtualServerHTTPPort = get(this, 'virtualServerHTTPPort');
@@ -64,19 +64,19 @@ export default Resource.extend({
     const host = get(this, 'host');
 
     if (!virtualServerAddress) {
-      errors.push(intl.t('validation.required', { key: intl.t('f5CtlPage.form.url') }));
+      errors.push(intl.t('validation.required', { key: intl.t('f5CtlPage.form.url.label') }));
     }
 
     if (!virtualServerHTTPPort) {
-      errors.push(intl.t('validation.required', { key: intl.t('f5CtlPage.form.http') }));
+      errors.push(intl.t('validation.required', { key: intl.t('f5CtlPage.form.http.label') }));
     }
 
     if (!virtualServerHTTPSPort) {
-      errors.push(intl.t('validation.required', { key: intl.t('f5CtlPage.form.https') }));
+      errors.push(intl.t('validation.required', { key: intl.t('f5CtlPage.form.https.label') }));
     }
 
     if (!host) {
-      errors.push(intl.t('validation.required', { key: intl.t('f5CtlPage.form.domain') }));
+      errors.push(intl.t('validation.required', { key: intl.t('f5CtlPage.form.domain.label') }));
     }
 
     if (pools.length === 0) {
@@ -88,13 +88,13 @@ export default Resource.extend({
         if (!get(pool, 'monitor.interval')) {
           errors.push(intl.t('f5CtlPage.validation.pool', {
             index,
-            key: intl.t('f5CtlPage.form.interval')
+            key: intl.t('f5CtlPage.form.interval.label')
           }));
         }
         if (!get(pool, 'monitor.send')) {
           errors.push(intl.t('f5CtlPage.validation.pool', {
             index,
-            key: intl.t('f5CtlPage.form.send')
+            key: intl.t('f5CtlPage.form.send.label')
           }));
         }
       }
@@ -109,7 +109,7 @@ export default Resource.extend({
       if (!pool.servicePort) {
         errors.push(intl.t('f5CtlPage.validation.pool', {
           index,
-          key: intl.t('f5CtlPage.form.port')
+          key: intl.t('f5CtlPage.form.port.label')
         }));
       }
     });

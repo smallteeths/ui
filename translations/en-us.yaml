@@ -1650,7 +1650,7 @@ f5TLSPage:
     reference: Reference
     termination:
       label: Termination
-      placeholder: e.g. edge
+      placeholder: Choose...
     clientSSL:
       label: Client SSL
       placeholder: "e.g. /Common/clientssl"

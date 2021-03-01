@@ -1637,7 +1637,7 @@ f5TLSPage:
     reference: Reference
     termination:
       label: Termination
-      placeholder: "例如: edge"
+      placeholder: "请选择..."
     clientSSL:
       label: Client SSL
       placeholder: "例如: /Common/clientssl"

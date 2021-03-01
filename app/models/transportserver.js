@@ -72,11 +72,11 @@ export default Resource.extend({
     const virtualServerPort = get(this, 'virtualServerPort');
 
     if (!virtualServerAddress) {
-      errors.push(intl.t('validation.required', { key: intl.t('f5CtlPage.form.url') }));
+      errors.push(intl.t('validation.required', { key: intl.t('f5CtlPage.form.url.label') }));
     }
 
     if (!virtualServerPort) {
-      errors.push(intl.t('validation.required', { key: intl.t('f5CtlPage.form.port') }));
+      errors.push(intl.t('validation.required', { key: intl.t('f5CtlPage.form.port.label') }));
     }
 
     if (isEmptyObject(pool)) {
@@ -87,7 +87,7 @@ export default Resource.extend({
       if (!get(pool, 'monitor.interval')) {
         errors.push(intl.t('f5CtlPage.validation.pool', {
           index: 0,
-          key:   intl.t('f5CtlPage.form.interval')
+          key:   intl.t('f5CtlPage.form.interval.label')
         }));
       }
     }
@@ -102,7 +102,7 @@ export default Resource.extend({
     if (!pool.servicePort) {
       errors.push(intl.t('f5CtlPage.validation.pool', {
         index: 0,
-        key:   intl.t('f5CtlPage.form.port')
+        key:   intl.t('f5CtlPage.form.port.label')
       }));
     }
 

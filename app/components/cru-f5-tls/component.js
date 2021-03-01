@@ -17,6 +17,21 @@ const REFERENCE = [
   }
 ];
 
+const TERMINATION = [
+  {
+    label: 'edge',
+    value: 'edge'
+  },
+  {
+    label: 'reencrypt',
+    value: 'reencrypt'
+  },
+  {
+    label: 'passthrough',
+    value: 'passthrough'
+  }
+];
+
 export default Component.extend(NewOrEdit, {
   intl:  service(),
   scope: service(),
@@ -27,7 +42,8 @@ export default Component.extend(NewOrEdit, {
   mode:   null,
   errors: null,
 
-  referenceChoices: REFERENCE,
+  referenceChoices:   REFERENCE,
+  terminationChoices: TERMINATION,
 
   primaryResource: alias('model'),
 
