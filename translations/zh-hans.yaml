@@ -1631,6 +1631,10 @@ f5CtlPage:
       duplicated: '规则中的访问路径必须唯一'
       relative: '规则[{index}]: "访问路径必须是绝对路径"'
       relativeInPool: 访问路径必须是绝对路径
+  globalDnsModel:
+    label: 域名
+    description: 保存成功后会添加 annotation <code>rancher.io/globalDNS.hostname='hostname'</code>（清空会删除这条 annotation )。
+    placeholder: e.g. VirtualServer host
 
 f5TLSPage:
   addTLS: 添加证书
@@ -10426,6 +10430,7 @@ action:
   auditlog: 审计日志
   downloadFile: 下载文件
   cloneCrossCluster: 跨集群克隆
+  editVsAnnotaionForGlobalDns: 添加/删除 Global DNS Record
 
 ##############################
 # Resource Actions

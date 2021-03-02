@@ -1,0 +1,28 @@
+<section class="horizontal-form container-fluid">
+  <h2>{{t 'action.editVsAnnotaionForGlobalDns'}}</h2>
+  <div class="row">
+    <div class="col span-12 mb-0">
+      <label
+        class="acc-label"
+        for="route53-root-domain"
+      >
+        {{t "f5CtlPage.globalDnsModel.label"}}
+      </label>
+      {{input
+        classNames="form-control"
+        id="route53-root-domain"
+        placeholder=(t "f5CtlPage.globalDnsModel.placeholder")
+        type="text"
+        value=rootDomain
+      }}
+      <div style="margin-top: 10px;">
+        {{#banner-message icon="icon-info" color="bg-info mb-0 mt-10"}}
+          {{t "f5CtlPage.globalDnsModel.description" htmlSafe=true}}  
+        {{/banner-message}}
+      </div>
+    </div>
+  </div>
+</section>
+
+{{top-errors errors=errors}}
+{{save-cancel editing=editing save=(action "save") cancel=(action "cancel")}}

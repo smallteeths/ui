@@ -1645,6 +1645,10 @@ f5CtlPage:
       duplicated: 'Paths in Pools are duplicated'
       relative: 'Pools[{index}]: "Path in Pools must be absolute path"'
       relativeInPool: Path must be absolute path
+  globalDnsModel:
+    label: Domain Name
+    description: A successful save will add the annotation <code>rancher.io/globalDNS.hostname='hostname'</code> (clearing will remove this annotation).
+    placeholder: e.g. VirtualServer host
 
 f5TLSPage:
   addTLS: Create TLS
@@ -10521,6 +10525,7 @@ action:
   auditlog: Audit Log
   downloadFile: Download File
   cloneCrossCluster: Clone Cross Cluster
+  editVsAnnotaionForGlobalDns: Add/Remove Global DNS Record
 
 ##############################
 # Resource Actions
