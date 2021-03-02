@@ -1652,6 +1652,7 @@ f5CtlPage:
 
 f5TLSPage:
   addTLS: Create TLS
+  header:
     new: Create TLS
     edit: Edit TLS
     view: "TLS: {name}"

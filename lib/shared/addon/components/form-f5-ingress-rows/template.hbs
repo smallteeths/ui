@@ -104,7 +104,13 @@
           editable=editing
           value=pool.monitor.interval
         }}
-          {{input-integer class="form-control" min="1" value=pool.monitor.interval placeholder=(t "f5CtlPage.form.interval.placeholder")}}
+          <div class="input-group">
+            {{input-integer class="form-control" min="1" value=pool.monitor.interval placeholder=(t "f5CtlPage.form.interval.placeholder")}}
+            <div class="input-group-addon bg-default">
+              {{t "generic.seconds"}}
+            </div>
+          </div>
+          
         {{/input-or-display}}
       </div>
 
@@ -114,7 +120,12 @@
           editable=editing
           value=pool.monitor.timeout
         }}
-          {{input-integer class="form-control" min="1" value=pool.monitor.timeout placeholder=(t "f5CtlPage.form.timeout.placeholder")}}
+          <div class="input-group">
+            {{input-integer class="form-control" min="1" value=pool.monitor.timeout placeholder=(t "f5CtlPage.form.timeout.placeholder")}}
+            <div class="input-group-addon bg-default">
+              {{t "generic.seconds"}}
+            </div>
+          </div>
         {{/input-or-display}}
       </div>
     </div>

@@ -1612,16 +1612,16 @@ f5CtlPage:
       disable: 禁用
     monitorType: 类型
     send:
-      label: Send
+      label: 发送
       placeholder: "例如: GET /"
     receive:
-      label: Receive
+      label: 接收
       placeholder: ""
     interval:
-      label: Interval
+      label: 间隔时间
       placeholder: "例如: 20"
     timeout:
-      label: Timeout
+      label: 延迟时间
       placeholder: "例如: 20"
     path:
       label: 访问路径
