@@ -10964,6 +10964,11 @@ formMenu:
     placeholder: 'e.g. https://www.example.com'
   iframeEnabled:
     label: Use iframe
+  scope:
+    cluster: 
+      label: 'Apply For Cluster'
+    project: 
+      label: 'Apply For Project'
 
 modalConfirmYamlMonitoring2Form:
   helpText: "Data loss may occur when switching back to form based editing. Please make sure you intended to switch before selecting confirm."

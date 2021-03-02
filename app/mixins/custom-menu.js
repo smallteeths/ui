@@ -3,7 +3,8 @@ import Mixin from '@ember/object/mixin';
 import { inject as service } from '@ember/service'
 
 export default Mixin.create({
-  settings: service(),
+  settings:         service(),
+  scope:            service(),
 
   addExtraMenus(out) {
     const extraMenus = get(this, 'settings.extra-menus') || '';
@@ -11,13 +12,21 @@ export default Mixin.create({
     extraMenus.split(';').forEach((menu) => {
       const currentScope = get(this, 'pageScope');
 
-      const [menuScope, menuLabel, menuUrl = '', strIframeEnabled] = menu.split(',');
+      const [menuScope, menuLabel, menuUrl = '', strIframeEnabled, scopeId] = menu.split(',');
       const iframeEnabled = strIframeEnabled === 'true' ? true : false
 
       if ( menuScope === currentScope ) {
         let url = `https://${  menuUrl }`
         let customRoute
         let ctx
+
+        if (scopeId && scopeId !== 'undefined') {
+          if (menuScope === 'cluster' && scopeId !== get(this, 'scope.currentCluster.id')) {
+            return
+          } else if (menuScope === 'project' && scopeId !== get(this, 'scope.currentProject.id')) {
+            return
+          }
+        }
 
         const isRancherUrl = url.startsWith(window.location.origin)
         const isKubernetesUrl = url.startsWith(`${ window.location.origin }/k8s/clusters`)
@@ -34,8 +43,12 @@ export default Mixin.create({
           }
         }
 
+        url = iframeEnabled ? url : menuUrl
+        const clusterId = get(this, 'scope.currentCluster.id')
+        const projectId = get(this, 'scope.currentProject.id')
+
         out.push({
-          url:         iframeEnabled ? url : menuUrl,
+          url:         (url || '').replace(/{clusterId}/g, clusterId).replace(/{projectId}/g, projectId),
           label:       menuLabel,
           scope:       menuScope,
           customRoute,

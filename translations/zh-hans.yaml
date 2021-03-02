@@ -10927,6 +10927,11 @@ formMenu:
     placeholder: "e.g. https://www.example.com"
   iframeEnabled:
     label: 使用 iframe
+  scope:
+    cluster: 
+      label: '应用于集群'
+    project: 
+      label: '应用于项目'
 
 modalConfirmYamlMonitoring2Form:
   helpText: '请注意，当切换回表单编辑时，非表单数据可能会发生数据丢失。在点击确认之前，请确认不会受影响。'

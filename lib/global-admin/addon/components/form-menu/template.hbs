@@ -13,7 +13,17 @@
             {{t "formMenu.name.label"}}
             {{field-required}}
           </th>
-          <th width="40"></th>
+          <th width="10">&nbsp;</th>
+          {{#if canSelectScope}}
+            <th class="acc-label">
+              {{#if (eq menuScope 'cluster')}}
+                {{t "formMenu.scope.cluster.label"}}
+              {{else if (eq menuScope 'project') }}
+                {{t "formMenu.scope.project.label"}}
+              {{/if}}
+            </th>
+            <th width="10">&nbsp;</th>
+          {{/if}}
           <th class="acc-label">
             {{t "formMenu.link.label"}}
             {{field-required}}
@@ -43,6 +53,22 @@
           <td>
             &nbsp;
           </td>
+          {{#if canSelectScope}}
+            <td>
+              {{#input-or-display
+                editable=editing
+                value=item.label
+              }}
+                {{new-select
+                  value=item.scopeId
+                  content=scopeContent
+                }}
+              {{/input-or-display}}
+            </td>
+            <td>
+              &nbsp;
+            </td>
+          {{/if}}
           <td>
             {{#input-or-display
               editable=editing

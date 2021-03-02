@@ -34,7 +34,7 @@ export default Component.extend(ModalBase, {
       const menus = extraMenus.split(';')
 
       menus.map((menu) => {
-        const [scope, label, url, strIframeEnabled] = menu.split(',');
+        const [scope, label, url, strIframeEnabled, scopeId] = menu.split(',');
         const iframeEnabled = strIframeEnabled === 'true' ? true : false
 
         switch (scope) {
@@ -50,6 +50,7 @@ export default Component.extend(ModalBase, {
             label,
             url,
             iframeEnabled,
+            scopeId,
           })
           break;
         case 'project':
@@ -57,6 +58,7 @@ export default Component.extend(ModalBase, {
             label,
             url,
             iframeEnabled,
+            scopeId,
           })
           break;
         default:
@@ -101,11 +103,11 @@ export default Component.extend(ModalBase, {
       }).join(';')
 
       const clusterStr = clusterMenus.map((m) => {
-        return `${ CLUSTER },${ m.label },${ m.url },${ m.iframeEnabled }`
+        return `${ CLUSTER },${ m.label },${ m.url },${ m.iframeEnabled },${ m.scopeId }`
       }).join(';')
 
       const projectStr = projectMenus.map((m) => {
-        return `${ PROJECT },${ m.label },${ m.url },${ m.iframeEnabled }`
+        return `${ PROJECT },${ m.label },${ m.url },${ m.iframeEnabled },${ m.scopeId }`
       }).join(';')
 
       const out = [globalStr, clusterStr, projectStr].filter((str) => str !== '').join(';')
