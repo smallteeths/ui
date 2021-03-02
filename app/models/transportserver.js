@@ -10,8 +10,18 @@ export default Resource.extend({
   clusterStore:  service(),
   router:        service(),
   intl:          service(),
+  modalService:  service('modal'),
 
   type: 'transportserver',
+
+  availableActions: [
+    {
+      label:   'action.editVsAnnotaionForGlobalDns',
+      icon:    'icon icon-edit',
+      action:  'editAnnotationForGlobalDns',
+      enabled:  true,
+    },
+  ],
 
   namespace: reference('namespaceId', 'namespace', 'clusterStore'),
 
@@ -116,6 +126,10 @@ export default Resource.extend({
   actions:      {
     edit() {
       get(this, 'router').transitionTo('authenticated.project.f5.controllers.detail.edit', get(this, 'id'), { queryParams: { type: get(this, 'type') } });
+    },
+
+    editAnnotationForGlobalDns() {
+      this.get('modalService').toggleModal('modal-edit-f5cis-annotation-for-globaldns-cn', { model: this })
     },
   },
 
