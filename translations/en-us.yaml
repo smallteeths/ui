@@ -1637,12 +1637,17 @@ f5CtlPage:
     timeout:
       label: Timeout
       placeholder: "e.g. 20"
+    path:
+      label: Path
   validation:
     pool: 'Pools[{index}]: "{key}" is required'
+    path:
+      duplicated: 'Paths in Pools are duplicated'
+      relative: 'Pools[{index}]: "Path in Pools must be absolute path"'
+      relativeInPool: Path must be absolute path
 
 f5TLSPage:
   addTLS: Create TLS
-  header:
     new: Create TLS
     edit: Edit TLS
     view: "TLS: {name}"

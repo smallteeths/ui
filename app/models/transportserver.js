@@ -83,6 +83,10 @@ export default Resource.extend({
       errors.push(intl.t('validation.required', { key: intl.t('formIngress.label') }));
     }
 
+    if (pool.path && !pool.path.startsWith('/')) {
+      errors.push(intl.t('f5CtlPage.validation.path.relativeInPool'));
+    }
+
     if (pool.monitor) {
       if (!get(pool, 'monitor.interval')) {
         errors.push(intl.t('f5CtlPage.validation.pool', {

@@ -62,6 +62,7 @@ export default Resource.extend({
     const virtualServerHTTPPort = get(this, 'virtualServerHTTPPort');
     const virtualServerHTTPSPort = get(this, 'virtualServerHTTPSPort');
     const host = get(this, 'host');
+    const paths = new Set();
 
     if (!virtualServerAddress) {
       errors.push(intl.t('validation.required', { key: intl.t('f5CtlPage.form.url.label') }));
@@ -99,6 +100,15 @@ export default Resource.extend({
         }
       }
 
+      if (pool.path && !pool.path.startsWith('/')) {
+        errors.push(intl.t('f5CtlPage.validation.path.relative', { index }));
+        paths.add(pool.path)
+      } else if (!pool.path) {
+        paths.add(index)
+      } else {
+        paths.add(pool.path)
+      }
+
       if (!pool.service) {
         errors.push(intl.t('f5CtlPage.validation.pool', {
           index,
@@ -113,6 +123,10 @@ export default Resource.extend({
         }));
       }
     });
+
+    if (paths.size !== pools.length) {
+      errors.push(intl.t('f5CtlPage.validation.path.duplicated'));
+    }
 
     return errors;
   },

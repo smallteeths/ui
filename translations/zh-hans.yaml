@@ -1552,7 +1552,7 @@ f5CISPage:
       placeholder: "例如: /Common/MyFlannel"
   disabled: F5 负载均衡服务在当前集群中尚未开启。
   toUpdate: F5 负载均衡服务已启动。
-  notReady: 未找到F5负载均衡服务Chart, 请确认系统<a href="/g/catalog">应用商店</a>配置是否正确。
+  notReady: '未找到F5负载均衡服务Chart, 请确认系统<a href="/g/catalog">应用商店</a>配置是否正确。'
   confirmDisable: "你确定吗？再次点击将会禁用 F5 负载均衡服务。"
   disable: 禁用
   enableActionLabel: 启用
@@ -1623,8 +1623,14 @@ f5CtlPage:
     timeout:
       label: Timeout
       placeholder: "例如: 20"
+    path:
+      label: 访问路径
   validation:
     pool: '规则[{index}]: "{key}" 必须设置'
+    path:
+      duplicated: '规则中的访问路径必须唯一'
+      relative: '规则[{index}]: "访问路径必须是绝对路径"'
+      relativeInPool: 访问路径必须是绝对路径
 
 f5TLSPage:
   addTLS: 添加证书
