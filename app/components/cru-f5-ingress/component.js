@@ -191,9 +191,6 @@ export default Component.extend(NewOrEdit, {
     let ok = this.validate();
 
     set(pr, 'namespaceId', nsId);
-    // macvlan
-
-    console.log(pr.tlsProfileName)
 
     return ok;
   },

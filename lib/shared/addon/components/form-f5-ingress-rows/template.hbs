@@ -121,7 +121,7 @@
           value=pool.monitor.timeout
         }}
           <div class="input-group">
-            {{input-integer class="form-control" min="1" value=pool.monitor.timeout placeholder=(t "f5CtlPage.form.timeout.placeholder")}}
+            {{input-integer class="form-control" min="1" nullable=true value=pool.monitor.timeout placeholder=(t "f5CtlPage.form.timeout.placeholder")}}
             <div class="input-group-addon bg-default">
               {{t "generic.seconds"}}
             </div>

@@ -97,9 +97,6 @@ export default Component.extend(NewOrEdit, {
     let ok = this.validate();
 
     set(pr, 'namespaceId', nsId);
-    // macvlan
-
-    // return ok;
 
     return ok;
   },
