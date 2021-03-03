@@ -114,7 +114,7 @@ export default Resource.extend({
         errors.push(intl.t('f5CtlPage.validation.path.relative', { index }));
         paths.add(pool.path)
       } else if (!pool.path) {
-        paths.add(index)
+        paths.add('emptyPath')
       } else {
         paths.add(pool.path)
       }
