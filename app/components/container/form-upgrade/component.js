@@ -23,7 +23,7 @@ export default Component.extend({
 
   workloadConfig: computed('scaleMode', function() {
     const scaleMode = get(this, 'scaleMode');
-    const config = get(this, `workload.${ scaleMode }Config`);
+    const config = get(this, `workload.${ scaleMode }Config`) || {};
 
     return config;
   }),
