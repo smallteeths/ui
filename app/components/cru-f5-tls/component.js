@@ -79,6 +79,18 @@ export default Component.extend(NewOrEdit, {
     return get(this, 'mode') === 'view';
   }),
 
+  isEdge: computed('model.tls.termination', function() {
+    return get(this, 'model.tls.termination') === 'edge';
+  }),
+
+  isPaththrough: computed('model.tls.termination', function() {
+    return get(this, 'model.tls.termination') === 'passthrough';
+  }),
+
+  isReencrypt: computed('model.tls.termination', function() {
+    return get(this, 'model.tls.termination') === 'reencrypt';
+  }),
+
   willSave() {
     const pr = get(this, 'primaryResource');
 
@@ -88,6 +100,17 @@ export default Component.extend(NewOrEdit, {
       a['f5cr'] = 'true';
 
       set(pr, 'labels', a);
+    }
+
+    if (get(this, 'isPaththrough')) {
+      delete pr.tls.clientSSL;
+      delete pr.tls.serverSSL;
+
+      set(pr, 'tls.reference', 'bigip');
+    }
+
+    if (get(this, 'isEdge')) {
+      delete pr.tls.serverSSL;
     }
 
     // Namespace is required, but doesn't exist yet... so lie to the validator
@@ -101,10 +124,13 @@ export default Component.extend(NewOrEdit, {
     return ok;
   },
 
-  doSave() {
+  doSave(opt) {
     let pr = get(this, 'primaryResource');
 
     let namespacePromise = resolve();
+
+    opt = opt || {};
+    opt.qp = { '_replace': 'true' };
 
     if (get(this, 'addMode')) {
       // Set the namespace ID
@@ -123,7 +149,7 @@ export default Component.extend(NewOrEdit, {
     let self = this;
     let sup = self._super;
 
-    return namespacePromise.then(() => sup.apply(self, arguments));
+    return namespacePromise.then(() => sup.apply(self, [opt]));
   },
 
   validate() {

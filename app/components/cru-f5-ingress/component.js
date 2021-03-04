@@ -95,7 +95,7 @@ export default Component.extend(NewOrEdit, {
         label: f.name,
         value: f.name
       })
-    })
+    });
 
     return out;
   }),
@@ -103,6 +103,8 @@ export default Component.extend(NewOrEdit, {
   generatePr() {
     const store = get(this, 'store');
     const f5 = get(this, 'f5');
+    const profiles = get(this, 'tlsProfileChoices');
+    const tlsProfileName = get(f5, 'tlsProfileName');
     let pr = null;
 
     if (get(this, 'isEdit')) {
@@ -114,7 +116,7 @@ export default Component.extend(NewOrEdit, {
       }
 
 
-      if (!get(pr, 'tlsProfileName')) {
+      if (!tlsProfileName || !profiles.findBy('value', tlsProfileName)) {
         set(pr, 'tlsProfileName', '');
       }
 
@@ -195,10 +197,13 @@ export default Component.extend(NewOrEdit, {
     return ok;
   },
 
-  doSave() {
+  doSave(opt) {
     let pr = get(this, 'primaryResource');
 
     let namespacePromise = resolve();
+
+    opt = opt || {};
+    opt.qp = { '_replace': 'true' };
 
     if (get(this, 'isAdd')) {
       // Set the namespace ID
@@ -217,7 +222,7 @@ export default Component.extend(NewOrEdit, {
     let self = this;
     let sup = self._super;
 
-    return namespacePromise.then(() => sup.apply(self, arguments));
+    return namespacePromise.then(() => sup.apply(self, [opt]));
   },
 
   validate() {

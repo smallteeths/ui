@@ -23,13 +23,19 @@ export default Resource.extend({
     let errors = this._super(...arguments);
     const hosts = get(this, 'hosts');
     const client = get(this, 'tls.clientSSL');
+    const server = get(this, 'tls.serverSSL');
+    const termination = get(this, 'tls.termination');
 
     if (hosts.length === 0) {
       errors.push(intl.t('validation.required', { key: intl.t('generic.domainName') }));
     }
 
-    if ( !client || client.trim() === '' ) {
+    if (termination !== 'passthrough' && (!client || client.trim() === '') ) {
       errors.push(intl.t('validation.required', { key: intl.t('f5TLSPage.form.clientSSL.label') }));
+    }
+
+    if (termination === 'reencrypt' && (!server || server.trim() === '') ) {
+      errors.push(intl.t('validation.required', { key: intl.t('f5TLSPage.form.serverSSL.label') }));
     }
 
     return errors;

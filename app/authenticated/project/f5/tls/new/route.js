@@ -9,7 +9,10 @@ export default Route.extend({
       type:  'tlsprofile',
       name:  '',
       hosts: [],
-      tls:   { reference: 'bigip' }
+      tls:   {
+        reference:   'bigip',
+        termination: 'edge'
+      }
     })
 
     return hash({ tlsProfile });
