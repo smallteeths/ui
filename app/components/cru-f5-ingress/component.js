@@ -117,7 +117,23 @@ export default Component.extend(NewOrEdit, {
 
 
       if (!tlsProfileName || !profiles.findBy('value', tlsProfileName)) {
-        set(pr, 'tlsProfileName', '');
+        delete pr.tlsProfileName
+      }
+
+      if (!get(f5, 'waf')) {
+        delete pr.waf;
+      }
+
+      if (!get(f5, 'snat')) {
+        delete pr.snat;
+      }
+
+      if (!get(f5, 'virtualServerName')) {
+        delete pr.virtualServerName;
+      }
+
+      if (!get(f5, 'rewriteAppRoot')) {
+        delete pr.rewriteAppRoot;
       }
 
       set(this, 'primaryResource', pr);

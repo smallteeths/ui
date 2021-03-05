@@ -1640,6 +1640,7 @@ f5CtlPage:
     path:
       label: Path
   validation:
+    waf: '"WAF" must be started with /'
     pool: 'Pools[{index}]: "{key}" is required'
     path:
       duplicated: 'Paths in Pools are duplicated'

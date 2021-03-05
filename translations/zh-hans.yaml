@@ -1626,6 +1626,7 @@ f5CtlPage:
     path:
       label: 访问路径
   validation:
+    waf: '"WAF" 必须以 / 开始'
     pool: '规则[{index}]: "{key}" 必须设置'
     path:
       duplicated: '规则中的访问路径必须唯一'

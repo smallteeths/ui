@@ -72,6 +72,7 @@ export default Resource.extend({
     const virtualServerHTTPPort = get(this, 'virtualServerHTTPPort');
     const virtualServerHTTPSPort = get(this, 'virtualServerHTTPSPort');
     const host = get(this, 'host');
+    const waf = get(this, 'waf');
     const paths = new Set();
 
     if (!virtualServerAddress) {
@@ -88,6 +89,10 @@ export default Resource.extend({
 
     if (!host) {
       errors.push(intl.t('validation.required', { key: intl.t('f5CtlPage.form.domain.label') }));
+    }
+
+    if (waf && !waf.startsWith('/')) {
+      errors.push(intl.t('f5CtlPage.validation.waf'));
     }
 
     if (pools.length === 0) {
