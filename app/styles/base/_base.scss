@@ -95,3 +95,58 @@ hr {
 .flatpickr-months .flatpickr-month {
   height: 36px !important;
 }
+
+.password-meter {
+  width: 100%;
+  & > div {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 4px;
+    height: 8x;
+  }
+
+  .password-meter-null {
+    & div {
+      width: 32%;
+      border-radius: 4px;
+      height: 8px;
+      background:#eae9e9;
+    }
+  }
+
+  .password-meter-weak {
+    & div {
+      width: 32%;
+      border-radius: 4px;
+      height: 8px;
+      background:#eae9e9;
+    }
+    & .weak {
+      background: $error;
+    }
+  }
+
+  .password-meter-good {
+    & div {
+      width: 32%;
+      border-radius: 4px;
+      height: 8px;
+      background:#eae9e9;
+    }
+    & .weak {
+      background: $warning;
+    }
+    & .good {
+      background: $warning;
+    }
+  }
+  
+  .password-meter-best {
+    & div {
+      width: 32%;
+      border-radius: 4px;
+      height: 8px;
+      background: $success;
+    }
+  }
+}

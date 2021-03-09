@@ -8390,6 +8390,11 @@ modalEditPassword:
     generate: '随机生成新密码: '
     manual: '自定义新密码: '
   deleteTokens: 删除所有现有的 API KEY
+  strength: 
+    label: '密码强度'
+    weak: '弱'
+    good: '中'
+    best: '强'
 
 modalFeedback:
   header: "欢迎使用 {appName}!"

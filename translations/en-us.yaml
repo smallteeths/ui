@@ -8463,6 +8463,11 @@ modalEditPassword:
     generate: 'Use a new randomly generated password:'
     manual: 'Set a specific password to use:'
   deleteTokens: Delete all existing API keys
+  strength:
+    label: 'Password strength'
+    weak: 'weak'
+    good: 'good'
+    best: 'best'
 
 modalFeedback:
   header: Welcome to {appName}!
