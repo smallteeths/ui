@@ -96,7 +96,19 @@ hr {
   height: 36px !important;
 }
 
-.password-meter {
+.password-meter-label {
+  .weak {
+    color: $error;
+  }
+  .good {
+    color: $warning;
+  }
+  .best {
+    color: $success;
+  }
+}
+
+.password-meter-content {
   width: 100%;
   & > div {
     display: flex;

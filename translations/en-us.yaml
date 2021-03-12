@@ -225,6 +225,7 @@ accountsPage:
       usernameInExists: Username is already in use. Please choose a new username.
       pwReq: Password is required.
       role: New users are required to have a role. Select a role from the list.
+      strengthError: Weak password strength
     form:
       username:
         labelText: Username

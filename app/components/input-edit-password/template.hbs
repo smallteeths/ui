@@ -91,18 +91,7 @@
             </div>
           </div>
           <div class="row pr-5 pl-5">
-            <div class="col span-12">
-              <label class="acc-label">
-                {{t "modalEditPassword.strength.label"}} {{passwordStrengthText}}
-              </label>
-              <div class="password-meter">
-                <div class="{{passwordStrengthClass}}">
-                  <div class="weak"></div>
-                  <div class="good"></div>
-                  <div class="best"></div>
-                </div>
-              </div>
-            </div>
+            {{input-password-strength setPasswordStrength=(action "setPasswordStrength") password=password}}
           </div>
         {{/liquid-if}}
       </div>

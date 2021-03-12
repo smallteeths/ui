@@ -225,6 +225,7 @@ accountsPage:
       usernameInExists: 用户名已存在，请设置新的用户名。
       pwReq: 必须设置密码。
       role: 新用户需要具备角色，从列表中选择角色。
+      strengthError: 密码强度弱
     form:
       username:
         labelText: 用户名
