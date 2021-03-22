@@ -162,3 +162,9 @@ hr {
     }
   }
 }
+
+.password-meter-tooltip {
+  color: $error;
+  padding-top: 5px;
+  font-size: .85em;
+}
