@@ -43,6 +43,14 @@ export default Route.extend({
     const project = appRoute.modelFor('authenticated.project').get('project');
     const projectId = project.get('id');
     const clusterId = project.get('clusterId');
+    let pspId = ''
+
+    if (project.get('cluster.rancherKubernetesEngineConfig.services.kubeApi.podSecurityPolicy')) {
+      let clusterPspId = project.get('cluster').defaultPodSecurityPolicyTemplateId ? project.get('cluster').defaultPodSecurityPolicyTemplateId : '';
+      let projectPspId = project.podSecurityPolicyTemplateId ? project.podSecurityPolicyTemplateId : '';
+
+      pspId = projectPspId ? projectPspId : clusterPspId
+    }
 
     const clusterLogging = gs.find('clusterLogging').then((res) => {
       const logging = res.filterBy('clusterId', clusterId).get('firstObject');
@@ -74,16 +82,19 @@ export default Route.extend({
         return reject(err);
       }
     });
+    const psps = gs.findAll('podSecurityPolicyTemplate');
 
     return hash({
       dataMap: promise,
       clusterLogging,
       projectLogging,
       harborVersion,
+      psps,
     }).then((hash) => ({
       loggingEnabled: hash.clusterLogging || hash.projectLogging,
       dataMap:        hash.dataMap,
       harborVersion:  hash.harborVersion,
+      psp:            hash.psps ? hash.psps.find((item) => item.name === pspId) : null,
     }))
   },
 

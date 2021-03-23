@@ -57,6 +57,7 @@ export default Component.extend(NewOrEdit, ChildHook, {
   labelErrors:      null,
   annotationErrors: null,
   lifecycleErrors:  null,
+  psp:              null,
 
   // ----------------------------------
   advanced:     false,
@@ -73,6 +74,11 @@ export default Component.extend(NewOrEdit, ChildHook, {
 
     if (get(this, 'launchConfig') && !get(this, 'launchConfig.environmentFrom')) {
       set(this, 'launchConfig.environmentFrom', []);
+    }
+
+    // setdefault pod secuiry runAsNonRoot
+    if (!get(this, 'isUpgrade') && get(this, 'psp.runAsUser.rule') === 'MustRunAsNonRoot') {
+      set(this, 'launchConfig.runAsNonRoot', true);
     }
 
     const service = get(this, 'service');
