@@ -18,17 +18,36 @@ const TRUE = 'True';
 const CLUSTER_TEMPLATE_ID_PREFIX = 'cattle-global-data:';
 const SCHEDULE_CLUSTER_SCAN_QUESTION_KEY = 'scheduledClusterScan.enabled';
 
+export const DEFAULT_USER_DATA =
+`MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="==MYBOUNDARY=="
+
+--==MYBOUNDARY==
+Content-Type: text/x-shellscript; charset="us-ascii"
+
+#!/bin/bash
+echo "Running custom user data script"
+
+--==MYBOUNDARY==--\\`;
+
 export const DEFAULT_NODE_GROUP_CONFIG = {
-  desiredSize:   2,
-  diskSize:      20,
-  ec2SshKey:     '',
-  gpu:           false,
-  instanceType:  't3.medium',
-  maxSize:       2,
-  minSize:       2,
-  nodegroupName: '',
-  subnets:       [],
-  type:          'nodeGroup',
+  desiredSize:          2,
+  diskSize:             20,
+  ec2SshKey:            '',
+  gpu:                  false,
+  imageId:              null,
+  instanceType:         't3.medium',
+  labels:               {},
+  maxSize:              2,
+  minSize:              2,
+  nodegroupName:        '',
+  requestSpotInstances: false,
+  resourceTags:         {},
+  spotInstanceTypes:    [],
+  subnets:                [],
+  tags:                 {},
+  type:                 'nodeGroup',
+  userData:             DEFAULT_USER_DATA,
 };
 
 export const DEFAULT_EKS_CONFIG = {
@@ -139,6 +158,45 @@ export default Resource.extend(Grafana, ResourceUsage, {
     return !!this.actionLinks.rotateCertificates;
   }),
 
+  canRotateEncryptionKey: computed(
+    'actionLinks.rotateEncryptionKey',
+    'etcdbackups.@each.created',
+    'rancherKubernetesEngineConfig.rotateEncryptionKey',
+    'rancherKubernetesEngineConfig.services.kubeApi.secretsEncryptionConfig.enabled',
+    'transitioning',
+    'isActive',
+    function() {
+      const acceptableTimeFrame = 360;
+      const {
+        actionLinks: { rotateEncryptionKey }, etcdbackups, rancherKubernetesEngineConfig
+      } = this;
+      const lastBackup = !isEmpty(etcdbackups) ? get(etcdbackups, 'lastObject') : undefined;
+      let diffInMinutes = 0;
+
+      if (this.transitioning !== 'no' || !this.isActive) {
+        return false;
+      }
+
+      if (isEmpty(rancherKubernetesEngineConfig)) {
+        return false;
+      } else {
+        const {
+          rotateEncryptionKey = false,
+          services: { kubeApi: { secretsEncryptionConfig = null } }
+        } = rancherKubernetesEngineConfig;
+
+        if (!!rotateEncryptionKey || isEmpty(secretsEncryptionConfig) || !get(secretsEncryptionConfig, 'enabled')) {
+          return false
+        }
+      }
+
+      if (lastBackup) {
+        diffInMinutes = moment().diff(lastBackup.created, 'minutes');
+      }
+
+      return rotateEncryptionKey && diffInMinutes <= acceptableTimeFrame;
+    }),
+
   canBulkRemove: computed('action.remove', function() { // eslint-disable-line
     return get(this, 'hasSessionToken') ? false : true;
   }),
@@ -160,6 +218,47 @@ export default Resource.extend(Grafana, ResourceUsage, {
     }
 
     return !!actionLinks.saveAsTemplate;
+  }),
+
+  hasPublicAccess: computed('eksConfig.publicAccess', 'eksStatus.upstreamSpec.publicAccess', 'property', function() {
+    return this?.eksStatus?.upstreamSpec?.publicAccess || this?.eksConfig?.publicAccess || true;
+  }),
+
+  hasPrivateAccess: computed('eksConfig.privateAccess', 'eksStatus.upstreamSpec.privateAccess', 'property', function() {
+    return this?.eksStatus?.upstreamSpec?.privateAccess || this?.eksConfig?.privateAccess || false;
+  }),
+
+  eksDisplayEksImport: computed('hasPrivateAccess', 'hasPublicAccess', function() {
+    const { clusterProvider } = this;
+
+    if (clusterProvider !== 'amazoneksv2') {
+      return false;
+    }
+
+    if (!this.hasPublicAccess && this.hasPrivateAccess) {
+      return true;
+    }
+
+    return false;
+  }),
+
+  canShowAddHost: computed('clusterProvider', 'hasPrivateAccess', 'hasPublicAccess', 'nodes', function() {
+    const { clusterProvider } = this;
+    const compatibleProviders = ['custom', 'import', 'amazoneksv2'];
+    const nodes = get(this, 'nodes');
+
+    if (!compatibleProviders.includes(clusterProvider)) {
+      return false;
+    }
+
+    // private access requires the ability to run the import command on the cluster
+    if (clusterProvider === 'amazoneksv2' && !!this.hasPublicAccess && this.hasPrivateAccess) {
+      return true;
+    } else if (clusterProvider !== 'amazoneksv2' && isEmpty(nodes)) {
+      return true;
+    }
+
+    return false;
   }),
 
   configName: computed('driver', 'state', function() {
@@ -208,13 +307,14 @@ export default Resource.extend(Grafana, ResourceUsage, {
       return 'googlegke';
     case 'okeEngineConfig':
       return 'oracleoke';
+    case 'lkeEngineConfig':
+      return 'linodelke';
     case 'rke2Config':
       return 'rke2';
     case 'rancherKubernetesEngineConfig':
       if ( !pools.length ) {
         return 'custom';
       }
-
 
       return firstPool.driver || get(firstPool, 'nodeTemplate.driver') || null;
     default:
@@ -226,11 +326,12 @@ export default Resource.extend(Grafana, ResourceUsage, {
     }
   }),
 
-  displayProvider: computed('configName', 'nodePools.@each.displayProvider', 'intl.locale', 'driver', function() {
+  displayProvider: computed('configName', 'driver', 'intl.locale', 'nodePools.@each.displayProvider', 'provider', function() {
     const intl = get(this, 'intl');
     const pools = get(this, 'nodePools');
     const firstPool = (pools || []).objectAt(0);
     const configName = get(this, 'configName');
+    const driverName = get(this, 'driver');
 
     switch ( configName ) {
     case 'amazonElasticContainerServiceConfig':
@@ -242,11 +343,25 @@ export default Resource.extend(Grafana, ResourceUsage, {
       return intl.t('clusterNew.googlegke.shortLabel');
     case 'okeEngineConfig':
       return intl.t('clusterNew.oracleoke.shortLabel');
+    case 'otccceEngineConfig':
+      return intl.t('clusterNew.otccce.shortLabel');
+    case 'lkeEngineConfig':
+      return intl.t('clusterNew.linodelke.shortLabel');
     case 'k3sConfig':
       return intl.t('clusterNew.k3simport.shortLabel');
     case 'rke2Config':
     case 'rancherKubernetesEngineConfig':
-      var shortLabel = configName === 'rancherKubernetesEngineConfig' ? 'clusterNew.rke.shortLabel' : 'clusterNew.rke2.shortLabel';
+      var shortLabel;
+
+      if (configName === 'rancherKubernetesEngineConfig') {
+        if (this.provider === 'rke.windows') {
+          shortLabel = 'clusterNew.rkeWindows.shortLabel'
+        } else {
+          shortLabel = 'clusterNew.rke.shortLabel'
+        }
+      } else {
+        shortLabel = 'clusterNew.rke2.shortLabel';
+      }
 
       if ( !!pools ) {
         if ( firstPool ) {
@@ -258,8 +373,13 @@ export default Resource.extend(Grafana, ResourceUsage, {
         return intl.t('clusterNew.custom.shortLabel');
       }
     default:
-      if (get(this, 'driver') && get(this, 'configName')) {
-        return get(this, 'driver').capitalize();
+      if (driverName) {
+        switch (driverName) {
+        case 'rancherd':
+          return intl.t('clusterNew.rancherd.shortLabel');
+        default:
+          return driverName.capitalize();
+        }
       } else {
         return intl.t('clusterNew.import.shortLabel');
       }
@@ -309,7 +429,13 @@ export default Resource.extend(Grafana, ResourceUsage, {
     const kubernetesVersion = get(this, 'eksStatus.upstreamSpec.kubernetesVersion');
     const nodeGroupVersions = (get(this, 'eksStatus.upstreamSpec.nodeGroups') || []).getEach('version');
 
-    return nodeGroupVersions.any((ngv) => Semver.lt(Semver.coerce(ngv), Semver.coerce(kubernetesVersion)));
+    return nodeGroupVersions.any((ngv) => {
+      if (isEmpty(ngv)) {
+        return false;
+      } else {
+        return Semver.lt(Semver.coerce(ngv), Semver.coerce(kubernetesVersion));
+      }
+    });
   }),
 
 
@@ -345,7 +471,7 @@ export default Resource.extend(Grafana, ResourceUsage, {
     return false;
   }),
 
-  availableActions: computed('actionLinks.rotateCertificates', 'canSaveAsTemplate', 'isClusterScanDisabled', function() {
+  availableActions: computed('actionLinks.{rotateCertificates,rotateEncryptionKey}', 'canRotateEncryptionKey', 'canSaveAsTemplate', 'canShowAddHost', 'eksDisplayEksImport', 'isClusterScanDisabled', function() {
     const a = get(this, 'actionLinks') || {};
 
     return [
@@ -354,6 +480,13 @@ export default Resource.extend(Grafana, ResourceUsage, {
         icon:      'icon icon-history',
         action:    'rotateCertificates',
         enabled:   !!a.rotateCertificates,
+      },
+      {
+        label:     'action.rotateEncryption',
+        icon:      'icon icon-key',
+        action:    'rotateEncryptionKey',
+        enabled:   !!this.canRotateEncryptionKey,
+        // enabled: true
       },
       {
         label:     'action.backupEtcd',
@@ -372,6 +505,12 @@ export default Resource.extend(Grafana, ResourceUsage, {
         icon:      'icon icon-file',
         action:    'saveAsTemplate',
         enabled:   this.canSaveAsTemplate,
+      },
+      {
+        label:     this.eksDisplayEksImport ? 'action.importHost' : 'action.registration',
+        icon:      'icon icon-host',
+        action:    'showCommandModal',
+        enabled:   this.canShowAddHost,
       },
       {
         label:     'action.runCISScan',
@@ -562,6 +701,10 @@ export default Resource.extend(Grafana, ResourceUsage, {
         }
       };
 
+      if (provider === 'import' && isEmpty(get(this, 'eksConfig'))) {
+        set(queryParams, 'queryParams.importProvider', 'other');
+      }
+
       if (provider === 'amazoneks' && !isEmpty(get(this, 'eksConfig'))) {
         set(queryParams, 'queryParams.provider', 'amazoneksv2');
       }
@@ -610,6 +753,15 @@ export default Resource.extend(Grafana, ResourceUsage, {
       });
     },
 
+    rotateEncryptionKey() {
+      const model = this;
+
+      get(this, 'modalService').toggleModal('modal-rotate-encryption-key', { model, });
+    },
+
+    showCommandModal() {
+      this.modalService.toggleModal('modal-show-command', { cluster: this });
+    },
   },
 
   clearConfigFieldsForClusterTemplate() {
@@ -721,7 +873,7 @@ export default Resource.extend(Grafana, ResourceUsage, {
       if (isEmpty(this.id)) {
         sanitizeConfigs(eksClusterConfigSpec, nodeGroupConfigSpec);
 
-        if (this.name !== get(this, 'eksConfig.displayName')) {
+        if (!get(this, 'eksConfig.imported') && this.name !== get(this, 'eksConfig.displayName')) {
           set(this, 'eksConfig.displayName', this.name);
         }
 

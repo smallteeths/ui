@@ -9,6 +9,7 @@ import { scheduleOnce } from '@ember/runloop';
 export default Route.extend({
   access:                 service(),
   globalStore:            service(),
+  clusterStore:           service(),
   releaseVersions:        service(),
   clusterTemplateService: service('clusterTemplates'),
   roleTemplateService:    service('roleTemplate'),

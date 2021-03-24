@@ -2,6 +2,7 @@
   <form onsubmit={{action "clickNext"}}>
     {{form-name-description
       model=model.cluster
+      editing=(not isEksClusterPending)
       nameRequired=true
       rowClass="row mb-20"
       colClass="col span-12 mb-0"
@@ -65,7 +66,7 @@
 
       <FormMembers
         @creator={{model.me}}
-        @editing={{and notView (not (or isK3sCluster isRke2Cluster))}}
+        @editing={{and (and notView (not (or isK3sCluster isRke2Cluster))) (not isEksClusterPending)}}
         @expanded={{expanded}}
         @isNew={{newCluster}}
         @memberConfig={{memberConfig}}
@@ -85,7 +86,7 @@
       expandFn=expandFn
       initialLabels=model.cluster.labels
       model=model.cluster
-      editing=(and notView (not (or isK3sCluster isRke2Cluster)))
+      editing=(and (and notView (not (or isK3sCluster isRke2Cluster))) (not isEksClusterPending))
     }}
 
     {{#if (eq driverInfo.name "import")}}
@@ -151,6 +152,25 @@
       {{/accordion-list-item}}
     {{/if}}
   {{/accordion-list}}
+  {{#if isImportedOther}}
+    {{#accordion-list showExpandAll=false as |al expandFn|}}
+      {{#accordion-list-item
+        title=(t "clusterNew.rke.advanced.label")
+        detail=(t "clusterNew.rke.advanced.detail")
+        expandAll=al.expandAll
+        everExpanded=true
+        expand=(action expandFn)
+      }}
+        <label class="acc-label">
+          {{t "clusterNew.rke.agentEnvVars.label"}}
+        </label>
+        <FormAgentEnvVar
+          @editable={{notView}}
+          @value={{agentEnvVars}}
+        />
+      {{/accordion-list-item}}
+    {{/accordion-list}}
+  {{/if}}
 {{/if}}
 
 {{#if showDriverComponent}}
@@ -166,6 +186,7 @@
     originalCluster=originalCluster
     otherErrors=memberErrors
     isEditCluster=isEdit
+    isPostSave=isPostSave
     save=(action "save")
     close=(action "close")
     registerHook=(action "registerHook")
@@ -173,6 +194,7 @@
   }}
 {{/if}}
 
+{{!-- otherwise save is handled by the cluster driver component --}}
 {{#if (and isEdit (not provider))}}
   {{top-errors errors=errors}}
   {{save-cancel
@@ -181,6 +203,7 @@
     cancel=(action "close")
   }}
 {{else if (not showDriverComponent)}}
+  {{!-- something is super wrong because your not import or custom or any driver in general so we're not letting you save --}}
   {{save-cancel
     saveDisabled=true
     cancel=(action "close")
