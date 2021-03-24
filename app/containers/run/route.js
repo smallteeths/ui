@@ -94,7 +94,7 @@ export default Route.extend({
       loggingEnabled: hash.clusterLogging || hash.projectLogging,
       dataMap:        hash.dataMap,
       harborVersion:  hash.harborVersion,
-      psp:            hash.psps ? hash.psps.find((item) => item.name === pspId) : null,
+      psp:            hash.psps ? hash.psps.find((item) => item.name === pspId && !params.workloadId) : null,
     }))
   },
 
