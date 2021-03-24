@@ -167,7 +167,7 @@ export default Route.extend(Preload, {
         scheduleOnce('afterRender', this.modalService, 'toggleModal', 'modal-feedback');
       } else if ( !isDev && (!seenWhatsNew || compare(seenWhatsNew, C.WHATS_NEW_VERSION) < 0) ) {
         // What's new
-        scheduleOnce('afterRender', this.modalService, 'toggleModal', 'modal-whats-new');
+        // scheduleOnce('afterRender', this.modalService, 'toggleModal', 'modal-whats-new');
       }
     }
   },
