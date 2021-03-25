@@ -91,69 +91,20 @@
 
     {{#if (eq driverInfo.name "import")}}
       {{#accordion-list-item
-              title=(t "cruPrivateRegistry.title.label")
-              detail=(t "cruPrivateRegistry.title.detailAtImportCluster")
-              expandOnInit=false
-              expandAll=al.expandAll
-              expand=(action expandFn)
+        title=(t "cruPrivateRegistry.title.label")
+        detail=(t "cruPrivateRegistry.title.detailAtImportCluster")
+        expandOnInit=false
+        expandAll=al.expandAll
+        expand=(action expandFn)
       }}
         {{input
-                type="text"
-                value=model.cluster.systemDefaultRegistry
-                classNames="form-control"
+          type="text"
+          value=model.cluster.systemDefaultRegistry
+          classNames="form-control"
         }}
       {{/accordion-list-item}}
-      {{#accordion-list-item
-              title=(t "clusterNew.rke.advanced.label")
-              detail=(t "clusterNew.rke.advanced.detail")
-              expandOnInit=false
-              expandAll=al.expandAll
-              expand=(action expandFn)
-      }}
-        <div class="row">
-          <div class="col span-4">
-            <label class="acc-label">
-              {{t "loggingPage.dockerRootDir.label"}}
-              {{#if clusterTemplateCreate}}
-                <ClusterTemplateOverrideToggle
-                        @path="dockerRootDir"
-                        @configVariable={{cluster.dockerRootDir}}
-                        @addOverride={{action "addOverride"}}
-                        @questions={{model.clusterTemplateRevision.questions}}
-                />
-              {{/if}}
-            </label>
-            <CheckOverrideAllowed
-                    @paramName="dockerRootDir"
-                    @applyClusterTemplate={{applyClusterTemplate}}
-                    @clusterTemplateRevision={{model.clusterTemplateRevision.clusterConfig}}
-                    @questions={{model.clusterTemplateRevision.questions}}
-            >
-              {{#input-or-display
-                      editable=notView
-                      value=model.cluster.dockerRootDir
-              }}
-                {{input
-                        type="text"
-                        value=model.cluster.dockerRootDir
-                        className="form-control"
-                        placeholder=(t "clusterNew.rke.dockerRootDir.placeholder" dir=defaultDockerRootDir)
-                }}
-              {{/input-or-display}}
-            </CheckOverrideAllowed>
-          </div>
-          <div class="col span-4">
-            <FluentdLogDirInput 
-              @cluster={{cluster}}
-              @editable={{notView}}
-            />
-          </div>
-        </div>
-      {{/accordion-list-item}}
     {{/if}}
-  {{/accordion-list}}
-  {{#if isImportedOther}}
-    {{#accordion-list showExpandAll=false as |al expandFn|}}
+    {{#if (or (eq driverInfo.name "import") isImportedOther)}}
       {{#accordion-list-item
         title=(t "clusterNew.rke.advanced.label")
         detail=(t "clusterNew.rke.advanced.detail")
@@ -161,16 +112,63 @@
         everExpanded=true
         expand=(action expandFn)
       }}
-        <label class="acc-label">
-          {{t "clusterNew.rke.agentEnvVars.label"}}
-        </label>
-        <FormAgentEnvVar
-          @editable={{notView}}
-          @value={{agentEnvVars}}
-        />
+      {{#if (eq driverInfo.name "import")}}
+        <div class="row">
+          <div class="col span-6">
+            <label class="acc-label">
+              {{t "loggingPage.dockerRootDir.label"}}
+              {{#if clusterTemplateCreate}}
+                <ClusterTemplateOverrideToggle
+                  @path="dockerRootDir"
+                  @configVariable={{cluster.dockerRootDir}}
+                  @addOverride={{action "addOverride"}}
+                  @questions={{model.clusterTemplateRevision.questions}}
+                />
+              {{/if}}
+            </label>
+            <CheckOverrideAllowed
+              @paramName="dockerRootDir"
+              @applyClusterTemplate={{applyClusterTemplate}}
+              @clusterTemplateRevision={{model.clusterTemplateRevision.clusterConfig}}
+              @questions={{model.clusterTemplateRevision.questions}}
+            >
+              {{#input-or-display
+                editable=notView
+                value=model.cluster.dockerRootDir
+              }}
+                {{input
+                  type="text"
+                  value=model.cluster.dockerRootDir
+                  className="form-control"
+                  placeholder=(t "clusterNew.rke.dockerRootDir.placeholder" dir=defaultDockerRootDir)
+                }}
+              {{/input-or-display}}
+            </CheckOverrideAllowed>
+          </div>
+          <div class="col span-6">
+            <FluentdLogDirInput 
+              @cluster={{cluster}}
+              @editable={{notView}}
+            />
+          </div>
+        </div>
+      {{/if}}
+      {{#if isImportedOther}}
+      <div class="row">
+        <div class="col span-12">
+          <label class="acc-label">
+            {{t "clusterNew.rke.agentEnvVars.label"}}
+          </label>
+          <FormAgentEnvVar
+            @editable={{notView}}
+            @value={{agentEnvVars}}
+          />
+        </div>
+      </div>
+      {{/if}}
       {{/accordion-list-item}}
-    {{/accordion-list}}
-  {{/if}}
+    {{/if}}
+  {{/accordion-list}}
 {{/if}}
 
 {{#if showDriverComponent}}
