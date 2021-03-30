@@ -58,7 +58,7 @@ export function initialize(/* application */) {
     },
 
     goToParent() {
-      var infos = this._router._routerMicrolib.currentHandlerInfos;
+      var infos = this._router._routerMicrolib.currentHandlerInfos || this._router._routerMicrolib.currentRouteInfos;
 
       var args = [];
       var info;
