@@ -162,14 +162,6 @@ const rootNav = [
         initExpand:     'authenticated.project.logging.logging'
       },
       {
-        id:             'tools-monitoring',
-        localizedLabel: 'nav.tools.monitoring',
-        route:          'authenticated.project.monitoring.project-setting',
-        resourceScope:  'global',
-        resource:       [],
-        ctx:            [getProjectId],
-      },
-      {
         id:             'tools-pipeline',
         localizedLabel: 'nav.tools.pipeline',
         route:          'authenticated.project.pipeline.settings',
