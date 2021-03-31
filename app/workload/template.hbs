@@ -348,6 +348,31 @@
   </div>
   {{/accordion-list-item}}
 
+  {{#if model.loggingEnabled}}
+    {{#accordion-list-item
+      title=(t "formContainerLog.title")
+      detail=(t "formContainerLog.detail" appName=settings.appName)
+      expandAll=al.expandAll
+      expand=(action expandFn)
+    }}
+      <div class="row">
+        <div class="col span-6">
+          <div>
+            <label class="acc-label">
+              {{t "formContainerLog.excludeContainer.label"}}
+            </label>
+          </div>
+          <div>
+            {{#if excludeContainer}}
+              {{t "formContainerLog.excludeContainer.true"}}
+            {{else}}
+              {{t "formContainerLog.excludeContainer.false"}}
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    {{/accordion-list-item}}
+  {{/if}}
 {{/accordion-list}}
 
 {{#custom-modal-adjust-pod

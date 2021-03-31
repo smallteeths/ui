@@ -476,6 +476,41 @@
           </div>
         </div>
         {{/accordion-list-item}}
+
+        {{#if loggingEnabled}}
+          {{#accordion-list-item
+            title=(t "formContainerLog.title")
+            detail=(t "formContainerLog.detail" appName=settings.appName)
+            expandAll=al.expandAll
+            expand=(action expandFn)
+          }}
+            <div class="row">
+              <div class="col span-6">
+                <label class="acc-label">
+                  {{t "formContainerLog.excludeContainer.label"}}
+                </label>
+                <div class="radio">
+                  <label>
+                    {{radio-button
+                      selection=excludeContainer
+                      value=false
+                    }}
+                    {{t "formContainerLog.excludeContainer.false"}}
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    {{radio-button
+                      selection=excludeContainer
+                      value=true
+                    }}
+                    {{t "formContainerLog.excludeContainer.true"}}
+                  </label>
+                </div>
+              </div>
+            </div>
+          {{/accordion-list-item}}
+        {{/if}}
       {{/advanced-section}}
     {{/accordion-list}}
   </div>

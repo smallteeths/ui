@@ -36,6 +36,15 @@ export default Controller.extend({
 
     return envs;
   }),
+
+  excludeContainer: computed('model.workload.annotations', function() {
+    const annotations = get(this, 'model.workload.annotations') || {}
+
+    const excludeContainer = annotations['field.cattle.io/excludeContainer'] === 'true' ? true : false
+
+    return excludeContainer
+  }),
+
   adjustPod(num){
     set(this, 'podChangeNum', num)
     set(this, 'showAddPodModal', true);

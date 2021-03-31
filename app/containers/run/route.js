@@ -47,13 +47,13 @@ export default Route.extend({
     const clusterLogging = gs.find('clusterLogging').then((res) => {
       const logging = res.filterBy('clusterId', clusterId).get('firstObject');
 
-      return !!logging;
+      return this.isLoggingEnabled(logging);
     });
 
     const projectLogging = gs.find('projectLogging').then((res) => {
       const logging = res.filterBy('projectId', projectId).get('firstObject');
 
-      return !!logging;
+      return this.isLoggingEnabled(logging);
     });
 
     let promise = null;
@@ -288,4 +288,24 @@ export default Route.extend({
     });
   },
 
+  isLoggingEnabled(logging) {
+    if (!logging) {
+      return false
+    }
+
+    const {
+      customTargetConfig,
+      elasticsearchConfig,
+      fluentForwarderConfig,
+      kafkaConfig,
+      splunkConfig,
+      syslogConfig,
+    } = logging
+
+    if (customTargetConfig || elasticsearchConfig || fluentForwarderConfig || kafkaConfig || splunkConfig || syslogConfig) {
+      return true
+    } else {
+      return false
+    }
+  },
 });
