@@ -185,16 +185,18 @@ export default Controller.extend({
       return (network.plugin === 'multus-flannel-macvlan' || network.plugin === 'multus-canal-macvlan');
     }
   }),
-  isCanalMacvlan: computed('scope.currentCluster.rancherKubernetesEngineConfig.network.plugin', 'scope.currentCluster.rancherKubernetesEngineConfig.network.options', function() {
+  isCanalMacvlan: computed('scope.currentCluster.annotations', 'scope.currentCluster.rancherKubernetesEngineConfig.network.{options,plugin}', function() {
     let network = get(this, 'scope.currentCluster.rancherKubernetesEngineConfig.network');
 
     if (!network){
       return false;
     }
     if (network.plugin === 'none'){
-      let options = network.options;
+      const annotations = get(this, 'scope.currentCluster.annotations') || {};
+      const options = network.options || {};
+      const macvlanPlugin = annotations['macvlan.pandaria.io/plugin'] || options.pandariaExtraPluginName;
 
-      return options &&  options.pandariaExtraPluginName === 'multus-canal-macvlan';
+      return macvlanPlugin && (macvlanPlugin === 'multus-canal-macvlan');
     } else {
       return network.plugin === 'multus-canal-macvlan';
     }
