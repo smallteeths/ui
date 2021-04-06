@@ -434,6 +434,7 @@ alertPage:
     addAlertGroup: 添加告警组
     addAlert: 添加告警规则
     noAlerts: 当前没有配置告警规则。
+    config: 告警配置
     table:
       noMatch: 没有告警与当前搜索匹配。
       noData: 没有配置告警规则
@@ -488,6 +489,9 @@ alertPage:
     cpuUsagePercent: CPU 使用率
     podRebootTimes: POD 重启次数
     customClusterBackupFailed: 自定义集群 Etcd 备份失败告警
+  config:
+    save: 保存
+    reset: 重置配置
 
 podSecurityPoliciesPage:
   index:

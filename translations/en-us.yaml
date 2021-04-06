@@ -433,6 +433,7 @@ alertPage:
     addAlertGroup: Add Alert Group
     addAlert: Add Alert Rule
     noAlerts: There are no alert rules defined.
+    config: Alert Config
     table:
       noMatch: No alerts match the current search.
       noData: There are no alerts defined
@@ -487,6 +488,9 @@ alertPage:
     cpuUsagePercent: CPU usage percent
     podRebootTimes: POD reboot times
     customClusterBackupFailed: Custom cluster Etcd backup failure
+  config:
+    save: Save
+    reset: Reset Config
 
 podSecurityPoliciesPage:
   index:

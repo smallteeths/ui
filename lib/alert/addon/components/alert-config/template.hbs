@@ -1,0 +1,34 @@
+<section class="header clearfix">
+  <div class="pull-left pt-10">
+    <h1 class="text-capitalize">
+      {{t 'alertPage.index.config'}}
+    </h1>
+  </div>
+</section>
+
+<div>
+  <div class="right-buttons pull-right">
+    <button class="btn btn-sm bg-primary" {{action "resetConfig"}}>
+      {{t 'alertPage.config.reset'}}
+    </button>
+  </div>
+</div>
+
+{{input-yaml
+  showUpload=false
+  showDownload=false
+  canChangeName=false
+  value=pastedAnswers
+  autoResize=true
+}}
+
+{{top-errors errors=yamlErrors}}
+
+{{save-cancel
+  saveDisabled=saveDisabled
+  editing=true
+  createLabel="alertPage.config.save"
+  save=(action "save")
+  saved=saved
+  cancel=(action "cancel")
+}}
