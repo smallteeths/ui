@@ -1088,16 +1088,16 @@ balancerPage:
     target: 目标
 
 banner:
-  alerting: Alerting is <a href="https://rancher.com/support-maintenance-terms/" target="_blank">deprecated</a> in Rancher v2.5+. Check out the updated version of alerting which is integrated with an <a href="{dashboardLink}/monitoring">updated monitoring</a>.
-  cis: CIS scans are <a href="https://rancher.com/support-maintenance-terms/" target="_blank">deprecated</a> in Rancher v2.5+. Check out the updated version of <a href="{dashboardLink}/cis">CIS scans</a>.
-  dashboard: Try out the <a href="{dashboardLink}">Cluster Explorer</a> for a new way to view and manage your Kubernetes resources.
-  istio: Istio is no longer being updated here. Check out the latest versions of <a href="{dashboardLink}/istio">Istio</a>.
-  logging: Logging is <a href="https://rancher.com/support-maintenance-terms/" target="_blank">deprecated</a> in Rancher v2.5+. Check out the updated version of <a href="{dashboardLink}/logging">logging</a>.
-  multiclusterapp: Multi-cluster apps are <a href="https://rancher.com/support-maintenance-terms/" target="_blank">deprecated</a> in Rancher v2.5+. Deploying apps to multiple clusters is available using <a href="{dashboardBase}c/local/fleet">Rancher Continuous Delivery</a>.
-  monitoring: Monitoring is <a href="https://rancher.com/support-maintenance-terms/" target="_blank">deprecated</a> in Rancher v2.5+. Check out the updated version of <a href="{dashboardLink}/monitoring">monitoring</a>.
-  monitoringV2Warning:  Monitoring is <a href="https://rancher.com/support-maintenance-terms/" target="_blank">deprecated</a> in Rancher v2.5+. The updated Rancher <a href="{dashboardLink}/monitoring">monitoring</a> chart is currently deployed.
-  notifiers: Notifiers are <a href="https://rancher.com/support-maintenance-terms/" target="_blank">deprecated</a> in Rancher v2.5+. Check out the updated version of notifiers which is integrated with an updated <a href="{dashboardLink}/monitoring">monitoring</a>.
-  pipeline: Pipelines are <a href="https://rancher.com/support-maintenance-terms/" target="_blank">deprecated</a> in Rancher v2.5+. Check out <a href="{dashboardBase}c/local/fleet">Rancher Continuous Delivery</a>.
+  alerting: 从 Rancher v2.5.0 开始，Cluster Manager 中的 Alerts 已不推荐使用 - 请查看 <a href="https://rancher.com/docs/rancher/v2.x/en/faq/deprecated-features-25x" target="_blank">FAQ</a>。请在 Cluster Explorer 应用程序和市场中查看 Rancher 新版<a href="{dashboardLink}/monitoring">监控</a>中 Alerts 的集成。
+  cis: 从 Rancher v2.5.0 开始，Cluster Manager 中的 CIS 扫描功能已不推荐使用 - 请查看 <a href="https://rancher.com/docs/rancher/v2.x/en/faq/deprecated-features-25x" target="_blank">FAQ</a>。对于使用基准版本 1.5 及以上的 CIS 扫描，请参见 Cluster Explorer 应用程序和市场中新版 <a href="{dashboardLink}/cis">CIS 扫描</a>。
+  dashboard: 请尝试使用 <a href="{dashboardLink}">Cluster Explorer</a> 查看和管理 Kubernetes 资源。
+  istio: Istio 已经停止在 Cluster Manager 中维护，请在 Cluster Explorer 应用程序和市场中查看新版的 <a href="{dashboardLink}/istio">Istio</a>。
+  logging: 从 Rancher v2.5.0 开始，Cluster Manager 中的 Logging 已不推荐使用 - 请查看 <a href="https://rancher.com/docs/rancher/v2.x/en/faq/deprecated-features-25x" target="_blank">FAQ</a>。请在 Cluster Explorer 应用程序和市场中查看新版的 <a href="{dashboardLink}/logging">Logging</a>。
+  multiclusterapp: 从 Rancher v2.5.0 开始，多集群应用已不推荐使用 - 请查看 <a href="https://rancher.com/docs/rancher/v2.x/en/faq/deprecated-features-25x" target="_blank">FAQ</a>。请查看 <a href="{dashboardBase}c/local/fleet">Rancher 持续交付</a>功能，通过 GitOps 实现多集群应用的部署。
+  monitoring: 从 Rancher v2.5.0 开始，Cluster Manager 中的监控已经不推荐使用 - 请查看 <a href="https://rancher.com/docs/rancher/v2.x/en/faq/deprecated-features-25x" target="_blank">FAQ</a>。请在 Cluster Explorer 应用程序和市场中查看新版的<a href="{dashboardLink}/monitoring">监控</a>。
+  monitoringV2Warning: 从 Rancher v2.5.0 开始，Cluster Manager 中的监控已经不推荐使用 - 请查看 <a href="https://rancher.com/docs/rancher/v2.x/en/faq/deprecated-features-25x" target="_blank">FAQ</a>。最新版的Rancher <a href="{dashboardLink}/monitoring">监控</a> 已经部署。
+  notifiers:  从 Rancher v2.5.0 开始，Cluster Manager 中的 Notifiers 已经不推荐使用 - 请查看 <a href="https://rancher.com/docs/rancher/v2.x/en/faq/deprecated-features-25x" target="_blank">FAQ</a>。请在 Cluster Explorer 应用程序和市场中查看 Rancher 新版<a href="{dashboardLink}/monitoring">监控</a>中 Notifiers 的集成。
+  pipeline: 从 Rancher v2.5.0 开始，Pipelines 已经不推荐使用 - 请查看 <a href="https://rancher.com/docs/rancher/v2.x/en/faq/deprecated-features-25x" target="_blank">FAQ</a>。有关持续交付功能，请查看 Cluster Explorer 中的 <a href="{dashboardBase}c/local/fleet">Rancher 持续交付</a>。
 
 catalogPage:
   istio:
