@@ -74,7 +74,7 @@ export default Component.extend({
     ports.forEach((obj) => {
       let containerPort = obj.containerPort;
 
-      if ( !containerPort ) {
+      if ( !containerPort || containerPort === '0' ) {
         errors.push(intl.t('formPorts.error.privateRequired'));
       }
 
