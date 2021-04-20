@@ -188,6 +188,10 @@
   background-image: url('images/providers/rdns.svg');
 }
 
+@mixin f5bigip {
+  background-image: url('images/providers/f5bigip.svg');
+}
+
 @mixin cloudflare {
   background-image: url('images/providers/cloudflare.svg');
 }

@@ -22,9 +22,15 @@
       <div class="row">
         <div class="col span-12">
           {{#banner-message icon="icon-info" color="bg-info mb-0 mt-10"}}
-            <p>
-              {{t "globalDnsPage.entriesPage.projectHelp" htmlSafe=true}}
-            </p>
+            {{#if isF5BigipProvider}}
+              <p>
+                {{t "globalDnsPage.entriesPage.projectF5bigipHelp" htmlSafe=true}}
+              </p>
+            {{else}}
+              <p>
+                {{t "globalDnsPage.entriesPage.projectHelp" htmlSafe=true}}
+              </p>
+            {{/if}}
           {{/banner-message}}
         </div>
       </div>

@@ -43,6 +43,13 @@ export default Resource.extend({
         provider: 'rdns'
       });
     }
+
+    if (get(this, 'f5bigipProviderConfig')) {
+      setProperties(this, {
+        config:   alias('f5bigipProviderConfig'),
+        provider: 'f5bigip'
+      });
+    }
   },
 
   canEdit: computed('links.update', function() {

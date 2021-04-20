@@ -75,6 +75,7 @@
   &.otc { @include otc; }
   &.route53 { @include route53; }
   &.rdns { @include rdns; }
+  &.f5bigip { @include f5bigip; }
   &.cloudflare { @include cloudflare; }
   &.alidns { @include alidns; }
 }

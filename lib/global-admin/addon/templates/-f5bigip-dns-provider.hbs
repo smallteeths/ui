@@ -1,0 +1,218 @@
+<section>
+  {{form-name-description
+    model=config
+    nameDisabled=isEdit
+    descriptionShown=false
+  }}
+</section>
+<form class="horizontal-form container-fluid text-left" autocomplete="off">
+  <div class="row">
+    <div class="col span-12 mb-0">
+      <label
+        class="acc-label"
+        for="f5bigip-root-domain"
+      >
+        {{t "globalDnsPage.providersPage.config.root.label"}}
+      </label>
+      {{input
+        classNames="form-control"
+        id="f5bigip-root-domain"
+        placeholder="e.g. example.org"
+        type="text"
+        value=config.rootDomain
+      }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col span-6 mb-0">
+      <label
+        class="acc-label"
+        for="f5bigip-host"
+      >
+        F5 Bigip Host{{field-required}}
+      </label>
+      {{input
+        classNames="form-control"
+        id="f5bigip-host"
+        placeholder="F5bigip Host"
+        type="text"
+        value=config.f5bigipProviderConfig.f5BigipHost
+      }}
+    </div>
+    <div class="col span-6 mb-0">
+      <label
+        class="acc-label"
+        for="f5bigip-port"
+      >
+        F5 Bigip Port{{field-required}}
+      </label>
+      {{input-integer
+        min="1"
+        max="65535"
+        classNames="form-control"
+        id="f5bigip-port"
+        placeholder="F5 Bigip Port"
+        type="text"
+        value=config.f5bigipProviderConfig.f5BigipPort
+      }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col span-6 mb-0">
+      <label
+        class="acc-label"
+        for="f5bigip-user"
+      >
+        F5 Bigip User{{field-required}}
+      </label>
+      {{input
+        classNames="form-control"
+        id="f5bigip-user"
+        placeholder="F5 Bigip User"
+        type="text"
+        value=config.f5bigipProviderConfig.f5BigipUser
+      }}
+    </div>
+    <div class="col span-6 mb-0">
+      <label
+        class="acc-label"
+        for="f5bigip-passwd"
+      >
+        F5 Bigip Password{{field-required}}
+      </label>
+      {{input
+        classNames="form-control"
+        id="f5bigip-passwd"
+        placeholder="F5bigip Password"
+        type="password"
+        value=config.f5bigipProviderConfig.f5BigipPasswd
+      }}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col span-6 mb-0">
+      <label
+        class="acc-label"
+        for="f5bigip-datacenter-name"
+      >
+        F5 Bigip Datacenter Name{{field-required}}
+        <a target="_blank" href="https://techdocs.f5.com/kb/en-us/products/big-ip-dns/manuals/product/bigip-dns-implementations-13-1-0/1.html#guid-0f3bec76-6adf-45d8-9469-8d6cb64976b8">
+          ({{t "globalDnsPage.providersPage.config.bigip.datacenterDescription"}})
+        </a>
+      </label>
+      {{input
+        classNames="form-control"
+        id="f5bigip-datacenter-name"
+        placeholder="Input the datacenter created in F5 Bigip"
+        type="text"
+        value=config.f5bigipProviderConfig.f5BigipDatacenterName
+      }}
+    </div>
+    <div class="col span-6 mb-0">
+      <label
+        class="acc-label"
+        for="f5bigip-server-name"
+      >
+        F5 Bigip Server Name{{field-required}}
+        <a target="_blank" href="https://techdocs.f5.com/kb/en-us/products/big-ip-dns/manuals/product/bigip-dns-implementations-13-1-0/1.html#guid-0f3bec76-6adf-45d8-9469-8d6cb64976b8">
+          ({{t "globalDnsPage.providersPage.config.bigip.serverDescription"}})
+        </a>
+      </label>
+      {{input
+        classNames="form-control"
+        id="f5bigip-server-name"
+        placeholder="e.g. rancher"
+        type="text"
+        value=config.f5bigipProviderConfig.f5BigipServerName
+      }}
+    </div>
+  </div>
+  <div class="row">
+    <table class="fixed mt-20">
+      <thead>
+        <tr>
+          <th class="divided ml-5">
+            F5 Bigip Device IP{{field-required}}
+            <a target="_blank" href="https://techdocs.f5.com/kb/en-us/products/big-ip-dns/manuals/product/bigip-dns-implementations-13-1-0/17.html">
+              ({{t "globalDnsPage.providersPage.config.bigip.deviceIPDescription"}})
+            </a>
+          </th>
+          <th class="divided ml-5">
+            F5 Bigip Device Name{{field-required}}
+            <a target="_blank" href="https://techdocs.f5.com/kb/en-us/products/big-ip-dns/manuals/product/bigip-dns-implementations-13-1-0/17.html">
+              ({{t "globalDnsPage.providersPage.config.bigip.deviceNameDescription"}})
+            </a>
+          </th>
+          <th class="divided ml-5">
+            F5 Bigip Device Translation
+            <a target="_blank" href="https://support.f5.com/csp/article/K14707">
+              ({{t "globalDnsPage.providersPage.config.bigip.deviceTranslationDescription"}})
+            </a>
+          </th>
+          {{#if editing}}
+            <th width="40">&nbsp;</th>
+          {{/if}}
+        </tr>
+      </thead>
+
+      <tbody>
+        {{#each config.f5bigipProviderConfig.f5BigipDeviceIPs as |deciceIp|}}
+          <tr>
+            <td class="divided p-5" data-title="F5 Bigip Device IP">
+              {{#if editing}}
+                {{input
+                  classNames="form-control"
+                  placeholder="e.g. F5 Bigip host"
+                  type="text"
+                  value=deciceIp.name
+                }}
+              {{else}}
+                {{deciceIp.name}}
+              {{/if}}
+            </td>
+
+            <td class="divided p-5" data-title="F5 Bigip Device Name">
+              {{#if editing}}
+                {{input
+                  classNames="form-control"
+                  placeholder="F5 Bigip Device Name"
+                  type="text"
+                  value=deciceIp.deviceName
+                }}
+              {{else}}
+                {{deciceIp.deviceName}}
+              {{/if}}
+            </td>
+
+            <td class="divided p-5" data-title="F5 Bigip Device Translation">
+              {{#if editing}}
+                {{input
+                  classNames="form-control"
+                  placeholder="F5 Bigip Device Translation"
+                  type="text"
+                  value=deciceIp.translation
+                }}
+              {{else}}
+                {{deciceIp.translation}}
+              {{/if}}
+            </td>
+
+            {{#if editing}}
+              <td class="text-right">
+                <button class="btn bg-primary btn-sm" {{action "removeDeciceIp" deciceIp}}><i class="icon icon-minus"/><span class="sr-only">{{t 'generic.remove'}}</span></button>
+              </td>
+            {{/if}}
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    <div class="clearfix">
+      {{#if editing}}
+        <button class="btn bg-link icon-btn" {{action "addDeviceIP"}}>
+          <span class="darken"><i class="icon icon-plus text-small"></i></span>
+          <span>{{t "globalDnsPage.providersPage.config.bigip.addDeviceIP"}}</span>
+        </button>
+      {{/if}}
+    </div>
+  </div>
+</form>

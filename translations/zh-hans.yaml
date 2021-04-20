@@ -2459,6 +2459,7 @@ globalDnsPage:
       noAccessProject: 您无法访问目标项目
       noAccessAddProvider: 您没有权限添加供应商
     projectHelp: "要完成项目的全局 DNS 记录设置，必须在应用或项目的 ingress 规则中添加注释(<code>rancher.io/globalDNS.hostname='hostname'</code>)，其中<code>'hostname'</code>是路由规则中使用的主机名，这个<code>'hostname'</code>也必须匹配这个全局 DNS 条目的 FQDN。"
+    projectF5bigipHelp: "您选择的是 F5bigip 的供应商，F5bigip 负载均衡是由自定义 CRD VirtualServer 来完成，要完成项目的全局 DNS 记录设置，必须在应用或项目的 VirtualServer 规则中添加注释(<code>rancher.io/globalDNS.hostname='hostname'</code>)，其中<code>'hostname'</code>是路由规则中使用的主机名，这个<code>'hostname'</code>也必须匹配这个全局 DNS 条目的 FQDN。"
     istioHelp: "要使模板在流量规则商店中可见，必须在应用商店模板<code>questions.yaml</code>文件中添加标签( <code>io.rancher.istio=true</code> )"
     table:
       name: 名称
@@ -2506,6 +2507,18 @@ globalDnsPage:
       provider: 提供商名称
       rootDomain: 根域名
     config:
+      bigip: 
+        datacenterDescription: Datacenter F5文档链接
+        serverDescription: Server F5文档链接
+        deviceIPDescription: Device IP F5文档链接
+        deviceNameDescription: Device Name F5文档链接
+        deviceTranslationDescription: Device Translation F5文档链接
+        addDeviceIP: 添加 Device IP
+        validation:
+          mustHasDeviceIP: Device IP/Device Name 不能为空
+          deviceIPMustUnique: Device IP 必须唯一
+          deviceIPFormatError: Device IP 格式错误
+          translationFormatError: Device Translation 格式错误
       root:
         label: 根域名
         placeholder: 根域名
@@ -9623,6 +9636,11 @@ pagination:
     =0{ 无 DNS 记录 }
     =1{ 选中 {count}{count, plural,=1{ 条 DNS 记录 } other { 条 DNS 记录 }}}
     other { 当前显示 {count} 条 DNS Records 中的 {from} 到 {to} 条 }}
+  dnsProvider: |
+    {pages, plural,
+    =0{ 无 DNS 提供商 }
+    =1{ 选中 {count}{count, plural,=1{ 条 DNS 提供商 } other { 条 DNS 提供商 }}}
+    other { 当前显示 {count} 条 DNS 提供商 中的 {from} 到 {to} 条 }}
   driver: |
     {pages, plural,
     =0{ 无驱动 }

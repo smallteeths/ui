@@ -44,19 +44,21 @@
     {{partial (concat activeProvider "-dns-provider")}}
   {{/accordion-list-item}}
 
-  {{#accordion-list-item
-    title=(t "globalDnsPage.providersPage.additionalOptions.title")
-    detail=(t "globalDnsPage.providersPage.additionalOptions.detail")
-    expandAll=al.expandAll
-    expand=(action expandFn)
-  }}
-    {{form-key-value
-      initialMap=additionalOptions
-      editing=true
-      changed=(action (mut additionalOptions))
-      addActionLabel="globalDnsPage.providersPage.additionalOptions.button"
+  {{#if (not isF5bigipProvider)}}
+    {{#accordion-list-item
+      title=(t "globalDnsPage.providersPage.additionalOptions.title")
+      detail=(t "globalDnsPage.providersPage.additionalOptions.detail")
+      expandAll=al.expandAll
+      expand=(action expandFn)
     }}
-  {{/accordion-list-item}}
+      {{form-key-value
+        initialMap=additionalOptions
+        editing=true
+        changed=(action (mut additionalOptions))
+        addActionLabel="globalDnsPage.providersPage.additionalOptions.button"
+      }}
+    {{/accordion-list-item}}
+  {{/if}}
 
   {{#accordion-list-item
     title=(t "globalDnsPage.providersPage.members.title")
@@ -73,7 +75,6 @@
     }}
   {{/accordion-list-item}}
 {{/accordion-list}}
-
 <section>
   {{top-errors errors=errors}}
   {{save-cancel

@@ -2476,6 +2476,7 @@ globalDnsPage:
       noAccessProject: You do not have access to the target project
       noAccessAddProvider: You do not have access to add a provider
     projectHelp: "To finalize configuring this Global DNS entry, you must add the following annotation ( <code>rancher.io/globalDNS.hostname</code> ) on the ingress in your application or in your project. The value of this annotation should be the hostname used in the routing rules of your ingress and match the FQDN of this Global DNS entry."
+    projectF5bigipHelp: "You have chosen a provider for F5bigip, where load balancing is done by a custom CRD VirtualServer. To finalize configuring this Global DNS entry, you must add the following annotation ( <code>rancher.io/globalDNS.hostname</code> ) on the VirtualServer in your application or in your project. The value of this annotation should be the hostname used in the routing rules of your ingress and match the FQDN of this Global DNS entry."
     istioHelp: "To make catalog template visable in Traffic Rules Catalog, you must add the following label ( <code>io.rancher.istio=true</code> ) in <code>questions.yaml</code> file of your catalog template."
     table:
       name: Name
@@ -2523,6 +2524,18 @@ globalDnsPage:
       provider: Provider Name
       rootDomain: Root Domain
     config:
+      bigip: 
+        datacenterDescription: Description of the Datacenter
+        serverDescription: Description of the Server
+        deviceIPDescription: Description of the device IP
+        deviceNameDescription: Description of the device name
+        deviceTranslationDescription: Description of the Device Translation
+        addDeviceIP: Add Device IP
+        validation:
+          mustHasDeviceIP: Device IP/Device Name must be configured
+          deviceIPMustUnique: Device IP Must Unique
+          deviceIPFormatError: Device IP format error
+          translationFormatError: Device Translation format error
       root:
         label: Root Domain
         placeholder: Your root domain
@@ -9724,6 +9737,11 @@ pagination:
     =0 {No DNS Records}
     =1 {{count} {count, plural, =1 {DNS Record} other {DNS Records}}}
     other {{from} - {to} of {count} DNS Records}}
+  dnsProvider: |
+    {pages, plural,
+    =0 {No DNS Records}
+    =1 {{count} {count, plural, =1 {DNS Provider} other {DNS Providers}}}
+    other {{from} - {to} of {count} DNS Providers}}
   driver: |
     {pages, plural,
     =0 {No Drivers}
