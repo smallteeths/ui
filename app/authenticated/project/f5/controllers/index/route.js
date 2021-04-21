@@ -6,7 +6,7 @@ import C from 'ui/utils/constants';
 import { inject as service } from '@ember/service';
 
 export default Route.extend({
-  scope:  service(),
+  scope: service(),
 
   model() {
     const store = this.get('store');

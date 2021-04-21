@@ -23,7 +23,7 @@ export default Resource.extend({
 
   namespace: reference('namespaceId', 'namespace', 'clusterStore'),
 
-  targets: computed('pools', function(){
+  targets: computed('pools', 'annotations', function(){
     const a = get(this, 'annotations') || {};
     const pools = get(this, 'pools');
     const out = [];

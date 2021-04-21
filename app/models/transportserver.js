@@ -33,7 +33,7 @@ export default Resource.extend({
     }
   }),
 
-  targets: computed('pools.@each.service', function(){
+  targets: computed('pools.@each.service', 'annotations', function(){
     const a = get(this, 'annotations') || {};
     const pools = get(this, 'pools') || [];
     const out = [];

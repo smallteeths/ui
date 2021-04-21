@@ -94,7 +94,7 @@ const rootNav = [
           'authenticated.project.f5.controllers',
           'authenticated.project.f5.tls',
         ],
-        initExpand:     'authenticated.project.f5.index'
+        initExpand: 'authenticated.project.f5.index'
       },
     ],
   },

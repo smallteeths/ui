@@ -16,7 +16,7 @@ export default Component.extend(ModalBase, NewOrEdit, {
   editing:    true,
   rootDomain: '',
 
-  model:          alias('modalService.modalOpts.model'),
+  model: alias('modalService.modalOpts.model'),
 
   init() {
     this._super(...arguments);
