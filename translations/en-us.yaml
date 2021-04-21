@@ -7122,6 +7122,9 @@ formGlobalRoles:
     admin:
       label: Administrator
       detail: Administrators have full control over the entire installation and all resources in all clusters.
+    readOnlyAdmin:
+      label: Read-Only Administrator
+      detail: A read-only administrator can access all resources in all downstream clusters, but cannot access the local cluster
     user:
       label: Standard User
       detail: Standard Users can create new clusters and manage clusters and projects they have been granted access to.

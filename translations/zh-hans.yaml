@@ -6739,6 +6739,9 @@ formGlobalRoles:
     admin:
       label: 管理员
       detail: 管理员完全控制所有集群中的全部安装和所有资源。
+    readOnlyAdmin:
+      label: 只读管理员
+      detail: 只读管理员可以访问所有下游集群中的所有资源，但不能访问local集群
     user:
       label: 标准用户
       detail: 标准用户可以创建新的集群并管理他们已被授权访问的集群和项目。

@@ -6,7 +6,8 @@ import { hasMany } from '@rancher/ember-api-store/utils/denormalize';
 const BASE = 'user-base';
 const USER = 'user';
 const ADMIN = 'admin';
-const SPECIAL = [BASE, ADMIN, USER];
+const READ_ONLY_ADMIN = 'read-only-pandaria';
+const SPECIAL = [BASE, ADMIN, USER, READ_ONLY_ADMIN];
 
 export default Resource.extend({
 
