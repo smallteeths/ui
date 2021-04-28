@@ -1561,6 +1561,7 @@ f5CISPage:
   disable: 禁用
   enableActionLabel: 启用
   warning: "请注意，当 Pool成员类型 选择 Cluster 时，每个集群需要使用独立的 F5 BIG IP，无法与其它集群共享 F5 BIG IP。"
+  authError: "local集群不支持F5 CIS 服务"
 
 f5CtlPage:
   notEnabled: 'F5 负载均衡服务尚未启用。点击 <a href="/c/{clusterId}/cis/f5">此处</a> 启用它。'

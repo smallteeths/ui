@@ -94,7 +94,10 @@ const rootNav = [
           'authenticated.project.f5.controllers',
           'authenticated.project.f5.tls',
         ],
-        initExpand: 'authenticated.project.f5.index'
+        initExpand: 'authenticated.project.f5.index',
+        condition() {
+          return get(this, 'cluster.id') !== 'local';
+        }
       },
     ],
   },
@@ -375,6 +378,9 @@ const rootNav = [
         resource:                 [],
         ctx:                      [getClusterId],
         initExpand:               'authenticated.cluster.cis/f5',
+        condition() {
+          return get(this, 'cluster.id') !== 'local';
+        }
       },
       { divider: true },
       {

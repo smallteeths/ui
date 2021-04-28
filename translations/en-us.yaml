@@ -1575,6 +1575,7 @@ f5CISPage:
   disable: Disable
   enableActionLabel: Enable
   warning: "If Pool Member Type is Cluster, each cluster needs to use an independent F5 BIG IP and cannot share with other clusters F5 BIG IP"
+  authError: "F5 CIS service is not supported in local cluster"
 
 f5CtlPage:
   notEnabled: 'F5 CIS is disabled. Click <a href="/c/{clusterId}/cis/f5">here</a> to enable it。'
