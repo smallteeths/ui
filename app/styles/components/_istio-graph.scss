@@ -1,5 +1,6 @@
 #kiali-div {
   width : 100%;
+  min-width: 910px;
   height: calc(110vh);
   overflow : hidden;
   position : relative;
@@ -14,6 +15,7 @@
   top: -75px;
   left: -210px;
   width: calc(100% + 210px);
+  min-width: 1120px;
   height: calc(110vh);
   border: none;
 }
