@@ -54,7 +54,6 @@
   {{#accordion-list as |al expandFn|}}
     {{#if scope.currentCluster.isMonitoringReady}}
       {{#metrics-summary
-        classNames="mb-20"
         expandAll=al.expandAll
         expandFn=expandFn
         grafanaUrl=model.node.grafanaUrl
@@ -75,49 +74,39 @@
       expandFn=expandFn
     }}
     {{#if isK3sNode}}
-      <div class="mt-20">
-        {{#accordion-list-item
-           title=(t "clusterDashboard.k3sInfo.title")
-           detail=(t "clusterDashboard.k3sInfo.detail")
-           expandAll=expandAll
-           expand=(action expandFn)
-           as | parent |
-        }}
-          <div class="row">
-            <K3sNodeArgs @node={{model.node}} />
-            <K3sNodeEnvVar @node={{model.node}} />
-          </div>
-        {{/accordion-list-item}}
-      </div>
+      {{#accordion-list-item
+          title=(t "clusterDashboard.k3sInfo.title")
+          detail=(t "clusterDashboard.k3sInfo.detail")
+          expandAll=expandAll
+          expand=(action expandFn)
+          as | parent |
+      }}
+        <div class="row">
+          <K3sNodeArgs @node={{model.node}} />
+          <K3sNodeEnvVar @node={{model.node}} />
+        </div>
+      {{/accordion-list-item}}
     {{/if}}
-    <div class="mt-20">
-      {{system-info-section
-        node=model.node
-        expandAll=al.expandAll
-        expandFn=expandFn
-      }}
-    </div>
-    <div class="mt-20">
-      {{labels-section
-        model=model.node
-        showKind=false
-        expandAll=al.expandAll
-        expandFn=expandFn
-      }}
-    </div>
-    <div class="mt-20">
-      {{annotations-section
-        model=model.node
-        expandAll=al.expandAll
-        expandFn=expandFn
-      }}
-    </div>
-    <div class="mt-20">
-      {{taints-section
-        taints=model.node.taints
-        expandAll=al.expandAll
-        expandFn=expandFn
-      }}
-    </div>
+    {{system-info-section
+      node=model.node
+      expandAll=al.expandAll
+      expandFn=expandFn
+    }}
+    {{labels-section
+      model=model.node
+      showKind=false
+      expandAll=al.expandAll
+      expandFn=expandFn
+    }}
+    {{annotations-section
+      model=model.node
+      expandAll=al.expandAll
+      expandFn=expandFn
+    }}
+    {{taints-section
+      taints=model.node.taints
+      expandAll=al.expandAll
+      expandFn=expandFn
+    }}
   {{/accordion-list}}
 </section>
