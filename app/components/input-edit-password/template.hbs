@@ -90,10 +90,10 @@
               }}
             </div>
           </div>
-          <div class="row pr-5 pl-5">
-            {{input-password-strength setPasswordStrength=(action "setPasswordStrength") password=password}}
-          </div>
         {{/liquid-if}}
+        <div class="row pr-5 pl-5">
+          {{input-password-strength setPasswordStrength=(action "setPasswordStrength") password=password}}
+        </div>
       </div>
     </div>
   </div>
