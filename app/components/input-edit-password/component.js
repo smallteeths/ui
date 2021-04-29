@@ -5,7 +5,6 @@ import { inject as service } from '@ember/service';
 import { later, run } from '@ember/runloop';
 import { randomStr } from 'shared/utils/util';
 import { resolve, all } from 'rsvp';
-import AESEncrypt from 'shared/utils/crypto';
 
 
 const CHANGE = 'change';
@@ -58,11 +57,11 @@ export default Component.extend({
 
     save(cb) {
       const user = get(this, 'user');
-      const neu = AESEncrypt(get(this, 'password').trim()) || '';
+      const neu = get(this, 'access').encryptPassword(get(this, 'password').trim()) || '';
       let old = get(this, 'currentPassword').trim() || '';
 
       if (get(this, 'showCurrent')) {
-        old = AESEncrypt(get(this, 'currentPassword').trim()) || '';
+        old = get(this, 'access').encryptPassword(get(this, 'currentPassword').trim()) || '';
       }
       set(this, 'serverErrors', []);
 
