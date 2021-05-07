@@ -16,6 +16,7 @@ $live-color                          : #52c41a !default;
 
 .percent-gauge {
   fill: $gauge-main-color;
+  position: relative;
 
   .gauge-value-path {
     fill: $gauge-color;
@@ -80,6 +81,18 @@ $live-color                          : #52c41a !default;
   border: 0px;
   border-radius: 8px;
   pointer-events: none;
+}
+
+// pandaria
+.percent-quota-tooltip {
+  position: absolute;
+  background: rgba($text-color,.8);
+  padding: 10px;
+  border-radius: 3px;
+  max-width: 95%;
+  z-index: 1000;
+  color: $body-bg;
+  text-align: center;
 }
 
 .percent-gauge-tooltip table {
