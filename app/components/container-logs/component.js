@@ -177,6 +177,7 @@ export default Component.extend({
     set(this, 'socket', socket);
 
     var body = null;
+    let truncatedLog = '';
 
     set(this, 'status', 'initializing');
 
@@ -190,8 +191,25 @@ export default Component.extend({
       let ansiup = new AnsiUp;
 
       set(this, 'status', 'connected');
-      const data = AWS.util.base64.decode(message.data).toString();
+      const d = AWS.util.base64.decode(message.data).toString();
+      let data = d;
       let html = '';
+
+      if (truncatedLog) {
+        data = `${ truncatedLog }${ d }`;
+        truncatedLog = ''
+      }
+      if (!d.endsWith('\n')) {
+        const lines = data.trim().split(/\n/)
+
+        if (lines.length === 1) {
+          truncatedLog = data
+
+          return;
+        }
+        data = lines.slice(0, -1).join('\n');
+        truncatedLog = lines.slice(-1);
+      }
 
       data.trim().split(/\n/)
         .filter((line) => line)
