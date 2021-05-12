@@ -43,6 +43,10 @@
       <div class="text-center mt-20 mb-20 text-bold text-success">
         {{t "accountsPage.detail.table.global.admin"}}
       </div>
+    {{else if model.user.hasReadOnlyAdmin}}
+    <div class="text-center mt-20 mb-20 text-bold text-success">
+      {{t "accountsPage.detail.table.global.readOnlyAdmin"}}
+    </div>
     {{else}}
       {{#sortable-table
          classNames="grid sortable-table"

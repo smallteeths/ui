@@ -188,6 +188,7 @@ accountsPage:
         description: Access to manage things that affect the entire installation
         admin: This user is an administrator and has all permissions.
         noRoles: This user has no global roles
+        readOnlyAdmin: This user is a read-only administrator and has read-only access to subordinate cluster objects
       cluster:
         title: Cluster Roles
         description: Roles granted to this user for individual clusters

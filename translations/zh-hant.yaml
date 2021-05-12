@@ -157,6 +157,7 @@ accountsPage:
         description: 訪問管理影響整個安裝的事情
         admin: 此用戶是管理員並擁有所有權限
         noRoles: 此用戶沒有全局角色
+        readOnlyAdmin: 此用戶是只讀管理員並對下級集群對象擁有只讀權限
       cluster:
         title: 集群角色
         description: 授予此用戶的單個集群的角色

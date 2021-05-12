@@ -43,6 +43,10 @@ export default Resource.extend({
     return get(this, 'id') === ADMIN;
   }),
 
+  isReadOnlyAdmin: computed('id', function() {
+    return get(this, 'id') === READ_ONLY_ADMIN;
+  }),
+
   isCustom: computed('isAdmin', 'isUser', 'isBase', function() {
     return !get(this, 'isAdmin') && !get(this, 'isBase') && !get(this, 'isUser');
   }),

@@ -46,6 +46,10 @@ export default Resource.extend({
     return get(this, 'globalRoleBindings').findBy('globalRole.isAdmin', true);
   }),
 
+  hasReadOnlyAdmin: computed('globalRoleBindings.[]', function() {
+    return get(this, 'globalRoleBindings').findBy('globalRole.isReadOnlyAdmin', true);
+  }),
+
   hasCustom: computed('globalRoleBindings.[]', function() {
     return get(this, 'globalRoleBindings').findBy('globalRole.isCustom', true);
   }),
