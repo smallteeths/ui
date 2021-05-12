@@ -161,7 +161,7 @@ accountsPage:
       cluster:
         title: 集群角色
         description: 授予此用戶的單個集群的角色
-        noRoles: 此用戶沒有項目角色
+        noRoles: 此用戶沒有集群角色
       project:
         title: 項目角色
         description: 授予此用戶的單個項目的角色

@@ -192,7 +192,7 @@ accountsPage:
       cluster:
         title: 集群角色
         description: 授予此用户的单个集群的角色
-        noRoles: 此用户没有项目角色
+        noRoles: 此用户没有集群角色
       project:
         title: 项目角色
         description: 授予此用户的单个项目的角色

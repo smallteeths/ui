@@ -190,7 +190,7 @@ accountsPage:
       cluster:
         title: 叢集角色
         description: 授予此用戶的單個叢集的角色
-        noRoles: 此用戶沒有專案角色
+        noRoles: 此用戶沒有叢集角色
       project:
         title: 專案角色
         description: 授予此用戶的單個專案的角色
