@@ -14,7 +14,7 @@
     </h2>
   </div>
   <div class="right-buttons">
-    {{#if (or (and isEdit (not applyClusterTemplate)) (and (lte step 1) (not applyClusterTemplate)))}}
+    {{#if (and (lte step 1) (not applyClusterTemplate))}}
       {{#if pasteOrUpload}}
         <button {{action "cancel"}} type="button" class="btn btn-sm bg-primary" disabled={{not canEditForm}}>
           {{#if notView}}
@@ -37,7 +37,7 @@
 </section>
 
 {{#if (and (not clusterTemplateCreate) notView) }}
-  {{#if (or isEdit (eq step 1))}}
+  {{#if (or (and isEdit (not isPostSave)) (eq step 1))}}
     <section class="cluster-template-select mb-5">
       <div class="row">
         {{#if (or (or model.clusterTemplateRevisions model.clusterTemplateRevision) clusterTemplatesEnforced)}}
@@ -95,7 +95,7 @@
 {{/if}}
 
 {{#if (or clusterTemplateCreate (or (not clusterTemplatesEnforced) (and clusterTemplatesEnforced clusterTemplateRevisionId)))}}
-  {{#if (or isEdit (eq step 1))}}
+  {{#if (or (and isEdit (not isPostSave)) (eq step 1))}}
     {{#accordion-list
        expandAll=(mut forceExpandAll)
        showExpandAll=true
@@ -1259,17 +1259,17 @@
               {{drain-node selection=upgradeStrategy.nodeDrainInput clusterTemplateCreate=clusterTemplateCreate editable=notView applyClusterTemplate=applyClusterTemplate clusterTemplateRevision=model.clusterTemplateRevision.clusterConfig questions=model.clusterTemplateRevision.questions addOverride=(action "addOverride")}}
             </div>
           {{/if}}
-          {{#if (not clusterTemplateCreate)}}
+          {{#unless clusterTemplateCreate}}
             <div class="row mt-10">
               <label class="acc-label">
                 {{t "clusterNew.rke.agentEnvVars.label"}}
               </label>
-              <FormAgentEnvVar 
-                @editable={{notView}} 
-                @value={{agentEnvVars}} 
+              <FormAgentEnvVar
+                @editable={{notView}}
+                @value={{mut agentEnvVars}}
               />
             </div>
-          {{/if}}
+          {{/unless}}
           <hr>
           <div class="row">
             <div class="col span-4">
@@ -1359,7 +1359,7 @@
        showExpandAll=false
        as |al expandFn|
     }}
-      {{#if cluster.windowsPreferedCluster}}
+      {{#if isWindowsPreferedCluster}}
         {{#accordion-list-item
            title=(t "clusterNew.rke.system.title")
            detail=(t "clusterNew.rke.system.detail")
@@ -1435,7 +1435,7 @@
 
 {{top-errors errors=allErrors}}
 
-{{#if (or (and notView (eq step 1)) (and isEdit (eq step 2)))}}
+{{#if (or (and notView (eq step 1)) (and (and (not isPostSave) isEdit) (eq step 2)))}}
   {{#if (and clusterTemplatesEnforced (not clusterTemplateRevisionId) )}}
     <section class="mt-20 mb-20">
       <BannerMessage

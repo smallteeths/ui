@@ -145,11 +145,35 @@
           </p>
         </div>
       </div>
+    {{else if (eq cloudCredentialType "google")}}
+      <div class="row">
+        <div class="col span-12">
+          {{#input-text-file
+            label="clusterNew.googlegke.credential.label"
+            value=config.authEncodedJson
+            accept="text/*, .json"
+            minHeight=60
+            canChangeName=false
+            nameRequired=true
+            placeholder="clusterNew.googlegke.credential.placeholder"
+            concealValue=true as |section|
+          }}
+            {{#if (eq section "description")}}
+              <div class="row">
+                <div class="col span-12 wrap mb-0">
+                  {{t "clusterNew.googlegke.credential.helpText" htmlSafe=true}}
+                </div>
+              </div>
+            {{/if}}
+          {{/input-text-file}}
+        </div>
+      </div>
     {{else if (eq cloudCredentialType "linode")}}
       <div class="row">
         <div class="col span-6">
           <label class="acc-label" for="linode-token">
-            {{t "modalAddCloudKey.linode.token.label"}}{{field-required}}
+            {{t "modalAddCloudKey.linode.token.label"}}
+            {{field-required}}
           </label>
           {{input
             type="password"
@@ -256,6 +280,37 @@
           }}
         </div>
 
+      </div>
+
+    {{else if (eq cloudCredentialType "pnap")}}
+      <div class="row">
+        <div class="col span-6">
+          <label class="acc-label" for="pnap-client-identifier">
+            {{t "modalAddCloudKey.pnap.clientIdentifier.label"}}{{field-required}}
+          </label>
+          {{input
+          type="text"
+          value=config.clientIdentifier
+          classNames="form-control"
+          id="pnap-client-identifier"
+          placeholder=(t "modalAddCloudKey.pnap.clientIdentifier.placeholder")
+          }}
+        </div>
+        <div class="col span-6">
+          <label class="acc-label" for="pnap-client-secret">
+            {{t "modalAddCloudKey.pnap.clientSecret.label"}}{{field-required}}
+          </label>
+          {{input
+          type="password"
+          value=config.clientSecret
+          classNames="form-control"
+          id="pnap-client-secret"
+          placeholder=(t "modalAddCloudKey.pnap.clientSecret.placeholder")
+          }}
+          <p class="text-info">
+            {{t "modalAddCloudKey.pnap.clientSecret.help" htmlSafe=true}}
+          </p>
+        </div>
       </div>
 
     {{else if (eq cloudCredentialType "vmware")}}

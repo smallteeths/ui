@@ -56,6 +56,7 @@
   &.oci { @include oci; }
   &.openstack { @include openstack; }
   &.packet { @include packet; }
+  &.pnap { @include pnap; }
   &.rackspace { @include rackspace; }
   &.vmwarevsphere { @include vmwarevsphere; }
   &.other { @include other; }
@@ -68,6 +69,7 @@
   &.amazoneksv2 { @include amazoneks; }
   &.azureaks { @include azureaks; }
   &.googlegke { @include googlegke; }
+  &.googlegkev2 { @include googlegke; }
   &.tencenttke { @include tencenttke; }
   &.huaweicce { @include huaweicce; }
   &.oracleoke { @include oracleoke; }

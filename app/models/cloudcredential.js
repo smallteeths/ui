@@ -18,17 +18,22 @@ const cloudCredential = Resource.extend({
   isAmazon:    notEmpty('amazonec2credentialConfig'),
   isAzure:     notEmpty('azurecredentialConfig'),
   isDo:        notEmpty('digitaloceancredentialConfig'),
+  isGoogle:    notEmpty('googlecredentialConfig'),
   isLinode:    notEmpty('linodecredentialConfig'),
   isOCI:       notEmpty('ocicredentialConfig'),
+  isPNAP:      notEmpty('pnapcredentialConfig'),
   isVMware:    notEmpty('vmwarevspherecredentialConfig'),
-  displayType: computed('amazonec2credentialConfig', 'azurecredentialConfig', 'digitaloceancredentialConfig', 'linodecredentialConfig', 'ocicredentialConfig', 'vmwarevspherecredentialConfig', function() {
+
+  displayType: computed('amazonec2credentialConfig', 'azurecredentialConfig', 'digitaloceancredentialConfig', 'googlecredentialConfig', 'linodecredentialConfig', 'ocicredentialConfig', 'pnapcredentialConfig', 'vmwarevspherecredentialConfig', function() {
     const {
       isAmazon,
       isAzure,
       isDo,
+      isGoogle,
       isLinode,
       isOCI,
-      isVMware
+      isPNAP,
+      isVMware,
     } = this;
 
     if (isAmazon) {
@@ -37,10 +42,14 @@ const cloudCredential = Resource.extend({
       return 'Azure';
     } else if (isDo) {
       return 'Digital Ocean';
+    } else if (isGoogle) {
+      return 'Google';
     } else if (isLinode) {
       return 'Linode';
     } else if (isOCI) {
       return 'OCI';
+    } else if (isPNAP) {
+      return 'phoenixNAP';
     } else if (isVMware) {
       return 'VMware vSphere';
     }
