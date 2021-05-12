@@ -13,6 +13,7 @@ const {
 } = C.CATALOG;
 
 const Catalog = Resource.extend({
+  growl:        service(),
   modalService: service('modal'),
   level:        'global',
 
@@ -79,7 +80,9 @@ const Catalog = Resource.extend({
         set(this, 'helmVersion', helmV3);
       }
 
-      this.save();
+      this.save().catch((err) => {
+        get(this, 'growl').fromError(err.message || err.code || err.error, '');
+      });
     },
 
     edit() {
