@@ -39,7 +39,9 @@ var PersistentVolumeClaim = Resource.extend({
   }),
 
   workloads: computed('id', 'namespace.workloads.@each.volumes', function() {
-    return (get(this, 'namespace.workloads') || []).filter((workload) => (get(workload, 'volumes') || []).find((volume) => get(volume, 'persistentVolumeClaim.persistentVolumeClaimId') === get(this, 'id')));
+    return (get(this, 'namespace.workloads') || [])
+      .filter((workload) => (get(workload, 'volumes') || get(workload, 'statefulSetConfig.volumeClaimTemplates') || [])
+        .find((volume) => get(volume, 'persistentVolumeClaim.persistentVolumeClaimId') === get(this, 'id') || (get(this, 'id').lastIndexOf('-') > -1 && get(volume, 'id') && get(this, 'id').slice(0, get(this, 'id').lastIndexOf('-')) === `${ get(volume, 'id') }-${ get(workload, 'name') }`)));
   }),
 
   sizeBytes: computed('status.capacity.storage', function() {
