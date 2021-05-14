@@ -325,7 +325,9 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
         this.doAction('redeploy');
       } else {
         this.updateTimestamp();
-        this.save();
+        this.save().catch((err) => {
+          get(this, 'growl').fromError(err.message || err.code || err.error, '');
+        });
       }
     },
 

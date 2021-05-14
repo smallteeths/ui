@@ -1,9 +1,11 @@
 import Resource from '@rancher/ember-api-store/models/resource';
-import { computed, set } from '@ember/object';
+import { computed, get, set } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 var Feature = Resource.extend({
   intl: service(),
+
+  growl: service(),
 
   type: 'feature',
 
@@ -43,6 +45,7 @@ var Feature = Resource.extend({
 
       return this.save().catch((err) => {
         set(this, 'value', false);
+        get(this, 'growl').fromError(err.message || err.code || err.error, '');
 
         return err;
       });
@@ -52,6 +55,7 @@ var Feature = Resource.extend({
 
       return this.save().catch((err) => {
         set(this, 'value', true)
+        get(this, 'growl').fromError(err.message || err.code || err.error, '');
 
         return err;
       });

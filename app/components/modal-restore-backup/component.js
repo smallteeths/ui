@@ -25,7 +25,7 @@ export default Component.extend(ModalBase, {
   },
 
   actions: {
-    restore() {
+    restore(cb) {
       const { backupId, restoreRkeConfig } = this;
       const out          = {};
 
@@ -37,6 +37,9 @@ export default Component.extend(ModalBase, {
 
         this.modalOpts.cluster.doAction('restoreFromEtcdBackup', out).then(() => {
           this.send('cancel');
+        }).catch((err) => {
+          cb(false)
+          set(this, 'errors', [err.message || err.code || err.error])
         });
       } else {
         this.growl.fromError(this.intl.t('modalRestoreBackup.error'));

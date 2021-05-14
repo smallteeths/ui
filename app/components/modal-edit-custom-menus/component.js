@@ -132,7 +132,7 @@ export default Component.extend(ModalBase, {
         cb(true)
         this.send('done')
       }).catch((err) => {
-        set(this, 'errors', err)
+        set(this, 'errors', [err.body.message || err.body.code || err.body.error])
         cb(false)
       })
     },
