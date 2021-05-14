@@ -33,6 +33,7 @@
   <div class="shell-body {{if (eq status 'closed') 'shell-close-bg'}}" contenteditable="{{contenteditable}}" oncontextmenu={{action "contextMenuHandler"}}>
   </div>
 </div>
+<TopErrors @errors={{errors}} />
 {{#if hasBlock}}
   <div class="footer-actions">
     {{yield}}

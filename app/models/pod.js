@@ -13,10 +13,11 @@ import DisplayImage from 'shared/mixins/display-image';
 
 var Pod = Resource.extend(Grafana, DisplayImage, {
   router:       service(),
-  modalService:  service('modal'),
+  modalService: service('modal'),
   globalStore:  service(),
-  clusterStore:  service(),
+  clusterStore: service(),
   scope:        service(),
+  access:       service(),
 
   canHaveLabels: true,
   escToClose:    true,
@@ -232,7 +233,10 @@ var Pod = Resource.extend(Grafana, DisplayImage, {
     },
 
     shell() {
-      get(this, 'modalService').toggleModal('modal-shell', { model: this, });
+      get(this, 'modalService').toggleModal('modal-shell', {
+        model:           this,
+        permissionCheck: !!get(this, 'access.me.hasReadOnlyAdmin')
+      });
     },
 
     popoutShell() {

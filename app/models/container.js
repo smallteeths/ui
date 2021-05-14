@@ -13,6 +13,7 @@ var Container = Resource.extend(Grafana, DisplayImage, {
   intl:         service(),
   scope:        service(),
   router:       service(),
+  access:       service(),
 
   links:        {},
   type:         'container',
@@ -115,7 +116,9 @@ var Container = Resource.extend(Grafana, DisplayImage, {
     shell() {
       get(this, 'modalService').toggleModal('modal-shell', {
         model:         get(this, 'pod'),
-        containerName: get(this, 'name')
+        containerName: get(this, 'name'),
+
+        permissionCheck: !!get(this, 'access.me.hasReadOnlyAdmin')
       });
     },
 

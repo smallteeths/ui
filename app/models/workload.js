@@ -22,8 +22,8 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
   router:        service(),
   settings:      service(),
   clusterStore:  service(),
-
-  pods: hasMany('id', 'pod', 'workloadId'),
+  access:        service(),
+  pods:          hasMany('id', 'pod', 'workloadId'),
 
   scaleTimer: null,
 
@@ -339,7 +339,10 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
     },
 
     shell() {
-      get(this, 'modalService').toggleModal('modal-shell', { model: get(this, 'podForShell'), });
+      get(this, 'modalService').toggleModal('modal-shell', {
+        model:           get(this, 'podForShell'),
+        permissionCheck: !!get(this, 'access.me.hasReadOnlyAdmin')
+      });
     },
 
     popoutShell() {

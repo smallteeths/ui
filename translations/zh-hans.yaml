@@ -5149,6 +5149,7 @@ containerShell:
     disconnected: 已断开
     closed: 已关闭
     code: " 状态码: {code}"
+  permissionDenied: 无权访问
 
 copyToClipboard:
   tooltip: 复制到剪贴板

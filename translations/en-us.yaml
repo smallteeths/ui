@@ -5503,6 +5503,7 @@ containerShell:
     disconnected: Disconnected
     closed: Closed
     code: "Code: {code}"
+  permissionDenied: Permission Denied
 
 copyToClipboard:
   tooltip: Copy to Clipboard

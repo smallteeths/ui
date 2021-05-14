@@ -2565,6 +2565,7 @@ containerShell:
     connected: 已連接
     disconnected: 已斷開
     closed: 已關閉
+  permissionDenied: 無權訪問
 
 copyToClipboard:
   tooltip: 複製到剪貼板
