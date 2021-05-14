@@ -7,6 +7,7 @@ import layout from './template';
 import C from 'shared/utils/constants';
 import { get as getTree } from 'shared/utils/navigation-tree';
 import { run } from '@ember/runloop';
+import $ from 'jquery';
 import CustomMenu from 'ui/mixins/custom-menu';
 
 function fnOrValue(val, ctx) {
@@ -56,8 +57,17 @@ export default Component.extend(CustomMenu, {
 
     run.once(this, 'updateNavTree');
   },
+
   didInsertElement() {
     run.scheduleOnce('afterRender', this, this.setupTearDown);
+
+    if ($('.page-header-left') && $('.page-header-left').position()) {
+      if (get(this, 'settings.showFooterBanner')) {
+        $('.page-header-left').css('bottom', 85)
+      } else {
+        $('.page-header-left').css('bottom', 60)
+      }
+    }
   },
 
   actions: {
