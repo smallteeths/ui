@@ -51,6 +51,7 @@ export function getProvisioners() {
 export default Resource.extend({
   clusterStore: service(),
   router:       service(),
+  growl:        service(),
 
   type:      'storageClass',
   state: 'active',
@@ -138,7 +139,9 @@ export default Resource.extend({
       annotations[BETA_ANNOTATION] = 'false';
     }
 
-    this.save();
+    this.save().catch((err) => {
+      get(this, 'growl').fromError(err.message || err.code || err.error, '');
+    });
   },
 
 });
