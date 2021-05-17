@@ -57,6 +57,8 @@
         </tr>
       {{/if}}
     {{/component}}
+  {{else if errors.length}}
+    {{top-errors errors=errors}}
   {{else}}
     <div class="text-center mt-20">
       <i class="icon icon-spinner icon-spin icon-3x"></i>
