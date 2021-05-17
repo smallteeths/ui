@@ -249,7 +249,7 @@
 
 //table mixins
 @mixin bordered {
-  border-bottom: $table-border-color solid 2px;
+  // border-bottom: $table-border-color solid 2px;
   border-collapse: collapse;
 
   > TBODY {
