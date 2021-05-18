@@ -212,67 +212,69 @@
       </div>
     {{/accordion-list-item}}
 
-    {{#accordion-list-item
-       title=(t "clusterIstioPage.mixer.title")
-       detail=(t "clusterIstioPage.mixer.detail")
-       expandAll=al.expandAll
-       expand=(action expandFn)
-       expandOnInit=false
-    }}
-      {{form-reservation
-        component="MixerTelemetry"
-        requestCpu=config.mixerTelemetryRequestCpu
-        requestMemory=config.mixerTelemetryRequestMemory
-        limitCpu=config.mixerTelemetryLimitCpu
-        limitMemory=config.mixerTelemetryLimitMemory
+    {{#if showMixer}}
+      {{#accordion-list-item
+        title=(t "clusterIstioPage.mixer.title")
+        detail=(t "clusterIstioPage.mixer.detail")
+        expandAll=al.expandAll
+        expand=(action expandFn)
+        expandOnInit=false
       }}
-
-      <div class="row">
-        <div class="col span-6">
-          <label class="acc-label" for="input-mixer-policy-enabled">
-            {{t "clusterIstioPage.config.mixerPolicyEnabled.label"}}
-          </label>
-          {{schema/input-boolean
-            id="input-mixer-policy-enabled"
-            value=config.mixerPolicyEnabled
-            classNames="form-control"
-          }}
-        </div>
-      </div>
-
-      {{#if config.mixerPolicyEnabled}}
         {{form-reservation
-          component="MixerPolicy"
-          requestCpu=config.mixerPolicyRequestCpu
-          requestMemory=config.mixerPolicyRequestMemory
-          limitCpu=config.mixerPolicyLimitCpu
-          limitMemory=config.mixerPolicyLimitMemory
+          component="MixerTelemetry"
+          requestCpu=config.mixerTelemetryRequestCpu
+          requestMemory=config.mixerTelemetryRequestMemory
+          limitCpu=config.mixerTelemetryLimitCpu
+          limitMemory=config.mixerTelemetryLimitMemory
         }}
-      {{/if}}
 
-      <div class="row">
-        <div class="col span-12">
-          <label class="acc-label">
-            {{t "clusterIstioPage.nodeSelector.helpText" component="Mixer"}}
-          </label>
-          {{form-key-value
-            changedArray=(action (mut mixerNodeSelectors))
-            initialMap=mixerNodeSelector
-            allowEmptyValue=true
-            addActionLabel="clusterIstioPage.nodeSelector.addSelectorLabel"
-          }}
+        <div class="row">
+          <div class="col span-6">
+            <label class="acc-label" for="input-mixer-policy-enabled">
+              {{t "clusterIstioPage.config.mixerPolicyEnabled.label"}}
+            </label>
+            {{schema/input-boolean
+              id="input-mixer-policy-enabled"
+              value=config.mixerPolicyEnabled
+              classNames="form-control"
+            }}
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col span-12">
-          {{scheduling-toleration
-            editing=true
-            tolerate=mixerTolerations
-            title=(t "formScheduling.toleration.workloadTitle" workload="Mixer")
+
+        {{#if config.mixerPolicyEnabled}}
+          {{form-reservation
+            component="MixerPolicy"
+            requestCpu=config.mixerPolicyRequestCpu
+            requestMemory=config.mixerPolicyRequestMemory
+            limitCpu=config.mixerPolicyLimitCpu
+            limitMemory=config.mixerPolicyLimitMemory
           }}
+        {{/if}}
+
+        <div class="row">
+          <div class="col span-12">
+            <label class="acc-label">
+              {{t "clusterIstioPage.nodeSelector.helpText" component="Mixer"}}
+            </label>
+            {{form-key-value
+              changedArray=(action (mut mixerNodeSelectors))
+              initialMap=mixerNodeSelector
+              allowEmptyValue=true
+              addActionLabel="clusterIstioPage.nodeSelector.addSelectorLabel"
+            }}
+          </div>
         </div>
-      </div>
-    {{/accordion-list-item}}
+        <div class="row">
+          <div class="col span-12">
+            {{scheduling-toleration
+              editing=true
+              tolerate=mixerTolerations
+              title=(t "formScheduling.toleration.workloadTitle" workload="Mixer")
+            }}
+          </div>
+        </div>
+      {{/accordion-list-item}}
+    {{/if}}
 
     {{#accordion-list-item
        title=(t "clusterIstioPage.tracing.title")
@@ -503,6 +505,13 @@
       @color="bg-warning"
       @icon="icon-alert"
       @message={{t "clusterIstioPage.monitoringNotDeployed"}}
+    />
+  {{/if}}
+
+  {{#if (and saveDisabled mixerBreaking)}}
+    <BannerMessage
+      @color="bg-warning"
+      @message={{t "clusterIstioPage.warning.mixerBreaking"}}
     />
   {{/if}}
 

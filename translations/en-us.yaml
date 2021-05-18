@@ -1333,6 +1333,8 @@ clusterIstioPage:
   upgradeMonitoring: 'Before enabling Istio, you need to upgrade cluster monitoring to version 0.0.4 or above first. Go <a href="/c/{clusterId}/monitoring/cluster-setting">here</a> to upgrade cluster monitoring.'
   enableMonitoring:
     label: Enable Monitoring
+  warning:
+    mixerBreaking: Istio upgrade to 1.8 requires disabled first and then enable.
 
 certificatesPage:
   cn: Domain Name

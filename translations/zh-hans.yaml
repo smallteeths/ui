@@ -1318,6 +1318,8 @@ clusterIstioPage:
   upgradeMonitoring: '在启用 Istio 之前，您需要首先将集群监视升级到 0.0.4 或更高版本。访问 <a href="/c/{clusterId}/monitoring/cluster-setting">此处</a> 去升级集群监控。'
   enableMonitoring:
     label: 启用监控
+  warning:
+    mixerBreaking: Istio升级到1.8需要先禁用再重新启用
 
 certificatesPage:
   cn: 域名
