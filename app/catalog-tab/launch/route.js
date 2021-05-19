@@ -192,7 +192,7 @@ export default Route.extend({
         });
       });
     }).catch((error) => {
-      if (error.status === 404) {
+      if ([404, 403].includes(error.status)) {
         this.growl.fromError(this.intl.t('newCatalog.error.appData'), error.message);
       }
 
