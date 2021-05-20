@@ -10885,6 +10885,7 @@ nav:
     gatekeeper: OPA Gatekeeper
     rio: Rio
     cisF5: F5 CIS
+  project:
     none: Grouped Projects/Namespaces
     namespaces: Namespaces
   dashboard:
