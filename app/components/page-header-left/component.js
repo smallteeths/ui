@@ -64,8 +64,10 @@ export default Component.extend(CustomMenu, {
     if ($('.page-header-left') && $('.page-header-left').position()) {
       if (get(this, 'settings.showFooterBanner')) {
         $('.page-header-left').css('bottom', 85)
+        $('.sidebar').css('margin-bottom', 25)
       } else {
         $('.page-header-left').css('bottom', 60)
+        $('.sidebar').css('margin-bottom', 0)
       }
     }
   },
