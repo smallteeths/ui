@@ -14,6 +14,10 @@ $healthy-text-color                  : $success !default;
 $unhealthy-text-color                : $error !default;
 $live-color                          : #52c41a !default;
 
+// pandaria-ui
+$warning                             : #F1C40F !default;
+$link-color                          : #3497DA !default;
+
 .percent-gauge {
   fill: $gauge-main-color;
   position: relative;
@@ -72,6 +76,22 @@ $live-color                          : #52c41a !default;
   .gauge-reservedPercent-fill {
     stroke: $gauge-color;
     fill: $gauge-color;
+  }
+  // pandaria
+  .gauge-quota-usage-fill {
+    fill: $warning;
+  }
+  .gauge-quota-distribution-fill {
+    fill: $live-color;
+  }
+  .gauge-quota-usage-text-fill {
+    fill: $link-color;
+  }
+  .gauge-quota-distribution-text-fill {
+    fill: $link-color;
+  }
+  .gauge-quota-canAssigned-text-fill {
+    fill: $link-color;
   }
 }
 

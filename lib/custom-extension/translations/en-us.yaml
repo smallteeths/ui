@@ -47,9 +47,20 @@ imageRepoSection:
 quotasCn:
   quotas: Quotas
   remain: Assignable
-  usable: Usable 
+  usable: Usable
   editProjectModal: Edit project quotas
   editNamespaceModal: Edit namespace quotas
+  chart: 
+    distribution: Allocated
+    used: Used
+    qesourceQuotaLink: This page shows quota-related usage. For details, please refer to
+    percent: Percent
+    remain: Assignable
+    class: Storage Class
+    total: Total
+    legend: 
+      distribution: Allocated
+      used: Used
   headers:
     namespace: Namespace
     used: Allocated

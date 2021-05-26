@@ -25,52 +25,7 @@
         </dd.Content>
       </BasicDropdown>
     </div>
-    <div class="quota-title">
-      <b>{{quotaName}}</b>
-      <span>
-        {{quotaState}}
-      </span>
-      {{#if quotaSubKey}}
-        <div title="{{quotaSubKey}}" class="clip">
-          <b>{{t 'volumesPage.storageClass.label'}}: {{quotaSubKey}}</b>
-        </div>
-      {{/if}}
-    </div>
-    <div class="quota-container">
-      <span>
-        {{firstLetterQuotaName}}
-      </span>
-      <div class="quota-container-size">
-        {{#if (eq percent 'N/A')}}
-          <b>{{percent}}</b>
-        {{else}}
-          <b>{{percent}}%</b>
-        {{/if}}
-      </div>
-      <div class="quota-container-state">
-        {{t 'quotasCn.common.usage'}}
-      </div>
-    </div>
-    <div class="quota-progress">
-      <div class="quota-progress-precent">
-        <span>{{t 'quotasCn.common.use'}} <span style="font-size: 12px;">{{used}}</span></span>
-        <br>
-        <span>{{t 'quotasCn.common.total'}} <span style="font-size: 12px;">{{quotaTotalText}}</span></span>
-      </div>
-      {{#if (eq percent 'N/A')}}
-        {{progress-bar
-          percent=0
-          color='quota'
-        }}
-      {{else}}
-        {{progress-bar
-          percent=percent
-          color='quota'
-        }}
-      {{/if}}
-      <div class="quota-progress-total">
-         <span style="font-size: 12px;">{{t 'quotasCn.usable'}} <span style="font-size: 12px;">{{available}}</span></span>
-      </div>
+    <div class="quota-chart percent-gauge">
     </div>
   </div>
 </div>

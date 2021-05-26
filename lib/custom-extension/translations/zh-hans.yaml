@@ -51,6 +51,17 @@ quotasCn:
   usable: 剩余可使用
   editProjectModal: 修改项目配额
   editNamespaceModal: 修改命名空间配额
+  chart: 
+    distribution: 分配
+    used: 占用
+    qesourceQuotaLink: 此页面展示的是配额相关用量，详情请参考
+    percent: 百分比
+    remain: 剩余
+    class: 存储类
+    total: 总共
+    legend: 
+      distribution: 分配
+      used: 占用
   headers:
     namespace: 命名空间
     used: 已分配

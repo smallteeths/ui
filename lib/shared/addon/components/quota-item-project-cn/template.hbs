@@ -1,5 +1,5 @@
 <div class="quota-item-cn">
-  <div style="position:relative;width: 240px;min-width:240px;border-right:1px solid #ebebeb;border-bottom:none">
+  <div class="quota-item-cn-container">
     {{#if hasPermissions}}
       <div class="quota-item-edit">
         <BasicDropdown
@@ -26,56 +26,7 @@
         </BasicDropdown>
       </div>
     {{/if}}
-    <div class="quota-title">
-      <b>{{quotaName}}</b>
-      <span>
-        {{quotaState}}
-      </span>
-      {{#if quotaSubKey}}
-        <div title="{{quotaSubKey}}" class="clip">
-          <b>{{t 'volumesPage.storageClass.label'}}: {{quotaSubKey}}</b>
-        </div>
-      {{/if}}
-    </div>
-    <div class="quota-container">
-      <span>
-        {{firstLetterQuotaName}}
-      </span>
-      <div class="quota-container-size">
-        {{#if (eq percent 'N/A')}}
-          <b>{{percent}}</b>
-        {{else}}
-          <b>{{percent}}%</b>
-        {{/if}}
-      </div>
-      <div class="quota-container-state">
-        {{t 'quotasCn.common.usage'}}
-      </div>
-    </div>
-    <div class="quota-progress">
-      <div class="quota-progress-total">
-        <span style="font-size: 12px;">{{t 'quotasCn.common.use'}} <span style="font-size: 12px;">{{used}}</span></span>
-        <br>
-        <span style="font-size: 12px;">{{t 'quotasCn.common.total'}} <span style="font-size: 12px;">{{quotaTotalText}}</span></span>
-      </div>
-      {{#if (eq percent 'N/A')}}
-        {{progress-bar
-          percent=0
-          color='quota'
-        }}
-      {{else}}
-        {{progress-bar-multi
-          values=quotaPercentData.value
-          max=maxQuotas
-          tooltipValues=quotaPercentData.tooltipValues
-          tooltipArrayOrString="array"
-          tooltipTemplate="-ns-quota-progressbar"
-          minPercent=0
-        }}
-      {{/if}}
-      <div class="quota-progress-total">
-        <span style="font-size: 12px;">{{t 'quotasCn.remain'}} <span style="font-size: 12px;">{{quotaPercentData.canAssigned}}</span></span>
-      </div>
+    <div class="quota-chart percent-gauge">
     </div>
   </div>
   <div class="quota-namespqce-table">
@@ -113,11 +64,8 @@
                 {{/link-to}}
               </div>
             </td>
-            <td class="pl-10">
-              {{row.used}} ({{row.percent}})
-            </td>
-            <td class="text-right pr-30">
-              {{row.usedInNS}} ({{row.percentInNS}})
+            <td class="pl-10 text-center">
+              {{row.used}}
             </td>
           </tr>
         {{else if (eq kind "nomatch")}}
