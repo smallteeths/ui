@@ -474,24 +474,28 @@
         keyPlaceholder="newContainer.environment.keyPlaceholder"
         valueLabel="newContainer.environment.valueLabel"
         valuePlaceholder="newContainer.environment.valuePlaceholder"
+        initToggle=initToggle
+        key=initToggle
       }}
     {{/accordion-list-item}}
   {{/accordion-list}}
-  {{#if (or pilotWarning mixerTelemetryWarning tracingWarning gatewayWarning (and mixerPolicyWarning config.mixerPolicyEnabled) mixerWarning istioWarning)}}
+  {{#if (or pilotWarning (and showMixer mixerTelemetryWarning) tracingWarning gatewayWarning (and showMixer mixerPolicyWarning config.mixerPolicyEnabled) (and showMixer mixerWarning) istioWarning)}}
     {{#banner-message color="bg-warning"}}
       {{#if istioWarning}}
         <p>{{istioWarning}}</p>
       {{else}}
         <p>{{pilotWarning}}</p>
-        <p>{{mixerWarning}}</p>
-        <p>{{mixerTelemetryWarning}}</p>
+        {{#if showMixer}}
+          <p>{{mixerWarning}}</p>
+          <p>{{mixerTelemetryWarning}}</p>
+        {{/if}}
         {{#if config.tracingEnabled}}
           <p>{{tracingWarning}}</p>
         {{/if}}
         {{#if config.gatewayEnabled}}
           <p>{{gatewayWarning}}</p>
         {{/if}}
-        {{#if config.mixerPolicyEnabled}}
+        {{#if (and config.mixerPolicyEnabled showMixer)}}
           <p>{{mixerPolicyWarning}}</p>
         {{/if}}
       {{/if}}

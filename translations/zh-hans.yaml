@@ -1232,6 +1232,7 @@ clusterIstioPage:
   customAnswers:
     title: 自定义应答
     detail: 配置自定义的应答。
+    warning: "自定义应答是一个高级配置选项。{appName}预配置了一些自定义应答, 以保证能满足一些 <a href='https://istio.io/latest/docs/setup/additional-setup/cni/#prerequisites' target='_blank' rel='nofollow noreferrer'>特定</a> 的Istio配置。 添加和移除自定义应答可能会生成一些无效的Istio配置。在保存修改之前，请确保您明白这些改动可能会带来的结果。"
   links:
     kiali:
       label: Kiali UI
