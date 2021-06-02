@@ -21,7 +21,7 @@ $modal-overlay                       : rgba($light-grey, 0.75) !default;
   }
 
   &.modal-open {
-    z-index: 9999;
+    z-index: 999;
     opacity: 1;
     transition: opacity .25s ease-in-out;
 
