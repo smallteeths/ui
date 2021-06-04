@@ -111,7 +111,7 @@ export default Component.extend({
     optionsChanged(options) {
       const out = [];
 
-      options.filter((option) => get(option, 'key') && get(option, 'value')).forEach((option) => {
+      options.forEach((option) => {
         out.push({
           name:  get(option, 'key'),
           value: get(option, 'value'),

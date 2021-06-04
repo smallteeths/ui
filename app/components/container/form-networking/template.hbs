@@ -86,7 +86,7 @@
   <div class="row box mt-20">
     {{form-key-value
         editing=editing
-        allowEmptyValue=false
+        allowEmptyValue=true
         initialArray=initOptionsArray
         changedArray=(action "optionsChanged")
         header=(t 'formNetwork.dnsConfig.options.label')
