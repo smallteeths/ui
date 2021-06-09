@@ -3797,6 +3797,8 @@ catalogSettings:
       placeholder: 'e.g. master'
     private:
       label: Use private catalog
+    tls:
+      insecureSkipTLSVerify: Skip tls verify
     username:
       label: Username
       required: '"Username" is required'

@@ -26,14 +26,24 @@
         {{t "catalogSettings.more.url.label"}}
       </label>
       {{input type="text" value=primaryResource.url classNames="form-control"}}
-    </div>
-    <div class="checkbox pt-10">
-      <label class="acc-label pb-5">
-        {{input
-          type="checkbox"
-          checked=isPrivate
-        }} {{t "catalogSettings.more.private.label"}}
-      </label>
+      <div class="flex flex-row">
+        <div class="checkbox pt-10">
+          <label class="acc-label pb-5 center">
+            {{input
+              type="checkbox"
+              checked=isPrivate
+            }} <span class="ml-5">{{t "catalogSettings.more.private.label"}}</span>
+          </label>
+        </div>
+        <div class="checkbox pt-10 ml-20">
+          <label class="acc-label pb-5 center ">
+            {{input
+              type="checkbox"
+              checked=primaryResource.insecureSkipTLSVerify
+            }} <span class="ml-5">{{t "catalogSettings.more.tls.insecureSkipTLSVerify"}}</span>
+          </label>
+        </div>
+      </div>
     </div>
   </div>
 

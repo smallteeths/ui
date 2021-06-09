@@ -141,6 +141,28 @@
   display:flex;
 }
 
+// pandaria
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-justify-between {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-col-reverse {
+  flex-direction: column-reverse;
+}
+
 .center {
   display:flex !important;
   justify-content:center;
