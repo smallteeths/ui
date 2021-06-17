@@ -34,7 +34,8 @@
           {{feature.name}}
         </td>
         <td data-title="{{dt.description}}" class="pt-5 pb-5">
-          {{feature.status.description}}
+          {{!-- {{feature.status.description}} --}}
+          {{get featureDescMap feature.name}}
         </td>
         <td data-title="{{dt.actions}}" class="actions">
           <ActionMenu @model={{feature}} />

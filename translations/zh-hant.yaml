@@ -3464,6 +3464,9 @@ featureFlags:
   features:
     istioVirtualServiceUi: "启用此功能将为Istio公开其他UI页面。"
     unsupportedStorageDrivers: "启用此功能将为持久卷和存储类公开不受支持的存储驱动程序选项。"
+    fleet: "啟動 Rancher 時，安裝 Fleet"
+    projectPipelineServiceUI: "啟用此功能將顯示項目流水線導航菜單"
+    virtaitechGpuServiceUI: "啟用此功能將在部署服務時允許用戶設置 vGpus 的預留實例數量"
   table:
     state: 狀態
     name: 名稱
