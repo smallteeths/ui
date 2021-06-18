@@ -26,12 +26,21 @@
       selectedSecret=selectedSecret
     }}
   {{else if (and editing (eq source.source "configMap"))}}
+    {{#if enableLoadResourceByNamespace}}
+    {{schema/input-ns-config-map
+      namespace=namespace
+      value=source.sourceName
+      valueKey="name"
+      selectedConfigMap=selectedConfigMap
+    }}
+    {{else}}
     {{schema/input-config-map
       namespace=namespace
       value=source.sourceName
       valueKey="name"
       selectedConfigMap=selectedConfigMap
     }}
+    {{/if}}
   {{else if (and editing (eq source.source "field"))}}
     {{input type="text" value=source.sourceName classNames="form-control" placeholder=(t "formSources.field.placeholder")}}
   {{else if (and editing (eq source.source "resource"))}}

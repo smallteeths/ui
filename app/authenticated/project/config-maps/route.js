@@ -3,9 +3,24 @@ import { hash } from 'rsvp'
 import { get, set } from '@ember/object';
 import { on } from '@ember/object/evented';
 import C from 'ui/utils/constants';
+import { inject as service } from '@ember/service';
 
 export default Route.extend({
-  model() {
+  settings:     service(),
+  nsResource:   service(),
+  scope:        service(),
+  clusterStore: service(),
+  model(params) {
+    if (get(this, 'settings.enable-load-resource-by-namespace')) {
+      const namespaces =  get(this, 'scope.currentProject.namespaces');
+      const namespaceId = params.namespaceId || get(namespaces, 'firstObject.id');
+
+      return hash({
+        namespaceId,
+        namespaces: this.clusterStore.findAll('namespace'),
+        configMaps: this.nsResource.findAll('configMap', namespaceId)
+      });
+    }
     const store = get(this, 'store');
 
     return hash({ configMaps: store.findAll('configMap'), });
@@ -14,4 +29,5 @@ export default Route.extend({
   setDefaultRoute: on('activate', function() {
     set(this, `session.${ C.SESSION.PROJECT_ROUTE }`, 'authenticated.project.config-maps');
   }),
+  queryParams: { namespaceId: { refreshModel: true } },
 });

@@ -57,7 +57,7 @@ export default Route.extend(Preload, {
                 this.preload('workload'),
                 this.preload('secret'),
                 this.preload('service'),
-                this.preload('configmap'),
+                get(this, 'settings.enable-load-resource-by-namespace') ? [] : this.preload('configmap'),
                 this.preload('namespacedSecret'),
                 this.preload('persistentVolumeClaim'),
               ]).then(() => out)

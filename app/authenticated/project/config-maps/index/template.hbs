@@ -27,6 +27,7 @@
     groupByRef="namespace"
     sortBy=sortBy
     bulkActions=true
+    rightActions=enableLoadResourceByNamespace
     headers=headers as |sortable kind row dt|}}
     {{#if (eq kind "row")}}
       {{config-map-row model=row dt=dt}}
@@ -36,6 +37,13 @@
       <tr><td colspan="{{sortable.fullColspan}}" class="text-center text-muted pt-20 pb-20">{{t 'configMapsPage.index.noMatch'}}</td></tr>
     {{else if (eq kind "norows")}}
       <tr><td colspan="{{sortable.fullColspan}}" class="text-center text-muted pt-20 pb-20">{{t 'configMapsPage.index.noData'}}</td></tr>
+    {{else if (eq kind "right-actions")}}
+      {{new-select
+        content=projectNamespaces
+        optionLabelPath="displayName"
+        optionValuePath="id"
+        value=namespace
+      }}
     {{/if}}
   {{/sortable-table}}
 </section>

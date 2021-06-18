@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import layout from './template';
 import { get, set, computed } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 const SOURCES = [
   {
@@ -22,6 +23,8 @@ const SOURCES = [
 ];
 
 export default Component.extend({
+  settings: service(),
+
   layout,
   tagName:         'tr',
   source:          null,
@@ -31,6 +34,10 @@ export default Component.extend({
 
   selectedSecret: null,
   sources:        SOURCES,
+
+  enableLoadResourceByNamespace: computed('settings.enable-load-resource-by-namespace', function() {
+    return get(this, 'settings.enable-load-resource-by-namespace');
+  }),
 
   prefixOrTarget: computed('source.{prefix,source,sourceKey,targetKey}', {
     get() {
