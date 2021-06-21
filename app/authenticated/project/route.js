@@ -55,10 +55,10 @@ export default Route.extend(Preload, {
                 this.preload('persistentVolume', 'clusterStore'),
                 this.preload('pod'),
                 this.preload('workload'),
-                this.preload('secret'),
+                get(this, 'settings.enable-load-resource-by-namespace') ? [] : this.preload('secret'),
                 this.preload('service'),
                 get(this, 'settings.enable-load-resource-by-namespace') ? [] : this.preload('configmap'),
-                this.preload('namespacedSecret'),
+                get(this, 'settings.enable-load-resource-by-namespace') ? [] : this.preload('namespacedSecret'),
                 this.preload('persistentVolumeClaim'),
               ]).then(() => out)
             }

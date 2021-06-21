@@ -67,6 +67,8 @@ export default Controller.extend({
       if (typeof v === 'string') {
         set(this, 'configMapsController.namespaceId', v)
       }
+
+      return v;
     }
   }),
 
@@ -78,7 +80,7 @@ export default Controller.extend({
     return get(this, 'model.namespaces').filter( (ns) => get(ns, 'projectId') === get(this, 'scope.currentProject.id'));
   }),
 
-  rows: computed('model.configMaps.@each.type', 'enableLoadResourceByNamespace', function() {
+  rows: computed('model.configMaps.@each.type', 'enableLoadResourceByNamespace', 'model.namespaceId', function() {
     if (this.enableLoadResourceByNamespace) {
       return get(this, 'model.configMaps').filterBy('type', 'configMap').filterBy('namespaceId', get(this, 'model.namespaceId'))
     }

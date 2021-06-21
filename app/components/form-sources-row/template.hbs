@@ -19,12 +19,21 @@
 {{/unless }}
 <td data-title="{{t "formSources.kind.label"}}">
   {{#if (and editing (eq source.source "secret"))}}
+    {{#if enableLoadResourceByNamespace}}
+    {{schema/input-ns-secret
+      namespace=namespace
+      value=source.sourceName
+      valueKey="name"
+      selectedSecret=selectedSecret
+    }}
+    {{else}}
     {{schema/input-secret
       namespace=namespace
       value=source.sourceName
       valueKey="name"
       selectedSecret=selectedSecret
     }}
+    {{/if}}
   {{else if (and editing (eq source.source "configMap"))}}
     {{#if enableLoadResourceByNamespace}}
     {{schema/input-ns-config-map
