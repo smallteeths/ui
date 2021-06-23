@@ -8,6 +8,7 @@ import textWidth from 'shared/utils/text-width';
 import { next } from '@ember/runloop';
 import { escapeRegex, escapeHtml } from 'shared/utils/util';
 import $ from 'jquery';
+import { debouncedObserver } from 'ui/utils/debounce';
 
 const ITEM_HEIGHT = 50;
 const BUFFER_HEIGHT = 150;
@@ -47,6 +48,8 @@ export default Component.extend(ThrottledResize, {
   boundClickMenu:     null,
   boundClickItem:     null,
   boundEnterCluster:  null,
+
+  searchInputDebounce: '',
 
   project:            alias('scope.pendingProject'),
   cluster:            alias('scope.pendingCluster'),
@@ -223,8 +226,8 @@ export default Component.extend(ThrottledResize, {
     return Math.max(...widths);
   }),
 
-  clusterSearchResults: computed('searchInput', 'byCluster.[]', function() {
-    const needle = get(this, 'searchInput');
+  clusterSearchResults: computed('searchInputDebounce', 'byCluster.[]', function() {
+    const needle = get(this, 'searchInputDebounce');
     const out = [];
 
     get(this, 'byCluster').forEach((entry) => {
@@ -243,8 +246,8 @@ export default Component.extend(ThrottledResize, {
     return out;
   }),
 
-  projectSearchResults: computed('byCluster.[]', 'projectChoices', 'searchInput', function() {
-    const needle = get(this, 'searchInput');
+  projectSearchResults: computed('byCluster.[]', 'projectChoices', 'searchInputDebounce', function() {
+    const needle = get(this, 'searchInputDebounce');
     const out = [];
 
     get(this, 'projectChoices').forEach((project) => {
@@ -261,6 +264,10 @@ export default Component.extend(ThrottledResize, {
     });
 
     return out;
+  }),
+
+  searchInputDidChanged: debouncedObserver('searchInput', function() {
+    set(this, 'searchInputDebounce', get(this, 'searchInput'));
   }),
 
   mouseMoved(e) {

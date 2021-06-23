@@ -63,7 +63,7 @@
       </label>
 
       <ul style="background: #fff" class="list-unstyled {{if (eq hoverEntry null) "no-hover-entry"}}" style="{{columnStyle}}">
-        {{#if searchInput}}
+        {{#if searchInputDebounce}}
           {{#each clusterSearchResults as |entry|}}
             <li data-cluster-id={{entry.cluster.id}} class="item clip cluster">
               {{#link-to
@@ -77,7 +77,7 @@
             </li>
           {{else}}
             <li class="text-muted p-10">
-              {{t "nav.projectDropdown.clustersNoMatch" searchInput=searchInput}}
+              {{t "nav.projectDropdown.clustersNoMatch" searchInput=searchInputDebounce}}
             </li>
           {{/each}}
         {{else}}
@@ -105,7 +105,7 @@
     </div>
 
     <div class="projects">
-      {{#if (or searchInput (not clusterEntry)) }}
+      {{#if (or searchInputDebounce (not clusterEntry)) }}
         <label class="acc-label">
           {{t "nav.projectDropdown.projects"}}
         </label>
@@ -116,7 +116,7 @@
       {{/if}}
 
       <ul class="list-unstyled" style="{{columnStyle}}">
-        {{#if searchInput}}
+        {{#if searchInputDebounce}}
           {{#each projectSearchResults as |entry|}}
             <li class="item clip project {{unless entry.project.isReady "not-ready"}}">
               {{#link-to
@@ -135,7 +135,7 @@
             </li>
           {{else}}
             <li class="text-muted p-10">
-              {{t "nav.projectDropdown.projectsNoMatch" searchInput=searchInput}}
+              {{t "nav.projectDropdown.projectsNoMatch" searchInput=searchInputDebounce}}
             </li>
           {{/each}}
         {{else if clusterEntry}}
