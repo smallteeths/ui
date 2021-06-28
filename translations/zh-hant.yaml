@@ -3467,6 +3467,7 @@ featureFlags:
     fleet: "啟動 Rancher 時，安裝 Fleet"
     projectPipelineServiceUI: "啟用此功能將顯示項目流水線導航菜單"
     virtaitechGpuServiceUI: "啟用此功能將在部署服務時允許用戶設置 vGpus 的預留實例數量"
+    proxy: "對 Kubernetes API 請求使用新的實驗性代理。"
   table:
     state: 狀態
     name: 名稱

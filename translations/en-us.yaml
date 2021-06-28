@@ -6748,6 +6748,7 @@ featureFlags:
     fleet: "Install Fleet when starting Rancher"
     projectPipelineServiceUI: "Expose enable project pipeline UI and allow user to use pipeline with project level."
     virtaitechGpuServiceUI: "Allows user to set vGpus reserved value."
+    proxy: "Use new experimental proxy for Kubernetes API requests."
   table:
     description: Description
     name: Name
