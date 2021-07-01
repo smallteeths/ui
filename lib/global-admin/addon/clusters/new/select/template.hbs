@@ -11,6 +11,20 @@
       />
     {{/if}}
     <div class="row-same-height">
+      {{#if showImportAck}}
+        <a
+          class="col span-2 cluster-driver-box small span-height"
+          href="{{href-to "global-admin.clusters.new.launch" "import" (query-params importProvider='ack')}}"
+          disabled={{disabledAddCluster}}
+        >
+          <div class="machine-driver aliyun"></div>
+          <div class="driver-content">
+            <p class="driver-name">
+              {{t "clusterNew.aliyunack.shortLabel"}}
+            </p>
+          </div>
+        </a>
+      {{/if}}
       <a
         class="col span-2 cluster-driver-box small span-height"
         href="{{href-to "global-admin.clusters.new.launch" "import" (query-params importProvider='eks')}}"
