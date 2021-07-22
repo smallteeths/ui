@@ -31,7 +31,7 @@ steps:
     path: /var/run/docker.sock
   when:
     branch:
-    - 2.5-fixes-cn
+    - 2.5.9-fixes-cn
     event:
     - push
 
@@ -64,7 +64,7 @@ steps:
     target: /static-2-5/2.5-fixes
   when:
     branch:
-    - 2.5-fixes-cn
+    - 2.5.9-fixes-cn
     event:
     - push
 
