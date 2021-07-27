@@ -38,10 +38,26 @@ var PersistentVolumeClaim = Resource.extend({
     return false;
   }),
 
-  workloads: computed('id', 'namespace.workloads.@each.volumes', function() {
+  workloads: computed('id', 'namespace.workloads.@each.volumes', 'namespaceId', function() {
     return (get(this, 'namespace.workloads') || [])
-      .filter((workload) => (get(workload, 'volumes') || get(workload, 'statefulSetConfig.volumeClaimTemplates') || [])
-        .find((volume) => get(volume, 'persistentVolumeClaim.persistentVolumeClaimId') === get(this, 'id') || (get(this, 'id').lastIndexOf('-') > -1 && get(volume, 'id') && get(this, 'id').slice(0, get(this, 'id').lastIndexOf('-')) === `${ get(volume, 'id') }-${ get(workload, 'name') }`)));
+      .filter((workload) => [...(get(workload, 'volumes') || []), ...(get(workload, 'statefulSetConfig.volumeClaimTemplates') || [])]
+        .find((volume) => {
+          if (get(volume, 'persistentVolumeClaim.persistentVolumeClaimId') === get(this, 'id')) {
+            return true
+          }
+
+          const index = get(this, 'id').lastIndexOf('-');
+
+          if (index > -1 && get(volume, 'id')) {
+            if (get(volume, 'id').indexOf(':') > -1) {
+              return get(this, 'id').slice(0, index) === `${ get(volume, 'id') }-${ get(workload, 'name') }`
+            }
+
+            return get(this, 'id').slice(0, index) === `${ this.namespaceId }:${ get(volume, 'id') }-${ get(workload, 'name') }`
+          }
+
+          return false;
+        }));
   }),
 
   sizeBytes: computed('status.capacity.storage', function() {
