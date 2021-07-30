@@ -1,0 +1,36 @@
+{{#if editing}}
+  <BasicDropdown @calculatePosition={{calculatePosition}} as |dd|>
+    <dd.Trigger class="mutiple-select">
+      <div class="mutiple-select-input">
+        {{#each options as |option|}}
+          {{#if option.active}}
+            <span class="mutiple-select-card mr-10">{{option.value}} <span class="mutiple-select-icon" onclick={{disable-bubbling (action "change" option)}}><i class="icon icon-close"/></span></span>
+          {{/if}}
+        {{/each}}
+      </div>
+    </dd.Trigger>
+    <dd.Content class="mutiple-option-container">
+      {{#each options as |option|}}
+        {{#if option.active}}
+          <li class="mutiple-select-option active" onclick={{action "change" option}}>
+            {{option.value}}
+          </li>
+        {{else}}
+          <li class="mutiple-select-option" onclick={{action "change" option}}>
+            {{option.value}}
+          </li>
+        {{/if}}
+      {{/each}}
+    </dd.Content>
+  </BasicDropdown>
+{{else}}
+  <div class="mutiple-select">
+    <div class="mutiple-select-input">
+      {{#each options as |option|}}
+        {{#if option.active}}
+          <span class="mutiple-select-card mr-10">{{option.value}}</span>
+        {{/if}}
+      {{/each}}
+    </div>
+  </div>
+{{/if}}

@@ -145,6 +145,13 @@
       expandFn=expandFn
       classNames="accordion"
     }}
+
+    {{container/form-pod-affinity
+      editing=false
+      scheduling=model.workload.scheduling
+      expandAll=al.expandAll
+      expandFn=expandFn
+    }}
   {{/if}}
 
   {{container/form-networking

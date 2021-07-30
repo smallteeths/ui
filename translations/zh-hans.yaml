@@ -7217,6 +7217,13 @@ formScale:
     sidekickPrefix: "Sidecar: 添加容器到"
     sidekickSuffix: ""
 
+podScheduling:
+  title: Pod 调度
+  detail: 配置 Pod Affinity 和 Pod AntiAffinity.
+  remove: 删除 Pod 调度
+  add: 添加 Pod 调度
+  label: 如需配置 Pod 亲和性请添加调度规则
+
 formScheduling:
   title: 主机调度
   detail: 配置 Pod 对应的主机调度规则。

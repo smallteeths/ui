@@ -208,6 +208,13 @@
     classNames="accordion"
   }}
 
+  {{container/form-pod-affinity
+    editing=false
+    scheduling=service.scheduling
+    expandAll=al.expandAll
+    expandFn=expandFn
+  }}
+
   {{#if service.canHaveHealthCheck}}
     {{#accordion-list-item
        title=(t "formHealthCheck.title")

@@ -1,0 +1,140 @@
+<div class="row">
+  <div class="col span-6">
+    <label class="acc-label">Affinity Type</label>
+    {{#if editing}}
+      {{new-select
+        value=affinityType
+        content=podSchedulingType
+      }}
+    {{else}}
+      <div calss="text-muted">
+        {{affinityType}}
+      </div>
+    {{/if}}
+  </div>
+  {{#if editing}}
+    <div class="col span-6 text-right mt-0 mb-0">
+      <button class="btn bg-link icon-btn" type="button" {{action "remove"}}>
+        <span class="darken"><i class="icon icon-minus text-small"/></span>
+        <span>{{t "podScheduling.remove"}}</span>
+      </button>
+    </div>
+  {{/if}}
+</div>
+
+<div class="row">
+  <div class="col span-6">
+    <label class="acc-label">Priority</label>
+    {{#if editing}}
+      {{new-select
+        value=affinityPriority
+        content=podSchedulingPriority
+      }}
+    {{else}}
+      <div calss="text-muted">
+        {{affinityPriority}}
+      </div>
+    {{/if}}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col span-12">
+    <label class="acc-label">
+      Topology Key
+    </label>
+    {{#if editing}}
+      {{input
+        class="form-control"
+        value=topologyKey
+        placeholder="e.g. kubernetes.io/hostname"
+      }}
+    {{else}}
+      <div calss="text-muted">
+        {{topologyKey}}
+      </div>
+    {{/if}}
+  </div>
+</div>
+
+<div>
+  {{#if editing}}
+    {{#input-or-display value=namespaceSelection}}
+      <div class="radio mb-10 mt-10">
+        <div>
+          <label>
+            {{radio-button selection=namespaceSelection value="current"}} This pod's namespace
+          </label>
+        </div>
+        <div>
+          <label>
+            {{radio-button selection=namespaceSelection value="interactive"}} Pods in these namespaces
+          </label>
+        </div>
+      </div>
+    {{/input-or-display}}
+  {{else}}
+    <div>
+      <label class="acc-label">
+        Namespaces
+      </label>
+    </div>
+  {{/if}}
+  {{#if (or (eq namespaceSelection "interactive") (not editing))}}
+    <div class="mb-10">
+      {{multiple-select-pandaria
+        data=namespaces
+        editing=editing
+        selectedOptions=selectedNamespaces
+      }}
+    </div>
+  {{/if}}
+</div>
+
+{{#if ruleArray.length}}
+  <table class="table fixed no-lines mb-20">
+    {{#if editing}}
+      <thead>
+        <tr>
+          <th class="acc-label" >{{t "formScheduling.key"}}</th>
+          <th width="40"></th>
+          <th class="acc-label">{{t "formScheduling.operator"}}</th>
+          <th width="40"></th>
+          <th class="acc-label">{{t "formScheduling.value"}}</th>
+          <th width="10">&nbsp;</th>
+          <th width="40"></th>
+        </tr>
+      </thead>
+    {{else}}
+      <div>
+        <label class="acc-label">
+          Expressions
+        </label>
+      </div>
+    {{/if}}
+    <tbody>
+      {{#each ruleArray as |rule|}}
+        {{pod-selector-row
+          remove=(action "removeRule")
+          editing=editing rule=rule
+        }}
+      {{/each}}
+    </tbody>
+  </table>
+{{else}}
+  {{#unless editing}}
+    <div class="text-muted mt-20">
+      {{t "formScheduling.noRules"}}
+    </div>
+  {{/unless}}
+{{/if}}
+
+{{#if editing}}
+  <button class="btn bg-link icon-btn" type="button" {{action "addRule"}}>
+    <span class="darken"><i class="icon icon-plus text-small"/></span>
+    <span>{{t "formScheduling.addRule"}}</span>
+  </button>
+  <button class="btn bg-transparent btn-sm" type="button" {{action "addRule" true}}>
+    {{t "formScheduling.addCustom"}}
+  </button>
+{{/if}}

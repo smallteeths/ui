@@ -85,10 +85,13 @@ export default Component.extend(NewOrEdit, ChildHook, {
 
     const scheduling = get(service, 'scheduling')
 
-    if (!get(this, 'isSidekick') && !get(service, 'scheduling.node')) {
+    if (!get(this, 'isSidekick') && !get(service, 'scheduling.node') && !get(service, 'scheduling.podAffinity') && !get(service, 'scheduling.podAntiAffinity')) {
       set(service, 'scheduling', {
         ...scheduling,
-        node: {}
+        node:            {},
+        // pandaria
+        podAffinity:     {},
+        podAntiAffinity: {}
       });
     }
 

@@ -7599,6 +7599,13 @@ formScale:
     sidekickPrefix: "Sidecar: Add a container to"
     sidekickSuffix: ""
 
+podScheduling:
+  title: Pod Scheduling
+  detail: Configure Pod Affinity and Pod AntiAffinity.
+  remove: Delete Pod Scheduling
+  add: Add Pod Scheduling
+  label: Please add Pod scheduling to configure Pod affinity.
+
 formScheduling:
   title: Node Scheduling
   detail: Configure what nodes the pods can be deployed to.

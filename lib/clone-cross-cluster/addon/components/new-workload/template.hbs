@@ -284,6 +284,13 @@
           expandAll=al.expandAll
           expandFn=expandFn
         }}
+        {{container/form-pod-affinity
+          editing=true
+          currentNamespace=namespace
+          scheduling=service.scheduling
+          expandAll=al.expandAll
+          expandFn=expandFn
+        }}
       {{/if}}
       {{#accordion-list-item
         title=(t "formHealthCheck.title")

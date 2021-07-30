@@ -175,6 +175,16 @@
     }}
   {{/unless}}
 
+  {{#unless isSidekick}}
+    {{container/form-pod-affinity
+      editing=true
+      currentNamespace=namespace
+      scheduling=service.scheduling
+      expandAll=al.expandAll
+      expandFn=expandFn
+    }}
+  {{/unless}}
+
   {{#accordion-list-item
      title=(t "formHealthCheck.title")
      detail=(t "formHealthCheck.detail" appName=settings.appName)
