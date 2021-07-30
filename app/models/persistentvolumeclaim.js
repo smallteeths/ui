@@ -38,7 +38,7 @@ var PersistentVolumeClaim = Resource.extend({
     return false;
   }),
 
-  workloads: computed('id', 'namespace.workloads.@each.volumes', 'namespaceId', function() {
+  workloads: computed('id', 'namespace.workloads.@each.{volumes,statefulSetConfig}', 'namespaceId', function() {
     return (get(this, 'namespace.workloads') || [])
       .filter((workload) => [...(get(workload, 'volumes') || []), ...(get(workload, 'statefulSetConfig.volumeClaimTemplates') || [])]
         .find((volume) => {
