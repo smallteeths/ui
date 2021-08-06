@@ -6749,6 +6749,7 @@ featureFlags:
     projectPipelineServiceUI: "Expose enable project pipeline UI and allow user to use pipeline with project level."
     virtaitechGpuServiceUI: "Allows user to set vGpus reserved value."
     proxy: "Use new experimental proxy for Kubernetes API requests."
+    managementResourceApiCache: "Enable management resources api cache."
   table:
     description: Description
     name: Name

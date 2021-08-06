@@ -6395,6 +6395,7 @@ featureFlags:
     projectPipelineServiceUI: "启用此功能将显示项目流水线导航菜单"
     virtaitechGpuServiceUI: "启用此功能将在部署服务时允许用户设置 vGpus 的预留实例数量"
     proxy: "对 Kubernetes API 请求使用新的实验性代理。"
+    managementResourceApiCache: "Management API 开启缓存功能"
   table:
     description: 描述
     name: 名称

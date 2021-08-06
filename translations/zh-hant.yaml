@@ -3468,6 +3468,7 @@ featureFlags:
     projectPipelineServiceUI: "啟用此功能將顯示項目流水線導航菜單"
     virtaitechGpuServiceUI: "啟用此功能將在部署服務時允許用戶設置 vGpus 的預留實例數量"
     proxy: "對 Kubernetes API 請求使用新的實驗性代理。"
+    managementResourceApiCache: "Management API 開啟緩存功能"
   table:
     state: 狀態
     name: 名稱
