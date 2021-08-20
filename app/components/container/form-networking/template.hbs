@@ -113,8 +113,14 @@
       {{#if enableStaticPod}}
         <div class="row">
           <div class="col span-6">
-            <label class="acc-label">Interface</label>
-            <div>{{netInterface}}</div>
+            <label class="acc-label">Interface{{field-required}}</label>
+            {{#input-or-display editable=editing value=netInterface classesForDisplay="force-wrap"}}
+              {{new-select
+                  classNames="form-control"
+                  content=interfaces
+                  value=staticPodForm.network
+              }}
+            {{/input-or-display}}
           </div>
           <div class="col span-6">
             <label class="acc-label">{{t "formNetwork.subnet.form.ip.label"}}</label>

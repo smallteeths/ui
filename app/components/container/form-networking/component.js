@@ -4,6 +4,17 @@ import layout from './template';
 import { inject as service } from '@ember/service';
 import { htmlSafe } from '@ember/string';
 
+const DUAL_NETWORK_CARD = '[{"name":"static-macvlan-cni-attach","interface":"eth1"}]';
+const SINGLE_NETWORK_CARD = '[{"name":"static-macvlan-cni-attach","interface":"eth0"}]';
+
+const MACVLAN_ANNOTATION_MAP = {
+  network:  'k8s.v1.cni.cncf.io/networks',
+  network0: 'v1.multus-cni.io/default-network',
+  ip:       'macvlan.pandaria.cattle.io/ip',
+  mac:      'macvlan.pandaria.cattle.io/mac',
+  subnet:   'macvlan.pandaria.cattle.io/subnet'
+};
+
 export default Component.extend({
   scope:      service(),
   vlansubnet: service(),
@@ -21,11 +32,19 @@ export default Component.extend({
   staticPod:    false,
 
   staticPodForm: {
-    network: '[{"name":"static-macvlan-cni-attach","interface":"eth1"}]',
+    network: DUAL_NETWORK_CARD,
     ip:      '',
     mac:     '',
     subnet:    '',
   },
+
+  interfaces: [{
+    label: 'eth1',
+    value: DUAL_NETWORK_CARD,
+  }, {
+    label: 'eth0',
+    value: SINGLE_NETWORK_CARD,
+  }],
   vlansubnets:          [],
   // unsupport vlansubnet
   unsupportVlansubnet:  true,
@@ -46,13 +65,8 @@ export default Component.extend({
     updateStaticPod() {
       const annotationsForm = get(this, 'staticPodForm');
       const annotations = get(this, 'service.annotations');
-      const props = ['k8s.v1.cni.cncf.io/networks', 'macvlan.pandaria.cattle.io/ip', 'macvlan.pandaria.cattle.io/mac', 'macvlan.pandaria.cattle.io/subnet'];
-      const propMap = {
-        network: 'k8s.v1.cni.cncf.io/networks',
-        ip:      'macvlan.pandaria.cattle.io/ip',
-        mac:     'macvlan.pandaria.cattle.io/mac',
-        subnet:  'macvlan.pandaria.cattle.io/subnet',
-      };
+      const props = Object.values(MACVLAN_ANNOTATION_MAP);
+      const propMap = Object.assign({}, MACVLAN_ANNOTATION_MAP);
 
       if (!get(this, 'enableStaticPod')) {
         if (annotations) {
@@ -75,7 +89,11 @@ export default Component.extend({
         const form = {};
 
         Object.keys(annotationsForm).forEach((a) => {
-          form[propMap[a]] = annotationsForm[a];
+          if (a === 'network') {
+            form[propMap[`${ annotationsForm[a] === DUAL_NETWORK_CARD ? a : `${ a }0` }`]] = annotationsForm[a];
+          } else {
+            form[propMap[a]] = annotationsForm[a];
+          }
           if ((a === 'ip' || a === 'mac') && annotationsForm[a] === '') {
             form[propMap[a]] = 'auto';
           }
@@ -89,6 +107,8 @@ export default Component.extend({
         });
         if (annotations) {
           delete annotations['macvlan.panda.io/macvlanService'];
+          delete annotations[MACVLAN_ANNOTATION_MAP.network];
+          delete annotations[MACVLAN_ANNOTATION_MAP.network0];
         }
         set(this, 'service.annotations', Object.assign({}, annotations || {}, form));
 
@@ -151,7 +171,7 @@ export default Component.extend({
   staticPodDidChanged: observer('staticPod', function() {
     if (!get(this, 'staticPod')) {
       const annotations = get(this, 'service.annotations') || {};
-      const props = ['k8s.v1.cni.cncf.io/networks', 'macvlan.pandaria.cattle.io/ip', 'macvlan.pandaria.cattle.io/mac', 'macvlan.pandaria.cattle.io/subnet'];
+      const props = Object.values(MACVLAN_ANNOTATION_MAP);
       const form = {}
 
       Object.keys(annotations).forEach((a) => {
@@ -168,6 +188,27 @@ export default Component.extend({
     this.send('updateStaticPod');
     this.sendAction('toggleMacvlan', get(this, 'staticPod'));
   }),
+
+  macvlanNetworkAnnotationDidChanged: observer('staticPodForm.network', 'enableStaticPod', function() {
+    const annotations = get(this, 'service.annotations');
+
+    if (annotations) {
+      if (!get(this, 'enableStaticPod')) {
+        delete annotations[MACVLAN_ANNOTATION_MAP.network];
+        delete annotations[MACVLAN_ANNOTATION_MAP.network0];
+
+        return;
+      }
+      delete annotations[MACVLAN_ANNOTATION_MAP.network];
+      delete annotations[MACVLAN_ANNOTATION_MAP.network0];
+      if (get(this, 'staticPodForm.network') === DUAL_NETWORK_CARD) {
+        annotations[MACVLAN_ANNOTATION_MAP.network] = DUAL_NETWORK_CARD
+      } else {
+        annotations[MACVLAN_ANNOTATION_MAP.network0] = SINGLE_NETWORK_CARD
+      }
+    }
+  }),
+
   isStopFirstChange: computed('service.deploymentConfig.maxSurge', 'scaleMode', function() {
     if ( get(this, 'scaleMode') !== 'deployment') {
       return false
@@ -196,25 +237,25 @@ export default Component.extend({
 
     return;
   }),
-  staticPodAnnotation: computed('service.annotations.{k8s.v1.cni.cncf.io/networks,macvlan.pandaria.cattle.io/ip,macvlan.pandaria.cattle.io/subnet,macvlan.pandaria.cattle.io/mac}', function() {
+  staticPodAnnotation: computed('service.annotations', function() {
     const annotations = get(this, 'service.annotations') || {};
 
     return {
-      network: annotations['k8s.v1.cni.cncf.io/networks'],
-      ip:      (annotations['macvlan.pandaria.cattle.io/ip'] || '').split('-').join(','),
-      mac:     (annotations['macvlan.pandaria.cattle.io/mac'] || '').split('-').join(','),
-      subnet:  annotations['macvlan.pandaria.cattle.io/subnet'],
+      network: annotations[MACVLAN_ANNOTATION_MAP.network] || annotations[MACVLAN_ANNOTATION_MAP.network0],
+      ip:      (annotations[MACVLAN_ANNOTATION_MAP.ip] || '').split('-').join(','),
+      mac:     (annotations[MACVLAN_ANNOTATION_MAP.mac] || '').split('-').join(','),
+      subnet:  annotations[MACVLAN_ANNOTATION_MAP.subnet],
     }
   }),
-  enableStaticPod: computed('service.annotations.{k8s.v1.cni.cncf.io/networks,static-ip,static-mac,vlan}', 'staticPod', 'editing', function() {
+  enableStaticPod: computed('service.annotations', 'staticPod', 'editing', function() {
     const {
-      'k8s.v1.cni.cncf.io/networks': network, 'macvlan.pandaria.cattle.io/ip':ip, 'macvlan.pandaria.cattle.io/subnet':subnet
+      [MACVLAN_ANNOTATION_MAP.network]: network, [MACVLAN_ANNOTATION_MAP.network0]: network0, [MACVLAN_ANNOTATION_MAP.ip]:ip, [MACVLAN_ANNOTATION_MAP.subnet]:subnet
     } = get(this, 'service.annotations') || {};
 
     if (get(this, 'editing')) {
       return get(this, 'staticPod')
     }
-    if (network && ip && subnet) {
+    if ((network || network0) && ip && subnet) {
       return true;
     }
 
@@ -292,20 +333,20 @@ export default Component.extend({
   },
   initStaticPod() {
     const {
-      'k8s.v1.cni.cncf.io/networks': network, 'macvlan.pandaria.cattle.io/ip':ip, 'macvlan.pandaria.cattle.io/subnet':subnet, 'macvlan.pandaria.cattle.io/mac':mac
+      [MACVLAN_ANNOTATION_MAP.network]: network, [MACVLAN_ANNOTATION_MAP.network0]: network0, [MACVLAN_ANNOTATION_MAP.ip]:ip, [MACVLAN_ANNOTATION_MAP.subnet]:subnet, [MACVLAN_ANNOTATION_MAP.mac]:mac
     } = get(this, 'service.annotations') || {};
 
-    if (network && subnet) {
+    if ((network || network0) && subnet) {
       set(this, 'staticPodForm', {
-        network,
-        ip:  ip === 'auto' ? '' : ip.split('-').join(','),
-        mac: mac === 'auto' ? '' : mac.split('-').join(','),
+        network: network || network0,
+        ip:      ip === 'auto' ? '' : ip.split('-').join(','),
+        mac:     mac === 'auto' ? '' : mac.split('-').join(','),
         subnet,
       });
       set(this, 'staticPod', true);
     } else {
       set(this, 'staticPodForm', {
-        network: '[{"name":"static-macvlan-cni-attach","interface":"eth1"}]',
+        network: DUAL_NETWORK_CARD,
         ip:      '',
         mac:     '',
         subnet:  '',
