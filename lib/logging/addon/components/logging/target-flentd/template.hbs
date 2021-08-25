@@ -123,7 +123,30 @@
       </button>
     </div>
   </div>
-
+  <div class="row">
+    <div class="col span-12">
+      <label class="acc-label">
+        {{t "loggingPage.fluentd.customBuffer"}}
+      </label>
+      {{ivy-codemirror
+        value=customBuffer
+        valueUpdated=(action (mut customBuffer))
+        options=(hash
+          autofocus=true
+          theme="monokai"
+          tabSize=2
+          lineNumbers=true
+          mode="yaml"
+          readOnly=false
+          gutters=gutters
+          lint=false
+          lineWrapping=true
+          viewportMargin=viewportMargin
+          smartIndent=false
+        )
+      }}
+    </div>
+  </div>
   {{logging/form-log-ssl
     config=config
     targetType=targetType

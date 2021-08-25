@@ -8614,6 +8614,7 @@ loggingPage:
     hostname:
       label: Hostname
       placeholder: The hostname of the server.
+    customBuffer: Custom Buffer
   customTarget:
     type:
       error: "@type is not supported, you can chose the following type: ['elasticsearch', 'splunk_hec', 'remote_syslog', 'kafka_buffered', 'forward']"

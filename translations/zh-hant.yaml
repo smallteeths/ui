@@ -4910,6 +4910,7 @@ loggingPage:
     hostname:
       label: 主機名
       placeholder: 服務器主機名
+    customBuffer: 自定義 Buffer
   ssl:
     sslHeader: SSL配置
     certificate:
