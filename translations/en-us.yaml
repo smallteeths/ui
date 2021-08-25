@@ -8667,6 +8667,8 @@ loggingPage:
     running: RUNNING
     runOk: Dry run success.
     dryRun: Dry Run
+  customBuffer:
+    label: Custom Buffer
 
 machineTemplatesPage:
   title: Add Node

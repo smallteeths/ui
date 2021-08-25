@@ -4930,6 +4930,8 @@ loggingPage:
     header: Docker配置
     label: Docker Root Directory
     placeholder: "輸入docker root Directory，默認值為{dir}"
+  customBuffer:
+    label: 自定義 Buffer
 loginUserPass:
   local: 使用本地用戶
   provider: "{kind}"

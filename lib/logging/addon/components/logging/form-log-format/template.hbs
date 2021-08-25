@@ -4,7 +4,30 @@
   </h2>
 
   <hr/>
-
+  <div class="col span-12">
+    <label>
+      {{t "loggingPage.customBuffer.label"}}
+    </label>
+  </div>
+  <div class="col span-12">
+    {{ivy-codemirror
+      value=loggingModel.customBuffer
+      valueUpdated=(action (mut loggingModel.customBuffer))
+      options=(hash
+        autofocus=true
+        theme="monokai"
+        tabSize=2
+        lineNumbers=true
+        mode="yaml"
+        readOnly=false
+        gutters=gutters
+        lint=false
+        lineWrapping=true
+        viewportMargin=viewportMargin
+        smartIndent=false
+      )
+    }}
+  </div>
   <div class="col span-5">
     <section class="additional-logging-configuration-content">
       <label>{{t "loggingPage.additional.fields.header"}}</label>

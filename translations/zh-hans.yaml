@@ -8267,6 +8267,8 @@ loggingPage:
     running: 运行中
     runOk: 试运行成功
     dryRun: 试运行
+  customBuffer:
+    label: 自定义 Buffer
 
 machineTemplatesPage:
   title: 添加主机
