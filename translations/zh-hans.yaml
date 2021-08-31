@@ -7268,8 +7268,8 @@ formScheduling:
     placeholder: e.g. myScheduler
   nodeSelector:
     requireAll: "必须 "
-    requireAny: "最好"
-    preferred: "首选"
+    requireAny: "任一"
+    preferred: "最好"
     operator:
       lt: '<'
       le: |

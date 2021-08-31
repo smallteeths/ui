@@ -6487,8 +6487,8 @@ formScheduling:
     placeholder: '例如: MyScheduler'
   nodeSelector:
     requireAll: "必須 "
-    requireAny: "最好"
-    preferred: "首選"
+    requireAny: "任一"
+    preferred: "最好"
     operator:
       lt: '<'
       le: |
