@@ -31,7 +31,7 @@ steps:
     path: /var/run/docker.sock
   when:
     branch:
-    - 2.5.9-fixes-cn
+    - 2.6-fixes-cn
     event:
     - push
 
@@ -59,12 +59,12 @@ steps:
       from_secret: aws_access_id
     secret_key:
       from_secret: aws_access_secret
-    source: dist/static/2.5-fixes/**/*
-    strip_prefix: dist/static/2.5-fixes
-    target: /static-2-5/2.5-fixes
+    source: dist/static/2.6-fixes/**/*
+    strip_prefix: dist/static/2.6-fixes
+    target: /static-2-6/2.6-fixes
   when:
     branch:
-    - 2.5.9-fixes-cn
+    - 2.6-fixes-cn
     event:
     - push
 

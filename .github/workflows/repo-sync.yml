@@ -1,4 +1,4 @@
-name: SYNC-REPO-2.5
+name: SYNC-REPO-2.6
 
 on:
   create
@@ -11,9 +11,9 @@ jobs:
       uses: kingsd041/git-sync@ksd/v2.0
       env:
         SOURCE_REPO: "cnrancher/pandaria-ui"
-        SOURCE_BRANCH: "refs/remotes/source/2.5-fixes-cn"
+        SOURCE_BRANCH: "refs/remotes/source/2.6-fixes-cn"
         DESTINATION_REPO: "ranchervip/pandaria-ui"
-        DESTINATION_BRANCH: "refs/heads/2.5-fixes-cn"
+        DESTINATION_BRANCH: "refs/heads/2.6-fixes-cn"
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       with:
         args: $SOURCE_REPO $SOURCE_BRANCH $DESTINATION_REPO $DESTINATION_BRANCH
