@@ -1,8 +1,11 @@
-import Application from '../app';
-import config from '../config/environment';
+import Application from 'ui/app';
+import config from 'ui/config/environment';
+import * as QUnit from 'qunit';
 import { setApplication } from '@ember/test-helpers';
+import { setup } from 'qunit-dom';
 import { start } from 'ember-qunit';
 
 setApplication(Application.create(config.APP));
 
-start();
+setup(QUnit.assert);
+preloadAssets(manifest).then(start); // This ensures all engine resources are loaded before the tests

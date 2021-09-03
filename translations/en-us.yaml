@@ -80,6 +80,7 @@ generic:
   name: Name
   namespace: Namespace
   namespaces: Namespaces
+  networking: Networking
   never: Never
   no: "No"
   noRating: No Rating
@@ -1107,16 +1108,20 @@ balancerPage:
     target: Target
 
 banner:
-  alerting: Alerts in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. Check out the updated alerts integration in Rancher <a href="{dashboardLink}/monitoring">monitoring</a> in Cluster Explorer Apps and Marketplace.
-  cis: CIS Scanning in Cluster Manager has been deprecated as of Rancher 2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. For CIS Scanning with benchmark version 1.5 and above, see the updated <a href="{dashboardLink}/cis">CIS scanning</a> functionality in Cluster Explorer Apps and Marketplace.
-  dashboard: Try out the <a href="{dashboardLink}">Cluster Explorer</a> for a new way to view and manage your Kubernetes resources.
-  istio: Istio v1.5 has been declared end of life by the upstream project and is now deprecated as of Rancher 2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. Checkout the new <a href="{dashboardLink}/istio">Istio</a> v1.7 integration in the new Cluster Explorer Apps and Marketplace.
-  logging: Logging in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. Check out the updated version of <a href="{dashboardLink}/logging">logging</a> in Cluster Explorer Apps and Marketplace.
+  alerting: Alerts in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. Check out the updated alerts integration in Rancher <a href="{dashboardLink}/monitoring">monitoring</a> in Cluster Tools.
+  cis: CIS Scanning in Cluster Manager has been deprecated as of Rancher 2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. For CIS Scanning with benchmark version 1.5 and above, see the updated <a href="{dashboardLink}/cis">CIS scanning</a> functionality in Cluster Tools.
+  cis21: CIS Scanning (v1) in Kubernetes 1.21+ is no longer supported.
+  istio: Istio v1.5 has been declared end of life by the upstream project and is now deprecated as of Rancher 2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. Checkout the newer versions of <a href="{dashboardLink}/istio">Istio</a> integration in the new Cluster Tools.
+  istio21: Istio (v1) in Kubernetes 1.21+ is no longer supported.
+  logging: Logging in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. Check out the updated version of <a href="{dashboardLink}/logging">logging</a> in Cluster Tools.
+  logging21: Logging (v1) in Kubernetes 1.21+ is no longer supported.
   multiclusterapp: Multi-Cluster Apps have been deprecated as of Rancher v2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. Check out the new <a href="{dashboardBase}c/local/fleet">Rancher Continuous Delivery</a> capability to deploy apps across multiple clusters through GitOps.
-  monitoring: Monitoring in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. Check out the updated version of <a href="{dashboardLink}/monitoring">monitoring</a> in Cluster Explorer Apps and Marketplace.
-  monitoringV2Warning:  Monitoring in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. The updated version of <a href="{dashboardLink}/monitoring">monitoring</a> in Cluster Explorer Apps and Marketplace is currently deployed.
-  notifiers: Notifiers in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. Check out the updated notifier integration in Rancher <a href="{dashboardLink}/monitoring">monitoring</a> in Cluster Explorer Apps and Marketplace.
-  pipeline: Pipelines has been deprecated as of Rancher 2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. For continuous delivery capabilities check out <a href="{dashboardBase}c/local/fleet">Rancher Continuous Delivery</a> in the new Cluster Explorer view.
+  monitoring: Monitoring in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. Check out the updated version of <a href="{dashboardLink}/monitoring">monitoring</a> in Cluster Tools.
+  monitoringV2Warning:  Monitoring in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. The updated version of <a href="{dashboardLink}/monitoring">monitoring</a> in Cluster Tools is currently deployed.
+  notifiers: Notifiers in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. Check out the updated notifier integration in Rancher <a href="{dashboardLink}/monitoring">monitoring</a> in Cluster Tools.
+  pipeline: Pipelines has been deprecated as of Rancher 2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. For continuous delivery capabilities check out <a href="{dashboardBase}c/local/fleet">Rancher Continuous Delivery</a> in the new view.
+  pipeline21: Pipelines in Kubernetes 1.21+ are no longer supported.
+  upgrade21: The legacy feature flag is enabled and not all legacy features are supported in Kubernetes 1.21+.
 
 catalogPage:
   istio:
@@ -1494,8 +1499,9 @@ clustersPage:
   launch:
     new: Add Cluster
     import: Import Cluster
-    importEks: Import Amazon EKS
-    importGke: Import Google GKE
+    importAks: Import AKS
+    importEks: Import EKS
+    importGke: Import GKE
     register: Register Cluster
   cluster:
     label: Cluster Name
@@ -3958,7 +3964,7 @@ clusterNew:
       access:
         endpoints:
           addActionLabel: Add Endpoint
-          helpBlock: Optionally limit access to the public endpoint via explicit CIDR blocks. If you limit access to specific CIDR blocks, then it is recommended that you also enable the private access to avoid loosing network communitcation to the cluster.
+          helpBlock: Optionally limit access to the public endpoint via explicit CIDR blocks. If you limit access to specific CIDR blocks, then it is recommended that you also enable private access to avoid losing network communication to the cluster.
           label: Public Access Endpoints
           valueLabel: Endpoints
         help: Configuring Public/Priavte API access is an advanced use case. Users are encouraged to read the EKS cluster endpoint access control <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html" target="_blank"  rel="nofollow noopener noreferrer">documentation</a>.
@@ -3978,27 +3984,48 @@ clusterNew:
         custom: 'Custom: Choose from your existing VPC and Subnets'
         default: 'Standard: VPC and Subnet are automatically created'
       title: Networking
+
   azureaks:
     access:
+      cloudCred: Cloud Credential
       detail: Configure the Azure Active Directory (AD) Service Principal that will be used to talk to Azure
+      detailCC: Select the cloud credential that will be used to launch your cluster.
       help: You can find instructions on how to create an Azure AD Service Principal <a href="https://docs.microsoft.com/en-us/azure/aks/kubernetes-service-principal" target="_blank">here</a>.
+      next: 'Next: Configure Cluster'
       title: Account Access
     accountAccessSection:
       label: Account Access
     admin:
-      label: Admin Username
+      label: Linux Admin Username
       placeholder: user-1
     authenticate:
       next: 'Next: Authenticate & configure nodes'
+    authorizedIpRanges:
+      addActionLabel: Add Range
+      inputLabel: Set Authorized IP Ranges
+      label: Authorized IP Ranges
+      placeholder: 73.140.245.0/24
     availabilitySet:
       label: Availability Set
       placeholder: availability-set-name
+    availabilityZoneWarning: No availablity zones are available for the selected region. For the most resiliency it is recommended to select a High Availablity region.
+    availabilityZones:
+      label: Availablity Zones
+      zone: Zone {loc}
     clientId:
       label: Client ID
       placeholder: Your Client ID
     clientSecret:
       label: Client Secret
       placeholder: Your Client Secret
+    clusterLocation:
+      createLabel: Configure Cluster
+      detail: Configure cluster and node location options
+      savingLabel: Loading Resources
+      title: Cluster Location
+    clusterOption:
+      detail: Configure your cluster details
+      title: Cluster Options
     count:
       label: Node Count
       placeholder: e.g. 1
@@ -4008,9 +4035,12 @@ clusterNew:
     dns:
       label: DNS Prefix
       placeholder: e.g. example
+      placeholderv2: aks-dns-xxxxx
     dockerPort:
       label: Docker Port
       placeholder: '2376'
+    enableAutoScaling:
+      label: Enable Auto Scaling
     enableHttpApplicationRouting:
       label: HTTP Application Routing
     enableMonitoring:
@@ -4028,12 +4058,24 @@ clusterNew:
     image:
       label: Image
       placeholder: canonical:UbuntuServer:18.04-LTS:latest
+    import:
+      clusterSelect:
+        createLabel: Register Cluster
+        detail: Choose an AKS cluster to register
+        input:
+          label: Cluster Name To register
+        select:
+          label: Cluster To register
+        title: Choose Cluster
+      prompt: Select cluster to import
+      rbacWarning: This cluster has Kubernetes RBAC disabled. Importing a cluster without RBAC enabled may cause unexpected behavior.
     ingressWarning: 'Note: Currently Azure AKS will not create an ingress controller when launching a new cluster. If you need this functionality you will have to create an ingress controller manually after cluster creation.'
     kubernetesVersion:
       label: Kubernetes Version
       prompt: Choose a Version...
     label: Azure Container Service
     loadBalancerSku:
+      immutable: You have selected one or more availablity zones. When selected the Load Balancer SKU must be Standard.
       label: LoadBalancer SKU
     location:
       label: Location
@@ -4041,9 +4083,28 @@ clusterNew:
     machineType:
       label: VM Size
       prompt: Choose a size...
+    maxCount:
+      label: Max Node Count
+      placeholder: e.g. 5
+    maxPods:
+      label: Max Pods Per Node
+      placeholder: '110'
     members:
       label: Member Roles
+    minCount:
+      label: Min Node Count
+      placeholder: e.g. 1
+    monitoring:
+      label: Container Monitoring
+      workspaceGroup:
+        label: Log Analytics Workspace Resource Group
+      workspaceName:
+        label: Log Analytics Workspace Name
+    networkOptions:
+      detail: Change the network settings for the cluster.
+      title: Networking Options
     networkPolicy:
+      help: Azure Network Policy is only available when Azure CNI is selected as the Network Plugin
       label: Network Policy
       placeholder: Select a Network Policy
     networking:
@@ -4059,6 +4120,7 @@ clusterNew:
         placeholder: e.g. 172.17.0.1/16
       label: Networking
       networkPlugin:
+        help: When using Azure CNI, IP addresses from the selected subnet will be allocated for each pod on the node. This will exhaust available IP addresses more quickly if "Pods Per Node" is set to a high value. It is suggested to that you change the default values for "Pods Per Node" to account for this.
         label: Network Plugin
         prompt: Select a Network Plugin
       podCidr:
@@ -4080,25 +4142,50 @@ clusterNew:
         prompt: Please select a Virtual Network
     noPublicIp:
       label: No Public IP
+    nodePools:
+      availablityZones:
+        label: Node Availabilty Zones
+      errors:
+        linuxName: Linux node pool names must be 1-11 characters.
+        nameFormat: Node pool names must be all lower case, start with a letter and may only contain letters and numbers.
+        windowsName: Windows node pool names must be 1-6 characters.
+      name:
+        label: Name
+      nodeType:
+        label: Mode
+        primary: Primary Pool - System
+        system: System
+        user: User
     openPort:
       label: Open Port
       placeholder: Comma-separated, e.g. 80,443
+    osDiskType:
+      label: OS Disk Type
+      placeholder: Select OS Disk Type
+    osType:
+      label: VM Operating System
+      prompt: Select VM OS
     placement:
       label: Placement
     pod:
       label: Pod Security Policies
+    privateCluster:
+      label: Enable Private Cluster
+      warning: AKS private clusters is an advanced  use case which requires {appName} to be running on the same NAT as the AKS nodes. Before enabling private clusters ensure you have read through the <a href="{docsBase}/cluster-provisioning/hosted-kubernetes-clusters/aks/" target="_blank" rel="nofollow noopener noreferrer">AKS cluster provisioning docs</a> for instructions on configuring AKS so nodes may communicate with {appName}.
     privateIpAddress:
       label: Private IP
       placeholder: 127.0.0.1
     publishSettingsFile:
       label: Publish Settings
       placeholder: Your Publish Settings file
+    rbacWarning: This cluster has Kubernetes RBAC disabled. A cluster without Kubernetes RBAC enabled may exhibit unexpected behavior.
     region:
       label: Region
     resourceGroup:
       helpText: 'Use an existing resource group or enter a new resource group name and one will be created for you. Note: Using a resource group containing an existing AKS cluster will create a new resource group. Azure AKS only allows one AKS cluster per resource group.'
       label: Cluster Resource Group
       placeholder: docker-machine
+      placeholderv2: aks-resource-group
     security:
       label: Security
     shortLabel: Azure AKS
@@ -4134,6 +4221,12 @@ clusterNew:
     vnet:
       label: VNet
       placeholder: '[resourcegroup:]name'
+    windowsAdmin:
+      password:
+        label: Windows Admin Password
+      username:
+        label: Windows Admin Username
+
   config:
     detail: Choose where the nodes for the cluster will come from
     label: Provider
@@ -4222,7 +4315,7 @@ clusterNew:
       label: System Monitoring Type
       placeholder: monitoring.googleapis.com/kubernetes
     clusterOption:
-      detail: Configure your cluster options.
+      detail: Configure your cluster details
       title: Cluster Options
     computeEngine:
       label: Compute Engine
@@ -4276,6 +4369,10 @@ clusterNew:
       WINDOWS_SAC: Windows Semi-Annual Channel
       label: Image Type
     import:
+      clusterOptions:
+        detail: Configure additional cluster options
+        title: Cluster Options
+        warning: The imported GKE cluster must support Kubernetes NetworkPolicy resources for Project Network Isolation to be enforced
       clusterSelect:
         createLabel: Register Cluster
         detail: Choose an GKE cluster to register
@@ -4335,6 +4432,7 @@ clusterNew:
       zone: Zonal
     locations:
       label: Additional Zones
+      warning: 'Total (in all zones): {totalNodes}'
     loggingMonitoringWarning: Logging and Monitoring service options can be created independently, but they may not be updated separately. They must both either be NONE or have their corresponding service set.
     loggingService:
       default: logging.googleapis.com/kubernetes
@@ -4381,7 +4479,8 @@ clusterNew:
     network:
       label: Network
     networkPolicy:
-      label: Network Policy
+      help: To enable network policy for nodes, first enable network policy for master and apply the update.
+      label: Network Policy for Nodes
     nodeCount:
       label: Node Count
       outsideError: The specified number of nodes in the node pool is outside the specified autoscaling limits
@@ -4390,6 +4489,9 @@ clusterNew:
     nodeLabels:
       addAction: Add Label
       label: Node Labels
+    nodeTags:
+      addAction: Add Tag
+      label: Network Tags
     nodePool:
       addLabel: Add Node Pool
       detail: Customize node pools.
@@ -4416,6 +4518,7 @@ clusterNew:
       default: Allow default access
       full: Allow full access to all Cloud APIs
       label: Access scopes
+    policyConfigDisableWarning: Disabling "network policy" will remove and recreate all nodes in all node pools. Depending on the specs of the cluster, this could take a significant amount of time.
     preemptible:
       label: Preemptible nodes (beta)
       warning: Preemptible nodes will live at most 24 hours.
@@ -4473,7 +4576,9 @@ clusterNew:
     taskQueue:
       label: Task queue
     useIpAliases:
+      error: Use IP Aliases is disabled, a network and subnetwork must be selected.
       label: Ip Aliases
+      warning: When Disabling IP Aliases you must select both a network and subnet.
     userInfo:
       label: User Info
     zone:
@@ -4481,145 +4586,147 @@ clusterNew:
       prompt: Choose a Zone...
 
   header: Select Cluster Type
-  # huaweicce:
-  #   access:
-  #     detail: Choose the region and API Key that will be used to launch Huawei Cloud Container Engine.
-  #     title: Account Access
-  #   accessKey:
-  #     help: You can find instructions on how to create Access Key <a href="https://support.huaweicloud.com/usermanual-ca/zh-cn_topic_0046606340.html" target="_blank">here</a>.
-  #     label: Access Key
-  #     placeholder: Your Huawei access key
-  #   authentiactionMode:
-  #     authenticating_proxy: Authenticating Proxy
-  #     label: Authentiaction Mode
-  #     rbac: RBAC
-  #   authenticatingProxyCa:
-  #     label: Certificate
-  #   availableZone:
-  #     label: Zone
-  #   billingMode:
-  #     label: Billing Mode
-  #     payPerUse: Pay-per-use
-  #     yearly: Yearly/Monthly
-  #   bmsIsAutoRenew:
-  #     label: Auto Renew
-  #   business:
-  #     label: Business
-  #   checkAccount: 'Next: Configure cluster'
-  #   checkingAccount: Authenticating...
-  #   clusterEipId:
-  #     label: Cluster Eip
-  #     prompt: Choose a Eip...
-  #   clusterFlavor:
-  #     label: Cluster Flavor
-  #   clusterLabels:
-  #     label: Cluster Label
-  #     none: No label
-  #   clusterOption:
-  #     detail: Customize the cluster that will be used to launch Huawei Cloud Container Engine.
-  #     title: Cluster Options
-  #   clusterType:
-  #     label: Cluster Type
-  #   configureNode: 'Next: Configure Node'
-  #   configuringNode: Configuring...
-  #   containerNetworkCidr:
-  #     label: Container Network Cidr
-  #     placeholder: e.g. 172.16.0.0/16
-  #   containerNetworkMode:
-  #     label: Container Network Mode
-  #     none: No config
-  #   dataVolumeSize:
-  #     label: Data Volume Size
-  #   dataVolumeType:
-  #     label: Data Volume Type
-  #   description:
-  #     label: Description
-  #     placeholder: e.g. Cluster for Huawei CCE
-  #   eip:
-  #     label: Eip
-  #   eipBandwidthSize:
-  #     label: Eip Bandwidth Size
-  #   eipChargeMode:
-  #     label: Eip Charge Mode
-  #   eipCount:
-  #     label: Eip Count
-  #   eipIds:
-  #     label: Eip
-  #     none: No available Eip
-  #   eipSelection:
-  #     exist: Select Existed Eip
-  #     new: Create Eip
-  #     none: Disabled
-  #   eipShareType:
-  #     label: EIP Share Type
-  #   eipType:
-  #     label: Eip Type
-  #   externalServerEnabled:
-  #     disabled: Disabled - Setup cce cluster in the same vpc as Rancher server
-  #     enabled: Enabled - Only support in intranet
-  #     label: External Server
-  #   highAvailability:
-  #     label: High Availability
-  #   highwaySubnet:
-  #     label: Highway Subnet
-  #     none: No Highway Subnet can be used
-  #     placeholder: Highway Subnet
-  #   label: Huawei Cloud Container Engine
-  #   loginMode:
-  #     keyPair: Key Pair
-  #     label: Login Mode
-  #     password: Password
-  #   managementScale:
-  #     label: Management Scale count
-  #   masterVersion:
-  #     label: Master Version
-  #   name:
-  #     label: Cluster Name
-  #     required: Cluster name is required.
-  #   nodeCount:
-  #     label: Node Count
-  #   nodeFlavor:
-  #     label: Node Flavor
-  #   nodeLabels:
-  #     label: Node Label
-  #   nodeOperationSystem:
-  #     label: Node Operation System
-  #   nodeOption:
-  #     detail: Customize the nodes that will be used to launch Huawei Cloud Container Engine.
-  #     title: Nodes
-  #   password:
-  #     label: Password
-  #     placeholder: Please enter password
-  #   projectId:
-  #     help: You can find instructions on how to obtain Project Id <a href="https://support.huaweicloud.com/usermanual-ca/zh-cn_topic_0046606344.html" target="_blank">here</a>.
-  #     label: Project Id
-  #     placeholder: Your CCE project id
-  #     required: Project Id is required.
-  #   region:
-  #     helpText: You can find instructions on how to obtain Region <a href="https://developer.huaweicloud.com/endpoint" target="_blank">here</a>.
-  #     label: Region
-  #     required: Region is required.
-  #   rootVolumeSize:
-  #     label: Root Volume Size
-  #   rootVolumeType:
-  #     label: Root Volume Type
-  #   secretKey:
-  #     help: You can find instructions on how to obtain Secret Key <a href="https://support.huaweicloud.com/usermanual-ca/zh-cn_topic_0046606340.html" target="_blank">here</a>.
-  #     label: Secret Key
-  #     placeholder: Your Huawei secret key
-  #   shortLabel: Huawei CCE
-  #   ssh:
-  #     label: SSH Key Name
-  #   subnetId:
-  #     label: Subnet Name
-  #     none: No subnet in this VPC
-  #   userName:
-  #     label: User Name
-  #   validityPeriod:
-  #     label: Validity Period
-  #   vpcId:
-  #     label: VPC Name
+  huaweicce:
+    access:
+      detail: Choose the region and API Key that will be used to launch Huawei Cloud Container Engine.
+      title: Account Access
+    accessKey:
+      help: You can find instructions on how to create Access Key <a href="https://support.huaweicloud.com/usermanual-ca/zh-cn_topic_0046606340.html" target="_blank">here</a>.
+      label: Access Key
+      placeholder: Your Huawei access key
+    authentiactionMode:
+      authenticating_proxy: Authenticating Proxy
+      label: Authentiaction Mode
+      rbac: RBAC
+    authenticatingProxyCa:
+      label: Certificate
+    availableZone:
+      label: Zone
+    billingMode:
+      label: Billing Mode
+      payPerUse: Pay-per-use
+      yearly: Yearly/Monthly
+    bmsIsAutoRenew:
+      label: Auto Renew
+    business:
+      label: Business
+    checkAccount: 'Next: Configure cluster'
+    checkingAccount: Authenticating...
+    clusterEipId:
+      label: Cluster Eip
+      prompt: Choose a Eip...
+    clusterFlavor:
+      label: Cluster Flavor
+    clusterLabels:
+      label: Cluster Label
+      none: No label
+    clusterOption:
+      detail: Customize the cluster that will be used to launch Huawei Cloud Container Engine.
+      title: Cluster Options
+    clusterType:
+      label: Cluster Type
+    configureNode: 'Next: Configure Node'
+    configuringNode: Configuring...
+    containerNetworkCidr:
+      label: Container Network Cidr
+      placeholder: e.g. 172.16.0.0/16
+    containerNetworkMode:
+      label: Container Network Mode
+      none: No config
+    dataVolumeSize:
+      label: Data Volume Size
+    dataVolumeType:
+      label: Data Volume Type
+    description:
+      label: Description
+      placeholder: e.g. Cluster for Huawei CCE
+    eip:
+      label: Eip
+    eipBandwidthSize:
+      label: Eip Bandwidth Size
+    eipChargeMode:
+      label: Eip Charge Mode
+    eipCount:
+      label: Eip Count
+    eipIds:
+      label: Eip
+      none: No available Eip
+    eipSelection:
+      exist: Select Existed Eip
+      new: Create Eip
+      none: Disabled
+    eipShareType:
+      label: EIP Share Type
+    eipType:
+      label: Eip Type
+    externalServerEnabled:
+      disabled: Disabled - Setup cce cluster in the same vpc as Rancher server
+      enabled: Enabled - Only support in intranet
+      label: External Server
+    highAvailability:
+      label: High Availability
+    highwaySubnet:
+      label: Highway Subnet
+      none: No Highway Subnet can be used
+      placeholder: Highway Subnet
+    label: Huawei Cloud Container Engine
+    loginMode:
+      keyPair: Key Pair
+      label: Login Mode
+      password: Password
+    managementScale:
+      label: Management Scale count
+    masterVersion:
+      label: Master Version
+    name:
+      label: Cluster Name
+      required: Cluster name is required.
+    nodeCount:
+      label: Node Count
+    nodeFlavor:
+      label: Node Flavor
+    nodeLabels:
+      label: Node Label
+    nodeOperationSystem:
+      label: Node Operation System
+    nodeOption:
+      detail: Customize the nodes that will be used to launch Huawei Cloud Container Engine.
+      title: Nodes
+    password:
+      label: Password
+      placeholder: Please enter password
+    projectId:
+      help: You can find instructions on how to obtain Project Id <a href="https://support.huaweicloud.com/usermanual-ca/zh-cn_topic_0046606344.html" target="_blank">here</a>.
+      label: Project Id
+      placeholder: Your CCE project id
+      required: Project Id is required.
+    region:
+      helpText: You can find instructions on how to obtain Region <a href="https://developer.huaweicloud.com/endpoint" target="_blank">here</a>.
+      label: Region
+      required: Region is required.
+    rootVolumeSize:
+      label: Root Volume Size
+    rootVolumeType:
+      label: Root Volume Type
+    secretKey:
+      help: You can find instructions on how to obtain Secret Key <a href="https://support.huaweicloud.com/usermanual-ca/zh-cn_topic_0046606340.html" target="_blank">here</a>.
+      label: Secret Key
+      placeholder: Your Huawei secret key
+    shortLabel: Huawei CCE
+    ssh:
+      label: SSH Key Name
+    subnetId:
+      label: Subnet Name
+      none: No subnet in this VPC
+    userName:
+      label: User Name
+    validityPeriod:
+      label: Validity Period
+    vpcId:
+      label: VPC Name
   import:
+    clusterOptions:
+      warning: The imported cluster must support Kubernetes NetworkPolicy resources for Project Network Isolation to be enforced
     command:
       instructionEksCluster: You are creating an EKS cluster that has private API access only. {appName} requires network access to the Kubernetes endpoint to complete cluster creation; You must manually run one of the following commands.
       instructionGkeCluster: You are creating a private GKE cluster, nodes in a private cluster do not have public IP addresses. For {appName} to finish setting up your cluster it must be able to speak to your nodes. Ensure you follow these <a href="{docsBase}/cluster-provisioning/hosted-kubernetes-clusters/gke/" target="_blank" rel="nofollow noopener noreferrer">private cluster provisioning instructions</a> to configure GKE in a way which allows this access.
@@ -4730,6 +4837,16 @@ clusterNew:
       label: Virtual Cloud Network CIDR
       placeholder: e.g. 172.16.0.0/16
       required: Virtual Cloud Network CIDR is required
+    podCidr:
+      error: Virtual Cloud CIDR format error
+      label: Kubernetes Pod CIDR block
+      placeholder: e.g. 10.244.0.0/16
+      required: Kubernetes Pod CIDR block is required
+    serviceCidr:
+      error: Virtual Cloud CIDR format error
+      label: Kubernetes Service CIDR block
+      placeholder: e.g. 10.96.0.0/16
+      required: Kubernetes Service CIDR block is required
     cluster:
       detail: Choose the Kubernetes version, the number of nodes, and the target compartment for the cluster.
       loading: Loading VCNs from Oracle Cloud Infrastructure
@@ -4744,15 +4861,20 @@ clusterNew:
       compartmentOCID: OCID of the VCN's compartment
       compartmentOCIDHelp: leave blank if it's the cluster compartment
       compartmentOCIDPlaceholder: e.g. ocid1.compartment.oc1..aaaaaaaa...
-      lbSubnetName1: Name of first pre-existing LB subnet
-      lbSubnetName1Placeholder: e.g. my-lb-sub-1
+      lbSubnetName1: Name of pre-existing LB subnet
+      lbSubnetName1Placeholder: e.g. svc-sub-1
       lbSubnetName2: Name of second pre-existing LB subnet (if applicable)
-      lbSubnetName2Placeholder: e.g. my-lb-sub-2
+      lbSubnetName2Placeholder: e.g. svc-sub-2
+      nodePoolPlaneSubnetName: Name of pre-existing node-pool subnet
+      nodePoolSubnetNamePlaceholder: e.g. nodepool-sub
+      controlPlaneSubnetName: Name of pre-existing control plane subnet
+      controlPlaneSubnetNamePlaceholder: e.g. k8sendpoint-sub
       vcnName: Name of the pre-existing VCN
       vcnNamePlaceholder: e.g. my-vcn
     flexShapeConfig:
       error: Default Persistent Volume Disk Size should be greater than 0
       label: Specify the number of OCPUs for the flex shape
+      memory: Specify the amount of memory (GB) for the flex shape
       placeholder: e.g. 10
     instance:
       detail: Configure the instance that will be used as nodes in the cluster.
@@ -4765,6 +4887,9 @@ clusterNew:
     localDisk:
       label: Local Disk
       placeholder: size GB
+    kmsKeyId:
+      label: KMS Key ID
+      placeholder: Optional, enter a valid KMS Key OCID
     node:
       detail: Choose the node type that will be used for this Kubernetes cluster
       loading: Loading configuration from Oracle Cloud Infrastructure
@@ -4800,8 +4925,12 @@ clusterNew:
     storageType:
       label: Default Persistent Volume Disk Type
     subnet:
-      label: Subnet Access
-      required: Subnet access is required
+      label: Node-pool Subnet Access
+      required: Node-pool subnet access is required
+    controlPlaneSubnet:
+      label: Control plane Subnet Access
+      required: Control plane subnet access is required
+      warning: Rancher needs to be able to access the Kubernetes API on a private IP for this option to be successful. Typically, this requires VCN peering or running Rancher in the same VCN that hosts the (existing) control plane subnet.
     subnetAccessOptions:
       custom: Custom Create
       existing: Existing
@@ -5114,92 +5243,92 @@ clusterNew:
   security:
     detail: Customize the Service Account and Access Scopes
     title: Security Options
-  # tencenttke:
-  #   access:
-  #     detail: Choose the region and API Key that will be used to launch Tencent Kubernetes Service
-  #     loading: Loading VPCs from Tencent Cloud
-  #     next: 'Next: Configure Cluster'
-  #     title: Account Access
-  #   bandwidth:
-  #     label: Band Width
-  #     placeholder: e.g. 10
-  #   bandwidthType:
-  #     hour: Pay By Hour
-  #     label: Band Width Type
-  #     traffic: Pay By Traffic
-  #   cidr:
-  #     label: Container Network CIDR
-  #     placeholder: e.g. 172.16.0.0/16
-  #     required: Container Network CIDR is required
-  #   cluster:
-  #     detail: Choose the VPC and Kubernetes version that will be used to launch Tencent Kubernetes Service
-  #     loading: Loading Availability Zones from Tencent Cloud
-  #     next: 'Next: Select Instance Type'
-  #     title: Cluster Configuration
-  #   disk:
-  #     CLOUD_BASIC: Cloud Basic
-  #     CLOUD_PREMIUM: Cloud Premium
-  #     CLOUD_SSD: Cloud SSD
-  #     LOCAL_BASIC: Local Basic
-  #     LOCAL_SSD: Local SSD
-  #   instance:
-  #     detail: Configure the instance that will be used to launch Tencent Kubernetes Service
-  #     title: Instance Configuration
-  #   instanceType:
-  #     label: Instance Type
-  #     required: Instance Type is required
-  #   keyPair:
-  #     label: Key Pair
-  #     required: Key Pair is required
-  #   label: Tencent Kubernetes Engine
-  #   node:
-  #     detail: Choose the instance type that will be used to launch Tencent Kubernetes Service
-  #     loading: Loading configuration from Tencent Cloud
-  #     next: 'Next: Configure Instance'
-  #     title: Instance Type
-  #   nodeCount:
-  #     help: The count of nodes will be launched in this Kubernetes cluster
-  #     label: Node Count
-  #     placeholder: e.g. 3
-  #     required: Node Count is required
-  #   os:
-  #     label: Operating System
-  #   region:
-  #     label: Region
-  #   rootSize:
-  #     label: Root Disk Size
-  #     placeholder: e.g. 25
-  #   rootType:
-  #     label: Root Disk Type
-  #   secretId:
-  #     label: Secret ID
-  #     placeholder: Your Tencent Cloud secret id
-  #     required: Secret ID is required
-  #   secretKey:
-  #     label: Secret Key
-  #     placeholder: Your Tencent Cloud secret key
-  #     provided: Provided
-  #     required: Secret Key is required
-  #   securityGroup:
-  #     label: Security Group
-  #     required: Security Group is required
-  #   shortLabel: Tencent TKE
-  #   storageSize:
-  #     label: Data Disk Size
-  #     placeholder: e.g. 10
-  #   storageType:
-  #     label: Data Disk Type
-  #   subnet:
-  #     label: Subnet
-  #     required: Subnet is required
-  #   version:
-  #     label: Kubernetes Version
-  #   vpc:
-  #     label: VPC
-  #     required: VPC is required
-  #   zone:
-  #     label: Availability Zone
-  #     required: Availability Zone is required
+  tencenttke:
+    access:
+      detail: Choose the region and API Key that will be used to launch Tencent Kubernetes Service
+      loading: Loading VPCs from Tencent Cloud
+      next: 'Next: Configure Cluster'
+      title: Account Access
+    bandwidth:
+      label: Band Width
+      placeholder: e.g. 10
+    bandwidthType:
+      hour: Pay By Hour
+      label: Band Width Type
+      traffic: Pay By Traffic
+    cidr:
+      label: Container Network CIDR
+      placeholder: e.g. 172.16.0.0/16
+      required: Container Network CIDR is required
+    cluster:
+      detail: Choose the VPC and Kubernetes version that will be used to launch Tencent Kubernetes Service
+      loading: Loading Availability Zones from Tencent Cloud
+      next: 'Next: Select Instance Type'
+      title: Cluster Configuration
+    disk:
+      CLOUD_BASIC: Cloud Basic
+      CLOUD_PREMIUM: Cloud Premium
+      CLOUD_SSD: Cloud SSD
+      LOCAL_BASIC: Local Basic
+      LOCAL_SSD: Local SSD
+    instance:
+      detail: Configure the instance that will be used to launch Tencent Kubernetes Service
+      title: Instance Configuration
+    instanceType:
+      label: Instance Type
+      required: Instance Type is required
+    keyPair:
+      label: Key Pair
+      required: Key Pair is required
+    label: Tencent Kubernetes Engine
+    node:
+      detail: Choose the instance type that will be used to launch Tencent Kubernetes Service
+      loading: Loading configuration from Tencent Cloud
+      next: 'Next: Configure Instance'
+      title: Instance Type
+    nodeCount:
+      help: The count of nodes will be launched in this Kubernetes cluster
+      label: Node Count
+      placeholder: e.g. 3
+      required: Node Count is required
+    os:
+      label: Operating System
+    region:
+      label: Region
+    rootSize:
+      label: Root Disk Size
+      placeholder: e.g. 25
+    rootType:
+      label: Root Disk Type
+    secretId:
+      label: Secret ID
+      placeholder: Your Tencent Cloud secret id
+      required: Secret ID is required
+    secretKey:
+      label: Secret Key
+      placeholder: Your Tencent Cloud secret key
+      provided: Provided
+      required: Secret Key is required
+    securityGroup:
+      label: Security Group
+      required: Security Group is required
+    shortLabel: Tencent TKE
+    storageSize:
+      label: Data Disk Size
+      placeholder: e.g. 10
+    storageType:
+      label: Data Disk Type
+    subnet:
+      label: Subnet
+      required: Subnet is required
+    version:
+      label: Kubernetes Version
+    vpc:
+      label: VPC
+      required: VPC is required
+    zone:
+      label: Availability Zone
+      required: Availability Zone is required
 
 clusterTemplateNew:
   members:
@@ -8332,8 +8461,8 @@ nodeGroupRow:
     placeholder: Paste in the script
   version:
     label: Kubernetes Version
-    upgrade: 'Upgrade Node Group Version from { from } to { version }'
-    warning: A new cluster version has been selected. Once completed you may come back and upgrade the node group version.
+    upgrade: 'Upgrade Node Version from { from } to { version }'
+    warning: A new cluster version has been selected. Once completed you may come back and upgrade the node version.
 
 
 uploadFile:
@@ -8825,6 +8954,7 @@ modalAddCloudKey:
   errors:
     validation: '{ status }: There was a problem validating your keys. Enter valid credentials and try again.'
     region: You must select a region in order to validate your keys
+    azureTenantId: Tenant ID is required to launch a hosted Azure AKS cluster.
   typeSelect:
     prompt: Choose a cloud credential provider type
   aliyun:
@@ -8848,6 +8978,9 @@ modalAddCloudKey:
     clientSecret:
       label: Client Secret
       placeholder: Your Client Secret
+    subscriptionId:
+      label: Subscription ID
+      placeholder: Your Azure subscription ID
   digitalocean:
     accessToken:
       label: Access Token
@@ -8882,7 +9015,6 @@ modalAddCloudKey:
     authRegion:
       label: Region
       help: Any region your tenancy is subscribed to authenticate your credentials.
-
   pnap:
     clientIdentifier:
       label: Client ID
@@ -8891,7 +9023,7 @@ modalAddCloudKey:
       label: Client Secret
       placeholder: Your Client Secret
       help:
-        From <a href="https://bmc.phoenixnap.com/applications/" target="_blank" rel="nofollow noreferrer noopener">phoenixNAP BMC Portal</a> Application Credentials
+        From <a href="https://bmc.phoenixnap.com/applications/" target="_blank" rel="nofollow noreferrer noopener">phoenixNAP BMC Portal</a> API Credentials
 
   vmwarevsphere:
     password:
@@ -9129,8 +9261,8 @@ modalRollbackApp:
     label: Differences
 
 modalSaveRkeTemplate:
-  title: "Create RKE Template from {clusterName}"
-  subtitle: Create a new RKE cluster template and initial revision from the current cluster configuration. This will modify the current cluster, setting up the cluster to use the newly created cluster template and revision.
+  title: "Convert {clusterName} to new RKE Template"
+  subtitle: Create a new RKE cluster template and initial revision from the current cluster configuration. This will modify the current cluster, setting up the cluster to use the newly created cluster template and revision. This can not be undone.
   name: Cluster Template Name
   revName: Cluster Template Revision Name
 modalShell:
@@ -9488,6 +9620,7 @@ nodeDriver:
     amazoneks: Amazon EKS
     amazoneksv2: Amazon EKS
     azure: Azure
+    azureaksv2: Azure AKS
     azureaks: Azure AKS
     cloudca: Cloud.ca
     digitalocean: DigitalOcean
@@ -9500,6 +9633,7 @@ nodeDriver:
     importeks: Amazon EKS
     linode: Linode
     linodelke: Linode LKE
+    metal: Equinix Metal
     oci: Oracle Cloud Infrastructure
     openstack: OpenStack
     otc: Open Telekom Cloud
@@ -9507,7 +9641,7 @@ nodeDriver:
     packet: Packet
     pinganyunecs: Pinganyun ECS
     pnap: phoenixNAP
-    rackspace: RackSpace
+    rackspace: Rackspace
     rancherkubernetesengine: RKE
     softlayer: SoftLayer
     tencenttke: Tencent TKE
@@ -9779,6 +9913,33 @@ nodeDriver:
       placeholder: 'picked by default by docker-machine'
     template:
       label: Template
+  metal:
+    accountSection: Account Access
+    projectId:
+      label: Project ID
+      placeholder: Your Equinix Metal project ID
+    apiKey:
+      label: Account API Key
+      placeholder: Your Equinix Metal API key
+    apiKeyHelp: From the Equinix Metal <a href="https://console.equinix.com/users/0/api-keys" target="_blank">API Keys</a> screen
+    instanceSection: Instance
+    instanceOptionsSection: Instance Options
+    loginAction: "Next: Authenticate & select an instance"
+    authentication: Authenticating
+    location: Location
+    planDetails:
+      label: Instance Details
+      cpu: CPUs
+      memory: Memory
+      drives: Drives
+      network: NICs
+    image:
+      label: Image
+    size:
+      label: Size
+    regionSection: Region
+    region:
+      label: Region
   packet:
     accountSection: Account Access
     projectId:
@@ -9812,11 +9973,11 @@ nodeDriver:
       detail: Username and API Key will be used to launch Rackspace Instances.
     username:
       label: Username
-      placeholder: Your RackSpace username
+      placeholder: Your Rackspace username
     apiKey:
       label: API Key
-      placeholder: Your RackSpace API key
-    accountHelp: From the Account Settings screen of the RackSpace control panel
+      placeholder: Your Rackspace API key
+    accountHelp: From the Account Settings screen of the Rackspace control panel
     region:
       title: 2. Region and Flavor
       detail: Choose the region and flavor that will be used to launch Rackspace Instances.
@@ -10059,110 +10220,110 @@ nodeDriver:
       placeholder: "e.g. AllowVnetOutBound"
       helpText: When using a Rancher managed or providing an existing NSG, all nodes using this template will use the supplied NSG. If no NSG is provided, a new NSG will be created for each node.
       openPorts: When using an existing NSG, Open Ports are ignored.
-  # aliyunecs:
-  #   accountSection:
-  #     label: 1. Account Access
-  #     detail: API Keys will be used to launch Alicloud ECS Instances.
-  #     next: "Next: Authenticate & Config network options"
-  #     loading: Loading Regions from Alicloud ECS...
-  #   accessKey:
-  #     label: Access Key
-  #     placeholder: Your Alicloud Account Access Key
-  #   accessKeySecret:
-  #     label: Access Key Secret
-  #     placeholder: Your Alicloud Account Access Key Secret
-  #     provided: Provided
-  #   apiEndpoint:
-  #     label: Private Alicloud API Server Endpoint
-  #     placeholder: Private Alicloud API Server Endpoint
-  #   instanceOptionsSection:
-  #     label: Instance
-  #     detail: Customize the Alicloud ECS Instance that will be created.
-  #   instanceDescription:
-  #     label: Instance Description
-  #     placeholder: Instance Description
-  #   instanceType:
-  #     label: Instance Type
-  #     placeholder: Instance Type
-  #   systemImage:
-  #     label: System image
-  #     placeholder: System image
-  #   internetMaxBandwidth:
-  #     label: Internet Max Bandwidth
-  #     placeholder: 1 to 100
-  #   aliyunSLB:
-  #     label: Alicloud SLB ID
-  #     placeholder: Alicloud SLB ID
-  #   internetChargeType:
-  #     label: EIP Charge Type
-  #     payByBandwidth: Pay By Bandwidth
-  #     payByTraffic: Pay By Traffic
-  #   storageSection:
-  #     label: Storage
-  #     detail: Configure the storage for the instances that will be created by this template.
-  #     next: "Next: Config Alicloud ECS Instance options"
-  #     loading: Loading Instance Types and Images from Alicloud ECS...
-  #   ioOptimized:
-  #     label: Instance Storage I/O Optimized
-  #     optimized: Optimized
-  #     none: None
-  #   systemDiskCategory:
-  #     label: System Disk Category
-  #   dataDiskCategory:
-  #     label: Data Disk Category
-  #   dataDiskSize:
-  #     label: Data Disk Size
-  #     placeholder: Disk Size
-  #   region:
-  #     label: Region
-  #     placeholder: Region
-  #   zone:
-  #     label: Available Zone
-  #     prompt: Choose a Available Zone...
-  #   networkSection:
-  #     label: Network
-  #     detail: Configure the network for the instances that will be created by this template.
-  #     next: "Next: Config Storage Options"
-  #     loading: Loading Storage Types from Alicloud ECS...
-  #   routeCIDR:
-  #     label: Route CIDR
-  #     placeholder: e.g. 192.168.1.0/24
-  #   vpcId:
-  #     label: VPC
-  #     prompt: Choose a VPC...
-  #   vswitchId:
-  #     label: VSwitch
-  #     prompt: Choose a VSwitch...
-  #   privateIp:
-  #     label: Private IP
-  #     placeholder: Private IP in Private Network
-  #   privateAddressOnly:
-  #     label: Private Address Only
-  #   securitySection:
-  #     label: Security
-  #     detail: Choose the security groups that will be applied to Instances
-  #   securityGroup:
-  #     label: Security Group
-  #     placeholder: Security Group
-  #     prompt: Choose a Security Group...
-  #     defaultCreate: "Automatically create a <code>{groupName}</code> group"
-  #   sshPassword:
-  #     label: SSH Password
-  #     placeholder: Set Instance SSH Password (Optional)
-  #     provided: Provided
-  #   tags:
-  #     addActionLabel: Add Instance Tag
-  #     valueLabel: Tags
-  #     placeholder: e.g. dev
-  #   errors:
-  #     vpcIdRequired: VPC is required.
-  #     vswitchIdRequired: VSwitch is required.
-  #     accessKeyRequired: Access Key is required.
-  #     accessSecretRequired: Access Secret Key is required.
-  #     sshPasswordLengthNotValid: The length of SSH password must between eight and thirty.
-  #     sshPasswordInvalidCharacter: SSH password contains invalid characters.
-  #     sshPasswordFormatError: "SSH password must contain at least three out of four kinds of following characters: uppercase letter, lowercase letters, numbers, and special characters."
-  #     nameNotValidForApp: The name is invalid according to the {appName} hostname rule.
+  aliyunecs:
+    accountSection:
+      label: 1. Account Access
+      detail: API Keys will be used to launch Alicloud ECS Instances.
+      next: "Next: Authenticate & Config network options"
+      loading: Loading Regions from Alicloud ECS...
+    accessKey:
+      label: Access Key
+      placeholder: Your Alicloud Account Access Key
+    accessKeySecret:
+      label: Access Key Secret
+      placeholder: Your Alicloud Account Access Key Secret
+      provided: Provided
+    apiEndpoint:
+      label: Private Alicloud API Server Endpoint
+      placeholder: Private Alicloud API Server Endpoint
+    instanceOptionsSection:
+      label: Instance
+      detail: Customize the Alicloud ECS Instance that will be created.
+    instanceDescription:
+      label: Instance Description
+      placeholder: Instance Description
+    instanceType:
+      label: Instance Type
+      placeholder: Instance Type
+    systemImage:
+      label: System image
+      placeholder: System image
+    internetMaxBandwidth:
+      label: Internet Max Bandwidth
+      placeholder: 1 to 100
+    aliyunSLB:
+      label: Alicloud SLB ID
+      placeholder: Alicloud SLB ID
+    internetChargeType:
+      label: EIP Charge Type
+      payByBandwidth: Pay By Bandwidth
+      payByTraffic: Pay By Traffic
+    storageSection:
+      label: Storage
+      detail: Configure the storage for the instances that will be created by this template.
+      next: "Next: Config Alicloud ECS Instance options"
+      loading: Loading Instance Types and Images from Alicloud ECS...
+    ioOptimized:
+      label: Instance Storage I/O Optimized
+      optimized: Optimized
+      none: None
+    systemDiskCategory:
+      label: System Disk Category
+    dataDiskCategory:
+      label: Data Disk Category
+    dataDiskSize:
+      label: Data Disk Size
+      placeholder: Disk Size
+    region:
+      label: Region
+      placeholder: Region
+    zone:
+      label: Available Zone
+      prompt: Choose a Available Zone...
+    networkSection:
+      label: Network
+      detail: Configure the network for the instances that will be created by this template.
+      next: "Next: Config Storage Options"
+      loading: Loading Storage Types from Alicloud ECS...
+    routeCIDR:
+      label: Route CIDR
+      placeholder: e.g. 192.168.1.0/24
+    vpcId:
+      label: VPC
+      prompt: Choose a VPC...
+    vswitchId:
+      label: VSwitch
+      prompt: Choose a VSwitch...
+    privateIp:
+      label: Private IP
+      placeholder: Private IP in Private Network
+    privateAddressOnly:
+      label: Private Address Only
+    securitySection:
+      label: Security
+      detail: Choose the security groups that will be applied to Instances
+    securityGroup:
+      label: Security Group
+      placeholder: Security Group
+      prompt: Choose a Security Group...
+      defaultCreate: "Automatically create a <code>{groupName}</code> group"
+    sshPassword:
+      label: SSH Password
+      placeholder: Set Instance SSH Password (Optional)
+      provided: Provided
+    tags:
+      addActionLabel: Add Instance Tag
+      valueLabel: Tags
+      placeholder: e.g. dev
+    errors:
+      vpcIdRequired: VPC is required.
+      vswitchIdRequired: VSwitch is required.
+      accessKeyRequired: Access Key is required.
+      accessSecretRequired: Access Secret Key is required.
+      sshPasswordLengthNotValid: The length of SSH password must between eight and thirty.
+      sshPasswordInvalidCharacter: SSH password contains invalid characters.
+      sshPasswordFormatError: "SSH password must contain at least three out of four kinds of following characters: uppercase letter, lowercase letters, numbers, and special characters."
+      nameNotValidForApp: The name is invalid according to the {appName} hostname rule.
   oci:
     placement:
       title: Placement
@@ -10211,6 +10372,57 @@ nodeDriver:
     region:
       label: Region
       placeholder: 'select cloud credential to populate options...'
+  harvester:
+    cluster:
+      label: Cluster
+      kubeconfig: KubeconfigContent
+    imageName:
+      label: Image
+    diskBus:
+      label: Bus
+    access:
+      title: 1. Account Access
+      detail: Configure where to find the Harvester server
+    instance:
+      title: 2. Instance Options
+      detail: Choose the size and OS of the virtual machine
+    advanced:
+      title: 3. Advanced Options
+      detail: CloudInit
+    host:
+      label: Host
+      placeholder: IP/domain
+    port:
+      label: Port
+    username:
+      label: Username
+    imported: Imported Harvester
+    external: External Harvester
+    sshUser:
+      label: SSH User
+    networkName:
+      label: Network Name
+    password:
+      label: Password
+    cpuCount:
+      label: CPUs
+      unit: '{cores, plural, =1 {Core} other {Cores}}'
+    memorySize:
+      label: Memory
+      unit: GiB
+    namespace:
+      label: Namespace
+    diskSize:
+      label: Disk
+      unit: GiB
+    networkData:
+      label: Network Data YAML
+      template:
+        label: Network Data Template
+    userData:
+      label: User Data YAML
+      template:
+        label: User Data Template
   pnap:
     access:
       title: Account Access
@@ -10227,6 +10439,16 @@ nodeDriver:
     type:
       label: Type
       placeholder: 'Please select type of server to provision.'
+      help: <a href="https://phoenixnap.com/bare-metal-cloud/instances" target="_blank" rel="nofollow noreferrer noopener">Instance types and pricing</a>
+    product:
+      label: Server specification
+      cpu: CPU
+      cpucount: CPU Count
+      cpucores: Cores per CPU
+      cpufrequency: CPU Frequency [GHz]
+      memory: RAM [GB]
+      storage: Storage
+      network: Network
     errors:
       typeRequired: Server type is required.
       osRequired: Operating System is required.
@@ -10934,6 +11156,7 @@ action:
   convertToService: Convert to Service
   cordon: Cordon
   deactivate: Deactivate
+  disableAutoInject: Disable Istio Auto Injection
   download: Download
   downloadYaml: Download YAML
   drain: Drain
@@ -10942,6 +11165,7 @@ action:
   editConfig: Edit Config
   editService: Edit Service
   editYaml: View/Edit YAML
+  enableAutoInject: Enable Istio Auto Injection
   evacuate: Evacuate
   execute: Execute Shell
   exportConfig: Export Config
@@ -11005,8 +11229,6 @@ action:
   viewInGrafana: Go to Grafana
   viewInstance: View Instance
   viewYaml: View YAML
-  enableAutoInject: Enable Istio Auto Injection
-  disableAutoInject: Disable Istio Auto Injection
   auditlog: Audit Log
   downloadFile: Download File
   cloneCrossCluster: Clone Cross Cluster

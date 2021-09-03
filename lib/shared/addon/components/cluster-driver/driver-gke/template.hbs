@@ -120,22 +120,9 @@
                 />
               </InputOrDisplay>
             </div>
-            <div class="col span-2">
-              <label class="acc-label">
-                {{t "clusterNew.googlegke.locations.label"}}
-              </label>
-              {{#each locationContent as |location|}}
-                <div class="checkbox">
-                  <label>
-                    {{input type="checkbox" checked=location.checked}}
-                    {{location.name}}
-                  </label>
-                </div>
-              {{/each}}
-            </div>
           {{/if}}
           {{#if (eq locationType "regional")}}
-            <div class="col span-6">
+            <div class="col span-4">
               <label class="acc-label">
                 {{t "clusterNew.googlegke.region.label"}}
               </label>
@@ -156,6 +143,26 @@
               </InputOrDisplay>
             </div>
           {{/if}}
+          <div class="col span-2">
+            <label class="acc-label">
+              {{t "clusterNew.googlegke.locations.label"}}
+            </label>
+            {{#each locationContent as |location|}}
+              <div class="checkbox">
+                <label>
+                  <Input
+                    @type="checkbox"
+                    @checked={{location.checked}}
+                    @disabled={{and
+                      (not isNewOrEditable)
+                      (eq locationType "regional")
+                    }}
+                  />
+                  {{location.name}}
+                </label>
+              </div>
+            {{/each}}
+          </div>
         </div>
         {{#if (eq step 2)}}
           <SaveCancel
@@ -226,7 +233,6 @@
                   classNames="form-control"
                   value=config.network
                   optionValuePath="name"
-                  optionLabelPath="name"
                 }}
               </InputOrDisplay>
             </div>
@@ -248,7 +254,6 @@
                   content=subNetworkContent
                   classNames="form-control"
                   value=config.subnetwork
-                  readOnly=(lte subNetworkContent.length 0)
                 }}
               </InputOrDisplay>
             </div>
@@ -274,12 +279,72 @@
                 <label>
                   {{input
                     type="checkbox"
-                    checked=config.networkPolicyEnabled
-                    disabled=(not isNewOrEditable)
+                    checked=config.clusterAddons.networkPolicyConfig
+                    disabled=shouldDisableNetworkPolicyConfig
                   }}
-                  {{t "clusterNew.googlegke.networkPolicy.label"}}
+                  {{t "clusterNew.googlegke.clusterAddons.networkPolicyConfig"}}
                 </label>
               </div>
+              <div class="checkbox">
+                <label>
+                  {{input
+                    type="checkbox"
+                    checked=config.networkPolicyEnabled
+                    disabled=shouldDisableNetworkPolicyEnabled
+                  }}
+                  {{t "clusterNew.googlegke.networkPolicy.label"}}
+                  {{#if
+                    (and
+                      editing
+                      (and
+                        (or
+                          model.originalCluster.gkeStatus.upstreamSpec.networkPolicyEnabled
+                          model.originalCluster.gkeStatus.upstreamSpec.clusterAddons.networkPolicyConfig
+                        )
+                        (not
+                          (or
+                            config.networkPolicyEnabled
+                            config.clusterAddons.networkPolicyConfig
+                          )
+                        )
+                      )
+                    )
+                  }}
+                    {{#tooltip-element
+                      type="tooltip-basic"
+                      model=(t "clusterNew.googlegke.networkPolicy.help")
+                      tooltipTemplate="tooltip-static"
+                      aria-describedby="tooltip-base"
+                      tooltipFor="tooltipLink"
+                    }}
+                      <i class="icon icon-info"></i>
+                    {{/tooltip-element}}
+                  {{/if}}
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  {{input type="checkbox" checked=cluster.enableNetworkPolicy}}
+                  {{t "clusterNew.rke.networkPolicy.label"}}
+                </label>
+              </div>
+            </div>
+            <div class="col span-6">
+              {{#unless config.ipAllocationPolicy.useIpAliases}}
+                <BannerMessage
+                  @icon="icon-alert"
+                  @color="bg-warning mt-0"
+                  @message={{t "clusterNew.googlegke.useIpAliases.warning"}}
+                />
+              {{/unless}}
+              {{#if (or showPolicyEnabledWarning showPolicyConfigWarning)}}
+                <BannerMessage
+                  @icon="icon-alert"
+                  @color="bg-warning mb-10"
+                  @message={{t "clusterNew.googlegke.policyConfigDisableWarning"
+                  }}
+                />
+              {{/if}}
             </div>
           </div>
           <div class="row">
@@ -297,7 +362,10 @@
                     placeholder=(t
                       "clusterNew.googlegke.ipPolicySubnetworkName.placeholder"
                     )
-                    disabled=(not config.ipAllocationPolicy.createSubnetwork)
+                    disabled=(or
+                      (not config.ipAllocationPolicy.createSubnetwork)
+                      (not config.ipAllocationPolicy.useIpAliases)
+                    )
                   }}
                 </InputOrDisplay>
               </div>
@@ -464,15 +532,6 @@
                   {{t "clusterNew.googlegke.clusterAddons.httpLoadBalancing"}}
                 </label>
               </div>
-              <div class="checkbox">
-                <label>
-                  {{input
-                    type="checkbox"
-                    checked=config.clusterAddons.networkPolicyConfig
-                  }}
-                  {{t "clusterNew.googlegke.clusterAddons.networkPolicyConfig"}}
-                </label>
-              </div>
             </div>
             <div class="col span-6">
               <label class="acc-label">
@@ -591,6 +650,8 @@
         <div class="row">
           {{#each config.nodePools as |nodePool|}}
             <GkeNodePoolRow
+              @locationType={{locationType}}
+              @locationContent={{locationContent}}
               @originalCluster={{model.originalCluster}}
               @isNew={{isNewOrEditable}}
               @machineTypes={{machineTypes}}
@@ -613,9 +674,7 @@
             type="button"
             {{action "addNodePool"}}
           >
-            <span class="darken">
-              <i class="icon icon-plus text-small"></i>
-            </span>
+            <i class="icon icon-plus text-small"></i>
             <span>
               {{t "clusterNew.googlegke.nodePool.addLabel"}}
             </span>

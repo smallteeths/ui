@@ -197,9 +197,7 @@
                       type="button"
                       {{action addUserLabel}}
                     >
-                      <span class="darken">
-                        <i class="icon icon-plus text-small"></i>
-                      </span>
+                      <i class="icon icon-plus text-small"></i>
                       <span>
                         {{t "formUserLabels.addAction"}}
                       </span>
@@ -242,7 +240,9 @@
                   @tagName="div"
                   @classNames="copy-to-pre"
                 />
-                <pre id="registration-command" style="font-size: 14px;">{{command}}</pre>
+                <pre id="registration-command" style="font-size: 14px;">
+                  {{command}}
+                </pre>
               {{/if}}
             </div>
           </li>

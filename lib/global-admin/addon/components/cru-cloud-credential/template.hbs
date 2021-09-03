@@ -88,45 +88,7 @@
         </div>
       </div>
     {{else if (eq cloudCredentialType "azure")}}
-      <div class="row">
-        <div class="col span-6">
-          <label class="acc-label">
-            {{t "nodeDriver.azure.subscriptionId.label"}}{{field-required}}
-          </label>
-          {{input
-            type="text"
-            value=config.subscriptionId
-            classNames="form-control"
-            placeholder=(t "nodeDriver.azure.subscriptionId.placeholder")
-          }}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col span-6">
-          <label class="acc-label" for="azure-clientId">
-            {{t "modalAddCloudKey.azure.clientId.label"}}{{field-required}}
-          </label>
-          {{input
-            type="text"
-            value=config.clientId
-            classNames="form-control"
-            id="azure-clientId"
-            placeholder=(t "modalAddCloudKey.azure.clientId.placeholder")
-          }}
-        </div>
-        <div class="col span-6">
-          <label class="acc-label" for="azure-clientSecret">
-            {{t "modalAddCloudKey.azure.clientSecret.label"}}{{field-required}}
-          </label>
-          {{input
-            type="password"
-            value=config.clientSecret
-            classNames="form-control"
-            id="azure-clientSecret"
-            placeholder=(t "modalAddCloudKey.azure.clientSecret.placeholder")
-          }}
-        </div>
-      </div>
+      <CloudCredentialAzure @config={{mut config}} />
     {{else if (eq cloudCredentialType "digitalOcean")}}
       <div class="row">
         <div class="col span-6">
@@ -396,6 +358,60 @@
           }}
         </div>
       </div>
+
+    {{else if (eq cloudCredentialType "harvester")}}
+      <div class="row">
+        <div class="col span-12">
+          <div class="radio">
+            <label>
+              {{radio-button selection=config.clusterType value="imported"}}
+              {{t "nodeDriver.harvester.imported"}}
+            </label>
+          </div>
+
+          <div class="radio">
+            <label>
+              {{radio-button selection=config.clusterType value="external"}}
+              {{t "nodeDriver.harvester.external"}}
+            </label>
+          </div>
+        </div>
+      </div>
+
+      {{#if (eq config.clusterType "imported")}}
+        <div class="row">
+          <div class="col span-6">
+            <label class="acc-label">
+              {{t "nodeDriver.harvester.cluster.label"}}{{field-required}}
+            </label>
+            <SearchableSelect
+              @class="form-control"
+              @content={{clusterContent}}
+              @value={{config.clusterId}}
+            />
+          </div>
+        </div>
+      {{else}}
+        <div class="row">
+          <div class="col span-12">
+            <label class="acc-label">
+              {{t "nodeDriver.harvester.cluster.kubeconfig"}}{{field-required}}
+            </label>
+
+            {{input-yaml
+              class="modal-yaml"
+              showDownload=false
+              showUpload=false
+              canChangeName=false
+              autoResize=true
+              gutters=(array)
+              minHeight=500
+              value=config.kubeconfigContent
+              valueUpdated=(action "updateKubeconfigYaml")
+            }}
+          </div>
+        </div>
+      {{/if}}
     {{/if}}
   </div>
 

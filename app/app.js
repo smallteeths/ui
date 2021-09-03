@@ -10,6 +10,29 @@ export default class App extends Application {
 
   Resolver = Resolver;
 
+  ready = function() {
+    const isEmbedded = window.top !== window;
+
+    if (isEmbedded) {
+      // Add a class 'hide-when-embedded' which can be used to hide elements
+      // that we don't want to show up when embedded
+      const head = document.getElementsByTagName('head')[0];
+      const styl = document.createElement('style');
+      const css = '.embedded .hide-when-embedded { display: none !important; }\n  .embedded-no-overflow { overflow-y: hidden; } .embedded-no-overflow #application { padding-bottom: 10px; }';
+
+      styl.setAttribute('type', 'text/css');
+      if (styl.styleSheet) {
+        styl.styleSheet.cssText = css;
+      } else {
+        styl.appendChild(document.createTextNode(css));
+      }
+      head.appendChild(styl);
+
+      // Notify outer window that the app has loaded when we are embedded
+      window.top.postMessage({ action: 'ready' });
+    }
+  };
+
   engines = {
     login: {
       dependencies: {
@@ -74,7 +97,7 @@ export default class App extends Application {
         }
       }
     },
-    globalAdmin: {
+    'global-admin': {
       dependencies: {
         services: [
           'access',
@@ -90,7 +113,6 @@ export default class App extends Application {
           'modal',
           'oauth',
           'resource-actions',
-          'router',
           'scope',
           'session',
           'settings',
@@ -98,6 +120,7 @@ export default class App extends Application {
           'tooltip',
           'user-language',
           'user-theme',
+          'router',
         ],
         externalRoutes: {
           index:                                          'index',
@@ -170,30 +193,30 @@ export default class App extends Application {
           'intl',
           'modal',
           'resource-actions',
-          'router',
           'scope',
           'session',
           'store',
           'tooltip',
+          'router',
         ],
         externalRoutes: {
-          index:                                      'index',
-          failWhale:                                  'failWhale',
-          authenticated:                              'authenticated',
           'authenticated.cluster':                    'authenticated.cluster',
           'authenticated.cluster.index':              'authenticated.cluster.index',
           'authenticated.cluster.projects':           'authenticated.cluster.projects',
-          'authenticated.project':                    'authenticated.project',
           'authenticated.prefs':                      'authenticated.prefs',
-          'logout':                                   'logout',
-          'volumes.index':                            'volumes.index',
+          'authenticated.project':                    'authenticated.project',
           'authenticated.project.dns.index':          'authenticated.project.dns.index',
           'authenticated.project.hpa.index':          'authenticated.project.hpa.index',
-          'ingresses.index':                          'ingresses.index',
-          'containers.index':                         'containers.index',
           'authenticated.project.pipeline.pipeline':  'authenticated.project.pipeline.pipeline',
           'authenticated.project.pipeline.pipelines': 'authenticated.project.pipeline.pipelines',
+          'containers.index':                         'containers.index',
+          'ingresses.index':                          'ingresses.index',
+          'logout':                                   'logout',
           'notifier':                                 'authenticated.cluster.notifier',
+          'volumes.index':                            'volumes.index',
+          authenticated:                              'authenticated',
+          failWhale:                                  'failWhale',
+          index:                                      'index',
         }
       }
     },

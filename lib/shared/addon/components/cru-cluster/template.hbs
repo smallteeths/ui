@@ -169,6 +169,51 @@
       {{/accordion-list-item}}
     {{/if}}
   {{/accordion-list}}
+  {{#if isImportedOther}}
+    {{#accordion-list showExpandAll=false as |al expandFn|}}
+      {{#accordion-list-item
+        title=(t "clusterNew.rke.advanced.label")
+        detail=(t "clusterNew.rke.advanced.detail")
+        expandAll=al.expandAll
+        everExpanded=true
+        expand=(action expandFn)
+      }}
+      <div class="row">
+        <div class="col span-6">
+          <label class="acc-label">
+            {{t "generic.networking"}}
+          </label>
+          <div class="checkbox">
+            <label>
+              {{input type="checkbox" checked=cluster.enableNetworkPolicy}}
+              {{t "clusterNew.rke.networkPolicy.label"}}
+            </label>
+          </div>
+        </div>
+        <div class="col span-6">
+          {{#if cluster.enableNetworkPolicy}}
+            <BannerMessage
+              @icon="icon-alert"
+              @color="bg-warning mt-0"
+              @message={{t "clusterNew.import.clusterOptions.warning"}}
+            />
+          {{/if}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col span-6">
+          <label class="acc-label">
+            {{t "clusterNew.rke.agentEnvVars.label"}}
+          </label>
+          <FormAgentEnvVar
+            @editable={{notView}}
+            @value={{mut agentEnvVars}}
+          />
+        </div>
+      </div>
+      {{/accordion-list-item}}
+    {{/accordion-list}}
+  {{/if}}
 {{/if}}
 
 {{#if showDriverComponent}}

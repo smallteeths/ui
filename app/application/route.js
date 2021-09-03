@@ -1,8 +1,8 @@
+import { get, observer, set } from '@ember/object';
+import Route from '@ember/routing/route';
 import { cancel, next, schedule } from '@ember/runloop';
 import { inject as service } from '@ember/service';
-import Route from '@ember/routing/route';
 import C from 'ui/utils/constants';
-import { get, set, observer } from '@ember/object';
 
 export default Route.extend({
   access:     service(),
@@ -56,6 +56,9 @@ export default Route.extend({
   },
 
   actions: {
+    didTransition() {
+      this.notifyAction('did-transition');
+    },
     loading(transition) {
       this.incrementProperty('loadingId');
       let id = get(this, 'loadingId');
@@ -63,9 +66,12 @@ export default Route.extend({
       cancel(get(this, 'hideTimer'));
 
       // console.log('Loading', id);
+      this.notifyAction('need-to-load');
+
       if ( !get(this, 'loadingShown') ) {
         set(this, 'loadingShown', true);
         // console.log('Loading Show', id);
+        this.notifyLoading(true);
 
         schedule('afterRender', () => {
           if (!get(this, 'loadingShown')) {
@@ -97,6 +103,7 @@ export default Route.extend({
               easing:   'linear',
               complete: schedule('afterRender', function() { // eslint-disable-line
                 $('#loading-underlay').stop().fadeOut({duration: 100, queue: false, easing: 'linear'}); // eslint-disable-line
+                setTimeout(() => self.notifyLoading(false), 200);
               })
             });
           });
@@ -145,9 +152,22 @@ export default Route.extend({
     logout(transition, errorMsg) {
       let session = get(this, 'session');
       let access = get(this, 'access');
+      const isEmbedded = window.top !== window;
+
+      if ( isEmbedded ) {
+        window.top.postMessage({ action: 'logout' });
+
+        return;
+      }
 
       access.clearToken().finally(() => {
-        let url =  `${ window.location.origin }/login`;
+        let url;
+
+        if ( get(this, 'app.environment') === 'development' ) {
+          url =  `${ window.location.origin }/login`;
+        } else {
+          url =  `${ window.location.origin }/dashboard/auth/login`;
+        }
 
         get(this, 'tab-session').clear();
         set(this, `session.${ C.SESSION.CONTAINER_ROUTE }`, undefined);
@@ -203,4 +223,19 @@ export default Route.extend({
     }
   },
 
+  notifyLoading(isLoading) {
+    this.notifyAction('loading', isLoading);
+  },
+
+  notifyAction(action, state) {
+    // If embedded, notify outer frame
+    const isEmbedded = window !== window.top;
+
+    if (isEmbedded) {
+      window.top.postMessage({
+        action,
+        state
+      });
+    }
+  }
 });

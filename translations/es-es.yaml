@@ -4490,7 +4490,7 @@ nodeDriver:
     openstack: OpenStack
     otc: Abrir Telekom Cloud
     packet: Paquete
-    rackspace: RackSpace
+    rackspace: Rackspace
     softlayer: SoftLayer
     vmwarevsphere: vSphere
     zstack: ZStack
@@ -4684,6 +4684,57 @@ nodeDriver:
       placeholder: 'elegido por defecto por docker-machine'
     template:
       label: Plantilla
+  harvester:
+    cluster:
+      label: Cluster
+      kubeconfig: KubeconfigContent
+    imageName:
+      label: Image
+    diskBus:
+      label: Bus
+    access:
+      title: 1. Account Access
+      detail: Configure where to find the Harvester server
+    instance:
+      title: 2. Instance Options
+      detail: Choose the size and OS of the virtual machine
+    advanced:
+      title: 3. Advanced Options
+      detail: CloudInit
+    host:
+      label: Host
+      placeholder: IP/domain
+    port:
+      label: Port
+    username:
+      label: Username
+    imported: Imported Harvester
+    external: External Harvester
+    sshUser:
+      label: SSH User
+    networkName:
+      label: Network Name
+    password:
+      label: Password
+    cpuCount:
+      label: CPUs
+      unit: '{cores, plural, =1 {Core} other {Cores}}'
+    memorySize:
+      label: Memory
+      unit: GiB
+    namespace:
+      label: Namespace
+    diskSize:
+      label: Disk
+      unit: GiB
+    networkData:
+      label: Network Data YAML
+      template:
+        label: Network Data Template
+    userData:
+      label: User Data YAML
+      template:
+        label: User Data Template
   packet:
     accountSection: Acceso a la Cuenta
     projectId:
@@ -4714,11 +4765,11 @@ nodeDriver:
       detail: El nombre de usuario y la clave API se utilizarán para iniciar instancias de Rackspace.
     username:
       label: Nombre de Usuario
-      placeholder: Tu nombre de usuario de RackSpace
+      placeholder: Tu nombre de usuario de Rackspace
     apiKey:
       label: Llave de API
       placeholder: Tu llave de API de Rackspace
-    accountHelp: Desde la pantalla de Configuración de Cuentas del panel de control de RackSpace
+    accountHelp: Desde la pantalla de Configuración de Cuentas del panel de control de Rackspace
     region:
       title: 2. Región y sabor
       detail: Elija la región y la clave Api que se utilizarán para iniciar instancias Ec2.
@@ -5145,7 +5196,7 @@ pagination:
     =1 {{count} {count, plural, =1 {Puerto} other {Puertos}}}
     other {{from} - {to} of {count} Puertos}}
   service: |
-    {pages, plural,
+    {páginas, plural,
     =0 {Sin Hosts}
     =1 {{count} {count, plural, =1 {Service} other {Services}}}
     other {{from} - {to} of {count} Hosts}}
@@ -5641,7 +5692,7 @@ volumeSource:
     title: Canal de Fibra
   flex-volume:
     title: Volumen flexible
-  csi-volume-longhorn:
+  flex-volume-longhorn:
     title: Longhorn
   flocker:
     title: Flocker

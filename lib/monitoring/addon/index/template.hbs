@@ -1,21 +1,15 @@
-<section class="header clearfix">
-  <h1 class="pull-left">{{t "clusterDashboard.title"}}: {{cluster.displayName}}</h1>
+<section class="header hide-when-embedded">
+  <h1>{{t "clusterDashboard.title"}}: {{cluster.displayName}}</h1>
 
   <div class="right-buttons">
-    <button
-      class="btn bg-primary btn-sm icon-btn ml-10"
-      disabled={{not cluster.isReady}}
-      onClick={{action "kubectl" allowedKeys="meta"}} type="button"
-    >
-      <span class="darken"><i class="icon icon-terminal"></i></span>
+    <button class="btn bg-primary" disabled={{not cluster.isReady}} onClick={{action "kubectl" allowedKeys="meta" }}
+      type="button">
+      <i class="icon icon-terminal"></i>
       <span>{{t "k8sPage.shell.button"}}</span>
     </button>
 
-    <button
-      class="btn bg-primary btn-sm icon-btn ml-10"
-      disabled={{not cluster.isReady}} type="button" {{action "kubeconfig"}}
-    >
-      <span class="darken"><i class="icon icon-file"></i></span>
+    <button class="btn bg-primary" disabled={{not cluster.isReady}} type="button" {{action "kubeconfig" }}>
+      <i class="icon icon-file"></i>
       <span>{{t "k8sPage.configFile.button"}}</span>
     </button>
 
@@ -28,15 +22,17 @@
 </section>
 
 {{#if cluster.description}}
-  <div class="row mb-30">
+  <div class="row mb-30 hide-when-embedded">
     {{banner-message color="bg-secondary mb-0 mt-10" message=(linkify cluster.description)}}
   </div>
 {{/if}}
 
-{{#if (and showBanner scope.currentCluster.isReady)}}
-  {{#banner-message color="bg-info" showClose=true close=(action "closeBanner")}}
-    <p>{{t 'banner.dashboard' dashboardLink=scope.dashboardLink docsBase=settings.docsBase htmlSafe=true}}</p>
-  {{/banner-message}}
+{{#if showAzureRBACWarning}}
+  <BannerMessage
+    @color="bg-warning"
+    @icon="icon-alert"
+    @message={{t "clusterNew.azureaks.rbacWarning"}}
+  />
 {{/if}}
 
 <section>

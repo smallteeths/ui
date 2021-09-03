@@ -1,10 +1,16 @@
 {{#if scope.currentCluster.isReady}}
-  {{#banner-message color="bg-warning"}}
-    <p>{{t 'banner.logging' dashboardLink=scope.dashboardLink docsBase=scope.docsBase htmlSafe=true}}</p>
-  {{/banner-message}}
+  {{#if scope.currentCluster.isK8s21Plus}}
+    {{#banner-message color="bg-error"}}
+      <p>{{t 'banner.logging21'}}</p>
+    {{/banner-message}}
+  {{else}}
+    {{#banner-message color="bg-warning"}}
+      <p>{{t 'banner.logging' dashboardLink=scope.dashboardLink docsBase=scope.docsBase htmlSafe=true}}</p>
+    {{/banner-message}}
+  {{/if}}
 {{/if}}
 
-<section class="header clearfix">
+<section class="header">
   <h1 class="pull-left text-capitalize">
     {{t headerLabel}}
   </h1>
@@ -72,21 +78,18 @@
 {{/if}}
 
 {{#if (not-eq targetType "none")}}
-  <section class="header has-tabs clearfix p-0">
+  <section class="has-tabs clearfix p-0">
     <ul class="tab-nav">
       {{#if (eq targetType "customTarget")}}
         <li>
-          <button
-            class={{concat (if testing "btn-disabled-transparent") " btn bg-transparent"}} disabled={{testing}} type="button" {{action "cancel"}}
-          >
+          <button class={{concat (if testing "btn-disabled-transparent" ) " btn bg-transparent" }} disabled={{testing}}
+            type="button" {{action "cancel" }}>
             {{t "loggingPage.advanced.cancel"}}
           </button>
         </li>
       {{else}}
         <li>
-          <button
-            class="btn bg-transparent" type="button" {{action "showPaste"}}
-          >
+          <button class="btn bg-transparent" type="button" {{action "showPaste" }}>
             {{t "loggingPage.advanced.file"}} <span class="icon icon-copy"></span>
           </button>
         </li>

@@ -55,6 +55,9 @@ Router.map(function() {
     this.route('prefs');
     this.route('iframe', { path: '/iframe/:url' });
 
+    // Only to avoid conflicy with /c path on dashboard when developing embedded pages
+    this.route('embed', { path: '/k/*path' });
+
     // Per-Cluster
     this.route('cluster', { path: '/c/:cluster_id' }, function() {
       this.route('index', { path: '/' });
@@ -178,13 +181,26 @@ Router.map(function() {
         this.route('container', {
           path:           '/:pod_id/container/:container_name',
           resetNamespace: true
-        })
+        });
+
+        // Pos metrics graphs for embedding
+        this.route('pod-graphs', {
+          path:           '/pod-metrics/:pod_id',
+          resetNamespace: true
+        });
+
+        // Container metrics graphs for embedding
+        this.route('container-graphs', {
+          path:           '/:pod_id/container-metrics/:container_name',
+          resetNamespace: true
+        });
 
         // audit log
         this.route('audit-log', function() {
           this.route('index', { path: '/' });
         });
       });
+
       // audit log
       this.route('audit-log', function() {
         this.route('index', { path: '/' });
@@ -227,6 +243,11 @@ Router.map(function() {
         resetNamespace: true
       });
 
+      // Worlkload metrics graphs for embedding
+      this.route('workload-graphs', {
+        path:           '/workload-metrics/:workload_id',
+        resetNamespace: true
+      });
 
       this.route('project-catalogs', { path: '/catalogs' });
 

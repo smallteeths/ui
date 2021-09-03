@@ -1,5 +1,5 @@
 {{#if showHeader}}
-  <section class="header clearfix">
+  <section class="header">
     <div class="pull-left">
       <h1>
         {{t (if istio "catalogPage.istio.header" "catalogPage.index.header")}}
@@ -15,21 +15,15 @@
         }}
         {{#if search}}
           <span class="input-group-btn">
-            <button
-              class="btn bg-transparent text-info pl-10 pr-10" type="button" {{action "clearSearch"}}
-            >
+            <button class="btn bg-transparent text-info pl-10 pr-10" type="button" {{action "clearSearch" }}>
               <i class="icon icon-close"></i>
             </button>
           </span>
         {{/if}}
       </div>
       <div class="dropdown filter-group pull-right ml-20">
-        <BasicDropdown
-          @horizontalPosition="right"
-          @verticalPosition="below" as |dd|
-        >
-          <dd.Trigger class="btn bg-default btn-md pt-5 pb-5">
-            <i class="icon icon-chevron-down pull-right ml-10"></i>
+        <BasicDropdown @horizontalPosition="right" @verticalPosition="below" as |dd|>
+          <dd.Trigger class="btn bg-default">
             <span class="text-capitalize">
               {{#if (eq category "")}}
                 {{t "catalogPage.index.allCategories"}}
@@ -37,12 +31,10 @@
                 {{category}}
               {{/if}}
             </span>
+            <i class="icon icon-chevron-down ml-10"></i>
           </dd.Trigger>
           <dd.Content class="text-right">
-            <li
-              class="text-capitalize {{if (eq category "") "active"}}"
-              {{action dd.actions.close}}
-            >
+            <li class="text-capitalize {{if (eq category "") "active"}}" {{action dd.actions.close}}>
               <a href="#" {{action "filterCatalog" "" dd}}>
                 {{t "catalogPage.index.allCategories"}}
                 (
@@ -51,10 +43,7 @@
               </a>
             </li>
             {{#each categories as |opt|}}
-              <li
-                class="{{if (eq category opt.category) "active"}}"
-                {{action dd.actions.close}}
-              >
+              <li class="{{if (eq category opt.category) "active"}}" {{action dd.actions.close}}>
                 <a href="#" {{action "filterCatalog" opt.category dd}}>
                   <div class="text-capitalize">
                     {{opt.name}}
@@ -69,24 +58,13 @@
         </BasicDropdown>
       </div>
       <div class="pull-right">
-        <button
-          type="button"
-          class="btn bg-primary icon-btn"
-          disabled={{eq updating "yes"}}
-          {{action "update"}}
-        >
+        <button type="button" class="btn bg-primary icon-btn" disabled={{eq updating "yes" }} {{action "update" }}>
           {{#if (eq updating "yes")}}
-            <span class="darken">
-              <i class="icon icon-spinner icon-spin"></i>
-            </span>
+            <i class="icon icon-spinner icon-spin"></i>
           {{else if (eq updating "error")}}
-            <span class="darken">
-              <i class="icon icon-spinner icon-alert"></i>
-            </span>
+            <i class="icon icon-spinner icon-alert"></i>
           {{else}}
-            <span class="darken">
-              <i class="icon icon-refresh"></i>
-            </span>
+            <i class="icon icon-refresh pr-10"></i>
           {{/if}}
           <span>
             {{t "catalogPage.index.refreshBtn"}}
@@ -106,9 +84,7 @@
 {{#each groupedContent as |group|}}
   <div class="catalog-group">
     <div class="clearfix">
-      <button
-        class="btn btn-sm bg-transparent mt-10 pull-right" type="button" {{action "toggleCollapse" group}}
-      >
+      <button class="btn btn-sm bg-transparent mt-10 pull-right" type="button" {{action "toggleCollapse" group}}>
         {{t (if group.collapsed "generic.expand" "generic.collapse")}}
       </button>
       <p>

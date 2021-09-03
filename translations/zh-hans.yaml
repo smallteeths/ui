@@ -9087,6 +9087,7 @@ nodeDriver:
     importeks: Amazon EKS
     linode: Linode
     linodelke: Linode LKE
+    metal: Equinix Metal
     oci: Oracle Cloud Infrastructure
     openstack: OpenStack
     oracleoke: Oracle OKE
@@ -9094,7 +9095,7 @@ nodeDriver:
     otccce: Open Telekom Cloud CCE
     packet: Packet
     pinganyunecs: Pinganyun ECS
-    rackspace: RackSpace
+    rackspace: Rackspace
     rancherkubernetesengine: RKE
     softlayer: SoftLayer
     tencent: Tencent TKE
@@ -9364,6 +9365,33 @@ nodeDriver:
       placeholder: '默认情况下由 docker-machine 选择'
     template:
       label: 模板
+  metal:
+    accountSection: 账户访问
+    projectId:
+      label: 项目
+      placeholder: Equinix Metal 项目 ID
+    apiKey:
+      label: API Key
+      placeholder: Equinix Metal API Key
+    apiKeyHelp: '由 Equinix Metal 的<a href="https://console.equinix.com/users/0/api-keys" target="_blank">API Keys</a>页面获取。'
+    instanceSection: 实例
+    instanceOptionsSection: 实例选项
+    loginAction: '下一步: 认证并且选择实例'
+    authentication: 验证
+    location: 所在地区
+    planDetails:
+      label: 实例详情
+      cpu: CPUs
+      memory: 内存
+      drives: 驱动
+      network: NICs
+    image:
+      label: 镜像
+    size:
+      label: 规格
+    regionSection: 区域
+    region:
+      label: 区域
   packet:
     accountSection: 账户访问
     projectId:
@@ -9394,17 +9422,17 @@ nodeDriver:
   rackspace:
     account:
       title: 1. 账户访问
-      detail: 用来创建 RackSpace 实例的用户名和 API Key。
+      detail: 用来创建 Rackspace 实例的用户名和 API Key。
     username:
       label: 用户名
-      placeholder: RackSpace 用户名
+      placeholder: Rackspace 用户名
     apiKey:
       label: API Key
-      placeholder: RackSpace APK Key
-    accountHelp: 从 RackSpace 控制面板的帐户设置页面获取。
+      placeholder: Rackspace APK Key
+    accountHelp: 从 Rackspace 控制面板的帐户设置页面获取。
     region:
       title: 2. 区域和偏好
-      detail: 选择要创建的 RackSpace 实例的区域和偏好。
+      detail: 选择要创建的 Rackspace 实例的区域和偏好。
       label: 区域
     flavor:
       label: 偏好
@@ -9636,8 +9664,163 @@ nodeDriver:
     nsg:
       label: 网络安全组
       placeholder: "e.g. AllowVnetOutBound"
-      helpText: 当使用一个由 Rancher 管理的或提供一个现有的 NSG 时，使用此模板的所有节点将使用提供的 NSG。如果没有提供 NSG，将为每个节点创建一个新的 NSG。
-      openPorts: 当使用一个现有的 NSG 时，打开的端口被忽略。
+      helpText: 当使用 Rancher 管理的 NSG或提供现有的 NSG 时，使用此模板的所有节点将使用提供的 NSG。如果没有提供 NSG，将为每个节点创建一个新的 NSG。
+      openPorts: 使用现有 NSG 时，打开的端口将被忽略。
+  aliyunecs:
+    accountSection:
+      label: 1. 访问令牌
+      detail: 配置用于创建阿里云主机的访问令牌
+      next: '下一步: 认证&配置网络'
+      loading: 正在获取阿里云区域信息...
+    accessKey:
+      label: 访问秘钥
+      placeholder: 阿里云访问秘钥
+    accessKeySecret:
+      label: 访问秘钥令牌
+      placeholder: 阿里云访问秘钥所对应的令牌
+      provided: 已提供
+    apiEndpoint:
+      label: '私有阿里云 API 地址'
+      placeholder: 私有阿里云 API 地址
+    instanceOptionsSection:
+      label: 实例
+      detail: 设置即将创建的阿里云实例
+    instanceDescription:
+      label: 实例描述
+      placeholder: 该实例的描述
+    instanceType:
+      label: 实例类型
+      placeholder: 实例类型
+    systemImage:
+      label: 系统镜像
+      placeholder: 系统镜像
+    internetMaxBandwidth:
+      label: 最大网络带宽
+      placeholder: 1 到 100
+    aliyunSLB:
+      label: 阿里云 SLB ID
+      placeholder: 阿里云 SLB ID
+    internetChargeType:
+      label: EIP 计费方式
+      payByBandwidth: 按带宽计费
+      payByTraffic: 按流量计费
+    storageSection:
+      label: 存储
+      detail: 配置通过该模版创建的实例的存储选项
+      next: '下一步: 配置阿里云实例选项'
+      loading: 正在获取主机类型和系统镜像...
+    ioOptimized:
+      label: 存储 IO 优化
+      optimized: 优化
+      none: 不优化
+    systemDiskCategory:
+      label: 系统盘种类
+    dataDiskCategory:
+      label: 数据盘种类
+    dataDiskSize:
+      label: 数据磁盘大小
+      placeholder: 磁盘大小
+    region:
+      label: 区域
+      placeholder: 区域
+    zone:
+      label: 可用区
+      prompt: 选择可用区...
+    networkSection:
+      label: 网络
+      detail: 配置通过该模版创建的实例的网络选项
+      next: '下一步: 配置存储选项'
+      loading: 正在获取阿里云存储类型...
+    routeCIDR:
+      label: 路由 CIDR
+      placeholder: '例如: 192.168.1.0/24'
+    vpcId:
+      label: 专有网络
+      prompt: 选择专有网络...
+    vswitchId:
+      label: 交换机
+      prompt: 选择交换机...
+    privateIp:
+      label: 私有 IP
+      placeholder: 专用网络中的私有 IP
+    privateAddressOnly:
+      label: 仅私网 IP
+    securitySection:
+      label: 安全
+      detail: 选择实例所需要配置的安全组。
+    securityGroup:
+      label: 安全组
+      placeholder: 安全组
+      prompt: 选择安全组...
+      defaultCreate: "自动创建<code>{groupName}</code>安全组。"
+    sshPassword:
+      label: SSH 密码
+      placeholder: '创建实例后 SSH 远程登录密码(非必填)'
+      provided: 已提供
+    tags:
+      addActionLabel: 添加实例标签
+      valueLabel: 标签
+      placeholder: '例如: dev'
+    errors:
+      vpcIdRequired: VPC is required.
+      vswitchIdRequired: VSwitch is required.
+      accessKeyRequired: Access Key is required.
+      accessSecretRequired: Access Secret Key is required.
+      sshPasswordLengthNotValid: The length of SSH password must between eight and thirty.
+      sshPasswordInvalidCharacter: SSH password contains invalid characters.
+      sshPasswordFormatError: "SSH password must contain at least three out of four kinds of following characters: uppercase letter, lowercase letters, numbers, and special characters."
+      nameNotValidForApp: The name is invalid according to the {appName} hostname rule.
+  harvester:
+    cluster:
+      label: 集群
+      kubeconfig: Kubeconfig文件
+    imageName:
+      label: 镜像
+    diskBus:
+      label: 磁盘 Bus
+    access:
+      title: 1. 帐户访问
+      detail: 配置在哪里查找 Harvester 服务器
+    instance:
+      title: 2. 实例配置
+      detail: 选择虚拟机的大小和操作系统
+    advanced:
+      title: 3. 高级配置
+      detail: CloudInit
+    host:
+      label: 主机
+      placeholder: IP/Domain
+    port:
+      label: 端口
+    username:
+      label: 用户名
+    imported: 导入的 Harvester
+    external: 外部的 Harvester
+    sshUser:
+      label: SSH 用户名
+    networkName:
+      label: 网络
+    password:
+      label: 密码
+    cpuCount:
+      label: CPUs
+      unit: '{cores, plural, =1 {Core} other {Cores}}'
+    memorySize:
+      label: 内存
+      unit: GiB
+    namespace:
+      label: 命名空间
+    diskSize:
+      label: 磁盘
+      unit: GiB
+    networkData:
+      label: 网络数据
+      template:
+        label: 网络配置模板
+    userData:
+      label: 用户数据
+      template:
+        label: 用户配置模板
   oci:
     placement:
       title: Placement

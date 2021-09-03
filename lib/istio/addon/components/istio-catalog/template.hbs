@@ -1,11 +1,17 @@
 {{#if scope.currentCluster.isReady}}
-  {{#banner-message color="bg-warning"}}
-    <p>{{t 'banner.istio' dashboardLink=scope.dashboardLink docsBase=scope.docsBase htmlSafe=true}}</p>
-  {{/banner-message}}
+  {{#if scope.currentCluster.isK8s21Plus}}
+    {{#banner-message color="bg-error"}}
+      <p>{{t 'banner.istio21'}}</p>
+    {{/banner-message}}
+  {{else}}
+    {{#banner-message color="bg-warning"}}
+      <p>{{t 'banner.istio' dashboardLink=scope.dashboardLink docsBase=scope.docsBase htmlSafe=true}}</p>
+    {{/banner-message}}
+  {{/if}}
 {{/if}}
 
-<section class="header clearfix">
-  <h1 class="pull-left">
+<section class="header">
+  <h1>
     {{t "clusterIstioPage.header"}}
   </h1>
 </section>
@@ -94,7 +100,7 @@
              baseClass="text-left"
           }}
             <span>
-              <i class="icon icon-help icon-blue"/>
+              <i class="icon icon-help icon-blue" />
             </span>
           {{/tooltip-element}}
         </div>
@@ -457,11 +463,8 @@
        expand=(action expandFn)
        expandOnInit=false
     }}
-      <BannerMessage
-        @color="bg-warning"
-        @icon="icon-alert"
-        @message={{t "clusterIstioPage.customAnswers.warning" appName=settings.appName htmlSafe=true}}
-      />
+      <BannerMessage @color="bg-warning" @icon="icon-alert" @message={{t "clusterIstioPage.customAnswers.warning"
+        appName=settings.appName htmlSafe=true}} />
       {{form-key-value
         initialMap=customAnswers
         changed=(action (mut customAnswers))
@@ -505,11 +508,7 @@
   {{top-errors errors=errors}}
 
   {{#if (and (not saveDisabled) (not enabled) enableClusterMonitoring (not scope.currentCluster.isMonitoringReady))}}
-    <BannerMessage
-      @color="bg-warning"
-      @icon="icon-alert"
-      @message={{t "clusterIstioPage.monitoringNotDeployed"}}
-    />
+    <BannerMessage @color="bg-warning" @icon="icon-alert" @message={{t "clusterIstioPage.monitoringNotDeployed" }} />
   {{/if}}
 
   {{#if (and saveDisabled mixerBreaking)}}
@@ -528,7 +527,7 @@
      cancelDisabled=true
   }}
     {{#if (and enabled canEnable)}}
-      <button class="btn bg-error" type="button" {{action "disable"}}>
+      <button class="btn bg-error" type="button" {{action "disable" }}>
         {{t "clusterIstioPage.disable"}}
       </button>
     {{/if}}
@@ -543,9 +542,6 @@
     {{/unless}}
   {{/if}}
   {{#if cluster.isWindows}}
-    <BannerMessage
-      @color="bg-warning"
-      @message={{t "windowsCluster.istio"}}
-    />
+    <BannerMessage @color="bg-warning" @message={{t "windowsCluster.istio" }} />
   {{/if}}
 {{/if}}

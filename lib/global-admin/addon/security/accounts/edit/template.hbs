@@ -1,4 +1,4 @@
-<section class="header clearfix">
+<section class="header">
   <div class="pull-left">
     <h1>
       {{t "editUser.title"}}
@@ -74,13 +74,8 @@
   </div>
 {{/if}}
 
-<FormGlobalRoles
-  @errors={{errors}}
-  @mode="edit"
-  @setGRValidator={{action "setValidateGlobalRoles"}}
-  @setSave={{action "setGlobalRoleSave"}}
-  @user={{model.user}}
-/>
+<FormGlobalRoles @errors={{errors}} @mode="edit" @setGRValidator={{action "setValidateGlobalRoles" }}
+  @setSave={{action "setGlobalRoleSave" }} @user={{model.user}} />
 
 {{top-errors errors=errors}}
 {{save-cancel

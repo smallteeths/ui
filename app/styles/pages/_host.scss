@@ -53,6 +53,7 @@
   &.azure { @include azure; }
   &.digitalocean { @include digitalocean; }
   &.exoscale { @include exoscale; }
+  &.harvester { @include harvester; }
   &.oci { @include oci; }
   &.openstack { @include openstack; }
   &.packet { @include packet; }
@@ -68,6 +69,7 @@
   &.amazoneks { @include amazoneks; }
   &.amazoneksv2 { @include amazoneks; }
   &.azureaks { @include azureaks; }
+  &.azureaksv2 { @include azureaks; }
   &.googlegke { @include googlegke; }
   &.googlegkev2 { @include googlegke; }
   &.tencenttke { @include tencenttke; }
@@ -207,11 +209,6 @@
   .driver {
     background-position: center center;
     background-repeat: no-repeat;
-    filter: grayscale(100%);
-    -webkit-filter: grayscale(100%);
-    -moz-filter: grayscale(100%);
-    -ms-filter: grayscale(100%);
-    -o-filter: grayscale(100%);
     position: relative;
     max-width: 190px;
     margin-right: 14px;

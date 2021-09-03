@@ -149,7 +149,7 @@
       @editable={{isNewNodePool}}
     />
     <div class="row mt-20">
-      <div class="col span-12 mb-0">
+      <div class="col span-12">
         <label class="acc-label">
           {{t "clusterNew.googlegke.nodeLabels.label"}}
         </label>
@@ -157,6 +157,20 @@
           @initialMap={{nodePool.config.labels}}
           @changed={{action "setNodeLabels"}}
           @addActionLabel="clusterNew.googlegke.nodeLabels.addAction"
+          @editing={{isNewNodePool}}
+        />
+      </div>
+    </div>
+    <div class="row mt-20">
+      <div class="col span-6 mb-0">
+        <label class="acc-label">
+          {{t "clusterNew.googlegke.nodeTags.label"}}
+        </label>
+        <FormValueArray
+          @addActionLabel="clusterNew.googlegke.nodeTags.addAction"
+          @valueLabelEnabled={{false}}
+          @initialValues={{nodePool.config.tags}}
+          @changed={{action (mut nodePool.config.tags)}}
           @editing={{isNewNodePool}}
         />
       </div>
@@ -192,6 +206,14 @@
           @min={{1}}
           @classNames="form-control"
         />
+        {{#if (gt regionalTotalNodeCounts nodePool.initialNodeCount)}}
+          <span class="pl-10 help-block text-warning">
+            {{t
+              "clusterNew.googlegke.locations.warning"
+              totalNodes=regionalTotalNodeCounts
+            }}
+          </span>
+        {{/if}}
       </div>
       <div class="col span-3">
         <label class="acc-label">
@@ -307,10 +329,11 @@
         </div>
       </div>
       {{#if (eq oauthScopesSelection "custom")}}
-        <GkeAccessScope
-          @model={{scopeConfig}}
-          @readOnly={{not isNewNodePool}}
-        />
+        {{gke-access-scope
+          config=scopeConfig
+          readOnly=(not isNewNodePool)
+          change=(action "updateScopes")
+        }}
       {{/if}}
     </div>
   </AdvancedSection>
