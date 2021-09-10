@@ -10,14 +10,12 @@
   </h1>
   <div class="right-buttons">
     {{#link-to "new" classNames="btn bg-primary"}}{{t 'alertPage.index.addAlertGroup'}}{{/link-to}}
-  </div>
-  {{#if (eq pageScope "cluster")}}
-    <div class="right-buttons">
+    {{#if (eq pageScope "cluster")}}
       {{#link-to "config" classNames="btn btn-sm bg-primary mr-10"}}
         {{t 'alertPage.index.config'}}
       {{/link-to}}
-    </div>
-  {{/if}}
+    {{/if}}
+  </div>
 </section>
 
 {{alert-table alerts=model.alerts notifiers=model.notifiers groups=model.groups}}
