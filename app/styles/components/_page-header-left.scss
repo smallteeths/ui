@@ -59,6 +59,20 @@ $project-nav-active: $dropdown-link-hover-bg !default;
   min-width: 780px !important; 
 }
 
+.embedded HEADER {
+  display: none;
+}
+
+.embedded FOOTER {
+  display: none;
+}
+.embedded aside {
+  display: none;
+}
+.embedded .sidebar {
+  margin-left: 0;
+}
+
 .page-header-left {
   position: absolute;
   max-width: 260px;
