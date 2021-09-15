@@ -13,7 +13,7 @@ export default Route.extend({
   model(params) {
     if (get(this, 'settings.enable-load-resource-by-namespace')) {
       const namespaces =  get(this, 'scope.currentProject.namespaces');
-      const namespaceId = params.namespaceId || get(namespaces, 'firstObject.id');
+      const namespaceId = params.namespaceId === undefined ? get(namespaces, 'firstObject.id') : params.namespaceId;
 
       return hash({
         namespaceId,

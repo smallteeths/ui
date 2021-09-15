@@ -9,16 +9,17 @@ export default Route.extend({
   settings:     service(),
   nsResource:   service(),
   clusterStore: service(),
-
+  scope:        service(),
   model(params) {
     if (get(this, 'settings.enable-load-resource-by-namespace')) {
-      const namespaceId = params.namespaceId || '';
+      const namespaces =  get(this, 'scope.currentProject.namespaces');
+      const namespaceId = params.namespaceId === undefined ? get(namespaces, 'firstObject.id') : params.namespaceId;
 
       return hash({
         namespaceId,
         namespaces:        this.clusterStore.findAll('namespace'),
         projectSecrets:    namespaceId ? [] : this.nsResource.findAll('secret'),
-        namespacedSecrets: namespaceId ? this.nsResource.findAll('namespacedSecret', namespaceId) : [],
+        namespacedSecrets: this.nsResource.findAll('namespacedSecret', namespaceId),
       });
     }
 

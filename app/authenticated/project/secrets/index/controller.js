@@ -79,11 +79,19 @@ export default Controller.extend({
     return [{
       id:          '',
       displayName: get(this, 'intl').t('generic.all')
-    }, ...get(this, 'model.namespaces').filter( (ns) => get(ns, 'projectId') === get(this, 'scope.currentProject.id'))];
+    }, ...(get(this, 'model.namespaces') || []).filter( (ns) => get(ns, 'projectId') === get(this, 'scope.currentProject.id'))];
   }),
 
   rows: computed('enableLoadResourceByNamespace', 'model.namespaceId', 'model.namespacedSecrets.@each.type', 'model.projectSecrets.@each.type', function() {
     if (this.enableLoadResourceByNamespace) {
+      if (!get(this, 'model.namespaceId')){
+        const proj = get(this, 'model.projectSecrets').filterBy('type', 'secret');
+        const ns = get(this, 'model.namespacedSecrets').filterBy('type', 'namespacedSecret');
+        const out = proj.concat(ns);
+
+        return out;
+      }
+
       const proj = get(this, 'model.projectSecrets').filterBy('type', 'secret').filterBy('namespaceId', get(this, 'model.namespaceId') || null);
       const ns = get(this, 'model.namespacedSecrets').filterBy('type', 'namespacedSecret').filterBy('namespaceId', get(this, 'model.namespaceId') || null);
       const out = proj.concat(ns);
