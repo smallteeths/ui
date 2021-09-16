@@ -1768,6 +1768,30 @@ clusterDashboard:
   used: 已使用
   value: 值
 
+clusterConnectMode:
+  title: 集群连接模式
+  detail: 集群连接模式切换和参数调整
+  connectMode:
+    label: 连接模式
+  connectStatus:
+    label: 连接状态
+    address: Address
+    timeout: Timeout
+    host: Host
+    provider: Provider
+    apiEndpoint: API Endpoint
+    driver: Driver
+  testConnect:
+    label: 测试
+    success: 测试成功
+    error: 测试失败
+  apiEndpoint:
+    label: API Endpoint
+    placeholder: 例如：https://10.43.0.1:443
+  actions:
+    saveAndRestart: 保存并重启
+    restartConfirm: 您确定保存连接模式并重启集群（{name}）User Controller 吗？
+    yes: 确定
 
 ingressResponse:
   host: 主机

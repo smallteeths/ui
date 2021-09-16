@@ -60,6 +60,7 @@ module.exports = function(app, options) {
     'Drivers':      '/assets/rancher-ui-driver-*',
     'K3Versions':   '/v1-k3s-release/release',
     'Rke2Versions': '/v1-rke2-release/release',
+    'mcm': '/mcm',
   }
 
   app.use('/', function(req, res, next) {

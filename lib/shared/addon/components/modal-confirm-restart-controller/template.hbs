@@ -1,0 +1,10 @@
+  <div class="container-header-text">
+    <h3>
+      {{t "clusterConnectMode.actions.restartConfirm" name=cluster.displayName}}
+    </h3>
+  </div>
+
+  <div class="footer-actions">
+    <button class="btn bg-error" type="button" {{action "confirm"}}>{{t "clusterConnectMode.actions.yes"}}</button>
+    <button class="btn bg-transparent" type="button" {{action "cancel"}}>{{t 'generic.cancel'}}</button>
+  </div>

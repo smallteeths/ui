@@ -1789,6 +1789,30 @@ clusterDashboard:
   used: Used
   value: Value
 
+clusterConnectMode:
+  title: Cluster connect mode
+  detail: Cluster connection mode switching and parameter adjustment
+  connectMode:
+    label: Connect Mode
+  connectStatus:
+    label: Connect Status
+    address: Address
+    timeout: Timeout
+    host: Host
+    provider: Provider
+    apiEndpoint: API Endpoint
+    driver: Driver
+  testConnect:
+    label: Test
+    success: Connect Success
+    error: Connect Failed
+  apiEndpoint:
+    label: API Endpoint
+    placeholder: e.g. https://10.43.0.1:443
+  actions:
+    saveAndRestart: Save And Restart
+    restartConfirm: Are You Sure You Want To Save Connect Mode And Restart Cluster({name}) User Controller ？
+    yes: Yes
 
 ingressResponse:
   host: Host

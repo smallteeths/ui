@@ -1,0 +1,51 @@
+<section class="header clearfix">
+  <h1>{{t "clusterConnectMode.title"}}</h1>
+</section>
+
+<div class="row">
+  <div class="col span-6 box">
+    <label class="acc-label">
+      {{t "clusterConnectMode.connectMode.label"}}
+    </label>
+    {{new-select
+      content=connectModes
+      value=model.directAccess
+    }}
+  </div>
+   <div class="col span-6 box">
+    <label class="acc-label">
+      {{t "clusterConnectMode.apiEndpoint.label"}}
+    </label>
+    {{input
+      type="text"
+      classNames="form-control"
+      placeholder=(t "clusterConnectMode.apiEndpoint.placeholder")
+      value=model.apiEndpoint
+    }}
+  </div>
+</div>
+<div class="over-hr mt-40">
+  <button class="btn bg-info" type="button" {{action "testConnectMode"}} disabled={{loading}}>
+    {{t "clusterConnectMode.testConnect.label"}}
+  </button>
+
+</div>
+{{#if testSuccess}}
+  {{#banner-message color="bg-success"}}
+    <p>{{t "clusterConnectMode.testConnect.success"}}</p>
+  {{/banner-message}}
+{{/if}}
+{{top-errors errors=errors}}
+<div class="center">
+  <button class="btn bg-primary" type="button" {{action "doSaveAndRestart"}} disabled={{loading}}>
+  {{t "clusterConnectMode.actions.saveAndRestart"}}
+  </button>
+  &nbsp;
+  <button class="btn bg-primary" type="button" {{action "doSave"}} disabled={{loading}}>
+  {{t "generic.save"}}
+  </button>
+  &nbsp;
+  <button class="btn bg-transparent" type="button" {{action "cancel"}} disabled={{loading}}>
+  {{t "generic.cancel"}}
+  </button>
+</div>
