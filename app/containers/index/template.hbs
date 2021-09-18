@@ -29,6 +29,7 @@
         subSearchField="pods"
         extraSearchFields=extraSearchFields
         extraSearchSubFields=extraSearchSubFields
+        rightActions=true
         headers=headers as |sortable kind inst dt|}}
     {{#if (eq kind "row")}}
       {{#if (eq inst.type "pod")}}
@@ -76,6 +77,8 @@
           {{t "containersPage.table.noData"}}
         </td>
       </tr>
+    {{else if (eq kind "right-actions")}}
+      {{resource-label-filter onChange=(action "labelSelectorChange") initLabelSelector=labelSelector}}
     {{/if}}
   {{/sortable-table}}
 </section>

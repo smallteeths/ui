@@ -1,0 +1,20 @@
+.resource-label-filter__content {
+  min-width: 578px;
+  min-height: 100px;
+  padding: 5px 5px;
+  display: grid;
+  row-gap: 10px;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr;
+  .resource-label-filter__conditions {
+    display: grid;
+    grid-template-columns: 1fr 140px 1fr auto;
+    gap: 8px;
+    height: fit-content;
+  }
+  .resource-label-filter__actions {
+    display: flex;
+    justify-content: space-between;
+    height: max-content;
+  }
+}

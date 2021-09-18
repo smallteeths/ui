@@ -1,0 +1,62 @@
+<BasicDropdown  @onOpen={{action "onOpen"}} @horizontalPosition="right" as |dd|>
+  <dd.Trigger class="btn bg-default btn-sm">
+    <span>
+      {{t "resourceLabelFilter.title"}}
+    </span>
+  </dd.Trigger>
+  <dd.Content>
+    <div class="resource-label-filter__content">
+    <label class="acc-label">Match Expressions</label>
+    <div class="resource-label-filter__conditions">
+      <label class="acc-label">Key</label> <label class="acc-label">Operator</label> <label class="acc-label">Values</label> <div></div>
+    {{#each labelSelectorForm as |row|}}
+      {{input
+        class=(concat "form-control input-sm value")
+        spellcheck="false"
+        type="text"
+        value=row.key
+        placeholder=(t "resourceLabelFilter.key.placeholder")
+      }}
+      {{new-select
+        class="input-sm"
+        value=row.operator
+        content=operators
+      }}
+      {{#if (or (eq row.operator 'in') (eq row.operator 'notIn'))}}
+      {{input
+        class=(concat "form-control input-sm value")
+        spellcheck="false"
+        type="text"
+        value=row.values
+        placeholder=(t "resourceLabelFilter.values.placeholder")
+      }}
+      {{else}}
+      <div></div>
+      {{/if}}
+      <button
+        class="btn bg-primary btn-sm"
+        {{action "removeQueryLabel" row}}
+      >
+        <i class="icon icon-minus"/>
+        <span class="sr-only">
+          {{t "generic.remove"}}
+        </span>
+      </button>
+    {{/each}}
+    </div>
+    <div class="resource-label-filter__actions">
+      <button
+       class="btn bg-primary btn-sm"
+       {{action "addQueryLabel"}}>
+        {{t "generic.add"}}
+      </button>
+      <button
+        class="btn bg-primary btn-sm"
+        {{action "search" row}}
+      >
+       {{t "generic.search"}}
+      </button>
+    </div>
+    </div>
+  </dd.Content>
+</BasicDropdown>

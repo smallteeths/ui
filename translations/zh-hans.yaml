@@ -10398,6 +10398,13 @@ searchableSelect:
   noMatch: 没有匹配
   noOptions: 没有可用的选项
 
+resourceLabelFilter:
+  title: 根据Label过滤
+  key:
+    placeholder: 例如：app
+  values:
+    placeholder: 例如：frontend,test
+
 ##############################
 # Mixins
 ##############################

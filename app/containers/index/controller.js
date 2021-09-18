@@ -2,7 +2,7 @@ import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import Controller, { inject as controller } from '@ember/controller';
 import { searchFields as containerSearchFields } from 'ui/components/pod-dots/component';
-import { computed } from '@ember/object';
+import { computed, set } from '@ember/object';
 
 export const headers = [
   {
@@ -52,6 +52,8 @@ export default Controller.extend({
   extraSearchFields:    ['id:prefix', 'displayIp:ip', 'namespaceId'],
   extraSearchSubFields: containerSearchFields,
 
+  labelSelector: [],
+
   group:             alias('projectController.group'),
   groupTableBy:      alias('projectController.groupTableBy'),
   expandedInstances: alias('projectController.expandedInstances'),
@@ -61,20 +63,33 @@ export default Controller.extend({
     toggleExpand() {
       this.get('projectController').send('toggleExpand', ...arguments);
     },
+    labelSelectorChange(d) {
+      set(this, 'labelSelector', d)
+    }
   },
 
-  rows: computed('group', 'model.pods', 'model.workloads.@each.{isBalancer,namespaceId}', function() {
+  rows: computed('group', 'labelSelector.@each.{key,values,validate}', 'model.pods', 'model.workloads.@each.{isBalancer,namespaceId}', function() {
     const groupBy = this.get('group');
     let out = [];
 
     switch (groupBy) {
     case 'none':
     case 'node':
-      out = this.get('model.pods');
+      if (this.labelSelector.length > 0) {
+        out = this.get('model.pods').filter((p) => p.labels && this.labelSelector.every((s) => s.validate(s.key, s.values, p.labels)));
+      } else {
+        out = this.get('model.pods');
+      }
       break;
     default:
       out = this.get('model.pods').filter((obj) => !obj.get('workloadId'));
-      out.pushObjects(this.get('model.workloads').slice());
+      if (this.labelSelector.length > 0) {
+        out.pushObjects(this.get('model.workloads')
+          .filter((w) => w.labels && this.labelSelector.every((s) => s.validate(s.key, s.values, w.labels)))
+          .slice());
+      } else {
+        out.pushObjects(this.get('model.workloads').slice());
+      }
       break
     }
 

@@ -10988,6 +10988,13 @@ searchableSelect:
   noMatch: No match
   noOptions: No available options
 
+resourceLabelFilter:
+  title: Filter by label
+  key:
+    placeholder: e.g. app
+  values:
+    placeholder: e.g. frontend,test
+
 ##############################
 # Mixins
 ##############################

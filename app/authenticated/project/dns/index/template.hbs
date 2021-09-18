@@ -18,6 +18,7 @@
     pagingLabel="pagination.dnsRecord"
     subHeaders=containerHeaders
     subSearchField="instances"
+    rightActions=true
     headers=headers as |sortable kind inst dt|
   }}
     {{#if (eq kind "row")}}
@@ -38,6 +39,8 @@
       <tr>
         <td colspan="{{sortable.fullColspan}}" class="text-center text-muted pt-20 pb-20">{{t 'dnsPage.noData'}}</td>
       </tr>
+    {{else if (eq kind "right-actions")}}
+      {{resource-label-filter onChange=(action "labelSelectorChange") initLabelSelector=labelSelector}}
     {{/if}}
   {{/sortable-table}}
 </section>

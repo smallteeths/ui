@@ -1,6 +1,7 @@
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import Controller, { inject as controller } from '@ember/controller';
+import { computed, set } from '@ember/object';
 
 export default Controller.extend({
   scope: service(),
@@ -38,9 +39,24 @@ export default Controller.extend({
     },
   ],
 
+  labelSelector: [],
+
   groupTableBy:      alias('projectController.groupTableBy'),
   expandedInstances: alias('projectController.expandedInstances'),
   preSorts:          alias('projectController.preSorts'),
 
-  rows: alias('model.records'),
+  actions: {
+    labelSelectorChange(d) {
+      set(this, 'labelSelector', d)
+    }
+  },
+
+  // rows: alias('model.records'),
+  rows: computed('model.records', 'labelSelector.@each.{key,values,validate}', function() {
+    if (this.labelSelector.length > 0) {
+      return this.model.records.filter((r) => r.labels && this.labelSelector.every((s) => s.validate(s.key, s.values, r.labels)));
+    }
+
+    return this.model.records;
+  }),
 });
