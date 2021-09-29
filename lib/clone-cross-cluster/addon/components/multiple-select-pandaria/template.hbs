@@ -2,10 +2,11 @@
   <BasicDropdown @calculatePosition={{calculatePosition}} as |dd|>
     <dd.Trigger class="mutiple-select">
       <div class="mutiple-select-input">
-        {{#each options as |option|}}
-          {{#if option.active}}
-            <span class="mutiple-select-card mr-10">{{option.value}} <span class="mutiple-select-icon" onclick={{disable-bubbling (action "change" option)}}><i class="icon icon-close"/></span></span>
-          {{/if}}
+        {{#if (eq activeOptions.length 0)}}
+          All Namespaces
+        {{/if}}
+        {{#each activeOptions as |option|}}
+          <span class="mutiple-select-card mr-10">{{option.value}} <span class="mutiple-select-icon" onclick={{disable-bubbling (action "change" option)}}><i class="icon icon-close"/></span></span>
         {{/each}}
       </div>
     </dd.Trigger>
@@ -24,13 +25,15 @@
     </dd.Content>
   </BasicDropdown>
 {{else}}
-  <div class="mutiple-select">
-    <div class="mutiple-select-input">
-      {{#each options as |option|}}
-        {{#if option.active}}
-          <span class="mutiple-select-card mr-10">{{option.value}}</span>
-        {{/if}}
-      {{/each}}
+  {{#if selectedOptions}}
+    <div class="mutiple-select">
+      <div class="mutiple-select-input">
+        {{#each options as |option|}}
+          {{#if option.active}}
+            <span class="mutiple-select-card mr-10">{{option.value}}</span>
+          {{/if}}
+        {{/each}}
+      </div>
     </div>
-  </div>
+  {{/if}}
 {{/if}}

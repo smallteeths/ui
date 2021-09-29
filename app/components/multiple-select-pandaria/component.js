@@ -1,4 +1,4 @@
-import { get, set, observer } from '@ember/object';
+import { get, set, observer, computed } from '@ember/object';
 import Component from '@ember/component';
 import layout from './template';
 import { inject as service } from '@ember/service';
@@ -19,7 +19,7 @@ export default Component.extend({
 
     get(this, 'data').forEach((ele) => {
       options.push({
-        active: get(this, 'selectedOptions').some((item) => item === ele),
+        active: (get(this, 'selectedOptions') || []).some((item) => item === ele),
         value:  ele,
       })
     });
@@ -29,7 +29,7 @@ export default Component.extend({
 
   actions: {
     change(record) {
-      let selectedOptions = get(this, 'selectedOptions')
+      let selectedOptions = get(this, 'selectedOptions') ? get(this, 'selectedOptions') : []
 
       if (selectedOptions.some((selectedOption) => selectedOption === record.value )) {
         set(this, 'selectedOptions', selectedOptions.filter((selectedOption) => selectedOption !== record.value))
@@ -52,6 +52,14 @@ export default Component.extend({
     });
 
     set(this, 'options', options)
+  }),
+
+  activeOptions: computed('options', function() {
+    let activeOptions = get(this, 'options').filter((option) => {
+      return option.active
+    })
+
+    return activeOptions ? activeOptions : []
   }),
 
   calculatePosition(trigger) {
