@@ -115,6 +115,7 @@ export default Component.extend({
     },
     clean() {
       set(this, 'labelSelectorForm', [])
+      this.send('search');
     },
     onOpen() {
       let f = this.labelSelector.map((l) => ({

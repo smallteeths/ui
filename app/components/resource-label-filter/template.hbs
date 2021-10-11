@@ -6,7 +6,7 @@
   </dd.Trigger>
   <dd.Content>
     <div class="resource-label-filter__content">
-    <label class="acc-label">Match Expressions</label>
+    <label class="acc-label">{{t "resourceLabelFilter.matchExpressions"}}</label>
     <div class="resource-label-filter__conditions">
       <label class="acc-label">Key</label> <label class="acc-label">Operator</label> <label class="acc-label">Values</label> <div></div>
     {{#each labelSelectorForm as |row|}}
@@ -44,19 +44,27 @@
       </button>
     {{/each}}
     </div>
-    <div class="resource-label-filter__actions">
+    <div>
       <button
        class="btn bg-primary btn-sm"
        {{action "addQueryLabel"}}>
         {{t "generic.add"}}
       </button>
+    </div>
+    </div>
+    <div class="resource-label-filter__actions">
       <button
         class="btn bg-primary btn-sm"
-        {{action "search" row}}
+        {{action "search"}}
       >
        {{t "generic.search"}}
       </button>
-    </div>
+      <button
+        class="btn btn-sm"
+        {{action "clean"}}
+      >
+       {{t "resourceLabelFilter.clear"}}
+      </button>
     </div>
   </dd.Content>
 </BasicDropdown>

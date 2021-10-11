@@ -10989,7 +10989,9 @@ searchableSelect:
   noOptions: No available options
 
 resourceLabelFilter:
-  title: Filter by label
+  title: Advanced Search
+  matchExpressions: Label Match Expressions
+  clear: Clear
   key:
     placeholder: e.g. app
   values:

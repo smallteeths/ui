@@ -10399,7 +10399,9 @@ searchableSelect:
   noOptions: 没有可用的选项
 
 resourceLabelFilter:
-  title: 根据Label过滤
+  title: 高级搜索
+  matchExpressions: 标签匹配表达式
+  clear: 清除
   key:
     placeholder: 例如：app
   values:

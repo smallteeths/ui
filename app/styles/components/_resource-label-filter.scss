@@ -1,7 +1,7 @@
 .resource-label-filter__content {
   min-width: 578px;
   min-height: 100px;
-  padding: 5px 5px;
+  padding: 5px 5px 10px 5px;
   display: grid;
   row-gap: 10px;
   grid-template-rows: auto 1fr auto;
@@ -12,9 +12,12 @@
     gap: 8px;
     height: fit-content;
   }
-  .resource-label-filter__actions {
-    display: flex;
-    justify-content: space-between;
-    height: max-content;
-  }
+}
+.resource-label-filter__actions {
+  display: grid;
+  column-gap: 10px;
+  grid-auto-flow: column;
+  justify-content: end;
+  border-top: solid 1px $border;
+  padding: 10px 5px;
 }
