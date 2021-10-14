@@ -33,26 +33,26 @@ steps:
     path: /var/run/docker.sock
   when:
     branch:
-    - 2.5-fixes
+    - 2.6-fixes
     event:
       exclude:
       - pull_request
       - tag
 
-- name: upload-latest-2-5
+- name: upload-latest-2-6
   pull: default
   image: plugins/gcs
   settings:
     acl:
     - allUsers:READER
     cache_control: "no-cache,must-revalidate"
-    source: dist/static/latest-2.5
-    target: releases.rancher.com/ui/latest-2.5
+    source: dist/static/latest-2.6
+    target: releases.rancher.com/ui/latest-2.6
     token:
       from_secret: google_auth_key
   when:
     branch:
-    - 2.5-fixes
+    - 2.6-fixes
     event:
       exclude:
       - pull_request
@@ -74,7 +74,7 @@ steps:
       - tag
     ref:
       include:
-      - "refs/tags/v2.5.*"
+      - "refs/tags/v2.6.*"
 
 
 - name: upload-release
@@ -93,7 +93,7 @@ steps:
       - tag
     ref:
       include:
-      - "refs/tags/v2.5.*"
+      - "refs/tags/v2.6.*"
 
 - name: upload-release-tar
   pull: default
@@ -111,7 +111,7 @@ steps:
       - tag
     ref:
       include:
-      - "refs/tags/v2.5.*"
+      - "refs/tags/v2.6.*"
 
 volumes:
 - name: docker

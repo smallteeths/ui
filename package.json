@@ -1,6 +1,6 @@
 {
   "name": "ui",
-  "version": "2.5-dev",
+  "version": "2.6-dev",
   "cnVersion": "2.5.9-cn-ent",
   "private": true,
   "repository": "https://github.com/rancher/ui",
