@@ -107,6 +107,13 @@ $modal-overlay                       : rgba($light-grey, 0.75) !default;
     }
   }
 
+  .sticky-modal-header {
+    position: sticky;
+    top: 0;
+    background-color: $modal-content-bg;
+    z-index: 5;
+  }
+
   .container-header-text {
     text-align: center;
     padding: 20px 0;

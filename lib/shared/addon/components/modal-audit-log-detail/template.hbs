@@ -1,6 +1,7 @@
 <div class="modal-audit-log-detail">
-  <section class="header">
+  <section class="header flex justify-between items-center sticky-modal-header">
     <h1>{{t "auditLog.detail.title"}}</h1>
+    <button class="btn bg-transparent" style="color: inherit;" {{action "cancel"}}><i class="icon icon-close"></i></button>
   </section>
   <div>
      <h2>{{t "auditLog.detail.request"}}</h2>

@@ -152,8 +152,11 @@
   flex-direction: row;
 }
 
-.flex-justify-between {
+.justify-between {
   justify-content: space-between;
+}
+
+.items-center {
   align-items: center;
 }
 
