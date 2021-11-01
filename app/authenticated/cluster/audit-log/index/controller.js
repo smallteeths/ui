@@ -2,6 +2,8 @@ import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
 import { get, set, computed } from '@ember/object';
 
+const DEFAULT_DATE_RANGE = '5';
+
 export const headers = [
   {
     name:           'username',
@@ -68,7 +70,7 @@ export default Controller.extend({
     next:            '',
     operation:       '',
     operationLabel:  '',
-    dateRange:       -1,
+    dateRange:       DEFAULT_DATE_RANGE,
     order:           '',
   },
   queryForm: {},
@@ -346,7 +348,7 @@ export default Controller.extend({
       next:            '',
       operation:       '',
       operationLabel:  '',
-      dateRange:       -1,
+      dateRange:       DEFAULT_DATE_RANGE,
       order:           '',
     });
   },

@@ -5,6 +5,8 @@ import { get, set } from '@ember/object';
 import { on } from '@ember/object/evented';
 import C from 'ui/utils/constants';
 
+const DEFAULT_DATE_RANGE = '5';
+
 export default Route.extend({
   scope:       service(),
   auditLog:    service(),
@@ -42,8 +44,17 @@ export default Route.extend({
         resources
       };
     });
+    const d = new Date();
+    const to = `${ d.toISOString().split('.')[0] }Z`;
 
-    const logs = this.auditLog.fetchWorkloadAuditLogs(clusterId, projectId, { pagesize }).then((resp) => {
+    d.setDate(d.getDate() - DEFAULT_DATE_RANGE);
+    const from = `${ d.toISOString().split('.')[0] }Z`;
+
+    const logs = this.auditLog.fetchWorkloadAuditLogs(clusterId, projectId, {
+      from,
+      to,
+      pagesize
+    }).then((resp) => {
       return {
         status:    true,
         content:   resp.body,
@@ -74,7 +85,7 @@ export default Route.extend({
         next:           '',
         operation:      '',
         operationLabel: '',
-        dateRange:      -1,
+        dateRange:      DEFAULT_DATE_RANGE,
         order:          '',
       });
     }
