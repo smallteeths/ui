@@ -9,10 +9,10 @@ import C from 'ui/utils/constants';
 import { downloadFile } from 'shared/utils/download-files';
 import $ from 'jquery';
 import { on } from '@ember/object/evented';
+import AnsiUp from 'ansi_up';
 
 const LINES = 500;
-
-var AnsiUp = null;
+const DEFAULT_LOG_SIZE_LIMIT = 10 * 1024 * 1024; // 10Mib
 
 export default Component.extend({
   scope: service(),
@@ -32,19 +32,28 @@ export default Component.extend({
   followTimer:    null,
   isPrevious:     false,
 
+  logSizeOptions: [{
+    label: 'containerLogs.logSize.default',
+    value: `${ DEFAULT_LOG_SIZE_LIMIT }`
+  }, {
+    label: 'containerLogs.logSize.noLimit',
+    value: '-1'
+  }],
+
+  limitBytes: `${ DEFAULT_LOG_SIZE_LIMIT }`,
 
   init() {
     this._super(...arguments);
+    this._bootstrap();
+    // if (AnsiUp) {
+    //   this._bootstrap();
+    // } else {
+    //   import('ansi_up').then( (module) => {
+    //     AnsiUp = module.default;
 
-    if (AnsiUp) {
-      this._bootstrap();
-    } else {
-      import('ansi_up').then( (module) => {
-        AnsiUp = module.default;
-
-        this._bootstrap();
-      });
-    }
+    //     this._bootstrap();
+    //   });
+    // }
   },
 
   didInsertElement() {
@@ -129,7 +138,7 @@ export default Component.extend({
     set(this, `prefs.${ C.PREFS.WRAP_LINES }`, get(this, 'wrapLines'));
   }),
 
-  watchReconnect: on('init', observer('containerName', 'isPrevious', function() {
+  watchReconnect: on('init', observer('containerName', 'isPrevious', 'limitBytes', function() {
     this.disconnect();
     this.send('clear');
 
@@ -167,7 +176,11 @@ export default Component.extend({
     let url = `${ scheme }${ window.location.host }/k8s/clusters/${ clusterId }/api/v1/namespaces/${ namespaceId }/pods/${ podName }/log`;
 
     url += `?container=${ encodeURIComponent(containerName) }&tailLines=${ LINES }&follow=true&timestamps=true&previous=${ get(this, 'isPrevious') }`;
+    const limitBytes = get(this, 'limitBytes');
 
+    if (limitBytes !== '-1') {
+      url += `&limitBytes=${ limitBytes }`
+    }
     this.connect(url);
   },
 

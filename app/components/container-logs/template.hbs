@@ -26,8 +26,8 @@
 </pre>
 {{yield}}
 
-<div class="footer-actions">
-  <div class="checkbox pt-10 text-left" style="position: absolute; top: -2px">
+<div class="footer-actions flex justify-between items-center">
+  <div class="checkbox pt-10 text-left">
     <label class="block">
       {{input type="checkbox" checked=wrapLines}}
       {{t 'containerLogs.wrapLines'}}
@@ -37,9 +37,19 @@
       {{t 'containerLogs.previous'}}
     </label>
   </div>
-  <button class="btn bg-default" type="button" {{action "scrollToTop"}}>{{t 'containerLogs.scrollTop'}}</button>
-  <button class="btn bg-default scroll-bottom" type="button" {{action "followLog"}}>{{t 'containerLogs.scrollBottom'}}</button>
-  <button class="btn bg-default" type="button" {{action "download"}}>{{t 'containerLogs.download'}}</button>
-  <button class="btn bg-default" type="button" {{action "clear"}}>{{t 'containerLogs.clear'}}</button>
-  <button class="btn bg-primary" type="button" {{action "cancel"}}>{{t 'generic.closeModal'}}</button>
+  <div>
+    <button class="btn bg-default" type="button" {{action "scrollToTop"}}>{{t 'containerLogs.scrollTop'}}</button>
+    <button class="btn bg-default scroll-bottom" type="button" {{action "followLog"}}>{{t 'containerLogs.scrollBottom'}}</button>
+    <button class="btn bg-default" type="button" {{action "download"}}>{{t 'containerLogs.download'}}</button>
+    <button class="btn bg-default" type="button" {{action "clear"}}>{{t 'containerLogs.clear'}}</button>
+    <button class="btn bg-primary" type="button" {{action "cancel"}}>{{t 'generic.closeModal'}}</button>
+  </div>
+  <div class="text-left">
+    <label class="acc-label">{{t 'containerLogs.logSize.label'}}</label>
+    {{new-select
+      value=limitBytes
+      content=logSizeOptions
+      localizedLabel=true
+    }}
+  </div>
 </div>

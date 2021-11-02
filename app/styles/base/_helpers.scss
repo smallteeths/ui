@@ -169,6 +169,14 @@
   flex-direction: column-reverse;
 }
 
+.justify-between {
+  justify-content: space-between;
+}
+
+.items-center {
+  align-items: center;
+}
+
 .center {
   display:flex !important;
   justify-content:center;

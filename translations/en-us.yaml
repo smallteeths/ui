@@ -5650,6 +5650,11 @@ containerLogs:
     connected: Connected
     disconnected: Disconnected
     closed: Closed
+  logSize:
+    label: Log Size Limit
+    default: 10 M
+    noLimit: No size limit
+
 
 containerShell:
   protip: "ProTip: Hold the {key} key when opening shell access to launch a new window."
