@@ -414,6 +414,15 @@ const rootNav = [
         resourceScope:  'global',
       },
       {
+        scope:          'global',
+        id:             'metric-rule-template',
+        localizedLabel: 'nav.admin.metricRuleTemplate',
+        route:          'global-admin.metric-rule-template',
+        resource:       ['metricruletemplate'],
+        resourceScope:  'global',
+        initExpand:     'global-admin.metric-rule-template',
+      },
+      {
         id:             'global-dns-entries',
         localizedLabel: 'nav.admin.globalDnsEntries',
         route:          'global-admin.global-dns.entries',

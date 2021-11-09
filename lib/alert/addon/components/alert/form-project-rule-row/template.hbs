@@ -183,6 +183,38 @@
           {{/if}}
         </div>
       </div>
+      
+      <div class="row">
+        <div class="col span-3">
+          <label style={{expressionStyle}}>
+            {{radio-button
+              selection=model._targetType
+              value="templateRules"
+              disabled=(or (not monitoringEnabled) graphLoading)
+            }}
+            {{t "alertPage.newOrEdit.templateRules.label"}}
+          </label>
+        </div>
+        <div class="col span-8 mt-0">
+          {{searchable-select
+            content=templateRulesContent
+            class="form-control text-left break-all"
+            value=model.metricRule.templateRule
+            readOnly=(or (not-eq model._targetType "templateRules") graphLoading)
+            placeholder=(t "alertPage.newOrEdit.templateRules.placeholder")
+            allowCustom=false
+          }}
+          {{#if (and (eq graphStatus "noData") (eq model._targetType "templateRules"))}}
+            <p class="text-error text-small mt-0 mb-0">
+              {{t "alertPage.newOrEdit.expression.noData"}}
+            </p>
+          {{else if (and (eq graphStatus "error") (eq model._targetType "templateRules"))}}
+            <p class="text-error text-small mt-0 mb-0">
+              {{t "alertPage.newOrEdit.expression.error"}}
+            </p>
+          {{/if}}
+        </div>
+      </div>
 
       <div class="row">
         <div class="col span-3">
@@ -240,7 +272,7 @@
         {{t "alertPage.newOrEdit.is"}}
       </div>
     </div>
-    {{#if (or (eq model._targetType "metric") (eq model._targetType "commonRules") (eq model._targetType "podRebootRule"))}}
+    {{#if (or (eq model._targetType "metric") (eq model._targetType "commonRules") (eq model._targetType "templateRules") (eq model._targetType "podRebootRule"))}}
       {{alert/form-comparison-row
         model=model
       }}

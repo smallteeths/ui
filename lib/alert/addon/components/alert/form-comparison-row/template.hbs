@@ -4,23 +4,23 @@
       content=operatorContent
       class="form-control"
       value=model.metricRule.comparison
-      readOnly=(and (not-eq model._targetType "metric") (not-eq model._targetType "commonRules") (not-eq model._targetType "podRebootRule"))
+      readOnly=(and (not-eq model._targetType "metric") (not-eq model._targetType "commonRules") (not-eq model._targetType "templateRules") (not-eq model._targetType "podRebootRule"))
       localizedLabel=true
     }}
   </div>
-  <div class="col span-{{if (or (eq model._targetType "commonRules") (eq model._targetType "podRebootRule")) "1" "2"}} mt-5">
+  <div class="col span-{{if (or (eq model._targetType "commonRules") (not-eq model._targetType "templateRules") (eq model._targetType "podRebootRule")) "1" "2"}} mt-5">
     {{#unless (eq model.metricRule.comparison hasValue)}}
       {{input-number
         class="form-control"
         value=model.metricRule.thresholdValue
-        readOnly=(and (not-eq model._targetType "metric") (not-eq model._targetType "commonRules") (not-eq model._targetType "podRebootRule"))
-        disabled=(and (eq model.metricRule.onlyReadThresholdValue true) (eq model._targetType "commonRules"))
+        readOnly=(and (not-eq model._targetType "metric") (not-eq model._targetType "commonRules") (not-eq model._targetType "templateRules") (not-eq model._targetType "podRebootRule"))
+        disabled=(and (eq model.metricRule.onlyReadThresholdValue true) (eq model._targetType "commonRules") (eq model._targetType "templateRules"))
         placeholder="e.g. 10"
         min=0
       }}
     {{/unless}}
   </div>
-  {{#if (and (or (eq model._targetType "commonRules") (eq model._targetType "podRebootRule")) (not-eq model.metricRule.comparison hasValue))}}
+  {{#if (and (or (eq model._targetType "commonRules") (eq model._targetType "templateRules") (eq model._targetType "podRebootRule")) (not-eq model.metricRule.comparison hasValue))}}
     <div class="col span-1 text-left">
       <div style={{verbStyles}}>
         {{unit}}
@@ -37,7 +37,7 @@
       content=durationContent
       class="form-control"
       value=model.metricRule.duration
-      readOnly=(and (not-eq model._targetType "metric") (not-eq model._targetType "commonRules") (not-eq model._targetType "podRebootRule"))
+      readOnly=(and (not-eq model._targetType "metric") (not-eq model._targetType "commonRules") (not-eq model._targetType "templateRules") (not-eq model._targetType "podRebootRule"))
     }}
   </div>
 </div>

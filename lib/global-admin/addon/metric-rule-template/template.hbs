@@ -1,0 +1,9 @@
+<section class="header clearfix">
+  <h1>{{t 'metricruletemplate.header'}}</h1>
+</section>
+
+{{custom-metric-rule-template
+    metricRuleTemplates=model
+    mode="global"
+    refresh=(action 'refresh')
+}}

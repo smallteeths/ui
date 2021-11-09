@@ -1,0 +1,39 @@
+{{#sortable-table
+     body=rows
+     descending=descending
+     headers=headers
+     paging=paging
+     bulkActions=false
+     rightActions=rightActions
+     sortBy=sortBy
+     classNames="grid sortable-table bordered"
+     as |sortable kind row dt|
+}}
+  {{#if (eq kind "row")}}
+    <tr class="main-row {{unless row.id "text-muted"}}">
+      <td data-title="{{dt.name}}">
+        {{row.name}}
+      </td>
+      <td data-title="{{dt.level}}">
+        {{#if (eq row.name 'pandaria-cluster-metrics-rules')}}
+          cluster
+        {{else}}
+          project
+        {{/if}}
+      </td>
+      <td data-title="{{dt.rule}}" class="clip">
+        {{row.rules}}
+      </td>
+      <td data-title="{{dt.actions}}" class="actions">
+        {{custom-action-menu model=row resourceActions=rowActions menuClick=(action 'handleMenuClick')}}
+      </td>
+    </tr>
+    {{#if row.showTransitioningMessage}}
+      {{error-sub-row fullColspan=sortable.fullColspan model=row}}
+    {{/if}}
+  {{else if (eq kind "nomatch")}}
+    <tr><td colspan="{{sortable.fullColspan}}" class="text-center text-muted pt-20 pb-20">{{t "catalogSettings.more.noMatch"}}</td></tr>
+  {{else if (eq kind "norows")}}
+    <tr><td colspan="{{sortable.fullColspan}}" class="text-center text-muted pt-20 pb-20">{{t "catalogSettings.more.noData"}}</td></tr>
+  {{/if}}
+{{/sortable-table}}
