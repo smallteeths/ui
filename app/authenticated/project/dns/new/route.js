@@ -35,9 +35,6 @@ export default Route.extend({
 
       if ( hash.existing ) {
         record = hash.existing.cloneForNew();
-        if (record.clusterIp && record.clusterIp !== 'None') {
-          record.clusterIp = '';
-        }
         delete hash.existing;
       } else {
         record = store.createRecord({

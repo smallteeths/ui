@@ -104,6 +104,7 @@ export default Component.extend(ViewNewEdit, ChildHook, {
       set(this, 'model.clusterIp', 'None');
     } else if ( this.mode === 'new' ) {
       set(this, 'model.clusterIp', '');
+      delete this.model.clusterIPs;
     }
 
     if ( kind === LOAD_BALANCER || kind === NODE_PORT ) {
