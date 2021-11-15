@@ -60,6 +60,7 @@ export default Component.extend(ViewNewEdit, ChildHook, {
     }
 
     this.initKindChoices();
+    this.kindDidChange();
   },
 
   actions: {
@@ -104,6 +105,9 @@ export default Component.extend(ViewNewEdit, ChildHook, {
       set(this, 'model.clusterIp', 'None');
     } else if ( this.mode === 'new' ) {
       set(this, 'model.clusterIp', '');
+    }
+
+    if (this.mode === 'new') {
       delete this.model.clusterIPs;
     }
 
