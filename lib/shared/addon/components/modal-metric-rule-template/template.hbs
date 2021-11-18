@@ -1,8 +1,31 @@
 <div style="display: flex;">
-  <span class="protip ml-10 mt-5">{{t "alertPage.newOrEdit.templateRules.note"}}</span>
+  {{#if (eq mode 'edit')}}
+    <span class="protip ml-10 mt-5">{{t "alertPage.newOrEdit.templateRules.note"}}</span>
+  {{/if}}
 </div>
+
 <div style="display: flex; justify-content: space-between">
-  <div style="width: 49%">
+  {{#if (eq mode 'edit')}}
+    <div style="width: 49%">
+      {{textarea-autogrow maxHeight=600 minHeight=600 class=(concat "form-control input-sm value" (if concealValue " conceal")) value=tmpl  disabled=true}}
+      <p style="text-align: center; position: relative">
+        <span>{{t 'alertPage.newOrEdit.templateRules.currentTemplate'}}</span>
+        <span style="position: absolute; left: -12px; top: -9px;">
+          {{copy-to-clipboard
+            tooltipText=""
+            buttonText="copyToClipboard.tooltip"
+            clipboardText=tmpl
+            class="with-clip"
+          }}
+        </span>
+      </p>
+    </div>
+    <div style="width: 49%">
+      {{textarea-autogrow  placeholder="notifierPage.alertTemplate.placeholder" maxHeight=600 minHeight=600 class=(concat "form-control input-sm value" (if concealValue " conceal")) value=tmplByUser disabled=false}}
+      <p style="text-align: center;"><span>{{t 'alertPage.newOrEdit.templateRules.customTemplate'}}</span></p>
+    </div>
+  {{else}}
+    <div style="width: 100%">
     {{textarea-autogrow maxHeight=600 minHeight=600 class=(concat "form-control input-sm value" (if concealValue " conceal")) value=tmpl  disabled=true}}
     <p style="text-align: center; position: relative">
       <span>{{t 'alertPage.newOrEdit.templateRules.currentTemplate'}}</span>
@@ -16,19 +39,23 @@
       </span>
     </p>
   </div>
-  <div style="width: 49%">
-    {{textarea-autogrow  placeholder="notifierPage.alertTemplate.placeholder" maxHeight=600 minHeight=600 class=(concat "form-control input-sm value" (if concealValue " conceal")) value=tmplByUser disabled=false}}
-    <p style="text-align: center;"><span>{{t 'alertPage.newOrEdit.templateRules.customTemplate'}}</span></p>
-  </div>
+  {{/if}}
 </div>
 
 {{top-errors errors=errors}}
 
 <div class="footer-actions">
-  {{save-cancel
-    createLabel="generic.save"
-    saving=saving
-    save=(action "save")
-    cancel=(action "cancel")
-  }}
+  {{#if (eq mode 'edit')}}
+    {{save-cancel
+      createLabel="generic.save"
+      saving=saving
+      editing=false
+      save=(action "save")
+      cancel=(action "cancel")
+    }}
+  {{else}}
+    <button class="btn {{cancelColor}}" type="button" {{action "cancel"}}>
+      {{t 'saveCancel.cancel'}}
+    </button>
+  {{/if}}
 </div>
