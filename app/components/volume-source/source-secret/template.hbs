@@ -45,11 +45,19 @@
       {{t "cruPersistentVolume.secret.secretName.label"}}
     </label>
     {{#if editing}}
+      {{#if enableLoadResourceByNamespace}}
+      {{schema/input-ns-secret
+        namespace=namespace
+        value=config.secretName
+        valueKey="name"
+      }}
+      {{else}}
       {{schema/input-secret
         namespace=namespace
         value=config.secretName
         valueKey="name"
       }}
+      {{/if}}
     {{else}}
       <div>
         {{config.secretName}}

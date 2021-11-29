@@ -45,11 +45,19 @@
       {{t "cruPersistentVolume.configMap.name.label"}}
     </label>
     {{#if editing}}
-      {{schema/input-config-map
+      {{#if enableLoadResourceByNamespace}}
+      {{schema/input-ns-config-map
         namespace=namespace
         value=config.name
         valueKey="name"
       }}
+      {{else}}
+        {{schema/input-config-map
+          namespace=namespace
+          value=config.name
+          valueKey="name"
+        }}
+      {{/if}}
     {{else}}
       <div>
         {{#link-to "authenticated.project.config-maps.detail" (concat namespace.id ":" config.name)}}

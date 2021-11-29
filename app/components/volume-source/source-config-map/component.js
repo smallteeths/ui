@@ -1,9 +1,12 @@
 import Component from '@ember/component';
 import layout from './template';
-import { get, set, observer } from '@ember/object';
+import { get, set, observer, computed } from '@ember/object';
 import VolumeSource from 'shared/mixins/volume-source';
+import { inject as service } from '@ember/service';
 
 export default Component.extend(VolumeSource, {
+  settings: service(),
+
   layout,
   field: 'configMap',
 
@@ -35,5 +38,9 @@ export default Component.extend(VolumeSource, {
     const octal = get(this, 'defaultMode') || '0';
 
     set(this, 'config.defaultMode', parseInt(octal, 8));
+  }),
+
+  enableLoadResourceByNamespace: computed('settings.enable-load-resource-by-namespace', function() {
+    return get(this, 'settings.enable-load-resource-by-namespace');
   }),
 });
