@@ -1,7 +1,7 @@
 {
   "name": "ui",
   "version": "2.6-dev",
-  "cnVersion": "2.5.9-cn-ent",
+  "cnVersion": "2.6.1-cn-ent-rc1",
   "private": true,
   "repository": "https://github.com/rancher/ui",
   "license": "Apache-2.0",
