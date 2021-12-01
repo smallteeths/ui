@@ -11782,3 +11782,9 @@ formServiceAccount:
   title: Service Account
   detail: 配置 Service Account.
   placeholder: 请输入 Service Account Name
+apiPerformance:
+  header: API 性能模式
+  option:
+    power: Power
+    normal: 常规
+  powerMessage: Power模式可能会消耗后台服务更多的计算资源

@@ -10914,6 +10914,12 @@ systemInfoSection:
 
 tableCountSelect:
   header: Table Rows per Page
+apiPerformance:
+  header: API Performance Mode
+  option: 
+    power: Power
+    normal: Normal
+  powerMessage: Power mode may occupy more computing resources of background services
 
 telemetryOpt:
   header: Statistics

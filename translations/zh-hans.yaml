@@ -10314,6 +10314,12 @@ systemInfoSection:
 
 tableCountSelect:
   header: 每页显示行数
+apiPerformance:
+  header: API 性能模式
+  option: 
+    power: Power
+    normal: 常规
+  powerMessage: Power模式可能会消耗后台服务更多的计算资源
 
 telemetryOpt:
   header: 统计数据

@@ -1,0 +1,26 @@
+<h2>
+  {{t "apiPerformance.header"}}
+</h2>
+<div class="box">
+  <div class="row">
+    <div class="radio">
+      <label>
+        {{radio-button selection=apiMode value="normal"}}
+        {{t 'apiPerformance.option.normal'}}
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        {{radio-button selection=apiMode value="power"}}
+        {{t 'apiPerformance.option.power'}}
+      </label>
+    </div>
+
+    {{#if (eq apiMode 'power')}}
+      {{banner-message
+        color="bg-warning mb-0 mt-10"
+        message=(t 'apiPerformance.powerMessage')
+      }}
+    {{/if}}
+  </div>
+</div>

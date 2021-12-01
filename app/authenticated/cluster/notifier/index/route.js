@@ -8,6 +8,7 @@ import C from 'ui/utils/constants';
 export default Route.extend({
   globalStore:  service(),
   scope:        service(),
+  cookies:      service(),
 
   model(/* params, transition */) {
     const cs = get(this, 'globalStore');
@@ -22,7 +23,8 @@ export default Route.extend({
     let systemProjectId = systemProject && systemProject.id ? systemProject.id : ''
 
     // Find alert manager template for alertmanger-notification-template
-    let secret = systemProjectId ? get(this, 'globalStore').rawRequest({ url: `/v3/project/${ systemProjectId }/namespacedsecrets?limit=-1&sort=name` }).then((res) => {
+    const apiMode = this.get(`cookies.${ C.COOKIE.API_MODE }`);
+    let secret = systemProjectId ? get(this, 'globalStore').rawRequest({ url: `/v3/project/${ systemProjectId }/namespacedsecrets?limit=-1&sort=name${ apiMode ? '&_power=true' : '' }` }).then((res) => {
       if ( res && res.body && res.body.data) {
         let notificationSecret = res.body.data.find((item) => item.name === 'alertmanager-default-notification-template')
 

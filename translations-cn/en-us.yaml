@@ -12071,3 +12071,9 @@ formServiceAccount:
   title: Service Account
   detail: Setting Service Account.
   placeholder: Please input the service account name.
+apiPerformance:
+  header: API Performance Mode
+  option:
+    power: Power
+    normal: Normal
+  powerMessage: Power mode may occupy more computing resources of background services

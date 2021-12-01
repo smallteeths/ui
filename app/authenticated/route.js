@@ -374,6 +374,12 @@ export default Route.extend(Preload, {
           $('BODY').addClass('i-hate-spinners');
         }
 
+        if (get(this, `prefs.${ C.PREFS.API_MODE }`)) {
+          const cookies = get(this, 'cookies');
+
+          cookies.set(C.COOKIE.API_MODE, get(this, `prefs.${ C.PREFS.API_MODE }`));
+        }
+
         return res;
       });
   },
