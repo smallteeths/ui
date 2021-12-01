@@ -8427,13 +8427,6 @@ modalAddCloudKey:
     region: 您必须选择一个区域来验证您的密钥。
   typeSelect:
     prompt: 选择云凭证提供商类型
-  aliyun:
-    accessKey:
-      label: Access Key
-      placeholder: Your ACK access key
-    secretKey:
-      label: Secret Key
-      placeholder: Your ACK secret key
   amazonec2:
     accessKey:
       label: Access Key

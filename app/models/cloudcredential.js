@@ -15,7 +15,6 @@ const cloudCredential = Resource.extend({
   canClone: false,
   canEdit:  true,
 
-  isAlibaba:   notEmpty('aliyunecscredentialConfig'),
   isAmazon:    notEmpty('amazonec2credentialConfig'),
   isAzure:     notEmpty('azurecredentialConfig'),
   isDo:        notEmpty('digitaloceancredentialConfig'),
@@ -26,10 +25,8 @@ const cloudCredential = Resource.extend({
   isPNAP:      notEmpty('pnapcredentialConfig'),
   isVMware:    notEmpty('vmwarevspherecredentialConfig'),
 
-
-  displayType: computed('aliyunecscredentialConfig', 'amazonec2credentialConfig', 'azurecredentialConfig', 'digitaloceancredentialConfig', 'harvestercredentialConfig', 'googlecredentialConfig', 'linodecredentialConfig', 'ocicredentialConfig', 'pnapcredentialConfig', 'vmwarevspherecredentialConfig', function() {
+  displayType: computed('amazonec2credentialConfig', 'azurecredentialConfig', 'digitaloceancredentialConfig', 'harvestercredentialConfig', 'googlecredentialConfig', 'linodecredentialConfig', 'ocicredentialConfig', 'pnapcredentialConfig', 'vmwarevspherecredentialConfig', function() {
     const {
-      isAlibaba,
       isAmazon,
       isAzure,
       isDo,
@@ -41,9 +38,7 @@ const cloudCredential = Resource.extend({
       isHarvester
     } = this;
 
-    if (isAlibaba) {
-      return 'Alibaba';
-    } else if (isAmazon) {
+    if (isAmazon) {
       return 'Amazon';
     } else if (isAzure) {
       return 'Azure';

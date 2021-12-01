@@ -328,37 +328,6 @@
         </div>
       </div>
       <p class="help-block">{{t "nodeDriver.vmwarevsphere.access.help"}}</p>
-    {{else if (eq cloudCredentialType "alibaba")}}
-      <div class="row">
-        <div class="col span-6">
-          <label class="acc-label" for="aliyun-accessKey">
-            {{t "modalAddCloudKey.aliyun.accessKey.label"}}{{field-required}}
-          </label>
-          {{input
-            type="text"
-            name="username"
-            classNames="form-control"
-            placeholder=(t "modalAddCloudKey.aliyun.accessKey.placeholder")
-            value=config.accessKeyId
-            id="aliyun-accessKey"
-          }}
-        </div>
-
-        <div class="col span-6">
-          <label class="acc-label" for="aliyun-secretKey">
-            {{t "modalAddCloudKey.aliyun.secretKey.label"}}{{field-required}}
-          </label>
-          {{input
-            type="password"
-            name="password"
-            classNames="form-control"
-            placeholder=(t "modalAddCloudKey.aliyun.secretKey.placeholder")
-            value=config.accessKeySecret
-            id="aliyun-secretKey"
-          }}
-        </div>
-      </div>
-
     {{else if (eq cloudCredentialType "harvester")}}
       <div class="row">
         <div class="col span-12">

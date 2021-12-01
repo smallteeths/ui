@@ -8958,13 +8958,6 @@ modalAddCloudKey:
     azureTenantId: Tenant ID is required to launch a hosted Azure AKS cluster.
   typeSelect:
     prompt: Choose a cloud credential provider type
-  aliyun:
-    accessKey:
-      label: Access Key
-      placeholder: Your ACK access key
-    secretKey:
-      label: Secret Key
-      placeholder: Your ACK secret key
   amazonec2:
     accessKey:
       label: Access Key
