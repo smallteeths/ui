@@ -81,7 +81,7 @@ module.exports = function(/* environment */) {
      * @type {String}
      * @default "'translations'"
      */
-    inputPath: 'translations',
+    inputPath: 'translations-cn',
 
     /**
      * Automatically inject the Intl.JS polyfill into index.html

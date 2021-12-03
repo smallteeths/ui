@@ -29,7 +29,7 @@ function readLocales(environment) {
   /* Parse the translations from the translations folder*/
   /* ember intl getLocalesByTranslations does not work if intl is not managing them (bundled) */
   /* This needs a little work to read the yaml files for the langugae name prop*/
-  var files = fs.readdirSync('./translations');
+  var files = fs.readdirSync('./translations-cn');
   var translationsOut = {};
   files.forEach(function(filename) {
     if ( !filename.match(/\.ya?ml$/) && !filename.match(/\.json$/) ) {
@@ -41,7 +41,7 @@ function readLocales(environment) {
       // Don't show the "None" language in prod
       return;
     }
-    var ymlFile = YAML.load('./translations/' + filename);
+    var ymlFile = YAML.load('./translations-cn/' + filename);
     var label  = ymlFile.languageName;
     var locale = filename.split('.')[0];
     translationsOut[locale] = label;
