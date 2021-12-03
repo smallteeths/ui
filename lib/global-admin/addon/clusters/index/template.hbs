@@ -1,4 +1,4 @@
-<section class="header{{if showMetricsTab "has-tabs p-0"}}">
+<section class="header clearfix{{if showMetricsTab "has-tabs p-0"}}">
   {{#if showMetricsTab}}
     <ul class="tab-nav">
       <li>
@@ -17,7 +17,7 @@
       </li>
     </ul>
   {{else}}
-    <h1>
+    <h1 class="pull-left">
       {{t "clustersPage.header"}}
     </h1>
   {{/if}}
