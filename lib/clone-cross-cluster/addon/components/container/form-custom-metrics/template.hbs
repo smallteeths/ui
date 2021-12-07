@@ -15,7 +15,7 @@
           <div class="col span-2">
             {{#if editing}}
               <button class="btn bg-link icon-btn" {{action "remove" metric}}>
-                <span class="darken"><i class="icon icon-minus"/></span>
+                <i class="icon icon-minus"/>
                 <span>{{t 'formCustomMetrics.delete.label'}}</span>
               </button>
             {{/if}}
@@ -83,8 +83,8 @@
           <div class="col span-2 offset-10">
             <div>
               {{#if editing}}
-                <button class="btn bg-link icon-btn p-0" {{action "addLabel" metric}}>
-                  <span class="darken"><i class="icon icon-plus text-small"/></span>
+                <button class="btn bg-link icon-btn" {{action "addLabel" metric}}>
+                  <i class="icon icon-plus text-small"/>
                   <span>{{t 'formCustomMetrics.addActionregex'}}</span>
                 </button>
               {{/if}}
@@ -102,8 +102,8 @@
 
 <div>
   {{#if editing}}
-    <button class="btn bg-link icon-btn p-0" {{action "add"}}>
-      <span class="darken"><i class="icon icon-plus text-small"/></span>
+    <button class="btn bg-link icon-btn" {{action "add"}}>
+      <i class="icon icon-plus text-small"/>
       <span>{{t 'formCustomMetrics.addActionLabel'}}</span>
     </button>
   {{/if}}
