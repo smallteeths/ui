@@ -88,7 +88,7 @@
     <label class="acc-label vertical-middle p-0">{{t "podPage.nodeIp"}}:</label>
     {{#if (and model.node.id model.node.clusterId)}}
       <div class="inline">
-        <a href="{{href-to " authenticated.cluster.monitoring.node-detail" model.node.clusterId
+        <a href="{{href-to "authenticated.cluster.monitoring.node-detail" model.node.clusterId
           model.node.id}}">{{model.node.displayName}}</a>
         {{#if (or model.node.externalIpAddress model.node.ipAddress)}}
           {{node-ip model=model.node}}
