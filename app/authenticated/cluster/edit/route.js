@@ -30,6 +30,7 @@ export default Route.extend({
       users:                      globalStore.findAll('user'),
       clusterRoleTemplateBinding: globalStore.findAll('clusterRoleTemplateBinding'),
       me:                         get(this, 'access.principal'),
+      operatorsettings:           globalStore.rawRequest({ url: '/v3/operatorsettings' }).then((res) => res?.body?.data || []).catch(() => ([])),
     };
 
     if (cluster.driver === 'k3s' || cluster.driver === 'rke2') {
@@ -96,14 +97,26 @@ export default Route.extend({
 
     // load the css/js url here, if the url loads fail we should error the driver out
     // show the driver in the ui, greyed out, and possibly add error text "can not load comonent from url [put url here]"
-    let { kontainerDrivers } = model;
+    let { kontainerDrivers, operatorsettings } = model;
     let externalDrivers      = kontainerDrivers.filter( (d) => d.uiUrl !== '' && d.state === 'active' && d.name.includes(model.cluster.clusterProvider));
+    let externalOperatorSettings    = operatorsettings.filter((o) => o.url !== '' && o.state === 'active')
     let promises             = {};
 
     externalDrivers.forEach( (d) => {
       if (get(d, 'hasUi')) {
         const jsUrl  = proxifyUrl(d.uiUrl, this.get('app.proxyEndpoint'));
         const cssUrl = proxifyUrl(d.uiUrl.replace(/\.js$/, '.css'), get(this, 'app.proxyEndpoint'));
+
+        // skip setProperties cause of weird names
+        set(promises, `${ d.name }Js`, loadScript(jsUrl, `driver-ui-js-${ d.name }`));
+        set(promises, `${ d.name }Css`, loadStylesheet(cssUrl, `driver-ui-css-${ d.name }`));
+      }
+    });
+
+    externalOperatorSettings.forEach( (d) => {
+      if (get(d, 'url')) {
+        const jsUrl  = proxifyUrl(d.url, this.get('app.proxyEndpoint'));
+        const cssUrl = proxifyUrl(d.url.replace(/\.js$/, '.css'), get(this, 'app.proxyEndpoint'));
 
         // skip setProperties cause of weird names
         set(promises, `${ d.name }Js`, loadScript(jsUrl, `driver-ui-js-${ d.name }`));

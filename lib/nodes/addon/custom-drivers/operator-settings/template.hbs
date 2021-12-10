@@ -17,32 +17,21 @@
     </li>
   </ul>
   <div class="right-buttons">
-    <button disabled={{or refreshing (rbac-prevents resource="kontainerdriver" scope="global" permission="create" )}}
-      class="btn btn-sm bg-primary right-divider-btn" type="button" {{action "refreshMetadata" }}>
-      {{#if refreshing}}
-        <i class="icon icon-spinner icon-spin"></i>
-      {{/if}}
-      {{t "clusterDrivers.refresh"}}
-    </button>
-
-    <button disabled={{rbac-prevents resource="kontainerdriver" scope="global" permission="create" }}
-      class="btn btn-sm bg-primary right-divider-btn" type="button" {{action "addNewDriver" }}>
-      {{t "clusterDrivers.add"}}
-    </button>
+    <button disabled={{rbac-prevents resource="nodedriver" scope="global" permission="create"}} class="btn btn-sm bg-primary right-divider-btn" type="button" {{action 'addNewOperator'}}>{{t 'operatorPage.add'}}</button>
   </div>
 </section>
 
 {{#sortable-table
-   classNames="grid"
-   body=rows
-   searchText=searchText
-   sortBy=sortBy
-   descending=descending
-   bulkActions=true
-   pagingLabel="pagination.driver"
-   headers=headers
-   as |sortable kind driver dt|
- }}
+  classNames="grid"
+  body=rows
+  search=false
+  sortBy=sortBy
+  descending=descending
+  bulkActions=true
+  pagingLabel="pagination.driver"
+  headers=headers
+  as |sortable kind driver dt|
+}}
   {{#if (eq kind "row")}}
     <tr class="main-row">
       <td valign="middle" class="row-check" style="padding-top: 2px;">

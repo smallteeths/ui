@@ -1,0 +1,38 @@
+{{#if modalVisible}}
+  <div class="modal-container medium-modal">
+    <div class="container-header-text">
+      <h3>{{t 'modalConfirmDeactivate.header'}} {{t "action.deactivate"}}:</h3>
+      <hr/>
+      <div class="display-name">
+        {{#if (lte resources.length totalLimit)}}
+          {{#each resources as |resource|}}
+            <div>{{resource.displayName}}</div>
+          {{/each}}
+        {{else}}
+          <div>{{t 'confirmDelete.largeDeleteText' key=resources.firstObject.displayName othersCount=(sub resources.length 1)}}</div>
+        {{/if}}
+      </div>
+    </div>
+    <div class="footer-actions">
+      <button {{action "confirm"}} class="btn bg-error" disabled={{btnDisabled}}>
+        {{t "action.deactivate"}}
+      </button>
+      <button {{action "cancel"}} class="btn bg-transparent">{{t 'modalConfirmDeactivate.cancel'}}</button>
+    </div>
+
+    {{#if infoText}}
+      <div class="mb-20 mt-20">
+        {{#banner-message
+          color="bg-warning m-0"
+        }}
+          {{infoText}}
+        {{/banner-message}}
+      </div>
+    {{/if}}
+
+    {{#if showProtip}}
+      <div class="protip mt-10">{{t 'confirmDelete.protip' key=alternateLabel}}</div>
+    {{/if}}
+
+  </div>
+{{/if}}

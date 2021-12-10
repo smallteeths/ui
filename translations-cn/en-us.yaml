@@ -8657,6 +8657,16 @@ loggingPage:
     dryRun: Dry Run
   customBuffer:
     label: Custom Buffer
+operatorPage:
+  add: Add Operator Configuration
+  provider:
+    label: Operator Provider
+    request: Please select operator provider type
+    existError: provider type {provider} configuration already exists。
+    placeholder: Select the operator provider type
+  url:
+    label: Custom UI URL
+    request: Custom UI URL not configured
 machineTemplatesPage:
   title: Add Node
   new:
@@ -8905,6 +8915,8 @@ modalEditDriver:
   header:
     create: "Add {type} Driver"
     edit: "Edit {type} Driver"
+    createOperator: Add Operator Configuration
+    editOperator: Edit Operator Configuration
   url:
     label: Download URL
     help: The URL to download the machine driver binary for 64-bit Linux.
@@ -9380,6 +9392,7 @@ newSecret:
 customDrivers:
   nodes: Node Drivers
   clusters: Cluster Drivers
+  operator: Operator Configuration
 clusterDrivers:
   add: Add Cluster Driver
   refresh: Refresh Kubernetes Metadata
@@ -9410,6 +9423,7 @@ nodeDriver:
   cloudCredentialError: A cloud credential is required
   nameError: A name is required
   displayName:
+    ackoperatorsetting: Alibaba ACK
     aliyun: Alibaba ACK
     aliyunecs: Alicloud ECS
     amazonec2: Amazon EC2

@@ -62,7 +62,7 @@
             @classNames="form-control"
             @checked={{showCustomApiEndpoint}}
           />
-          {{#if showCustomApiEndpoint}} 
+          {{#if showCustomApiEndpoint}}
             <Input
               @type="text"
               @value={{config.apiEndpoint}}
@@ -367,7 +367,7 @@
             @classNames="form-control"
             @placeholder={{t "nodeDriver.aliyunecs.aliyunSLB.placeholder"}}
           />
-        </div>   
+        </div>
       </div>
 
       {{#unless config.privateAddressOnly}}

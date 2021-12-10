@@ -1,0 +1,37 @@
+<h2 class="alert-header">
+  {{t (if editing "modalEditDriver.header.editOperator" "modalEditDriver.header.createOperator")}}
+</h2>
+<hr/>
+
+<div class="inline-form pt-20">
+  <label class="acc-label">
+    {{t "operatorPage.provider.label"}}
+  </label>
+  {{new-select
+    value=originalModel.name
+    content=providerChoices
+    disabled=(not isNew)
+    placeholder=(t 'operatorPage.provider.placeholder')
+  }}
+</div>
+
+<div class="inline-form pt-20">
+  <label class="acc-label">
+    {{t "operatorPage.url.label"}}
+  </label>
+  {{input
+    class="form-control"
+    value=originalModel.url
+  }}
+</div>
+
+<div class="mt-20"></div>
+
+{{top-errors errors=errors}}
+
+{{save-cancel
+  editing=editing
+  saving=saving
+  save=(action "save")
+  cancel=(action "cancel")
+}}

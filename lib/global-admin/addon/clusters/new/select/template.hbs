@@ -11,6 +11,20 @@
       />
     {{/if}}
     <div class="row-same-height">
+      {{#if showImportAck}}
+        <a
+          class="col span-2 cluster-driver-box small span-height"
+          href="{{href-to "global-admin.clusters.new.launch" "import" (query-params importProvider='ack')}}"
+          disabled={{disabledAddCluster}}
+        >
+          <div class="machine-driver ackoperatorsetting"></div>
+          <div class="driver-content">
+            <p class="driver-name">
+              {{t "clusterNew.aliyunack.shortLabel"}}
+            </p>
+          </div>
+        </a>
+      {{/if}}
       <a
         class="col span-2 cluster-driver-box small span-height"
         href="{{href-to "global-admin.clusters.new.launch" "import" (query-params importProvider='eks')}}"
@@ -150,7 +164,7 @@
         </div>
         {{#each (get providerGroups "cloudGroup") as |provider|}}
           {{#unless provider.scriptError}}
-            {{#unless (or (or (eq provider.name "amazoneks") (eq provider.name "googlegke")) (eq provider.name "azureaks"))}}
+            {{#unless (or (eq provider.name "amazoneks") (eq provider.name "googlegke") (eq provider.name "azureaks") (eq provider.name "aliyun"))}}
               {{#link-to
                 "clusters.new.launch"
                 provider.name

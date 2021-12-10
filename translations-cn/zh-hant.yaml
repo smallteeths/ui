@@ -6587,6 +6587,16 @@ loginUserPass:
   loggingInLabel: 登錄中...
   passwordLabel: 密碼
   externalProvider: 使用 {externalName} 用戶
+operatorPage:
+  add: 添加Operator配置
+  provider:
+    label: Operator提供商類型
+    request: 請選擇Operator提供商類型
+    existError: 提供商類型 { provider } 配置已存在。
+    placeholder: 選擇operator提供商類型
+  url:
+    label: 自定義 UI URL
+    request: 未配置 自定義 UI URL
 machineTemplatesPage:
   title: 添加主機
   new:
@@ -6735,6 +6745,8 @@ modalEditDriver:
   header:
     create: 添加驅動
     edit: 編輯驅動
+    createOperator: 添加Operator配置
+    editOperator: 編輯Operator配置
   url:
     label: 下載URL
     help: 64位Linux Docker-Machine驅動下載地址
@@ -7045,6 +7057,7 @@ nodeDriver:
   editTemplate: "編輯主機模板: {name}"
   editWarning: 編輯主機模板只會影響由主機池創建的新主機，現有主機將不會自動更新或替換。<br>如果從池中刪除主機，將使用模板中的新設置創建新主機
   displayName:
+    ackoperatorsetting: Alibaba ACK
     aliyunecs: Alicloud ECS
     amazonec2: Amazon EC2
     azure: Azure
@@ -10043,6 +10056,7 @@ cruVolumeClaimTemplate:
 customDrivers:
   clusters: 集羣驅動
   nodes: 主机驅動
+  operator: Operator配置
 customMenus:
   index:
     clusterMenu: 集羣級別自定義菜單

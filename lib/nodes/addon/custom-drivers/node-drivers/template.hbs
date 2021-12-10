@@ -6,6 +6,11 @@
     <li>
       {{#link-to "custom-drivers.node-drivers"}}{{t 'customDrivers.nodes'}}{{/link-to}}
     </li>
+    <li>
+      {{#link-to "custom-drivers.operator-settings"}}
+        {{t "customDrivers.operator"}}
+      {{/link-to}}
+    </li>
   </ul>
   <div class="right-buttons">
     <button disabled={{rbac-prevents resource="nodedriver" scope="global" permission="create" }}

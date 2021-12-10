@@ -8420,6 +8420,16 @@ loggingPage:
     dryRun: 试运行
   customBuffer:
     label: 自定义 Buffer
+operatorPage:
+  add: 添加Operator配置
+  provider:
+    label: Operator提供商类型
+    request: 请选择Operator提供商类型
+    existError: 提供商类型 { provider } 配置已存在。
+    placeholder: 选择operator提供商类型
+  url:
+    label: 自定义 UI URL
+    request: 未配置 自定义 UI URL
 machineTemplatesPage:
   title: 添加主机
   new:
@@ -8668,6 +8678,8 @@ modalEditDriver:
   header:
     create: 添加驱动
     edit: 编辑驱动
+    createOperator: 添加Operator配置
+    editOperator: 编辑Operator配置
   url:
     label: 下载 URL
     help: 64 位 Linux Docker-Machine 驱动下载地址。
@@ -9146,6 +9158,7 @@ newSecret:
 customDrivers:
   nodes: 主机驱动
   clusters: 集群驱动
+  operator: Operator配置
 clusterDrivers:
   add: 添加集群驱动
   refresh: 刷新 Kubernetes 元数据
@@ -9176,6 +9189,7 @@ nodeDriver:
   cloudCredentialError: 云凭证必须设置。
   nameError: 名称必须设置。
   displayName:
+    ackoperatorsetting: Alibaba ACK
     aliyun: Alibaba ACK
     aliyunecs: Alicloud ECS
     amazonec2: Amazon EC2

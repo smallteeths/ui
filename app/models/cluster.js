@@ -495,6 +495,10 @@ export default Resource.extend(Grafana, ResourceUsage, {
     const firstPool = pools.objectAt(0);
 
     switch ( get(this, 'configName') ) {
+    case 'ackConfig':
+      return 'ackoperatorsetting';
+    case 'aliyunEngineConfig':
+      return 'aliyun';
     case 'amazonElasticContainerServiceConfig':
       return 'amazoneks';
     case 'eksConfig':
@@ -536,6 +540,9 @@ export default Resource.extend(Grafana, ResourceUsage, {
     const driverName = get(this, 'driver');
 
     switch ( configName ) {
+    case 'aliyunEngineConfig':
+    case 'ackConfig':
+      return intl.t('clusterNew.aliyunack.shortLabel');
     case 'amazonElasticContainerServiceConfig':
     case 'eksConfig':
       return intl.t('clusterNew.amazoneks.shortLabel');

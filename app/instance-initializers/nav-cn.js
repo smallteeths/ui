@@ -573,7 +573,7 @@ const rootNav = [
         id:             'nodes-node-drivers',
         localizedLabel: 'nav.admin.drivers',
         route:          'nodes.custom-drivers',
-        resource:       ['nodedriver', 'kontainerdriver'],
+        resource:       ['nodedriver', 'kontainerdriver', 'operatorsetting'],
         resourceScope:  'global',
         initExpand:     'nodes.custom-drivers.cluster-drivers'
       },
