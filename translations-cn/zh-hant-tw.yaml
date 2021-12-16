@@ -3372,6 +3372,9 @@ cloudProvider:
       description: "部署 Vnet 的資源組的名稱"
     loadBalancerSku:
       description: "Sku of Load Balancer and Public IP. Candidate values are: basic and standard"
+  harvester:
+    helpText: 請輸入一個 "集群名稱 "並選擇一個節點模板來啟用該選項。
+    label: Harvester (Out-of-tree)
 catalogSettings:
   header: 應用商店
   notAvailable: "不可用: 這是名為<code>{name}</code>的自定義商店"
@@ -3887,6 +3890,10 @@ clusterNew:
       basic: 基本
       label: LoadBalancer SKU
       standard: 標準
+    import:
+      clusterOptions:
+        detail: 配置額外的集群選項
+        title: 集群選項
   googlegke:
     label: Google Kubernetes 引擎
     shortLabel: Google GKE
@@ -9459,6 +9466,9 @@ nodeDriver:
       label: 網路安全組
       openPorts: 當使用一個現有的 NSG 時，開啟的埠被忽略。
       placeholder: "例如: AllowVnetOutBound"
+    plan:
+      label: 購買計劃
+      placeholder: publisher:product:plan
   aliyunecs:
     accountSection:
       label: 1. 訪問令牌
@@ -9683,6 +9693,22 @@ nodeDriver:
       help: <a href="https://phoenixnap.com/bare-metal-cloud/instances" target="_blank" rel="nofollow noreferrer noopener">例項型別和定價</a>
       label: 類型
       placeholder: 請選擇要配置的伺服器型別。
+  harvester:
+    cpuCount:
+      placeholder: 例如：2
+    diskSize:
+      placeholder: 例如：4
+    imageName:
+      placeholder: 請選擇一個鏡像
+    memorySize:
+      placeholder: 例如：4
+    namespace:
+      placeholder: 例如：default
+    networkName:
+      placeholder: 請選擇一個網絡
+    sshUser:
+      placeholder: 例如：ubuntu
+      toolTip: 用以登錄選定操作系統的 SSH 用戶。
 newConfigMap:
   title:
     new: 添加配置映射

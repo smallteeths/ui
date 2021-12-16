@@ -3659,6 +3659,9 @@ cloudProvider:
       description: "部署 Vnet 的资源组的名称"
     loadBalancerSku:
       description: "Sku of Load Balancer and Public IP. Candidate values are: basic and standard"
+  harvester:
+    helpText: 请输入一个 "集群名称 "并选择一个节点模板来启用该选项。
+    label: Harvester (Out-of-tree)
 catalogSettings:
   header: 商店设置
   notAvailable: "不可用: 这是名为<code>{name}</code>的自定义商店"
@@ -4088,6 +4091,10 @@ clusterNew:
         parsedServiceCidr: 'Kubernetes 服务地址范围必须在选定的虚拟网络范围内。'
         parsedDnsServiceIp: 'Kubernetes DNS 服务 IP 地址必须在 Kubernetes 服务地址范围内。'
         parsedDockerBridgeCidr: 'Docker bridge 地址不能与选定的虚拟网络或 Kubernetes 服务地址相同'
+    import:
+      clusterOptions:
+        detail: 配置额外的集群选项
+        title: 集群选项
   aliyunack:
     shortLabel: Alibaba ACK
   googlegke:
@@ -9620,6 +9627,9 @@ nodeDriver:
       placeholder: "例如: AllowVnetOutBound"
       helpText: 当使用一个由 Rancher 管理的或提供一个现有的 NSG 时，使用此模板的所有节点将使用提供的 NSG。如果没有提供 NSG，将为每个节点创建一个新的 NSG。
       openPorts: 当使用一个现有的 NSG 时，打开的端口被忽略。
+    plan:
+      label: 购买计划
+      placeholder: publisher:product:plan
   aliyunecs:
     accountSection:
       label: 1. 访问令牌
@@ -9730,6 +9740,7 @@ nodeDriver:
       kubeconfig: Kubeconfig文件
     imageName:
       label: 镜像
+      placeholder: 请选择一个镜像
     diskBus:
       label: 磁盘 Bus
     access:
@@ -9752,21 +9763,28 @@ nodeDriver:
     external: 外部的 Harvester
     sshUser:
       label: SSH 用户名
+      placeholder: 例如：ubuntu
+      toolTip: 用以登录选定操作系统的 SSH 用户。
     networkName:
       label: 网络
+      placeholder: 请选择一个网络
     password:
       label: 密码
     cpuCount:
       label: CPUs
       unit: '{cores, plural, =1 {Core} other {Cores}}'
+      placeholder: 例如：2
     memorySize:
       label: 内存
       unit: GiB
+      placeholder: 例如：4
     namespace:
       label: 命名空间
+      placeholder: 例如：default
     diskSize:
       label: 磁盘
       unit: GiB
+      placeholder: 例如：4
     networkData:
       label: 网络数据
       template:

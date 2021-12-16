@@ -3667,6 +3667,9 @@ cloudProvider:
       description: "The name of the resource group that the Vnet is deployed in"
     loadBalancerSku:
       description: "Sku of Load Balancer and Public IP. Candidate values are: basic and standard"
+  harvester:
+    helpText: Please enter a "Cluster Name" and select a node template to enable this option
+    label: Harvester (Out-of-tree)
 catalogSettings:
   header: Catalogs
   notAvailable: "Not available: there is a custom catalog called <code>{name}</code>"
@@ -3987,6 +3990,9 @@ clusterNew:
         title: Choose Cluster
       prompt: Select cluster to import
       rbacWarning: This cluster has Kubernetes RBAC disabled. Importing a cluster without RBAC enabled may cause unexpected behavior.
+      clusterOptions:
+        detail: Configure additional cluster options
+        title: Cluster Options
     ingressWarning: 'Note: Currently Azure AKS will not create an ingress controller when launching a new cluster. If you need this functionality you will have to create an ingress controller manually after cluster creation.'
     kubernetesVersion:
       label: Kubernetes Version
@@ -9979,6 +9985,9 @@ nodeDriver:
       placeholder: "e.g. AllowVnetOutBound"
       helpText: When using a Rancher managed or providing an existing NSG, all nodes using this template will use the supplied NSG. If no NSG is provided, a new NSG will be created for each node.
       openPorts: When using an existing NSG, Open Ports are ignored.
+    plan:
+      label: Purchase Plan
+      placeholder: publisher:product:plan
   aliyunecs:
     accountSection:
       label: 1. Account Access
@@ -10137,6 +10146,7 @@ nodeDriver:
       kubeconfig: KubeconfigContent
     imageName:
       label: Image
+      placeholder: Please select a image
     diskBus:
       label: Bus
     access:
@@ -10159,21 +10169,28 @@ nodeDriver:
     external: External Harvester
     sshUser:
       label: SSH User
+      placeholder: e.g. ubuntu
+      toolTip: SSH user to login with the selected OS image.
     networkName:
       label: Network Name
+      placeholder: Please select a network
     password:
       label: Password
     cpuCount:
       label: CPUs
       unit: '{cores, plural, =1 {Core} other {Cores}}'
+      placeholder: e.g. 2
     memorySize:
       label: Memory
       unit: GiB
+      placeholder: e.g. 4
     namespace:
       label: Namespace
+      placeholder: e.g. default
     diskSize:
       label: Disk
       unit: GiB
+      placeholder: e.g. 4
     networkData:
       label: Network Data YAML
       template:
