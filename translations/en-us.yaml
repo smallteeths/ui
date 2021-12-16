@@ -3705,6 +3705,9 @@ cloudProvider:
     label: Custom (In-Tree)
     notInList: 'If your cloud provider is not listed, please use the <b>Custom</b> option.'
     helpText: 'Please edit the YAML to add in any other <a href="http://rancher.com/docs/rke/v0.1.x/en/config-options/cloud-providers/" target="_blank" rel="nofollow noopener noreferrer">cloud providers</a>'
+  harvester:
+    label: Harvester (Out-of-tree)
+    helpText: Please enter a "Cluster Name" and select a node template to enable this option
 
   helpText: |
      Read more about the state of the <a href="https://kubernetes.io/blog/2019/04/17/the-future-of-cloud-providers-in-kubernetes/" target="_blank" rel="nofollow noopener noreferrer">Kubernetes in-tree cloud providers</a>
@@ -4084,6 +4087,9 @@ clusterNew:
       label: Image
       placeholder: canonical:UbuntuServer:18.04-LTS:latest
     import:
+      clusterOptions:
+        detail: Configure additional cluster options
+        title: Cluster Options
       clusterSelect:
         createLabel: Register Cluster
         detail: Choose an AKS cluster to register
@@ -9968,11 +9974,11 @@ nodeDriver:
     accountSection: Account Access
     projectId:
       label: Project ID
-      placeholder: Your Packet project ID
+      placeholder: Your Equinix Metal project ID
     apiKey:
       label: Account API Key
-      placeholder: Your Packet API key
-    apiKeyHelp: From the Packet <a href="https://app.packet.net/users/0/api-keys" target="_blank">API Keys</a> screen
+      placeholder: Your Equinix Metal API key
+    apiKeyHelp: From the Equinix Metal <a href="https://app.packet.net/users/0/api-keys" target="_blank">API Keys</a> screen
     instanceSection: Instance
     instanceOptionsSection: Instance Options
     loginAction: "Next: Authenticate & select an instance"
@@ -10188,6 +10194,9 @@ nodeDriver:
       label: Fault Domain Count
       placeholder: e.g. 3
       helpText: If the availability set has already been created, the fault domain count will be ignored.
+    plan:
+      label: Purchase Plan
+      placeholder: publisher:product:plan
     size:
       label: Size
     dockerPort:
@@ -10402,6 +10411,7 @@ nodeDriver:
       kubeconfig: KubeconfigContent
     imageName:
       label: Image
+      placeholder: Please select a image
     diskBus:
       label: Bus
     access:
@@ -10424,21 +10434,28 @@ nodeDriver:
     external: External Harvester
     sshUser:
       label: SSH User
+      placeholder: e.g. ubuntu
+      toolTip: SSH user to login with the selected OS image.
     networkName:
       label: Network Name
+      placeholder: Please select a network
     password:
       label: Password
     cpuCount:
       label: CPUs
       unit: '{cores, plural, =1 {Core} other {Cores}}'
+      placeholder: e.g. 2
     memorySize:
       label: Memory
       unit: GiB
+      placeholder: e.g. 4
     namespace:
       label: Namespace
+      placeholder: e.g. default
     diskSize:
       label: Disk
       unit: GiB
+      placeholder: e.g. 4
     networkData:
       label: Network Data YAML
       template:

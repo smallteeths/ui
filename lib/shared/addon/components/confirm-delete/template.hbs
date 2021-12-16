@@ -119,14 +119,14 @@
   </div>
 {{/if}}
 <div class="footer-actions">
+  <button class="btn bg-transparent" type="button" {{action "cancel"}}>
+    {{t "confirmDelete.cancelAction"}}
+  </button>
   <button {{action "confirm"}} class="btn bg-error" disabled={{btnDisabled}}>
     {{t "confirmDelete.confirmAction"}}
     {{#if btnDisabled}}
       (<span style="width: 12px;display:inline-block;">{{awaitSeconds}}</span>)
     {{/if}}
-  </button>
-  <button class="btn bg-transparent" type="button" {{action "cancel"}}>
-    {{t "confirmDelete.cancelAction"}}
   </button>
 </div>
 {{#if showProtip}}

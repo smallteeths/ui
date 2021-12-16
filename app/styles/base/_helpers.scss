@@ -219,6 +219,10 @@
   visibility: hidden;
 }
 
+.overflow-visible {
+  overflow: visible !important;
+}
+
 @mixin list-unstyled {
   margin: 0;
   padding: 0;
