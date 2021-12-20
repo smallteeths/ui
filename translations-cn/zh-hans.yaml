@@ -8559,7 +8559,7 @@ modalEditPassword:
     weak: '弱'
     good: '中'
     best: '强'
-    tooltip1: '密码必须至少包含8个字符'
+    tooltip1: '密码必须至少包含 {length} 个字符'
     tooltip2: '至少包括数字、大写字母、小写字母、符号中的两个类型'
 modalFeedback:
   header: "欢迎使用 {appName}!"
