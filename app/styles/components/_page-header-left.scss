@@ -72,6 +72,9 @@ $project-nav-active: $dropdown-link-hover-bg !default;
 .embedded .sidebar {
   margin-left: 0;
 }
+.embedded .custom-kubeshell-toolbox-modal-popover {
+  display: none;
+}
 
 .page-header-left {
   position: absolute;
