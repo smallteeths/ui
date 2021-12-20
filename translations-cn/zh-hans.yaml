@@ -2606,6 +2606,9 @@ globalDnsPage:
         label: 目标项目
       ttl:
         label: 'DNS TTL(DNS 解析记录缓存有效期，阿里云 DNS TTL 最少 600)'
+      f5config:
+        title: 'F5 高级配置'
+        detail: '配置 Wideip 和 Pool memeber 的负载均衡'
   providersPage:
     additionalOptions:
       title: 附加选项

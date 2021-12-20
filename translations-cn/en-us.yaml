@@ -2614,6 +2614,9 @@ globalDnsPage:
         label: Target Projects
       ttl:
         label: DNS TTL
+      f5config:
+        title: 'F5 advanced configuration'
+        detail: 'Configure load balancing for wideip and pool memeber'
   providersPage:
     additionalOptions:
       title: Additional Options

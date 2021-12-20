@@ -10337,6 +10337,9 @@ globalDnsPage:
       title: 配置 DNS 條目
       ttl:
         label: DNS TTL(DNS 解析紀錄緩存有效期，阿里雲 DNS TTL 最少 600)
+      f5config:
+        title: 'F5 高級配置'
+        detail: '配置 Wideip 和 Pool memeber 的負載均衡'
     header:
       edit: 編輯全局 DNS 紀錄
       new: 添加全局 DNS 紀錄

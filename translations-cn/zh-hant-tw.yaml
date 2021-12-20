@@ -2305,6 +2305,9 @@ globalDnsPage:
         label: 目標項目
       ttl:
         label: DNS TTL (DNS解析紀錄缓存有效期)
+      f5config:
+        title: 'F5 高級配置'
+        detail: '配置 Wideip 和 Pool memeber 的負載均衡'
     projectF5bigipHelp: 您選擇的是 F5bigip 的供應商，F5bigip 負載均衡是由自定義的 CRD VirtualServer 來完成，要完成項目的全域 DNS 紀錄設置，必須在應用或項目的 VirtualServer 規則中添加注釋(<code>rancher.io/globalDNS.hostname='hostname'</code>)，其中<code>'hostname'</code>是路由規則中使用的主機名，這個<code>'hostname'</code>也必須匹配這個全域 DNS 條目的 FQDN。
   providersPage:
     title: 全域DNS提供商列表

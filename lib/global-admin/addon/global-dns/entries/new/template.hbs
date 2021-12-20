@@ -183,8 +183,55 @@
           </div>
         </div>
       </div>
-    {{/accordion-list-item}}
 
+      {{#if isF5BigipProvider}}
+        <div class="mt-10">
+          {{#accordion-list-item
+            title=(t "globalDnsPage.entriesPage.config.f5config.title")
+            detail=(t "globalDnsPage.entriesPage.config.f5config.detail")
+            expandAll=al.expandAll
+            expand=(action expandFn)
+          }}
+            <div class="row">
+              <div class="col span-6">
+                <label class="acc-label">Wideip pool-lb-mode</label>
+                {{new-select
+                  classNames="form-control"
+                  content=poolLbModeOptions
+                  value=poolLbModeValue
+                }}
+              </div>
+              <div class="col span-6">
+                <label class="acc-label">Pool Member load-balancing-mode</label>
+                {{new-select
+                  classNames="form-control"
+                  content=loadBalancingModeOptions
+                  value=loadBalancingModeValue
+                }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col span-6">
+                <label class="acc-label">Pool Member alternate-mode</label>
+                {{new-select
+                  classNames="form-control"
+                  content=alternateModeOptions
+                  value=alternateModeValue
+                }}
+              </div>
+              <div class="col span-6">
+                <label class="acc-label">Pool Member fallback-mode</label>
+                {{new-select
+                  classNames="form-control"
+                  content=fallbackModeOptions
+                  value=fallbackModeValue
+                }}
+              </div>
+            </div>
+          {{/accordion-list-item}}
+        </div>
+      {{/if}}
+    {{/accordion-list-item}}
 
     {{#accordion-list-item
        title=(t "globalDnsPage.providersPage.members.title")
