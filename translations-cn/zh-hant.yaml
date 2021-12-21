@@ -7618,6 +7618,10 @@ nodeDriver:
       sshPasswordInvalidCharacter: SSH密碼包含非法字符
       sshPasswordFormatError: "SSH密碼必須至少包括大寫字符，小寫字符，數字和特殊字符中的三種"
       nameNotValidForApp: 根據{appName}主機名規則該名稱無效。
+    internetChargeType:
+      label: EIP 計費方式
+      payByBandwidth: 按帶寬計費
+      payByTraffic: 按流量計費
   zstack:
     access:
       title: 1. 帳戶訪問
@@ -7749,19 +7753,62 @@ nodeDriver:
   harvester:
     cpuCount:
       placeholder: 例如：2
+      label: CPUs
+      unit: "{cores, plural, =1 {Core} other {Cores}}"
     diskSize:
       placeholder: 例如：4
+      label: 磁盤
+      unit: GiB
     imageName:
       placeholder: 請選擇一個鏡像
+      label: 鏡像
     memorySize:
       placeholder: 例如：4
+      label: 內存
+      unit: GiB
     namespace:
       placeholder: 例如：default
+      label: 命名空間
     networkName:
       placeholder: 請選擇一個網絡
+      label: 網絡
     sshUser:
       placeholder: 例如：ubuntu
       toolTip: 用以登錄選定操作系統的 SSH 用戶。
+      label: SSH 用戶名
+    access:
+      detail: 配置在哪裏查找 Harvester 服務器
+      title: 1. 帳戶訪問
+    advanced:
+      detail: CloudInit
+      title: 3. 高級配置
+    cluster:
+      kubeconfig: Kubeconfig文件
+      label: 集羣
+    diskBus:
+      label: 磁盤 Bus
+    external: 外部的 Harvester (實驗)
+    host:
+      label: 主機
+      placeholder: IP/Domain
+    imported: 導入的 Harvester
+    instance:
+      detail: 選擇虛擬機的大小和操作系統
+      title: 2. 實例配置
+    networkData:
+      label: 網絡數據
+      template:
+        label: 網絡配置模板
+    password:
+      label: 密碼
+    port:
+      label: 端口
+    userData:
+      label: 用戶數據
+      template:
+        label: 用戶配置模板
+    username:
+      label: 用戶名
 newConfigMap:
   title:
     new: 添加ConfigMap
@@ -10950,6 +10997,7 @@ imageRepoSection:
     table:
       noData: 暫無數據
       noMatch: 没有TAG匹配当前搜索
+      addLabel: 添加標籤
   userConfigPage:
     keyCloakAuthWarning: 需要使用您的 KeyCloak 賬號在 Harbor 中同步，請輸入密碼以初始化(後續您可以使用您的賬號與初始化的密碼登錄 Harbor 服務)，如果您已經在 Harbor 服務中同步了賬戶，請輸入您的密碼以同步
     methodNotSupported: Rancher {rancherAuthMode} 認證暫不支持對接 {auth} 認證類型的 Harbor 服務。

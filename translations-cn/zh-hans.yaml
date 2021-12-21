@@ -7092,8 +7092,7 @@ formNetwork:
     label: 容器
   requestedIp:
     label: 请求 IP
-    placeholder:
-      可选，"例如: 10.42.2.24"
+    placeholder: '例如: 10.42.2.24'
     help: '从 10.42.0.0/16 网段中请求指定的 IP 地址，如果此 IP 地址已经被使用则会分配随机 IP。'
   retainIp:
     label: 保持 IP
@@ -9760,7 +9759,7 @@ nodeDriver:
     username:
       label: 用户名
     imported: 导入的 Harvester
-    external: 外部的 Harvester
+    external: 外部的 Harvester (实验)
     sshUser:
       label: SSH 用户名
       placeholder: 例如：ubuntu
