@@ -67,3 +67,73 @@
     </div>
   </div>
 </div>
+
+<div class="row">
+  <div class="col span-6">
+    <label class="acc-label" for="input-milli-max-cpu">
+      {{t "formSecurity.cpuMax.label"}}
+    </label>
+    <div class="input-group">
+      {{input-integer
+        step="100"
+        value=maxCpu
+        classNames="form-control"
+        id="input-milli-max-cpu"
+        placeholder=(t "formSecurity.milliCpuReservation.placeholder")
+      }}
+      <div class="input-group-addon bg-default">
+        {{t "formSecurity.milliCpuReservation.unit"}}
+      </div>
+    </div>
+
+    <label class="acc-label mt-20" for="input-milli-min-cpu">
+      {{t "formSecurity.cpuMin.label"}}
+    </label>
+    <div class="input-group">
+      {{input-integer
+        step="100"
+        value=minCpu
+        classNames="form-control"
+        id="input-milli-min-cpu"
+        placeholder=(t "formSecurity.milliCpuReservation.placeholder")
+      }}
+      <div class="input-group-addon bg-default">
+        {{t "formSecurity.milliCpuReservation.unit"}}
+      </div>
+    </div>
+  </div>
+
+  <div class="col span-6">
+    <label class="acc-label" for="input-milli-max-memory">
+      {{t "formSecurity.memoryMax.label"}}
+    </label>
+    <div class="input-group">
+      {{input-integer
+        step="1"
+        value=maxMemory
+        classNames="form-control"
+        id="input-milli-max-memory"
+        placeholder=(t "formSecurity.memoryReservation.placeholder")
+      }}
+      <div class="input-group-addon bg-default">
+        {{t "generic.mibibyte"}}
+      </div>
+    </div>
+
+    <label class="acc-label mt-20" for="input-milli-min-memory">
+      {{t "formSecurity.memoryMin.label"}}
+    </label>
+    <div class="input-group">
+      {{input-integer
+        step="1"
+        value=minMemory
+        classNames="form-control"
+        id="input-milli-min-memory"
+        placeholder=(t "formSecurity.memoryReservation.placeholder")
+      }}
+      <div class="input-group-addon bg-default">
+        {{t "generic.mibibyte"}}
+      </div>
+    </div>
+  </div>
+</div>

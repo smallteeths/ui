@@ -7437,6 +7437,14 @@ formSecurity:
     label: 隔离
     default: 默认(容器)
     hyperv: HyperV (虚拟机)
+  cpuMax:
+    label: 最大 CPU
+  cpuMin:
+    label: 最小 CPU
+  memoryMax:
+    label: 最大内存
+  memoryMin:
+    label: 最小内存
 formSslTermination:
   title: SSL/TLS 证书
   detail: '配置用于端口加密的 SSL/TSL 证书。'

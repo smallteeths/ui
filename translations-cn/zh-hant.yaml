@@ -5763,6 +5763,14 @@ formSecurity:
     label: Orion X GPU 預留
     placeholder: "例如: 1"
     unit: vGPUs
+  cpuMax:
+    label: 最大 CPU
+  cpuMin:
+    label: 最小 CPU
+  memoryMax:
+    label: 最大內存
+  memoryMin:
+    label: 最小內存
 formSslTermination:
   title: SSL/TLS證書
   detail: '配置用於端口加密的SSL/TSL證書。'

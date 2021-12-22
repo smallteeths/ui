@@ -7806,6 +7806,14 @@ formSecurity:
     label: Isolation
     default: Default (Container)
     hyperv: HyperV (VM)
+  cpuMax:
+    label: Max CPU
+  cpuMin:
+    label: Min CPU
+  memoryMax:
+    label: Max Memoery
+  memoryMin:
+    label: Min Memoery
 formSslTermination:
   title: SSL/TLS Certificates
   detail: Configure the certificates that will be presented for requests to encrypted ports.
