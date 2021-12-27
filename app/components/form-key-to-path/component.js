@@ -133,7 +133,7 @@ export default Component.extend({
     set(this, 'keys', []);
 
     if (configMapName) {
-      const configMap = allConfigMaps.findBy('name', configMapName);
+      const configMap = allConfigMaps.filterBy('namespaceId', get(this, 'namespace.id')).findBy('name', configMapName);
 
       if (configMap && configMap.data) {
         set(this, 'keys', Object.keys(configMap.data).map((k) => ({
