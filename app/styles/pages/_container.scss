@@ -52,7 +52,8 @@
 
   .log-date {
     @include no-select;
-    color: $text-muted;
+    // color: $text-muted;
+    color: lighten($mid-grey, 20%);
     padding-right: 10px;
   }
 }
