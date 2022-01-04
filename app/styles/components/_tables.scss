@@ -39,7 +39,7 @@ TABLE {
   // General padding
   > THEAD > TR > TH,
   > TBODY > TR > TD {
-    padding: 0;
+    padding: 0 5px;
     transition: ease-in-out all 200ms;
     word-wrap: break-word;
 
@@ -260,12 +260,12 @@ TABLE {
       transition: all ease-in-out .3s;
       text-align: left;
       font-weight: normal;
-      padding: 8px 0px;
+      padding: 8px 5px;
 
-      &:first-child {
-        padding-left: 10px;
-        padding-right: 10px;
-      }
+      // &:first-child {
+      //   padding-left: 10px;
+      //   padding-right: 10px;
+      // }
     }
   }
 
