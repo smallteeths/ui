@@ -3834,6 +3834,7 @@ confirmDelete:
   forceDelete:
     label: 強制刪除
     warning: "重要提示: 強制刪除 Pod 並不等待確認 Pod 中的進程是否終止，這可能導致這些進程一直運行，直到節點檢測到並完成優雅的刪除。如果您的進程使用共享存儲或與遠程 API 通信，並且依賴於 pod 的名稱來標識自己，那麼強制刪除這些 pod 可能導致多個進程使用相同的標識運行在不同的機器上，這可能導致數據損壞或不一致。只有在確定 Pod 已終止，或者應用程序可以同時運行同一 pod 的多個副本時，才強制刪除 pod。此外，如果強制刪除 Pod，調度器可能會在節點釋放這些資源之前在這些節點上運行新的 Pod，並導致這些 Pod 立即被驅逐。"
+    namespaceWarning: 強制刪除將會直接修改finalizers，有可能導致錯誤。
   globalRoleNote: "{count, plural,\n=0 {No users are assigned this role.}\n=1 {# user is assigned this role.}\nother {# users are assigned this role.}\n}\n"
   systemChartNote: 您正在刪除一個系統應用程序。如果刪除該應用程序，可能會導致集羣出現問題。
   titleWithResourceType: 您確定要刪除 <b>{resourceType}</b> 嗎？

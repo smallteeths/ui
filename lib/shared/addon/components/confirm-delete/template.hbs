@@ -86,7 +86,7 @@
     {{t "confirmDelete.clusterNote" appName=settings.appName}}
   </div>
 {{/if}}
-{{#if isPod}}
+{{#if (or isPod nsSupportForceDelete)}}
   <div class="checkbox pt-10">
     <label>
       {{input type="checkbox" checked=forceDelete}}
@@ -95,13 +95,23 @@
   </div>
 {{/if}}
 {{#if forceDelete}}
-  <div class="mb-20 mt-20">
-    {{banner-message
-      icon="icon-alert"
-      color="bg-warning m-0"
-      message=(t "confirmDelete.forceDelete.warning" htmlSafe=true)
-    }}
-  </div>
+  {{#if isPod}}
+    <div class="mb-20 mt-20">
+      {{banner-message
+        icon="icon-alert"
+        color="bg-warning m-0"
+        message=(t "confirmDelete.forceDelete.warning" htmlSafe=true)
+      }}
+    </div>
+  {{else if nsSupportForceDelete}}
+    <div class="mb-20 mt-20">
+      {{banner-message
+        icon="icon-alert"
+        color="bg-warning m-0"
+        message=(t "confirmDelete.forceDelete.namespaceWarning")
+      }}
+    </div>
+  {{/if}}
 {{/if}}
 {{#if isClusterRoleTemplateBinding}}
   <div class="mb-15">

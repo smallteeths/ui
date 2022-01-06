@@ -5193,6 +5193,7 @@ confirmDelete:
   forceDelete:
     label: 强制删除
     warning: '重要提示: 强制删除 Pod 并不等待确认 Pod 中的进程是否终止，这可能导致这些进程一直运行，直到节点检测到并完成优雅的删除。如果您的进程使用共享存储或与远程 API 通信，并且依赖于 pod 的名称来标识自己，那么强制删除这些 pod 可能导致多个进程使用相同的标识运行在不同的机器上，这可能导致数据损坏或不一致。只有在确定 Pod 已终止，或者应用程序可以同时运行同一 pod 的多个副本时，才强制删除 pod。此外，如果强制删除 Pod，调度器可能会在节点释放这些资源之前在这些节点上运行新的 Pod，并导致这些 Pod 立即被驱逐。'
+    namespaceWarning: 强制删除将会直接修改finalizers，有可能导致错误。
   twoNodeEtcd: 从两个节点的集群中删除 ETCD 节点被认为是不安全的! 我们强烈建议您在删除一个节点之前将 ETCD 节点数增加到三个或更多节点。
   clearHarborConfig: 你确认要移除 Harbor 配置吗？
 batchDelete:
