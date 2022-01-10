@@ -1,4 +1,4 @@
-<section class="header has-tabs clearfix p-0">
+<section class="header has-tabs">
   <ul class="tab-nav">
     {{#if (rbac-allows resource="virtualserver" scope="project" permission="list")}}
       <li>{{#link-to-external "authenticated.project.f5.controllers.index" scope.currentProject.id}}{{t "nav.f5.controllers"}}{{/link-to-external}}</li>

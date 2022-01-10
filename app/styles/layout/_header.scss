@@ -37,33 +37,3 @@ header {
   @extend .header;
   border-bottom: none;
 }
-
-#application {
-  .header {
-    @include clearfix;
-    display: block;
-    line-height: 48px;
-  
-    h1 {
-      margin: 2px 0;
-      font-size: 21px;
-      float: left;
-    }
-  
-    .right-buttons {
-      @include clearfix;
-      float: right;
-
-      justify-content:	flex-start;
-      align-self: center;
-      text-align: right;
-  
-      > .resource-actions {
-        .btn {
-          padding: 6px 10px 4px 10px;
-          margin-left: 10px;
-        }
-      }
-    }
-  }
-}
