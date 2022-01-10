@@ -156,30 +156,6 @@
       {{/if}}
       {{#if isImportedOther}}
       <div class="row">
-        <div class="col span-12">
-          <label class="acc-label">
-            {{t "clusterNew.rke.agentEnvVars.label"}}
-          </label>
-          <FormAgentEnvVar
-            @editable={{notView}}
-            @value={{agentEnvVars}}
-          />
-        </div>
-      </div>
-      {{/if}}
-      {{/accordion-list-item}}
-    {{/if}}
-  {{/accordion-list}}
-  {{#if isImportedOther}}
-    {{#accordion-list showExpandAll=false as |al expandFn|}}
-      {{#accordion-list-item
-        title=(t "clusterNew.rke.advanced.label")
-        detail=(t "clusterNew.rke.advanced.detail")
-        expandAll=al.expandAll
-        everExpanded=true
-        expand=(action expandFn)
-      }}
-      <div class="row">
         <div class="col span-6">
           <label class="acc-label">
             {{t "generic.networking"}}
@@ -212,9 +188,10 @@
           />
         </div>
       </div>
+      {{/if}}
       {{/accordion-list-item}}
-    {{/accordion-list}}
-  {{/if}}
+    {{/if}}
+  {{/accordion-list}}
 {{/if}}
 
 {{#if showDriverComponent}}
