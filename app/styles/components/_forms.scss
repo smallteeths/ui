@@ -263,6 +263,10 @@ select {
   position: absolute;
   right: 3px;
   top: 3px;
+  .btn {
+    line-height: 22px;
+    min-height: initial;
+  }
 }
 .input-group {
     position: relative;

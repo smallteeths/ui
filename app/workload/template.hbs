@@ -98,12 +98,11 @@
       </span>
       <span>
         <div class="btn-group btn-group-xs p-0 ml-10">
-          <button class="btn btn-xs bg-primary" disabled={{not service.canScaleDown}} type="button" {{action "scaleDown"
-            target=service}}>
+          <button class="btn btn-xs bg-primary" disabled={{not service.canScaleDown}} type="button" {{action "podDown"}}>
             <i class="icon icon-minus icon-fw" />
           </button>
           <button style="margin-left: -1px;" class="btn btn-xs bg-primary" disabled={{not service.canScaleUp}}
-            type="button" {{action "scaleUp" target=service}}>
+            type="button" {{action "podUp"}}>
             <i class="icon icon-plus icon-fw" />
           </button>
         </div>
