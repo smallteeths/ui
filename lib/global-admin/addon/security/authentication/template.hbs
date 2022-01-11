@@ -3,12 +3,12 @@
     <h1 class="vertical-middle">
       {{t "nav.admin.security.authentication"}}
     </h1>
-    {{#if (eq access.provider "local")}}
-      <BannerMessage @color="bg-warning" @icon="icon-alert" @message={{t "authPage.localAuth.warning"
-        appName=settings.appName}} />
-    {{/if}}
   </div>
 </section>
+{{#if (eq access.provider "local")}}
+  <BannerMessage @color="bg-warning" @icon="icon-alert" @message={{t "authPage.localAuth.warning"
+    appName=settings.appName}} />
+{{/if}}
 <section class="mb-20">
   <div class="row nav nav-boxes checked-active">
     {{#each filteredDrivers as |driver|}}

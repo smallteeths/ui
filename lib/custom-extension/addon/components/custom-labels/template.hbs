@@ -2,12 +2,13 @@
 <button style="position: absolute; right: 0px; top: 52px;" class="btn btn-sm bg-primary right-divider-btn" {{action 'addNewLabel'}}>{{t "harborConfig.formTag.btn.add"}}</button>
 {{else}}
 <section class="header">
+  <div></div>
   <div class="right-buttons">
     <button class="btn btn-sm bg-primary right-divider-btn" {{action 'addNewLabel'}}>{{t "harborConfig.formTag.btn.add"}}</button>
   </div>
 </section>
 {{/if}}
-<section class="instances pt-5 pb-5">
+<section class="instances pb-5">
   {{#custom-table
     classNames="grid"
     headers=headers

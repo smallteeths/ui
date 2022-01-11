@@ -3,7 +3,7 @@
 </section>
 {{#if (and hasHarborServer (not model.harborServerError))}}
 <section>
-  <div class="fixed-header-actions row clearfix">
+  <div class="fixed-header-actions row pb-20 clearfix">
     <div class="pull-right" style="display: flex;">
       <div style="width:100px;margin-right:30px">
         {{new-select
@@ -26,7 +26,7 @@
     </div>
   </div>
 </section>
-<section class="instances pt-5 pb-5">
+<section class="instances pb-5">
   {{#custom-table
     classNames="grid"
     headers=headers
