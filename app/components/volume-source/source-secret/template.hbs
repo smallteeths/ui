@@ -55,6 +55,7 @@
       {{schema/input-secret
         namespace=namespace
         value=config.secretName
+        selected=selected
         valueKey="name"
       }}
       {{/if}}
@@ -107,6 +108,7 @@
       {{form-key-to-path
         initialItems=config.items
         secretName=config.secretName
+        secretId=selected
         editing=editing
         changed=(action (mut config.items))
       }}

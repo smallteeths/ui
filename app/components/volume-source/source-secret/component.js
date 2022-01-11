@@ -13,6 +13,7 @@ export default Component.extend(VolumeSource, {
   specific:    false,
   defaultMode: null,
   editing:     true,
+  selected:    null,
 
   didReceiveAttrs() {
     this._super(...arguments);

@@ -88,7 +88,7 @@ export default Component.extend({
     },
   },
 
-  secretDidChange: observer('secretName', function() {
+  secretDidChange: observer('secretName', 'secretId', function() {
     if ( get(this, 'mode') === SECRET ) {
       this.updateSecretKeys();
       set(this, 'ary', []);
@@ -110,11 +110,12 @@ export default Component.extend({
   updateSecretKeys() {
     const allSecrets = get(this, 'allSecrets');
     const secretName = get(this, 'secretName');
+    const secretId = get(this, 'secretId');
 
     set(this, 'keys', []);
 
     if (secretName) {
-      const secret = allSecrets.findBy('name', secretName);
+      const secret = allSecrets.findBy('id', secretId) || allSecrets.findBy('name', secretName);
 
       if (secret) {
         set(this, 'keys', Object.keys(secret.data || {}).map((k) => ({
