@@ -1333,7 +1333,7 @@ clusterIstioPage:
   enableMonitoring:
     label: Enable Monitoring
   warning:
-    mixerBreaking: Istio upgrade to 1.8 requires disabled first and then enable.
+    mixerBreaking: Istio upgrade to 1.8 or higher requires disabled first and then enable.
 certificatesPage:
   cn: Domain Name
   expiresDate: Expires

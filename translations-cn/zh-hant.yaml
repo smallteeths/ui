@@ -9323,7 +9323,7 @@ clusterIstioPage:
   upgradeMonitoring: 在啓用 Istio 之前，您需要首先將集羣監視升級到 0.0.4 或更高版本。訪問 <a href="/c/{clusterId}/monitoring/cluster-setting">此處</a> 去升級集羣監控。
   version: Istio 版本
   warning:
-    mixerBreaking: Istio升級到1.8需要先禁用再重新啓用
+    mixerBreaking: Istio 升級到 1.8 以上版本需要先禁用再重新啓用
 clusterRibbonNav:
   title: 最近創建的集羣
 clusterTemplateNew:

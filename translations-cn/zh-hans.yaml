@@ -1326,7 +1326,7 @@ clusterIstioPage:
   enableMonitoring:
     label: 启用监控
   warning:
-    mixerBreaking: Istio升级到1.8需要先禁用再重新启用
+    mixerBreaking: Istio 升级到 1.8 以上版本需要先禁用再重新启用
 certificatesPage:
   cn: 域名
   expiresDate: 过期时间
