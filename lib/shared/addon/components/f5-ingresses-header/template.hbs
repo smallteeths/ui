@@ -1,10 +1,10 @@
 <section class="header has-tabs">
   <ul class="tab-nav">
     {{#if (rbac-allows resource="virtualserver" scope="project" permission="list")}}
-      <li>{{#link-to-external "authenticated.project.f5.controllers.index" scope.currentProject.id}}{{t "nav.f5.controllers"}}{{/link-to-external}}</li>
+      <li>{{#link-to "authenticated.project.f5.controllers.index" scope.currentProject.id}}{{t "nav.f5.controllers"}}{{/link-to}}</li>
     {{/if}}
     {{#if (rbac-allows resource="tlsprofile" scope="project" permission="list")}}
-      <li>{{#link-to-external "authenticated.project.f5.tls.index" scope.currentProject.id}}{{t "nav.f5.tls"}}{{/link-to-external}}</li>
+      <li>{{#link-to "authenticated.project.f5.tls.index" scope.currentProject.id}}{{t "nav.f5.tls"}}{{/link-to}}</li>
     {{/if}}
   </ul>
 
