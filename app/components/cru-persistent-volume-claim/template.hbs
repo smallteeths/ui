@@ -13,9 +13,6 @@
       }}
     </div>
   {{/if}}
-  <h1>
-    {{title}}
-  </h1>
 </section>
 <div class="row">
   {{#if isView}}
@@ -67,7 +64,7 @@
         </label>
         <div>
           <a href="{{href-to
-                " authenticated.cluster.storage.classes.detail.index" scope.currentCluster.id
+                "authenticated.cluster.storage.classes.detail.index" scope.currentCluster.id
             primaryResource.storageClass.id }}">
             {{primaryResource.storageClass.displayName}}
           </a>
@@ -90,7 +87,7 @@
         </label>
         <div>
           <a href="{{href-to
-                " authenticated.cluster.storage.persistent-volumes.detail.index" scope.currentCluster.id
+                "authenticated.cluster.storage.persistent-volumes.detail.index" scope.currentCluster.id
             primaryResource.persistentVolume.id }}">
             {{primaryResource.persistentVolume.displayName}}
           </a>
