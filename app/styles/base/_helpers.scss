@@ -402,3 +402,8 @@ a.disabled {
   display:flex;
   align-items: center;
 }
+
+.outline-primary {
+  outline: 1px solid $primary;
+  outline-offset: -1px;
+}

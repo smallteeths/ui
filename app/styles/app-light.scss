@@ -1,3 +1,54 @@
 @import "app/styles/abstracts/variables";
 @import "app/styles/themes/light";
 @import "app/styles/rancher";
+
+.text-dark {
+  color: #141419 !important;
+}
+
+.bg-gray {
+  background-color: #DCDEE7;
+}
+
+.container-tooltip {
+  &.top > .tooltip-caret {
+    border-top: 5px solid #DCDEE7;
+  }
+  &.bottom > .tooltip-caret {
+    border-bottom: 5px solid #DCDEE7;
+  }
+  &.left > .tooltip-caret {
+    border-left: 5px solid #DCDEE7;
+  }
+  &.right > .tooltip-caret {
+    border-right: 5px solid #DCDEE7;
+  }
+  & .display-name a, .display-ip {
+    color: #141419;
+  }
+}
+
+.percent-dashboard-quota-tooltip {
+  background-color: #DCDEE7;
+  color: #141419;
+}
+
+.pagination-container {
+  a.btn[disabled] {
+    color: #b6b6c2;
+    &:hover {
+      color: #b6b6c2 !important;
+    }
+    background-color: #dcdee7;
+  }
+  a.btn {
+    border: 1px solid #3d98d3;
+    border-radius: 4px;
+    color: #3d98d3;
+    background: rgba(61,152,211,0.15);
+    &:hover {
+      color: #141419;
+      background: rgba(61,152,211,0.15);
+    }
+  }
+}
