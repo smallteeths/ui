@@ -7123,6 +7123,9 @@ formCustomMetrics:
   regex:
     description: 可以輸入標籤名稱或者通過表達式匹配標籤名
     label: 刪除標籤
+  bearerToken:
+    label: Bearer Token
+    placeholder: Your Token
 formServicePorts:
   header: 埠映射
   addAction: 添加埠

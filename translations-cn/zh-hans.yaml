@@ -7163,6 +7163,9 @@ formCustomMetrics:
     description: 可以输入标签名称或者通过表达式匹配标签名
   delete:
     label: 删除指标
+  bearerToken:
+    label: Bearer Token
+    placeholder: Your Token
 formServicePorts:
   header: 端口映射
   addAction: 添加

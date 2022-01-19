@@ -10127,6 +10127,9 @@ formCustomMetrics:
   regex:
     description: 可以輸入標籤名稱或者通過表達式匹配標籤名
     label: 刪除標籤
+  bearerToken:
+    label: Bearer Token
+    placeholder: Your Token
   title: 自定義指標
 formIstioHost:
   prompt: 選擇節點...

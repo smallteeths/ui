@@ -7,22 +7,23 @@
 <div class="clearfix {{unless editing 'box'}}">
   {{#if metrics.length}}
     {{#each metrics as |metric|}}
-      <div class="box mb-20">
+      <div class="box mb-10">
         <div class="row">
-          <div class="col span-4 acc-label">{{t 'formCustomMetrics.port.label'}}{{#if editing}}{{field-required}}{{/if}}</div>
-          <div class="col span-4 acc-label">{{t 'formCustomMetrics.path.label'}}</div>
-          <div class="col span-2 acc-label">{{t 'formCustomMetrics.protocol.label'}}</div>
-          <div class="col span-2">
-            {{#if editing}}
-              <button class="btn bg-link icon-btn" {{action "remove" metric}}>
-                <i class="icon icon-minus"/>
-                <span>{{t 'formCustomMetrics.delete.label'}}</span>
+          {{#if editing}}
+            <div class="pull-right">
+              <button class="btn bg-transparent text-small vertical-middle" {{action "remove" metric}}>
+                {{t 'formCustomMetrics.delete.label'}}
               </button>
-            {{/if}}
-          </div>
+            </div>
+          {{else}}
+            <!-- 28px is the height of the button, no jumpy -->
+            <div style="height: 28px;" class="pull-right"></div>
+          {{/if}}
         </div>
+
         <div class="row">
           <div class="col span-4">
+            <label class="acc-label pb-5">{{t 'formCustomMetrics.port.label'}}{{#if editing}}{{field-required}}{{/if}}</label>
             {{#if editing}}
               {{input-integer class="form-control input-sm public" min="1" max="65535" value=metric.port placeholder=(t 'formCustomMetrics.port.placeholder')}}
             {{else}}
@@ -31,12 +32,14 @@
           </div>
 
           <div class="col span-4">
+            <label class="acc-label pb-5">{{t 'formCustomMetrics.path.label'}}</label>
             {{#input-or-display editable=editing value=metric.path}}
               {{input class="form-control input-sm" type="text" value=metric.path placeholder=(t 'formCustomMetrics.path.placeholder')}}
             {{/input-or-display}}
           </div>
 
           <div class="col span-4">
+            <label class="acc-label pb-5">{{t 'formCustomMetrics.protocol.label'}}</label>
             {{#if editing}}
               {{new-select
                   class="form-control input-sm"
@@ -47,9 +50,19 @@
               {{metric.schema}}
             {{/if}}
           </div>
-
         </div>
+
+        <div class="row">
+          <div class="col span-4">
+            <label class="acc-label pb-5">{{t 'formCustomMetrics.bearerToken.label'}}</label>
+            {{#input-or-display editable=editing value=metric.bearerToken}}
+              {{input class="form-control input-sm" type="text" value=metric.bearerToken placeholder=(t 'formCustomMetrics.bearerToken.placeholder')}}
+            {{/input-or-display}}
+          </div>
+        </div>
+
         <hr class="mt-20">
+
         <div class="row">
             <div class="row">
               <div class="col span-11 acc-label">{{t 'formCustomMetrics.regex.label'}}<span style="margin-left: 10px" class="protip">{{t 'formCustomMetrics.regex.description'}}</span></div>

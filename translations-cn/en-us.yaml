@@ -7532,6 +7532,9 @@ formCustomMetrics:
     description: Enter the tag name or match the tag name by expression
   delete:
     label: Delete
+  bearerToken:
+    label: Bearer Token
+    placeholder: Your Token
 formServicePorts:
   header: Port Mapping
   addAction: Add Port
