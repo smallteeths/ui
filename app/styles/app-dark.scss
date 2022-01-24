@@ -25,12 +25,16 @@
       filter: grayscale(0.95) opacity(0.15);
     }
   }
-
-  input[type='checkbox']::before {
+  input[type='text']:hover {
+    border-color: #4a4b52;
+  }
+  input[type='checkbox']::before, input[type='radio']::before{
     outline: 1px solid #4a4b52;
     background-color: #1b1c21;
   }
-  input[type='checkbox']:checked::before, input[type='checkbox']:indeterminate::before {
+  input[type='checkbox']:checked::before,
+  input[type='checkbox']:indeterminate::before,
+  input[type='radio']:checked::before {
     background-color: #3d98d3;
   }
 
@@ -42,7 +46,7 @@
     background-color: #4a4b52;
   }
 
-  .btn-disabled {
+  .btn-disabled, .bg-disabled {
     color: #b6b6c2 !important;
   }
 
@@ -111,4 +115,49 @@
   .page-header-left {
     box-shadow: none;
   }
+  .ember-basic-dropdown-content > li > a {
+    color: #3d98d3;
+    &:hover {
+      color: #fff;
+    }
+  }
+  .ember-basic-dropdown-content > .active > a {
+    color: #fff;
+  }
+  .project-menu .global ul .item.active {
+    background-color: #1b5276;
+  }
+  .project-menu .global ul .item.active a,
+  .project-menu .global ul .item a {
+    color: #fff;
+  }
+
+  .project-menu .clusters ul li.item.cluster.hover,
+  .project-menu .global > ul.list-unstyled > LI:hover,
+  .project-menu .item.project:hover {
+    background-color: #3d98d3 !important;
+  }
+  .project-menu .item.cluster.hover A,
+  .project-menu .item.cluster.hover .state,
+  .project-menu .clusters ul.no-hover-entry li.item.cluster.active,
+  .project-menu .item.active a,
+  .project-menu .item.active a + .state,
+  .project-menu .item.project:hover a,
+  .project-menu .item.project:hover .state,
+  .project-menu .global > ul.list-unstyled > LI:hover A {
+    color: #fff;
+  }
+  
+  
+  .project-menu .clusters ul li.item.cluster.hover:after,
+  .project-menu .clusters ul.no-hover-entry li.item.cluster.active:after {
+    border-right: 8px solid #3d3d3d;
+  }
+
+  .project-menu .global > ul.list-unstyled,
+  .project-menu .clusters ul.no-hover-entry li.item.cluster.active,
+  .project-menu .item.active {
+    background-color: #1b5276 !important;
+  }
+  
 }

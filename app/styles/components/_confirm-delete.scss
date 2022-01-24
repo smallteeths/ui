@@ -18,9 +18,9 @@ $table-row-grey:    #fafafb;
     font-size: 1rem;
     line-height: 2rem;
   }
-  &__table-body > &__table-items {
-    &:nth-of-type(even) {
-      background: $table-row-grey
-    }
-  }
+  // &__table-body > &__table-items {
+  //   &:nth-of-type(even) {
+  //     background: $table-row-grey
+  //   }
+  // }
 }
