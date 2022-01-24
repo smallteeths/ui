@@ -127,13 +127,6 @@ $project-nav-active: $dropdown-link-hover-bg !default;
             color: #3e69c5;
             text-decoration: none;
             border-left: 3px solid #3e69c5;
-            .icon-chevron-describe {
-              left: 0px;
-              display: none
-            }
-            .icon-chevron-describe-active {
-              display: block
-            }
           }
         }
 
@@ -157,18 +150,7 @@ $project-nav-active: $dropdown-link-hover-bg !default;
             border-left: 8px transparent;
             border-right: 8px transparent;
             filter: drop-shadow(#3e69c5 0px 0px);
-          }
-          .icon-chevron-describe-active {
-            position: relative;
-            float: left;
-            left: 0px;
-            top: 2px;
-            margin-right: 13%;
-            margin-left: 6%;
-            opacity: 1;
-            border-left: 8px transparent;
-            border-right: 8px transparent;
-            display: none;
+            font-size: 16px;
           }
           .nav-item-pull-right {
             flex: 1;
@@ -179,13 +161,6 @@ $project-nav-active: $dropdown-link-hover-bg !default;
             background-color: #c1cce0;
             color: #78777c;
             text-decoration: none;
-            .icon-chevron-describe {
-              display: block !important;
-              filter: drop-shadow(#78777c 0px 0px);
-            }
-            .icon-chevron-describe-active {
-              display: none !important;
-            }
           }
 
           .icon-chevron-down {
@@ -260,5 +235,96 @@ $project-nav-active: $dropdown-link-hover-bg !default;
       }
     }
   }
-
+  .nav-icon {
+      width: 1em;
+      height: 1em;
+      mask-repeat: no-repeat;
+      -webkit-mask-repeat: no-repeat;
+      mask-size: cover;
+      -webkit-mask-size: cover;
+      mask-position: center;
+      -webkit-mask-position: center;
+      background-color: currentColor;
+      display: inline-block;
+  }
+  .nav-apply-icon {
+    mask-image: url(images/logos/menu-icon-cn/apply-icon.svg);
+    -webkit-mask-image: url(images/logos/menu-icon-cn/apply-icon.svg);
+  }
+  .nav-apps-icon {
+    mask-image: url(images/logos/menu-icon-cn/apps-icon.svg);
+    -webkit-mask-image: url(images/logos/menu-icon-cn/apps-icon.svg);
+  }
+  .nav-auditlog-icon {
+    mask-image: url(images/logos/menu-icon-cn/auditlog-icon.svg);
+    -webkit-mask-image: url(images/logos/menu-icon-cn/auditlog-icon.svg);
+  }
+  .nav-authenticated-icon {
+    mask-image: url(images/logos/menu-icon-cn/authenticated-icon.svg);
+    -webkit-mask-image: url(images/logos/menu-icon-cn/authenticated-icon.svg);
+  }
+  .nav-cluster-icon {
+    mask-image: url(images/logos/menu-icon-cn/cluster-icon.svg);
+    -webkit-mask-image: url(images/logos/menu-icon-cn/cluster-icon.svg);
+  }
+  .nav-external-link-icon {
+    mask-image: url(images/logos/menu-icon-cn/external-link-icon.svg);
+    -webkit-mask-image: url(images/logos/menu-icon-cn/external-link-icon.svg);
+  }
+  .nav-globle-icon {
+    mask-image: url(images/logos/menu-icon-cn/globle-icon.svg);
+    -webkit-mask-image: url(images/logos/menu-icon-cn/globle-icon.svg);
+  }
+  .nav-host-icon {
+    mask-image: url(images/logos/menu-icon-cn/host-icon.svg);
+    -webkit-mask-image: url(images/logos/menu-icon-cn/host-icon.svg);
+  }
+  .nav-images-icon {
+    mask-image: url(images/logos/menu-icon-cn/images-icon.svg);
+    -webkit-mask-image: url(images/logos/menu-icon-cn/images-icon.svg);
+  }
+  .nav-infra-icon {
+    mask-image: url(images/logos/menu-icon-cn/infra-icon.svg);
+    -webkit-mask-image: url(images/logos/menu-icon-cn/infra-icon.svg);
+  }
+  .nav-macvlan-icon {
+    mask-image: url(images/logos/menu-icon-cn/macvlan-icon.svg);
+    -webkit-mask-image: url(images/logos/menu-icon-cn/macvlan-icon.svg);
+  }
+  .nav-members-icon {
+    mask-image: url(images/logos/menu-icon-cn/members-icon.svg);
+    -webkit-mask-image: url(images/logos/menu-icon-cn/members-icon.svg);
+  }
+  .nav-namespaces-icon {
+    mask-image: url(images/logos/menu-icon-cn/namespaces-icon.svg);
+    -webkit-mask-image: url(images/logos/menu-icon-cn/namespaces-icon.svg);
+  }
+  .nav-projects-icon {
+    mask-image: url(images/logos/menu-icon-cn/projects-icon.svg);
+    -webkit-mask-image: url(images/logos/menu-icon-cn/projects-icon.svg);
+  }
+  .nav-quotas-icon {
+    mask-image: url(images/logos/menu-icon-cn/quotas-icon.svg);
+    -webkit-mask-image: url(images/logos/menu-icon-cn/quotas-icon.svg);
+  }
+  .nav-security-icon {
+    mask-image: url(images/logos/menu-icon-cn/security-icon.svg);
+    -webkit-mask-image: url(images/logos/menu-icon-cn/security-icon.svg);
+  }
+  .nav-settings-icon {
+    mask-image: url(images/logos/menu-icon-cn/settings-icon.svg);
+    -webkit-mask-image: url(images/logos/menu-icon-cn/settings-icon.svg);
+  }
+  .nav-storage-icon {
+    mask-image: url(images/logos/menu-icon-cn/storage-icon.svg);
+    -webkit-mask-image: url(images/logos/menu-icon-cn/storage-icon.svg);
+  }
+  .nav-tools-icon {
+    mask-image: url(images/logos/menu-icon-cn/tools-icon.svg);
+    -webkit-mask-image: url(images/logos/menu-icon-cn/tools-icon.svg);
+  }
+  .nav-user-icon {
+    mask-image: url(images/logos/menu-icon-cn/user-icon.svg);
+    -webkit-mask-image: url(images/logos/menu-icon-cn/user-icon.svg);
+  }
 }

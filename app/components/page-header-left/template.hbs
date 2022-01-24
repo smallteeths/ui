@@ -17,8 +17,7 @@
                   aria-expanded="false"
                 }}
                   {{#if item.icon}}
-                    <img class="icon-chevron-describe" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/{{item.icon}}.svg" width="16" height="16" />
-                    <img class="icon-chevron-describe-active" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/{{item.icon}}-active.svg" width="16" height="16" />
+                    <div class="icon-chevron-describe "><i class="nav-icon nav-{{item.icon}}"></i></div>
                   {{/if}}
                   <div style="position: absolute; width: 100%; height: 60px; top: 0px; left: 0px" {{action 'toogleExpand' item}}></div>
                   {{t item.localizedLabel default=item.label}}
@@ -33,8 +32,7 @@
               {{else}}
                 <a role="button" aria-haspopup="true" aria-label={{t item.localizedLabel item.label}} {{action 'toogleExpand' item}}>
                   {{#if item.icon}}
-                    <img class="icon-chevron-describe" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/{{item.icon}}.svg" fill="#fff" width="16" height="16" />
-                    <img class="icon-chevron-describe-active" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/{{item.icon}}-active.svg" width="16" height="16" />
+                    <div class="icon-chevron-describe "><i class="nav-icon nav-{{item.icon}}"></i></div>
                   {{/if}}
                   {{t item.localizedLabel default=item.label}}
                   <div class="pull-right nav-item-pull-right" >
@@ -119,8 +117,7 @@
                class="nav-link"
             }}
               {{#if item.icon}}
-                <img class="icon-chevron-describe" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/{{item.icon}}.svg" width="16" height="16" />
-                <img class="icon-chevron-describe-active" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/{{item.icon}}-active.svg" width="16" height="16" />
+                <div class="icon-chevron-describe "><i class="nav-icon nav-{{item.icon}}"></i></div>
               {{/if}}
               <div style="position: absolute; width: 100%; height: 60px; top: 0px; left: 0px" {{action 'toogleExpand' item}}></div>
               {{t item.localizedLabel default=item.label}}
@@ -137,15 +134,14 @@
                 class="nav-link"
                 ctx=item.ctx
               }}
-                <img class="icon-chevron-describe" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/external-link-icon.svg" width="16" height="16" />
-                <img class="icon-chevron-describe-active" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/external-link-icon-active.svg" width="16" height="16" />
+                <div class="icon-chevron-describe "><i class="nav-icon nav-{{item.icon}}"></i></div>
                 <span class="clip">
                   {{item.label}}
                 </span>
               {{/link-to-as-attrs}}
             {{else}}
               <a href="{{item.url}}">
-                <img class="icon-chevron-describe" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/external-link-icon.svg" width="16" height="16" />
+                <div class="icon-chevron-describe "><i class="nav-icon nav-external-link-icon"></i></div>
                 <span class="clip">
                   {{item.label}}
                 </span>
@@ -153,7 +149,7 @@
             {{/if}}
           {{else}}
             <a href="{{item.url}}" target="_blank">
-              <img class="icon-chevron-describe" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/external-link-icon.svg" width="16" height="16" />
+              <div class="icon-chevron-describe "><i class="nav-icon nav-external-link-icon"></i></div>
               <span class="clip">
                 {{item.label}}
               </span>
@@ -183,7 +179,7 @@
         {{! Just a label }}
         <li class="dropdown-header">
           {{#if item.icon}}
-            <img class="icon-chevron-describe" src="{{app.baseAssets}}assets/images/logos/menu-icon-cn/{{item.icon}}.svg" width="16" height="16" />
+           <div class="icon-chevron-describe "><i class="nav-icon nav-{{item.icon}}"></i></div>
           {{/if}}
           {{t item.localizedLabel default=item.label}}
         </li>
