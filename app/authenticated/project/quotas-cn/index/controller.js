@@ -61,7 +61,7 @@ export default Controller.extend({
 
   storageClassKey: ['requestsStorageClassStorage', 'requestsStorageClassPVC'],
 
-  quotaTypeArray: computed('C.QUOTA_TPYE_CN.[]', 'allNamespace', 'model.quotaSetting.{limit,used}', 'storageClassKey', function() {
+  quotaTypeArray: computed('C.QUOTA_TPYE_CN.[]', 'allNamespace', 'model.quotaSetting.{limit,used}', 'storageClassKey', 'intl.locale', function() {
     let quotaData = [];
     const intl = get(this, 'intl');
     const storageClassKey = get(this, 'storageClassKey');
