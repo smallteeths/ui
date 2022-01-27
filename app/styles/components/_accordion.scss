@@ -2,7 +2,7 @@ $acc-label              : $text-muted !default;
 
 .accordion-wrapper {
   margin-bottom: 20px;
-  background: $accent-bg;
+  // background: $accent-bg;
   // border: solid 1px $border;
 }
 
@@ -13,6 +13,7 @@ $acc-label              : $text-muted !default;
     @include no-select;
     @extend .hand;
     @extend .clearfix;
+    background: $accent-bg;
     border: solid 1px $border;
     padding: 5px;
     display: table;
@@ -21,7 +22,7 @@ $acc-label              : $text-muted !default;
 
     .expand,
     .title,
-    .badge-state, {
+    .badge-state {
       display: table-cell;
       height: 100%;
       vertical-align: middle;
