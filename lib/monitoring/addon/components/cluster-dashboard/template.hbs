@@ -128,10 +128,12 @@
           expandAll=al.expandAll
           expandFn=expandFn
         }}
+        {{#if showClusterConnectMode}}
         {{cluster-connect-mode
           expandAll=al.expandAll
           expandFn=expandFn
         }}
+        {{/if}}
       {{/accordion-list}}
     {{/unless}}
   {{/if}}
