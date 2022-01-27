@@ -86,12 +86,12 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
     const canEdit = get(this, 'canEdit');
 
     let choices = [
-      {
-        label:    'action.cloneCrossCluster',
-        icon:     'icon icon-copy',
-        action:   'cloneCrossCluster',
-        enabled:  !(this.workloadLabels && this.workloadLabels['io.cattle.field/appId']),
-      },
+      // {
+      //   label:    'action.cloneCrossCluster',
+      //   icon:     'icon icon-copy',
+      //   action:   'cloneCrossCluster',
+      //   enabled:  !(this.workloadLabels && this.workloadLabels['io.cattle.field/appId']),
+      // },
       {
         label:    'action.redeploy',
         icon:     'icon icon-refresh',
@@ -224,12 +224,12 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
     return pods.filter((p) => p.state === 'running').length
   }),
 
-  canCloneCrossCluster: computed('scope.allClusters.@each.state', 'scope.pendingCluster', function() {
-    const cluster = get(this, 'scope.pendingCluster');
-    const clusters = get(this, 'scope.allClusters').filter((c) => cluster && cluster.id !== c.id && c.state === 'active');
+  // canCloneCrossCluster: computed('scope.allClusters.@each.state', 'scope.pendingCluster', function() {
+  //   const cluster = get(this, 'scope.pendingCluster');
+  //   const clusters = get(this, 'scope.allClusters').filter((c) => cluster && cluster.id !== c.id && c.state === 'active');
 
-    return clusters.length > 0;
-  }),
+  //   return clusters.length > 0;
+  // }),
 
   actions: {
     activate() {
@@ -369,10 +369,10 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
       set(this, 'scale', podNum);
       this.saveScale();
     },
-    cloneCrossCluster() {
-      get(this, 'router').transitionTo('authenticated.project.clone-cross-cluster.clone-cross-cluster.run', get(this, 'id'));
-      // get(this, 'router').transitionTo('authenticated.project.pipeline.pipelines');
-    }
+    // cloneCrossCluster() {
+    //   get(this, 'router').transitionTo('authenticated.project.clone-cross-cluster.clone-cross-cluster.run', get(this, 'id'));
+    //   // get(this, 'router').transitionTo('authenticated.project.pipeline.pipelines');
+    // }
   },
   updateTimestamp() {
     let obj = get(this, 'annotations');
