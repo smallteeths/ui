@@ -109,14 +109,14 @@ var Pod = Resource.extend(Grafana, DisplayImage, {
     return out;
   }),
 
-  displayEnvironmentVars: computed('environment', function() {
+  displayEnvironmentVars: computed('env', function() {
     var envs = [];
-    var environment = get(this, 'environment') || {};
+    var environment = get(this, 'env') || [];
 
-    Object.keys(environment).forEach((key) => {
+    environment.forEach((e) => {
       envs.pushObject({
-        key,
-        value: environment[key]
+        key:   e.name,
+        value: e.value
       })
     });
 

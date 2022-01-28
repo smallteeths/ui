@@ -134,7 +134,7 @@
      expandAll=al.expandAll
      expand=(action expandFn)
   }}
-    {{form-key-value
+    {{!-- {{form-key-value
       initialMap=launchConfig.environment
       changed=(action (mut launchConfig.environment))
       allowEmptyValue=true
@@ -145,15 +145,21 @@
       keyPlaceholder="newContainer.environment.keyPlaceholder"
       valueLabel="newContainer.environment.valueLabel"
       valuePlaceholder="newContainer.environment.valuePlaceholder"
+    }} --}}
+    {{form-env-vars
+      container=launchConfig
+      namespace=namespace
+      editing=true
+      header=(t "newContainer.environment.label")
     }}
-    <hr class="mt-30 mb-30" />
+    {{!-- <hr class="mt-30 mb-30" />
     {{container/form-sources
       namespace=namespace
       classNames="accordion-wrapper"
       sources=launchConfig.environmentFrom
       errors=secretErrors
       editing=true
-    }}
+    }} --}}
 
   {{/accordion-list-item}}
 

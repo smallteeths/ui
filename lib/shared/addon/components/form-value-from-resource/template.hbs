@@ -1,0 +1,123 @@
+
+<div class="value-from-resource">
+  <div class="value-from-resource__type">
+    <label>{{t 'formSources.type.label'}}</label>
+    {{new-select
+      value=type
+      content=typeOpts
+      change=(action 'updateRow')
+    }}
+  </div>
+  <div class="value-from-resource__name">
+    <label>{{t nameLabel}}</label>
+    {{input
+      class="form-control"
+      value=name
+      input=(action 'updateRow')
+      placeholder=(t 'newContainer.environment.keyPlaceholder')
+    }}
+  </div>
+{{#if (eq type 'simple')}}
+  <div class="value-from-resource__single-value">
+    <label>{{t 'newContainer.environment.valueLabel'}}</label>
+    {{input
+      class="form-control"
+      value=valStr
+      input=(action 'updateRow')
+      placeholder=(t 'newContainer.environment.valueLabel')
+    }}
+  </div>
+  {{else if needsSource}}
+    <div class="{{if (or (eq type 'configMapRef') (eq type 'secretRef')) 'value-from-resource__single-value'}}">
+      <label>{{t sourceLabelPlaceholder.label}}</label>
+        {{#if (or (eq type 'secretRef') (eq type 'secretKeyRef'))}}
+          {{#if enableLoadResourceByNamespace}}
+            {{schema/input-ns-secret
+              namespace=namespace
+              value=referenced
+              valueKey="name"
+              selectedSecret=selectedSecret
+            }}
+            {{else}}
+            {{schema/input-secret
+              namespace=namespace
+              value=referenced
+              valueKey="name"
+              selectedSecret=selectedSecret
+            }}
+            {{/if}}
+        {{else if (or (eq type 'configMapRef') (eq type 'configMapKeyRef'))}}
+          {{#if enableLoadResourceByNamespace}}
+            {{schema/input-ns-config-map
+              namespace=namespace
+              value=referenced
+              valueKey="name"
+              selectedConfigMap=selectedConfigMap
+            }}
+            {{else}}
+            {{schema/input-config-map
+              namespace=namespace
+              value=referenced
+              valueKey="name"
+              selectedConfigMap=selectedConfigMap
+            }}
+          {{/if}}
+        {{/if}}
+        {{!-- {{new-select
+          value=referenced
+          content=sourceOptions
+          localizedPrompt=true
+          prompt=sourceLabelPlaceholder.placeholder
+        }} --}}
+    </div>
+    {{#if (and (not-eq type 'secretRef') (not-eq type 'configMapRef'))}}
+    <div>
+      <label>{{t 'newContainer.environment.keyLabel'}}</label>
+      {{new-select
+        value=key
+        content=keys
+        change=(action 'updateRow')
+        localizedPrompt=true
+        prompt="f5TLSPage.form.termination.placeholder"
+      }}
+    </div>
+    {{/if}}
+
+  {{else if (eq type 'resourceFieldRef')}}
+    <div>
+      <label>{{t 'formAgentEnvVar.headers.containerName'}}</label>
+      {{input
+        class="form-control"
+        value=refName
+        input=(action 'updateRow')
+        placeholder=""
+      }}
+    </div>
+    <div>
+      <label>{{t 'newContainer.environment.keyLabel'}}</label>
+      {{new-select
+        value=key
+        content=resourceKeyOpts
+        change=(action 'updateRow')
+        localizedPrompt=true
+        prompt="f5TLSPage.form.termination.placeholder"
+      }}
+    </div>
+  {{else}}
+  <div class="value-from-resource__single-value">
+    <label>{{t 'newContainer.environment.keyLabel'}}</label>
+    {{input
+      class="form-control"
+      value=fieldPath
+      input=(action 'updateRow')
+      placeholder=""
+    }}
+  </div>
+{{/if}}
+<button class="btn bg-primary btn-sm" disabled={{eq editing false}} type="button" {{action "removeRow"}}>
+  <i class="icon icon-minus" />
+  <span class="sr-only">
+    {{t "generic.remove"}}
+  </span>
+</button>
+</div>

@@ -3,14 +3,14 @@ import Service from 'ui/models/service';
 
 var ScalingGroup = Service.extend({
   type:                   'scalingGroup',
-  displayEnvironmentVars: computed('launchConfig.environment', function() {
+  displayEnvironmentVars: computed('launchConfig.env', function() {
     var envs = [];
-    var environment = this.get('launchConfig.environment') || {};
+    var environment = this.get('launchConfig.env') || [];
 
-    Object.keys(environment).forEach((key) => {
+    environment.forEach((e) => {
       envs.pushObject({
-        key,
-        value: environment[key]
+        key:   e.name,
+        value: e.value
       })
     });
 

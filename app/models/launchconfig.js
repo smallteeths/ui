@@ -2,14 +2,14 @@ import { computed } from '@ember/object';
 import Resource from '@rancher/ember-api-store/models/resource';
 
 var LaunchConfig = Resource.extend({
-  displayEnvironmentVars: computed('launchConfig.environment', function() {
+  displayEnvironmentVars: computed('launchConfig.env', function() {
     var envs = [];
-    var environment = this.get('launchConfig.environment') || {};
+    var environment = this.get('launchConfig.env') || [];
 
-    Object.keys(environment).forEach((key) => {
+    environment.forEach((e) => {
       envs.pushObject({
-        key,
-        value: environment[key]
+        key:   e.name,
+        value: e.value
       })
     });
 

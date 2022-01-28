@@ -12,14 +12,14 @@ export default Controller.extend({
   service:           alias('model.workload'),
   monitoringEnabled: alias('scope.currentCluster.isMonitoringReady'),
 
-  displayEnvironmentVars: computed('service.launchConfig.environment', function() {
+  displayEnvironmentVars: computed('service.launchConfig.env', function() {
     var envs = [];
-    var environment = get(this, 'service.launchConfig.environment') || {};
+    var environment = get(this, 'service.launchConfig.env') || [];
 
-    Object.keys(environment).forEach((key) => {
+    environment.forEach((e) => {
       envs.pushObject({
-        key,
-        value: environment[key]
+        key:   e.name,
+        value: e.value
       })
     });
 

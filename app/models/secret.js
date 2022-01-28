@@ -21,7 +21,7 @@ export default Resource.extend({
         return false;
       }
       const volume = (get(workload, 'volumes') || []).find((volume) => get(volume, 'secret.secretName') === get(this, 'name'));
-      const env = (get(workload, 'containers') || []).find((container) => (get(container, 'environmentFrom') || []).find((env) => get(env, 'source') === 'secret' && get(env, 'sourceName') === get(this, 'name')));
+      const env = (get(workload, 'containers') || []).find((container) => (get(container, 'envFrom') || []).find((env) => get(env, 'source') === 'secret' && get(env, 'sourceName') === get(this, 'name')));
 
       return volume || env;
     });

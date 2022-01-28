@@ -22,14 +22,14 @@ export default Controller.extend({
     }
   }),
 
-  displayEnvironmentVars: computed('model.environment', function() {
+  displayEnvironmentVars: computed('model.env', function() {
     var envs = [];
-    var environment = get(this, 'model.environment') || {};
+    var environment = get(this, 'model.env') || [];
 
-    Object.keys(environment).forEach((key) => {
+    environment.forEach((e) => {
       envs.pushObject({
-        key,
-        value: environment[key]
+        key:   e.name,
+        value: e.value
       })
     });
 
