@@ -7812,9 +7812,9 @@ formSecurity:
   cpuMin:
     label: Min CPU
   memoryMax:
-    label: Max Memoery
+    label: Max Memory
   memoryMin:
-    label: Min Memoery
+    label: Min Memory
 formSslTermination:
   title: SSL/TLS Certificates
   detail: Configure the certificates that will be presented for requests to encrypted ports.
