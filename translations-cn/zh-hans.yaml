@@ -4157,7 +4157,7 @@ clusterNew:
     httpLB:
       label: Http 负载均衡
     maintenanceWindow:
-      label: 维护窗口
+      label: 维护窗口 - UTC
     enableHorizontalPodAutoscaling:
       label: Pod 自动横向伸缩
     enableNodepoolAutoscaling:

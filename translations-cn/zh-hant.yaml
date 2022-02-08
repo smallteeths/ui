@@ -2997,7 +2997,7 @@ clusterNew:
     httpLB:
       label: Http 負載均衡
     maintenanceWindow:
-      label: 維護窗口
+      label: 維護窗口 - UTC
     enableHorizontalPodAutoscaling:
       label: Pod 自動橫向伸縮
     access:
