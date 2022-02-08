@@ -6141,7 +6141,7 @@ dangerZone:
     'server-url': '默認的 {appName} Server 訪問地址，必須是 HTTPS。叢集中的所有主機都必須能夠訪問此地址。'
     'system-default-registry': '用於 RKE 部署系統服務時鏡像的拉取，其他服務拉取鏡像不生效。'
     'ui-index': 'UI HTML 索引位置。'
-    'ui-pl': '企業名稱專用標籤'
+    'ui-pl': '企業名稱專用標籤。'
     'telemetry-opt': '遙感報告設置。'
     'auth-user-info-max-age-seconds': '在執行身份驗證提供者組成員同步之前，用戶身份驗證令牌的最大有效期。'
     'auth-user-info-resync-cron': '用於重新同步身份驗證提供者組成員關係的默認 cron 調度。'
@@ -6150,24 +6150,24 @@ dangerZone:
     'rke-metadata-config': '配置 RKE 元數據刷新參數。'
     auditlog-server-url: 配置審計日誌服務地址。
     auth-token-max-ttl-minutes: 自定義認證 token 最大 TTL 分鐘數 。
-    extra-menus: 配置擴展菜單
-    none-operate-session-time: 用戶超過配置時間沒有任何操作將自動註銷(以秒為單位)
+    extra-menus: 配置擴展菜單。
+    none-operate-session-time: 用戶超過配置時間沒有任何操作將自動註銷(以秒為單位)。
     rdns-base-url: 配置 RDNS 服務地址。
     ui-banners: "分類橫幅用於在頁眉、頁腳或同時在頁眉、頁腳顯示自定義固定的橫幅。該設置使用包含 3 個根參數的 JSON 對象: <code>banner、showHeader、showFooter</code>。banner 對象包含: <code>textColor、background、text</code>。 其中 <code>textColor 和 background</code> 是任意有效的 CSS 顏色值。"
     ui-dashboard-index: 叢集瀏覽器 UI HTML 首頁地址。
     ui-default-landing: 用戶登錄後訪問的默認頁面。
-    ui-footer-text: 額外的頁腳內容
-    ui-footer-url: 額外頁腳內容對應的鏈接
+    ui-footer-text: 額外的頁腳內容。
+    ui-footer-url: 額外頁腳內容對應的鏈接。
     ui-issues: 使用一個 url 地址發送新的 'File an Issue' 報告，而不是將用戶發送到 Github Issue 頁面。
     ui-offline-preferred: 控制 UI 靜態資源是由伺服器容器在本地提供還是從 ui-index 和 ui-dashboard-index 設定中定義的遠端 URL 提供。
     ui-session-logout-minutes: 用戶超過配置時間沒有任何操作將自動註銷(以分鐘為單位)。
-    disable-password-encrypt: 禁用密碼加密
-    download-file-size-limit: 容器文件下載大小限制（以Mi為單位）
-    enable-load-resource-by-namespace: 按照namespace載入configmap&secret資源
-    pandaria-enable-healthcheck-api: 啟用Rancher local api-server健康檢查
-    restricted-default-admin: "初始化管理員角色是否使用受限管理員許可權，許可權說明請查看<a href=\"http://docs.rancher.cn/docs/rancher2.5/admin-settings/rbac/global-permissions/_index/#%E5%8F%97%E9%99%90%E7%AE%A1%E7%90%86%E5%91%98\" target=\"_blank\">這裡</a>"
-    rotate-certs-if-expiring-in-days: 設置Rancher Server提前輪換證書的時間（以天為單位）
-    system-catalog: 配置 Rancher 使用 System Chart Repo
+    disable-password-encrypt: 禁用密碼加密。
+    download-file-size-limit: 容器文件下載大小限制（以Mi為單位）。
+    enable-load-resource-by-namespace: 按照namespace載入configmap&secret資源。
+    pandaria-enable-healthcheck-api: 啟用Rancher local api-server健康檢查。
+    restricted-default-admin: "初始化管理員角色是否使用受限管理員許可權，許可權說明請查看<a href=\"http://docs.rancher.cn/docs/rancher2.5/admin-settings/rbac/global-permissions/_index/#%E5%8F%97%E9%99%90%E7%AE%A1%E7%90%86%E5%91%98\" target=\"_blank\">這裡</a>。"
+    rotate-certs-if-expiring-in-days: 設置Rancher Server提前輪換證書的時間（以天為單位）。
+    system-catalog: 配置 Rancher 使用 System Chart Repo。
 deleteEksCluster:
   title: "確定刪除叢集{clusterName}嗎?"
   help: 此叢集是通過臨時令牌創建的，請提供一個新的令牌來刪除它。

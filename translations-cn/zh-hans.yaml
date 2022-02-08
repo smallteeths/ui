@@ -6204,7 +6204,7 @@ dangerZone:
     'server-url': '默认的 {appName} Server 访问地址，必须是 HTTPS。集群中的所有主机都必须能够访问此地址。'
     'system-default-registry': '用于 RKE 部署系统服务时镜像的拉取，其他服务拉取镜像不生效。'
     'ui-index': 'UI HTML 索引位置。'
-    'ui-pl': '企业名称专用标签'
+    'ui-pl': '企业名称专用标签。'
     'ui-issues': "使用一个 url 地址发送新的 'File an Issue' 报告，而不是将用户发送到 Github Issue 页面。"
     'telemetry-opt': '遥感报告设置。'
     'auth-user-info-resync-cron': '用于重新同步身份验证提供者组成员关系的默认 cron 调度。'
@@ -6217,19 +6217,19 @@ dangerZone:
     'rke-metadata-config': '配置 RKE 元数据刷新参数。'
     'ui-banners': '分类横幅用于在页眉、页脚或同时在页眉、页脚显示自定义固定的横幅。该设置使用包含 3 个根参数的 JSON 对象: <code>banner、showHeader、showFooter</code>。banner 对象包含: <code>textColor、background、text</code>。 其中 <code>textColor 和 background</code> 是任意有效的 CSS 颜色值。'
     'ui-default-landing': '用户登录后访问的默认页面。'
-    'none-operate-session-time': '用户超过配置时间没有任何操作将自动注销(以秒为单位)'
-    'ui-footer-text': '额外的页脚内容'
-    'ui-footer-url': '额外页脚内容对应的链接'
-    'extra-menus': '配置扩展菜单'
+    'none-operate-session-time': '用户超过配置时间没有任何操作将自动注销(以秒为单位)。'
+    'ui-footer-text': '额外的页脚内容。'
+    'ui-footer-url': '额外页脚内容对应的链接。'
+    'extra-menus': '配置扩展菜单。'
     ui-dashboard-index: 集群浏览器 UI HTML 首页地址。
     ui-offline-preferred: 控制 UI 静态资源是由服务器容器在本地提供还是从 ui-index 和 ui-dashboard-index 设置中定义的远程 URL 提供。
-    disable-password-encrypt: 禁用密码加密
-    download-file-size-limit: 容器文件下载大小限制（以Mi为单位）
-    enable-load-resource-by-namespace: 按照namespace加载configmap&secret资源
-    pandaria-enable-healthcheck-api: 启用Rancher local api-server健康检查
-    restricted-default-admin: "初始化管理员角色是否使用受限管理员权限，权限说明请查看<a href=\"http://docs.rancher.cn/docs/rancher2.5/admin-settings/rbac/global-permissions/_index/#%E5%8F%97%E9%99%90%E7%AE%A1%E7%90%86%E5%91%98\" target=\"_blank\">这里</a>"
-    rotate-certs-if-expiring-in-days: 设置Rancher Server提前轮换证书的时间（以天为单位）
-    system-catalog: 配置 Rancher 使用 System Chart Repo
+    disable-password-encrypt: 禁用密码加密。
+    download-file-size-limit: 容器文件下载大小限制（以Mi为单位）。
+    enable-load-resource-by-namespace: 按照namespace加载configmap&secret资源。
+    pandaria-enable-healthcheck-api: 启用Rancher local api-server健康检查。
+    restricted-default-admin: "初始化管理员角色是否使用受限管理员权限，权限说明请查看<a href=\"http://docs.rancher.cn/docs/rancher2.5/admin-settings/rbac/global-permissions/_index/#%E5%8F%97%E9%99%90%E7%AE%A1%E7%90%86%E5%91%98\" target=\"_blank\">这里</a>。"
+    rotate-certs-if-expiring-in-days: 设置Rancher Server提前轮换证书的时间（以天为单位）。
+    system-catalog: 配置 Rancher 使用 System Chart Repo。
 deleteEksCluster:
   title: "确定删除集群 {clusterName} 吗?"
   help: 此集群是通过临时令牌创建的，请提供新的令牌来删除它。
