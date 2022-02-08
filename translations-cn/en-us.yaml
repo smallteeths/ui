@@ -11646,7 +11646,7 @@ metricruletemplate:
     rule: Rule
 clusterConnectMode:
   actions:
-    restartConfirm: Are You Sure You Want To Save Connect Mode And Restart Cluster({name}) User Controller ？
+    restartConfirm: Are You Sure You Want To Save Connect Mode And Restart {name} Cluster Controller？
     saveAndRestart: Save And Restart
     yes: Yes
   apiEndpoint:

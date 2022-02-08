@@ -25,48 +25,14 @@
 {{/if}}
 
   {{#if connectStatus}}
-  <div class="row">
-    <div class="col span-12">
-      {{t "clusterConnectMode.connectStatus.label"}}:
-    </div>
-  </div>
   <div class="row box">
-    <div class="col span-12">
-      Dialer:
-    </div>
-    <div class="col span-4">
-      <label class="acc-label vertical-middle p-0">{{t "clusterConnectMode.connectStatus.address"}}:</label>
-      {{connectStatus.ClusterManagerState.Dialer.Address}}
-    </div>
-  </div>
-  <div class="row box">
-    <div class="col span-12">
-      Rest Config:
-    </div>
      <div class="col span-4">
       <label class="acc-label vertical-middle p-0">{{t "clusterConnectMode.connectStatus.timeout"}}:</label>
       {{timeout}} {{t "generic.seconds"}}
     </div>
-     <div class="col span-4">
-      <label class="acc-label vertical-middle p-0">{{t "clusterConnectMode.connectStatus.host"}}:</label>
-      {{connectStatus.ClusterManagerState.RestConfig.Host}}
-    </div>
-  </div>
-  <div class="row box">
-    <div class="col span-12">
-      Cluster Status:
-    </div>
-     <div class="col span-4">
-      <label class="acc-label vertical-middle p-0">{{t "clusterConnectMode.connectStatus.provider"}}:</label>
-      {{connectStatus.ClusterManagerState.ClusterStatus.Provider}}
-    </div>
     <div class="col span-4">
       <label class="acc-label vertical-middle p-0">{{t "clusterConnectMode.connectStatus.apiEndpoint"}}:</label>
       {{connectStatus.ClusterManagerState.ClusterStatus.APIEndpoint}}
-    </div>
-    <div class="col span-4">
-      <label class="acc-label vertical-middle p-0">{{t "clusterConnectMode.connectStatus.driver"}}:</label>
-      {{connectStatus.ClusterManagerState.ClusterStatus.Driver}}
     </div>
   </div>
   {{/if}}

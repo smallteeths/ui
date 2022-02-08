@@ -11350,7 +11350,7 @@ metricruletemplate:
     rule: 规则
 clusterConnectMode:
   actions:
-    restartConfirm: 您确定保存连接模式并重启集群（{name}）User Controller 吗？
+    restartConfirm: 您确定保存连接模式并重启 {name} 集群控制器吗？
     saveAndRestart: 保存并重启
     yes: 确定
   apiEndpoint:

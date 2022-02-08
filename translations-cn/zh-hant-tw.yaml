@@ -11153,7 +11153,7 @@ metricruletemplate:
     rule: 規則
 clusterConnectMode:
   actions:
-    restartConfirm: 您確定保存連接模式並重啟叢集（{name}）User Controller 嗎？
+    restartConfirm: 您確定保存連接模式並重啟 {name} 叢集控制器嗎？
     saveAndRestart: 保存並重啟
     yes: 確定
   apiEndpoint:
