@@ -10634,6 +10634,7 @@ action:
   registration: 主机注册
   scaledown: Scale Down
   view: 查看
+  editConnectMode: 连接模式
 ##############################
 # Resource Actions
 ##############################

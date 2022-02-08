@@ -8474,6 +8474,7 @@ action:
   suspend: 暫停
   view: 編輯
   viewInGrafana: 查看 Grafana
+  editConnectMode: 連接模式
 ##############################
 # Resource Actions
 ##############################

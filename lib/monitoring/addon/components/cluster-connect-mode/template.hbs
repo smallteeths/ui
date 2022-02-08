@@ -16,10 +16,6 @@
       {{else}}
         Tunnel
       {{/if}}
-      <button class="btn bg-transparent" type="button" {{action "showEditModal"}}>
-        <i class="icon icon-edit"></i>
-        {{t "generic.edit"}}
-      </button>
     </div>
   </div>
 {{/if}}
@@ -32,11 +28,10 @@
     </div>
     <div class="col span-4">
       <label class="acc-label vertical-middle p-0">{{t "clusterConnectMode.connectStatus.apiEndpoint"}}:</label>
-      {{connectStatus.ClusterManagerState.ClusterStatus.APIEndpoint}}
+      {{connectStatus.ClusterManagerState.RestConfig.Host}}
     </div>
   </div>
   {{/if}}
 
-{{top-errors errors=connectStatusErrors}}
-{{top-errors errors=connectModeErrors}}
+{{top-errors errors=errors}}
 {{/accordion-list-item}}

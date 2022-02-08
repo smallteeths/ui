@@ -13,6 +13,7 @@ import moment from 'moment';
 import jsondiffpatch from 'jsondiffpatch';
 import { isArray } from '@ember/array';
 import Semver from 'semver';
+import { next } from '@ember/runloop';
 
 const TRUE = 'True';
 const CLUSTER_TEMPLATE_ID_PREFIX = 'cattle-global-data:';
@@ -693,6 +694,11 @@ export default Resource.extend(Grafana, ResourceUsage, {
 
     return [
       {
+        label:     'action.editConnectMode',
+        icon:      'icon icon-edit',
+        action:    'editConnectMode',
+      },
+      {
         label:     'action.rotate',
         icon:      'icon icon-history',
         action:    'rotateCertificates',
@@ -989,6 +995,32 @@ export default Resource.extend(Grafana, ResourceUsage, {
 
     showCommandModal() {
       this.modalService.toggleModal('modal-show-command', { cluster: this });
+    },
+
+    editConnectMode() {
+      this.fetchClusterConnectMode().then((resp) => {
+        const d = resp.body;
+
+        this.modalService.toggleModal('modal-edit-connect-mode', {
+          cluster:  this,
+          model:    d,
+          callback: (data, restart = false) => {
+            if (restart) {
+              next(() => {
+                this.modalService.toggleModal('modal-confirm-restart-controller', {
+                  cluster:       this,
+                  action:        () => {
+                    this.confirmSaveAndRestartConnectMode(data, true);
+                  },
+                });
+              });
+
+              return;
+            }
+            this.confirmSaveAndRestartConnectMode(data, false);
+          },
+        });
+      });
     },
   },
 
@@ -1439,6 +1471,39 @@ export default Resource.extend(Grafana, ResourceUsage, {
     });
 
     return delta;
+  },
+
+  fetchClusterConnectMode(signal) {
+    return this.globalStore.rawRequest({
+      url:     `/v3/clusters/${ this.id }?action=viewConnectionConfig`,
+      method:  'post',
+      signal,
+    });
+  },
+
+  fetchConnectStatus(signal) {
+    return this.globalStore.rawRequest({
+      url:     `/mcm/show/${ this.id }`,
+      method:  'get',
+      signal,
+    });
+  },
+
+  confirmSaveAndRestartConnectMode(data, restart = false) {
+    this.globalStore.rawRequest({
+      url:     `/v3/clusters/${ this.id }?action=editConnectionConfig`,
+      method:  'post',
+      data,
+    }).then(() => {
+      if (restart) {
+        return this.globalStore.rawRequest({
+          url:     `/mcm/restart/${ this.id }`,
+          method:  'get',
+        });
+      }
+    }).catch((err) => {
+      this.growl.fromError(err && err.body && err.body.message);
+    });
   },
 
   /**

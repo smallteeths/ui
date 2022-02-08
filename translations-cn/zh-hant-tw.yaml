@@ -10458,6 +10458,7 @@ action:
   rotateEncryption: 輪換加密密鑰
   scaledown: Scale Down
   view: 編輯
+  editConnectMode: 連接模式
 ##############################
 # Resource Actions
 ##############################

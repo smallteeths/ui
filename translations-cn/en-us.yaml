@@ -10992,6 +10992,7 @@ action:
   editVsAnnotaionForGlobalDns: Add/Remove Global DNS Record
   importClusterCmd: Import Cluster Cmd
   view: View
+  editConnectMode: Connect Mode
 ##############################
 # Resource Actions
 ##############################
