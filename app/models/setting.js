@@ -59,6 +59,7 @@ export default Resource.extend({
           kind:           details.kind,
           options:        details.options,
           canDelete:      obj && !obj.get('isDefault'),
+          unit:           details.unit,
           obj,
         });
       }

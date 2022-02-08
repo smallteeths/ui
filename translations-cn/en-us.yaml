@@ -6535,7 +6535,7 @@ validationsList:
   noMatch: No issues match the current search
 dangerZone:
   header: Advanced Settings
-  subtext: "Typical users will not need to change these.  Proceed with caution, incorrect values can break your {appName} installation.<br/>Settings which have been customized from default settings  are shown in <b>bold</b>."
+  subtext: "Typical users will not need to change these.  Proceed with caution, incorrect values can break your {appName} installation.<br/>Settings which have been customized from default settings  are shown in <b>bold</b>.If there are no configuration items you need here, please view <a href=\"/v3/setting\" target=\"_blank\">More Settings</a>."
   showLabel: "I understand that I can break things by changing advanced settings."
   show: Show
   hide: Hide
@@ -6570,6 +6570,13 @@ dangerZone:
     'ui-footer-url': 'URL for the extra text in footer.'
     'extra-menus': 'Configure custom menus.'
     none-operate-session-time: The user will automatically log out if there is no operation beyond the configured time (in seconds)
+    disable-password-encrypt: Disabling Password Encryption
+    download-file-size-limit: Container file download size limit（in Mi）
+    enable-load-resource-by-namespace: Load the configmap & Secret resource according to the namespace
+    pandaria-enable-healthcheck-api: Enable rancher local API server health check
+    restricted-default-admin: "Whether the initialization administrator role uses restricted administrator permissions. Please see the permission description<a href=\"http://docs.rancher.cn/docs/rancher2.5/admin-settings/rbac/global-permissions/_index/#%E5%8F%97%E9%99%90%E7%AE%A1%E7%90%86%E5%91%98\" target=\"_blank\">here</a>"
+    rotate-certs-if-expiring-in-days: Set the time for the rancher server to rotate certificates in advance（in days）
+    system-catalog: Configure Rancher to use System Chart Repo
 deleteEksCluster:
   title: "Delete {clusterName}?"
   help: This cluster was created with a temporary session token. Please provide keys and token to delete the cluster.

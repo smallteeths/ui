@@ -49,7 +49,12 @@ export default Component.extend(ModalBase, {
 
       set(this, 'formattedValue', formattedValue);
     } else {
-      set(this, 'value', get(this, 'model.obj.value') || '');
+      let val = get(this, 'model.obj.value') || ''
+
+      if (get(this, 'model.unit') && get(this, 'model.kind') === 'int'){
+        val = parseInt(val, 10) || 0;
+      }
+      set(this, 'value', val);
     }
   },
 
@@ -71,7 +76,13 @@ export default Component.extend(ModalBase, {
 
   actions: {
     save(btnCb) {
-      get(this, 'settings').set(normalizeName(get(this, 'model.key')), get(this, 'value'));
+      let value = get(this, 'value')
+
+      if (get(this, 'model.unit') && get(this, 'model.kind') === 'int'){
+        value = value || 0;
+        value += get(this, 'model.unit');
+      }
+      get(this, 'settings').set(normalizeName(get(this, 'model.key')), value);
       get(this, 'settings').one('settingsPromisesResolved', () => {
         btnCb(true);
         this.send('done');

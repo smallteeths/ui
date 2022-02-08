@@ -6126,7 +6126,7 @@ validationsList:
   noMatch: 沒有問題匹配當前搜索
 dangerZone:
   header: 高級設置
-  subtext: "通常情況下用戶不需要修改以下設置。請謹慎操作，不正確的值可能導致 {appName} 無法正常運行。修改默認設置後將以 <b>粗體</b> 顯示配置名。"
+  subtext: "通常情況下用戶不需要修改以下設置。請謹慎操作，不正確的值可能導致 {appName} 無法正常運行。修改默認設置後將以 <b>粗體</b> 顯示配置名。如果這裡沒有您需要的配置項，請查看<a href=\"/v3/setting\" target=\"_blank\">更多設置</a>。"
   showLabel: 我已確認修改高級設置可能導致 {appName} 出問題。
   show: 顯示
   hide: 隱藏
@@ -6161,6 +6161,13 @@ dangerZone:
     ui-issues: 使用一個 url 地址發送新的 'File an Issue' 報告，而不是將用戶發送到 Github Issue 頁面。
     ui-offline-preferred: 控制 UI 靜態資源是由伺服器容器在本地提供還是從 ui-index 和 ui-dashboard-index 設定中定義的遠端 URL 提供。
     ui-session-logout-minutes: 用戶超過配置時間沒有任何操作將自動註銷(以分鐘為單位)。
+    disable-password-encrypt: 禁用密碼加密
+    download-file-size-limit: 容器文件下載大小限制（以Mi為單位）
+    enable-load-resource-by-namespace: 按照namespace載入configmap&secret資源
+    pandaria-enable-healthcheck-api: 啟用Rancher local api-server健康檢查
+    restricted-default-admin: "初始化管理員角色是否使用受限管理員許可權，許可權說明請查看<a href=\"http://docs.rancher.cn/docs/rancher2.5/admin-settings/rbac/global-permissions/_index/#%E5%8F%97%E9%99%90%E7%AE%A1%E7%90%86%E5%91%98\" target=\"_blank\">這裡</a>"
+    rotate-certs-if-expiring-in-days: 設置Rancher Server提前輪換證書的時間（以天為單位）
+    system-catalog: 配置 Rancher 使用 System Chart Repo
 deleteEksCluster:
   title: "確定刪除叢集{clusterName}嗎?"
   help: 此叢集是通過臨時令牌創建的，請提供一個新的令牌來刪除它。
