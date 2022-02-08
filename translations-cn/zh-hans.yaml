@@ -11769,3 +11769,7 @@ vlansubnetPage:
   noData: 暂无数据
   noMatch: 暂无匹配数据
   unsupport: 当前集群不支持扁平网络
+formServiceAccount:
+  title: Service Account
+  detail: 配置 Service Account.
+  placeholder: 请输入 Service Account Name

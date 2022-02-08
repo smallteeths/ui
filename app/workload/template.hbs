@@ -372,6 +372,15 @@
       </div>
     {{/accordion-list-item}}
   {{/if}}
+  {{#if service.serviceAccountName}}
+    {{container/form-service-account-pandaria
+      service=service
+      editing=false
+      expandAll=al.expandAll
+      expandFn=expandFn
+      expanded=securitySectionExpanded
+    }}
+  {{/if}}
 {{/accordion-list}}
 
 {{#custom-modal-adjust-pod

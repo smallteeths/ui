@@ -195,4 +195,14 @@
     </div>
   </div>
   {{/accordion-list-item}}
+
+  {{#if model.pod.serviceAccountName}}
+    {{container/form-service-account-pandaria
+      service=model.pod
+      editing=false
+      expandAll=al.expandAll
+      expandFn=expandFn
+      expanded=securitySectionExpanded
+    }}
+  {{/if}}
 {{/accordion-list}}

@@ -11771,3 +11771,7 @@ windowsCluster:
       brokerTypeHelpText: 使用 Broker 列表作為 Kafka 連接入口點。
     vxlanWarning: "由於 <a href=\"https://github.com/kubernetes/kubernetes/issues/79359\" target=\"_blank\">kubernetes/kubernetes#79359</a> 這個問題，{appName} Logging 目前無法運行在 VxLan 模式下。我們正在與微軟合作， 以修復 Kubernetes 相關的問題。\n"
   pipelines: 在 Windows 集羣中不支持 pipelines。
+formServiceAccount:
+  title: Service Account
+  detail: 配置 Service Account.
+  placeholder: 請輸入 Service Account Name

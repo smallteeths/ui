@@ -12207,3 +12207,7 @@ volumesPage:
   title: PVC
   volume:
     label: 持久卷(PV)
+formServiceAccount:
+  title: Service Account
+  detail: 配置 Service Account.
+  placeholder: 請輸入 Service Account Name

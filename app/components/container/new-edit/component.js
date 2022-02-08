@@ -462,6 +462,15 @@ export default Component.extend(NewOrEdit, ChildHook, {
 
     pr.updateTimestamp();
 
+    // pandaria
+    // Because the pod created will be assigned the default service account under this namespace by default
+    // So when I need to delete the corresponding serviceAccount I need to set it to the default
+    // Of course, if the user has not edited the servieAccount of the workload, it will not enter the following logic.
+    // Because the servieAccount property of the workload is null
+    if (service.serviceAccountName === '') {
+      service.serviceAccountName = 'default'
+    }
+
     return this.applyHooks('_beforeSaveHooks').then(() => {
       set(pr, 'namespaceId', get(this, 'namespace.id'));
 

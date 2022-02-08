@@ -1,0 +1,15 @@
+{{#accordion-list-item
+  title=(t "formServiceAccount.title")
+  detail=(t "formServiceAccount.detail")
+  expandAll=expandAll
+  expand=(action expandFn)
+}}
+	<div class="row">
+		<div class="col box span-12">
+			<label class="acc-label">Service Account Name</label>
+			{{#input-or-display editable=editing value=service.serviceAccountName}}
+			  {{input type="text" classNames="form-control" value=service.serviceAccountName placeholder=(t 'formServiceAccount.placeholder')}}
+			{{/input-or-display}}
+		</div>
+  </div>
+{{/accordion-list-item}}

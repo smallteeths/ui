@@ -401,6 +401,14 @@
         </div>
       {{/accordion-list-item}}
     {{/if}}
+
+    {{container/form-service-account-pandaria
+      service=service
+      editing=true
+      expandAll=al.expandAll
+      expandFn=expandFn
+      expanded=securitySectionExpanded
+    }}
   {{/advanced-section}}
 {{/accordion-list}}
 

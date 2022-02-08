@@ -12058,3 +12058,7 @@ vlansubnetPage:
   noData: No Data
   noMatch: There is no matching data.
   unsupport: The current cluster does not support flat networks.
+formServiceAccount:
+  title: Service Account
+  detail: Setting Service Account.
+  placeholder: Please input the service account name.
