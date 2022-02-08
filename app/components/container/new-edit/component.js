@@ -1,5 +1,7 @@
 import Errors from 'ui/utils/errors';
-import { get, set, setProperties, observer } from '@ember/object';
+import {
+  get, set, setProperties, observer, computed
+} from '@ember/object';
 import { equal } from '@ember/object/computed';
 import { next } from '@ember/runloop';
 import { inject as service } from '@ember/service';
@@ -142,6 +144,10 @@ export default Component.extend(NewOrEdit, ChildHook, {
 
       set(this, 'excludeContainer', excludeContainer)
     }
+
+    const workloadAnnotations = get(this, 'primaryResource.workloadAnnotations') || {};
+
+    set(this, 'defaultServiceEnabled', workloadAnnotations['field.cattle.io/defaultPort'] === 'true' ? 'true' : 'false');
   },
 
   didInsertElement() {
@@ -224,6 +230,20 @@ export default Component.extend(NewOrEdit, ChildHook, {
       set(this, 'header', get(this, 'intl').t(k, args));
     });
   })),
+
+  portsLen: computed('isUpgrade', 'launchConfig.ports', 'primaryResource.containers.@each.ports', function() {
+    let total =  get(this, 'primaryResource.containers').reduce((t, c) => {
+      t = t + (c.ports || []).length;
+
+      return t;
+    }, 0);
+
+    if (!this.isUpgrade) {
+      total = total + (this.launchConfig.ports || []).length;
+    }
+
+    return total
+  }),
 
   // ----------------------------------
   // ----------------------------------
@@ -418,16 +438,14 @@ export default Component.extend(NewOrEdit, ChildHook, {
       })
     }
 
-    // Whether to create default service for new workload
-    if (!this.isUpgrade) {
-      const annotations = get(this, 'primaryResource.annotations') || {};
-      const enabled = (get(this, 'launchConfig.ports') || []).length === 0 ? this.defaultServiceEnabled : false;
+    // Whether to create default service for new/edit workload
+    const workloadAnnotations = get(this, 'primaryResource.workloadAnnotations') || {};
+    const enabled = get(this, 'portsLen') === 0 ? this.defaultServiceEnabled : 'false';
 
-      set(this, 'primaryResource.annotations', {
-        ...annotations,
-        'field.cattle.io/defaultPort': enabled
-      })
-    }
+    set(this, 'primaryResource.workloadAnnotations', {
+      ...workloadAnnotations,
+      'field.cattle.io/defaultPort': enabled
+    });
 
     let errors = [];
 

@@ -7217,9 +7217,8 @@ formPorts:
     mixedIpPort: "Port{ip}:{port}/{proto} 有超过一条映射规则。"
     mixedPort: "Port{port}/{proto} 有超过一条映射规则。"
   showAdvanced: 显示端口命名选项
-  defaultService:
-    enabled: 创建默认服务
-    disabled: 禁止创建默认服务
+  createDefaultService:
+    label: 创建默认服务
 formScale:
   label: 工作负载类型
   showAdvanced: 更多选项

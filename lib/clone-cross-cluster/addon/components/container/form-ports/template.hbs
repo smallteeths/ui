@@ -189,7 +189,7 @@
   {{/if}}
 </div>
 
-<div>
+<div class="flex-align-center">
   {{#if editing}}
     <button class="btn bg-link icon-btn" {{action "addPort"}}>
       <i class="icon icon-plus text-small"/>
@@ -197,5 +197,22 @@
         {{t "formPorts.addAction"}}
       </span>
     </button>
+    {{#if (eq totalPorts 0)}}
+    &nbsp;
+    <label class="acc-label">{{t "formPorts.createDefaultService.label"}}:&nbsp;</label>
+    <div class="radio">
+      <label>
+        {{radio-button selection=defaultServiceEnabled value="false"}}
+        {{t 'generic.disabled'}}
+      </label>
+    </div>
+    &nbsp;
+    <div class="radio">
+      <label>
+        {{radio-button selection=defaultServiceEnabled value="true"}}
+        {{t 'generic.enabled'}}
+      </label>
+    </div>
+    {{/if}}
   {{/if}}
 </div>

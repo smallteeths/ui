@@ -197,15 +197,22 @@
         {{t "formPorts.addAction"}}
       </span>
     </button>
-    {{#if (and (not isUpgrade) (eq ports.length 0))}}
+    {{#if (eq totalPorts 0)}}
     &nbsp;
-    {{new-select
-      optionValuePath="value"
-      optionLabelPath="translationKey"
-      localizedLabel=true
-      content=enableDefaultServiceOptions
-      value=defaultServiceEnabled
-    }}
+    <label class="acc-label">{{t "formPorts.createDefaultService.label"}}:&nbsp;</label>
+    <div class="radio">
+      <label>
+        {{radio-button selection=defaultServiceEnabled value="false"}}
+        {{t 'generic.disabled'}}
+      </label>
+    </div>
+    &nbsp;
+    <div class="radio">
+      <label>
+        {{radio-button selection=defaultServiceEnabled value="true"}}
+        {{t 'generic.enabled'}}
+      </label>
+    </div>
     {{/if}}
   {{/if}}
 </div>
