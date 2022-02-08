@@ -3365,7 +3365,7 @@ notifierPage:
   clone: 克隆
   index:
     addActionLabel: 添加通知
-    addAlertTemplate: 添加告警模版
+    addAlertTemplate: 自定义告警模版
     table:
       created: 创建时间
       noData: 没有配置通知

@@ -3042,7 +3042,7 @@ notifierPage:
       created: 創建時間
       noData: 沒有配置通知
       noMatch: 不匹配
-    addAlertTemplate: 添加告警模版
+    addAlertTemplate: 自定義告警模版
   alertTemplate:
     customTemplate: 自定義模版
     defaultTemplate: 默認模版

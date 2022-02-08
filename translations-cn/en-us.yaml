@@ -3368,7 +3368,7 @@ notifierPage:
   clone: Clone
   index:
     addActionLabel: Add Notifier
-    addAlertTemplate: Add Alarm Template
+    addAlertTemplate: Custom Alarm Template
     table:
       created: Created
       noData: There are no notifiers defined
