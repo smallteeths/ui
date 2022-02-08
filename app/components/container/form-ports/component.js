@@ -36,6 +36,17 @@ export default Component.extend({
   nodePortTo:          null,
   nodePortPlaceholder: null,
 
+  enableDefaultServiceOptions: [
+    {
+      translationKey: 'formPorts.defaultService.disabled',
+      value:          'false'
+    },
+    {
+      translationKey: 'formPorts.defaultService.enabled',
+      value:          'true'
+    },
+  ],
+
   init() {
     this._super(...arguments);
     this.initPorts();

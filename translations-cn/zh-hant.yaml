@@ -5549,6 +5549,9 @@ formPorts:
     mixedPort: "Port{port}/{proto}有超過一條映射規則。"
   showAdvanced: 顯示端口命名選項
   hostPortWarning: "Host Port 模式不支持 Windows 節點。了解更多關於 Windows 在 Kubernetes 中的<a href=\"https://kubernetes.io/docs/setup/production-environment/windows/intro-windows-in-kubernetes/#limitations\" target=\"_blank\">支持限制</a>。"
+  defaultService:
+    enabled: 創建默認服務
+    disabled: 禁止創建默認服務
 formScale:
   label: 工作負載類型
   showAdvanced: 更多選項

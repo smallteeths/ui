@@ -67,6 +67,8 @@ export default Component.extend(NewOrEdit, ChildHook, {
   toggleMacvlan: false,
   harborVersion: '',
 
+  defaultServiceEnabled: 'false',
+
   isSidekick: equal('scaleMode', 'sidekick'),
   init() {
     window.nec = this;
@@ -413,6 +415,17 @@ export default Component.extend(NewOrEdit, ChildHook, {
       set(this, 'primaryResource.annotations', {
         ...annotations,
         'field.cattle.io/excludeContainer': get(this, 'excludeContainer')
+      })
+    }
+
+    // Whether to create default service for new workload
+    if (!this.isUpgrade) {
+      const annotations = get(this, 'primaryResource.annotations') || {};
+      const enabled = (get(this, 'launchConfig.ports') || []).length === 0 ? this.defaultServiceEnabled : false;
+
+      set(this, 'primaryResource.annotations', {
+        ...annotations,
+        'field.cattle.io/defaultPort': enabled
       })
     }
 

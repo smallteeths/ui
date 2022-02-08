@@ -7586,6 +7586,9 @@ formPorts:
     mixedIpPort: "Port {ip}:{port}/{proto} has more than one mapping."
     mixedPort: "Port {port}/{proto} has more than one mapping."
   showAdvanced: Show Port Naming Options
+  defaultService:
+    enabled: Create the default service
+    disabled: Disable the creation of default service
 formScale:
   label: Workload Type
   showAdvanced: More options

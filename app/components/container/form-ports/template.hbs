@@ -189,7 +189,7 @@
   {{/if}}
 </div>
 
-<div>
+<div class="flex-align-center">
   {{#if editing}}
     <button class="btn bg-link icon-btn" type="button" {{action "addPort"}}>
       <i class="icon icon-plus text-small"/>
@@ -197,5 +197,15 @@
         {{t "formPorts.addAction"}}
       </span>
     </button>
+    {{#if (and (not isUpgrade) (eq ports.length 0))}}
+    &nbsp;
+    {{new-select
+      optionValuePath="value"
+      optionLabelPath="translationKey"
+      localizedLabel=true
+      content=enableDefaultServiceOptions
+      value=defaultServiceEnabled
+    }}
+    {{/if}}
   {{/if}}
 </div>
