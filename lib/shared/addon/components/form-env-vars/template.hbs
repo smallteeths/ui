@@ -19,7 +19,9 @@
   {{/each}}
 </div>
 {{/if}}
+{{#if editing}}
 <button class="btn bg-link icon-btn" type="button" {{action "addFromReference" }}>
   <i class="icon icon-plus text-small" />
   <span>{{t 'newContainer.environment.addAction'}}</span>
 </button>
+{{/if}}

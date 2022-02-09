@@ -6,6 +6,7 @@
       value=type
       content=typeOpts
       change=(action 'updateRow')
+      disabled=(not editing)
     }}
   </div>
   <div class="value-from-resource__name">
@@ -15,6 +16,7 @@
       value=name
       input=(action 'updateRow')
       placeholder=(t 'newContainer.environment.keyPlaceholder')
+      disabled=(not editing)
     }}
   </div>
 {{#if (eq type 'simple')}}
@@ -25,11 +27,13 @@
       value=valStr
       input=(action 'updateRow')
       placeholder=(t 'newContainer.environment.valueLabel')
+      disabled=(not editing)
     }}
   </div>
   {{else if needsSource}}
     <div class="{{if (or (eq type 'configMapRef') (eq type 'secretRef')) 'value-from-resource__single-value'}}">
       <label>{{t sourceLabelPlaceholder.label}}</label>
+      {{#if editing}}
         {{#if (or (eq type 'secretRef') (eq type 'secretKeyRef'))}}
           {{#if enableLoadResourceByNamespace}}
             {{schema/input-ns-secret
@@ -38,7 +42,7 @@
               valueKey="name"
               selectedSecret=selectedSecret
             }}
-            {{else}}
+          {{else}}
             {{schema/input-secret
               namespace=namespace
               value=referenced
@@ -54,7 +58,7 @@
               valueKey="name"
               selectedConfigMap=selectedConfigMap
             }}
-            {{else}}
+          {{else}}
             {{schema/input-config-map
               namespace=namespace
               value=referenced
@@ -63,16 +67,19 @@
             }}
           {{/if}}
         {{/if}}
-        {{!-- {{new-select
-          value=referenced
-          content=sourceOptions
-          localizedPrompt=true
-          prompt=sourceLabelPlaceholder.placeholder
-        }} --}}
+      {{else}}
+      {{input
+        class="form-control"
+        value=referenced
+        placeholder=""
+        disabled=true
+      }}
+      {{/if}}
     </div>
     {{#if (and (not-eq type 'secretRef') (not-eq type 'configMapRef'))}}
     <div>
       <label>{{t 'newContainer.environment.keyLabel'}}</label>
+      {{#if editing}}
       {{new-select
         value=key
         content=keys
@@ -80,6 +87,14 @@
         localizedPrompt=true
         prompt="f5TLSPage.form.termination.placeholder"
       }}
+      {{else}}
+      {{input
+        class="form-control"
+        value=key
+        placeholder=""
+        disabled=true
+      }}
+      {{/if}}
     </div>
     {{/if}}
 
@@ -91,10 +106,12 @@
         value=refName
         input=(action 'updateRow')
         placeholder=""
+        disabled=(not editing)
       }}
     </div>
     <div>
       <label>{{t 'newContainer.environment.keyLabel'}}</label>
+      {{#if editing}}
       {{new-select
         value=key
         content=resourceKeyOpts
@@ -102,6 +119,14 @@
         localizedPrompt=true
         prompt="f5TLSPage.form.termination.placeholder"
       }}
+      {{else}}
+      {{input
+        class="form-control"
+        value=key
+        placeholder=""
+        disabled=true
+      }}
+      {{/if}}
     </div>
   {{else}}
   <div class="value-from-resource__single-value">
@@ -111,13 +136,16 @@
       value=fieldPath
       input=(action 'updateRow')
       placeholder=""
+      disabled=(not editing)
     }}
   </div>
 {{/if}}
+{{#if editing}}
 <button class="btn bg-primary btn-sm" disabled={{eq editing false}} type="button" {{action "removeRow"}}>
   <i class="icon icon-minus" />
   <span class="sr-only">
     {{t "generic.remove"}}
   </span>
 </button>
+{{/if}}
 </div>

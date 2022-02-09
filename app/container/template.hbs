@@ -105,8 +105,14 @@
      expandAll=al.expandAll
      expand=(action expandFn)
   }}
-    {{form-env-var
+    {{!-- {{form-env-var
       model=displayEnvironmentVars
+    }} --}}
+    {{form-env-vars
+      container=model
+      namespace=model.pod.namespace
+      editing=false
+      header=(t "newContainer.environment.label")
     }}
   {{/accordion-list-item}}
 
