@@ -5,8 +5,8 @@
       expand=(action expandFn)
       expanded=expanded
 }}
-  <div class="row box">
-    <div class="col span-4">
+  <div class="row">
+    <div class="col box span-4">
       <label class="acc-label">{{t 'formSecurity.pullImage.label'}}</label>
       {{#input-or-display editable=editing value=instance.imagePullPolicy}}
         <div class="radio">
@@ -20,7 +20,7 @@
         </div>
       {{/input-or-display}}
     </div>
-    <div class="col span-4">
+    <div class="col box span-4">
       <label class="acc-label">{{t 'formSecurity.privileged.label'}}</label>
       {{#input-or-display editable=editing value=instance.privileged}}
         <div class="radio">
@@ -31,7 +31,7 @@
         </div>
       {{/input-or-display}}
     </div>
-    <div class="col span-4">
+    <div class="col box span-4">
       <label class="acc-label">{{t 'formSecurity.allowPrivilegeEscalation.label'}}</label>
       {{#input-or-display editable=editing value=instance.allowPrivilegeEscalation}}
         <div class="radio">
@@ -44,8 +44,8 @@
     </div>
   </div>
 
-  <div class="row box mt-20">
-    <div class="col span-6">
+  <div class="row mt-20">
+    <div class="col box span-6">
       <label class="acc-label">{{t 'formSecurity.hostPID.label'}}</label>
       {{#input-or-display editable=editing value=service.hostPID}}
         <div class="radio">
@@ -56,7 +56,7 @@
         </div>
       {{/input-or-display}}
     </div>
-    <div class="col span-6">
+    <div class="col box span-6">
       <label class="acc-label">{{t 'formSecurity.hostIPC.label'}}</label>
       {{#input-or-display editable=editing value=service.hostIPC}}
         <div class="radio">
@@ -68,8 +68,8 @@
       {{/input-or-display}}
     </div>
   </div>
-  <div class="row box mt-20">
-    <div class="col span-6">
+  <div class="row mt-20">
+    <div class="col box span-6">
       <label class="acc-label">{{t 'formSecurity.runAsNonRoot.label'}}</label>
       {{#input-or-display editable=editing value=instance.runAsNonRoot}}
         <div class="radio">
@@ -80,7 +80,7 @@
         </div>
       {{/input-or-display}}
     </div>
-    <div class="col span-6">
+    <div class="col box span-6">
       <label class="acc-label">{{t 'formSecurity.readOnlyRootFilesystem.label'}}</label>
       {{#input-or-display editable=editing value=instance.readOnly}}
         <div class="radio">

@@ -36,8 +36,8 @@
 </div>
 
 {{#unless isSimpleMode}}
-  <div class="row box">
-    <div class="col span-4">
+  <div class="row">
+    <div class="col box span-4">
       <label class="acc-label">
         {{t "cruDestinationRule.loadBalancer.consistentHash.mode.label"}}
       </label>
@@ -63,7 +63,7 @@
       {{/input-or-display}}
     </div>
     {{#if (eq consistentHashMode "header")}}
-      <div class="col span-4">
+      <div class="col box span-4">
         <label
           class="acc-label"
           for="{{concat elementId "-input-httpHeaderName"}}"
@@ -86,7 +86,7 @@
         {{/input-or-display}}
       </div>
     {{else if (eq consistentHashMode "cookie")}}
-      <div class="col span-4">
+      <div class="col box span-4">
         <label
           class="acc-label"
           for="{{concat elementId "-input-httpCookie-name"}}"
@@ -149,7 +149,7 @@
       </div>
     {{/if}}
 
-    <div class="col span-4">
+    <div class="col box span-4">
       <label
         class="acc-label"
         for="{{concat elementId "-input-minimumRingSize"}}"

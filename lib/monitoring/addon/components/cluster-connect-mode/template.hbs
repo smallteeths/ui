@@ -21,12 +21,12 @@
 {{/if}}
 
   {{#if connectStatus}}
-  <div class="row box">
-     <div class="col span-4">
+  <div class="row">
+     <div class="col box span-4">
       <label class="acc-label vertical-middle p-0">{{t "clusterConnectMode.connectStatus.timeout"}}:</label>
       {{timeout}} {{t "generic.seconds"}}
     </div>
-    <div class="col span-4">
+    <div class="col box span-4">
       <label class="acc-label vertical-middle p-0">{{t "clusterConnectMode.connectStatus.apiEndpoint"}}:</label>
       {{connectStatus.ClusterManagerState.RestConfig.Host}}
     </div>

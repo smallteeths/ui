@@ -33,6 +33,10 @@ BODY {
   }
 }
 
+.embedded #application:not(.container-nav-left) {
+  padding-top: 20px;
+}
+
 BODY.popup #application {
   padding-bottom: 0;
   min-height: 0;

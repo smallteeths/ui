@@ -5,7 +5,7 @@
 <section>
   <div class="mb-30">
     {{#each fluentServers as |item idx|}}
-      <div class="row box mb-20">
+      <div class="row mb-20">
         {{#if canRemove}}
           <div class="pull-right">
             <button class="btn bg-transparent text-small vertical-middle" type="button" {{action "remove" item idx}}>
@@ -13,7 +13,7 @@
             </button>
           </div>
         {{/if}}
-        <div class="col span-12">
+        <div class="col box span-12">
           <div class="row">
             <div class="col span-12">
               <label class="acc-label" for="">
