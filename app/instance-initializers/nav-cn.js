@@ -1,6 +1,6 @@
 import { getProjectId, getClusterId, bulkAdd } from 'ui/utils/navigation-tree';
 import { get } from '@ember/object';
-// import C from 'ui/utils/constants';
+import C from 'ui/utils/constants';
 
 const rootNav = [
   // Project
@@ -36,18 +36,18 @@ const rootNav = [
         resourceScope:  'project',
         initExpand:     'authenticated.project.hpa.index'
       },
-      // {
-      //   id:             'pipelines',
-      //   localizedLabel: 'nav.infra.pipelines',
-      //   route:          'authenticated.project.pipeline.pipelines',
-      //   ctx:            [getProjectId],
-      //   resource:       [],
-      //   resourceScope:  'project',
-      //   initExpand:     'authenticated.project.pipeline.pipelines.index',
-      //   condition() {
-      //     return enableProjectMenus.call(this, 'pipeline')
-      //   }
-      // },
+      {
+        id:             'pipelines',
+        localizedLabel: 'nav.infra.pipelines',
+        route:          'authenticated.project.pipeline.pipelines',
+        ctx:            [getProjectId],
+        resource:       [],
+        resourceScope:  'project',
+        initExpand:     'authenticated.project.pipeline.pipelines.index',
+        condition() {
+          return enableProjectMenus.call(this, 'pipeline')
+        }
+      },
       {
         id:             'istio',
         localizedLabel: 'nav.tools.istio',
@@ -177,18 +177,18 @@ const rootNav = [
         ctx:            [getProjectId],
         initExpand:     'authenticated.project.logging.logging'
       },
-      // {
-      //   id:             'tools-pipeline',
-      //   localizedLabel: 'nav.tools.pipeline',
-      //   route:          'authenticated.project.pipeline.settings',
-      //   resource:       ['sourcecodeproviderconfig'],
-      //   resourceScope:  'project',
-      //   ctx:            [getProjectId],
-      //   initExpand:     'authenticated.project.pipeline.settings',
-      //   condition() {
-      //     return enableProjectMenus.call(this, 'pipeline')
-      //   }
-      // },
+      {
+        id:             'tools-pipeline',
+        localizedLabel: 'nav.tools.pipeline',
+        route:          'authenticated.project.pipeline.settings',
+        resource:       ['sourcecodeproviderconfig'],
+        resourceScope:  'project',
+        ctx:            [getProjectId],
+        initExpand:     'authenticated.project.pipeline.settings',
+        condition() {
+          return enableProjectMenus.call(this, 'pipeline')
+        }
+      },
     ]
   },
   {
@@ -655,28 +655,28 @@ const rootNav = [
 //  },
 ];
 
-// const enableProjectMenus = function(name) {
-//   const { [name]: menu } = {
-//     monitoring: {
-//       label: 'project.feature.pandaria.io/monitoring',
-//       key:   C.FEATURES.PROJECT_MONITORING_SERVICE_UI
-//     },
-//     pipeline: {
-//       label: 'project.feature.pandaria.io/pipeline',
-//       key:   C.FEATURES.PROJECT_PIPELINE_SERVICE_UI
-//     }
-//   };
-//   const labels = get(this, 'project.labels');
+const enableProjectMenus = function(name) {
+  const { [name]: menu } = {
+    monitoring: {
+      label: 'project.feature.pandaria.io/monitoring',
+      key:   C.FEATURES.PROJECT_MONITORING_SERVICE_UI
+    },
+    pipeline: {
+      label: 'project.feature.pandaria.io/pipeline',
+      key:   C.FEATURES.PROJECT_PIPELINE_SERVICE_UI
+    }
+  };
+  const labels = get(this, 'project.labels');
 
-//   if (labels && labels[menu.label] !== undefined) {
-//     return labels[menu.label] === 'true'
-//   }
+  if (labels && labels[menu.label] !== undefined) {
+    return labels[menu.label] === 'true'
+  }
 
-//   const features        = get(this, 'globalStore').all('feature');
-//   const enableByFeature = features.filterBy('name', menu.key).get('firstObject.value');
+  const features        = get(this, 'globalStore').all('feature');
+  const enableByFeature = features.filterBy('name', menu.key).get('firstObject.value');
 
-//   return enableByFeature !== false;
-// };
+  return enableByFeature !== false;
+};
 
 export function initialize(/* appInstance*/) {
   bulkAdd(rootNav);
