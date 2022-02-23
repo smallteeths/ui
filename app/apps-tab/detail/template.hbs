@@ -294,14 +294,14 @@
                 {{badge-state model=obj}}
               </td>
               <td data-title="{{dt.name}}">
-                <a href="{{href-to " volumes.detail" obj.id}}">{{obj.displayName}}</a>
+                <a href="{{href-to "volumes.detail" obj.id}}">{{obj.displayName}}</a>
               </td>
               <td data-title="{{dt.size}}">
                 {{obj.displaySize}}
               </td>
               <td data-title="{{dt.volume}}">
                 {{#if obj.persistentVolume}}
-                  <a href="{{href-to " authenticated.cluster.storage.persistent-volumes.detail" scope.currentCluster.id
+                  <a href="{{href-to "authenticated.cluster.storage.persistent-volumes.detail" scope.currentCluster.id
                     obj.persistentVolume.id}}">
                     {{obj.persistentVolume.displayName}}
                   </a>
@@ -311,7 +311,7 @@
               </td>
               <td data-title="{{dt.storageClass}}">
                 {{#if obj.storageClass}}
-                  <a href="{{href-to " authenticated.cluster.storage.classes.detail" scope.currentCluster.id
+                  <a href="{{href-to "authenticated.cluster.storage.classes.detail" scope.currentCluster.id
                     obj.storageClass.id}}">
                     {{obj.storageClass.displayName}}
                   </a>
