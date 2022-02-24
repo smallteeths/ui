@@ -135,9 +135,14 @@ export default Route.extend({
     const cloneType = clone.type;
 
     if ( !params.upgrade && params.addSidekick !== 'true' ) {
+      const defaultServiceEnabled = clone['workloadAnnotations'] ? clone['workloadAnnotations']['field.cattle.io/defaultPort'] : '';
+
       delete clone['workloadAnnotations'];
       delete clone['workloadLabels'];
       delete clone['publicEndpoints'];
+      if (defaultServiceEnabled) {
+        clone['workloadAnnotations'] = { 'field.cattle.io/defaultPort': defaultServiceEnabled };
+      }
       set(clone, 'type', 'workload');
       if ( clone.labels ) {
         delete clone.labels['workload.user.cattle.io/workloadselector'];
