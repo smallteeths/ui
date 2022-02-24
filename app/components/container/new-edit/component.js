@@ -69,7 +69,7 @@ export default Component.extend(NewOrEdit, ChildHook, {
   toggleMacvlan: false,
   harborVersion: '',
 
-  defaultServiceEnabled: 'false',
+  defaultServiceEnabled: 'true',
 
   isSidekick: equal('scaleMode', 'sidekick'),
   init() {
@@ -147,7 +147,7 @@ export default Component.extend(NewOrEdit, ChildHook, {
 
     const workloadAnnotations = get(this, 'primaryResource.workloadAnnotations') || {};
 
-    set(this, 'defaultServiceEnabled', workloadAnnotations['field.cattle.io/defaultPort'] === 'true' ? 'true' : 'false');
+    set(this, 'defaultServiceEnabled', workloadAnnotations['field.cattle.io/defaultPort'] === 'false' ? 'false' : 'true');
   },
 
   didInsertElement() {
@@ -440,12 +440,16 @@ export default Component.extend(NewOrEdit, ChildHook, {
 
     // Whether to create default service for new/edit workload
     const workloadAnnotations = get(this, 'primaryResource.workloadAnnotations') || {};
-    const enabled = get(this, 'portsLen') === 0 ? this.defaultServiceEnabled : 'false';
 
-    set(this, 'primaryResource.workloadAnnotations', {
-      ...workloadAnnotations,
-      'field.cattle.io/defaultPort': enabled
-    });
+    if (get(this, 'portsLen') === 0) {
+      set(this, 'primaryResource.workloadAnnotations', {
+        ...workloadAnnotations,
+        'field.cattle.io/defaultPort': this.defaultServiceEnabled
+      });
+    } else {
+      delete workloadAnnotations['field.cattle.io/defaultPort'];
+      set(this, 'primaryResource.workloadAnnotations', workloadAnnotations);
+    }
 
     let errors = [];
 
