@@ -108,15 +108,15 @@
           {{#if (eq obj.routeList.length 1)}}
             <div class="pull-left" style="width: 150px;">
               <div class="text-small">
-                <span class="badge-state vertical-middle" style="background: #BAD545;color: #fff;width: 37px;height:16px;">DST</span>
+                <span class="badge-state vertical-middle" style={{dstStyle}}>DST</span>
                 {{obj.routeList.firstObject.dst}}
               </div>
               <div class="text-small">
-                <span class="bg-warning badge-state vertical-middle" style="color: #fff;width: 37px;height:16px;">GW</span>
+                <span class="bg-warning badge-state vertical-middle" style={{gwStyle}}>GW</span>
                 {{obj.routeList.firstObject.gw}}
               </div>
               <div class="text-small">
-                <span class="bg-primary badge-state vertical-middle" style="width: 37px;height:16px;">Iface</span>
+                <span class="bg-primary badge-state vertical-middle" style={{ifaceStyle}}>Iface</span>
                 {{obj.routeList.firstObject.iface}}
               </div>
             </div>
@@ -134,15 +134,15 @@
           }}
             <div class="pull-left" style="max-width: 150px;">
               <div class="text-small">
-                <span class="badge-state vertical-middle" style="background: #BAD545;color: #fff;width: 37px;height:16px;">DST</span>
+                <span class="badge-state vertical-middle" style={{dstStyle}}>DST</span>
                 {{obj.routeList.firstObject.dst}}
               </div>
               <div class="text-small">
-                <span class="bg-warning badge-state vertical-middle" style="color: #fff;width: 37px;height:16px;">GW</span>
+                <span class="bg-warning badge-state vertical-middle" style={{gwStyle}}>GW</span>
                 {{obj.routeList.firstObject.gw}}
               </div>
               <div class="text-small">
-                <span class="bg-primary badge-state vertical-middle" style="width: 37px;height:16px;">Iface</span>
+                <span class="bg-primary badge-state vertical-middle" style={{ifaceStyle}}>Iface</span>
                 {{obj.routeList.firstObject.iface}}
               </div>
             </div>

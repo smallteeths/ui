@@ -4,6 +4,7 @@ import {
   get, set, computed, observer, setProperties
 } from '@ember/object';
 import { all } from 'rsvp';
+import { htmlSafe } from '@ember/string';
 
 export const headers = [
   {
@@ -55,6 +56,8 @@ export const headers = [
   },
 ];
 
+const tagStyle = 'color: #fff;width: 37px;height:16px;padding: 1px 5px; border-radius: 2px;';
+
 export default Controller.extend({
   growl:                  service(),
   vlansubnet:             service(),
@@ -99,6 +102,9 @@ export default Controller.extend({
       label:          'action.remove',
     }
   ],
+  dstStyle:   htmlSafe(`background: #BAD545;${  tagStyle }`),
+  gwStyle:    htmlSafe(tagStyle),
+  ifaceStyle: htmlSafe(tagStyle),
   init() {
     this._super(...arguments);
     this.vlansubnetsDidChanged();
