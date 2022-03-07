@@ -55,7 +55,6 @@
       {{schema/input-secret
         namespace=namespace
         value=config.secretName
-        selected=selected
         valueKey="name"
       }}
       {{/if}}
@@ -106,9 +105,9 @@
   <div class="row">
     <div class="col span-12">
       {{form-key-to-path
+        namespace=namespace
         initialItems=config.items
         secretName=config.secretName
-        secretId=selected
         editing=editing
         changed=(action (mut config.items))
       }}
