@@ -9389,12 +9389,6 @@ nodeDriver:
         placeholder: "例如: ip:VM Network, expression 或 string"
       label: vApp屬性
       addActionLabel: 添加參數
-    creationMethod:
-      cloneAnExistingVirtualMachine: 克隆現有虛擬機
-      deployFromTemplateContentLibrary: "模板部署: Content Library"
-      deployFromTemplateDataCenter: "模板部署: Data Center"
-      label: 創建方法
-      rancherOsIso: RancherOS ISO (Deprecated)
   azure:
     placement:
       title: 位置

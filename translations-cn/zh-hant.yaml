@@ -7382,12 +7382,6 @@ nodeDriver:
     cloudinitType:
       label: Cloud Init type
     contentLibrary: "Content library:"
-    creationMethod:
-      cloneAnExistingVirtualMachine: 克隆現有虛擬機
-      deployFromTemplateContentLibrary: "模板部署: Content Library"
-      deployFromTemplateDataCenter: "模板部署: Data Center"
-      label: 創建方法
-      rancherOsIso: RancherOS ISO (Deprecated)
     creationType:
       label: 創建方法
       legacy: 從 boot2docker ISO 安裝 (Legacy)
