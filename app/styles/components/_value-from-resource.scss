@@ -9,3 +9,10 @@
 .value-from-resource__single-value {
   grid-column: span 2;
 }
+
+.value-from-resource__label-value {
+  display: grid;
+  height: 100%;
+  grid-template-rows: auto 1fr;
+  align-items: center;
+}

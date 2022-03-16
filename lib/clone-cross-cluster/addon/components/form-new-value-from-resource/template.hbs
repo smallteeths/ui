@@ -1,0 +1,98 @@
+
+<div class="value-from-resource">
+  <div class="value-from-resource__type value-from-resource__label-value">
+    <label>{{t 'formSources.type.label'}}</label>
+    {{typeSelected.label}}
+  </div>
+  <div class="value-from-resource__name">
+    <label>{{t nameLabel}}</label>
+    {{input
+      class="form-control"
+      value=name
+      input=(action 'updateRow')
+      placeholder=(t 'newContainer.environment.keyPlaceholder')
+    }}
+  </div>
+{{#if (eq type 'simple')}}
+  <div class="value-from-resource__single-value">
+    <label>{{t 'newContainer.environment.valueLabel'}}</label>
+    {{input
+      class="form-control"
+      value=valStr
+      input=(action 'updateRow')
+      placeholder=(t 'newContainer.environment.valueLabel')
+    }}
+  </div>
+  {{else if needsSource}}
+    <div class="{{if (or (eq type 'configMapRef') (eq type 'secretRef')) 'value-from-resource__single-value'}} value-from-resource__label-value">
+      <label>{{t sourceLabelPlaceholder.label}}</label>
+      {{#if (or (eq type 'secretRef') (eq type 'secretKeyRef'))}}
+      <div>{{referenced}}
+        <button class="btn bg-transparent" {{action 'editSecret' refData}}>
+          <i class="icon icon-edit"/>
+          {{t "generic.edit"}}
+        </button>
+      </div>
+      {{else if (or (eq type 'configMapRef') (eq type 'configMapKeyRef'))}}
+      <div>
+        {{referenced}}
+        <button class="btn bg-transparent" {{action 'editConfigMap' refData}}>
+          <i class="icon icon-edit"/>
+          {{t "generic.edit"}}
+        </button>
+      </div>
+      {{/if}}
+      
+    </div>
+    {{#if (and (not-eq type 'secretRef') (not-eq type 'configMapRef'))}}
+    <div>
+      <label>{{t 'newContainer.environment.keyLabel'}}</label>
+      {{new-select
+        value=key
+        content=keys
+        change=(action 'updateRow')
+        localizedPrompt=true
+        prompt="f5TLSPage.form.termination.placeholder"
+      }}
+    </div>
+    {{/if}}
+
+  {{else if (eq type 'resourceFieldRef')}}
+    <div>
+      <label>{{t 'formAgentEnvVar.headers.containerName'}}</label>
+      {{input
+        class="form-control"
+        value=refName
+        input=(action 'updateRow')
+        placeholder=""
+      }}
+    </div>
+    <div>
+      <label>{{t 'newContainer.environment.keyLabel'}}</label>
+      {{new-select
+        value=key
+        content=resourceKeyOpts
+        change=(action 'updateRow')
+        localizedPrompt=true
+        prompt="f5TLSPage.form.termination.placeholder"
+      }}
+    </div>
+  {{else}}
+  <div class="value-from-resource__single-value">
+    <label>{{t 'newContainer.environment.keyLabel'}}</label>
+    {{input
+      class="form-control"
+      value=fieldPath
+      input=(action 'updateRow')
+      placeholder=""
+      disabled=(not editing)
+    }}
+  </div>
+{{/if}}
+<button class="btn bg-primary btn-sm" type="button" {{action "removeRow"}}>
+  <i class="icon icon-minus" />
+  <span class="sr-only">
+    {{t "generic.remove"}}
+  </span>
+</button>
+</div>

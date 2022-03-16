@@ -182,38 +182,25 @@
         expandAll=al.expandAll
         expand=(action expandFn)
       }}
-        {{form-key-value
-          initialMap=container.environment
-          changed=(action (mut container.environment))
-          allowEmptyValue=true
-          editing=true
-          header=(t "newContainer.environment.label")
-          addActionLabel="newContainer.environment.addAction"
-          keyLabel="newContainer.environment.keyLabel"
-          keyPlaceholder="newContainer.environment.keyPlaceholder"
-          valueLabel="newContainer.environment.valueLabel"
-          valuePlaceholder="newContainer.environment.valuePlaceholder"
-        }}
-        <hr class="mt-30 mb-30" />
-        {{container/form-new-sources
-          namespace=namespace
-          targetNamespace=targetNamespace
-          classNames="accordion-wrapper"
-          sources=(get environmentFromMap container._originName)
+
+        {{form-new-env-vars
+          env=(get envMap container._originName)
+          envFrom=(get envFromMap container._originName)
           updateSecret=(action 'updateSecret')
           updateConfigMap=(action 'updateConfigMap')
-          errors=secretErrors
+          header=(t "newContainer.environment.label")
         }}
-        {{container/form-sources
+        {{form-env-vars
+          container=container
+          env=(get targetEnvMap container._originName)
+          envFrom=(get targetEnvFromMap container._originName)
           namespace=targetNamespace
-          classNames="accordion-wrapper"
-          sources=(get targetEnvironmentFromMap container._originName)
-          errors=secretErrors
           editing=true
           projectSecrets=targetProjectSecrets
           namespaceSecrets=targetNamespaceSecrets
           namespaceConfigMaps=targetNamespaceConfigMaps
         }}
+        
       {{/accordion-list-item}}
       {{#if (and showCredentialConfig (eq index 0))}}
         {{#accordion-list-item

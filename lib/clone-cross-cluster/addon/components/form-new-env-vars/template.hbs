@@ -1,0 +1,21 @@
+{{#if header}}
+  <div>
+    <label class="acc-label">{{header}}</label>
+  </div>
+{{/if}}
+{{#if allEnv.length}}
+<div>
+  {{#each allEnv as |row|}}
+  <div>
+    {{form-new-value-from-resource
+      value=row.data
+      refData=row.refData
+      update=(action 'updateRow' row)
+      remove=(action 'removeRow' row)
+      updateSecret=updateSecret
+      updateConfigMap=updateConfigMap
+      }}
+    </div>
+  {{/each}}
+</div>
+{{/if}}

@@ -1,0 +1,28 @@
+{{#if header}}
+    <div>
+      <label class="acc-label">{{header}}</label>
+    </div>
+  {{/if}}
+{{#if allEnv.length}}
+<div>
+  {{#each allEnv as |row|}}
+  <div>
+    {{form-value-from-resource
+      value=row.value
+      projectSecrets=projectSecrets
+      namespaceSecrets=namespaceSecrets
+      namespaceConfigMaps=namespaceConfigMaps
+      editing=editing
+      namespace=namespace
+      update=(action 'updateRow' row)
+      remove=(action 'removeRow' row)}}
+    </div>
+  {{/each}}
+</div>
+{{/if}}
+{{#if editing}}
+<button class="btn bg-link icon-btn" type="button" {{action "addFromReference" }}>
+  <i class="icon icon-plus text-small" />
+  <span>{{t 'newContainer.environment.addAction'}}</span>
+</button>
+{{/if}}
