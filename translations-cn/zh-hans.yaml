@@ -2239,6 +2239,8 @@ globalMonitoringPage:
   notReady: 正在安装全局监控到指定集群的系统项目里...
   updating: 正在更新全局监控组件...
   noTemplate: 无法加载全局监控模版
+  monitoring: 从 Rancher v2.6.3 开始，Cluster Manager 中的全局监控已经不推荐使用。请在 Cluster Explorer 的 Cluster Management 中查看新版的<a href="/dashboard/c/local/manager/globalMonitoring#general">全局监控</a>。
+  monitoringV2Warning: 从 Rancher v2.6.3 开始，Cluster Manager 中的全局监控已经不推荐使用。新版<a href="/dashboard/c/local/manager/globalMonitoring#general">全局监控</a>已经启动。
   version: 全局监控版本
   disable: 禁用
   confirmDisable: "你确定吗? 再次单击将禁用全局监控"

@@ -10445,6 +10445,8 @@ globalDnsPage:
       rootDomain: 根域名
     title: 全局 DNS 提供商列表
 globalMonitoringPage:
+  monitoring: 從 Rancher v2.6.3 開始，Cluster Manager 中的全局監控已經不推薦使用。請在 Cluster Explorer 的 Cluster Management 中查看新版的<a href="/dashboard/c/local/manager/globalMonitoring#general">全局監控</a>。
+  monitoringV2Warning: 從 Rancher v2.6.3 開始，Cluster Manager 中的全局監控已經不推薦使用。新版<a href="/dashboard/c/local/manager/globalMonitoring#general">全局監控</a>已經啟動。
   cluster: 全局監控所在集羣
   confirmDisable: 你確定嗎? 再次單擊將禁用全局監控
   customAnswers:

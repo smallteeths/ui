@@ -2246,6 +2246,8 @@ globalMonitoringPage:
   disabled: "Global Monitoring is not enabled yet. Please click Enable button to enable it. You will be able to query your metrics across multiple clusters if cluster monitoring <code>v0.0.7000</code> or above enabled inside the clusters."
   notReady: Installing Global Monitoring into the system project of global monitoring cluster...
   updating: Updating Global Monitoring in the system project of global monitoring cluster...
+  monitoring: Monitoring in Cluster Manager has been deprecated as of Rancher v2.6.3. Check out the updated version of <a href="/dashboard/c/local/manager/globalMonitoring#general">global monitoring</a> in Cluster Explorer Cluster Management.
+  monitoringV2Warning: Monitoring in Cluster Manager has been deprecated as of Rancher v2.6.3. The updated version of <a href="/dashboard/c/local/manager/globalMonitoring#general">global monitoring</a> in Cluster Explorer Cluster Management is currently deployed.
   version: Global Monitoring Version
   disable: Disable
   noTemplate: Failed to load global monitoring catalog templates.

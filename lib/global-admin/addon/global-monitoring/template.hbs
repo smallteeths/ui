@@ -1,3 +1,14 @@
+{{#if (eq settings.globalMonitoringEnabledV2 "true")}}
+  <BannerMessage
+    @message={{t "globalMonitoringPage.monitoringV2Warning" htmlSafe=true}}
+    @color="bg-warning"
+  />
+{{else}}
+  <BannerMessage
+    @message={{t "globalMonitoringPage.monitoring" htmlSafe=true}}
+    @color="bg-warning"
+  />
+{{/if}}
 <section class="header">
   <h1 class="pull-left">
     {{t "globalMonitoringPage.header"}}
