@@ -1,0 +1,67 @@
+{{#accordion-list-item
+     title=(t 'formSslClientAuth.title')
+     detail=(t 'formSslClientAuth.detail' appName=settings.appName)
+     status=status
+     statusClass=statusClass
+     expandAll=expandAll
+     expand=(action expandFn)
+}}
+  <div class="row">
+    <div class="col span-6">
+      <div class="radio mb-10">
+        <label>{{radio-button disabled=(not editing) selection=clinetAuth.strategy value="off"}} {{t 'formSslClientAuth.strategy.off'}}</label>
+      </div>
+      <div class="radio mb-10">
+        <label>{{radio-button disabled=(not editing) selection=clinetAuth.strategy value="on"}} {{t 'formSslClientAuth.strategy.on'}}</label>
+      </div>
+      <div class="radio mb-10">
+        <label>{{radio-button disabled=(not editing) selection=clinetAuth.strategy value="optional"}} {{t 'formSslClientAuth.strategy.optional'}}</label>
+      </div>
+      <div class="radio">
+        <label>{{radio-button disabled=(not editing) selection=clinetAuth.strategy value="optional_no_ca"}} {{t 'formSslClientAuth.strategy.optionalNoCA'}}</label>
+      </div>
+    </div>
+
+    {{#unless (eq clinetAuth.strategy 'off')}}
+      <div class="col span-6">
+        <div class="box">
+          <label class="acc-label">{{t 'formSslClientAuth.secret.title'}}{{field-required}}</label>
+          {{#input-or-display editable=editing value=clinetAuth.secret}}
+            {{new-select
+              classNames="form-control"
+              content=secretChoise
+              optionLabelPath="label"
+              optionValuePath="value"
+              value=clinetAuth.secret
+            }}
+            <p class="help-block">{{t 'formSslClientAuth.secret.detail'}}</p>
+          {{/input-or-display}}
+        </div>
+      </div>
+    {{/unless}}
+  </div>
+
+  {{#unless (eq clinetAuth.strategy 'off')}}
+    <div class="row">
+      <div class="col span-6">
+        <div class="box">
+          <label class="acc-label">{{t 'formSslClientAuth.depth.title'}}</label>
+          {{#input-or-display editable=editing value=clinetAuth.depth}}
+            {{input-integer classNames="form-control" value=clinetAuth.depth  placeholder=(t "formSslClientAuth.depth.placeholder")}}
+            <p class="help-block">{{t 'formSslClientAuth.depth.detail'}}</p>
+          {{/input-or-display}}
+        </div>
+      </div>
+      <div class="col span-6">
+        <div class="box">
+          <label class="acc-label">{{t 'formSslClientAuth.errorPage.title'}}</label>
+          {{#input-or-display editable=editing value=clinetAuth.errorPage}}
+            {{input classNames="form-control" value=clinetAuth.errorPage  placeholder=(t "formSslClientAuth.errorPage.placeholder")}}
+            <p class="help-block">{{t 'formSslClientAuth.errorPage.detail'}}</p>
+          {{/input-or-display}}
+        </div>
+      </div>
+    </div>
+  {{/unless}}
+
+{{/accordion-list-item}}

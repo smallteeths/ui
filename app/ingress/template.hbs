@@ -47,5 +47,34 @@
       initialLabels=model.ingress.labels
       model=model.ingress
     }}
+
+    {{form-ssl-client-auth
+      certificates=certificates
+      editing=false
+      expandAll=al.expandAll
+      expandFn=expandFn
+      ingress=model.ingress
+      errors=certErrors
+      namespace=namespace
+      namespacedCertificates=namespacedCertificates
+    }}
+
+    {{form-ingress-general-setting
+      certificates=certificates
+      editing=false
+      expandAll=al.expandAll
+      expandFn=expandFn
+      ingress=model.ingress
+      errors=certErrors
+    }}
+
+    {{form-ingress-cors-setting
+      certificates=certificates
+      editing=false
+      expandAll=al.expandAll
+      expandFn=expandFn
+      ingress=model.ingress
+      errors=certErrors
+    }}
   {{/accordion-list}}
 </section>

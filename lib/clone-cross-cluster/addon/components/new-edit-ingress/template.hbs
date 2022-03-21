@@ -65,6 +65,36 @@
     model=ingress
     setLabels=(action "setLabels")
   }}
+
+  {{form-ssl-client-auth
+    certificates=certificates
+    editing=true
+    expandAll=al.expandAll
+    expandFn=expandFn
+    ingress=ingress
+    errors=certErrors
+    namespace=namespace
+    namespacedCertificates=namespacedCertificates
+    clientAuthSecert=clientAuthSecert
+  }}
+
+  {{form-ingress-general-setting
+    certificates=certificates
+    editing=true
+    expandAll=al.expandAll
+    expandFn=expandFn
+    ingress=ingress
+    errors=certErrors
+  }}
+
+  {{form-ingress-cors-setting
+      certificates=certificates
+      editing=false
+      expandAll=al.expandAll
+      expandFn=expandFn
+      ingress=ingress
+      errors=certErrors
+    }}
 {{/accordion-list}}
 
 {{#if isGKE}}

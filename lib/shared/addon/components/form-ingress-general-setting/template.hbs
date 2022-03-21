@@ -1,0 +1,100 @@
+{{#accordion-list-item
+     title=(t 'formIngressGeneralSetting.title')
+     detail=(t 'formIngressGeneralSetting.detail' appName=settings.appName)
+     status=status
+     statusClass=statusClass
+     expandAll=expandAll
+     expand=(action expandFn)
+}}
+
+  <div class="row box p-20">
+    <div class="col span-6 mt-0 mb-0">
+      <label class="acc-label">{{t 'formIngressGeneralSetting.permanentRedirect.title'}}</label>
+      {{#input-or-display editable=editing value=generalSetting.permanentRedirect}}
+        {{input classNames="form-control" value=generalSetting.permanentRedirect  placeholder=(t "formIngressGeneralSetting.permanentRedirect.placeholder")}}
+      {{/input-or-display}}
+      <p class="help-block">{{t 'formIngressGeneralSetting.permanentRedirect.detail'}}</p>
+    </div>
+    <div class="col span-6 mt-0 mb-0">
+      <label class="acc-label">{{t 'formIngressGeneralSetting.permanentRedirectCode.title'}}</label>
+      {{#input-or-display editable=editing value=generalSetting.permanentRedirectCode}}
+        {{input-integer classNames="form-control" value=generalSetting.permanentRedirectCode  placeholder=(t "formIngressGeneralSetting.permanentRedirectCode.placeholder")}}
+      {{/input-or-display}}
+      <p class="help-block">{{t 'formIngressGeneralSetting.permanentRedirectCode.detail'}}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col span-6 box">
+      <label class="acc-label">{{t 'formIngressGeneralSetting.sslRedirect.title'}}</label>
+      <div class="radio">
+        <label>{{radio-button disabled=(not editing) selection=generalSetting.sslRedirect value="true"}} {{t 'generic.enabled'}}</label>
+      </div>
+      <div class="radio">
+        <label>{{radio-button disabled=(not editing) selection=generalSetting.sslRedirect value="false"}} {{t 'generic.disable'}}</label>
+      </div>
+    </div>
+
+    <div class="row col span-6 box p-20">
+      <div class="col span-5 m-0">
+        <label class="acc-label">{{t 'formIngressGeneralSetting.proxyBuffering.title'}}</label>
+        <div class="radio">
+          <label>{{radio-button disabled=(not editing) selection=generalSetting.proxyBuffering value="on"}} {{t 'generic.enabled'}}</label>
+        </div>
+        <div class="radio">
+          <label>{{radio-button disabled=(not editing) selection=generalSetting.proxyBuffering value="off"}} {{t 'generic.disable'}}</label>
+        </div>
+      </div>
+      {{#unless (eq generalSetting.proxyBuffering 'off')}}
+      <div class="col span-7 m-0">
+        <label class="acc-label">{{t 'formIngressGeneralSetting.proxyBufferSize.title'}}</label>
+        {{#input-or-display editable=editing value=generalSetting.proxyBufferSize}}
+          {{input-integer classNames="form-control" value=generalSetting.proxyBufferSize  placeholder=(t "formIngressGeneralSetting.proxyBufferSize.placeholder")}}
+        {{/input-or-display}}
+      </div>
+      {{/unless}}
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col span-6">
+      <div class="box">
+        <label class="acc-label">{{t 'formIngressGeneralSetting.whitelist.title'}}</label>
+        {{#input-or-display editable=editing value=generalSetting.whitelist}}
+          {{input classNames="form-control" value=generalSetting.whitelist  placeholder=(t "formIngressGeneralSetting.whitelist.placeholder")}}
+        {{/input-or-display}}
+        <p class="help-block">{{t 'formIngressGeneralSetting.whitelist.detail'}}</p>
+      </div>
+    </div>
+    <div class="col span-6">
+      <div class="box">
+        <label class="acc-label">{{t 'formIngressGeneralSetting.limitRps.title'}}</label>
+        {{#input-or-display editable=editing value=generalSetting.limitRps}}
+          {{input-integer classNames="form-control" value=generalSetting.limitRps  placeholder=(t "formIngressGeneralSetting.limitRps.placeholder")}}
+        {{/input-or-display}}
+        <p class="help-block">{{t 'formIngressGeneralSetting.limitRps.detail'}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col span-6">
+      <div class="box">
+        <label class="acc-label">{{t 'formIngressGeneralSetting.proxyBodySize.title'}}</label>
+        {{#input-or-display editable=editing value=generalSetting.proxyBodySize}}
+          {{input-integer classNames="form-control" value=generalSetting.proxyBodySize  placeholder=(t "formIngressGeneralSetting.proxyBodySize.placeholder")}}
+        {{/input-or-display}}
+        <p class="help-block">{{t 'formIngressGeneralSetting.proxyBodySize.detail'}}</p>
+      </div>
+    </div>
+    <div class="col span-6">
+      <div class="box">
+        <label class="acc-label">{{t 'formIngressGeneralSetting.rewriteTarget.title'}}</label>
+        {{#input-or-display editable=editing value=generalSetting.rewriteTarget}}
+          {{input classNames="form-control" value=generalSetting.rewriteTarget  placeholder=(t "formIngressGeneralSetting.rewriteTarget.placeholder")}}
+        {{/input-or-display}}
+        <p class="help-block">{{t 'formIngressGeneralSetting.rewriteTarget.detail'}}</p>
+      </div>
+    </div>
+  </div>
+{{/accordion-list-item}}

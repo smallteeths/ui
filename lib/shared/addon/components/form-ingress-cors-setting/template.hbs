@@ -1,0 +1,123 @@
+{{#accordion-list-item
+     title=(t 'formIngressCorsSetting.title')
+     detail=(t 'formIngressCorsSetting.detail' appName=settings.appName)
+     status=status
+     statusClass=statusClass
+     expandAll=expandAll
+     expand=(action expandFn)
+}}
+  <div class="row">
+    <div class="col span-6">
+      <div class="radio mb-10">
+        <label>{{radio-button disabled=(not editing) selection=ingressCors.strategy value="true"}} {{t 'generic.enabled'}}</label>
+      </div>
+      <div class="radio mb-10">
+        <label>{{radio-button disabled=(not editing) selection=ingressCors.strategy value="false"}} {{t 'generic.disable'}}</label>
+      </div>
+    </div>
+    {{#unless (eq ingressCors.strategy 'false')}}
+    <div class="col span-6">
+      <div class="box">
+        <label class="acc-label">{{t 'formIngressCorsSetting.corsAllowMethod.title'}}{{field-required}}</label>
+        <div class="checkbox pt-10 text-left">
+          <label class="mr-20">
+            {{input type="checkbox" disabled=(not editing) checked=ingressCors.allowMethods.get}}
+            GET
+          </label>
+          <label class="mr-20">
+            {{input type="checkbox" disabled=(not editing) checked=ingressCors.allowMethods.post}}
+            POST
+          </label>
+          <label class="mr-20">
+            {{input type="checkbox" disabled=(not editing) checked=ingressCors.allowMethods.put}}
+            PUT
+          </label>
+          <label class="mr-20">
+            {{input type="checkbox" disabled=(not editing) checked=ingressCors.allowMethods.delete}}
+            DELETE
+          </label>
+          <label class="mr-20">
+            {{input type="checkbox" disabled=(not editing) checked=ingressCors.allowMethods.patch}}
+            PATCH
+          </label>
+          <label class="mr-20">
+            {{input type="checkbox" disabled=(not editing) checked=ingressCors.allowMethods.options}}
+            OPTIONS
+          </label>
+        </div>
+      </div>
+    </div>
+    {{/unless}}
+  </div>
+  {{#unless (eq ingressCors.strategy 'false')}}
+  <div class="row">
+    <div class="col span-6">
+      <div class="box">
+        <label class="acc-label">{{t 'formIngressCorsSetting.corsAllowHeader.title'}}</label>
+        {{#input-or-display editable=editing value=ingressCors.allowHeader}}
+          {{textarea-autogrow
+            class="form-control input-sm value"
+            spellcheck="false"
+            value=ingressCors.allowHeader
+            placeholder="formIngressCorsSetting.corsAllowHeader.placeholder"
+          }}
+          <p class="help-block">{{t 'formIngressCorsSetting.corsAllowHeader.detail'}}</p>
+        {{/input-or-display}}
+      </div>
+    </div>
+    <div class="col span-6">
+      <div class="box">
+        <label class="acc-label">{{t 'formIngressCorsSetting.corsExposeHeader.title'}}</label>
+        {{#input-or-display editable=editing value=ingressCors.exposeHeader}}
+          {{textarea-autogrow
+            class="form-control input-sm value"
+            spellcheck="false"
+            value=ingressCors.exposeHeader
+            placeholder="formIngressCorsSetting.corsExposeHeader.placeholder"
+          }}
+          <p class="help-block">{{t 'formIngressCorsSetting.corsExposeHeader.detail'}}</p>
+        {{/input-or-display}}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col span-6">
+      <div class="box">
+        <label class="acc-label">{{t 'formIngressCorsSetting.corsAllowOrigin.title'}}</label>
+        {{#input-or-display editable=editing value=ingressCors.allowOrigin}}
+          {{textarea-autogrow
+            class="form-control input-sm value"
+            spellcheck="false"
+            value=ingressCors.allowOrigin
+            placeholder="formIngressCorsSetting.corsAllowOrigin.placeholder"
+          }}
+          <p class="help-block">{{t 'formIngressCorsSetting.corsAllowOrigin.detail'}}</p>
+        {{/input-or-display}}
+      </div>
+    </div>
+    <div class="col span-6">
+      <div class="box">
+        <label class="acc-label">{{t 'formIngressCorsSetting.corsAllowCredential.title'}}</label>
+        <div class="radio">
+          <label>{{radio-button disabled=(not editing) selection=ingressCors.allowCredential value="true"}} {{t 'generic.enabled'}}</label>
+        </div>
+        <div class="radio">
+          <label>{{radio-button disabled=(not editing) selection=ingressCors.allowCredential value="false"}} {{t 'generic.disable'}}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col span-6">
+      <div class="box">
+        <label class="acc-label">{{t 'formIngressCorsSetting.corsMaxAge.title'}}</label>
+        {{#input-or-display editable=editing value=ingressCors.maxAge}}
+          {{input-integer classNames="form-control" value=ingressCors.maxAge  placeholder=(t "formIngressCorsSetting.corsMaxAge.placeholder")}}
+        {{/input-or-display}}
+      </div>
+    </div>
+  </div>
+  {{/unless}}
+
+{{/accordion-list-item}}

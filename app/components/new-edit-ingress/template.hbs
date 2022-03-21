@@ -39,6 +39,13 @@
   <hr class="mt-30 mb-30" />
 </section>
 
+{{#if advanced}}
+  {{banner-message
+    color="bg-warning mb-0 mt-10"
+    message=(t "ingressPage.ingressNginxClassWarning")
+  }}
+{{/if}}
+
 {{#accordion-list as | al expandFn | }}
   {{form-ssl-termination
     certificates=certificates
@@ -61,6 +68,38 @@
     model=ingress
     setLabels=(action "setLabels")
   }}
+
+  {{#advanced-section advanced=advanced}}
+    {{form-ssl-client-auth
+      certificates=certificates
+      editing=true
+      expandAll=al.expandAll
+      expandFn=expandFn
+      ingress=ingress
+      errors=certErrors
+      namespace=namespace
+      namespacedCertificates=namespacedCertificates
+      clientAuthSecert=clientAuthSecert
+    }}
+
+    {{form-ingress-general-setting
+      certificates=certificates
+      editing=true
+      expandAll=al.expandAll
+      expandFn=expandFn
+      ingress=ingress
+      errors=certErrors
+    }}
+
+    {{form-ingress-cors-setting
+      certificates=certificates
+      editing=true
+      expandAll=al.expandAll
+      expandFn=expandFn
+      ingress=ingress
+      errors=certErrors
+    }}
+  {{/advanced-section}}
 {{/accordion-list}}
 
 {{#if isGKE}}

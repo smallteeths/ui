@@ -1,14 +1,33 @@
 import { hash } from 'rsvp';
 import { get, set } from '@ember/object'
 import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
 
 export default Route.extend({
+  settings:   service(),
+  nsResource: service(),
+  scope:      service(),
   model(params) {
     const store = get(this, 'store');
+    let projectSecrets = [];
+    let namespacedSecrets = [];
+
+    if (get(this, 'settings.enable-load-resource-by-namespace')) {
+      const namespaces =  get(this, 'scope.currentProject.namespaces') || {};
+      const namespaceId = params.namespaceId === undefined ? get(namespaces, 'firstObject.id') : params.namespaceId;
+
+      projectSecrets =  namespaceId ? [] : this.nsResource.findAll('secret')
+      namespacedSecrets = this.nsResource.findAll('namespacedSecret', namespaceId)
+    } else {
+      projectSecrets =   store.findAll('secret')
+      namespacedSecrets = store.findAll('namespacedSecret')
+    }
 
     const dependencies = {
       namespacedcertificates: store.findAll('namespacedcertificate'),
       certificates:           store.findAll('certificate'),
+      projectSecrets,
+      namespacedSecrets,
     };
 
     if (params.ingressId) {
@@ -36,6 +55,8 @@ export default Route.extend({
       }
       hash.ingress = ingress;
 
+      hash.clientAuthSecert = this.getClientAuthSecert(hash);
+
       return hash;
     });
   },
@@ -51,5 +72,13 @@ export default Route.extend({
     cancel() {
       this.goToPrevious();
     },
+  },
+
+  getClientAuthSecert(hash){
+    const proj = get(hash, 'projectSecrets').filterBy('type', 'secret');
+    const ns = get(hash, 'namespacedSecrets').filterBy('type', 'namespacedSecret');
+    const out = proj.concat(ns);
+
+    return out.filter((item) => !!item?.data?.['ca.crt']);
   }
 });

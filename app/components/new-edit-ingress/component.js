@@ -17,9 +17,11 @@ export default Component.extend(NewOrEdit, {
   editing:                null,
   existing:               null,
   namespacedCertificates: null,
+  clientAuthSecert:       null,
   certificates:           null,
   supportVlansubnet:      false,
   enableVlansubnet:       false,
+  advanced:               false,
 
   isGKE: alias('scope.currentCluster.isGKE'),
 
