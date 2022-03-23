@@ -31,7 +31,14 @@
           target="_blank"
           rel="nofollow noopener noreferrer"
         >
-          <div class="global-monitoring"></div>
+          {{#tooltip-element
+              classNames="max-full-width global-monitoring block"
+              type="tooltip-basic"
+              tooltipTemplate='-tooltip-break-all'
+              model=(t "globalMonitoringPage.links.globalMonitoring.label")
+              placement="top"
+          }}
+          {{/tooltip-element}}
         </a>
 
         <a
@@ -40,7 +47,14 @@
           target="_blank"
           rel="nofollow noopener noreferrer"
         >
-          <div class="grafana"></div>
+          {{#tooltip-element
+              classNames="max-full-width grafana block"
+              type="tooltip-basic"
+              tooltipTemplate='-tooltip-break-all'
+              model=(t "globalMonitoringPage.links.grafana.label")
+              placement="top"
+          }}
+          {{/tooltip-element}}
         </a>
 
         <a
@@ -49,7 +63,14 @@
           target="_blank"
           rel="nofollow noopener noreferrer"
         >
-          <div class="thanos"></div>
+          {{#tooltip-element
+              classNames="max-full-width thanos block"
+              type="tooltip-basic"
+              tooltipTemplate='-tooltip-break-all'
+              model=(t "globalMonitoringPage.links.thanos.label")
+              placement="top"
+          }}
+          {{/tooltip-element}}
         </a>
       </div>
     {{/if}}
