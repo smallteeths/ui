@@ -11787,3 +11787,17 @@ apiPerformance:
     power: Power
     normal: 常規
   powerMessage: Power模式可能會消耗後台服務更多的計算資源
+modalConfirmIgnoreNameConflicts:
+  title: 請確認是否要忽略以下克隆鏡像庫憑證?
+  confirm: 確認
+  resource:
+    name: 名稱
+    type: 類型
+    sourceProject: 源項目
+    targetProject: 目標項目
+    sourceCluster: 源集羣
+    targetCluster: 目標集羣
+    registries: 地址
+    userName: 用戶名
+    detail: 詳情
+    hide: 隱藏

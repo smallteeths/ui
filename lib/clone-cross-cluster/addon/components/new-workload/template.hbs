@@ -209,6 +209,12 @@
           expandAll=al.expandAll
           expand=(action expandFn)
         }}
+          {{#if credentialList.length}}
+          <label>
+            {{input type="checkbox" checked=ignoreNameConflicts}}
+            {{t 'cloneCrossCluster.newContainer.imagePullSecret.ignoreNameConflicts'}}
+          </label>
+          {{/if}}
           {{container/form-new-image-pull-secrets
           credentialList=credentialList
           }}

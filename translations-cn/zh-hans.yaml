@@ -11785,3 +11785,17 @@ apiPerformance:
     power: Power
     normal: 常规
   powerMessage: Power模式可能会消耗后台服务更多的计算资源
+modalConfirmIgnoreNameConflicts:
+  title: 请确认是否要忽略以下克隆镜像库凭证?
+  confirm: 确认
+  resource:
+    name: 名称
+    type: 类型
+    sourceProject: 源项目
+    targetProject: 目标项目
+    sourceCluster: 源集群
+    targetCluster: 目标集群
+    registries: 地址
+    userName: 用户名
+    detail: 详情
+    hide: 隐藏

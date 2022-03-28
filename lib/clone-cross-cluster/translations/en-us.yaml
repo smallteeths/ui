@@ -21,6 +21,7 @@ cloneCrossCluster:
       addressRequired: Registry Credential Address Required
       usernameRequired: Registry Credential User Name Required
       passwordRequired: Registry Credential Password Required
+      ignoreNameConflicts: Ignore Name Conflicts
     ingress:
       label: Load Balancing(Ingress)
       detail: External Access Provided By The Application

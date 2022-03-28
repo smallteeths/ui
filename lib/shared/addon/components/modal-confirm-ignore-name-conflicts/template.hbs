@@ -1,0 +1,56 @@
+<header class="container-header-text">
+  <h3>
+    {{t "modalConfirmIgnoreNameConflicts.title" project=targetProject.name}}
+  </h3>
+</header>
+<hr>
+<div class="row">
+   <div class="col span-5 clip">
+    {{t "modalConfirmIgnoreNameConflicts.resource.type"}}
+  </div>
+  <div class="col span-5 clip">
+    {{t "modalConfirmIgnoreNameConflicts.resource.name"}}
+  </div>
+</div>
+{{#each model as |row|}}
+<div class="row">
+  <div class="col span-5 clip">
+  {{row.target.type}}
+  </div>
+  <div class="col span-5 clip">
+     {{#if row.target.namespaceId}}{{targetNamespace.name}} / {{/if}}{{row.target.name}}
+  </div>
+  <div class="col span-2">
+    <a role="button" class="btn bg-transparent p-0" {{action "toggleDetail" row}}>
+      {{#if row.detail}}{{t "modalConfirmIgnoreNameConflicts.resource.hide"}}{{else}}{{t "modalConfirmIgnoreNameConflicts.resource.detail"}}{{/if}}
+    </a>
+  </div>
+</div>
+{{#if row.detail}}
+<div class="row">
+  <div class="col span-5">
+    <div class="clip">{{t "modalConfirmIgnoreNameConflicts.resource.sourceCluster"}}: {{sourceCluster.name}}</div>
+    <div class="clip">{{t "modalConfirmIgnoreNameConflicts.resource.sourceProject"}}: {{sourceProject.name}}</div>
+    {{#if row.source.namespaceId}}<div class="clip">{{t "generic.namespace"}}: {{sourceNamespace.name}}</div>{{/if}}
+    <div class="clip">{{t "modalConfirmIgnoreNameConflicts.resource.name"}}: {{row.source.name}}</div>
+    {{#each row.source.registries as |item|}}
+    <div class="clip">{{t "modalConfirmIgnoreNameConflicts.resource.registries"}}: {{item.address}}</div>
+    <div class="clip">{{t "modalConfirmIgnoreNameConflicts.resource.userName"}}: {{item.username}}</div>
+    {{/each}}
+  </div>
+  <div class="col span-5">
+    <div class="clip">{{t "modalConfirmIgnoreNameConflicts.resource.targetCluster"}}: {{targetCluster.name}}</div>
+    <div class="clip">{{t "modalConfirmIgnoreNameConflicts.resource.targetProject"}}: {{targetProject.name}}</div>
+    {{#if row.target.namespaceId}}<div class="clip">{{t "generic.namespace"}}: {{targetNamespace.name}}</div>{{/if}}
+    <div class="clip">{{t "modalConfirmIgnoreNameConflicts.resource.name"}}: {{row.target.name}}</div>
+    {{#each row.target.registries as |item|}}
+    <div class="clip">{{t "modalConfirmIgnoreNameConflicts.resource.registries"}}: {{item.address}}</div>
+    <div class="clip">{{t "modalConfirmIgnoreNameConflicts.resource.userName"}}: {{item.username}}</div>
+    {{/each}}
+  </div>
+  <div class="col span-2"></div>
+</div>
+{{/if}}
+{{/each}}
+
+{{save-cancel editing=true editLabel="modalConfirmIgnoreNameConflicts.confirm" save=(action "confirm") cancel=(action "cancel")}}

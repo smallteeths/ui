@@ -21,6 +21,7 @@ cloneCrossCluster:
       addressRequired: 镜像库凭证地址不能为空
       usernameRequired: 镜像库凭证用户名不能为空
       passwordRequired: 镜像库凭证密码不能为空
+      ignoreNameConflicts: 忽略同名资源
     ingress:
       label: 负载均衡(Ingress)
       detail: 应用提供的对外访问方式

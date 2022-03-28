@@ -12074,3 +12074,17 @@ apiPerformance:
     power: Power
     normal: Normal
   powerMessage: Power mode may occupy more computing resources of background services
+modalConfirmIgnoreNameConflicts:
+  title: Do You Want To Ignore The Following Cloned Registry Credentials?
+  confirm: Yes
+  resource:
+    name: Name
+    type: Type
+    sourceProject: Source Project
+    targetProject: Target Project
+    sourceCluster: Source Cluster
+    targetCluster: Target Cluster
+    registries: Address
+    userName: User Name
+    detail: Detail
+    hide: Hide
