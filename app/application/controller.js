@@ -44,7 +44,39 @@ export default Controller.extend({
     this.set('app.currentRouteName', this.get('router.currentRouteName'));
   }),
 
+  faviconurlChanged: observer('settings.uiFavicon', 'settings.all.length', function() {
+    this.setFavicon();
+  }),
+
   isLeftMenu: computed(`session.${ C.PREFS.MENU }`, function() {
     return get(this, `session.${ C.PREFS.MENU }`) === 'left';
   }),
+  setFavicon(){
+    let faviconurl = get(this, 'settings.uiFavicon');
+    const settingPending = !get(this, 'settings.all.length');
+
+    if (!settingPending) {
+      if (get(this, 'settings.uiFavicon')) {
+        faviconurl = get(this, 'settings.uiFavicon');
+      } else {
+        faviconurl = '/assets/images/logos/favicon.ico'
+      }
+    } else {
+      return;
+    }
+
+    let link = document.querySelector("head link[rel*='icon']");
+
+    if (!link){
+      link = document.createElement('link');
+
+      link.type = 'image/x-icon';
+      link.rel = 'shortcut icon';
+      link.href = faviconurl;
+
+      document.getElementsByTagName('head')[0].appendChild(link);
+    } else {
+      link.setAttribute('href', faviconurl);
+    }
+  }
 });
