@@ -59,9 +59,15 @@
     {{/each}}
   {{else}}
   <div class="row">
-    <div class="col span-12">
+    <div class="col span-10">
       {{t "cloneCrossCluster.newContainer.errors.noPermissionAccessResource" type=(t "cloneCrossCluster.newContainer.imagePullSecret.label") name=model.name}}
     </div>
+    <div class="col span-2">
+        <button class="btn bg-link icon-btn" {{action "remove"}}>
+          <i class="icon icon-minus text-small"/>
+          <span>{{t "cloneCrossCluster.newContainer.imagePullSecret.delete"}}</span>
+        </button>
+      </div>
   </div>
   {{/if}}
 </div>
