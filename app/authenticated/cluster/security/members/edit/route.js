@@ -4,20 +4,18 @@ import { get } from '@ember/object';
 import { hash } from 'rsvp';
 
 export default Route.extend({
-  globalStore: service(),
+  globalStore:         service(),
+  roleTemplateService: service('roleTemplate'),
 
   model(params) {
-    const store = get(this, 'globalStore');
+    const gs  = get(this, 'globalStore');
+    const cid = this.paramsFor('authenticated.cluster');
 
     return hash({
-      role:     store.find('clusterroletemplatebinding', params.role_id),
-      roles:    store.find('roletemplate', null, {
-        filter: {
-          hidden:  false,
-          context: 'cluster'
-        }
-      }),
-      policies: store.find('podsecuritypolicytemplate'),
+      cluster:      gs.find('cluster', cid.cluster_id, { forceReload: true }),
+      role:         gs.find('clusterroletemplatebinding', params.role_id),
+      roles:        get(this, 'roleTemplateService').get('allFilteredRoleTemplates'),
+      roleBindings: gs.findAll('clusterRoleTemplateBinding'),
     });
   },
 });

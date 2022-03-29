@@ -3,12 +3,14 @@ import { reference } from '@rancher/ember-api-store/utils/denormalize';
 import { get, computed } from '@ember/object';
 import C from 'ui/utils/constants';
 import PrincipalReference from 'ui/mixins/principal-reference';
-
+import { inject as service } from '@ember/service';
 
 export default Resource.extend(PrincipalReference, {
+  router: service(),
+
   type: 'clusterRoleTemplateBinding',
 
-  canEdit:      false,
+  // canEdit:      false,
   cluster:      reference('clusterId'),
   roleTemplate: reference('roleTemplateId'),
   user:         reference('userId', 'user'),
@@ -23,5 +25,11 @@ export default Resource.extend(PrincipalReference, {
   canRemove: computed('links.remove', 'name', function() {
     return !!get(this, 'links.remove') && get(this, 'name') !== 'creator';
   }),
+
+  actions: {
+    edit() {
+      get(this, 'router').transitionTo('authenticated.cluster.security.members.edit', get(this, 'id'));
+    },
+  },
 
 });

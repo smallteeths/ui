@@ -1,5 +1,16 @@
-{{new-edit-role
-    model=model
-    editing=true
-    roleType="cluster"
-}}
+<section class="header clearfix">
+  <div class="pull-left">
+    <h1>{{t "membersPage.edit.title" type="Cluster"}}</h1>
+  </div>
+</section>
+
+<section>
+  <div class="box mt-30">
+    {{form-edit-scoped-roles
+        model=model
+        type="cluster"
+        cancel=(action "doneSaving")
+        doneSaving=(action "doneSaving")
+    }}
+  </div>
+</section>

@@ -1374,6 +1374,8 @@ membersPage:
       member: 成员
       role: 角色
       kind: 类型
+  edit:
+    title: 编辑 {type} 成员
   index:
     localLink: '添加成员'
     table:

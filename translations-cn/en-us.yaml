@@ -1381,6 +1381,8 @@ membersPage:
       member: Member
       role: Role
       kind: Kind
+  edit:
+    title: Edit {type} Member
   index:
     localLink: 'Add Member'
     table:

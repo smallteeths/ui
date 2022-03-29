@@ -1,0 +1,143 @@
+<div class="row">
+  <div class="col span-6">
+    <label class="acc-label">
+      {{t "generic.member"}}
+    </label>
+    <div>
+      {{#if loading}}
+        {{t 'identityBlock.loading'}}
+      {{else}}
+         {{#if principal.displayName}}
+            <div>
+              {{principal.displayName}}{{#if principal.loginName }}<small>&nbsp;(&nbsp;{{principal.loginName}}&nbsp;)</small>{{/if}}
+            </div>
+          {{else if principal.loginName}}
+            {{principal.loginName}}
+          {{else if unknownUser}}
+            <div class="text-error">{{t 'generic.unknownUser'}}</div>
+            {{model.role.principalId}}
+          {{else if principal.name}}
+            <div>
+              {{principal.name}}
+            </div>
+          {{else}}
+            &nbsp;
+          {{/if}}
+      {{/if}}
+    </div>
+  </div>
+  <div class="col span-12">
+  </div>
+</div>
+
+{{#accordion-list-item
+   title=(t "formScopedRoles.title" type=cTyped)
+   detail=(t "formScopedRoles.description" type=cTyped)
+   expandOnInit=true
+   showExpand=false
+}}
+  {{#if showAdmin}}
+    <div class="radio">
+      <label>
+        {{radio-button
+          selection=mode
+          value=admin
+        }}
+        {{t "formScopedRoles.mode.admin.label"}}
+        <p class="help-block">
+          {{t "formScopedRoles.mode.admin.detail" type=cTyped}}
+        </p>
+      </label>
+    </div>
+  {{/if}}
+
+  {{#if showStdUser}}
+    <div class="radio">
+      <label>
+        {{radio-button
+          selection=mode
+          value=stdUser
+        }}
+        {{t "formScopedRoles.mode.user.label"}}
+        <p class="help-block">
+          {{t "formScopedRoles.mode.user.detail" type=cTyped}}
+        </p>
+      </label>
+    </div>
+  {{/if}}
+
+  {{#if (and showReadOnly (eq type "project"))}}
+    <div class="radio">
+      <label>
+        {{radio-button
+          selection=mode
+          value="read-only"
+        }}
+        {{t "formScopedRoles.mode.readOnly.label"}}
+        <p class="help-block">
+          {{t "formScopedRoles.mode.readOnly.detail" type=cTyped}}
+        </p>
+      </label>
+    </div>
+  {{/if}}
+
+  {{#each userRoles as |role| }}
+    <div class="radio">
+      <label>
+        {{radio-button
+          selection=mode
+          value=role.id
+        }}
+        {{role.displayName}}
+        <p class="help-block">
+          {{#if role.description}}
+            {{role.description}}
+          {{else}}
+            {{t "formScopedRoles.mode.userDef.detail"}}
+          {{/if}}
+        </p>
+      </label>
+    </div>
+  {{/each}}
+  <div class="radio">
+    <label>
+      {{radio-button
+        selection=mode
+        value="custom"
+      }}
+      {{t "formScopedRoles.mode.custom.label"}}
+      <p class="help-block">
+        {{t "formScopedRoles.mode.custom.detail" type=cTyped}}
+      </p>
+    </label>
+  </div>
+
+  {{#if (eq mode "custom")}}
+    <div class="pl-20">
+      {{#each custom as |row|}}
+        <div class="input-group mb-10 border">
+          <label class="input-group-addon bg-default p-10 vertical-middle">
+            {{radio-button
+              selection=primaryResource.roleTemplateId
+              value=row.id
+            }}
+          </label>
+          <div class="form-control p-10 vertical-middle">
+            {{row.displayName}}
+            {{#if row.detail}}
+              <p class="help-block">{{row.detail}}</p>
+            {{/if}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{/if}}
+
+{{/accordion-list-item}}
+
+{{top-errors errors=errors}}
+{{save-cancel
+  editing=true
+  save=(action "save")
+  cancel=(action "cancel")
+}}

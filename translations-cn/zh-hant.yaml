@@ -1202,6 +1202,8 @@ membersPage:
       member: 成員
       role: 角色
       kind: 類型
+  edit:
+    title: 編輯 {type} 成員
   index:
     localLink: '添加成員'
     table:

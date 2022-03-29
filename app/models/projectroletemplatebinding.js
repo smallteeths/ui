@@ -3,10 +3,13 @@ import { reference } from '@rancher/ember-api-store/utils/denormalize';
 import { get, computed } from '@ember/object';
 import C from 'ui/utils/constants';
 import PrincipalReference from 'ui/mixins/principal-reference';
+import { inject as service } from '@ember/service';
 
 export default Resource.extend(PrincipalReference, {
+  router: service(),
+
   type:         'projectRoleTemplateBinding',
-  canEdit:      false,
+  // canEdit:      false,
   project:      reference('projectId'),
   roleTemplate: reference('roleTemplateId'),
   user:         reference('userId', 'user'),
@@ -30,4 +33,10 @@ export default Resource.extend(PrincipalReference, {
   canRemove: computed('links.remove', 'name', function() {
     return !!get(this, 'links.remove') && get(this, 'name') !== 'creator';
   }),
+
+  actions: {
+    edit() {
+      get(this, 'router').transitionTo('authenticated.project.security.members.edit', get(this, 'id'));
+    },
+  },
 });
