@@ -90,7 +90,7 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
         label:    'action.cloneCrossCluster',
         icon:     'icon icon-copy',
         action:   'cloneCrossCluster',
-        enabled:  !(this.workloadLabels && this.workloadLabels['io.cattle.field/appId']),
+        enabled:  !(this.workloadLabels && (this.workloadLabels['io.cattle.field/appId'] || this.workloadLabels['helm.sh/chart'])),
       },
       {
         label:    'action.redeploy',
