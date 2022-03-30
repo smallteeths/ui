@@ -7128,6 +7128,8 @@ formCustomMetrics:
   bearerToken:
     label: Bearer Token
     placeholder: Your Token
+  errors:
+    portRequired: 每個自定義指標必須設置容器端口
 formServicePorts:
   header: 埠映射
   addAction: 添加埠

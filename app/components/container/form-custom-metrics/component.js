@@ -19,6 +19,7 @@ const OPTIONS = [
 
 export default Component.extend({
   scope: service(),
+  intl:  service(),
 
   layout,
 
@@ -90,5 +91,11 @@ export default Component.extend({
     })
 
     set(this, 'workload.workloadMetrics', metrics.filter((metric) => get(metric, 'port')));
+
+    if (metrics.some((item) => !item.port)) {
+      set(this, 'errors', [get(this, 'intl').t('formCustomMetrics.errors.portRequired')]);
+    } else {
+      set(this, 'errors', []);
+    }
   })
 });

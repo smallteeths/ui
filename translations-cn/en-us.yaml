@@ -7539,6 +7539,8 @@ formCustomMetrics:
   bearerToken:
     label: Bearer Token
     placeholder: Your Token
+  errors:
+    portRequired: The container port is required for each custom metrics.
 formServicePorts:
   header: Port Mapping
   addAction: Add Port

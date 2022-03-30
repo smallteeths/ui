@@ -59,6 +59,7 @@ export default Component.extend(NewOrEdit, ChildHook, {
   labelErrors:      null,
   annotationErrors: null,
   lifecycleErrors:  null,
+  metricsErrors:    null,
   psp:              null,
 
   // ----------------------------------
@@ -287,6 +288,7 @@ export default Component.extend(NewOrEdit, ChildHook, {
     errors.pushObjects(get(this, 'labelErrors') || []);
     errors.pushObjects(get(this, 'annotationErrors') || []);
     errors.pushObjects(get(this, 'lifecycleErrors') || []);
+    errors.pushObjects(get(this, 'metricsErrors') || []);
 
     errors = errors.uniq();
 

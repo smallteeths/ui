@@ -10127,6 +10127,8 @@ formCustomMetrics:
     label: Bearer Token
     placeholder: Your Token
   title: 自定義指標
+  errors:
+    portRequired: 每個自定義指標必須設置容器端口
 formIstioHost:
   prompt: 選擇節點...
 formMatchExpressions:
