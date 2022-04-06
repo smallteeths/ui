@@ -689,7 +689,7 @@ export default Resource.extend(Grafana, ResourceUsage, {
     return false;
   }),
 
-  availableActions: computed('actionLinks.{rotateCertificates,rotateEncryptionKey}', 'canRotateEncryptionKey', 'canSaveAsTemplate', 'canShowAddHost', 'displayImportLabel', 'isClusterScanDisabled', function() {
+  availableActions: computed('actionLinks.{rotateCertificates,rotateEncryptionKey}', 'canRotateEncryptionKey', 'canSaveAsTemplate', 'canShowAddHost', 'displayImportLabel', 'isClusterScanDisabled', 'showClusterConnectMode', function() {
     const a = get(this, 'actionLinks') || {};
 
     return [
@@ -697,6 +697,7 @@ export default Resource.extend(Grafana, ResourceUsage, {
         label:     'action.editConnectMode',
         icon:      'icon icon-edit',
         action:    'editConnectMode',
+        enabled:   get(this, 'showClusterConnectMode')
       },
       {
         label:     'action.rotate',
@@ -860,6 +861,10 @@ export default Resource.extend(Grafana, ResourceUsage, {
     });
 
     return out;
+  }),
+
+  showClusterConnectMode: computed('id', function() {
+    return this.id !== 'local';
   }),
 
   actions: {
