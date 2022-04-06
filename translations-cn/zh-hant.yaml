@@ -158,6 +158,7 @@ generic:
   "true": "True"
   windows: Windows
   writeOnly: 只寫
+  networking: Networking
 realmNames:
   all: 全部
   usWest: 美國西部
@@ -1325,6 +1326,7 @@ clustersPage:
     importGke: Import Google GKE
     new: 添加集羣
     register: 註冊集羣
+    importAks: 導入 AKS
   metricsHeader: 指標
   newTemplate: 添加模板
   rkeTemplate:
@@ -2798,6 +2800,9 @@ clusterNew:
       title: 賬戶訪問
       detail: 配置用於與 Azure 通訊的憑據
       help: '參考 <a href="https://docs.microsoft.com/en-us/azure/aks/kubernetes-service-principal" target="_blank"> 鏈接文檔 </a> 創建客戶端 ID 和秘鑰。'
+      cloudCred: Cloud Credential
+      detailCC: 選擇將用於啓動你的集羣的雲計算憑證。
+      next: '下一步：配置羣集'
     placement:
       label: 位置
     count:
@@ -2820,6 +2825,7 @@ clusterNew:
     dns:
       label: DNS 前綴
       placeholder: "例如: example"
+      placeholderv2: aks-dns-xxxxx
     ssh:
       label: 公共密鑰
       placeholder: 粘貼 SSH 公鑰
@@ -2855,6 +2861,7 @@ clusterNew:
       label: 資源組
       placeholder: 'docker-machine'
       helpText: "使用已有的資源組或者輸入新的資源組名稱。註意: 如果使用的資源組內已經存有 AKS 集羣的話，將會創建新的資源組，Azure AKS 只允許一個資源組有一個 AKS 集羣。"
+      placeholderv2: aks-resource-group
     networking:
       label: 網絡
       default: 默認
@@ -2883,6 +2890,7 @@ clusterNew:
       networkPlugin:
         label: 網絡插件
         prompt: 選擇網絡插件
+        help: 當使用 Azure CNI 時，所選子網的 IP 地址將被分配給節點上的每個Pod。如果 "Pods Per Node "設置爲一個較高的值，這將更快地耗盡可用的 IP 地址。建議你改變 "Pods Per Node "的默認值，以考慮到這一點。
       podCidr:
         help: "一個 IP 範圍，用於分配 Pod IP。例如: 172.244.0.0/16"
         label: Kubernetes pod 地址範圍
@@ -2940,9 +2948,12 @@ clusterNew:
       basic: 基本
       label: LoadBalancer SKU
       standard: 標準
+      immutable: 你已經選擇了一個或多個可用 zone。當選擇負載平衡器 SKU 時，必須是標準的。
     networkPolicy:
       label: 網絡策略
       placeholder: 選擇網絡策略
+      editHelp: 創建集羣后，不能改變Azure網絡策略選項
+      help: 只有當Azure CNI被選爲網絡插件時，Azure網絡策略纔可用。
     tags:
       addActionLabel: 添加標簽
       label: 標簽
@@ -2950,6 +2961,82 @@ clusterNew:
       clusterOptions:
         detail: 配置額外的集羣選項
         title: 集羣選項
+      clusterSelect:
+        createLabel: 註冊集羣
+        detail: 選擇一個AKS集羣來註冊
+        input:
+          label: 要註冊的集羣名稱
+        select:
+          label: 要註冊的集羣
+        title: 選擇集羣
+      prompt: 選擇要導入的集羣
+      rbacWarning: 該集羣已禁用 Kubernetes RBAC。導入一個沒有啓用 RBAC 的集羣可能會導致意外的行爲。
+    authorizedIpRanges:
+      addActionLabel: 添加 IP 範圍
+      inputLabel: 設置授權的 IP 範圍
+      label: 授權的 IP 範圍
+      placeholder: 73.140.245.0/24
+    availabilityZoneWarning: 所選 region 沒有可用的 zone。爲了獲得最大的彈性，建議選擇一個高可用性 region。
+    availabilityZones:
+      label: 可用 Zone
+      zone: Zone {loc}
+    clusterLocation:
+      createLabel: 配置羣集
+      detail: 配置集羣和節點位置選項
+      savingLabel: 加載資源
+      title: 集羣位置
+    clusterOption:
+      detail: 配置你的集羣細節
+      title: 集羣選項
+    enableAutoScaling:
+      label: 啓用自動縮放功能
+    maxCount:
+      label: 最大節點數
+      placeholder: '例如：5'
+    maxPods:
+      label: 每個節點最大 pod 數量
+      placeholder: "110"
+    minCount:
+      label: 最小節點數
+      placeholder: '例如：1'
+    monitoring:
+      label: 容器監控
+      workspaceGroup:
+        label: 日誌分析工作區資源組
+      workspaceName:
+        label: 日誌分析工作區名稱
+    networkOptions:
+      detail: 修改集羣的網絡設置。
+      title: 網絡選項
+    nodePools:
+      availablityZones:
+        label: 節點可用 zone
+      errors:
+        linuxName: Linux節點池名稱必須是 1-11 個字符。
+        nameFormat: 節點池名稱必須全部爲小寫，以字母開頭，只能包含字母和數字。
+        windowsName: Windows節點池名稱必須是1-6個字符。
+      name:
+        label: 名稱
+      nodeType:
+        label: Mode
+        primary: Primary Pool - System
+        system: System
+        user: 用戶
+    osDiskType:
+      label: OS 磁盤類型
+      placeholder: 選擇 OS 磁盤類型
+    osType:
+      label: VM 操作系統
+      prompt: 選擇 VM OS
+    privateCluster:
+      label: 啓用私有集羣
+      warning: AKS私有集羣是一個高級用例，它要求 {appName} 與 AKS 節點在同一 NAT 上運行。在啓用私有集羣之前，請確保您已經閱讀了<a href="{docsBase}/cluster-provisioning/hosted-kubernetes-clusters/aks/" target="_blank" rel="nofollow noopener noreferrer">AKS集羣配置文檔</a>，以獲得關於配置 AKS 的說明，以便節點可以與 {appName} 進行通信。
+    rbacWarning: 該集羣已禁用 Kubernetes RBAC。沒有啓用 Kubernetes RBAC 的集羣可能會表現出意外的行爲。
+    windowsAdmin:
+      password:
+        label: Windows Admin 密碼
+      username:
+        label: Windows Admin 用戶名
   googlegke:
     label: Google Kubernetes 引擎
     shortLabel: Google GKE
@@ -3111,6 +3198,10 @@ clusterNew:
       locations:
         detail: 選擇要從中導入 GKE 集羣的區域或地區
         title: 集羣位置
+      clusterOptions:
+        detail: 配置額外的集羣選項
+        title: 集羣選項
+        warning: 導入的 GKE 集羣必須支持 Kubernetes NetworkPolicy 資源，才能實施項目網絡隔離。
     ipAllocationPolicy:
       clusterIpv4CidrBlock:
         accesslabel: 集羣 Pod 地址範圍
@@ -3192,6 +3283,7 @@ clusterNew:
       label: 網絡
     networkPolicy:
       label: 網絡策略
+      help: 要爲節點啓用網絡策略，首先爲主節點啓用網絡策略並應用更新。
     nodeLabels:
       addAction: 添加標簽
       label: 主機標簽
@@ -3278,6 +3370,7 @@ clusterNew:
       warning: 當禁用IP別名時，你必須同時選擇一個網絡和子網。
     userInfo:
       label: 用戶信息
+    policyConfigDisableWarning: 禁用 "網絡策略 "將刪除並重新創建所有節點池中的所有節點。根據集羣的規格，這可能需要大量的時間。
   rke:
     etcd:
       heartbeat:
@@ -3435,6 +3528,8 @@ clusterNew:
       label: 監控指標
     networkPolicy:
       label: 項目網絡隔離
+      editHelp: 項目網絡隔離選項在集羣創建後不能被改變
+      selectNetworkPolicyHelp: 你必須選擇一個網絡策略來使用項目網絡隔離
     version:
       label: Kubernetes 版本
     registry:
@@ -3587,6 +3682,8 @@ clusterNew:
       other:
         helpBlock: 註冊現在的 Rancher 或 <a id='k3s-info-external-link' href='https://k3s.io/' target='_blank' rel='nofollow noreferrer'>K3s</a> 支持的集羣。
         title: Rancher 或 K3s
+    clusterOptions:
+      warning: 導入的集羣必須支持 Kubernetes NetworkPolicy 資源，以使項目網絡隔離得到執行。
   aliyunack:
     shortLabel: Alibaba ACK
   externalError: 無法加載組件，檢查 URL。
@@ -3693,10 +3790,15 @@ clusterNew:
       lbSubnetName2Placeholder: 例如：my-lb-sub-2
       vcnName: 已存在的 VCN 名稱
       vcnNamePlaceholder: 例如： my-vcn
+      controlPlaneSubnetName: 先前存在的控制平面子網的名稱
+      controlPlaneSubnetNamePlaceholder: 例如：k8sendpoint-sub
+      nodePoolPlaneSubnetName: 先前存在的節點池子網的名稱
+      nodePoolSubnetNamePlaceholder: 例如：nodepool-sub
     flexShapeConfig:
       error: 默認持久卷磁盤大小應大於 0
       label: 指定 flex shape 的 OCPUs 數
       placeholder: 例如：10
+      memory: 指定 flex shape 的內存量（GB）
     instance:
       detail: 配置將用作集羣中的節點的實例。
       title: 節點實例配置
@@ -3773,6 +3875,23 @@ clusterNew:
     version:
       label: Kubernetes 版本
       required: Kubernetes 版本必須設置
+    controlPlaneSubnet:
+      label: 控制平面子網訪問
+      required: 需要控制平面子網訪問
+      warning: Rancher 需要能夠在一個私有 IP 上訪問 Kubernetes API，才能使這個選項成功。通常情況下，這需要 VCN 對等或在承載（現有）控制平面子網的同一 VCN 中運行 Rancher。
+    kmsKeyId:
+      label: KMS 鍵 ID
+      placeholder: 可選的, 輸入一個有效的 KMS 鍵 OCID
+    podCidr:
+      error: 虛擬雲 CIDR 格式錯誤
+      label: Kubernetes Pod CIDR 塊
+      placeholder: 例如：10.244.0.0/16
+      required: Kubernetes Pod 的 CIDR 塊是必需的
+    serviceCidr:
+      error: 虛擬雲CIDR格式錯誤
+      label: Kubernetes 服務 CIDR 塊
+      placeholder: 例如：10.96.0.0/16
+      required: Kubernetes 服務 CIDR 塊是必需的
   otccce:
     shortLabel: Open Telekom Cloud CCE
   rancherd:
@@ -6962,6 +7081,7 @@ nodeDriver:
     tencent: Tencent TKE
     tencenttke: Tencent TKE
     upcloud: UpCloud
+    azureaksv2: Azure AKS
   driverOptions: "{driver}選項"
   templateOptions: "{appName}模板"
   amazoneks:
@@ -7157,6 +7277,7 @@ nodeDriver:
       label: 訪問令牌
       placeholder: DigitalOcean API訪問令牌
       help: |
+        从DigitalOcean粘贴一个个人访问 Token
         '從<a href="https://cloud.digitalocean.com/settings/api/tokens" target="_blank" rel="nofollow noreferrer noopener">Applications&API</a>頁面獲取DigitalOcean的個人訪問token'
     image:
       label: 鏡像
@@ -8732,28 +8853,80 @@ rkeConfigComment:
     "       plugin: canal"
     "       canal_network_provider:"
     "         iface: eth1"
-  services: |+
+  services: |
     ""
-    " # 自定義服務參數"
-    "     services:"
-    "       kube-api:"
-    "         service_cluster_ip_range: 10.43.0.0/16"
-    "       kube-controller:"
-    "         cluster_cidr: 10.42.0.0/16"
-    "         service_cluster_ip_range: 10.43.0.0/16"
-    "       kubelet:"
-    "         cluster_domain: cluster.local"
-    "         cluster_dns_server: 10.43.0.10"
-    "         # 擴展變量 "
-    "         extra_args:"
-    "           # 修改節點最大Pod數量"
-    "           max-pods: '250' "
-    "       etcd:"
-    "         # 修改空間配額為$((4*1024*1024*1024))，默認2G,最大8G"
-    "         extra_args:"
-    "           quota-backend-bytes: '4294967296'"
-
-  clusterConfig: "\"\"\n\"Cluster Config\"\n\n"
+    " # 自定義服務參數，僅適用於 Linux 環境"
+    "   services:"
+    "     kube-api:"
+    "       service_cluster_ip_range: 10.43.0.0/16"
+    "       extra_args: "
+    "         default-not-ready-toleration-seconds: '60' # 默認 300 秒 "
+    "         default-unreachable-toleration-seconds: '30' # 默認 300 秒 "
+    "         watch-cache: true   "
+    "     kube-controller:"
+    "       cluster_cidr: 10.42.0.0/16"
+    "       service_cluster_ip_range: 10.43.0.0/16"
+    "       extra_args:     "
+    "         # 修改每個節點子網大小(cidr 掩碼長度)，默認爲 24，可用 IP 爲 254 個；23，可用 IP 爲 510 個；22，可用 IP 爲 1022 個；"
+    "         node-cidr-mask-size: 24  "
+    "         # 控制器定時與節點通信以檢查通信是否正常，週期默認 5s  "
+    "         node-monitor-period: '5s'  "
+    "         # 當節點通信失敗後，再等一段時間 kubernetes 判定節點爲 notready 狀態。這個時間段必須是 kubelet 的 nodeStatusUpdateFrequency(默認 10s)的 N 倍，其中 N 表示允許 kubelet 同步節點狀態的重試次數，默認 40s。"
+    "         node-monitor-grace-period: '20s' "
+    "         # 再持續通信失敗一段時間後，kubernetes 判定節點爲 unhealthy 狀態，默認 1m0s。"
+    "         node-startup-grace-period: '30s' "
+    "         # 再持續失聯一段時間，kubernetes 開始遷移失聯節點的 Pod，默認 5m0s。"
+    "         pod-eviction-timeout: '1m'   "
+    "     kubelet:"
+    "       cluster_domain: cluster.local"
+    "       cluster_dns_server: 10.43.0.10"
+    "       # 擴展變量 "
+    "       extra_args:"
+    "         # 與 apiserver 會話時的併發數，默認是 10 "
+    "         kube-api-burst: '30'      "
+    "         # 與 apiserver 會話時的 QPS,默認是 5   "
+    "         kube-api-qps: '15'  "
+    "         # 修改節點最大 Pod 數量"
+    "         max-pods: '250' "
+    "         # secrets 和 configmaps 同步到 Pod 需要的時間，默認一分鐘"
+    "         sync-frequency: '3s'"
+    "         # kubelet 默認一次拉取一個鏡像，設置爲 false 可以同時拉取多個鏡像，前提是存儲驅動要爲 overlay2，對應的 Docker 也需要增加下載併發數     "
+    "         serialize-image-pulls: false  "
+    "         # 拉取鏡像的最大併發數，registry-burst 不能超過 registry-qps ，僅當 registry-qps 大於 0(零)時生效，(默認 10)。如果 registry-qps 爲 0 則不限制(默認 5)。"
+    "         registry-burst: '10' "
+    "         registry-qps: '0'   "
+    "         # 以下配置用於配置節點資源預留和限制  "
+    "         cgroups-per-qos: 'true'   "
+    "         cgroup-driver: cgroupfs   "
+    "         # 以下兩個參數指明爲相關服務預留多少資源，僅用於調度，不做實際限制"
+    "         system-reserved: 'memory=300Mi'   "
+    "         kube-reserved: 'memory=2Gi'  "
+    "         enforce-node-allocatable: 'pods'  "
+    "         # 硬驅逐閾值，當節點上的可用資源少於這個值時，就會觸發強制驅逐。強制驅逐會強制 kill 掉 POD，不會等 POD 自動退出。"
+    "         eviction-hard: 'memory.available<300Mi,nodefs.available<10%,imagefs.available<10%,nodefs.inodesFree<5%'   "
+    "         # 軟驅逐閾值  "
+    "         ## 以下四個參數配套使用，當節點上的可用資源少於這個值時但大於硬驅逐閾值時候，會等待 eviction-soft-grace-period 設置的時長；"
+    "         ## 等待中每 10s 檢查一次，當最後一次檢查還觸發了軟驅逐閾值就會開始驅逐，驅逐不會直接 Kill POD，先發送停止信號給 POD，然後等待 eviction-max-pod-grace-period 設置的時長； "
+    "         ## 在 eviction-max-pod-grace-period 時長之後，如果 POD 還未退出則發送強制 kill POD"
+    "         eviction-soft: 'memory.available<500Mi,nodefs.available<15%,imagefs.available<15%,nodefs.inodesFree<10%'   "
+    "         eviction-soft-grace-period: 'memory.available=1m30s'    "
+    "         eviction-max-pod-grace-period: '30'      "
+    "         ## 當處於驅逐狀態的節點不可調度，當節點恢復正常狀態後"
+    "         eviction-pressure-transition-period: '5m0s'       "
+    "       extra_binds:      "
+    "         - "/usr/libexec/kubernetes/kubelet-plugins:/usr/libexec/kubernetes/kubelet-plugins"    "
+    "         - "/etc/iscsi:/etc/iscsi"     "
+    "         - "/sbin/iscsiadm:/sbin/iscsiadm"       "
+    "     etcd:     "
+    "       # 修改空間配額爲$((4*1024*1024*1024))，默認 2G,最大 8G    "
+    "       extra_args:"
+    "         quota-backend-bytes: '4294967296'        "
+    "         auto-compaction-retention: 240 #(單位小時)      "
+    "     kubeproxy:    "
+    "       extra_args:     "
+    "       # 默認使用 iptables 進行數據轉發    "
+    "         proxy-mode: ""    # 如果要啓用 ipvs，則此處設置爲`ipvs` "
+  clusterConfig: "\"\"\n\"Cluster Config\"\n"
   rancher_kubernetes_engine_config: "\"\"\n\"Rancher Config\"\n"
 pipelinesPage:
   table:
@@ -9101,6 +9274,12 @@ banner:
   multiclusterapp: 從 Rancher v2.5.0 開始，多集羣應用已不推薦使用 - 請查看 <a href="https://rancher.com/docs/rancher/v2.x/en/faq/deprecated-features-25x" target="_blank">FAQ</a>。請查看 <a href="{dashboardBase}c/local/fleet">Rancher 持續交付</a>功能，通過 GitOps 實現多集羣應用的部署。
   notifiers: 從 Rancher v2.5.0 開始，Cluster Manager 中的 Notifiers 已經不推薦使用 - 請查看 <a href="https://rancher.com/docs/rancher/v2.x/en/faq/deprecated-features-25x" target="_blank">FAQ</a>。請在 Cluster Explorer 應用程序和市場中查看 Rancher 新版<a href="{dashboardLink}/monitoring">監控</a>中 Notifiers 的集成。
   pipeline: 從 Rancher v2.5.0 開始，Pipelines 已經不推薦使用 - 請查看 <a href="https://rancher.com/docs/rancher/v2.x/en/faq/deprecated-features-25x" target="_blank">FAQ</a>。有關持續交付功能，請查看 Cluster Explorer 中的 <a href="{dashboardBase}c/local/fleet">Rancher 持續交付</a>。
+  cis21: Kubernetes 1.21 以上版本的CIS掃描（v1）不再被支持。
+  istio21: Kubernetes 1.21 以上版本的 Istio（v1）不再被支持。
+  logging21: Kubernetes 1.21 以上版本的 Logging（v1）已不再支持。
+  pipeline21: Kubernetes 1.21 以上版本的 Pipelines 不再被支持。
+  secrets: Legacy 項目可用於管理需要對項目中所有命名空間可用的祕鑰。
+  upgrade21: 啓用了 legacy 功能標誌，在Kubernetes 1.21+中，並非所有的legacy 功能都被支持。
 batchDelete:
   headerSuffix: 名稱
 metricruletemplate:
@@ -11232,6 +11411,9 @@ modalAddCloudKey:
     clientSecret:
       label: Client Secret
       placeholder: 你的 Client Secret
+    subscriptionId:
+      label: 訂閱 ID
+      placeholder: 你的 Azure 訂閱 ID
   description:
     placeholder: "例如: cloud credential for production"
   digitalocean:
@@ -11243,6 +11425,7 @@ modalAddCloudKey:
   errors:
     region: 您必須選擇一個區域來驗證您的密鑰。
     validation: "{status}: 驗證密鑰時出現問題，請輸入有效憑證，然後重試。"
+    azureTenantId: 启动托管的 Azure AKS 集群需要租户 ID。
   header:
     edit: 編輯雲憑證
     new: 添加雲憑證
@@ -11886,4 +12069,3 @@ formIngressGeneralSetting:
     detail: 每个客戶端每秒允許發送的請求數。當超過此限制時，將返回限制請求狀態碼，默認 503。
   sslRedirect:
     title: http 重定向 https
-

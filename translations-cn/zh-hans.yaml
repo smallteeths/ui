@@ -158,6 +158,7 @@ generic:
   required: '{key} 为必填项。'
   run: 运行
   Gibibyte: 'GiB'
+  networking: Networking
 realmNames:
   all: 全部
   usWest: 美国西部
@@ -1115,6 +1116,12 @@ banner:
   monitoringV2Warning: 从 Rancher v2.5.0 开始，Cluster Manager 中的监控已经不推荐使用 - 请查看 <a href="https://rancher.com/docs/rancher/v2.x/en/faq/deprecated-features-25x" target="_blank">FAQ</a>。最新版的Rancher <a href="{dashboardLink}/monitoring">监控</a> 已经部署。
   notifiers: 从 Rancher v2.5.0 开始，Cluster Manager 中的 Notifiers 已经不推荐使用 - 请查看 <a href="https://rancher.com/docs/rancher/v2.x/en/faq/deprecated-features-25x" target="_blank">FAQ</a>。请在 Cluster Explorer 应用程序和市场中查看 Rancher 新版<a href="{dashboardLink}/monitoring">监控</a>中 Notifiers 的集成。
   pipeline: 从 Rancher v2.5.0 开始，Pipelines 已经不推荐使用 - 请查看 <a href="https://rancher.com/docs/rancher/v2.x/en/faq/deprecated-features-25x" target="_blank">FAQ</a>。有关持续交付功能，请查看 Cluster Explorer 中的 <a href="{dashboardBase}c/local/fleet">Rancher 持续交付</a>。
+  cis21: Kubernetes 1.21 以上版本的CIS扫描（v1）不再被支持。
+  istio21: Kubernetes 1.21 以上版本的 Istio（v1）不再被支持。
+  logging21: Kubernetes 1.21 以上版本的 Logging（v1）已不再支持。
+  pipeline21: Kubernetes 1.21 以上版本的 Pipelines 不再被支持。
+  secrets: Legacy 项目可用于管理需要对项目中所有命名空间可用的秘钥。
+  upgrade21: 启用了 legacy 功能标志，在Kubernetes 1.21+中，并非所有的legacy 功能都被支持。
 catalogPage:
   istio:
     header: 流量规则商店
@@ -1483,6 +1490,7 @@ clustersPage:
     importEks: 导入 Amazon EKS
     register: 注册集群
     importGke: 导入 Google GKE
+    importAks: 导入 AKS
   cluster:
     label: 集群名称
   templateRevision:
@@ -2702,12 +2710,11 @@ time:
     =1{#分钟前}
     other {#分钟前}
     }
-  secsAgo: |+
+  secsAgo: |
     {secs, plural,
     =1{#秒前}
     other {#秒前}
     }
-
 haPage:
   header: 高可用性(HA)
   setup:
@@ -3949,12 +3956,16 @@ clusterNew:
       label: LoadBalancer SKU
       standard: 标准
       basic: 基本
+      immutable: 你已经选择了一个或多个可用 zone。当选择负载平衡器 SKU 时，必须是标准的。
     authenticate:
       next: '下一步: 认证 & 配置主机'
     access:
       title: 账户访问
       detail: 配置用于与 Azure 通讯的凭据
       help: '参考 <a href="https://docs.microsoft.com/en-us/azure/aks/kubernetes-service-principal" target="_blank"> 链接文档 </a> 创建客户端 ID 和秘钥。'
+      cloudCred: Cloud Credential
+      detailCC: 选择将用于启动你的集群的云计算凭证。
+      next: '下一步：配置群集'
     placement:
       label: 位置
     count:
@@ -3977,6 +3988,7 @@ clusterNew:
     dns:
       label: DNS 前缀
       placeholder: '例如: example'
+      placeholderv2: aks-dns-xxxxx
     ssh:
       label: 公共密钥
       placeholder: "粘贴 SSH 公钥"
@@ -4012,6 +4024,7 @@ clusterNew:
       label: 资源组
       placeholder: 'docker-machine'
       helpText: '使用已有的资源组或者输入新的资源组名称。注意: 如果使用的资源组内已经存有 AKS 集群的话，将会创建新的资源组，Azure AKS 只允许一个资源组有一个 AKS 集群。'
+      placeholderv2: aks-resource-group
     networking:
       label: 网络
       default: 默认
@@ -4019,6 +4032,7 @@ clusterNew:
       networkPlugin:
         label: 网络插件
         prompt: 选择网络插件
+        help: 当使用 Azure CNI 时，所选子网的 IP 地址将被分配给节点上的每个Pod。如果 "Pods Per Node "设置为一个较高的值，这将更快地耗尽可用的 IP 地址。建议你改变 "Pods Per Node "的默认值，以考虑到这一点。
       vnet:
         label: '虚拟网络-子网(子网 CIDR)'
         prompt: '选择虚拟网络/子网'
@@ -4088,6 +4102,8 @@ clusterNew:
     networkPolicy:
       label: 网络策略
       placeholder: 选择网络策略
+      editHelp: 创建集群后，不能改变Azure网络策略选项
+      help: 只有当Azure CNI被选为网络插件时，Azure网络策略才可用。
     tags:
       label: 标签
       addActionLabel: 添加标签
@@ -4103,6 +4119,82 @@ clusterNew:
       clusterOptions:
         detail: 配置额外的集群选项
         title: 集群选项
+      clusterSelect:
+        createLabel: 注册集群
+        detail: 选择一个AKS集群来注册
+        input:
+          label: 要注册的集群名称
+        select:
+          label: 要注册的集群
+        title: 选择集群
+      prompt: 选择要导入的集群
+      rbacWarning: 该集群已禁用 Kubernetes RBAC。导入一个没有启用 RBAC 的集群可能会导致意外的行为。
+    authorizedIpRanges:
+      addActionLabel: 添加 IP 范围
+      inputLabel: 设置授权的 IP 范围
+      label: 授权的 IP 范围
+      placeholder: 73.140.245.0/24
+    availabilityZoneWarning: 所选 region 没有可用的 zone。为了获得最大的弹性，建议选择一个高可用性 region。
+    availabilityZones:
+      label: 可用 Zone
+      zone: Zone {loc}
+    clusterLocation:
+      createLabel: 配置群集
+      detail: 配置集群和节点位置选项
+      savingLabel: 加载资源
+      title: 集群位置
+    clusterOption:
+      detail: 配置你的集群细节
+      title: 集群选项
+    enableAutoScaling:
+      label: 启用自动缩放功能
+    maxCount:
+      label: 最大节点数
+      placeholder: '例如：5'
+    maxPods:
+      label: 每个节点最大 pod 数量
+      placeholder: "110"
+    minCount:
+      label: 最小节点数
+      placeholder: '例如：1'
+    monitoring:
+      label: 容器监控
+      workspaceGroup:
+        label: 日志分析工作区资源组
+      workspaceName:
+        label: 日志分析工作区名称
+    networkOptions:
+      detail: 修改集群的网络设置。
+      title: 网络选项
+    nodePools:
+      availablityZones:
+        label: 节点可用 zone
+      errors:
+        linuxName: Linux节点池名称必须是 1-11 个字符。
+        nameFormat: 节点池名称必须全部为小写，以字母开头，只能包含字母和数字。
+        windowsName: Windows节点池名称必须是1-6个字符。
+      name:
+        label: 名称
+      nodeType:
+        label: Mode
+        primary: Primary Pool - System
+        system: System
+        user: 用户
+    osDiskType:
+      label: OS 磁盘类型
+      placeholder: 选择 OS 磁盘类型
+    osType:
+      label: VM 操作系统
+      prompt: 选择 VM OS
+    privateCluster:
+      label: 启用私有集群
+      warning: AKS私有集群是一个高级用例，它要求 {appName} 与 AKS 节点在同一 NAT 上运行。在启用私有集群之前，请确保您已经阅读了<a href="{docsBase}/cluster-provisioning/hosted-kubernetes-clusters/aks/" target="_blank" rel="nofollow noopener noreferrer">AKS集群配置文档</a>，以获得关于配置 AKS 的说明，以便节点可以与 {appName} 进行通信。
+    rbacWarning: 该集群已禁用 Kubernetes RBAC。没有启用 Kubernetes RBAC 的集群可能会表现出意外的行为。
+    windowsAdmin:
+      password:
+        label: Windows Admin 密码
+      username:
+        label: Windows Admin 用户名
   aliyunack:
     shortLabel: Alibaba ACK
   googlegke:
@@ -4378,6 +4470,10 @@ clusterNew:
       locations:
         detail: 选择要从中导入 GKE 集群的区域或地区
         title: 集群位置
+      clusterOptions:
+        detail: 配置额外的集群选项
+        title: 集群选项
+        warning: 导入的 GKE 集群必须支持 Kubernetes NetworkPolicy 资源，才能实施项目网络隔离。
     ipAllocationPolicy:
       clusterIpv4CidrBlock:
         accesslabel: 集群 Pod 地址范围
@@ -4398,6 +4494,7 @@ clusterNew:
       label: 监控服务
     networkPolicy:
       label: 网络策略
+      help: 要为节点启用网络策略，首先为主节点启用网络策略并应用更新。
     nodePool:
       addLabel: 添加节点池
       detail: 自定义节点池。
@@ -4433,6 +4530,7 @@ clusterNew:
       label: 私有 Endpoint
     publicEndpoint:
       label: 公共 Endpoint
+    policyConfigDisableWarning: 禁用 "网络策略 "将删除并重新创建所有节点池中的所有节点。根据集群的规格，这可能需要大量的时间。
   rke2:
     label: Rancher RKE Government
     shortLabel: RKE Government
@@ -4507,6 +4605,10 @@ clusterNew:
       lbSubnetName1Placeholder: 例如：my-lb-sub-1
       lbSubnetName2: 第二个已存在的 LB 子网名称 (如可用)。
       lbSubnetName2Placeholder: 例如：my-lb-sub-2
+      controlPlaneSubnetName: 先前存在的控制平面子网的名称
+      controlPlaneSubnetNamePlaceholder: 例如：k8sendpoint-sub
+      nodePoolPlaneSubnetName: 先前存在的节点池子网的名称
+      nodePoolSubnetNamePlaceholder: 例如：nodepool-sub
     quantityPerSubnet:
       label: 每个AD 节点数
       placeholder: 例如：1
@@ -4556,6 +4658,24 @@ clusterNew:
       error: 默认持久卷磁盘大小应大于 0
       label: 指定 flex shape 的 OCPUs 数
       placeholder: 例如：10
+      memory: 指定 flex shape 的内存量（GB）
+    controlPlaneSubnet:
+      label: 控制平面子网访问
+      required: 需要控制平面子网访问
+      warning: Rancher 需要能够在一个私有 IP 上访问 Kubernetes API，才能使这个选项成功。通常情况下，这需要 VCN 对等或在承载（现有）控制平面子网的同一 VCN 中运行 Rancher。
+    kmsKeyId:
+      label: KMS 键 ID
+      placeholder: 可选的, 输入一个有效的 KMS 键 OCID
+    podCidr:
+      error: 虚拟云 CIDR 格式错误
+      label: Kubernetes Pod CIDR 块
+      placeholder: 例如：10.244.0.0/16
+      required: Kubernetes Pod 的 CIDR 块是必需的
+    serviceCidr:
+      error: 虚拟云CIDR格式错误
+      label: Kubernetes 服务 CIDR 块
+      placeholder: 例如：10.96.0.0/16
+      required: Kubernetes 服务 CIDR 块是必需的
   linodelke:
     label: Linode Kubernetes 引擎
     shortLabel: Linode LKE
@@ -4811,6 +4931,8 @@ clusterNew:
       label: 监控指标
     networkPolicy:
       label: 项目网络隔离
+      editHelp: 项目网络隔离选项在集群创建后不能被改变
+      selectNetworkPolicyHelp: 你必须选择一个网络策略来使用项目网络隔离
     networkMTU:
       label: 容器网卡 MTU
       help: "自定义容器网卡 MTU 值。默认网络传输的 MTU 为 1500，对于有些网络驱动(比如 canal)，由于使用 vxlan 后端，会有 50bit 用于传输 vxlan 的 tag，所以在主机上创建的网桥 flannel.1 的 MTU 值是 1450。而默认创建的容器网卡 MTU 值是 1500，为了对应网桥 flannel.1 的 MTU 值，可通过这个参数来自定义容器网卡的 MTU 值。"
@@ -4931,6 +5053,8 @@ clusterNew:
       eks:
         title: Amazon EKS
         helpBlock: "注册现有的 Amazon EKS 集群。"
+    clusterOptions:
+      warning: 导入的集群必须支持 Kubernetes NetworkPolicy 资源，以使项目网络隔离得到执行。
   importEks:
     label: 注册现有的 Amazon EKS 集群
     shortLabel: 已注册
@@ -7042,13 +7166,11 @@ formKeyValue:
     placeholder: 值
   protip: '高级技巧: 在键(Key)输入栏中粘贴一行或多行的 key=value 键值对能够批量输入。'
   binary:
-    byte: |+
+    byte: |
       {length, plural,
       =1 {# byte}
       other {# bytes}
       }
-
-
 formImage:
   label: Docker 镜像
   container:
@@ -7869,9 +7991,8 @@ hostSettings:
     alert: |
       确定要创建的所有主机都能够连接 <code>{activeValue}</code>？<br/> 当前地址似乎是私有 IP 或内部网络。
   badTld:
-    alert: |+
+    alert: |
       '<code>.local</code>顶级域名根据 RFC6762 被保留为用于多播 DNS。不推荐使用.local 域名作为注册 URL，该设置可能导致 DNS 解析问题。请选择其他的主机名或者 IP 地址。'
-
 hostPod:
   supportState:
     unsupported: 不支持的 Docker 版本
@@ -8438,6 +8559,7 @@ modalAddCloudKey:
   errors:
     validation: '{status}: 验证密钥时出现问题，请输入有效凭证，然后重试。'
     region: 您必须选择一个区域来验证您的密钥。
+    azureTenantId: 启动托管的 Azure AKS 集群需要租户 ID。
   typeSelect:
     prompt: 选择云凭证提供商类型
   amazonec2:
@@ -8454,6 +8576,9 @@ modalAddCloudKey:
     clientSecret:
       label: Client Secret
       placeholder: 你的 Client Secret
+    subscriptionId:
+      label: 订阅 ID
+      placeholder: 你的 Azure 订阅 ID
   digitalocean:
     accessToken:
       label: Access Token
@@ -9087,6 +9212,7 @@ nodeDriver:
     zstack: ZStack
     googlegkev2: Google GKE
     pnap: phoenixNAP
+    azureaksv2: Azure AKS
   driverOptions: "{driver} 选项"
   templateOptions: "{appName} 模板"
   amazoneks:
@@ -9280,7 +9406,8 @@ nodeDriver:
       label: 访问令牌
       placeholder: DigitalOcean API 访问令牌
       help: |
-        '从 <a href="https://cloud.digitalocean.com/settings/api/tokens" target="_blank" rel="nofollow noreferrer noopener">Applications&API</a> 页面获取 DigitalOcean 的个人访问 token。'
+        从DigitalOcean粘贴一个个人访问 Token
+        从 <a href="https://cloud.digitalocean.com/settings/api/tokens" target="_blank" rel="nofollow noreferrer noopener">Applications&API</a> 页面获取 DigitalOcean 的个人访问 token。
     image:
       label: 镜像
     sshUser:
@@ -9861,8 +9988,7 @@ nodeDriver:
       helpText: 如果使用特定于 ad 的子网，则必须匹配子网的可用域。
     openPort:
       label: 开放端口
-      placeholder:
-        逗号分隔, 例如: 80,443
+      placeholder: '逗号分隔, 例如: 80,443'
     region:
       label: 区域
       placeholder: '选择云凭据以填充选项...'
@@ -10181,12 +10307,11 @@ pagination:
     =0 {无选项}
     =1 {选中 {count} {count, plural, =1 {个网关} other {个网关}}}
     other {当前显示 {count} 个网关中的 {from} 到 {to} 个}}
-  workload: |+
+  workload: |
     {pages, plural,
     =0{无工作负载}
     =1{选中 {count}{count, plural,=1{个工作负载} other {个工作负载}}}
     other {当前显示 {count} 个工作负载中的 {from} 到 {to} 个}}
-
 projectRow:
   none: 没有描述
   orchestration: 编排
@@ -10975,10 +11100,9 @@ rkeConfigComment:
   rancher_kubernetes_engine_config: |
     ""
     "Rancher Config"
-  clusterConfig: |+
+  clusterConfig: |
     ""
     "Cluster Config"
-
 units:
   percent: '%'
   cpu: milli CPUs
@@ -11256,12 +11380,11 @@ pipelineNotification:
     required: 接受者必填
   asMessage: 发送信息到
 selectValueCheck:
-  message: |+
+  message: |
     {values, plural,
       =1 {请选择新的值。以下内容不再有效:}
       other {请选择新的值。以下内容不再有效:}
     }
-
 customMenus:
   index:
     header: 自定义菜单
@@ -11884,4 +12007,3 @@ formIngressGeneralSetting:
     detail: 每个客户端每秒允许发送的请求数。当超过此限制时，将返回限制请求状态码，默认 503。
   sslRedirect:
     title: http 重定向 https
-

@@ -47,7 +47,7 @@ generic:
   expandAll: Expand All
   experimental: "(experimental)"
   from: from
-  "false": 'False'
+  false: 'False'
   generic: 'Generic'
   gigabyte: 'GB'
   group: 'Group'
@@ -118,7 +118,7 @@ generic:
   testing: Testing
   to: To
   total: Total
-  "true": 'True'
+  true: 'True'
   type: Type
   unknown: Unknown
   unknownUser: Unable to fetch user info
@@ -385,7 +385,7 @@ alertPage:
       label: Common Rules
       noData: No metric graph data.
       error: Failed to fetch metric graph data.
-      placeholder: Select Alert Rule
+      placeholder: Choose Alert Rule
       podRebootTimesTips: Please convert symbol in keys to underline(_)
     removeAlert: Remove this Alert
     alertRule: Alert Rule
@@ -674,7 +674,7 @@ authPage:
           li1: '<b>Name:</b> <span class="text-muted">Anything you like, e.g. My Pipeline</span>'
           li2: Redirect URI
       li3:
-        text: 'Click "Save application"'
+        text: 'Click "Save application" '
     form:
       subtextVariable: 'Copy and paste the Application Id and Secret from your newly-created application.'
       clientId:
@@ -696,7 +696,7 @@ authPage:
           li2: Callback URL
           li3: '<b>Select Permissions</b> <b>Account Read</b>, <b>Pull Requests Write</b>, <b>Projects Read</b> and <b>Webhooks Read And Write</b>'
       li3:
-        text: 'Click "Save"'
+        text: 'Click "Save" '
     form:
       headerVariable: '3. Configure the pipeline to use your Bitbucket Cloud for authentication'
       subtextVariable: 'Copy and paste the Key and Secret from your newly-created consumer.'
@@ -824,7 +824,7 @@ authPage:
           li3: '<b>Application description:</b> <span class="text-muted">Anything you like, optional</span>'
           li4: Authorization callback URL
       li3:
-        text: 'Click "Register Application"'
+        text: 'Click "Register Application" '
     form:
       subtextVariable: 'Copy and paste the Client ID and Secret from your newly-created application.'
       clientId:
@@ -860,7 +860,9 @@ authPage:
           ul:
             li1: '<b>Application name:</b> <span class="text-muted">Anything you like, e.g. My {appName}</span>'
             li2: 'Homepage URL:'
-            li3: '<b>  Application description:</b> <span class="text-muted">Anything you like, optional</span>'
+            li3: '<b>
+
+              Application description:</b> <span class="text-muted">Anything you like, optional</span>'
             li4: 'Authorization callback URL:'
         li3:
           text: 'Click "Register application"'
@@ -909,15 +911,15 @@ authPage:
         li2:
           text: 'Navigate to the "OAuth consent screen" tab and fill in the form:'
           ul:
-            li1: '<b>Authorized domains:</b> Top private domain of'
-            li2: '<b>Application homepage link:</b>'
+            li1: '<b>Authorized domains:</b> Top private domain of '
+            li2: '<b>Application homepage link:</b> '
             li3: 'Under Scopes for Google APIs, enable "email", "profile", and "openid".'
             li4: 'Click on "Save".'
         li3:
           ul:
             li1: 'Select the "Create Credentials" dropdown, and select "OAuth clientID", then select "Web application".'
-            li2: '<b>Authorized Javascript origins:</b>'
-            li3: '<b>Authorized redirect URIs:</b>'
+            li2: '<b>Authorized Javascript origins:</b> '
+            li3: '<b>Authorized redirect URIs:</b> '
             li4: 'Click "Create", and then click on the "Download JSON" button.'
             li5: 'Upload the downloaded JSON file in the OAuth credentials box.'
         li4:
@@ -1106,18 +1108,18 @@ balancerPage:
   table:
     target: Target
 banner:
-  alerting: Alerts in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. Check out the updated alerts integration in Rancher <a href="{dashboardLink}/monitoring">monitoring</a> in Cluster Explorer Apps and Marketplace.
-  cis: CIS Scanning in Cluster Manager has been deprecated as of Rancher 2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. For CIS Scanning with benchmark version 1.5 and above, see the updated <a href="{dashboardLink}/cis">CIS scanning</a> functionality in Cluster Explorer Apps and Marketplace.
+  alerting: Alerts in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. Check out the updated alerts integration in Rancher <a href="{dashboardLink}/monitoring">monitoring</a> in Cluster Tools.
+  cis: CIS Scanning in Cluster Manager has been deprecated as of Rancher 2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. For CIS Scanning with benchmark version 1.5 and above, see the updated <a href="{dashboardLink}/cis">CIS scanning</a> functionality in Cluster Tools.
   cis21: CIS Scanning (v1) in Kubernetes 1.21+ is no longer supported.
-  istio: Istio v1.5 has been declared end of life by the upstream project and is now deprecated as of Rancher 2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. Checkout the new <a href="{dashboardLink}/istio">Istio</a> v1.7 integration in the new Cluster Explorer Apps and Marketplace.
+  istio: Istio v1.5 has been declared end of life by the upstream project and is now deprecated as of Rancher 2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. Checkout the newer versions of <a href="{dashboardLink}/istio">Istio</a> integration in the new Cluster Tools.
   istio21: Istio (v1) in Kubernetes 1.21+ is no longer supported.
-  logging: Logging in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. Check out the updated version of <a href="{dashboardLink}/logging">logging</a> in Cluster Explorer Apps and Marketplace.
+  logging: Logging in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. Check out the updated version of <a href="{dashboardLink}/logging">logging</a> in Cluster Tools.
   logging21: Logging (v1) in Kubernetes 1.21+ is no longer supported.
   multiclusterapp: Multi-Cluster Apps have been deprecated as of Rancher v2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. Check out the new <a href="{dashboardBase}c/local/fleet">Rancher Continuous Delivery</a> capability to deploy apps across multiple clusters through GitOps.
-  monitoring: Monitoring in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. Check out the updated version of <a href="{dashboardLink}/monitoring">monitoring</a> in Cluster Explorer Apps and Marketplace.
-  monitoringV2Warning: Monitoring in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. The updated version of <a href="{dashboardLink}/monitoring">monitoring</a> in Cluster Explorer Apps and Marketplace is currently deployed.
-  notifiers: Notifiers in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. Check out the updated notifier integration in Rancher <a href="{dashboardLink}/monitoring">monitoring</a> in Cluster Explorer Apps and Marketplace.
-  pipeline: Pipelines has been deprecated as of Rancher 2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. For continuous delivery capabilities check out <a href="{dashboardBase}c/local/fleet">Rancher Continuous Delivery</a> in the new Cluster Explorer view.
+  monitoring: Monitoring in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. Check out the updated version of <a href="{dashboardLink}/monitoring">monitoring</a> in Cluster Tools.
+  monitoringV2Warning: Monitoring in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. The updated version of <a href="{dashboardLink}/monitoring">monitoring</a> in Cluster Tools is currently deployed.
+  notifiers: Notifiers in Cluster Manager has been deprecated as of Rancher v2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. Check out the updated notifier integration in Rancher <a href="{dashboardLink}/monitoring">monitoring</a> in Cluster Tools.
+  pipeline: Pipelines has been deprecated as of Rancher 2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. For continuous delivery capabilities check out <a href="{dashboardBase}c/local/fleet">Rancher Continuous Delivery</a> in the new view.
   pipeline21: Pipelines in Kubernetes 1.21+ are no longer supported.
   upgrade21: The legacy feature flag is enabled and not all legacy features are supported in Kubernetes 1.21+.
   secrets: Legacy project functionality can be used to manage secrets that need to be available to all namespaces in a project
@@ -1488,8 +1490,8 @@ clustersPage:
     new: Add Cluster
     import: Import Cluster
     importAks: Import AKS
-    importEks: Import Amazon EKS
-    importGke: Import Google GKE
+    importEks: Import EKS
+    importGke: Import GKE
     register: Register Cluster
   cluster:
     label: Cluster Name
@@ -2710,18 +2712,17 @@ time:
     =1 {# min ago}
     other {# mins ago}
     }
-  secsAgo: |+
+  secsAgo: |
     {secs, plural,
     =1 {# second ago}
     other {# seconds ago}
     }
-
 haPage:
   header: High Availability
   setup:
-    prefix: "Multiple server containers can be deployed on different hosts so that {appName} keeps running even if one of the hosts fail."
+    prefix: "Multiple server containers can be deployed on different hosts so that {appName} keeps running even if one of the hosts fail.  "
     link: See documentation
-    suffix: "for information on setup and usage."
+    suffix: " for information on setup and usage."
   table:
     address: Advertised  Address
     port: Port
@@ -2901,8 +2902,8 @@ loginPage:
   githubMessage: "{appName} uses GitHub to manage accounts and teams.  Click the button below to log in and give us read-only access to your basic GitHub account information."
   shibbolethMessage: "{appName} uses Shibboleth to manage accounts.  Click the button below to log in to the configured Shibboleth IDP."
   shibbolethError:
-    "401": "Unauthorized"
-    "500": "Internal Server Error"
+    401: "Unauthorized"
+    500: "Internal Server Error"
     generic: "There was an error ({errorCode}) while trying to log you in. Please try again."
   error:
     authFailedCreds: "Logging in failed: Check credentials, or your account may not be authorized to log in."
@@ -3894,7 +3895,7 @@ clusterNew:
       access:
         endpoints:
           addActionLabel: Add Endpoint
-          helpBlock: Optionally limit access to the public endpoint via explicit CIDR blocks. If you limit access to specific CIDR blocks, then it is recommended that you also enable the private access to avoid loosing network communitcation to the cluster.
+          helpBlock: Optionally limit access to the public endpoint via explicit CIDR blocks. If you limit access to specific CIDR blocks, then it is recommended that you also enable private access to avoid losing network communication to the cluster.
           label: Public Access Endpoints
           valueLabel: Endpoints
         help: Configuring Public/Priavte API access is an advanced use case. Users are encouraged to read the EKS cluster endpoint access control <a href="https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html" target="_blank"  rel="nofollow noopener noreferrer">documentation</a>.
@@ -3925,7 +3926,7 @@ clusterNew:
     accountAccessSection:
       label: Account Access
     admin:
-      label: Admin Username
+      label: Linux Admin Username
       placeholder: user-1
     authenticate:
       next: 'Next: Authenticate & configure nodes'
@@ -4041,6 +4042,7 @@ clusterNew:
       help: Azure Network Policy is only available when Azure CNI is selected as the Network Plugin
       label: Network Policy
       placeholder: Select a Network Policy
+      editHelp: The Azure Network Policy option cannot be changed after the cluster is created
     networking:
       advanced: Advanced
       default: Default
@@ -4247,14 +4249,15 @@ clusterNew:
       label: System Monitoring Type
       placeholder: monitoring.googleapis.com/kubernetes
     clusterOption:
-      detail: Configure your cluster options.
+      detail: Configure your cluster details
       title: Cluster Options
     computeEngine:
       label: Compute Engine
     credential:
       configured: Configured for {project} project
-      helpText: >-
+      helpText: >
         Create a <a href="https://console.cloud.google.com/projectselector/iam-admin/serviceaccounts" target="_blank" rel="nofollow noopener noreferrer">Service Account</a> with a JSON private key and provide the JSON here.  See <a href="https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances" target="_blank" rel="nofollow noopener noreferrer">Google Cloud docs</a> for more info about creating a service account. These IAM roles are required: Compute Viewer (<code>roles/compute.viewer</code>), (Project) Viewer (<code>roles/viewer</code>), Kubernetes Engine Admin (<code>roles/container.admin</code>), Service Account User (<code>roles/iam.serviceAccountUser</code>). More info on roles can be found <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/iam-integration" target="_blank" rel="nofollow noopener noreferrer">here.</a>
+
       label: Service Account
       placeholder: Service account private key JSON file
     dashboard:
@@ -4411,7 +4414,7 @@ clusterNew:
       label: Network
     networkPolicy:
       help: To enable network policy for nodes, first enable network policy for master and apply the update.
-      label: Network Policy
+      label: Network Policy for Nodes
     nodeCount:
       label: Node Count
       outsideError: The specified number of nodes in the node pool is outside the specified autoscaling limits
@@ -4790,10 +4793,10 @@ clusterNew:
       compartmentOCID: OCID of the VCN's compartment
       compartmentOCIDHelp: leave blank if it's the cluster compartment
       compartmentOCIDPlaceholder: e.g. ocid1.compartment.oc1..aaaaaaaa...
-      lbSubnetName1: Name of first pre-existing LB subnet
-      lbSubnetName1Placeholder: e.g. my-lb-sub-1
+      lbSubnetName1: Name of pre-existing LB subnet
+      lbSubnetName1Placeholder: e.g. svc-sub-1
       lbSubnetName2: Name of second pre-existing LB subnet (if applicable)
-      lbSubnetName2Placeholder: e.g. my-lb-sub-2
+      lbSubnetName2Placeholder: e.g. svc-sub-2
       nodePoolPlaneSubnetName: Name of pre-existing node-pool subnet
       nodePoolSubnetNamePlaceholder: e.g. nodepool-sub
       controlPlaneSubnetName: Name of pre-existing control plane subnet
@@ -4854,8 +4857,8 @@ clusterNew:
     storageType:
       label: Default Persistent Volume Disk Type
     subnet:
-      label: Subnet Access
-      required: Subnet access is required
+      label: Node-pool Subnet Access
+      required: Node-pool subnet access is required
     controlPlaneSubnet:
       label: Control plane Subnet Access
       required: Control plane subnet access is required
@@ -5094,6 +5097,8 @@ clusterNew:
       label: CNI Plugin MTU Override
     networkPolicy:
       label: Project Network Isolation
+      editHelp: The Project Network Isolation option cannot be changed after the cluster is created
+      selectNetworkPolicyHelp: You must have a Network Policy selected to use Project Network Isolation
     nodeName:
       detail: Optionally configure the node name as identification instead of the actual hostname
       placeholder: e.g. my-worker-node
@@ -5534,7 +5539,7 @@ confirmDelete:
   protip: 'ProTip: Hold the {key} key while clicking Delete to bypass this confirmation.'
   confirmAction: Delete
   cancelAction: Cancel
-  largeDeleteText: '"{key}" and {othersCount} others'
+  largeDeleteText: '{key} and {othersCount} others'
   systemChartNote: 'You are removing a system app. It may cause issues with the cluster if it is removed.'
   globalRoleNote: |
     {count, plural,
@@ -6541,7 +6546,7 @@ validationsList:
   noMatch: No issues match the current search
 dangerZone:
   header: Advanced Settings
-  subtext: "Typical users will not need to change these.  Proceed with caution, incorrect values can break your {appName} installation.<br/>Settings which have been customized from default settings  are shown in <b>bold</b>.If there are no configuration items you need here, please view <a href=\"/v3/setting\" target=\"_blank\">More Settings</a>."
+  subtext: "Typical users will not need to change these.  Proceed with caution, incorrect values can break your {appName} installation.<br/>Settings which have been customized from default settings  are shown in <b>bold</b>."
   showLabel: "I understand that I can break things by changing advanced settings."
   show: Show
   hide: Hide
@@ -6800,8 +6805,8 @@ stacksPage:
 featureFlags:
   warningHeader: "Feature flags allow {appName} to gate certain features behind flags. You should enable these features with caution, and they should be considered beta functionality, which could cause problems for your system. Additionally, some features (non-dynamic) require a restart of the {appName} server to be enabled. Changing non-dynamic features will restart {appName} pods, which will result in a short outage."
   features:
-    istioVirtualServiceUi: "Exposes a UI that enables users to create, read, update and delete virtual services and destination rules, which are traffic management features of Istio."
-    unsupportedStorageDrivers: "Allows the use of types for storage providers and provisioners that are not enabled by default."
+    istioVirtualServiceUi: "Enabling this feature exposes additional UI pages for Istio."
+    unsupportedStorageDrivers: "Enabling this feature exposes unsupported storage driver options for persistent volumes and storage classes."
     fleet: "Install Fleet when starting Rancher"
     projectPipelineServiceUI: "Expose enable project pipeline UI and allow user to use pipeline with project level."
     virtaitechGpuServiceUI: "Allows user to set vGpus reserved value."
@@ -7411,13 +7416,11 @@ formKeyValue:
     placeholder: Value
   protip: 'ProTip: Paste lines of key=value pairs into any key field for easy bulk entry.'
   binary:
-    byte: |+
+    byte: |
       {length, plural,
       =1 {# byte}
       other {# bytes}
       }
-
-
 formImage:
   label: Docker Image
   container:
@@ -8238,9 +8241,8 @@ hostSettings:
     alert: |
       Are you sure all the hosts you will create will be able to reach <code>{activeValue}</code> ?<br/>It looks like a private IP or local network.
   badTld:
-    alert: |+
+    alert: |
       The <code>.local</code> Top-Level Domain is reserved by RFC6762 for Multicast DNS.  Using this as your Registration URL is strongly discouraged and may cause DNS resolution issues as well as problems with addons like secrets and networked storage drivers.  Please choose a different hostname or IP.
-
 hostPod:
   supportState:
     unsupported: Unsupported Docker version
@@ -8329,8 +8331,8 @@ nodeGroupRow:
     placeholder: Paste in the script
   version:
     label: Kubernetes Version
-    upgrade: 'Upgrade Node Group Version from {from} to {version}'
-    warning: A new cluster version has been selected. Once completed you may come back and upgrade the node group version.
+    upgrade: 'Upgrade Node Version from { from } to { version }'
+    warning: A new cluster version has been selected. Once completed you may come back and upgrade the node version.
 uploadFile:
   label: Read from File
 podsSection:
@@ -8669,8 +8671,8 @@ machineTemplatesPage:
 modalDeleteIstio:
   title: 'Are you sure you want to disable:'
   onlyIstio:
-    "true": Istio and remove Istio system namespace
-    "false": Istio, Monitoring and remove Istio system namespace
+    true: Istio and remove Istio system namespace
+    false: Istio, Monitoring and remove Istio system namespace
   disable: Disable
   disabling: Disabling
 newCertificate:
@@ -8792,7 +8794,7 @@ modalAddCloudKey:
   saving:
     validating: Validating Keys
   errors:
-    validation: '{status}: There was a problem validating your keys. Enter valid credentials and try again.'
+    validation: '{ status }: There was a problem validating your keys. Enter valid credentials and try again.'
     region: You must select a region in order to validate your keys
     azureTenantId: Tenant ID is required to launch a hosted Azure AKS cluster.
   typeSelect:
@@ -8855,7 +8857,7 @@ modalAddCloudKey:
     clientSecret:
       label: Client Secret
       placeholder: Your Client Secret
-      help: From <a href="https://bmc.phoenixnap.com/applications/" target="_blank" rel="nofollow noreferrer noopener">phoenixNAP BMC Portal</a> Application Credentials
+      help: From <a href="https://bmc.phoenixnap.com/applications/" target="_blank" rel="nofollow noreferrer noopener">phoenixNAP BMC Portal</a> API Credentials
   vmwarevsphere:
     password:
       label: Password
@@ -9044,8 +9046,8 @@ modalRotateCertificates:
   select:
     all: Select a service
   expiring:
-    until: '{cert} (expires {expiresIn})'
-    from: '{cert} (expired {expiresIn})'
+    until: '{ cert } (expires { expiresIn })'
+    from: '{ cert } (expired { expiresIn })'
 modalRotateEncryption:
   title: Rotate Encryption Keys
   backupWarning: Before proceeding, ensure a successful ETCD backup of the cluster has been completed.
@@ -9073,8 +9075,8 @@ modalRollbackApp:
   difference:
     label: Differences
 modalSaveRkeTemplate:
-  title: "Create RKE Template from {clusterName}"
-  subtitle: Create a new RKE cluster template and initial revision from the current cluster configuration. This will modify the current cluster, setting up the cluster to use the newly created cluster template and revision.
+  title: "Convert {clusterName} to new RKE Template"
+  subtitle: Create a new RKE cluster template and initial revision from the current cluster configuration. This will modify the current cluster, setting up the cluster to use the newly created cluster template and revision. This can not be undone.
   name: Cluster Template Name
   revName: Cluster Template Revision Name
 modalShell:
@@ -9432,10 +9434,10 @@ nodeDriver:
     openstack: OpenStack
     otc: Open Telekom Cloud
     otccce: Open Telekom Cloud CCE
-    packet: Packet
+    packet: Equinix Metal
     pinganyunecs: Pinganyun ECS
     pnap: phoenixNAP
-    rackspace: RackSpace
+    rackspace: Rackspace
     rancherkubernetesengine: RKE
     softlayer: SoftLayer
     tencenttke: Tencent TKE
@@ -9740,11 +9742,11 @@ nodeDriver:
     accountSection: Account Access
     projectId:
       label: Project ID
-      placeholder: Your Packet project ID
+      placeholder: Your Equinix Metal project ID
     apiKey:
       label: Account API Key
-      placeholder: Your Packet API key
-    apiKeyHelp: From the Packet <a href="https://app.packet.net/users/0/api-keys" target="_blank">API Keys</a> screen
+      placeholder: Your Equinix Metal API key
+    apiKeyHelp: From the Equinix Metal <a href="https://app.packet.net/users/0/api-keys" target="_blank">API Keys</a> screen
     instanceSection: Instance
     instanceOptionsSection: Instance Options
     loginAction: "Next: Authenticate & select an instance"
@@ -9769,11 +9771,11 @@ nodeDriver:
       detail: Username and API Key will be used to launch Rackspace Instances.
     username:
       label: Username
-      placeholder: Your RackSpace username
+      placeholder: Your Rackspace username
     apiKey:
       label: API Key
-      placeholder: Your RackSpace API key
-    accountHelp: From the Account Settings screen of the RackSpace control panel
+      placeholder: Your Rackspace API key
+    accountHelp: From the Account Settings screen of the Rackspace control panel
     region:
       title: 2. Region and Flavor
       detail: Choose the region and flavor that will be used to launch Rackspace Instances.
@@ -10539,12 +10541,11 @@ pagination:
     =0 {No Options}
     =1 {{count} {count, plural, =1 {Gateway} other {Gateways}}}
     other {{from} - {to} of {count} Gateways}}
-  workload: |+
+  workload: |
     {pages, plural,
     =0 {No Workloads}
     =1 {{count} {count, plural, =1 {Workload} other {Workloads}}}
     other {{from} - {to} of {count} Workloads}}
-
 projectRow:
   none: No description
   orchestration: Orchestration
@@ -10979,7 +10980,7 @@ action:
   setDefault: Set as Login Environment
   setDefaultRevision:
     success:
-      message: '{name} has been set at the default revision on {ctName}.'
+      message: '{ name } has been set at the default revision on { ctName }.'
       title: Success
   setting: Setting
   start: Start
@@ -11271,10 +11272,9 @@ rkeConfigComment:
   rancher_kubernetes_engine_config: |
     ""
     "Rancher Config"
-  clusterConfig: |+
+  clusterConfig: |
     ""
     "Cluster Config"
-
 units:
   percent: '%'
   cpu: milli CPUs
@@ -11552,12 +11552,11 @@ pipelineNotification:
     required: Recipient is required
   asMessage: Send a message to
 selectValueCheck:
-  message: |+
+  message: |
     {values, plural,
       =1 {Please select a new value. The following is no longer valid:}
       other {Please select new values. The following are no longer valid:}
     }
-
 customMenus:
   index:
     header: Extra Menus
@@ -11969,7 +11968,7 @@ imageRepoSection:
   labelPage:
     table:
       noData: No Data
-      noMatch: 没有Label匹配当前搜索
+      noMatch: No Match Conditions
   projectsPage:
     addProject: New Project
     porjectPrivate: Pricate
@@ -11992,8 +11991,9 @@ imageRepoSection:
     copy: COPY
     copyDigest: Copy Summary
     table:
+      addLabel: Add Tag
       noData: No Data
-      noMatch: 没有TAG匹配当前搜索
+      noMatch: No Match Conditions
   userConfigPage:
     keyCloakAuthWarning: You need to use your KeyCloak account to synchronize in Harbor. Please enter your password to initialize (you can use your account and the initialized password to log in to the Harbor service later). If you have already synchronized your account in the Harbor service, enter your password to Synchronize
     methodNotSupported: Rancher({rancherAuthMode}) does not support harbor server with {auth} authorization.
@@ -12173,4 +12173,3 @@ formIngressGeneralSetting:
     detail: "Number of requests accepted from a given IP each second. When clients exceed this limit, limit-req-status-code default: 503 is returned."
   sslRedirect:
     title: http redirect https
-
