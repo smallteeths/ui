@@ -27,12 +27,12 @@
 <SettingsOverridableBanner
   id="setting-ui-header-banner"
   @show={{settings.showHeaderBanner}}
-  @model={{settings.bannerContent}}
+  @model={{settings.bannerContent.bannerHeader}}
 />
 {{/unless}}
 <div
   id="application"
-  class="container no-inline-space {{if settings.showHeaderBanner 'with-ui-header-banner' ''}} {{if settings.showFooterBanner 'with-ui-footer-banner' ''}}"
+  class="container no-inline-space {{if settings.showHeaderBanner 'with-ui-header-banner' ''}} {{if settings.showFooterBanner 'with-ui-footer-banner' ''}} {{if isLeftMenu 'container-nav-left' ''}}"
 >
   {{outlet}}
 </div>
@@ -40,7 +40,7 @@
 <SettingsOverridableBanner
   id="setting-ui-footer-banner"
   @show={{settings.showFooterBanner}}
-  @model={{settings.bannerContent}}
+  @model={{settings.bannerContent.bannerFooter}}
 />
 {{/unless}}
 

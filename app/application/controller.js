@@ -2,10 +2,12 @@ import { oneWay } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
 import { run } from '@ember/runloop';
-import { observer, set } from '@ember/object';
+import { observer, set, computed, get } from '@ember/object';
+import C from 'shared/utils/constants';
 
 export default Controller.extend({
   settings: service(),
+  session:    service(),
 
   resourceActions:   service('resource-actions'),
   tooltipService:    service('tooltip'),
@@ -40,5 +42,9 @@ export default Controller.extend({
   // but getting the application controller to get it is inconvenient sometimes
   currentRouteNameChanged: observer('router.currentRouteName', function() {
     this.set('app.currentRouteName', this.get('router.currentRouteName'));
+  }),
+
+  isLeftMenu: computed(`session.${ C.PREFS.MENU }`, function() {
+    return get(this, `session.${ C.PREFS.MENU }`) === 'left';
   }),
 });
