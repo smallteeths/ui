@@ -11671,6 +11671,8 @@ clusterConnectMode:
   apiEndpoint:
     label: API Endpoint
     placeholder: e.g. https://10.43.0.1:443
+    required: API Endpoint is required
+    overrideLabel: Override API Endpoints
   connectMode:
     label: Connect Mode
   connectStatus:
@@ -11681,7 +11683,7 @@ clusterConnectMode:
     label: Connect Status
     provider: Provider
     timeout: Timeout
-  detail: Cluster connection mode switching and parameter adjustment
+  detail: View cluster connection mode and API Endpoints
   testConnect:
     error: Connect Failed
     label: Test

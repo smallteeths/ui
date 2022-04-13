@@ -3,7 +3,7 @@
 </section>
 
 <div class="row">
-  <div class="col span-6 box">
+  <div class="col box span-6">
     <label class="acc-label">
       {{t "clusterConnectMode.connectMode.label"}}
     </label>
@@ -12,20 +12,19 @@
       value=model.directAccess
     }}
   </div>
-   <div class="col span-6 box">
-    <label class="acc-label">
-      {{t "clusterConnectMode.apiEndpoint.label"}}
-    </label>
-    {{input
-      type="text"
-      classNames="form-control"
-      placeholder=(t "clusterConnectMode.apiEndpoint.placeholder")
-      value=model.apiEndpoint
+   <div class="col box span-6">
+    {{form-value-array-with-status
+      initialValues=initValues
+      valueLabel="clusterConnectMode.apiEndpoint.label"
+      valuePlaceholder="clusterConnectMode.apiEndpoint.placeholder"
+      addActionLabel="generic.add"
+      status=statusMap
+      changed=(action (mut model.apiEndpoints))
     }}
   </div>
 </div>
-<div class="over-hr mt-40">
-  <button class="btn bg-info" type="button" {{action "testConnectMode"}} disabled={{loading}}>
+<div class="mt-40 over-hr">
+  <button class="bg-info btn" type="button" {{action "testConnectMode"}} disabled={{loading}}>
     {{t "clusterConnectMode.testConnect.label"}}
   </button>
 
@@ -37,11 +36,11 @@
 {{/if}}
 {{top-errors errors=errors}}
 <div class="center">
-  <button class="btn bg-primary" type="button" {{action "doSaveAndRestart"}} disabled={{loading}}>
+  <button class="bg-primary btn" type="button" {{action "doSaveAndRestart"}} disabled={{loading}}>
   {{t "generic.save"}}
   </button>
   &nbsp;
-  <button class="btn bg-transparent" type="button" {{action "cancel"}} disabled={{loading}}>
+  <button class="bg-transparent btn" type="button" {{action "cancel"}} disabled={{loading}}>
   {{t "generic.cancel"}}
   </button>
 </div>

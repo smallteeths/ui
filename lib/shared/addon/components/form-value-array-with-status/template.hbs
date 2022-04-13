@@ -1,0 +1,77 @@
+<label class="acc-label block">
+  {{#if valueLabelEnabled}}
+    {{t valueLabel}}
+  {{/if}}
+  {{#if (and editing required)}}
+    {{field-required}}
+  {{/if}}
+</label>
+
+{{#if ary.length}}
+  {{#each ary as |row index|}}
+    <div class="mb-10 input-group">
+      {{#if (getValue status row.value)}}
+        {{#if (getValue (getValue status row.value) "status")}}
+        <span class="text-success icon icon-check input-group-addon"></span>
+        {{else}}
+        {{#tooltip-element type="tooltip-basic" model=(getValue (getValue status row.value) "error") tooltipTemplate='tooltip-static' class="input-group-addon"}}
+        <span class="text-error icon icon-info"></span>
+        {{/tooltip-element}}
+        {{/if}}
+      {{else}}
+       <span class="input-group-addon">&nbsp;&nbsp;&nbsp;</span>
+      {{/if}}
+      
+      <span class="value-container" data-title="{{t valueLabel}}">
+        {{#if hasBlock}}
+          {{yield this row index}}
+        {{else if editing}}
+          {{input-paste
+            pasted=(action "pastedValues")
+            class="form-control input-sm value"
+            type="text"
+            value=row.value
+            placeholder=valuePlaceholder
+          }}
+        {{else}}
+          {{row.value}}
+        {{/if}}
+      </span>
+      {{#if editing}}
+        <span class="input-group-btn">
+          <button
+            class="{{removeButtonClass}}" type="button" {{action "remove" row}}>
+            <i class="icon icon-minus"/>
+            <span class="sr-only">
+              {{t "generic.remove"}}
+            </span>
+          </button>
+        </span>
+      {{/if}}
+    </div>
+  {{/each}}
+
+
+{{else if (not editing)}}
+  <p class="text-muted">
+    {{t noDataLabel}}
+  </p>
+{{/if}}
+{{#if editing}}
+  <button
+    class={{addButtonClass}} disabled={{not addButtonEnabled}} type="button" {{action "add"}}
+  >
+    <i class="text-small icon icon-plus"/>
+    <span>
+      {{t addActionLabel}}
+    </span>
+  </button>
+
+  {{#if ary.length}}
+    {{#if showProTip}}
+      <div class="pt-10 protip">
+        {{t "formValueArray.protip"}}
+      </div>
+    {{/if}}
+  {{/if}}
+{{/if}}

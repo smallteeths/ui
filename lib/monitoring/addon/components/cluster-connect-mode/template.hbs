@@ -18,20 +18,26 @@
       {{/if}}
     </div>
   </div>
-{{/if}}
-
-  {{#if connectStatus}}
-  <div class="row">
-     <div class="col box span-4">
-      <label class="acc-label vertical-middle p-0">{{t "clusterConnectMode.connectStatus.timeout"}}:</label>
-      {{timeout}} {{t "generic.seconds"}}
-    </div>
-    <div class="col box span-4">
-      <label class="acc-label vertical-middle p-0">{{t "clusterConnectMode.connectStatus.apiEndpoint"}}:</label>
-      {{connectStatus.ClusterManagerState.RestConfig.Host}}
+  <div class="box">
+    <div class="row">
+      <div class="col span-5">
+        <label class="p-0 acc-label vertical-middle">{{t "clusterConnectMode.connectStatus.timeout"}}:</label>
+        {{timeout}} {{t "generic.seconds"}}
+      </div>
+      <div class="col span-6">
+        <label class="p-0 acc-label vertical-middle">{{t "clusterConnectMode.connectStatus.apiEndpoint"}}:</label>
+        {{cluster.apiEndpoint}}
+      </div>
+      <div class="col span-10">
+        {{form-value-array-with-status
+          initialValues=connectMode.apiEndpoints
+          valueLabel="clusterConnectMode.apiEndpoint.overrideLabel"
+          status=statusMap
+          editing=false
+        }}
+      </div>
     </div>
   </div>
-  {{/if}}
-
+{{/if}}
 {{top-errors errors=errors}}
 {{/accordion-list-item}}

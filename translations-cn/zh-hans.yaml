@@ -11499,6 +11499,8 @@ clusterConnectMode:
   apiEndpoint:
     label: API Endpoint
     placeholder: 例如：https://10.43.0.1:443
+    required: API Endpoint 不能为空
+    overrideLabel: Override API Endpoints
   connectMode:
     label: 连接模式
   connectStatus:
@@ -11509,7 +11511,7 @@ clusterConnectMode:
     label: 连接状态
     provider: Provider
     timeout: Timeout
-  detail: 集群连接模式切换和参数调整
+  detail: 查看集群连接模式和 API Endpoints
   testConnect:
     error: 测试失败
     label: 测试
