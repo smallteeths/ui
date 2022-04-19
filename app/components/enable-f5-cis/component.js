@@ -11,6 +11,10 @@ import jsyaml from 'js-yaml';
 import flatMap, { isEmptyObject, isObject } from 'shared/utils/flat-map';
 import layout from './template';
 import InputAnswers from 'shared/mixins/input-answers';
+import { compare as compareVersion } from 'ui/utils/parse-version';
+import CatalogUpgrade from 'shared/mixins/catalog-upgrade';
+import { all as PromiseAll } from 'rsvp';
+import { parseHelmExternalId } from 'ui/utils/parse-externalid';
 
 const EXPOSED_OPTIONS = [
   'bigip.password',
@@ -19,8 +23,11 @@ const EXPOSED_OPTIONS = [
   'network.flannelName',
   'network.poolMemberType',
   'network.type',
-  'partition'
+  'partition',
+  'ipam.enable',
+  'ipam.volume.pvc',
 ];
+const F5CIS_TEMPLATE = 'system-library-rancher-f5cis';
 
 const NETWORK_TYPE_CHOISES = [
   {
@@ -40,12 +47,15 @@ const POOL_MEMBER_TYPE_CHOISES = [
   },
 ];
 
-export default Component.extend(InputAnswers, {
+const ipv4RegExp = /^(((\d{1,2})|(1\d{2})|(2[0-4]\d)|(25[0-5]))\.){3}((\d{1,2})|(1\d{2})|(2[0-4]\d)|(25[0-5]))$/;
+
+export default Component.extend(InputAnswers, CatalogUpgrade, {
   scope: service(),
   intl:  service(),
 
   layout,
 
+  templateId:     F5CIS_TEMPLATE,
   answers:        null,
   customAnswers:  null,
   justDeployed:   false,
@@ -61,10 +71,17 @@ export default Component.extend(InputAnswers, {
   partition:      '',
   username:       '',
   password:       '',
+  currentVersion: null,
+  ipam:           {
+    enable:  false,
+    volume:  { pvc: '' },
+  },
+  ipRanges: [],
 
-  cluster:    alias('scope.currentCluster'),
-  version:    alias('versionConfig.defaultVersion'),
-  valuesYaml: alias('pastedAnswers'),
+  cluster:         alias('scope.currentCluster'),
+  enabled:         alias('scope.currentCluster.enableF5CIS'),
+  templateVersion: alias('versionConfig.defaultVersion'),
+  valuesYaml:      alias('pastedAnswers'),
 
   actions: {
     promptDisable() {
@@ -98,7 +115,7 @@ export default Component.extend(InputAnswers, {
       }
 
       // set(params, 'answers', answers);
-      set(params, 'version', get(this, 'version'));
+      set(params, 'version', get(this, 'templateVersion'));
 
       cluster.doAction(action, params).then(() => {
         if (this.isDestroyed || this.isDestroying) {
@@ -106,6 +123,11 @@ export default Component.extend(InputAnswers, {
         }
 
         set(this, 'justDeployed', true);
+
+        if ( action === 'editF5CIS' ) {
+          this.send('upgrade');
+        }
+
         cb(true);
         this.fetchSettings();
       }).catch(() => {
@@ -142,29 +164,105 @@ export default Component.extend(InputAnswers, {
     cancel() {
       this.parseYamlAnswers();
       this.filterMissingAnswer();
-    }
+    },
+
+    async upgrade() {
+      const currentVersion = get(this, 'apps.firstObject.externalIdInfo.version') || get(this, 'currentVersion');
+      const templateVersion = get(this, 'templateVersion');
+
+      if ( !templateVersion || !currentVersion || templateVersion === currentVersion ) {
+        return;
+      }
+
+      const requests = [];
+      let apps = get(this, 'apps') || [];
+
+      if (!apps.length){
+        apps = await this.fetchApps();
+      }
+
+      apps.forEach((app) => {
+        const externalInfo = parseHelmExternalId(get(app, 'externalId'));
+
+        requests.push(get(this, 'globalStore').rawRequest({
+          url:    `/v3/project/${ get(app, 'projectId') }/apps/${ get(app, 'id') }`,
+          method: 'PUT',
+          data:   {
+            projectId:       get(app, 'projectId'),
+            targetNamespace: get(app, 'targetNamespace'),
+            externalId:      get(app, 'externalId')
+              .replace(`version=${ get(externalInfo, 'version') }`, `version=${ templateVersion }`)
+          }
+        }));
+      });
+
+      return PromiseAll(requests);
+    },
+
+    addIPRange() {
+      let ranges = get(this, 'ipRanges').slice();
+
+      ranges.push({
+        key:        '',
+        rangeEnd:   '',
+        rangeStart: '',
+      });
+      set(this, 'ipRanges', ranges);
+    },
+
+    removeIPRange(obj) {
+      if (get(this, 'ipRanges.length') === 1){
+        return;
+      }
+      const ranges = get(this, 'ipRanges').filter((r) => r !== obj);
+
+      set(this, 'ipRanges', ranges);
+    },
   },
 
-  enabled: computed('cluster.enableF5CIS', function() {
-    return get(this, 'cluster.enableF5CIS');
+  ipamEnable: observer('ipam.enable', function() {
+    if (get(this, 'ipam.enable')){
+      !get(this, 'ipRanges.length') && this.send('addIPRange');
+    } else {
+      set(this, 'ipRanges', []);
+    }
   }),
 
-  versionChoices: computed('versionConfig.versionLinks', function() {
+  versionChoices: computed('enable', 'enabled', 'currentVersion', 'versionConfig.versionLinks', function() {
     const versionLinks = get(this, 'versionConfig.versionLinks') || [];
     const out = [];
 
-    Object.keys(versionLinks).forEach((key) => {
+    if (get(this, 'enabled') && get(this, 'currentVersion')){
       out.push({
-        label: key,
-        value: key
+        label: get(this, 'currentVersion'),
+        value: get(this, 'currentVersion')
       })
-    })
+      Object.keys(versionLinks).forEach((key) => {
+        if (compareVersion(key, get(this, 'currentVersion')) > 0){
+          out.push({
+            label: key,
+            value: key
+          })
+        }
+      })
+    } else {
+      Object.keys(versionLinks).forEach((key) => {
+        out.push({
+          label: key,
+          value: key
+        })
+      })
+    }
 
     return out;
   }),
 
   networkTypeIsFlannel: computed('networkType', function() {
     return get(this, 'networkType') === 'flannel';
+  }),
+
+  latestVersion: computed('versionChoices.lastObject.value', function() {
+    return get(this, 'versionChoices.lastObject.value')
   }),
 
   initSettings: on('init', observer('scope.currentProject.id', 'scope.currentCluster.id', function() {
@@ -180,6 +278,12 @@ export default Component.extend(InputAnswers, {
 
     if ( get(this, 'pasteOrUpload') ) {
       return true;
+    }
+
+    if (get(this, 'ipam.enable') && get(this, 'ipRanges.length')){
+      if (get(this, 'ipRanges').some((r) => !r.key || !ipv4RegExp.test(r.rangeEnd) || !ipv4RegExp.test(r.rangeStart))) {
+        errors.push(intl.t('f5CISPage.form.ipam.ipRange.IPFormatError'));
+      }
     }
 
     fields.forEach((f) => {
@@ -213,13 +317,23 @@ export default Component.extend(InputAnswers, {
 
         const { valuesYaml } = res
         const body = get(res, 'answers');
-        const version = get(res, 'version');
+        const currentVersion = get(res, 'version');
         const answers = {};
         const customAnswers = {};
+        const ipRanges = []
 
         Object.keys(body || {}).forEach((key) => {
           if ( EXPOSED_OPTIONS.indexOf(key) > -1 ) {
             answers[key] = body[key];
+          } else if (key.startsWith('ipam.ipRange.')) {
+            const out = {}
+            const k = key.substr(13);
+            const range = body[key].split('-');
+
+            out.key = k;
+            out.rangeStart = range[0];
+            out.rangeEnd = range[1];
+            ipRanges.push(out);
           } else {
             customAnswers[key] = body[key];
           }
@@ -227,16 +341,20 @@ export default Component.extend(InputAnswers, {
 
         if (valuesYaml) {
           setProperties(this, {
-            version,
-            pasteOrUpload: true,
-            pastedAnswers: valuesYaml,
+            currentVersion,
+            templateVersion: currentVersion,
+            pasteOrUpload:   true,
+            pastedAnswers:   valuesYaml,
+            ipRanges,
           })
           this.parseYamlAnswers()
         } else {
           setProperties(this, {
-            version,
+            currentVersion,
+            templateVersion: currentVersion,
             answers,
             customAnswers,
+            ipRanges,
           })
           this.updateConfig(answers);
         }
@@ -254,6 +372,8 @@ export default Component.extend(InputAnswers, {
     set(this, 'username', answers['bigip.username']);
     set(this, 'password', answers['bigip.password']);
     set(this, 'networkType', answers['network.type']);
+    set(this, 'ipam.enable', answers['ipam.enable'] === 'true');
+    set(this, 'ipam.volume.pvc', answers['ipam.volume.pvc']);
 
     if (this.networkType === 'flannel') {
       set(this, 'poolMemberType', answers['network.poolMemberType']);
@@ -269,6 +389,18 @@ export default Component.extend(InputAnswers, {
     answers['bigip.username'] = get(this, 'username');
     answers['bigip.password'] = get(this, 'password');
     answers['network.type'] = get(this, 'networkType');
+
+    if (get(this, 'ipam.enable')){
+      answers['ipam.enable'] = get(this, 'ipam.enable').toString();
+      answers['ipam.volume.pvc'] = get(this, 'ipam.volume.pvc');
+
+      if (get(this, 'ipRanges.length')){
+        get(this, 'ipRanges').forEach((item) => {
+          answers[`ipam.ipRange.${ item.key }`] = `${ item.rangeStart }-${ item.rangeEnd }`;
+        })
+      }
+    }
+
 
     if (this.networkTypeIsFlannel) {
       answers['network.poolMemberType'] = get(this, 'poolMemberType');
@@ -356,6 +488,26 @@ export default Component.extend(InputAnswers, {
     } else {
       this.finishBackToForm()
     }
+  },
+
+  async fetchApps(){
+    const store = get(this, 'globalStore');
+    const cluster = get(this, 'cluster');
+    const project = get(cluster, 'systemProject');
+
+    if ( project && get(cluster, 'enableF5CIS') ) {
+      const res = await store.rawRequest({
+        url:    `/v3/project/${ get(project, 'id') }/apps`,
+        method: 'GET',
+      });
+
+      const apps = get(res, 'body.data') || [];
+      const clusterApp = apps.findBy('name', 'cluster-f5cis');
+
+      return [clusterApp];
+    }
+
+    return [];
   },
 
 });

@@ -1566,6 +1566,24 @@ f5CISPage:
     flannelName:
       label: Flannel Name
       placeholder: "e.g. /Common/MyFlannel"
+    ipam:
+      label: Enable F5 IPAM Controller
+      pvc:
+        label: PVC Name
+        placeholder: "e.g. MyPVC"
+      ipRange:
+        label: IP Range
+        key:
+          label: Key
+          placeholder: "e.g. key"
+        start:
+          label: Start Address
+          placeholder: "e.g. 192.168.56.10"
+        end:
+          label: End Address
+          placeholder: "e.g. 192.168.56.20"
+        add: Add IP address
+        IPFormatError: "IP Range There are records with incorrect IP address format"
   disabled: F5 CIS is disabled in the current cluster.
   toUpdate: F5 CIS is enabled.
   notReady: 'F5 CIS Chart not found, check the <a href="/g/catalog">Catalog</a> Url please.'

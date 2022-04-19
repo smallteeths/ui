@@ -11397,6 +11397,24 @@ f5CISPage:
       label: BIG-IP 用戶名
       placeholder: "例如: John"
     version: F5 負載均衡服務組件版本
+    ipam:
+      label: 啟用 F5 IPAM Controller
+      pvc:
+        label: PVC Name
+        placeholder: "例如: MyPVC"
+      ipRange:
+        label: IP Range
+        key:
+          label: 鍵
+          placeholder: "例如: key"
+        start:
+          label: 起始地址
+          placeholder: "例如: 192.168.56.10"
+        end:
+          label: 結束地址
+          placeholder: "例如: 192.168.56.20"
+        add: 添加IP地址段
+        IPFormatError: IP Range 中，存在IP地址格式不正確的記錄
   notReady: 未找到F5負載均衡服務Chart, 請確認系統<a href="/g/catalog">應用商店</a>配置是否正確。
   title: F5 負載均衡服務
   toUpdate: F5 負載均衡服務已啟動。

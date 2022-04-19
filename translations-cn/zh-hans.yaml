@@ -1564,6 +1564,24 @@ f5CISPage:
     flannelName:
       label: Flannel Name
       placeholder: "例如: /Common/MyFlannel"
+    ipam:
+      label: 启用 F5 IPAM Controller
+      pvc:
+        label: PVC Name
+        placeholder: "例如: MyPVC"
+      ipRange:
+        label: IP Range
+        key:
+          label: 键
+          placeholder: "例如: key"
+        start:
+          label: 起始地址
+          placeholder: "例如: 192.168.56.10"
+        end:
+          label: 结束地址
+          placeholder: "例如: 192.168.56.20"
+        add: 添加IP地址段
+        IPFormatError: IP Range 中，存在IP地址格式不正确的记录
   disabled: F5 负载均衡服务在当前集群中尚未开启。
   toUpdate: F5 负载均衡服务已启动。
   notReady: '未找到F5负载均衡服务Chart, 请确认系统<a href="/g/catalog">应用商店</a>配置是否正确。'

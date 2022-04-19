@@ -16,11 +16,39 @@ export default Route.extend({
     const PREFIX = 'cattle-global-data';
     const F5CIS = 'system-library-rancher-f5cis';
 
-    return hash({ templates: get(this, 'catalog').fetchTemplates() }).then((hash) => {
+    const store = get(this, 'globalStore');
+
+    const cluster = get(this, 'scope.currentCluster');
+    const project = get(cluster, 'systemProject');
+
+    let fetchApps = [];
+
+    if ( project && get(cluster, 'enableF5CIS') ) {
+      fetchApps = store.rawRequest({
+        url:    `/v3/project/${ get(project, 'id') }/apps`,
+        method: 'GET',
+      }).then((res) => {
+        const out = [];
+        const apps = get(res, 'body.data') || [];
+        const clusterApp = apps.findBy('name', 'cluster-f5cis');
+
+        if ( clusterApp ) {
+          out.push(store.createRecord(clusterApp));
+        }
+
+        return out;
+      });
+    }
+
+    return hash({
+      apps:      fetchApps,
+      templates: get(this, 'catalog').fetchTemplates()
+    }).then((hash) => {
       const template = get(hash, 'templates.catalog').findBy('id', `${ PREFIX }:${ F5CIS }`);
 
       if (template) {
         return {
+          apps:          hash.apps,
           versionConfig: {
             versionLinks:   get(template, 'versionLinks'),
             defaultVersion: get(template, 'defaultVersion'),
@@ -28,7 +56,10 @@ export default Route.extend({
           f5Ready: true
         }
       } else {
-        return { f5Ready: false }
+        return {
+          apps:    hash.apps,
+          f5Ready: false
+        }
       }
     });
   },
