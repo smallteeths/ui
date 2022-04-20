@@ -148,7 +148,11 @@ export default Component.extend(NewOrEdit, ChildHook, {
 
     const workloadAnnotations = get(this, 'primaryResource.workloadAnnotations') || {};
 
-    set(this, 'defaultServiceEnabled', workloadAnnotations['field.cattle.io/defaultPort'] === 'false' ? 'false' : 'true');
+    if (get(this, 'isUpgrade') && !get(this, 'service.isCreatedByRancher')) {
+      set(this, 'defaultServiceEnabled', 'false');
+    } else {
+      set(this, 'defaultServiceEnabled', workloadAnnotations['field.cattle.io/defaultPort'] === 'false' ? 'false' : 'true');
+    }
   },
 
   didInsertElement() {
