@@ -9,6 +9,7 @@
   <div>
     {{form-new-value-from-resource
       value=row.data
+      namespace=namespace
       refData=row.refData
       update=(action 'updateRow' row)
       remove=(action 'removeRow' row)

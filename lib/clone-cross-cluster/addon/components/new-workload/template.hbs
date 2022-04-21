@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col span-11-of-23 mt-0 mb-0">
+  <div class="mt-0 mb-0 col span-11-of-23">
     <label
       for="add-project-target"
       class="acc-label"
@@ -17,7 +17,7 @@
       value=targetForm.project
     }}
   </div>
-  <div class="col span-11-of-23 mt-0 mb-0 offset-1-of-23">
+  <div class="mt-0 mb-0 col span-11-of-23 offset-1-of-23">
     <label
       for="add-project-target"
       class="acc-label"
@@ -42,19 +42,19 @@
     {{#each service.containers as |container index|}}
       {{#if (eq index 0)}}
         <a href="#" class="col span-2 nav-box-item {{if (eq activeConfig index) "active" ""}}" {{action "activateContainerConfig" index}}>
-          <div class="darken p-20 m-0">
+          <div class="m-0 p-20 darken">
             <i class="icon icon-service"/>
           </div>
           <span class="text-muted">
             {{container.name}}
           </span>
-          <p class="help-block mb-10">
+          <p class="mb-10 help-block">
             {{t "newContainer.sidekick.primary"}}
           </p>
         </a>
       {{else}}
         <a href="#" class="col span-2 nav-box-item {{if (eq activeConfig index) "active" ""}}" {{action "activateContainerConfig" index}}>
-          <div class="darken p-20 m-0">
+          <div class="m-0 p-20 darken">
             <i class="icon icon-container"/>
           </div>
           <div>
@@ -62,11 +62,11 @@
             {{container.name}}
           </span>
           </div>
-          <p class="help-block mb-10">
+          <p class="mb-10 help-block">
             {{t "newContainer.sidekick.sidekick"}}
           </p>
           {{!-- <button
-            class="btn btn-sm bg-error"
+            class="bg-error btn btn-sm"
             {{action "promptRemoveContainer" index}}
           >
             {{t "action.remove"}}
@@ -80,7 +80,7 @@
   {{#each service.containers as |container index|}}
   <div class="clone-cross-cluster__container {{if (eq activeConfig index) '' 'hide'}}">
     <div class="row">
-      <div class="col span-11-of-23 mt-0 mb-0">
+      <div class="mt-0 mb-0 col span-11-of-23">
         {{#if (eq index 0)}}
           {{form-name-description
             name=container.name
@@ -107,7 +107,7 @@
           }}
         {{/if}}
       </div>
-      <div class="col span-11-of-23 mt-0 mb-0 offset-1-of-23">
+      <div class="mt-0 mb-0 col span-11-of-23 offset-1-of-23">
         {{#if (eq index 0)}}
           {{container/form-scale
             initialScale=service.scale
@@ -144,7 +144,7 @@
     </div>
     <hr class="mt-30 mb-30" />
     <div class="row">
-      <div class="col span-11-of-23 mt-0 mb-0">
+      <div class="mt-0 mb-0 col span-11-of-23">
         {{container/form-image
           initialValue=container.image
           errors=imageErrors
@@ -186,6 +186,7 @@
         {{form-new-env-vars
           env=(get envMap container._originName)
           envFrom=(get envFromMap container._originName)
+          namespace=targetNamespace
           updateSecret=(action 'updateSecret')
           updateConfigMap=(action 'updateConfigMap')
           header=(t "newContainer.environment.label")
@@ -296,22 +297,22 @@
         expand=(action expandFn)
       }}
         <div class="row">
-          <div class="col span-6 mt-0 mb-0">
+          <div class="mt-0 mb-0 col span-6">
             <label class="acc-label">
               {{t "formHealthCheck.readiness"}}
             </label>
           </div>
-          <div class="col span-6 mt-0 mb-0">
+          <div class="mt-0 mb-0 col span-6">
             {{#if (get separateLivenessCheckMap container._originName)}}
               <label class="acc-label">
                 {{t "formHealthCheck.liveness"}}
               </label>
-              <div class="pull-right text-small">
-                <button class="btn bg-transparent p-0" {{action "toggleSeparateLivenessCheck" index}}>{{t "formHealthCheck.combinedLivenessCheck"}}</button>
+              <div class="text-small pull-right">
+                <button class="bg-transparent p-0 btn" {{action "toggleSeparateLivenessCheck" index}}>{{t "formHealthCheck.combinedLivenessCheck"}}</button>
               </div>
             {{else}}
-              <div class="pull-right text-small">
-                <button class="btn bg-transparent p-0" {{action "toggleSeparateLivenessCheck" index}}>{{t "formHealthCheck.separateLivenessCheck"}}</button>
+              <div class="text-small pull-right">
+                <button class="bg-transparent p-0 btn" {{action "toggleSeparateLivenessCheck" index}}>{{t "formHealthCheck.separateLivenessCheck"}}</button>
               </div>
             {{/if}}
           </div>
@@ -448,19 +449,19 @@
         }}
 
         <div class="row">
-          <div class="col span-6 mt-0 mb-0">
+          <div class="mt-0 mb-0 col span-6">
             <label class="acc-label">
               {{t "formContainerLifecycle.postStartHook"}}
             </label>
           </div>
-          <div class="col span-6 mt-0 mb-0">
+          <div class="mt-0 mb-0 col span-6">
             <label class="acc-label">
               {{t "formContainerLifecycle.preStopHook"}}
             </label>
           </div>
         </div>
         <div class="row">
-          <div class="col span-6 mt-0 mb-0">
+          <div class="mt-0 mb-0 col span-6">
             {{container/form-container-lifecycle
               initialHandler=container.postStart
               changed=(action (mut container.postStart))
@@ -468,7 +469,7 @@
               editing=true
             }}
           </div>
-          <div class="col span-6 mt-0 mb-0">
+          <div class="mt-0 mb-0 col span-6">
             {{container/form-container-lifecycle
               initialHandler=container.preStop
               changed=(action (mut container.preStop))
@@ -533,8 +534,8 @@
       save=(action "save")
       cancel=(action "cancel")
     }}
-    <div class="pt-20 ml-5">
-      <button class="btn bg-transparent" {{action "resetForm"}}>{{t 'cloneCrossCluster.newContainer.reset'}}</button>
+    <div class="ml-5 pt-20">
+      <button class="bg-transparent btn" {{action "resetForm"}}>{{t 'cloneCrossCluster.newContainer.reset'}}</button>
     </div>
   </div>
 {{/if}}
