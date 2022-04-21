@@ -157,6 +157,7 @@ export default Component.extend(ThrottledResize, {
 
   projectChoices: computed('scope.allProjects.@each.{id,displayName,relevantState}', function() {
     return get(this, 'scope.allProjects')
+      .filter((p) => p.cluster)
       .sortBy('displayName', 'id');
   }),
 
