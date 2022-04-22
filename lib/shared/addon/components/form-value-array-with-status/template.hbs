@@ -27,7 +27,7 @@
           {{yield this row index}}
         {{else if editing}}
           {{input-paste
-            pasted=(action "pastedValues")
+            pasted=(action "pastedValues" index)
             class="form-control input-sm value"
             type="text"
             value=row.value
