@@ -39,7 +39,7 @@
     {{/if}}
   </div>
 </div>
-<div class="row mb-20">
+<div class="mb-20 row">
   <div class="col span-6">
     <label class="acc-label">
       {{t "cruPersistentVolume.secret.secretName.label"}}
@@ -104,13 +104,23 @@
 {{#if (and config.secretName specific)}}
   <div class="row">
     <div class="col span-12">
-      {{form-key-to-path
-        namespace=namespace
-        initialItems=config.items
-        secretName=config.secretName
-        editing=editing
-        changed=(action (mut config.items))
-      }}
+      {{#if enableLoadResourceByNamespace}}
+        {{form-ns-key-to-path
+          namespace=namespace
+          initialItems=config.items
+          secretName=config.secretName
+          editing=editing
+          changed=(action (mut config.items))
+        }}
+      {{else}}
+        {{form-key-to-path
+          namespace=namespace
+          initialItems=config.items
+          secretName=config.secretName
+          editing=editing
+          changed=(action (mut config.items))
+        }}
+      {{/if}}
     </div>
   </div>
 {{/if}}

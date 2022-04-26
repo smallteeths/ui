@@ -41,6 +41,14 @@ export default Component.extend(VolumeSource, {
     set(this, 'config.defaultMode', parseInt(octal, 8));
   }),
 
+  configNameDidChange: observer('config.secretName', function() {
+    set(this, 'specific', false)
+  }),
+
+  namespaceDidChange: observer('namespace.id', function() {
+    set(this, 'config.secretName', '');
+  }),
+
   enableLoadResourceByNamespace: computed('settings.enable-load-resource-by-namespace', function() {
     return get(this, 'settings.enable-load-resource-by-namespace');
   }),

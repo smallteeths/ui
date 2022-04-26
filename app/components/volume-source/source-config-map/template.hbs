@@ -39,7 +39,7 @@
     {{/if}}
   </div>
 </div>
-<div class="row mb-20">
+<div class="mb-20 row">
   <div class="col span-6">
     <label class="acc-label">
       {{t "cruPersistentVolume.configMap.name.label"}}
@@ -106,14 +106,25 @@
 {{#if (and config.name specific)}}
   <div class="row">
     <div class="col span-12">
-      {{form-key-to-path
-        initialItems=config.items
-        configMapName=config.name
-        mode="configmap"
-        editing=editing
-        namespace=namespace
-        changed=(action (mut config.items))
-      }}
+      {{#if enableLoadResourceByNamespace}}
+        {{form-ns-key-to-path
+          initialItems=config.items
+          configMapName=config.name
+          mode="configmap"
+          editing=editing
+          namespace=namespace
+          changed=(action (mut config.items))
+        }}
+      {{else}}
+        {{form-key-to-path
+          initialItems=config.items
+          configMapName=config.name
+          mode="configmap"
+          editing=editing
+          namespace=namespace
+          changed=(action (mut config.items))
+        }}
+      {{/if}}
     </div>
   </div>
 {{/if}}
