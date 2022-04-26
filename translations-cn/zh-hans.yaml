@@ -1638,6 +1638,11 @@ f5CtlPage:
     waf:
       label: WAF
       placeholder: ""
+    ipam:
+      label: IPAM Label
+      placeholder: ""
+    tsType:
+      label: Type
     monitor:
       label: 启用监控
       enable: 启用

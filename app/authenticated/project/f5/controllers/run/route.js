@@ -13,7 +13,8 @@ export default Route.extend({
     const f5 = {
       virtualServerHTTPPort:  80,
       virtualServerHTTPSPort: 443,
-      mode:                   'standard'
+      mode:                   'standard',
+      tsType:                 'tcp',
     };
     const tlsProfiles = store.findAll('tlsprofile');
 

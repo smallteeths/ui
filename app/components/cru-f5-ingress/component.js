@@ -17,6 +17,16 @@ const TRANSPORT_MODES = [
     value: 'performance',
   }
 ]
+const TS_TYPES = [
+  {
+    label: 'TCP',
+    value: 'tcp'
+  },
+  {
+    label: 'UDP',
+    value: 'udp',
+  }
+]
 
 export default Component.extend(NewOrEdit, {
   intl:  service(),
@@ -33,6 +43,7 @@ export default Component.extend(NewOrEdit, {
 
   isVirtualServer: true,
   transportModes:  TRANSPORT_MODES,
+  tsTypeChoises:   TS_TYPES,
   primaryResource: null,
 
   init() {
@@ -136,6 +147,10 @@ export default Component.extend(NewOrEdit, {
         delete pr.rewriteAppRoot;
       }
 
+      if (!get(f5, 'ipamLabel')) {
+        delete pr.ipamLabel;
+      }
+
       set(this, 'primaryResource', pr);
 
       return;
@@ -166,7 +181,8 @@ export default Component.extend(NewOrEdit, {
         type:              'transportserver',
         pool:              get(f5, 'pools.firstObject'),
         virtualServerPort: get(f5, 'virtualServerPort'),
-        mode:              get(f5, 'mode')
+        mode:              get(f5, 'mode'),
+        tsType:            get(f5, 'tsType'),
       })
     }
 
@@ -185,6 +201,10 @@ export default Component.extend(NewOrEdit, {
 
     if (get(f5, 'virtualServerName')) {
       set(pr, 'virtualServerName', get(f5, 'virtualServerName'))
+    }
+
+    if (get(f5, 'ipamLabel')) {
+      set(pr, 'ipamLabel', get(f5, 'ipamLabel'))
     }
 
     set(this, 'primaryResource', pr);

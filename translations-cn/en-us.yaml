@@ -1640,6 +1640,11 @@ f5CtlPage:
     waf:
       label: WAF
       placeholder: ""
+    ipam:
+      label: IPAM Label
+      placeholder: ""
+    tsType:
+      label: Type
     monitor:
       label: Enable Monitor
       enable: Enable

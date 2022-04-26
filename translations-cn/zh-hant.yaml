@@ -10215,6 +10215,11 @@ f5CtlPage:
     waf:
       label: WAF
       placeholder: ""
+    ipam:
+      label: IPAM Label
+      placeholder: ""
+    tsType:
+      label: Type
   globalDnsModel:
     description: 保存成功後會添加 annotation <code>rancher.io/globalDNS.hostname='hostname'</code>（清空時會刪除這條 annotation )。
     label: 域名

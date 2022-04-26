@@ -101,7 +101,6 @@
         {{#input-or-display editable=editing value=f5.virtualServerHTTPPort}}
           {{input-integer class="form-control" min="1" max="65535" value=f5.virtualServerHTTPPort placeholder=(t "f5CtlPage.form.http.placeholder")}}
         {{/input-or-display}}
-        
       </div>
 
       <div class="col span-4">
@@ -154,6 +153,19 @@
             class="form-control"
             value=f5.waf
             placeholder=(t "f5CtlPage.form.waf.placeholder")
+          }}
+        {{/input-or-display}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col span-4">
+        <label class="acc-label">{{t "f5CtlPage.form.ipam.label"}}</label>
+        {{#input-or-display editable=editing value=f5.ipamLabel}}
+          {{input
+            class="form-control"
+            value=f5.ipamLabel
+            placeholder=(t "f5CtlPage.form.ipam.placeholder")
           }}
         {{/input-or-display}}
       </div>
@@ -213,6 +225,27 @@
           class="form-control"
           value=f5.snat
           placeholder=(t "f5CtlPage.form.snat.placeholder")
+        }}
+      {{/input-or-display}}
+    </div>
+    <div class="col span-6">
+      <label class="acc-label">{{t "f5CtlPage.form.ipam.label"}}</label>
+      {{#input-or-display editable=editing value=f5.ipamLabel}}
+        {{input
+          class="form-control"
+          value=f5.ipamLabel
+          placeholder=(t "f5CtlPage.form.ipam.placeholder")
+        }}
+      {{/input-or-display}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col span-6">
+      <label class="acc-label">{{t "f5CtlPage.form.tsType.label"}}</label>
+      {{#input-or-display editable=editing value=f5.tsType}}
+        {{new-select
+          value=f5.tsType
+          content=tsTypeChoises
         }}
       {{/input-or-display}}
     </div>
