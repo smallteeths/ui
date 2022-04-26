@@ -60,6 +60,8 @@ export default Route.extend(Preload, {
                 get(this, 'settings.enable-load-resource-by-namespace') ? [] : this.preload('configmap'),
                 get(this, 'settings.enable-load-resource-by-namespace') ? [] : this.preload('namespacedSecret'),
                 this.preload('persistentVolumeClaim'),
+                this.preload('certificate'),
+                this.preload('namespacedCertificate'),
               ]).then(() => out)
             }
           }))

@@ -24,11 +24,11 @@
       {{/if}}
     </div>
   </div>
-  <div class="row mb-20">
+  <div class="mb-20 row">
     <div class="col span-6">
       <label class="acc-label">{{t 'cruPersistentVolume.secret.certificateName.label'}}</label>
       {{#if editing}}
-        {{schema/input-secret
+        {{schema/input-certificate
           namespace=namespace
           value=config.secretName
           type='certificate'

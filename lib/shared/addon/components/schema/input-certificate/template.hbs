@@ -1,13 +1,8 @@
-{{#if loading}}
-  <i class="icon icon-spinner icon-spin"></i> {{t 'generic.loading'}}
-{{else}}
-  {{new-select
-    classNames="form-control"
-    content=choices
-    prompt="schema.inputCertificate.prompt"
-    localizedPrompt=true
-    optionLabelPath="displayDetailedName"
-    optionValuePath="name"
-    value=value
-  }}
-{{/if}}
+{{new-select
+  classNames="form-control"
+  content=filtered
+  prompt="schema.inputCertificate.prompt"
+  localizedPrompt=true
+  value=selected
+ }}
+ 

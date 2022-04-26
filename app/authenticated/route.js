@@ -404,6 +404,14 @@ export default Route.extend(Preload, {
     }
   },
 
+  loadCertificates() {
+    if ( get(this, 'store').getById('schema', 'certificate') ) {
+      return get(this, 'store').find('certificate');
+    } else {
+      return resolve();
+    }
+  },
+
   _gotoRoute(name, scope = 'global') {
     // Don't go to routes if in a form page, because you can easily not be on an input
     // and leave the page accidentally.
