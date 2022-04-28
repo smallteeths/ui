@@ -10936,6 +10936,7 @@ action:
   editConfig: Edit Config
   editService: Edit Service
   editYaml: View/Edit YAML
+  viewAllYAML: View All YAML
   enableAutoInject: Enable Istio Auto Injection
   evacuate: Evacuate
   execute: Execute Shell

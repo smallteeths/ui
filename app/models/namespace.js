@@ -83,8 +83,9 @@ var Namespace = Resource.extend(StateCounts, {
   volumes:               hasMany('id', 'persistentVolumeClaim', 'namespaceId', 'projectStore', null, 'clusterStore'),
   type:                  'namespace',
   canEditQoutaKey:       null,
+  canEditYaml:           false,
+  canViewYaml:           false,
   project:               reference('projectId', 'project', 'globalStore'),
-
 
   init() {
     this._super(...arguments);
@@ -115,6 +116,12 @@ var Namespace = Resource.extend(StateCounts, {
         action:   'disableAutoInject',
         enabled:  get(this, 'scope.currentCluster.istioEnabled') && !!get(this, 'scope.currentCluster.systemProject') && get(this, 'autoInjectionEnabled'),
         bulkable: true
+      },
+      {
+        label:    'action.viewAllYAML',
+        action:   'viewYaml',
+        icon:     'icon icon-files',
+        bulkable: false,
       },
       { divider: true },
     ];

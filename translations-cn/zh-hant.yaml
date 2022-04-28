@@ -8516,6 +8516,7 @@ action:
   edit: 編輯
   editService: 編輯服務
   editYaml: 查看/編輯 YAML
+  viewAllYAML: '查看所有 YAML'
   viewYaml: 查看YAML
   editConfig: 編輯配置
   evacuate: 疏散

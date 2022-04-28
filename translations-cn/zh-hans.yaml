@@ -10701,6 +10701,7 @@ action:
   editConfig: 编辑配置
   editService: 编辑服务
   editYaml: '查看/编辑 YAML'
+  viewAllYAML: '查看所有 YAML'
   enableAutoInject: 启用 Istio 自动注入
   evacuate: 疏散
   execute: 执行命令行

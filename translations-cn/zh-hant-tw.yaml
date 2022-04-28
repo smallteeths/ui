@@ -10519,6 +10519,7 @@ action:
   editConfig: 編輯設定檔
   editService: 編輯服務
   editYaml: 查看/編輯YAML
+  viewAllYAML: '查看所有 YAML'
   evacuate: 疏散
   execute: 執行命令行
   exportConfig: 導出設定
