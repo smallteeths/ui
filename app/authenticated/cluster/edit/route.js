@@ -154,7 +154,7 @@ export default Route.extend({
 
   actions: {
     willTransition() {
-      set(this, 'controller.scrollTo', null);
+      get(this, 'controller.scrollTo') && set(this, 'controller.scrollTo', null);
     }
   },
 
