@@ -10,6 +10,10 @@
   background-color: #DCDEE7;
 }
 
+.btn-disabled, .bg-disabled {
+  color: #8b969d !important;
+}
+
 .container-tooltip {
   &.top > .tooltip-caret {
     border-top: 5px solid #DCDEE7;
