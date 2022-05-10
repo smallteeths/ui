@@ -159,7 +159,6 @@ generic:
   bitbucket: Bitbucket
   required: '{key} is required.'
   run: Run
-  Gibibyte: 'GiB'
 
 realmNames:
   all: All
@@ -189,7 +188,6 @@ accountsPage:
         description: Access to manage things that affect the entire installation
         admin: This user is an administrator and has all permissions.
         noRoles: This user has no global roles
-        readOnlyAdmin: This user is a read-only administrator and has read-only access to subordinate cluster objects
       cluster:
         title: Cluster Roles
         description: Roles granted to this user for individual clusters
@@ -227,7 +225,6 @@ accountsPage:
       usernameInExists: Username is already in use. Please choose a new username.
       pwReq: Password is required.
       role: New users are required to have a role. Select a role from the list.
-      strengthError: Weak password strength
     form:
       username:
         labelText: Username
@@ -306,28 +303,6 @@ alertPage:
   cluster: Cluster
   project: Project
   alertGroups: Alerts
-  customLabel:
-    title: Customize alert labels and annotations
-    addText: Add Label and Annotation
-    note: "Note: The notification.tmpl template currently does not support webhooks. If you need to configure automatic alert labels and messages, please go to 'Tools -> Alerts' to add related configurations."
-    error:
-      key: Custom label key is invalid
-      value: Custom label value cannot be empty
-      uneq: Custom message keys of the same type cannot be the same
-    placeholder:
-      key: Key
-      value: Value
-    table:
-      stepOne: Add custom
-      stepTwo: Select
-      stepThree: Add
-    customStepOneOption:
-      label: Label
-      message: Annotation
-    customStepTwoOption:
-      annotations: Annotation
-      label: Label
-      custom: Custom
   newOrEdit:
     showAdvanced: Show Advanced Options
     initialWait: Initial Wait
@@ -368,29 +343,15 @@ alertPage:
     notifierPlaceholder: Choose a Notifier
     nodePlaceholder: Choose a Node
     systemServicePlaceholder: Choose a System Service
-    nameRequired: Name required
     nodeRequired: Node required
     nodeSelectorRequired: Node Selector required
     recipient:
       helpText: The value set in the Notifier is used by default. You can override this with another value.
-    unit:
-      timesPerSecond: 'Times/S'
-      second: S
-      percent: '%'
-      times: Times
-      millisecond: MS
-      mbPerSecond: 'MB/S'
     expression:
       label: Expression
       noData: No metric graph data.
       error: Failed to fetch metric graph data.
       placeholder: Input Expression
-    commonRules:
-      label: Common Rules
-      noData: No metric graph data.
-      error: Failed to fetch metric graph data.
-      placeholder: Choose Alert Rule
-      podRebootTimesTips: Please convert symbol in keys to underline(_)
     removeAlert: Remove this Alert
     alertRule: Alert Rule
     groupWaitSeconds:
@@ -427,7 +388,6 @@ alertPage:
     systemService: System Service
     nodeSelector: Node Selector
     workloadSelector: Workload Selector
-    podRebootTimes: Pod Reboot Times
     metric: Metric
     cisScan: CIS Scan
     undefined: None
@@ -435,7 +395,6 @@ alertPage:
     addAlertGroup: Add Alert Group
     addAlert: Add Alert Rule
     noAlerts: There are no alert rules defined.
-    config: Alert Config
     table:
       noMatch: No alerts match the current search.
       noData: There are no alerts defined
@@ -469,30 +428,6 @@ alertPage:
     greater-or-equal: Greater Or Equal
     less-or-equal: Less Or Equal
     has-value: Not Null
-  commonRules:
-    diskRemainingPercent: Disk remaining percent
-    inodesUsagePercent: Inodes usage percent
-    diskReadIOPS: Disk read IOPS
-    diskWriteIOPS: Disk write IOPS
-    diskReadThroughput: Disk read throughput
-    diskWriteThroughput: Disk write throughput
-    diskReadDelay: Disk read delay
-    leaderChanges: A high number of leader changes within the etcd cluster are happening
-    databaseUsage: Database usage close to the quota 500M
-    noDiskIsRunning: Node disk is running full within 24 hours
-    highCpuLoad: High cpu load
-    highNodeMemoryUtilization: High node memory utilization
-    ramUsagePercent: RAM usage percent
-    etcdSnapDelay: Etcd snap delay
-    etcdDiskWal: Etcd latency distributions of fsync called by wal
-    etcdDiskBackend: Etcd latency distributions of commit called by backend
-    fileDescriptorUsagePercent: File descriptor usage percent
-    cpuUsagePercent: CPU usage percent
-    podRebootTimes: POD reboot times
-    customClusterBackupFailed: Custom cluster Etcd backup failure
-  config:
-    save: Save
-    reset: Reset Config
 
 podSecurityPoliciesPage:
   index:
@@ -1044,49 +979,6 @@ authPage:
       buttonText:
         pre: Enable Local Auth
         post: 'Enabling...'
-  cas:
-    header:
-      disabled:
-        label: CAS is not configured
-    notAuthenticated:
-      form:
-        header: Configure Rancher to use CAS to authentication
-        hostUrl:
-          label: CAS Host
-          placeholder: e.g. cas-server.com
-        port:
-          label: Port
-          placeholder: e.g. 6379
-        callbackURL:
-          label: Service Callback URL
-          placeholder: Your CAS Service Callback URL
-        connectionTimeout:
-          label: Server Connection Timeout
-          placeholder: e.g. 5000
-        loginEndpoint:
-          label: Login Endpoint
-          placeholder: e.g. /cas/login
-        logoutEndpoint:
-          label: Logout Endpoint
-          placeholder: e.g. /cas/logout
-        usernameField:
-          label: User Name Field
-          placeholder: e.g. username
-        passwordField:
-          label: Password Field
-          placeholder: e.g. password
-
-    authenticated:
-      disableAccess:
-        disable: Disable CAS access
-    testAuth:
-      header: 'Test and enable authentication'
-      subtext: 'Check that your application is configured correctly by testing authentication with it:'
-      buttonText:
-        pre: Authenticate with CAS
-        post: Waiting to hear back from CAS
-      authError: 'CAS access was not authorized'
-      popupError: 'Please disable your pop-up blocker and click "Authenticate" again.'
 
 backupsPage:
   header: etcd Snapshots
@@ -1339,8 +1231,6 @@ clusterIstioPage:
   upgradeMonitoring: 'Before enabling Istio, you need to upgrade cluster monitoring to version 0.0.4 or above first. Go <a href="/c/{clusterId}/monitoring/cluster-setting">here</a> to upgrade cluster monitoring.'
   enableMonitoring:
     label: Enable Monitoring
-  warning:
-    mixerBreaking: Istio upgrade to 1.8 requires disabled first and then enable.
 
 certificatesPage:
   cn: Domain Name
@@ -1491,7 +1381,6 @@ clusterTemplateRevisionUpgradeNotification:
 
 clustersPage:
   header: Clusters
-  metricsHeader: Metrics
   newCluster: Add Cluster
   newTemplate: Add Template
   newClusterName: "Add Cluster: {name}"
@@ -1558,138 +1447,6 @@ ingressPage:
       label: Targets
     noMatch: No ingresses match the current search.
     noData: There are no ingress rules defined
-
-f5CISPage:
-  title: F5 CIS
-  form:
-    version: F5 CIS Version
-    url: 
-      label: BIG-IP URL
-      placeholder: e.g. http://example.com
-    partition:
-      label: BIG-IP Partition
-      placeholder: "e.g. Common"
-    username:
-      label: BIG-IP Username
-      placeholder: e.g. John
-    password:
-      label: BIG-IP Password
-      placeholder: Your Password
-    type: Network Provider
-    pool: Pool Member Type
-    flannelName:
-      label: Flannel Name
-      placeholder: "e.g. /Common/MyFlannel"
-  disabled: F5 CIS is disabled in the current cluster.
-  toUpdate: F5 CIS is enabled.
-  notReady: 'F5 CIS Chart not found, check the <a href="/g/catalog">Catalog</a> Url please.'
-  confirmDisable: "Are you sure?  Click again to disable F5 CIS."
-  disable: Disable
-  enableActionLabel: Enable
-  warning: "If Pool Member Type is Cluster, each cluster needs to use an independent F5 BIG IP and cannot share with other clusters F5 BIG IP"
-  authError: "F5 CIS service is not supported in local cluster"
-
-f5CtlPage:
-  notEnabled: 'F5 CIS is disabled. Click <a href="/c/{clusterId}/cis/f5">here</a> to enable it。'
-  addCtl: Create F5 Ingress
-  header:
-    new: Create F5 Ingress
-    edit: Edit F5 Ingress
-    view: "F5 Ingress: {name}"
-  table:
-    noData: There are no F5 Ingress
-  form:
-    type: 
-      label: F5 Ingress Type
-      virtual: L7 (VirtualServer)
-      transport: L4 (TransportServer)
-    url:
-      label: Url
-      placeholder: "e.g. 8.8.8.8"
-    name:
-      label: Name
-      placeholder: "e.g. F5 Ingress Name"
-    domain:
-      label: Host
-      placeholder: "e.g. example.com"
-    http:
-      label: Http Port
-      placeholder: "e.g. 80"
-    https:
-      label: Https Port
-      placeholder: "e.g. 443"
-    port:
-      label: Port
-      placeholder: "e.g. 8080"
-    mode: Mode
-    root:
-      label: Rewrite APP Root
-      placeholder: "e.g. /foo"
-    tls: 
-      label: TLS Profile
-      placeholder: Choose...
-    rewrite:
-      label: Rewrite
-      placeholder: "e.g. /foo"
-    snat:
-      label: SNAT
-      placeholder: ""
-    waf:
-      label: WAF
-      placeholder: ""
-    monitor:
-      label: Enable Monitor
-      enable: Enable
-      disable: Disable
-    monitorType: Type
-    send:
-      label: Send
-      placeholder: "e.g. GET /"
-    receive:
-      label: Receive
-      placeholder: ""
-    interval:
-      label: Interval
-      placeholder: "e.g. 20"
-    timeout:
-      label: Timeout
-      placeholder: "e.g. 20"
-    path:
-      label: Path
-  validation:
-    waf: '"WAF" must be started with /'
-    pool: 'Pools[{index}]: "{key}" is required'
-    path:
-      duplicated: 'Paths in Pools are duplicated'
-      relative: 'Pools[{index}]: "Path in Pools must be absolute path"'
-      relativeInPool: Path must be absolute path
-  globalDnsModel:
-    label: Domain Name
-    description: A successful save will add the annotation <code>rancher.io/globalDNS.hostname='hostname'</code> (clearing will remove this annotation).
-    placeholder: e.g. VirtualServer host
-
-f5TLSPage:
-  addTLS: Create TLS
-  header:
-    new: Create TLS
-    edit: Edit TLS
-    view: "TLS: {name}"
-  table:
-    noData: There are no TLS
-  form:
-    reference: Reference
-    termination:
-      label: Termination
-      placeholder: Choose...
-    clientSSL:
-      label: Client SSL
-      placeholder: "e.g. /Common/clientssl"
-    serverSSL:
-      label: Server SSL
-      placeholder: "e.g. /Common/serverssl"
-    hosts:
-      add: Add Host
-      placeholder: 'e.g. example.com'
 
 containerPage:
   header: 'Container: {name}'
@@ -1789,30 +1546,6 @@ clusterDashboard:
   used: Used
   value: Value
 
-clusterConnectMode:
-  title: Cluster connect mode
-  detail: Cluster connection mode switching and parameter adjustment
-  connectMode:
-    label: Connect Mode
-  connectStatus:
-    label: Connect Status
-    address: Address
-    timeout: Timeout
-    host: Host
-    provider: Provider
-    apiEndpoint: API Endpoint
-    driver: Driver
-  testConnect:
-    label: Test
-    success: Connect Success
-    error: Connect Failed
-  apiEndpoint:
-    label: API Endpoint
-    placeholder: e.g. https://10.43.0.1:443
-  actions:
-    saveAndRestart: Save And Restart
-    restartConfirm: Are You Sure You Want To Save Connect Mode And Restart Cluster({name}) User Controller ？
-    yes: Yes
 
 ingressResponse:
   host: Host
@@ -1913,8 +1646,6 @@ monitoringPage:
       memoryLimit:
         label: Node Exporter Memory Limit
         placeholder: e.g. 200
-    gpuMonitoring:
-      enable: Enable GPU Monitoring
   nodeSelector:
     addSelectorLabel: Add Selector
     helpText: Select the nodes where monitoring related workloads will be scheduled to
@@ -1956,17 +1687,6 @@ metricsAction:
     30d: 30 days
 
 metrics:
-  global-cluster-cpu-usage: Cluster CPU Utilization Top 5
-  global-cluster-memory-usage: Cluster Memory Utilization Top 5
-  global-cluster-disk-usage: Cluster Disk Utilization Top 5
-  global-node-cpu-usage: Node CPU Utilization Top 5
-  global-node-memory-usage: Node Memory Utilization Top 5
-  global-node-disk-usage: Node Disk Utilization Top 5
-  global-pod-unhealthy: Cluster Unhealthy Pods Top 5
-  global-pod-unschedulable: Cluster Unschedulable Pods Top 5
-  global-pod-restart: Cluster Pods Restart Top 5
-  global-pod-cpu-usage: Pod CPU Utilization Top 5
-  global-pod-memory-usage: Pod Memory Utilization Top 5
   apiserver-request-count: API Server Request Rate
   apiserver-request-latency: API Server Request Latency
   cluster-cpu-load: Load Average
@@ -2025,9 +1745,6 @@ metrics:
   workload-memory-usage-bytes-sum: Memory Utilization
   workload-network-io: Network I/O
   workload-network-packet: Network Packets
-  cluster-gpu-memory-usage: GPU Memory Utilization
-  node-gpu-memory-usage: GPU Memory Utilization
-  node-gpu-memory-total: GPU Memory Total
 
 dnsPage:
   noMatch: No records match the current search
@@ -2206,7 +1923,7 @@ cruPersistentVolumeClaim:
   define:
     addActionLabel: Define
   capacity:
-    label: Request Storage Capacity
+    label: Request Storage
     help: Req
     unit: GiB
   name:
@@ -2258,7 +1975,6 @@ cruPrivateRegistry:
   title:
     label: Private Registry
     detail: Configure a default private registry for provisioning RKE cluster components. When enabled, all system images required for RKE cluster provisioning and system add-ons startup will be pulled from this registry.
-    detailAtImportCluster: "Configure a default private registry for this cluster. When enabled, all images required for cluster provisioning and system add-ons startup will be pulled from this registry(Notice: This config will override system-default-registry in global config)."
   noData: This cluster does not have a private registry defined
   defaultError: You must designate one private registry as the default
   add:
@@ -2297,168 +2013,6 @@ destinationRulePage:
     subsets:
       label: Subsets
 
-globalMonitoringPage:
-  header: Global Monitoring (Experimental)
-  cluster: Global Monitoring Cluster
-  noAvailableClusters: No active clusters. Please add a cluster first.
-  enabled: "Global Monitoring is enabled. You can query your metrics across multiple clusters if cluster monitoring <code>v0.0.7000</code> or above enabled inside the clusters."
-  disabled: "Global Monitoring is not enabled yet. Please click Enable button to enable it. You will be able to query your metrics across multiple clusters if cluster monitoring <code>v0.0.7000</code> or above enabled inside the clusters."
-  notReady: Installing Global Monitoring into the system project of global monitoring cluster...
-  updating: Updating Global Monitoring in the system project of global monitoring cluster...
-  version: Global Monitoring Version
-  disable: Disable
-  noTemplate: Failed to load global monitoring catalog templates.
-  confirmDisable: "Are you sure?  Click again to disable global monitoring"
-  enableActionLabel: Enable
-  globalMonitoringClusterUnavailable: Cluster {clusterName} is unavailable.
-  objectStorageWarning: Thanos sidecar in each cluster requires the object storage crednetials. So cluster owners will also be able to see the object storage crednetials in the System projects.
-  customAnswers:
-    title: Custom Answers
-    detail: Configure custom answers.
-  nodeSelector:
-    addSelectorLabel: Add Selector
-    helpText: Select the nodes where {component} workloads will be scheduled to
-  links:
-    grafana:
-      label: Grafana UI
-    globalMonitoring:
-      label: Global Dashboard
-    thanos:
-      label: Thanos UI
-  thanos:
-    title: Thanos Query
-    detail: Query Prometheus metrics across multiple clusters.
-    serviceType:
-      label: Thanos Query UI Service
-  store:
-    title: Object Storage
-    detail: Store Prometheus metrics across multiple clusters to object storage for unlimited time.
-    enabled:
-      label: Store Prometheus metrics to object storage
-    gcs:
-      label: Google Cloud Storage
-      bucketName:
-        label: Bucket Name
-        placeholder: "e.g. backups"
-      serviceAccount:
-        label: Service Account
-        placeholder: "Your Google service account"
-    s3:
-      label: S3
-      bucketName:
-        label: S3 Bucket Name
-        placeholder: "e.g. backups"
-      endpoint:
-        label: S3 Region Endpoint
-        placeholder: "e.g. s3.us-west-2.amazonaws.com"
-      accessKey:
-        label: S3 Access Key
-        placeholder: Your AWS access key
-      secretKey:
-        label: S3 Secret Key
-        placeholder: Your AWS secret key
-        provided: Provided
-    aliyunoss:
-      label: Aliyun OSS
-      bucketName:
-        label: Aliyun OSS Bucket Name
-        placeholder: "e.g. backups"
-      endpoint:
-        label: Aliyun OSS Region
-        hangzhou: oss-cn-hangzhou
-        shanghai: oss-cn-shanghai
-        qingdao: oss-cn-qingdao
-        beijing: oss-cn-beijing
-        zhangjiakou: oss-cn-zhangjiakou
-        huhehaote: oss-cn-huhehaote
-        shenzhen: oss-cn-shenzhen
-        heyuan: oss-cn-heyuan
-        chengdu: oss-cn-chengdu
-        hongkong: oss-cn-hongkong
-        west-1: oss-us-west-1
-        east-1: oss-us-east-1
-        southeast-1: oss-ap-southeast-1
-        southeast-2: oss-ap-southeast-2
-        southeast-3: oss-ap-southeast-3
-        southeast-5: oss-ap-southeast-5
-        northeast-1: oss-ap-northeast-1
-        south-1: oss-ap-south-1
-        eu-central-1: oss-eu-central
-        eu-west-1: oss-eu-west-1
-        me-east-1: oss-me-east-1
-      accessKey:
-        label: Aliyun OSS Access Key
-        placeholder: Your Aliyun access key
-      secretKey:
-        label: Aliyun OSS Secret Key
-        placeholder: Your Aliyun secret key
-        provided: Provided
-    tencentcloudcos:
-      label: "Tencent COS"
-      bucketName:
-        label: "Bucket Name"
-        placeholder: "e.g. backups"
-      region:
-        label: "Region"
-        placeholder: "e.g. cos.ap-beijing-1.myqcloud.com"
-      appid:
-        label: "APP ID"
-        placeholder: "e.g. 1250000000"
-      secretKey:
-        label: "Secret Key"
-        placeholder: "Your Secret Key"
-      secretId:
-        label: "Secret Id"
-        placeholder: "Your Secret Id"
-    azure:
-      label: "Azure Storage"
-      bucketName:
-        label: "Container Name"
-        placeholder: "e.g. mycontainer"
-      endpoint:
-        label: "Endpoint"
-        placeholder: "e.g. http://mystorageaccount.blob.core.windows.net"
-      storageAccount:
-        label: "Storage Account"
-        placeholder: "Your Azure Storage Account"
-      storageAccountKey:
-        label: "Storage Account Key"
-        placeholder: "Your Azure Storage Account Key"
-      maxRetries:
-        label: "Max Retries"
-        placeholder: "e.g. 0"
-  grafana:
-    title: Global Dashboard
-    detail: Global Grafana and {appName} Global Dashboard configuration.
-    enablePersistence:
-      label: Enable Persistent Storage for Grafana
-    enableGrafanaSidecar:
-      label: Enable Grafana Dashboard Provisioning Sidecar
-    size:
-      label: Grafana Persistent Volume Size
-      placeholder: e.g. 10Gi
-    serviceType:
-      label: Grafana UI Service
-    storageClass:
-      label: Default StorageClass for Grafana
-  svc:
-    clusterIp: "{appName} Proxy"
-    nodePort: NodePort
-    loadBalancer: L4 Load Balancer
-  insufficientSize:
-    total:
-      cpu: Please make sure you have at least {minCpu} milli CPUs available to {action} Global Monitoring.
-      memory: Please make sure you have at least {minMemory} MiB of memory available to {action} Global Monitoring.
-      all: Please make sure you have at least {minCpu} milli CPUs and {minMemory} MiB of memory available to {action} Global Monitoring.
-    workload:
-      cpu: Please make sure you have at least one node with {cpu} milli CPUs available to deploy {component} workload.
-      memory: Please make sure you have at least one node with {memory} MiB of memory available to deploy {component} workload.
-      all: Please make sure you have at least one node with {cpu} milli CPUs and {memory} MiB of memory available to deploy {component} workload.
-    selectors:
-      cpu: Please make sure you have at least one node matches node selectors with {cpu} milli CPUs available to enable {component} workload.
-      memory: Please make sure you have at least one node matches node selectors with {memory} MiB of memory available to enable {component} workload.
-      all: Please make sure you have at least one node matches node selectors with {cpu} milli CPUs and {memory} MiB of memory available to enable {component} workload.
-      unsupported: 'Node selector with value "true", "false" or number is not supported'
 globalRegistryPage:
   header: Global Registry
   enabled: Registry is enabled. Click <a href="{url}/registry" target="_blank" rel="nofollow noopener noreferrer">here</a> to open Harbor UI in a new tab.
@@ -2646,9 +2200,7 @@ globalDnsPage:
       noAccessMulti: You do not have access to the target app
       noAccessProvider: You do not have access to the provider
       noAccessProject: You do not have access to the target project
-      noAccessAddProvider: You do not have access to add a provider
     projectHelp: "To finalize configuring this Global DNS entry, you must add the following annotation ( <code>rancher.io/globalDNS.hostname</code> ) on the ingress in your application or in your project. The value of this annotation should be the hostname used in the routing rules of your ingress and match the FQDN of this Global DNS entry."
-    projectF5bigipHelp: "You have chosen a provider for F5bigip, where load balancing is done by a custom CRD VirtualServer. To finalize configuring this Global DNS entry, you must add the following annotation ( <code>rancher.io/globalDNS.hostname</code> ) on the VirtualServer in your application or in your project. The value of this annotation should be the hostname used in the routing rules of your ingress and match the FQDN of this Global DNS entry."
     istioHelp: "To make catalog template visable in Traffic Rules Catalog, you must add the following label ( <code>io.rancher.istio=true</code> ) in <code>questions.yaml</code> file of your catalog template."
     table:
       name: Name
@@ -2696,18 +2248,6 @@ globalDnsPage:
       provider: Provider Name
       rootDomain: Root Domain
     config:
-      bigip: 
-        datacenterDescription: Description of the Datacenter
-        serverDescription: Description of the Server
-        deviceIPDescription: Description of the device IP
-        deviceNameDescription: Description of the device name
-        deviceTranslationDescription: Description of the Device Translation
-        addDeviceIP: Add Device IP
-        validation:
-          mustHasDeviceIP: Device IP/Device Name must be configured
-          deviceIPMustUnique: Device IP Must Unique
-          deviceIPFormatError: Device IP format error
-          translationFormatError: Device Translation format error
       root:
         label: Root Domain
         placeholder: Your root domain
@@ -2957,7 +2497,6 @@ k8sPage:
         Put this into <code>~/.kube/config</code>:
       downloadText: |
         Then <a href="{downloadUrl}" target="_blank">download</a> (if needed) and run <code>kubectl</code>
-  toolbox: TOOL
 
 loginPage:
   greeting: "Howdy!<br><span>Welcome to {appName}</span>"
@@ -3083,11 +2622,6 @@ servicePage:
     created: 'Created'
     daemonSetScale: '1 per node'
     currentScale: 'Ready Scale: {count}'
-    podNum:
-      label: 'The pod number'
-      error:
-        required: 'The pod number is required'
-        typeError: 'The pod number value is an integer greater than 0'
   serviceType:
     deployment: Deployment
     replicaSet: Replica Set
@@ -3137,8 +2671,6 @@ servicePage:
         placeholder: e.g. website
       description:
         placeholder: e.g. Ingress for mycompany.com
-      load:
-        label: "Flat network load"
   portsTab:
     title: Ports
     detail: 'Ports mapped from a host IP to the listening ports of a container.'
@@ -3298,10 +2830,6 @@ userPreferencesPage:
       label: Email
     password:
       text: Change Password
-  menu:
-    header: Menu Position
-    left: Left
-    top: Top
 
 verifyPage:
   header: "You've successfully verified your email!"
@@ -3346,8 +2874,6 @@ notifierPage:
     wechat: WeChat
     dingtalk: DingTalk
     msteams: Microsoft Teams
-    aliyunsms: Aliyun SMS
-    servicenow: ServiceNow
   slack:
     url: URL
     urlPlaceholder: e.g. https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX
@@ -3381,11 +2907,6 @@ notifierPage:
     helpText: |
       Here's how you <a href="https://www.pagerduty.com/docs/guides/prometheus-integration-guide/" target="_blank" rel="nofollow noopener noreferrer">create an Integration Key</a> for PagerDuty.
   wechat:
-    endpoint:
-      label: Endpoint
-      default: Default
-      custom: Custom
-      placeholder: e.g. https://qyapi.weixin.qq.com/cgi-bin/
     recipientType:
       label: Recipient Type
       tag: Tag
@@ -3415,40 +2936,11 @@ notifierPage:
   msteams:
     url: Webhook URL
     urlPlaceholder: Your webhook URL
-  aliyunsms:
-    accessKeyID:
-      label: Access Key
-      placeholder: Aliyun Access Key
-    accessKeySecret:
-      label: Access Key Secret
-      placeholder: Aliyun Access Key Secret
-    signName:
-      label: Signature Name
-      placeholder: e.g. mysign
-    templateCode:
-      label: Template Code
-      placeholder: e.g. mytemplate
-    to:
-      label: Phone Number
-      action: Add Phone Number
-      placeholder: e.g. 112314
-  servicenow:
-    url: Webhook Url
-    urlPlaceholder: Webhook Url
-    proxyUrl: Proxy URL
-    proxyUrlPlaceholder: Proxy URL
-    username: Username
-    usernamePlaceholder: Username
-    password: Password
-    passwordPlaceholder: Password
   proxyUrl:
     label: Proxy URL
     placeholder: e.g. http://my-proxy/
   sendResolved:
     label: Send Resolved Alerts
-  bearerToken:
-    label: Bearer Token
-    placeholder: Bearer token
 
   webhook:
     url: URL
@@ -3461,22 +2953,10 @@ notifierPage:
   clone: Clone
   index:
     addActionLabel: Add Notifier
-    addAlertTemplate: Add Alarm Template
     table:
       created: Created
       noData: There are no notifiers defined
       noMatch: No Match
-  alertTemplate:
-    defaultTemplate: Default Template  
-    customTemplate: Custom template
-    error: Failed to add alert template
-    note: "Note: The custom alarm template will use the current configuration item after a successful save."
-    enable: 'ON'
-    disabled: 'OFF'
-    linkToAlert: Click to configure custom alert labels and notes
-    linkToNotifier: Click to configure custom alert templates
-    validateError: Custom template cannot be empty
-    placeholder: Please fill in custom template
 ##############################
 # Partials
 ##############################
@@ -3530,7 +3010,6 @@ ldap:
       objectClass: 'Object Class:'
       search: 'Search Attribute:'
       searchFilter: 'Search Filter:'
-      uniqueId: "Unique Id:"
     header: Authentication
     serviceAccountDistinguishedName:
       labelText: 'Service Account Distinguished Name:'
@@ -3544,7 +3023,6 @@ ldap:
       objectClass: 'Object Class:'
       search: 'Search Attribute:'
       searchFilter: 'Search Filter:'
-      uniqueId: "Unique Id:"
   customizeSchema:
     cert:
       helpText: 'If needed, enter a CA certificate'
@@ -3575,9 +3053,6 @@ ldap:
         labelText: Search Attribute
       searchFilter:
         labelText: Search Filter
-      groupUniqueIdAttribute:
-        labelText: Group unique id
-        helpText: Use a globally unique property created by a user group to avoid losing user privileges due to a change in the value of the property
     header: 2. Customize Schema
     helpText: 'If your schema does not match the standard ActiveDirectory format, you can customize it here.'
     users:
@@ -3600,9 +3075,6 @@ ldap:
         labelText: Search Filter
       userMemberAttribute:
         labelText: User Member Attribute
-      userUniqueIdAttribute:
-        labelText: User unique id
-        helpText: Use the globally unique user attribute created by the user to avoid losing user permissions due to changes in the value of this attribute
   header:
     disabled:
       label: '{providerName} is not configured'
@@ -3674,10 +3146,6 @@ taintsSection:
   effect: Effect
   noData: No taints
   noMatch: No taints match the current search
-
-podSection:
-  title: Pods
-  detail: Pods of current Node
 
 billingInfo:
   header: Billing Info
@@ -3831,8 +3299,6 @@ catalogSettings:
       placeholder: 'e.g. master'
     private:
       label: Use private catalog
-    tls:
-      insecureSkipTLSVerify: Skip tls verify
     username:
       label: Username
       required: '"Username" is required'
@@ -5587,7 +5053,6 @@ conditionSections:
     lastUpdate: Last Update
     reason: Reason
     message: Message
-    lastState: Last State
   noData: No Conditions
   noMatch: No conditions match the current search
 
@@ -5609,12 +5074,8 @@ confirmDelete:
   titleWithResourceType: 'Are you sure you want to delete the <b>{resourceType}</b>:'
   resourceType:
     namespace: 'namespace'
-    subnet: 'Subnet'
-    cluster: 'cluster'
-    workload: 'workload'
-    ip: 'IP'
     project: 'project'
-  emptyPod: '0 pod'
+    cluster: 'cluster'
   environmentNote: 'Note: All resources inside this Project will be permanently removed, including any namespaces that were created through {appName}.'
   clusterNote: 'Note: Associated resources such as volumes, balancers, and networks that were created in the cloud provider will not be automatically removed.'
   clusterRoleTemplateBindingNote: "Note: User's project permissions will not be removed."
@@ -5623,7 +5084,7 @@ confirmDelete:
   protip: 'ProTip: Hold the {key} key while clicking Delete to bypass this confirmation.'
   confirmAction: Delete
   cancelAction: Cancel
-  largeDeleteText: '"{key}" and {othersCount} others'
+  largeDeleteText: '{key} and {othersCount} others'
   systemChartNote: 'You are removing a system app. It may cause issues with the cluster if it is removed.'
   globalRoleNote: |
     {count, plural,
@@ -5635,10 +5096,6 @@ confirmDelete:
     label: Force Delete
     warning: "IMPORTANT: Force deleting pods does not wait for confirmation that the pod's processes have been terminated. This may result in <b>data corruption or inconsistencies</b>."
   twoNodeEtcd: Removing an ETCD node from a two-node cluster is considered unsafe! We highly recommended that you increase the ETCD node count to three or more nodes before deleting one.
-  clearHarborConfig: Are you sure you want to remove harbor configuration
-  
-batchDelete:
-  headerSuffix: Name
 
 containerLogs:
   download: Download Logs
@@ -5659,11 +5116,6 @@ containerLogs:
     connected: Connected
     disconnected: Disconnected
     closed: Closed
-  logSize:
-    label: Log Size Limit
-    default: 10 M
-    noLimit: No size limit
-
 
 containerShell:
   protip: "ProTip: Hold the {key} key when opening shell access to launch a new window."
@@ -5675,7 +5127,6 @@ containerShell:
     disconnected: Disconnected
     closed: Closed
     code: "Code: {code}"
-  permissionDenied: Permission Denied
 
 copyToClipboard:
   tooltip: Copy to Clipboard
@@ -5691,7 +5142,6 @@ cruRegistry:
     dockerhub: DockerHub
     quay: Quay.io
     custom: Custom
-    harbor: Harbor
     globalRegistry: Global Registry
     placeholder: e.g. registry.example.com
     artifactory: Artifactory
@@ -6656,7 +6106,6 @@ dangerZone:
     'engine-newest-version': 'The newest supported version of Docker at the time of this release.  A Docker version that does not satisfy supported docker range but is newer than this will be marked as untested.'
     'engine-supported-range': 'Semver range for supported Docker engine versions.  Versions which do not satisfy this range will be marked unsupported in the UI.'
     'ingress-ip-domain': 'Wildcard DNS domain to use for automatically generated Ingress hostnames. <ingress-name>.<namespace-name>.<ip address of ingress controller> will be added to the domain.'
-    'rdns-base-url': 'Configure the rdns service url.'
     'server-url': 'Default {appName} install url. Must be HTTPS. All nodes in your cluster must be able to reach this.'
     'system-default-registry': 'Private registry to be used for all system Docker images.'
     'ui-index': 'HTML index location for the Cluster Manager UI.'
@@ -6669,15 +6118,10 @@ dangerZone:
     'auth-user-info-resync-cron': 'Default cron schedule for resyncing auth provider group memberships.'
     'cluster-template-enforcement': 'Non-admins will be restricted to launching clusters via preapproved RKE Templates only.'
     'auth-user-session-ttl-minutes': 'Custom TTL (in minutes) on a user auth session.'
-    'ui-session-logout-minutes': 'User will automatically logout without any operation after the configured time (in minutes)'
-    'auditlog-server-url': 'Configure the audit log service url'
     'auth-token-max-ttl-minutes': 'Custom max TTL (in minutes) on an auth token.'
     'rke-metadata-config': 'Configure RKE metadata refresh parameters.'
     'ui-banners': 'Classification banner is used to display a custom fixed banner in the header, footer, or both. The setting takes JSON object containing 3 root parameters; <code>banner</code>, <code>showHeader</code>, <code>showFooter</code>. <code>banner</code> is an object containing; <code>textColor</code>, <code>background</code>, and <code>text</code>, where <code>textColor</code> and <code>background</code> are any valid CSS color value.'
     'ui-default-landing': 'The default page users land on after login.'
-    'ui-footer-text': 'Extra text in footer.'
-    'ui-footer-url': 'URL for the extra text in footer.'
-    'extra-menus': 'Configure custom menus.'
 
 deleteEksCluster:
   title: "Delete {clusterName}?"
@@ -6913,13 +6357,8 @@ stacksPage:
 featureFlags:
   warningHeader: "Feature flags allow {appName} to gate certain features behind flags. You should enable these features with caution, and they should be considered beta functionality, which could cause problems for your system. Additionally, some features (non-dynamic) require a restart of the {appName} server to be enabled. Changing non-dynamic features will restart {appName} pods, which will result in a short outage."
   features:
-    istioVirtualServiceUi: "Exposes a UI that enables users to create, read, update and delete virtual services and destination rules, which are traffic management features of Istio."
-    unsupportedStorageDrivers: "Allows the use of types for storage providers and provisioners that are not enabled by default."
-    fleet: "Install Fleet when starting Rancher"
-    projectPipelineServiceUI: "Expose enable project pipeline UI and allow user to use pipeline with project level."
-    virtaitechGpuServiceUI: "Allows user to set vGpus reserved value."
-    proxy: "Use new experimental proxy for Kubernetes API requests."
-    managementResourceApiCache: "Enable management resources api cache."
+   istioVirtualServiceUi: "Enabling this feature exposes additional UI pages for Istio."
+   unsupportedStorageDrivers: "Enabling this feature exposes unsupported storage driver options for persistent volumes and storage classes."
   table:
     description: Description
     name: Name
@@ -7221,7 +6660,6 @@ formResourceQuota:
       placeholder: e.g. 50
       milliCpuPlaceholder: e.g. 2000
       memoryPlaceholder: e.g. 2048
-      stroageClassPlaceholder: storage class does not exist
     namespaceLimit:
       label: Namespace Default Limit
       placeholder: e.g. 10
@@ -7247,10 +6685,6 @@ formResourceQuota:
     services: Services
     servicesLoadBalancers: Services Load Balancers
     servicesNodePorts: Services Node Ports
-    requestsGpuMemory: GPU Memory
-    requestsGpuCount: GPU Count
-    requestsStorageClassStorage: 'Storage Class Storage'
-    requestsStorageClassPVC: 'Storage Class PVC'
 
 formEnvVar:
   title: Environment Variables
@@ -7298,9 +6732,6 @@ formGlobalRoles:
     admin:
       label: Administrator
       detail: Administrators have full control over the entire installation and all resources in all clusters.
-    readOnlyAdmin:
-      label: Read-Only Administrator
-      detail: A read-only administrator can access all resources in all downstream clusters, but cannot access the local cluster
     user:
       label: Standard User
       detail: Standard Users can create new clusters and manage clusters and projects they have been granted access to.
@@ -7443,36 +6874,6 @@ shareMemberRow:
     member: 'Member'
     'read-only': 'User'
 
-formContainerLifecycle:
-  title: Container Lifecycle Hooks
-  detail: The hooks enable Containers to be aware of events in their management lifecycle and run code implemented in a handler when the corresponding lifecycle hook is executed.
-  postStartHook: PostStart
-  preStopHook: PreStop
-  hookType:
-    none: None
-    tcp: TCPSocket specifies an action involving a TCP port.
-    command: Executes a specific command, inside the cgroups and namespaces of the Container
-    http: Executes an HTTP request against a specific endpoint on the Container
-    https: Executes an HTTPS request against a specific endpoint on the Container
-  command:
-    label: Command
-    placeholder: e.g. pre-stop.sh
-  httpHeaders:
-    label: Additional Headers
-    addActionLabel: Add Header
-    keyLabel: Header Name
-    keyPlaceholder: e.g. User-Agent
-    valuePlaceholder: e.g. Health-Check
-  host:
-    label: Host Header
-    placeholder: e.g. example.com
-  port:
-    label: Target Container Port
-    placeholder: e.g. 80
-  path:
-    label: Path to access on the HTTP(S) server.
-    placeholder: e.g. /test
-
 formHealthCheck:
   title: Health Check
   detail: Periodically make a request to the container to see if it is alive and responding correctly.
@@ -7565,8 +6966,6 @@ formImage:
   label: Docker Image
   container:
     placeholder: "e.g. ubuntu:xenial"
-  tag:
-    placeholder: Choose Image tag
 
 formNameDescription:
   name:
@@ -7606,18 +7005,6 @@ formNetwork:
       label: DNS Search Domains
       placeholder: e.g. example.com
       addActionLabel: Add Search Domain
-  subnet:
-    msg: "The upgrade strategy has been changed to: stop the old Pod and start the new Pod"
-    form:
-      ip:
-        label: IP
-        placeholder: "e.g. 192.168.1.100,Multiple ips are connected by commas"
-      mac:
-        label: MAC
-        placeholder: "例如: 0a:00:27:00:00:00, Multiple MACs are connected by commas"
-      subnet:
-        label: Subnet
-        placeholder: "Please choose a MacvlanSubnet"
   container:
     label: Container
   requestedIp:
@@ -7673,16 +7060,8 @@ formCustomMetrics:
     placeholder: e.g. /metrics
   protocol:
     label: Protocol
-  label:
-    placeholder: e.g. (^id$|^image$|^name$|^cpu$)
   noPorts: No Endpoints
   addActionLabel: Add Metrics Endpoint
-  addActionregex: Add Tag Name
-  regex:
-    label: Tag name
-    description: Enter the tag name or match the tag name by expression
-  delete:
-    label: Delete
 
 formServicePorts:
   header: Port Mapping
@@ -7766,13 +7145,6 @@ formScale:
     sidekickInactive: "Sidecar: Add a container to an existing workload"
     sidekickPrefix: "Sidecar: Add a container to"
     sidekickSuffix: ""
-
-podScheduling:
-  title: Pod Scheduling
-  detail: Configure Pod Affinity and Pod AntiAffinity.
-  remove: Delete Pod Scheduling
-  add: Add Pod Scheduling
-  label: Please add Pod scheduling to configure Pod affinity.
 
 formScheduling:
   title: Node Scheduling
@@ -7950,14 +7322,6 @@ formSecurity:
     label: NVIDIA GPU Reservation
     placeholder: e.g. 1
     unit: GPUs
-    memUnit: GiB
-    shared: Shared GPU Memory
-    set: Limit to
-    sharedTips: While setting the shared GPU memory, Rancher will automatically set the GPU scheduler name for the workload
-  vGpuReservation:
-    label: Orion X GPU Reservation
-    placeholder: e.g. 1
-    unit: vGPUs
   isolation:
     label: Isolation
     default: Default (Container)
@@ -7994,7 +7358,6 @@ formSslTermination:
   notNeeded: There are no SSL/TLS Listening Ports configured with a valid Target Rule.
   removeCertLabel: Remove this Certificate
   addCertLabel: Add Certificate
-  certNotMatch: A mismatch has been detected between the certificate hostname and the rule hostname. Please confirm that the selected is a valid certificate
 
 formNamespace:
   label:
@@ -8571,9 +7934,6 @@ loginGoogle:
 loginAzure:
   buttonText: Log In with Azure AD
 
-loginCAS:
-  buttonText: Log In with CAS
-
 loginSaml:
   ping:
     buttonText: "Log In with Ping"
@@ -8652,25 +8012,9 @@ loggingPage:
       label: Include System Log
     jsonParsing:
       label: Enable JSON Parsing
-    enableMultiLineMerge:
-      label: Enable MultiLine Filter
-    enableExceptionStackMatch:
-      label: Enable Exception Stack Match
-      description: Includes Java, JavaScript, C#, Python, Go, Ruby, and PHP
-    enableMultiLineFilter:
-      label: Custom Multi Line Filter 
-      required: '"Line Start Regexp" or "Line End Regexp" is required'
-    multiLineStartRegexp:
-      label: Line Start Regexp
-    multiLineEndRegexp:
-      label: Line End Regexp
-    fluentdLogDir:
-      label: Fluentd Log Directory
   advanced:
     file: Edit as File
     cancel: Edit as a Form
-  editIt : edit it.
-  configureFluentdLogDir: '"Fluentd Log Directory" currently is <code>{path}</code>. Go to "Cluster Advanced Options" to'
 
   elasticsearch:
     header: Elasticsearch Configuration
@@ -8844,8 +8188,6 @@ loggingPage:
     running: RUNNING
     runOk: Dry run success.
     dryRun: Dry Run
-  customBuffer:
-    label: Custom Buffer
 
 machineTemplatesPage:
   title: Add Node
@@ -8915,17 +8257,6 @@ modalAboutComponent:
   machine: Machine
   linuxImageList: Linux Image List
   windowsImageList: Windows Image List
-
-modalDownLoadFileComponent:
-  title: Container file download
-  container: Container
-  filePath: File Path
-  placeholder: Please enter the path of the file in the container
-  notice: Downloading files over 600MiB may cause your browser to crash.
-  validateContainer: Please select a container
-  validatePath: Please enter the path to the file you want to download.
-  noSuchFile: File does not exist
-  serverError: An error occurred on the service break
 
 modalAddPayment:
   header: Add New Payment Method
@@ -9148,13 +8479,6 @@ modalEditPassword:
     generate: 'Use a new randomly generated password:'
     manual: 'Set a specific password to use:'
   deleteTokens: Delete all existing API keys
-  strength:
-    label: 'Password strength'
-    weak: 'weak'
-    good: 'good'
-    best: 'best'
-    tooltip1: 'Password must contain at least 8 characters'
-    tooltip2: 'Include at least two types of numbers, uppercase letters, lowercase letters, and symbols'
 
 modalFeedback:
   header: Welcome to {appName}!
@@ -9425,8 +8749,6 @@ newCatalog:
     default: The default at the time (currently {version})
   error:
     appData: Error loading app data
-  warning:
-    monitoring: Configuration of monitoring should go to <b>cluster->tools->monitoring</b>，changes made on the current page may be overridden.
 
 newMultiClusterApp:
   answers:
@@ -9654,11 +8976,11 @@ nodeDriver:
     azure: Azure
     azureaksv2: Azure AKS
     azureaks: Azure AKS
+    baidu: Baidu CCE
     cloudca: Cloud.ca
     digitalocean: DigitalOcean
     exoscale: Exoscale
     googlegke: Google GKE
-    huawei: Huawei CCE
     googlegkev2: Google GKE
     huaweicce: Huawei CCE
     import: Other
@@ -9668,6 +8990,7 @@ nodeDriver:
     metal: Equinix Metal
     oci: Oracle Cloud Infrastructure
     openstack: OpenStack
+    oracleoke: Oracle OKE
     otc: Open Telekom Cloud
     otccce: Open Telekom Cloud CCE
     packet: Equinix Metal
@@ -9680,8 +9003,6 @@ nodeDriver:
     upcloud: UpCloud
     vmwarevsphere: vSphere
     zstack: ZStack
-    baidu: Baidu CCE
-    oracleoke: Oracle OKE
   driverOptions: "{driver} Options"
   templateOptions: "{appName} Template"
   amazoneks:
@@ -10579,7 +9900,6 @@ pageFooter:
     mac: macOS
     windows: Windows
     linux: Linux
-  downloadMirror: Download Mirror
   showSystem: Show System
 
 pagination:
@@ -10608,11 +9928,6 @@ pagination:
     =0 {No DNS Records}
     =1 {{count} {count, plural, =1 {DNS Record} other {DNS Records}}}
     other {{from} - {to} of {count} DNS Records}}
-  dnsProvider: |
-    {pages, plural,
-    =0 {No DNS Records}
-    =1 {{count} {count, plural, =1 {DNS Provider} other {DNS Providers}}}
-    other {{from} - {to} of {count} DNS Providers}}
   driver: |
     {pages, plural,
     =0 {No Drivers}
@@ -10678,16 +9993,6 @@ pagination:
     =0 {No Ingresses}
     =1 {{count} {count, plural, =1 {Ingress} other {Ingresses}}}
     other {{from} - {to} of {count} Ingresses}}
-  f5Ctl: |
-    {pages, plural,
-    =0{ No F5 LB}
-    =1 {{count} {count, plural, =1 {F5 LB} other {F5 LB}}}
-    other {{from} - {to} of {count} F5 LB}}
-  f5Tls: |
-    {pages, plural,
-    =0{ No TLS}
-    =1 {{count} {count, plural, =1 {TLS} other {TLS}}}
-    other {{from} - {to} of {count} TLS}}
   member: |
     {pages, plural,
     =0 {No Members}
@@ -10851,9 +10156,6 @@ schema:
   inputSecret:
     secret: Choose a Secret...
     certificate: Choose a Certificate...
-  inputMacvlansubnet:
-    prompt: Choose a Macvlansubnet...
-    notSupport: Current cluster not support Macvlansubnet
 
 schedulingRuleRow:
   theHost: The host
@@ -10910,12 +10212,6 @@ systemInfoSection:
 
 tableCountSelect:
   header: Table Rows per Page
-apiPerformance:
-  header: API Performance Mode
-  option: 
-    power: Power
-    normal: Normal
-  powerMessage: Power mode may occupy more computing resources of background services
 
 telemetryOpt:
   header: Statistics
@@ -11012,15 +10308,6 @@ searchableSelect:
   noMatch: No match
   noOptions: No available options
 
-resourceLabelFilter:
-  title: Advanced Search
-  matchExpressions: Label Match Expressions
-  clear: Clear
-  key:
-    placeholder: e.g. app
-  values:
-    placeholder: e.g. frontend,test
-
 ##############################
 # Mixins
 ##############################
@@ -11064,8 +10351,6 @@ nav:
       classes: Storage Classes
       volumes: Persistent Volumes
     projects: Projects/Namespaces
-    staticPods: Static Pods
-    vlansubnet: Flat Network
   containers:
     tab: Workloads
     systemTab: System
@@ -11083,9 +10368,6 @@ nav:
     addHpa: Add HPA
     addVolume: Add Volume
     importCompose: Import YAML
-  f5:
-    controllers: F5 Ingress Controllers
-    tls: TLS
   group:
     none: Flat List
     node: Group by Node
@@ -11116,7 +10398,6 @@ nav:
     members: Members
     hpa: HPA
     pipelines: Pipelines
-    f5Ingresses: F5 Ingress Controllers
   admin:
     tab: Global
     clusters:
@@ -11128,7 +10409,6 @@ nav:
     globalDns: Global DNS
     globalDnsEntries: Global DNS Entries
     globalDnsProviders: Global DNS Providers
-    globalMonitoring: Global Monitoring
     globalRegistry: Global Registry
     multiClusterApps: Apps
     security:
@@ -11145,12 +10425,6 @@ nav:
       auth: Access Control
       registration: Host Registration
       advanced: Advanced
-    imageRepo:
-      tab: Image Repo
-      config: Configuration
-      registries: Registries
-      projects: Image Management
-      logs: Logs
   user:
     label: "User Menu: {username}"
     logout: Log Out
@@ -11180,14 +10454,12 @@ nav:
     fleet: Continuous Delivery
     gatekeeper: OPA Gatekeeper
     rio: Rio
-    cisF5: F5 CIS
   project:
     none: Grouped Projects/Namespaces
     namespaces: Namespaces
   dashboard:
     try: Cluster Explorer
-  auditLog:
-    tab: Audit Log
+
 
 ##############################
 # Resource Actions
@@ -11244,6 +10516,7 @@ action:
   replay: Replay
   rerun: Rerun
   resetDefault: Reset default
+  resize: Resize
   restart: Restart
   restoreFromEtcdBackup: Restore Snapshot
   resume: Resume Orchestration
@@ -11256,7 +10529,6 @@ action:
   rotateEncryption: Rotate Encryption Keys
   run: Run
   runCISScan: Run CIS Scan
-  resize: Resize
   saveAsTemplate: Save As RKE Template
   setDefault: Set as Login Environment
   setDefaultRevision:
@@ -11281,10 +10553,6 @@ action:
   viewInGrafana: Go to Grafana
   viewInstance: View Instance
   viewYaml: View YAML
-  auditlog: Audit Log
-  downloadFile: Download File
-  cloneCrossCluster: Clone Cross Cluster
-  editVsAnnotaionForGlobalDns: Add/Remove Global DNS Record
 
 ##############################
 # Resource Actions
@@ -11396,9 +10664,6 @@ growl:
       warning: Unable to establish a WebSocket connection to the server.  If your server is behind a proxy or SSL-termination device, Browser can not connect to WebSocket. If you run the server behind a proxy, please make sure the proxy supports WebSockets.  Streaming stats, logs, shell/console, and auto-updating of the state of resources may not work until this is resolved.
       safariCertWarning: Another possible cause is that Safari does not allow WebSocket connections using an unrecognized certificate, even if you say to Continue to bypass the warning.  The server must have a certificate signed by a recognized authority Safari automatically trusts.
       disconnectedWarning: "Disconnected from server, attempting to reconnect..."
-  autoLogout:
-    title: Auto logout
-    message: "You have not operated in the last {autoLogoutTime} minutes, so we will auto log out"
 
 storageClass:
   aws-ebs:
@@ -11866,38 +11131,3 @@ selectValueCheck:
       =1 {Please select a new value. The following is no longer valid:}
       other {Please select new values. The following are no longer valid:}
     }
-
-customMenus:
-  index:
-    header: Extra Menus
-    globalMenu: Global level Menu
-    clusterMenu: Cluster level Menu
-    projectMenu: Project level Menu
-    protocalInvalid: '"Menu Link" should start with "http://" or "https://"'
-
-formMenu:
-  menu:
-    add: Add Menus
-  name:
-    label: Menu Name
-  link:
-    label: Menu Link
-    placeholder: 'e.g. https://www.example.com'
-  iframeEnabled:
-    label: Use iframe
-  scope:
-    cluster: 
-      label: 'Apply For Cluster'
-    project: 
-      label: 'Apply For Project'
-
-modalConfirmYamlMonitoring2Form:
-  helpText: "Data loss may occur when switching back to form based editing. Please make sure you intended to switch before selecting confirm."
-
-formContainerLog:
-  title: Container Log
-  detail: Configure container log
-  excludeContainer:
-    label: Collect Container stdout log
-    'true': Disable
-    'false': Enable

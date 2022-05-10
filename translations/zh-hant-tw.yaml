@@ -190,7 +190,7 @@ accountsPage:
       cluster:
         title: 叢集角色
         description: 授予此用戶的單個叢集的角色
-        noRoles: 此用戶沒有叢集角色
+        noRoles: 此用戶沒有專案角色
       project:
         title: 專案角色
         description: 授予此用戶的單個專案的角色
@@ -2161,7 +2161,6 @@ globalDnsPage:
       noAccessMulti: 您無法訪問目標應用程式
       noAccessProvider: 您没有全線訪問此供應商
       noAccessProject: 您無法訪問目標項目
-      noAccessAddProvider: 您没有全線添加應商
     projectHelp: "要完成項目的全域DNS紀錄設置，必須在應用或項目的ingress規則中添加註解(<code>rancher.io/globalDNS.hostname='hostname'</code>)，其中<code>'hostname'</code>是路由規則中使用註解机名，這個<code>'hostname'</code>也必須匹配這個全域DNS項目的FQDN。"
     istioHelp: "要使模板在流量規則商店中可見，必須在應用商店模板<code>questions.yaml</code>文件中添加標籤( <code>io.rancher.istio=true</code> )"
     table:
@@ -6027,9 +6026,6 @@ formGlobalRoles:
     admin:
       label: 管理員
       detail: 管理員完全控制所有叢集中的全部安裝和所有資源
-    readOnlyAdmin:
-      label: 只讀管理員
-      detail: 只讀管理員可以訪問所有下遊集群中的所有資源，但不能訪問local集群
     user:
       label: 標準用戶
       detail: 標準用戶可以創建新的叢集並管理他們已被授權訪問的叢集和專案。
@@ -6487,8 +6483,8 @@ formScheduling:
     placeholder: '例如: MyScheduler'
   nodeSelector:
     requireAll: "必須 "
-    requireAny: "任一"
-    preferred: "最好"
+    requireAny: "最好"
+    preferred: "首選"
     operator:
       lt: '<'
       le: |
@@ -8871,7 +8867,6 @@ pageFooter:
     mac: macOS
     windows: Windows
     linux: Linux
-  downloadMirror: 下載Rancher資源
   showSystem: 顯示系統容器
 
 pagination:
