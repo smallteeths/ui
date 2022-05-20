@@ -38,7 +38,7 @@
 
 
 <div class="row">
-  <div class="col span-12">
+  <div class="col span-6">
     <label class="acc-label mt-10 mb-10">{{t "f5CtlPage.form.type.label"}}</label>
     <div class="radio">
       <label>
@@ -61,6 +61,31 @@
 {{#if isVirtualServer}}
   <div>
     <div class="row">
+      <div class="col span-2">
+        <label class="acc-label">{{t "f5CtlPage.form.ipam.use"}}</label>
+        <div class="radio mt-5">
+          <label class="pr-10">
+            {{radio-button selection=isIpamLabel value=true disabled=isView}}
+            {{t 'generic.yes'}}
+          </label>
+          <label>
+            {{radio-button selection=isIpamLabel value=false disabled=isView}}
+            {{t 'generic.no'}}
+          </label>
+        </div>
+      </div>
+      {{#if isIpamLabel}}
+      <div class="col span-4">
+        <label class="acc-label">{{t "f5CtlPage.form.ipam.label"}}{{field-required}}</label>
+        {{#input-or-display editable=editing value=f5.ipamLabel}}
+          {{input
+            class="form-control"
+            value=f5.ipamLabel
+            placeholder=(t "f5CtlPage.form.ipam.placeholder")
+          }}
+        {{/input-or-display}}
+      </div>
+      {{else}}
       <div class="col span-4">
         <label class="acc-label">{{t "f5CtlPage.form.url.label"}}{{field-required}}</label>
         {{#input-or-display editable=editing value=f5.virtualServerAddress}}
@@ -71,7 +96,12 @@
           }}
         {{/input-or-display}}
       </div>
+      {{/if}}
+    </div>
 
+    <hr class="mt-30 mb-30">
+
+    <div class="row">
       <div class="col span-4">
         <label class="acc-label">{{t "f5CtlPage.form.name.label"}}</label>
         {{#input-or-display editable=editing value=f5.virtualServerName}}
@@ -157,25 +187,37 @@
         {{/input-or-display}}
       </div>
     </div>
-
-    <div class="row">
-      <div class="col span-4">
-        <label class="acc-label">{{t "f5CtlPage.form.ipam.label"}}</label>
-        {{#input-or-display editable=editing value=f5.ipamLabel}}
-          {{input
-            class="form-control"
-            value=f5.ipamLabel
-            placeholder=(t "f5CtlPage.form.ipam.placeholder")
-          }}
-        {{/input-or-display}}
-      </div>
-    </div>
   </div>
 {{/if}}
 
 {{#if (not isVirtualServer)}}
   <div class="row">
-    <div class="col span-6">
+    <div class="col span-2">
+      <label class="acc-label">{{t "f5CtlPage.form.ipam.use"}}</label>
+      <div class="radio mt-5">
+        <label class="pr-10">
+          {{radio-button selection=isIpamLabel value=true disabled=isView}}
+          {{t 'generic.yes'}}
+        </label>
+        <label>
+          {{radio-button selection=isIpamLabel value=false disabled=isView}}
+          {{t 'generic.no'}}
+        </label>
+      </div>
+    </div>
+    {{#if isIpamLabel}}
+    <div class="col span-4">
+      <label class="acc-label">{{t "f5CtlPage.form.ipam.label"}}{{field-required}}</label>
+      {{#input-or-display editable=editing value=f5.ipamLabel}}
+        {{input
+          class="form-control"
+          value=f5.ipamLabel
+          placeholder=(t "f5CtlPage.form.ipam.placeholder")
+        }}
+      {{/input-or-display}}
+    </div>
+    {{else}}
+    <div class="col span-4">
       <label class="acc-label">{{t "f5CtlPage.form.url.label"}}{{field-required}}</label>
       {{#input-or-display editable=editing value=f5.virtualServerAddress}}
         {{input
@@ -185,7 +227,12 @@
         }}
       {{/input-or-display}}
     </div>
+    {{/if}}
+  </div>
 
+  <hr class="mt-30 mb-30">
+
+  <div class="row">
     <div class="col span-6">
       <label class="acc-label">{{t "f5CtlPage.form.name.label"}}</label>
       {{#input-or-display editable=editing value=f5.virtualServerName}}
@@ -196,9 +243,7 @@
         }}
       {{/input-or-display}}
     </div>
-  </div>
 
-  <div class="row">
     <div class="col span-6">
       <label class="acc-label">{{t "f5CtlPage.form.mode"}}</label>
       {{#input-or-display editable=editing value=f5.mode}}
@@ -208,16 +253,15 @@
         }}
       {{/input-or-display}}
     </div>
-
+  </div>
+  <div class="row">
     <div class="col span-6">
       <label class="acc-label">{{t "f5CtlPage.form.port.label"}}{{field-required}}</label>
       {{#input-or-display editable=editing value=f5.virtualServerPort}}
         {{input-integer class="form-control" min="1" max="65535" value=f5.virtualServerPort placeholder=(t "f5CtlPage.form.port.placeholder")}}
       {{/input-or-display}}
     </div>
-  </div>
 
-  <div class="row">
     <div class="col span-6">
       <label class="acc-label">{{t "f5CtlPage.form.snat.label"}}</label>
       {{#input-or-display editable=editing value=f5.snat}}
@@ -225,16 +269,6 @@
           class="form-control"
           value=f5.snat
           placeholder=(t "f5CtlPage.form.snat.placeholder")
-        }}
-      {{/input-or-display}}
-    </div>
-    <div class="col span-6">
-      <label class="acc-label">{{t "f5CtlPage.form.ipam.label"}}</label>
-      {{#input-or-display editable=editing value=f5.ipamLabel}}
-        {{input
-          class="form-control"
-          value=f5.ipamLabel
-          placeholder=(t "f5CtlPage.form.ipam.placeholder")
         }}
       {{/input-or-display}}
     </div>
@@ -251,7 +285,6 @@
     </div>
   </div>
 {{/if}}
-
 
 <section class="mt-40 horizontal-form container-fluid">
   {{form-f5-ingress-rule

@@ -1568,9 +1568,10 @@ f5CISPage:
       placeholder: "e.g. /Common/MyFlannel"
     ipam:
       label: Enable F5 IPAM Controller
-      pvc:
-        label: PVC Name
-        placeholder: "e.g. MyPVC"
+      volume:
+        pvc:
+          label: PVC Name
+          placeholder: "e.g. MyPVC"
       ipRange:
         label: IP Range
         key:
@@ -1583,7 +1584,10 @@ f5CISPage:
           label: End Address
           placeholder: "e.g. 192.168.56.20"
         add: Add IP address
-        IPFormatError: "IP Range There are records with incorrect IP address format"
+        IPFormatError: IP Range "{key}" There are records with incorrect IP address format
+        keyError: The "Key" is required in IP range
+        IPRangeError: IP Range "{key}", the start address {min} cannot be greater than the end address {Max}
+        repeatKeyError: IP Range "{key}" There are multiple
   disabled: F5 CIS is disabled in the current cluster.
   toUpdate: F5 CIS is enabled.
   notReady: 'F5 CIS Chart not found, check the <a href="/g/catalog">Catalog</a> Url please.'
@@ -1643,6 +1647,7 @@ f5CtlPage:
     ipam:
       label: IPAM Label
       placeholder: ""
+      use: Use IPAM Label
     tsType:
       label: Type
     monitor:

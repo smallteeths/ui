@@ -78,12 +78,7 @@ export default Resource.extend({
     const intl = get(this, 'intl');
     let errors = this._super(...arguments);
     const pool = get(this, 'pool') || {};
-    const virtualServerAddress = get(this, 'virtualServerAddress');
     const virtualServerPort = get(this, 'virtualServerPort');
-
-    if (!virtualServerAddress) {
-      errors.push(intl.t('validation.required', { key: intl.t('f5CtlPage.form.url.label') }));
-    }
 
     if (!virtualServerPort) {
       errors.push(intl.t('validation.required', { key: intl.t('f5CtlPage.form.port.label') }));

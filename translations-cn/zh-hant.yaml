@@ -10135,9 +10135,10 @@ f5CISPage:
     version: F5 負載均衡服務組件版本
     ipam:
       label: 啟用 F5 IPAM Controller
-      pvc:
-        label: PVC Name
-        placeholder: "例如: MyPVC"
+      volume:
+        pvc:
+          label: PVC Name
+          placeholder: "例如: MyPVC"
       ipRange:
         label: IP Range
         key:
@@ -10150,7 +10151,10 @@ f5CISPage:
           label: 結束地址
           placeholder: "例如: 192.168.56.20"
         add: 添加IP地址段
-        IPFormatError: IP Range 中，存在IP地址格式不正確的記錄
+        IPFormatError: IP Range 中 "{key}"，IP地址格式不正確的記錄
+        keyError: IP Range 中，“鍵” 必填
+        IPRangeError: IP Range 中 "{key}", 開始地址 {min} 不能大於結束地址 {max}
+        repeatKeyError: IP Range 中 "{key}" 存在多個
   notReady: 未找到F5負載均衡服務Chart, 請確認系統<a href="/g/catalog">應用商店</a>配置是否正確。
   title: F5 負載均衡服務
   toUpdate: F5 負載均衡服務已啓動。
@@ -10218,6 +10222,7 @@ f5CtlPage:
     ipam:
       label: IPAM Label
       placeholder: ""
+      use: 使用 IPAM Label
     tsType:
       label: Type
   globalDnsModel:

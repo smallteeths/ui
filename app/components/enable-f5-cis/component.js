@@ -48,6 +48,7 @@ const POOL_MEMBER_TYPE_CHOISES = [
 ];
 
 const ipv4RegExp = /^(((\d{1,2})|(1\d{2})|(2[0-4]\d)|(25[0-5]))\.){3}((\d{1,2})|(1\d{2})|(2[0-4]\d)|(25[0-5]))$/;
+const ipv6RegExp = /^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$/;
 
 export default Component.extend(InputAnswers, CatalogUpgrade, {
   scope: service(),
@@ -281,9 +282,58 @@ export default Component.extend(InputAnswers, CatalogUpgrade, {
     }
 
     if (get(this, 'ipam.enable') && get(this, 'ipRanges.length')){
-      if (get(this, 'ipRanges').some((r) => !r.key || !ipv4RegExp.test(r.rangeEnd) || !ipv4RegExp.test(r.rangeStart))) {
-        errors.push(intl.t('f5CISPage.form.ipam.ipRange.IPFormatError'));
-      }
+      const keys = [];
+
+      get(this, 'ipRanges').some((r) => {
+        if (!r.key){
+          errors.push(intl.t('f5CISPage.form.ipam.ipRange.keyError'));
+
+          return true;
+        }
+
+        if (keys.includes(r.key)){
+          errors.push(intl.t('f5CISPage.form.ipam.ipRange.repeatKeyError', { key: r.key }));
+
+          return true;
+        }
+
+        keys.push(r.key);
+
+        const ipv4TestStart = ipv4RegExp.test(r.rangeStart)
+        const ipv4TestEnd = ipv4RegExp.test(r.rangeEnd)
+        const ipv6TestStart = ipv6RegExp.test(r.rangeStart)
+        const ipv6TestEnd = ipv6RegExp.test(r.rangeEnd)
+
+        if (!((ipv4TestStart && ipv4TestEnd) || (ipv6TestStart && ipv6TestEnd))){
+          errors.push(intl.t('f5CISPage.form.ipam.ipRange.IPFormatError', { key: r.key }));
+
+          return true;
+        }
+
+        if (ipv4TestStart && this.comapreIP4(r.rangeStart, r.rangeEnd) > 0){
+          errors.push(intl.t('f5CISPage.form.ipam.ipRange.IPRangeError', {
+            min: r.rangeStart,
+            max: r.rangeEnd,
+            key: r.key,
+          }));
+
+          return true;
+        }
+
+        if (ipv6TestStart && this.comapreIP6(r.rangeStart, r.rangeEnd) > 0){
+          errors.push(intl.t('f5CISPage.form.ipam.ipRange.IPRangeError', {
+            min: r.rangeStart,
+            max: r.rangeEnd,
+            key: r.key
+          }));
+
+          return true;
+        }
+      })
+    }
+
+    if (get(this, 'ipam.enable') && !get(this, 'ipam.volume.pvc')){
+      errors.push(intl.t('validation.required', { key: intl.t(`f5CISPage.form.ipam.volume.pvc.label`) }))
     }
 
     fields.forEach((f) => {
@@ -510,4 +560,68 @@ export default Component.extend(InputAnswers, CatalogUpgrade, {
     return [];
   },
 
+  comapreIP4(ipBegin, ipEnd) {
+    const begin = ipBegin.split('.');
+    const end = ipEnd.split('.');
+
+    for (let i = 0;i < 4;i++) {
+      if (parseInt(begin[i], 10) > parseInt(end[i], 10)) {
+        return 1;
+      } else if (parseInt(begin[i], 10) < parseInt(end[i], 10)) {
+        return -1;
+      }
+    }
+
+    return 0;
+  },
+  convert2CompleteIpV6(ip) {
+    let ipV6 = ip
+    const index = ip.indexOf('::')
+
+    if (index > 0) {
+      const size = 8 - (ip.split(':').length - 1)
+      let tmp = ''
+
+      for (let i = 0; i < size; i++) {
+        tmp += ':0'
+      }
+      tmp += ':'
+      ipV6 = ip.replace('::', tmp)
+    } else if (index === 0) {
+      ipV6 = ip.replace('::', '0:0:0:0:0:0:0:')
+    }
+
+    return ipV6
+  },
+  comapreIP6(ipBegin, ipEnd) {
+    ipBegin = this.convert2CompleteIpV6(ipBegin)
+    ipEnd = this.convert2CompleteIpV6(ipEnd)
+    const ipBegins = ipBegin.split(':')
+    const ipEnds = ipEnd.split(':')
+
+    for (let i = 0; i < ipBegins.length; i++) {
+      if (ipBegins[i] === '') {
+        if (ipEnds[i] === '') {
+          continue
+        } else {
+          return -1
+        }
+      } else {
+        if (ipEnds[i] === '') {
+          return 1
+        } else {
+          const value1 = parseInt(ipBegins[i], 16)
+          const value2 = parseInt(ipEnds[i], 16)
+
+          if (value1 > value2) {
+            return 1
+          } else if (value1 < value2) {
+            return -1
+          } else {
+            continue
+          }
+        }
+      }
+    }
+  },
 });

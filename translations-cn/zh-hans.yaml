@@ -1566,9 +1566,10 @@ f5CISPage:
       placeholder: "例如: /Common/MyFlannel"
     ipam:
       label: 启用 F5 IPAM Controller
-      pvc:
-        label: PVC Name
-        placeholder: "例如: MyPVC"
+      volume:
+        pvc:
+          label: PVC Name
+          placeholder: "例如: MyPVC"
       ipRange:
         label: IP Range
         key:
@@ -1581,7 +1582,10 @@ f5CISPage:
           label: 结束地址
           placeholder: "例如: 192.168.56.20"
         add: 添加IP地址段
-        IPFormatError: IP Range 中，存在IP地址格式不正确的记录
+        IPFormatError: IP Range 中 "{key}"，IP地址格式不正确的记录
+        keyError: IP Range 中，“键” 必填
+        IPRangeError: IP Range 中 "{key}", 开始地址 {min} 不能大于结束地址 {max}
+        repeatKeyError: IP Range 中 "{key}" 存在多个
   disabled: F5 负载均衡服务在当前集群中尚未开启。
   toUpdate: F5 负载均衡服务已启动。
   notReady: '未找到F5负载均衡服务Chart, 请确认系统<a href="/g/catalog">应用商店</a>配置是否正确。'
@@ -1641,6 +1645,7 @@ f5CtlPage:
     ipam:
       label: IPAM Label
       placeholder: ""
+      use: 使用 IPAM Label
     tsType:
       label: Type
     monitor:

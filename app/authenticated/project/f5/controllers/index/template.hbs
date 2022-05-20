@@ -39,7 +39,7 @@
                 {{#if (eq inst.type "virtualServer")}}
                   <a href="http://{{inst.host}}{{pool.path}}" target="_blank" rel="noopener noreferrer nofollow">{{inst.host}}{{if pool.path pool.path ''}}</a>
                 {{else}}
-                  <a href="http://{{inst.virtualServerAddress}}:{{inst.virtualServerPort}}" target="_blank" rel="noopener noreferrer nofollow">{{inst.virtualServerAddress}}:{{inst.virtualServerPort}}</a>
+                  <a href="http://{{or inst.virtualServerAddress inst.status.vsAddress}}:{{inst.virtualServerPort}}" target="_blank" rel="noopener noreferrer nofollow">{{or inst.virtualServerAddress inst.status.vsAddress}}:{{inst.virtualServerPort}}</a>
                 {{/if}}
                 <i class="icon icon-chevron-right"/>
                 {{#if pool.isWorkload}}

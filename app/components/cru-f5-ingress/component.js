@@ -38,6 +38,7 @@ export default Component.extend(NewOrEdit, {
   f5:          null,
   editing:     null,
   tlsProfiles: null,
+  isIpamLabel: false,
 
   readonlyAnnotations: ['f5.pandaria.io/targets'],
 
@@ -51,6 +52,10 @@ export default Component.extend(NewOrEdit, {
 
     if (!get(this, 'isAdd')) {
       set(this, 'namespace', get(this, 'f5.namespace'));
+    }
+
+    if (get(this, 'f5.ipamLabel')){
+      set(this, 'isIpamLabel', true);
     }
   },
   actions: {
@@ -78,6 +83,14 @@ export default Component.extend(NewOrEdit, {
 
   namespaceChanged: observer('namespace.id', function() {
     set(this, 'f5.tlsProfileName', null);
+  }),
+
+  isIpamLabelChanged: observer('isIpamLabel', function() {
+    if (get(this, 'isIpamLabel')){
+      set(this, 'f5.virtualServerAddress', '');
+    } else {
+      set(this, 'f5.ipamLabel', '');
+    }
   }),
 
   isNew: computed('mode', function() {
@@ -151,6 +164,10 @@ export default Component.extend(NewOrEdit, {
         delete pr.ipamLabel;
       }
 
+      if (!get(f5, 'virtualServerAddress')) {
+        delete pr.virtualServerAddress;
+      }
+
       set(this, 'primaryResource', pr);
 
       return;
@@ -192,7 +209,6 @@ export default Component.extend(NewOrEdit, {
       description:          get(f5, 'description'),
       labels:               get(f5, 'labels'),
       annotations:          get(f5, 'annotations'),
-      virtualServerAddress: get(f5, 'virtualServerAddress'),
     })
 
     if (get(f5, 'snat')) {
@@ -205,6 +221,9 @@ export default Component.extend(NewOrEdit, {
 
     if (get(f5, 'ipamLabel')) {
       set(pr, 'ipamLabel', get(f5, 'ipamLabel'))
+    }
+    if (get(f5, 'virtualServerAddress')) {
+      set(pr, 'virtualServerAddress', get(f5, 'virtualServerAddress'))
     }
 
     set(this, 'primaryResource', pr);
@@ -264,6 +283,14 @@ export default Component.extend(NewOrEdit, {
   validate() {
     let pr = get(this, 'primaryResource');
     let errors = pr.validationErrors() || [];
+    const intl = get(this, 'intl');
+
+    if (!get(this, 'isIpamLabel') && !get(this, 'f5.virtualServerAddress')) {
+      errors.unshift(intl.t('validation.required', { key: intl.t('f5CtlPage.form.url.label') }));
+    }
+    if (get(this, 'isIpamLabel') && !get(this, 'f5.ipamLabel')) {
+      errors.unshift(intl.t('validation.required', { key: intl.t('f5CtlPage.form.ipam.label') }));
+    }
 
     errors.pushObjects(get(this, 'namespaceErrors') || []);
 
