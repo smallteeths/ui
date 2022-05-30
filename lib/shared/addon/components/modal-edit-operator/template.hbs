@@ -8,7 +8,7 @@
     {{t "operatorPage.provider.label"}}
   </label>
   {{new-select
-    value=originalModel.name
+    value=model.name
     content=providerChoices
     disabled=(not isNew)
     placeholder=(t 'operatorPage.provider.placeholder')
@@ -21,7 +21,7 @@
   </label>
   {{input
     class="form-control"
-    value=originalModel.url
+    value=model.url
   }}
 </div>
 
