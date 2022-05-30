@@ -1586,7 +1586,7 @@ f5CISPage:
         add: Add IP address
         IPFormatError: IP Range "{key}" There are records with incorrect IP address format
         keyError: The "Key" is required in IP range
-        IPRangeError: IP Range "{key}", the start address {min} cannot be greater than the end address {Max}
+        IPRangeError: IP Range "{key}", the start address {min} cannot be greater than the end address {max}
         repeatKeyError: IP Range "{key}" There are multiple
   disabled: F5 CIS is disabled in the current cluster.
   toUpdate: F5 CIS is enabled.
