@@ -7,6 +7,7 @@
       rowClass="row mb-20"
       colClass="col span-12 mb-0"
       nameLabel="clusterNew.name.label"
+      disabledName=disabledName
       namePlaceholder="clusterNew.name.placeholder"
       descriptionPlaceholder="clusterNew.description.placeholder"
     }}
@@ -147,7 +148,7 @@
             </CheckOverrideAllowed>
           </div>
           <div class="col span-6">
-            <FluentdLogDirInput 
+            <FluentdLogDirInput
               @cluster={{cluster}}
               @editable={{notView}}
             />
