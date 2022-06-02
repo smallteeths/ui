@@ -82,10 +82,21 @@ export default Component.extend(ModalBase, {
               this.send('cancel');
             }
           } else if (resp && resp.target && resp.target.status !== 200){
+            let errorMessage = ''
+
+            if (resp.target.response) {
+              try {
+                let respJson = JSON.parse(String.fromCharCode.apply(null, new Uint8Array(resp.target.response)))
+
+                errorMessage = respJson && respJson.message ? respJson.message : ''
+              } catch (error) {
+                errorMessage = ''
+              }
+            }
             if (resp.target.status === 404) {
-              this.growl.fromError('Error', get(this, 'intl').t('modalDownLoadFileComponent.noSuchFile'))
+              this.growl.fromError('Error', `${ get(this, 'intl').t('modalDownLoadFileComponent.noSuchFile') }, Error: ${ errorMessage ? errorMessage : 'Unknow' }`)
             } else {
-              this.growl.fromError('Error', get(this, 'intl').t('modalDownLoadFileComponent.serverError'))
+              this.growl.fromError('Error', `${ get(this, 'intl').t('modalDownLoadFileComponent.serverError') }, Error: ${ errorMessage ? errorMessage : 'Unknow' }`)
             }
             if (!this.isDestroyed) {
               cb(false);
