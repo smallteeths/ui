@@ -36,7 +36,9 @@ export default Route.extend({
         const currentVersion = getCurrentVersion(appData);
 
         // If an app ID is given, the current app version will be used in the app launch route.
-        dependencies.upgrade = get(this, 'catalog').fetchTemplate(`${ params.template }-${ params.upgrade }`, true, currentVersion);
+        if (params.upgrade) {
+          dependencies.upgrade = get(this, 'catalog').fetchTemplate(`${ params.template }-${ params.upgrade }`, true, currentVersion);
+        }
         dependencies.tpl = get(this, 'catalog').fetchTemplate(params.template, false, currentVersion);
       })
         .catch((err) => {
