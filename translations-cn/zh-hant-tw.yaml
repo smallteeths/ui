@@ -9916,6 +9916,8 @@ nodeDriver:
         label: 用戶配置模板
     username:
       label: 用戶名
+    nodeTemplate:
+      tooltip: Harvester 需要在同一命名空間下的虛擬機
 newConfigMap:
   title:
     new: 添加配置映射

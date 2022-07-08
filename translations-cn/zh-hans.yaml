@@ -9986,6 +9986,8 @@ nodeDriver:
       label: 用户数据
       template:
         label: 用户配置模板
+    nodeTemplate:
+      tooltip: Harvester 需要在同一命名空间下的虚拟机
   oci:
     placement:
       title: Placement
