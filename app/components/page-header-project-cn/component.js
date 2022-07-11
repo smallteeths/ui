@@ -268,7 +268,7 @@ export default Component.extend(ThrottledResize, {
   }),
 
   searchInputDidChanged: debouncedObserver('searchInput', function() {
-    set(this, 'searchInputDebounce', get(this, 'searchInput'));
+    set(this, 'searchInputDebounce', (get(this, 'searchInput') || '').trim());
   }),
 
   mouseMoved(e) {
