@@ -103,6 +103,7 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
         label:   'action.addSidekick',
         icon:    'icon icon-plus-circle',
         action:  'addSidekick',
+        enabled:  canEdit,
       },
       {
         label:   'action.rollback',

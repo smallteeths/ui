@@ -37,13 +37,14 @@ export default Component.extend({
   }),
 
   scaleModeDidChange: observer('scaleMode', function() {
+    const scaleMode = get(this, 'scaleMode');
     const restartPolicy = get(this, 'service.restartPolicy');
 
     if ( get(this, 'isJob') ) {
       if ( restartPolicy === 'Always' ) {
         set(this, 'service.restartPolicy', 'Never');
       }
-    } else {
+    } else if (scaleMode !== 'sidekick') {
       set(this, 'service.restartPolicy', 'Always');
     }
   }),
