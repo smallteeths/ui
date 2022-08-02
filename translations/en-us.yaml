@@ -4318,6 +4318,9 @@ clusterNew:
     label: Cluster Name
     placeholder: e.g. sandbox
     required: '"Cluster Name" is required'
+  nodePools:
+    errors:
+      hostnamePrefix: Node pools must have unique name prefixes
   nodes:
     detail: Customize the nodes that will be created
     title: Node Options
@@ -4732,6 +4735,7 @@ clusterNew:
         even: Setting {count} etcd nodes is a waste of hardware because it doesn't increase the quorum until you have an odd number.
         noEtcd: The number of etcd nodes should not be less than 1.
     windowsSupport:
+      deprecated: Windows support is being deprecated for RKE1. We suggest migrating to RKE2/K3s.
       disabled: Not support {plugin} network provider.
       help: Available for Kubernetes 1.15 or above with Flannel network provider.
       label: Windows Support
@@ -6618,6 +6622,12 @@ formEngineOpts:
     addActionLabel: Add Engine Option
     keyPlaceholder: e.g. log-driver
     valuePlaceholder: e.g. syslog
+  logOpts:
+    label: Log Options
+    addActionLabel: Add Log Option
+  storageOpts:
+    label: Storage Options
+    addActionLabel: Add Storage Option
   engineLabels:
     label: Engine Labels
     addActionLabel: Add Engine Label
@@ -9773,6 +9783,30 @@ nodeDriver:
       label: Disk
       unit: GiB
       placeholder: e.g. 4
+    scheduling:
+      node:
+        label: Node Scheduling
+      pod:
+        label: Pod Scheduling
+        namespace:
+          podsNs: This pod's namespace
+          PodInNs: "Pods in these namespaces:"
+          tips: e.g. default,system,base
+      input:
+        priority:
+          label: Priority
+          required: Required
+          preferred: Preferred
+        type:
+          label: Type
+          affinity: Affinity
+          antiAffinity: Anti-Affinity
+        topology:
+          label: Topology Key
+          placeholder: e.g. failure-domain.beta.kubernetes.io/zone
+        weight:
+          label: Weight
+          placeholder: Must be a weight between 1 and 100
     networkData:
       label: Network Data YAML
       template:

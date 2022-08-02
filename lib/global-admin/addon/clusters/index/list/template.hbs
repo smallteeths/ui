@@ -1,6 +1,12 @@
+{{#if hasWindowsRke1Cluster}}
+<div>
+  {{banner-message icon='icon-alert' color='bg-warning mb-10 mt-10' message=(t
+  'clusterNew.rke.windowsSupport.deprecated')}}
+</div>
+{{/if}}
 {{#sortable-table
    classNames="grid"
-   body=model.clusters
+   body=filteredClusters
    searchText=searchText
    descending=descending
    sortBy=sortBy
