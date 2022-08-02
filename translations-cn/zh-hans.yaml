@@ -5033,6 +5033,7 @@ clusterNew:
       label: Windows 支持
       help: 适用于 Kubernetes 1.15 与 Flannel 网络提供商。
       disabled: 不支持 {plugin} 网络提供商。
+      deprecated: RKE1对Windows的支持正在被废除。我们建议迁移到RKE2/K3s。
     advanced:
       label: 高级集群选项
       detail: 自定义集群参数。
@@ -5087,6 +5088,9 @@ clusterNew:
     label: 注册现有的 Amazon EKS 集群
     shortLabel: 已注册
     helpBlock: "注册一个现有的 Amazon EKS Kubernetes 集群。"
+  nodePools:
+    errors:
+      hostnamePrefix: 节点池必须有唯一的名称前缀
 clusterTemplateNew:
   members:
     label: 成员角色
@@ -6875,6 +6879,12 @@ formEngineOpts:
     addActionLabel: 添加加速地址
     valueLabel: 镜像加速地址
     valuePlaceholder: '例如: https://my-mirror.example.com:5000'
+  logOpts:
+    addActionLabel: 添加日志选项
+    label: 日志选项
+  storageOpts:
+    addActionLabel: 添加存储选项
+    label: 存储选项
 formResourceQuota:
   addQuotaLabel: 添加配额
   table:
@@ -9988,6 +9998,30 @@ nodeDriver:
         label: 用户配置模板
     nodeTemplate:
       tooltip: Harvester 需要在同一命名空间下的虚拟机
+    scheduling:
+      input:
+        priority:
+          label: 优先级
+          preferred: 首选
+          required: 必须
+        topology:
+          label: 拓扑键
+          placeholder: 例如： failure-domain.beta.kubernetes.io/zone
+        type:
+          affinity: 亲和性
+          antiAffinity: 反亲和性
+          label: 类型
+        weight:
+          label: 权重
+          placeholder: 权重范围：1-100
+      node:
+        label: 节点调度
+      pod:
+        label: Pod 调度
+        namespace:
+          PodInNs: 这些命名空间中的 Pod
+          podsNs: 此 Pod 的命名空间
+          tips: 例如：default,system,base
   oci:
     placement:
       title: Placement

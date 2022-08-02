@@ -3597,6 +3597,7 @@ clusterNew:
       label: Windows 支持
       disabled: 不支持 {plugin} 網絡提供商。
       help: 適用於 Kubernetes 1.15 與 Flannel 網絡提供商。
+      deprecated: RKE1對Windows的支持正在被廢除。我們建議遷移到RKE2/K3s。
     advanced:
       label: 高級集羣選項
       detail: 自定義集羣參數。
@@ -3909,6 +3910,9 @@ clusterNew:
   security:
     detail: 自定義 GKE 服務賬號和訪問權限
     title: 安全
+  nodePools:
+    errors:
+      hostnamePrefix: 節點池必須有唯一的名稱前綴
 conditionSections:
   title: 狀態
   detail: '當前{resourceType}運行狀態'
@@ -5244,6 +5248,12 @@ formEngineOpts:
     addActionLabel: 添加加速地址
     valueLabel: 鏡像加速地址
     valuePlaceholder: '例如: https://my-mirror.example.com:5000'
+  logOpts:
+    addActionLabel: 添加日誌選項
+    label: 日誌選項
+  storageOpts:
+    addActionLabel: 添加存儲選項
+    label: 存儲選項
 formResourceQuota:
   addQuotaLabel: 添加配額
   table:
@@ -7960,6 +7970,30 @@ nodeDriver:
       label: 用戶名
     nodeTemplate:
       tooltip: Harvester 需要在同一命名空間下的虛擬機
+    scheduling:
+      input:
+        priority:
+          label: 優先級
+          preferred: 首選
+          required: 必須
+        topology:
+          label: 拓撲鍵
+          placeholder: 例如： failure-domain.beta.kubernetes.io/zone
+        type:
+          affinity: 親和性
+          antiAffinity: 反親和性
+          label: 類型
+        weight:
+          label: 權重
+          placeholder: 權重範圍：1-100
+      node:
+        label: 節點調度
+      pod:
+        label: Pod 調度
+        namespace:
+          PodInNs: 這些命名空間中的 Pod
+          podsNs: 此 Pod 的命名空間
+          tips: 例如：default,system,base
 newConfigMap:
   title:
     new: 添加ConfigMap
