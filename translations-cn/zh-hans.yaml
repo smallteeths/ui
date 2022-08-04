@@ -5033,7 +5033,7 @@ clusterNew:
       label: Windows 支持
       help: 适用于 Kubernetes 1.15 与 Flannel 网络提供商。
       disabled: 不支持 {plugin} 网络提供商。
-      deprecated: RKE1对Windows的支持正在被废除。我们建议迁移到RKE2/K3s。
+      deprecated: RKE1对Windows的支持正在被废除。我们建议迁移到RKE2。
     advanced:
       label: 高级集群选项
       detail: 自定义集群参数。

@@ -5212,7 +5212,7 @@ clusterNew:
       disabled: Not support {plugin} network provider.
       help: Available for Kubernetes 1.15 or above with Flannel network provider.
       label: Windows Support
-      deprecated: Windows support is being deprecated for RKE1. We suggest migrating to RKE2/K3s.
+      deprecated: Windows support is being deprecated for RKE1. We suggest migrating to RKE2.
     gpu:
       enableGPUManagement:
         label: GPU shared scheduling (memory unit)

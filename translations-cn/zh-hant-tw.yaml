@@ -4731,7 +4731,7 @@ clusterNew:
       label: Windows 支持
       help: 適用於 Kubernetes 1.15 與 Flannel 網絡提供商。
       disabled: 不支持 {plugin} 網絡提供商。
-      deprecated: RKE1對Windows的支持正在被廢除。我們建議遷移到RKE2/K3s。
+      deprecated: RKE1對Windows的支持正在被廢除。我們建議遷移到RKE2。
     advanced:
       label: 高級叢集選項
       detail: 自定義叢集參數。
