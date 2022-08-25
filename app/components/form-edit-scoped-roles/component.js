@@ -34,7 +34,7 @@ export default Component.extend(NewOrEdit, {
 
   init() {
     this._super(...arguments);
-    const model = get(this, 'model.role').clone();
+    const model = get(this, 'model.role').cloneForNew();
 
     setProperties(this, {
       primaryResource:  model,
@@ -66,12 +66,13 @@ export default Component.extend(NewOrEdit, {
         return;
       }
 
-      return this.primaryResource.save().then(() => this.doneSaving())
-        .catch((err) => {
-          set(this, 'errors', [Errors.stringify(err)]);
+      return get(this, 'model.role').delete().then(() => {
+        return this.primaryResource.save().then(() => this.doneSaving());
+      }).catch((err) => {
+        set(this, 'errors', [Errors.stringify(err)]);
 
-          return cb(false);
-        });
+        return cb(false);
+      });
     },
   },
 
