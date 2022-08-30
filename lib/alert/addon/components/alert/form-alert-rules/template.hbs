@@ -4,24 +4,17 @@
   </label>
 </div>
 <hr />
+
 {{#unless monitoringEnabled}}
-  {{#if enableMonitoringRoute}}
-    {{#banner-message color="bg-info mb-10 mt-10"}}
-      <p>
-        {{t "alertPage.newOrEdit.monitoringDisabled"}}
-        {{#link-to-external enableMonitoringRoute}}
-          {{t "alertPage.newOrEdit.enableMonitoring"}}
-        {{/link-to-external}}
-        .
-      </p>
-    {{/banner-message}}
-  {{/if}}
+  {{#banner-message color='bg-info mb-10 mt-10'}}
+    <p>{{t 'alertPage.newOrEdit.monitoringDisabled'}} {{#link-to-external 'authenticated.cluster.monitoring.cluster-setting' scope.currentCluster.id}} {{t 'alertPage.newOrEdit.enableMonitoring'}} {{/link-to-external}}.</p>
+  {{/banner-message}}
 {{/unless}}
+
 <div class="mb-10 pt-5">
-  {{#if enableMonitoringRoute}}
-    {{#each alertRules key="id" as |alertRule|}}
-      {{#if (eq pageScope "cluster")}}
-        {{alert/form-cluster-rule-row
+  {{#each alertRules key="id" as |alertRule|}}
+    {{#if (eq pageScope "cluster")}}
+      {{alert/form-cluster-rule-row
           removeRule=(action "removeRule")
           alertRules=alertRules
           editing=editing
@@ -34,9 +27,9 @@
           alertGroup=alertGroup
           mode=mode
           level=level
-        }}
-      {{else if (eq pageScope "project")}}
-        {{alert/form-project-rule-row
+      }}
+    {{else}}
+      {{alert/form-project-rule-row
           removeRule=(action "removeRule")
           condition=alertRule
           alertRules=alertRules
@@ -50,14 +43,13 @@
           alertGroup=alertGroup
           mode=mode
           level=level
-        }}
-      {{/if}}
-    {{else}}
+      }}
+    {{/if}}
+  {{else}}
       <div class="p-20">
         {{t "formIngress.noRules"}}
       </div>
-    {{/each}}
-  {{/if}}
+  {{/each}}
 </div>
 <div class="row">
   <button
