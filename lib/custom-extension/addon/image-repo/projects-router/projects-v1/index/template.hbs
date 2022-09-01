@@ -1,12 +1,10 @@
 <section class="header">
+  <h1>{{t "harborConfig.image"}}</h1>
   {{#if (and hasHarborServer (not model.harborServerError))}}
   <div class="right-buttons">
     <button class="btn btn-sm bg-primary right-divider-btn" {{action 'addNewProject'}}>{{t "harborConfig.btn.createProject"}}</button>
   </div>
   {{/if}}
-
-  <h1>{{t "harborConfig.image"}}</h1>
-
 </section>
 {{#if (and hasHarborServer (not model.harborServerError))}}
 <section class="instances pt-5 pb-5">
