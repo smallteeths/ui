@@ -6393,6 +6393,7 @@ dangerZone:
     restricted-default-admin: "初始化管理员角色是否使用受限管理员权限，权限说明请查看<a href=\"http://docs.rancher.cn/docs/rancher2.5/admin-settings/rbac/global-permissions/_index/#%E5%8F%97%E9%99%90%E7%AE%A1%E7%90%86%E5%91%98\" target=\"_blank\">这里</a>。"
     rotate-certs-if-expiring-in-days: 设置Rancher Server提前轮换证书的时间（以天为单位）。
     system-catalog: 配置 Rancher 使用 System Chart Repo。
+    password-min-length: 定义用户密码所需的最少字符。
 deleteEksCluster:
   title: "确定删除集群 {clusterName} 吗?"
   help: 此集群是通过临时令牌创建的，请提供新的令牌来删除它。

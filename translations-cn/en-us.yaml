@@ -6621,6 +6621,7 @@ dangerZone:
     restricted-default-admin: "Whether the initialization administrator role uses restricted administrator permissions. Please see the permission description<a href=\"http://docs.rancher.cn/docs/rancher2.5/admin-settings/rbac/global-permissions/_index/#%E5%8F%97%E9%99%90%E7%AE%A1%E7%90%86%E5%91%98\" target=\"_blank\">here</a>."
     rotate-certs-if-expiring-in-days: Set the time for the rancher server to rotate certificates in advance（in days）.
     system-catalog: Configure Rancher to use System Chart Repo.
+    password-min-length: Define minimum characters required for an user password.
 deleteEksCluster:
   title: "Delete {clusterName}?"
   help: This cluster was created with a temporary session token. Please provide keys and token to delete the cluster.
