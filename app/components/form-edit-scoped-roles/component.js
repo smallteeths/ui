@@ -174,6 +174,10 @@ export default Component.extend(NewOrEdit, {
 
   validate() {
     var errors = this.get('errors', errors) || [];
+    const hasUserTarget = get(this, 'primaryResource.userId') || get(this, 'primaryResource.userPrincipalId');
+
+    const pricncipalIdKey = hasUserTarget ? 'userPrincipalId' : 'groupPrincipalId';
+    const idKey = hasUserTarget ? 'userId' : 'groupId';
 
     const current = (get(this, 'model.roleBindings') || []).filter((role) => {
       let id;
@@ -184,7 +188,9 @@ export default Component.extend(NewOrEdit, {
         id = get(this, 'scope.currentCluster.id');
       }
 
-      return id === get(role, `${ get(this, 'type') }Id`) && get(role, 'userPrincipalId') === get(this, 'primaryResource.userPrincipalId');
+      return id === get(role, `${ get(this, 'type') }Id`)
+        && get(role, pricncipalIdKey) === get(this, `primaryResource.${ pricncipalIdKey }`)
+        && get(role, idKey) === get(this, `primaryResource.${ idKey }`);
     });
 
     if (get(this, 'mode') === 'custom') {
