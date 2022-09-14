@@ -58,6 +58,8 @@ module.exports = function(app, options) {
     'Apiui':        '/api-ui',
     'Samlauth':     '/v1-saml',
     'Drivers':      '/assets/rancher-ui-driver-*',
+    'Aliyunecs':    '/assets/driver-aliyunecs',
+    'Operator':     '/assets/rancher-ui-operator-*',
     'K3Versions':   '/v1-k3s-release/release',
     'Rke2Versions': '/v1-rke2-release/release',
     'mcm': '/mcm',
