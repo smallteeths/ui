@@ -45,9 +45,10 @@ export default Component.extend(NewOrEdit, {
     } else {
       set(model, 'groupPrincipalId', origModel.groupPrincipalId);
     }
+    model = this.make(model);
 
     setProperties(this, {
-      primaryResource:  this.make(model),
+      primaryResource:  model,
       stdUser:         `${ get(this, 'type') }-member`,
       admin:           `${ get(this, 'type') }-owner`,
       cTyped:          get(this, 'type').capitalize(),
