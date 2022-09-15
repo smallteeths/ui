@@ -34,10 +34,20 @@ export default Component.extend(NewOrEdit, {
 
   init() {
     this._super(...arguments);
-    const model = get(this, 'model.role').cloneForNew();
+    const origModel = get(this, 'model.role');
+
+    let model = { type: origModel.type };
+
+    set(model, `${ get(this, 'type') }Id`, get(this, `model.${ get(this, 'type') }.id`));
+    set(model, 'roleTemplateId', origModel.roleTemplateId);
+    if (origModel.userPrincipalId) {
+      set(model, 'userPrincipalId', origModel.userPrincipalId);
+    } else {
+      set(model, 'groupPrincipalId', origModel.groupPrincipalId);
+    }
 
     setProperties(this, {
-      primaryResource:  model,
+      primaryResource:  this.make(model),
       stdUser:         `${ get(this, 'type') }-member`,
       admin:           `${ get(this, 'type') }-owner`,
       cTyped:          get(this, 'type').capitalize(),
@@ -245,5 +255,9 @@ export default Component.extend(NewOrEdit, {
         set(this, 'unknownUser', true);
       });
     }
-  }
+  },
+
+  make(role) {
+    return get(this, 'globalStore').createRecord(role);
+  },
 });
