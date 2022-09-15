@@ -200,7 +200,6 @@
     </div>
   </div>
 </div>
-{{#if hasDefaultGateway}}
 <div class="row">
   <div class="col span-8 row">
     <label class="acc-label">{{t "formVlan.defaultGateway.label"}}</label>
@@ -237,6 +236,5 @@
     {{/if}}
   </div>
 </div>
-{{/if}}
 {{top-errors errors=errors}}
 {{save-cancel editing=true save=(action "save") cancel=(action "cancel")}}

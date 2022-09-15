@@ -66,7 +66,9 @@ export default Controller.extend({
         podDefaultGateway
       } = form.spec;
 
-      (!get(this, 'hasDefaultGateway') || !podDefaultGateway.enable) && (form.spec.podDefaultGateway = {});
+      if (!podDefaultGateway.enable){
+        form.spec.podDefaultGateway = {};
+      }
       this.hasVlan(master || '', vlan || 0).then(() => {
         const intl = get(this, 'intl');
         // if (result) {
@@ -168,22 +170,6 @@ export default Controller.extend({
     const ipRanges = get(this, 'ipRangesExisted') || [];
 
     return ipRanges.filter((r) => r.spec.ranges && r.spec.ranges.length > 0).map((r) => `${ r.spec.ranges.map((item) => `${ item.rangeStart } - ${ item.rangeEnd }`).join(', ') }`).join(', ');
-  }),
-  hasDefaultGateway: computed('scope.currentCluster.annotations', 'scope.currentCluster.rancherKubernetesEngineConfig.network.{options,plugin}', function() {
-    let network = get(this, 'scope.currentCluster.rancherKubernetesEngineConfig.network');
-
-    if (!network){
-      return false;
-    }
-    if (network.plugin === 'none'){
-      const annotations = get(this, 'scope.currentCluster.annotations') || {};
-      const options = network.options || {};
-      const macvlanPlugin = annotations['macvlan.pandaria.io/plugin'] || options.pandariaExtraPluginName;
-
-      return macvlanPlugin && (macvlanPlugin === 'multus-flannel-macvlan' || macvlanPlugin === 'multus-canal-macvlan');
-    } else {
-      return (network.plugin === 'multus-flannel-macvlan' || network.plugin === 'multus-canal-macvlan');
-    }
   }),
   isCanalMacvlan: computed('scope.currentCluster.annotations', 'scope.currentCluster.rancherKubernetesEngineConfig.network.{options,plugin}', function() {
     let network = get(this, 'scope.currentCluster.rancherKubernetesEngineConfig.network');
