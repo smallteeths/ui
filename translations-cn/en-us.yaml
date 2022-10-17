@@ -11088,6 +11088,7 @@ action:
   importClusterCmd: Import Cluster Cmd
   view: View
   editConnectMode: Connect Mode
+  k8sAuditLog: View API Server Audit Log
 ##############################
 # Resource Actions
 ##############################

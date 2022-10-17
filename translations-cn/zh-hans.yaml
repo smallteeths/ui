@@ -10854,6 +10854,7 @@ action:
   scaledown: Scale Down
   view: 查看
   editConnectMode: 连接模式
+  k8sAuditLog: 查看 API Server 审计日志
 ##############################
 # Resource Actions
 ##############################

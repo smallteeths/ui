@@ -696,7 +696,7 @@ export default Resource.extend(Grafana, ResourceUsage, {
     return false;
   }),
 
-  availableActions: computed('actionLinks.{rotateCertificates,rotateEncryptionKey}', 'canRotateEncryptionKey', 'canSaveAsTemplate', 'canShowAddHost', 'displayImportLabel', 'isClusterScanDisabled', 'showClusterConnectMode', function() {
+  availableActions: computed('actionLinks.{rotateCertificates,rotateEncryptionKey}', 'canRotateEncryptionKey', 'canSaveAsTemplate', 'canShowAddHost', 'displayImportLabel', 'isClusterScanDisabled', 'settings.auditlog-server-url', 'showClusterConnectMode', function() {
     const a = get(this, 'actionLinks') || {};
 
     return [
@@ -705,6 +705,12 @@ export default Resource.extend(Grafana, ResourceUsage, {
         icon:      'icon icon-edit',
         action:    'editConnectMode',
         enabled:   get(this, 'showClusterConnectMode')
+      },
+      {
+        label:     'action.k8sAuditLog',
+        icon:      'icon icon-file',
+        action:    'viewK8sAuditLog',
+        enabled:   !!get(this, 'settings.auditlog-server-url')
       },
       {
         label:     'action.rotate',
@@ -1034,6 +1040,12 @@ export default Resource.extend(Grafana, ResourceUsage, {
         });
       });
     },
+
+    viewK8sAuditLog() {
+      const url = get(this, 'settings.auditlog-server-url') || '';
+
+      this.router.transitionTo('global-admin.iframe.detail', `/meta/auditui/${ url.replace('//', '/') }#/k8s-audit-log/${ this.id }`, { queryParams: { ui: 'manager' } });
+    }
   },
 
   clearConfigFieldsForClusterTemplate() {
@@ -1531,6 +1543,5 @@ export default Resource.extend(Grafana, ResourceUsage, {
 
   isEmptyObject(obj) {
     return this.isObject(obj) && Object.keys(obj).length === 0;
-  }
-
+  },
 });
