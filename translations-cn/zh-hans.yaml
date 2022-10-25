@@ -1122,6 +1122,12 @@ banner:
   pipeline21: Kubernetes 1.21 以上版本的 Pipelines 不再被支持。
   secrets: Legacy 项目可用于管理需要对项目中所有命名空间可用的秘钥。
   upgrade21: 启用了 legacy 功能标志，在Kubernetes 1.21+中，并非所有的legacy 功能都被支持。
+  apps: 从 Rancher v2.7.0 开始，遗留的应用程序已被废弃，并将在未来的版本中被删除 - 请查看<a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">发布说明</a>。
+  catalogs: 从 Rancher v2.7.0 开始，Catalogs 已被弃用，并将在未来的版本中删除 - 请查看<a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">发布说明</a>。
+  globalCatalogs: 从 Rancher v2.7.0 开始，全局 Catalogs 已被弃用，并将在未来的版本中删除 - 请查看<a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">发布说明</a>。
+  globalDnsEntries: 从 Rancher v2.7.0 开始，全局 DNS Entries 已被弃用，并将在未来的版本中删除 - 请查看<a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">发布说明</a>。
+  globalDnsProviders: 从 Rancher v2.7.0 开始，全局 DNS Providers 已被弃用，并将在未来的版本中删除 - 请查看<a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">发布说明</a>。
+  longhorn: 有关如何将安装在遗留 Rancher UI 中的 Longhorn chart 迁移到新 Rancher UI 中的更多信息，请参阅<a href="https://longhorn.io/kb/how-to-migrate-longhorn-chart-installed-in-old-rancher-ui-to-the-chart-in-new-rancher-ui/" target="_blank">这里</a>。
 catalogPage:
   istio:
     header: 流量规则商店
@@ -2230,7 +2236,7 @@ cruVolumeClaimTemplate:
 cruPrivateRegistry:
   title:
     label: 私有镜像仓库
-    detail: 给集群配置私有镜像仓库，当开始构建集群时会通过此镜像仓库拉取所需的全部镜像。
+    detail: 配置一个默认的集群级 private registry，用于所有 Rancher 系统容器镜像。
     detailAtImportCluster: 给集群配置私有镜像仓库，部署 Rancher 服务组件时会通过此镜像仓库拉取所需的全部镜像（注意：设置该项会覆盖全局系统设置中的 system-default-registry 参数）。
   noData: 当前集群没有配置私有镜像仓库
   defaultError: 您必须指定默认的私有镜像仓库。

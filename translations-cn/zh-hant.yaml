@@ -1569,7 +1569,7 @@ cruPersistentVolumeClaim:
 cruPrivateRegistry:
   title:
     label: 私有鏡像倉庫
-    detail: 給集羣配置私有鏡像倉庫，當開始構建集羣時會通過此鏡像倉庫拉取所需的全部鏡像。
+    detail: 配置一個默認的集羣級 private registry，用於所有 Rancher 系統容器鏡像。
     detailAtImportCluster: 給集羣配置私有鏡像倉庫，部署 Rancher 服務組件時會通過此鏡像倉庫拉取所需的全部鏡像（註意：設置該項會覆蓋全局系統設置中的 system-default-registry 參數）。
   noData: 當前集羣沒有配置私有鏡像倉庫
   defaultError: 您必須指定默認的私有鏡像倉庫。
@@ -9333,6 +9333,12 @@ banner:
   pipeline21: Kubernetes 1.21 以上版本的 Pipelines 不再被支持。
   secrets: Legacy 項目可用於管理需要對項目中所有命名空間可用的祕鑰。
   upgrade21: 啓用了 legacy 功能標誌，在Kubernetes 1.21+中，並非所有的legacy 功能都被支持。
+  apps: 從 Rancher v2.7.0 開始，遺留的應用程序已被廢棄，並將在未來的版本中被刪除 - 請查看<a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">發佈說明</a>。
+  catalogs: 從 Rancher v2.7.0 開始，Catalogs 已被棄用，並將在未來的版本中刪除 - 請查看<a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">發佈說明</a>。
+  globalCatalogs: 從 Rancher v2.7.0 開始，全局 Catalogs 已被棄用，並將在未來的版本中刪除 - 請查看<a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">發佈說明</a>。
+  globalDnsEntries: 從 Rancher v2.7.0 開始，全局 DNS Entries 已被棄用，並將在未來的版本中刪除 - 請查看<a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">發佈說明</a>。
+  globalDnsProviders: 從 Rancher v2.7.0 開始，全局 DNS Providers 已被棄用，並將在未來的版本中刪除 - 請查看<a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">發佈說明</a>。
+  longhorn: 有關如何將安裝在遺留 Rancher UI 中的 Longhorn chart 遷移到新 Rancher UI 中的更多信息，請參閱<a href="https://longhorn.io/kb/how-to-migrate-longhorn-chart-installed-in-old-rancher-ui-to-the-chart-in-new-rancher-ui/" target="_blank">這裏</a>。
 batchDelete:
   headerSuffix: 名稱
 metricruletemplate:

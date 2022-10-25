@@ -1124,6 +1124,12 @@ banner:
   upgrade21: The legacy feature flag is enabled and not all legacy features are supported in Kubernetes 1.21+.
   secrets: Legacy project functionality can be used to manage secrets that need to be available to all namespaces in a project
   dashboard: Try out the <a href="{dashboardLink}">Cluster Explorer</a> for a new way to view and manage your Kubernetes resources.
+  apps: Legacy Apps have been deprecated as of Rancher v2.7.0 and will be removed in a future release - check out the <a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">Release Notes</a>.
+  catalogs: Catalogs have been deprecated as of Rancher v2.7.0 and will be removed in a future release - check out the <a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">Release Notes</a>.
+  globalCatalogs: Global Catalogs have been deprecated as of Rancher v2.7.0 and will be removed in a future release - check out the <a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">Release Notes</a>.
+  globalDnsEntries: Global DNS Entries have been deprecated as of Rancher v2.7.0 and will be removed in a future release - check out the <a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">Release Notes</a>.
+  globalDnsProviders: Global DNS Providers have been deprecated as of Rancher v2.7.0 and will be removed in a future release - check out the <a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">Release Notes</a>.
+  longhorn: For more information on how to migrate the Longhorn chart installed in the legacy Rancher UI to the chart for the new Rancher UI see <a href="https://longhorn.io/kb/how-to-migrate-longhorn-chart-installed-in-old-rancher-ui-to-the-chart-in-new-rancher-ui/" target="_blank">here</a>.
 catalogPage:
   istio:
     header: Traffic Rules Catalog
@@ -2232,7 +2238,7 @@ cruVolumeClaimTemplate:
 cruPrivateRegistry:
   title:
     label: Private Registry
-    detail: Configure a default private registry for provisioning RKE cluster components. When enabled, all system images required for RKE cluster provisioning and system add-ons startup will be pulled from this registry.
+    detail: Configure a default cluster-level private registry to be used for all Rancher System Container Images.
     detailAtImportCluster: "Configure a default private registry for this cluster. When enabled, all images required for cluster provisioning and system add-ons startup will be pulled from this registry(Notice: This config will override system-default-registry in global config)."
   noData: This cluster does not have a private registry defined
   defaultError: You must designate one private registry as the default
