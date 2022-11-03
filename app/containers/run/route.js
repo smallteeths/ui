@@ -9,7 +9,6 @@ import C from 'ui/utils/constants';
 export default Route.extend({
   prefs:        service(),
   clusterStore: service(),
-  globalStore:  service(),
 
   beforeModel() {
     const promises = {};
@@ -41,8 +40,6 @@ export default Route.extend({
     const gs = get(this, 'globalStore');
     const appRoute = window.l('route:application');
     const project = appRoute.modelFor('authenticated.project').get('project');
-    const projectId = project.get('id');
-    const clusterId = project.get('clusterId');
     let pspId = ''
 
     if (project.get('cluster.rancherKubernetesEngineConfig.services.kubeApi.podSecurityPolicy')) {
@@ -51,18 +48,6 @@ export default Route.extend({
 
       pspId = projectPspId ? projectPspId : clusterPspId
     }
-
-    const clusterLogging = gs.find('clusterLogging').then((res) => {
-      const logging = res.filterBy('clusterId', clusterId).get('firstObject');
-
-      return this.isLoggingEnabled(logging);
-    });
-
-    const projectLogging = gs.find('projectLogging').then((res) => {
-      const logging = res.filterBy('projectId', projectId).get('firstObject');
-
-      return this.isLoggingEnabled(logging);
-    });
 
     let promise = null;
 
@@ -86,12 +71,10 @@ export default Route.extend({
 
     return hash({
       dataMap: promise,
-      clusterLogging,
-      projectLogging,
       harborVersion,
       psps,
     }).then((hash) => ({
-      loggingEnabled: hash.clusterLogging || hash.projectLogging,
+      loggingEnabled: false,
       dataMap:        hash.dataMap,
       harborVersion:  hash.harborVersion,
       psp:            hash.psps ? hash.psps.find((item) => item.name === pspId && !params.workloadId) : null,

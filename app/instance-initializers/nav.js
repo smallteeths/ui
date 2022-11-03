@@ -34,25 +34,6 @@ const rootNav = [
         resourceScope:  'project',
       },
       {
-        id:             'pipelines',
-        localizedLabel: 'nav.infra.pipelines',
-        route:          'authenticated.project.pipeline.pipelines',
-        ctx:            [getProjectId],
-        resource:       [],
-        resourceScope:  'project',
-      },
-      {
-        id:             'istio',
-        localizedLabel: 'nav.tools.istio',
-        route:          'authenticated.project.istio.index',
-        ctx:            [getProjectId],
-        resource:       [],
-        resourceScope:  'project',
-        currentWhen:    [
-          'authenticated.project.istio.project-istio',
-        ],
-      },
-      {
         id:             'infra-secrets',
         localizedLabel: 'nav.infra.secrets',
         route:          'authenticated.project.secrets',
@@ -125,14 +106,6 @@ const rootNav = [
         ctx:            [getProjectId],
         resource:       ['catalog', 'project-catalog'],
         resourceScope:  'global',
-      },
-      {
-        id:             'tools-logging',
-        localizedLabel: 'nav.tools.logging',
-        route:          'authenticated.project.logging',
-        resourceScope:  'global',
-        resource:       [],
-        ctx:            [getProjectId],
       },
       {
         id:             'tools-monitoring',
@@ -262,14 +235,6 @@ const rootNav = [
         ctx:            [getClusterId],
       },
       {
-        id:             'cluster-tools-logging',
-        localizedLabel: 'nav.tools.logging',
-        route:          'authenticated.cluster.logging',
-        resourceScope:  'global',
-        resource:       [],
-        ctx:            [getClusterId],
-      },
-      {
         id:             'cluster-tools-monitoring',
         localizedLabel: 'nav.tools.monitoring',
         route:          'authenticated.cluster.monitoring.cluster-setting',
@@ -279,25 +244,6 @@ const rootNav = [
         condition() {
           return get(this, 'cluster.isActive')
         },
-      },
-      {
-        id:                       'cluster-tools-istio',
-        localizedLabel:           'nav.tools.istio',
-        route:                    'authenticated.cluster.istio.cluster-setting',
-        resourceScope:            'global',
-        resource:                 [],
-        ctx:                      [getClusterId],
-        condition() {
-          return get(this, 'cluster.isActive')
-        },
-      },
-      {
-        id:                       'cluster-tools-cis-scan',
-        localizedLabel:           'nav.tools.cisScans',
-        route:                    'authenticated.cluster.cis/scan',
-        resourceScope:            'global',
-        resource:                 [],
-        ctx:                      [getClusterId],
       },
       { divider: true },
       {
@@ -313,11 +259,6 @@ const rootNav = [
         localizedLabel:           'nav.tools.gatekeeper',
         dashboardLink:            '/gatekeeper',
       },
-      // {
-      //   id:                       'cluster-tools-rio',
-      //   localizedLabel:           'nav.tools.rio',
-      //   dashboardLink:            '/rio',
-      // },
     ],
   },
 
@@ -328,14 +269,6 @@ const rootNav = [
     localizedLabel: 'nav.admin.clusters.tab',
     route:          'global-admin.clusters',
     resource:       ['cluster'],
-    resourceScope:  'global',
-  },
-  {
-    scope:          'global',
-    id:             'multi-cluster-apps',
-    localizedLabel: 'nav.admin.multiClusterApps',
-    route:          'global-admin.multi-cluster-apps',
-    resource:       ['multiclusterapp'],
     resourceScope:  'global',
   },
   {
