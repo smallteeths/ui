@@ -163,7 +163,7 @@ Router.map(function() {
       this.mount('istio');
 
       // clone cross cluster
-      this.mount('clone-cross-cluster');
+      // this.mount('clone-cross-cluster');
 
       // Workload
       this.route('containers', {

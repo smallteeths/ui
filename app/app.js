@@ -314,7 +314,7 @@ export default class App extends Application {
           'containers.index':                'containers.index',
           'notifier':                        'authenticated.cluster.notifier',
 
-          'authenticated.project.clone-cross-cluster.clone-cross-cluster.run': 'authenticated.project.clone-cross-cluster.clone-cross-cluster.run',
+          // 'authenticated.project.clone-cross-cluster.clone-cross-cluster.run': 'authenticated.project.clone-cross-cluster.clone-cross-cluster.run',
         }
       }
     },

@@ -86,12 +86,12 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
     const canEdit = get(this, 'canEdit');
 
     let choices = [
-      {
-        label:    'action.cloneCrossCluster',
-        icon:     'icon icon-copy',
-        action:   'cloneCrossCluster',
-        enabled:  !(this.workloadLabels && (this.workloadLabels['io.cattle.field/appId'] || this.workloadLabels['helm.sh/chart'])),
-      },
+      // {
+      //   label:    'action.cloneCrossCluster',
+      //   icon:     'icon icon-copy',
+      //   action:   'cloneCrossCluster',
+      //   enabled:  !(this.workloadLabels && (this.workloadLabels['io.cattle.field/appId'] || this.workloadLabels['helm.sh/chart'])),
+      // },
       {
         label:    'action.redeploy',
         icon:     'icon icon-refresh',
@@ -370,9 +370,9 @@ var Workload = Resource.extend(Grafana, DisplayImage, StateCounts, EndpointPorts
       set(this, 'scale', podNum);
       this.saveScale();
     },
-    cloneCrossCluster() {
-      get(this, 'router').transitionTo('authenticated.project.clone-cross-cluster.clone-cross-cluster.run', get(this, 'id'));
-    }
+    // cloneCrossCluster() {
+    //   get(this, 'router').transitionTo('authenticated.project.clone-cross-cluster.clone-cross-cluster.run', get(this, 'id'));
+    // }
   },
   updateTimestamp() {
     let obj = get(this, 'annotations');
