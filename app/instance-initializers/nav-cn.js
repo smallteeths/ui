@@ -48,18 +48,18 @@ const rootNav = [
           return enableProjectMenus.call(this, 'pipeline')
         }
       },
-      {
-        id:             'istio',
-        localizedLabel: 'nav.tools.istio',
-        route:          'authenticated.project.istio.index',
-        ctx:            [getProjectId],
-        resource:       [],
-        resourceScope:  'project',
-        currentWhen:    [
-          'authenticated.project.istio.project-istio',
-        ],
-        initExpand: 'authenticated.project.istio.index'
-      },
+      // {
+      //   id:             'istio',
+      //   localizedLabel: 'nav.tools.istio',
+      //   route:          'authenticated.project.istio.index',
+      //   ctx:            [getProjectId],
+      //   resource:       [],
+      //   resourceScope:  'project',
+      //   currentWhen:    [
+      //     'authenticated.project.istio.project-istio',
+      //   ],
+      //   initExpand: 'authenticated.project.istio.index'
+      // },
       {
         id:             'infra-secrets',
         localizedLabel: 'nav.infra.secrets',
@@ -352,15 +352,15 @@ const rootNav = [
         ctx:            [getClusterId],
         initExpand:     'authenticated.cluster.monitoring.cluster-setting',
       },
-      {
-        id:                       'cluster-tools-istio',
-        localizedLabel:           'nav.tools.istio',
-        route:                    'authenticated.cluster.istio.cluster-setting',
-        resourceScope:            'global',
-        resource:                 [],
-        ctx:                      [getClusterId],
-        initExpand:               'authenticated.cluster.istio.cluster-setting',
-      },
+      // {
+      //   id:                       'cluster-tools-istio',
+      //   localizedLabel:           'nav.tools.istio',
+      //   route:                    'authenticated.cluster.istio.cluster-setting',
+      //   resourceScope:            'global',
+      //   resource:                 [],
+      //   ctx:                      [getClusterId],
+      //   initExpand:               'authenticated.cluster.istio.cluster-setting',
+      // },
       {
         id:                       'cluster-tools-cis-scan',
         localizedLabel:           'nav.tools.cisScans',
