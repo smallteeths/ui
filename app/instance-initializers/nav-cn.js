@@ -168,15 +168,15 @@ const rootNav = [
         resourceScope:  'global',
         initExpand:     'authenticated.project.project-catalogs'
       },
-      {
-        id:             'tools-logging',
-        localizedLabel: 'nav.tools.logging',
-        route:          'authenticated.project.logging',
-        resourceScope:  'global',
-        resource:       [],
-        ctx:            [getProjectId],
-        initExpand:     'authenticated.project.logging.logging'
-      },
+      // {
+      //   id:             'tools-logging',
+      //   localizedLabel: 'nav.tools.logging',
+      //   route:          'authenticated.project.logging',
+      //   resourceScope:  'global',
+      //   resource:       [],
+      //   ctx:            [getProjectId],
+      //   initExpand:     'authenticated.project.logging.logging'
+      // },
       {
         id:             'tools-pipeline',
         localizedLabel: 'nav.tools.pipeline',
@@ -334,15 +334,15 @@ const rootNav = [
         ctx:            [getClusterId],
         initExpand:     'authenticated.cluster.notifier.index',
       },
-      {
-        id:             'cluster-tools-logging',
-        localizedLabel: 'nav.tools.logging',
-        route:          'authenticated.cluster.logging',
-        resourceScope:  'global',
-        resource:       [],
-        ctx:            [getClusterId],
-        initExpand:     'authenticated.cluster.logging.logging',
-      },
+      // {
+      //   id:             'cluster-tools-logging',
+      //   localizedLabel: 'nav.tools.logging',
+      //   route:          'authenticated.cluster.logging',
+      //   resourceScope:  'global',
+      //   resource:       [],
+      //   ctx:            [getClusterId],
+      //   initExpand:     'authenticated.cluster.logging.logging',
+      // },
       {
         id:             'cluster-tools-monitoring',
         localizedLabel: 'nav.tools.monitoring',
