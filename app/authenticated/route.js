@@ -364,9 +364,13 @@ export default Route.extend(Preload, {
   },
 
   loadPreferences() {
+    const isEmbedded = window.top !== window;
+
     return get(this, 'globalStore').find('preference', null, { url: 'preference' })
       .then((res) => {
-        get(this, 'language').initLanguage(true);
+        if (!isEmbedded) {
+          get(this, 'language').initLanguage(true);
+        }
         get(this, 'userTheme').setupTheme();
         get(this, 'menuPosition').setupMenuPostion();
 

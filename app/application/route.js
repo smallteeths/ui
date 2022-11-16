@@ -24,6 +24,7 @@ export default Route.extend({
 
   beforeModel() {
     this.updateWindowTitle();
+    const isEmbedded = window.top !== window;
 
     return (async() => {
       if (!window.Prettycron) {
@@ -32,7 +33,9 @@ export default Route.extend({
 
       // Find out if auth is enabled
       return get(this, 'access').detect().finally(() => {
-        return get(this, 'language').initLanguage();
+        if (!isEmbedded) {
+          return get(this, 'language').initLanguage();
+        }
       });
     })();
   },
