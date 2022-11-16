@@ -83,22 +83,22 @@ const rootNav = [
         resourceScope:  'project',
         initExpand:     'authenticated.project.config-maps.index'
       },
-      {
-        id:             'infra-f5-ingresses',
-        localizedLabel: 'nav.infra.f5Ingresses',
-        route:          'authenticated.project.f5.index',
-        ctx:            [getProjectId],
-        resource:       ['virtualserver', 'transportserver', 'pool', 'monitor'],
-        resourceScope:  'project',
-        currentWhen:    [
-          'authenticated.project.f5.controllers',
-          'authenticated.project.f5.tls',
-        ],
-        initExpand: 'authenticated.project.f5.index',
-        condition() {
-          return get(this, 'cluster.id') !== 'local';
-        }
-      },
+      // {
+      //   id:             'infra-f5-ingresses',
+      //   localizedLabel: 'nav.infra.f5Ingresses',
+      //   route:          'authenticated.project.f5.index',
+      //   ctx:            [getProjectId],
+      //   resource:       ['virtualserver', 'transportserver', 'pool', 'monitor'],
+      //   resourceScope:  'project',
+      //   currentWhen:    [
+      //     'authenticated.project.f5.controllers',
+      //     'authenticated.project.f5.tls',
+      //   ],
+      //   initExpand: 'authenticated.project.f5.index',
+      //   condition() {
+      //     return get(this, 'cluster.id') !== 'local';
+      //   }
+      // },
     ],
   },
   {
@@ -370,18 +370,18 @@ const rootNav = [
         ctx:                      [getClusterId],
         initExpand:               'authenticated.cluster.cis/scan',
       },
-      {
-        id:                       'cluster-tools-cis-f5',
-        localizedLabel:           'nav.tools.cisF5',
-        route:                    'authenticated.cluster.cis/f5',
-        resourceScope:            'global',
-        resource:                 [],
-        ctx:                      [getClusterId],
-        initExpand:               'authenticated.cluster.cis/f5',
-        condition() {
-          return get(this, 'cluster.id') !== 'local';
-        }
-      },
+      // {
+      //   id:                       'cluster-tools-cis-f5',
+      //   localizedLabel:           'nav.tools.cisF5',
+      //   route:                    'authenticated.cluster.cis/f5',
+      //   resourceScope:            'global',
+      //   resource:                 [],
+      //   ctx:                      [getClusterId],
+      //   initExpand:               'authenticated.cluster.cis/f5',
+      //   condition() {
+      //     return get(this, 'cluster.id') !== 'local';
+      //   }
+      // },
       { divider: true },
       {
         id:                       'cluster-tools-backup',

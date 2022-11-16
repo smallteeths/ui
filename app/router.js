@@ -67,7 +67,7 @@ Router.map(function() {
       this.route('cis/scan');
       this.route('cis/scan/detail', { path: '/cis/scan/detail/:scan_id' });
 
-      this.route('cis/f5');
+      // this.route('cis/f5');
 
 
       this.route('backups', function() {
@@ -311,27 +311,27 @@ Router.map(function() {
         });
       });
 
-      this.route('f5', function() {
-        this.route('index', { path: '/' });
+      // this.route('f5', function() {
+      //   this.route('index', { path: '/' });
 
-        this.route('controllers', function() {
-          this.route('run');
-          this.route('index', { path: '/' });
+      //   this.route('controllers', function() {
+      //     this.route('run');
+      //     this.route('index', { path: '/' });
 
-          this.route('detail', { path: '/:controller_id' }, function() {
-            this.route('edit');
-          });
-        });
+      //     this.route('detail', { path: '/:controller_id' }, function() {
+      //       this.route('edit');
+      //     });
+      //   });
 
-        this.route('tls', function() {
-          this.route('new');
-          this.route('index', { path: '/' });
+      //   this.route('tls', function() {
+      //     this.route('new');
+      //     this.route('index', { path: '/' });
 
-          this.route('detail', { path: '/:tls_id' }, function() {
-            this.route('edit');
-          });
-        });
-      });
+      //     this.route('detail', { path: '/:tls_id' }, function() {
+      //       this.route('edit');
+      //     });
+      //   });
+      // });
 
       this.route('hooks', { path: '/api/hooks' }, function() {
         this.route('new-receiver', { path: '/add-receiver' });
