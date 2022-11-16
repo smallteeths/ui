@@ -1043,8 +1043,19 @@ export default Resource.extend(Grafana, ResourceUsage, {
 
     viewK8sAuditLog() {
       const url = get(this, 'settings.auditlog-server-url') || '';
+      const key = 'provisioning.cattle.io/administrated';
+      let id = this.id;
+      const annotations = this.annotations || {}
 
-      this.router.transitionTo('global-admin.iframe.detail', `/meta/auditui/${ url.replace('//', '/') }#/k8s-audit-log/${ this.id }`, { queryParams: { ui: 'manager' } });
+      if (annotations[key] === 'true') {
+        id = this.name;
+      } else {
+        if ( this.id.startsWith('c-m-')) {
+          id = this.name;
+        }
+      }
+
+      this.router.transitionTo('global-admin.iframe.detail', `/meta/auditui/${ url.replace('//', '/') }#/k8s-audit-log/${ id }?clusterName=${ this.name }&clusterType=${ this.clusterProvider }`);
     }
   },
 
