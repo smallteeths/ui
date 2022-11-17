@@ -59,9 +59,9 @@ steps:
       from_secret: aws_access_id
     secret_key:
       from_secret: aws_access_secret
-    source: dist/static/release-2.6.9/**/*
-    strip_prefix: dist/static/release-2.6.9
-    target: /static-2-6/release-2.6.9
+    source: dist/static/release-2.7.0/**/*
+    strip_prefix: dist/static/release-2.7.0
+    target: /static-2-7/release-2.7.0
   when:
     branch:
     - 2.7.0-fixes-cn
