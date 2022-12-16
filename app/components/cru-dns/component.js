@@ -172,7 +172,7 @@ export default Component.extend(ViewNewEdit, ChildHook, {
   initKindChoices() {
     const loadBalancerCapabilites = get(this, 'capabilities.loadBalancerCapabilites');
 
-    if ( get(this, 'model.kind') === CLUSTER_IP && get(this, 'model.clusterIp') === null ) {
+    if ( get(this, 'model.kind') === CLUSTER_IP && (get(this, 'model.clusterIp') === null || (get(this, 'model.clusterIp') === 'None' && this.mode === 'new')) ) {
       set(this, 'kind', HEADLESS);
     } else if ( get(this, 'model.kind') ) {
       set(this, 'kind', get(this, 'model.kind'));
