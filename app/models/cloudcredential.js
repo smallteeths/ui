@@ -25,8 +25,9 @@ const cloudCredential = Resource.extend({
   isOCI:       notEmpty('ocicredentialConfig'),
   isPNAP:      notEmpty('pnapcredentialConfig'),
   isVMware:    notEmpty('vmwarevspherecredentialConfig'),
+  isTencent:   notEmpty('tkecredentialConfig'),
 
-  displayType: computed('aliyunecscredentialConfig', 'amazonec2credentialConfig', 'azurecredentialConfig', 'digitaloceancredentialConfig', 'harvestercredentialConfig', 'googlecredentialConfig', 'linodecredentialConfig', 'ocicredentialConfig', 'pnapcredentialConfig', 'vmwarevspherecredentialConfig', function() {
+  displayType: computed('aliyunecscredentialConfig', 'amazonec2credentialConfig', 'azurecredentialConfig', 'digitaloceancredentialConfig', 'harvestercredentialConfig', 'googlecredentialConfig', 'linodecredentialConfig', 'ocicredentialConfig', 'pnapcredentialConfig', 'vmwarevspherecredentialConfig', 'tkecredentialConfig', function() {
     const {
       isAlibaba,
       isAmazon,
@@ -37,7 +38,8 @@ const cloudCredential = Resource.extend({
       isOCI,
       isPNAP,
       isVMware,
-      isHarvester
+      isHarvester,
+      isTencent
     } = this;
 
     if (isAlibaba) {
@@ -60,6 +62,8 @@ const cloudCredential = Resource.extend({
       return 'VMware vSphere';
     } else if (isHarvester) {
       return 'Harvester'
+    } else if (isTencent) {
+      return 'Tencent'
     }
 
     return '';

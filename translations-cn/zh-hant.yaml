@@ -7117,6 +7117,7 @@ nodeDriver:
     rancherkubernetesengine: RKE
     tencent: Tencent TKE
     tencenttke: Tencent TKE
+    tkeoperatorsetting: 騰訊雲 TKE
     upcloud: UpCloud
     azureaksv2: Azure AKS
   driverOptions: "{driver}選項"
@@ -11559,6 +11560,13 @@ modalAddCloudKey:
     secretKey:
       label: Secret Key
       placeholder: 你的 ACK secret key
+  tke:
+    accessKeyId:
+      label: 訪問密鑰 ID
+      placeholder: 你的 騰訊雲 訪問密鑰 ID
+    accessKeySecret:
+      label: 訪問密鑰 Secret
+      placeholder: 你的 騰訊雲 訪問密鑰 Secret
   amazonec2:
     accessKey:
       label: Access Key

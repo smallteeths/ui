@@ -8497,6 +8497,13 @@ modalAddCloudKey:
     secretKey:
       label: Secret Key
       placeholder: 你的 ACK secret key
+  tke:
+    accessKeyId:
+      label: 訪問密鑰 ID
+      placeholder: 你的 騰訊雲 訪問密鑰 ID
+    accessKeySecret:
+      label: 訪問密鑰 Secret
+      placeholder: 你的 騰訊雲 訪問密鑰 Secret
   oci:
     authRegion:
       help: Any region your tenancy is subscribed to authenticate your credentials.
@@ -9074,6 +9081,7 @@ nodeDriver:
     rancherkubernetesengine: RKE
     softlayer: SoftLayer
     tencenttke: Tencent TKE
+    tkeoperatorsetting: 騰訊雲 TKE
     upcloud: UpCloud
     vmwarevsphere: vSphere
     zstack: ZStack

@@ -498,6 +498,8 @@ export default Resource.extend(Grafana, ResourceUsage, {
     switch ( get(this, 'configName') ) {
     case 'ackConfig':
       return 'ackoperatorsetting';
+    case 'tkeConfig':
+      return 'tkeoperatorsetting';
     case 'aliyunEngineConfig':
       return 'aliyun';
     case 'amazonElasticContainerServiceConfig':

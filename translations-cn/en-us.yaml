@@ -8950,6 +8950,13 @@ modalAddCloudKey:
     secretKey:
       label: Secret Key
       placeholder: Your ACK secret key
+  tke:
+    accessKeyId:
+      label: Access Key ID
+      placeholder: Your TKE Access Key ID
+    accessKeySecret:
+      label: Access Key Secret
+      placeholder: Your TKE Access Key Secret
 modalConfirmYaml2Form:
   header: "You are about to switch from yaml to form based editing"
   helpText: "Data loss may occur when switching back to form based editing. The following fields have been identified as fields that will be lost. Please note this list is not all-inclusive, you should verify your answers before saving the application. Please make sure you intended to switch or that you are okay losing the data before selecting confirm."
@@ -9527,6 +9534,7 @@ nodeDriver:
     rancherkubernetesengine: RKE
     softlayer: SoftLayer
     tencenttke: Tencent TKE
+    tkeoperatorsetting: Tencent TKE
     upcloud: UpCloud
     vmwarevsphere: vSphere
     zstack: ZStack

@@ -369,6 +369,36 @@
           }}
         </div>
       </div>
+    {{else if (eq cloudCredentialType "tencent")}}
+      <div class="row">
+        <div class="col span-6">
+          <label class="acc-label" for="tke-accessKeyId">
+            {{t "modalAddCloudKey.tke.accessKeyId.label"}}{{field-required}}
+          </label>
+          {{input
+            type="text"
+            name="username"
+            classNames="form-control"
+            placeholder=(t "modalAddCloudKey.tke.accessKeyId.placeholder")
+            value=config.accessKeyId
+            id="tke-accessKeyId"
+          }}
+        </div>
+
+        <div class="col span-6">
+          <label class="acc-label" for="tke-accessKeySecret">
+            {{t "modalAddCloudKey.tke.accessKeySecret.label"}}{{field-required}}
+          </label>
+          {{input
+            type="password"
+            name="password"
+            classNames="form-control"
+            placeholder=(t "modalAddCloudKey.tke.accessKeySecret.placeholder")
+            value=config.accessKeySecret
+            id="tke-accessKeySecret"
+          }}
+        </div>
+      </div>
     {{/if}}
   </div>
 

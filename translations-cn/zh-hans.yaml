@@ -4244,6 +4244,8 @@ clusterNew:
         label: Windows Admin 用户名
   aliyunack:
     shortLabel: Alibaba ACK
+  tencenttke:
+    shortLabel: Tencent TKE
   googlegke:
     label: Google Kubernetes 引擎
     shortLabel: Google GKE
@@ -8706,6 +8708,13 @@ modalAddCloudKey:
     secretKey:
       label: Secret Key
       placeholder: 你的 ACK secret key
+  tke:
+    accessKeyId:
+      label: 访问密钥 ID
+      placeholder: 你的 腾讯云 访问密钥 ID
+    accessKeySecret:
+      label: 访问密钥 Secret
+      placeholder: 你的 腾讯云 访问密钥 Secret
   pnap:
     clientIdentifier:
       label: Client ID
@@ -9294,6 +9303,7 @@ nodeDriver:
     softlayer: SoftLayer
     tencent: Tencent TKE
     tencenttke: Tencent TKE
+    tkeoperatorsetting: 腾讯云 TKE
     upcloud: UpCloud
     vmwarevsphere: vSphere
     zstack: ZStack
