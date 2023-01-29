@@ -31,7 +31,7 @@ steps:
     path: /var/run/docker.sock
   when:
     branch:
-    - 2.7.0-fixes-cn
+    - 2.7.1-fixes-cn
     event:
     - push
 
@@ -59,12 +59,12 @@ steps:
       from_secret: aws_access_id
     secret_key:
       from_secret: aws_access_secret
-    source: dist/static/release-2.7.0/**/*
-    strip_prefix: dist/static/release-2.7.0
-    target: /static-2-7/release-2.7.0
+    source: dist/static/release-2.7.1/**/*
+    strip_prefix: dist/static/release-2.7.1
+    target: /static-2-7/release-2.7.1
   when:
     branch:
-    - 2.7.0-fixes-cn
+    - 2.7.1-fixes-cn
     event:
     - push
 
