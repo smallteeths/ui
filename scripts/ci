@@ -34,7 +34,7 @@ fi
 
 if [[ "${BUILD_LATEST}" == "true" ]]; then
   echo "Building latest..."
-  #./scripts/build-static -l -v latest-2.7.0
+  #./scripts/build-static -l -v latest-2.7.1
   ./scripts/build-static -l -c 'pandaria-ui.s3-ap-northeast-1.amazonaws.com/static-2-7'
   # (build-static contains a call to test & build)
 elif [[ "${BUILD_TAG}" == "true" ]]; then
