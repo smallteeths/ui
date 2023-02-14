@@ -1432,6 +1432,11 @@ clusterTemplatesPage:
   index:
     header: RKE Templates
     newTemplate: Add Template
+  compare:
+    label: Compare
+    header: Compare RKE Template Revisions
+    closeModal: Close
+    error: Two RKE Template Revisions required to perform diff
   new:
     header: Add RKE Template
   headers:
@@ -3142,7 +3147,8 @@ authorizedEndpoint:
   enabled:
     label: Authorized Cluster Endpoint
   fqdn:
-    label: FQDN
+    label: Endpoint
+    invalid: Authorized Cluster Endpoint is invalid
 
 taintsSection:
   title: Taints
@@ -4464,11 +4470,16 @@ clusterNew:
       required: Kubernetes Version is required
   otccce:
     shortLabel: Open Telekom Cloud CCE
+  psa:
+    label: Pod Security Admission Configuration Template
   psp:
     label: Default Pod Security Policy
     none: No policies are defined
     prompt: Select a Pod Security Policy...
     required: A Default Pod Security Policy is required when support is enabled.
+    unsupported: Pod security policies are not supported in the version selected; please disable PSP support and consider using the built-in Pod Security Admission Controller instead.
+    deleteBeforeUpgrade: The PSP resources in this cluster will be unreachable upon upgrade; please delete them before proceeding.
+    supportRemoved: Pod Security Policy support has been deprecated as of kubernetes version v1.21.0 and removed as of v1.25.0.
   rancherd:
     shortLabel: RancherD
   register:
@@ -7854,6 +7865,9 @@ nodeGroupRow:
     label: Minimum ASG Size
   name:
     label: Node Group Name
+  nodeInstanceRole:
+    label: Node Instance Role
+    defaultOption: Default (a role will be created automatically)
   nodeVolumeSize:
     label: Node Volume Size
     placeholder: e.g. 20
@@ -9516,6 +9530,7 @@ nodeDriver:
       label: Disk Size
       placeholder: e.g. 30
     managedDisks:
+      warning: StandardSSD_LRS requires managed disks. Please change the Disk Type to Managed Disk or select another storage type.
       label: Disk Type
       unmanaged: Unmanaged Disk
       managed: Managed Disk
@@ -9532,7 +9547,14 @@ nodeDriver:
       label: Purchase Plan
       placeholder: publisher:product:plan
     size:
-      label: Size
+      label: VM Size
+      tooltip: When accelerated networking is enabled, not all sizes are available.
+      supportsAcceleratedNetworking: Sizes that Support Accelerated Networking
+      doesNotSupportAcceleratedNetworking: Sizes Without Accelerated Networking
+      availabilityWarning: The selected VM size is not available in the selected region.
+      regionDoesNotSupportAzs: Availability zones are not supported in the selected region. Please select a different region or use an availability set instead.
+      regionSupportsAzsButNotThisSize: The selected region does not support availability zones for the selected VM size. Please select a different region or VM size.
+      selectedSizeAcceleratedNetworkingWarning: The selected VM size does not support accelerated networking. Please select another VM size or disable accelerated networking.
     dockerPort:
       label: Docker Port
       placeholder: '2376'
@@ -9559,9 +9581,17 @@ nodeDriver:
     subnetPrefix:
       label: Subnet Prefix
       placeholder: 128.42.0.0/21
+    acceleratedNetworking:
+      label: Accelerated Networking
+      tooltip: Accelerated networking is only supported for certain VM sizes.
     availabilitySet:
       label: "Availability Set ({type})"
       placeholder: availability-set-name
+      description: Availability sets are used to protect applications from hardware failures within an Azure data center.
+      sectionTitle: Availability Set Config
+    availabilityZone:
+      label: Availability Zone
+      description: Availability zones protect applications from complete Azure data center failures.
     openPort:
       label: Open Port
       placeholder: 'Comma-separated, e.g. 80,443'
@@ -9587,6 +9617,8 @@ nodeDriver:
       placeholder: "e.g. AllowVnetOutBound"
       helpText: When using a Rancher managed or providing an existing NSG, all nodes using this template will use the supplied NSG. If no NSG is provided, a new NSG will be created for each node.
       openPorts: When using an existing NSG, Open Ports are ignored.
+    tags:
+      addActionLabel: Add Azure Tags
   aliyunecs:
     accountSection:
       label: 1. Account Access
@@ -9741,11 +9773,13 @@ nodeDriver:
       placeholder: 'select cloud credential to populate options...'
   harvester:
     cluster:
-      label: Cluster
-      kubeconfig: KubeconfigContent
+      label: Imported Harvester Cluster
     imageName:
       label: Image
       placeholder: Please select a image
+    storageClass:
+      label: Storage Class
+      placeholder: Please select a storageClass
     diskBus:
       label: Bus
     access:
@@ -9765,11 +9799,13 @@ nodeDriver:
     username:
       label: Username
     imported: Imported Harvester
-    external: External Harvester (Experimental)
     sshUser:
       label: SSH User
       placeholder: e.g. ubuntu
       toolTip: SSH user to login with the selected OS image.
+    macAddress:
+      label: Mac Address
+      toolTip: MAC address as seen inside the guest system.
     networkName:
       label: Network Name
       placeholder: Please select a network
@@ -9786,6 +9822,22 @@ nodeDriver:
     namespace:
       label: Namespace
       placeholder: e.g. default
+    disks:
+      title: Volumes
+      diskType:
+        volume: Volume
+        imageVolume: Image Volume
+      bootOrder:
+        label: bootOrder
+      addVolume:
+        volume: Add Volume
+        imageVolume: Add Image Volume
+    network:
+      title: Networks
+      label: Network
+      macFormat: 'Invalid MAC address format.'
+      addNetwork:
+        network: Add Network
     diskSize:
       label: Disk
       unit: GiB
