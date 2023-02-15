@@ -1540,6 +1540,11 @@ clusterTemplatesPage:
     label: 从模板修订克隆
   table:
     name: 修订版本名称
+  compare:
+    closeModal: 关闭
+    error: 需要对 RKE 模板进行两次修订，以进行差异化操作
+    header: 对比 RKE 模板的 Revisions
+    label: 对比
 ingressPage:
   header: 'Ingress: {name}'
   gkeIngressWarning: 'Kubernetes Engine 可能需要几分钟才能分配外部 IP 地址并准备负载均衡器。与此同时，您可能会收到 HTTP 404 和 HTTP 500 等错误，直到负载平衡器准备好为流量提供服务。'
@@ -3609,7 +3614,8 @@ authorizedEndpoint:
   enabled:
     label: '此地址必须是能够访问 k8s api-server 的域名或者 IP。在 Rancher Server 不可用时，可使用包含此地址的 kubecfg 文件，通过命令 kubectl --context 直接访问 k8s 集群。'
   fqdn:
-    label: FQDN（此域名和右侧的 CA 证书可不用填写）
+    label: 端点
+    invalid: 授权的集群端点是无效的
 taintsSection:
   title: Taints
   detail: 通过向节点添加 taints 和 tolerations，确保工作负载只在适当的节点上运行。
@@ -3841,6 +3847,9 @@ clusterNew:
     prompt: 选择 Pod 安全策略...
     none: 没有配置策略
     required: 启用时需要设置默认 Pod 安全策略
+    deleteBeforeUpgrade: 该集群中的PSP资源在升级后将无法访问，请在继续进行之前删除它们。
+    supportRemoved: 从 kubernetes v1.21.0 版本开始，Pod 安全策略支持已被废弃，将在 v1.25.0 版本中移除。
+    unsupported: 选择的版本中不支持Pod安全策略；请禁用PSP支持，并考虑使用内置的Pod安全准入控制器替代。
   amazoneks:
     errors:
       clusterSpec: '无法解析集群上游规范。 集群准备好了吗？'
@@ -5098,6 +5107,8 @@ clusterNew:
   nodePools:
     errors:
       hostnamePrefix: 节点池必须有唯一的名称前缀
+  psa:
+    label: Pod 安全准入配置模板
 clusterTemplateNew:
   members:
     label: 成员角色
@@ -6371,7 +6382,7 @@ dangerZone:
     'ingress-ip-domain': '用于自动生成 Ingress 主机名的通配域名。<code><入口名>.<命名空间名>.<入口控制器的 IP 地址> </code>将被添加到域名中。'
     'rdns-base-url': '配置 RDNS 服务地址。'
     'server-url': '默认的 {appName} Server 访问地址，必须是 HTTPS。集群中的所有主机都必须能够访问此地址。'
-    'system-default-registry': '用于 RKE 部署系统服务时镜像的拉取，其他服务拉取镜像不生效。'
+    'system-default-registry': '用于所有系统容器镜像的私有仓库。'
     'ui-index': 'UI HTML 索引位置。'
     'ui-pl': '企业名称专用标签。'
     'ui-issues': "使用一个 url 地址发送新的 'File an Issue' 报告，而不是将用户发送到 Github Issue 页面。"
@@ -7227,6 +7238,7 @@ formNameDescription:
   name:
     label: 名称
     placeholder: 名称
+    underscoreError: 名称不能包含下划线字符
   description:
     label: 描述
     placeholder: 描述
@@ -8129,6 +8141,9 @@ nodeGroupRow:
     help: "使用 <a href='https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html#launch-template-user-data' target='_blank'>cloud-init</a> 将用户数据传递给 Amazon，以实现常见操作的自动化。"
     label: 用户数据
     placeholder: 粘贴在脚本中
+  nodeInstanceRole:
+    defaultOption: 默认（将自动创建一个角色）
+    label: 节点实例角色
 uploadFile:
   label: 从文件读取
 podsSection:
@@ -9774,6 +9789,7 @@ nodeDriver:
       unmanaged: 非托管的磁盘
       managed: 托管的磁盘
       helpText: "创建一个 {type} 可用性集。在创建可用性集后更改此值可能会导致错误。"
+      warning: StandardSSD_LRS 需要托管磁盘。请将磁盘类型改为托管磁盘或选择其他存储类型。
     updateDomainCount:
       label: 更新域计数
       placeholder: '例如: 5'
@@ -9783,7 +9799,14 @@ nodeDriver:
       placeholder: '例如: 3'
       helpText: 如果已经创建了可用性集，则将忽略故障域计数。
     size:
-      label: 规格
+      label: 虚拟机规格
+      availabilityWarning: 所选的虚拟机规格在所选地区不可用。
+      doesNotSupportAcceleratedNetworking: 没有加速网络规格
+      regionDoesNotSupportAzs: 所选地区不支持可用 Zone。请选择一个不同的地区或使用一个可用性集来代替。
+      regionSupportsAzsButNotThisSize: 所选地区不支持所选虚拟机规格的可用 Zone。请选择一个不同的地区或虚拟机规格。
+      selectedSizeAcceleratedNetworkingWarning: 所选的虚拟机规格不支持加速网络。请选择另一种虚拟机规格或禁用加速网络。
+      supportsAcceleratedNetworking: 支持加速联网的规格
+      tooltip: 当启用加速网络时，并非所有规格都可用。
     dockerPort:
       label: Docker 端口
       placeholder: '2376'
@@ -9813,6 +9836,8 @@ nodeDriver:
     availabilitySet:
       label: 可用性集
       placeholder: 可用集名称
+      description: 可用性集被用来保护应用程序免受 Azure 数据中心内硬件故障的影响。
+      sectionTitle: 可用性设置配置
     openPort:
       label: 开放端口
       placeholder: '使用逗号分隔符，例如: 80，443'
@@ -9841,6 +9866,14 @@ nodeDriver:
     plan:
       label: 购买计划
       placeholder: publisher:product:plan
+    acceleratedNetworking:
+      label: 加速网络
+      tooltip: 加速网络只支持部分规格的虚拟机。
+    availabilityZone:
+      description: 可用 Zone 保护应用程序免受 Azure 数据中心完全故障的影响。
+      label: 可用 Zone
+    tags:
+      addActionLabel: 添加 Azure 标签
   aliyunecs:
     accountSection:
       label: 1. 访问令牌
@@ -9947,7 +9980,7 @@ nodeDriver:
       nameNotValidForApp: The name is invalid according to the {appName} hostname rule.
   harvester:
     cluster:
-      label: 集群
+      label: 已导入的 Harvester 集群
       kubeconfig: Kubeconfig文件
     imageName:
       label: 镜像
@@ -10030,6 +10063,28 @@ nodeDriver:
           PodInNs: 这些命名空间中的 Pod
           podsNs: 此 Pod 的命名空间
           tips: 例如：default,system,base
+    disks:
+      addVolume:
+        imageVolume: 添加镜像卷
+        volume: 添加卷
+      bootOrder:
+        label: 启动顺序
+      diskType:
+        imageVolume: 镜像卷
+        volume: 卷
+      title: 卷
+    macAddress:
+      label: Mac  地址
+      toolTip: 在客户系统内看到的 MAC 地址。
+    network:
+      addNetwork:
+        network: 添加网络
+      label: 网络
+      macFormat: 无效的 MAC 地址格式。
+      title: 网络
+    storageClass:
+      label: 存储类
+      placeholder: 请选择一个 storageClass
   oci:
     placement:
       title: Placement

@@ -2649,6 +2649,9 @@ clusterNew:
     prompt: 選擇 Pod 安全策略...
     none: 沒有配置策略
     required: 啟用時需要設置默認 Pod 安全策略
+    deleteBeforeUpgrade: 該集羣中的PSP資源在升級後將無法訪問，請在繼續進行之前刪除它們。
+    supportRemoved: 從 kubernetes v1.21.0 版本開始，Pod 安全策略支持已被廢棄，將在 v1.25.0 版本中移除。
+    unsupported: 選擇的版本中不支持Pod安全策略；請禁用PSP支持，並考慮使用內置的Pod安全准入控制器替代。
   amazoneks:
     label: 為 Kubernetes 提供的 Amazon 彈性容器服務
     shortLabel: Amazon EKS
@@ -3914,6 +3917,8 @@ clusterNew:
   nodePools:
     errors:
       hostnamePrefix: 節點池必須有唯一的名稱前綴
+  psa:
+    label: Pod 安全准入配置模板
 conditionSections:
   title: 狀態
   detail: '當前{resourceType}運行狀態'
@@ -4757,7 +4762,7 @@ dangerZone:
     'ingress-ip-domain': '用於自動生成 Ingress 主機名的通配域名。<code><入口名>.<命名空間名>.<入口控制器的 IP 地址> </code>將被添加到域名中。'
     'rdns-base-url': '配置 RDNS 服務地址。'
     'server-url': '默認的 {appName} Server 訪問地址，必須是 HTTPS。集羣中的所有主機都必須能夠訪問此地址。'
-    'system-default-registry': '用於 RKE 部署系統服務時鏡像的拉取，其他服務拉取鏡像不生效。'
+    'system-default-registry': '用於所有系統容器鏡像的私有倉庫。'
     'auditlog-server-url': '配置審計日誌服務地址。'
     'ui-index': 'UI HTML 索引位置。'
     'ui-pl': '企業名稱專用標籤。'
@@ -5560,6 +5565,7 @@ formNameDescription:
   name:
     label: 名稱
     placeholder: 名稱
+    underscoreError: 名稱不能包含下劃線字符
   description:
     label: 描述
     placeholder: 描述
@@ -7605,7 +7611,14 @@ nodeDriver:
       placeholder: '推薦:UbuntuServer:16.04.0-LTS:latest'
       helpText: 提供 ARM 資源標識符需要使用托管磁盤。
     size:
-      label: 規格
+      label: 虛擬機規格
+      availabilityWarning: 所選的虛擬機規格在所選地區不可用。
+      doesNotSupportAcceleratedNetworking: 沒有加速網絡規格
+      regionDoesNotSupportAzs: 所選地區不支持可用 Zone。請選擇一個不同的地區或使用一個可用性集來代替。
+      regionSupportsAzsButNotThisSize: 所選地區不支持所選虛擬機規格的可用 Zone。請選擇一個不同的地區或虛擬機規格。
+      selectedSizeAcceleratedNetworkingWarning: 所選的虛擬機規格不支持加速網絡。請選擇另一種虛擬機規格或禁用加速網絡。
+      supportsAcceleratedNetworking: 支持加速聯網的規格
+      tooltip: 當啓用加速網絡時，並非所有規格都可用。
     dockerPort:
       label: Docker端口
       placeholder: '2376'
@@ -7635,6 +7648,8 @@ nodeDriver:
     availabilitySet:
       label: 可用性集
       placeholder: 可用集名稱
+      description: 可用性集被用來保護應用程序免受 Azure 數據中心內硬件故障的影響。
+      sectionTitle: 可用性設置配置
     openPort:
       label: 開放端口
       placeholder: '使用逗號分隔符，例如: 80，443'
@@ -7667,6 +7682,7 @@ nodeDriver:
       label: 磁盤類型
       managed: 託管的磁盤
       unmanaged: 非託管的磁盤
+      warning: StandardSSD_LRS 需要託管磁盤。請將磁盤類型改爲託管磁盤或選擇其他存儲類型。
     nsg:
       helpText: 當使用一個由 Rancher 管理的或提供一個現有的 NSG 時，使用此模板的所有節點將使用提供的 NSG。如果沒有提供 NSG，將為每個節點創建一個新的 NSG。
       label: 網絡安全組
@@ -7679,6 +7695,14 @@ nodeDriver:
     plan:
       label: 購買計劃
       placeholder: publisher:product:plan
+    acceleratedNetworking:
+      label: 加速網絡
+      tooltip: 加速網絡只支持部分規格的虛擬機。
+    availabilityZone:
+      description: 可用 Zone 保護應用程序免受 Azure 數據中心完全故障的影響。
+      label: 可用 Zone
+    tags:
+      addActionLabel: 添加 Azure 標籤
   aliyunecs:
     accountSection:
       label: 1. 訪問令牌
@@ -7945,7 +7969,7 @@ nodeDriver:
       title: 3. 高級配置
     cluster:
       kubeconfig: Kubeconfig文件
-      label: 集羣
+      label: 已導入的 Harvester 集羣
     diskBus:
       label: 磁盤 Bus
     external: 外部的 Harvester (實驗)
@@ -7996,6 +8020,28 @@ nodeDriver:
           PodInNs: 這些命名空間中的 Pod
           podsNs: 此 Pod 的命名空間
           tips: 例如：default,system,base
+    disks:
+      addVolume:
+        imageVolume: 添加鏡像卷
+        volume: 添加捲
+      bootOrder:
+        label: 啓動順序
+      diskType:
+        imageVolume: 鏡像卷
+        volume: 卷
+      title: 卷
+    macAddress:
+      label: Mac  地址
+      toolTip: 在客戶系統內看到的 MAC 地址。
+    network:
+      addNetwork:
+        network: 添加網絡
+      label: 網絡
+      macFormat: 無效的 MAC 地址格式。
+      title: 網絡
+    storageClass:
+      label: 存儲類
+      placeholder: 請選擇一個 storageClass
 newConfigMap:
   title:
     new: 添加ConfigMap
@@ -9303,7 +9349,8 @@ authorizedEndpoint:
   enabled:
     label: 此地址必須是能夠訪問 k8s api-server 的域名或者 IP。在 Rancher Server 不可用時，可使用包含此地址的 kubecfg 文件，通過命令 kubectl --context 直接訪問 k8s 集羣。
   fqdn:
-    label: FQDN（此域名和右側的 CA 證書可不用填寫）
+    label: 端點
+    invalid: 授權的集羣端點是無效的
 backupsPage:
   detail: 如果啟用 etcd 備份功能，將按照預先配置的時間間隔週期來獲取集羣快照，可用於集羣災難恢復。
   header: Etcd 備份
@@ -9632,6 +9679,11 @@ clusterTemplatesPage:
     label: 從模板修訂克隆
   table:
     name: 修訂版本名稱
+  compare:
+    closeModal: 關閉
+    error: 需要對 RKE 模板進行兩次修訂，以進行差異化操作
+    header: 對比 RKE 模板的 Revisions
+    label: 對比
 containersSection:
   detail: Pod 中的容器
   initContainer: Init 容器
@@ -11908,6 +11960,9 @@ nodeGroupRow:
     label: Kubernetes 版本
     upgrade: 將節點組版本從 {from} 升級到 {version}。
     warning: 選擇了一個新的集羣版本。一旦完成，您可以返回並升級節點組版本。
+  nodeInstanceRole:
+    defaultOption: 默認（將自動創建一個角色）
+    label: 節點實例角色
 pipelineNotification:
   asMessage: 發送信息到
   condition:

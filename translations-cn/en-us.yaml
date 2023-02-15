@@ -1542,6 +1542,11 @@ clusterTemplatesPage:
     label: Clone from RKE Template Revision
   table:
     name: Revision Name
+  compare:
+    closeModal: Close
+    error: Two RKE Template Revisions required to perform diff
+    header: Compare RKE Template Revisions
+    label: Compare
 ingressPage:
   header: 'Ingress: {name}'
   gkeIngressWarning: 'It may take a few minutes for Kubernetes Engine to allocate an external IP address and prepare the load balancer. In the meanwhile, you may get errors like HTTP 404 and HTTP 500 until the load balancer is ready to serve the traffic.'
@@ -3611,7 +3616,8 @@ authorizedEndpoint:
   enabled:
     label: Authorized Cluster Endpoint
   fqdn:
-    label: FQDN
+    label: Endpoint
+    invalid: Authorized Cluster Endpoint is invalid
 taintsSection:
   title: Taints
   detail: Ensure workloads only run on appropriate nodes by adding taints to nodes and tolerations to workloads
@@ -4933,6 +4939,9 @@ clusterNew:
     none: No policies are defined
     prompt: Select a Pod Security Policy...
     required: A Default Pod Security Policy is required when support is enabled.
+    deleteBeforeUpgrade: The PSP resources in this cluster will be unreachable upon upgrade; please delete them before proceeding.
+    supportRemoved: Pod Security Policy support has been deprecated as of kubernetes version v1.21.0 and removed as of v1.25.0.
+    unsupported: Pod security policies are not supported in the version selected; please disable PSP support and consider using the built-in Pod Security Admission Controller instead.
   rancherd:
     shortLabel: RancherD
   register:
@@ -5326,6 +5335,8 @@ clusterNew:
   nodePools:
     errors:
       hostnamePrefix: Node pools must have unique name prefixes
+  psa:
+    label: Pod Security Admission Configuration Template
 clusterTemplateNew:
   members:
     label: Member Roles
@@ -6599,7 +6610,7 @@ dangerZone:
     'ingress-ip-domain': 'Wildcard DNS domain to use for automatically generated Ingress hostnames. <ingress-name>.<namespace-name>.<ip address of ingress controller> will be added to the domain.'
     'rdns-base-url': 'Configure the rdns service url.'
     'server-url': 'Default {appName} install url. Must be HTTPS. All nodes in your cluster must be able to reach this.'
-    'system-default-registry': 'Private registry to be used for all system Docker images.'
+    'system-default-registry': 'Private registry to be used for all system container images.'
     'ui-index': 'HTML index location for the Cluster Manager UI.'
     'ui-dashboard-index': 'HTML index location for the Cluster Explorer UI.'
     'ui-offline-preferred': "Controls whether UI assets are served locally by the server container or from the remote URL defined in the ui-index and ui-dashboard-index settings."
@@ -7477,6 +7488,7 @@ formNameDescription:
   name:
     label: Name
     placeholder: Name
+    underscoreError: Name can not contain the underscore character
   description:
     label: Description
     placeholder: Description
@@ -8379,6 +8391,9 @@ nodeGroupRow:
     label: Kubernetes Version
     upgrade: 'Upgrade Node Version from { from } to { version }'
     warning: A new cluster version has been selected. Once completed you may come back and upgrade the node version.
+  nodeInstanceRole:
+    defaultOption: Default (a role will be created automatically)
+    label: Node Instance Role
 uploadFile:
   label: Read from File
 podsSection:
@@ -10008,6 +10023,7 @@ nodeDriver:
       unmanaged: Unmanaged Disk
       managed: Managed Disk
       helpText: "Creates a {type} availability set. Changing this value after the availability set has been created may cause errors."
+      warning: StandardSSD_LRS requires managed disks. Please change the Disk Type to Managed Disk or select another storage type.
     updateDomainCount:
       label: Update Domain Count
       placeholder: e.g. 5
@@ -10017,7 +10033,14 @@ nodeDriver:
       placeholder: e.g. 3
       helpText: If the availability set has already been created, the fault domain count will be ignored.
     size:
-      label: Size
+      label: VM Size
+      availabilityWarning: The selected VM size is not available in the selected region.
+      doesNotSupportAcceleratedNetworking: Sizes Without Accelerated Networking
+      regionDoesNotSupportAzs: Availability zones are not supported in the selected region. Please select a different region or use an availability set instead.
+      regionSupportsAzsButNotThisSize: The selected region does not support availability zones for the selected VM size. Please select a different region or VM size.
+      selectedSizeAcceleratedNetworkingWarning: The selected VM size does not support accelerated networking. Please select another VM size or disable accelerated networking.
+      supportsAcceleratedNetworking: Sizes that Support Accelerated Networking
+      tooltip: When accelerated networking is enabled, not all sizes are available.
     dockerPort:
       label: Docker Port
       placeholder: '2376'
@@ -10047,6 +10070,8 @@ nodeDriver:
     availabilitySet:
       label: "Availability Set ({type})"
       placeholder: availability-set-name
+      description: Availability sets are used to protect applications from hardware failures within an Azure data center.
+      sectionTitle: Availability Set Config
     openPort:
       label: Open Port
       placeholder: 'Comma-separated, e.g. 80,443'
@@ -10075,6 +10100,14 @@ nodeDriver:
     plan:
       label: Purchase Plan
       placeholder: publisher:product:plan
+    acceleratedNetworking:
+      label: Accelerated Networking
+      tooltip: Accelerated networking is only supported for certain VM sizes.
+    availabilityZone:
+      description: Availability zones protect applications from complete Azure data center failures.
+      label: Availability Zone
+    tags:
+      addActionLabel: Add Azure Tags
   aliyunecs:
     accountSection:
       label: 1. Account Access
@@ -10229,7 +10262,7 @@ nodeDriver:
       placeholder: 'select cloud credential to populate options...'
   harvester:
     cluster:
-      label: Cluster
+      label: Imported Harvester Cluster
       kubeconfig: KubeconfigContent
     imageName:
       label: Image
@@ -10312,6 +10345,28 @@ nodeDriver:
           PodInNs: 'Pods in these namespaces:'
           podsNs: This pod's namespace
           tips: e.g. default,system,base
+    disks:
+      addVolume:
+        imageVolume: Add Image Volume
+        volume: Add Volume
+      bootOrder:
+        label: bootOrder
+      diskType:
+        imageVolume: Image Volume
+        volume: Volume
+      title: Volumes
+    macAddress:
+      label: Mac Address
+      toolTip: MAC address as seen inside the guest system.
+    network:
+      addNetwork:
+        network: Add Network
+      label: Network
+      macFormat: Invalid MAC address format.
+      title: Networks
+    storageClass:
+      label: Storage Class
+      placeholder: Please select a storageClass
   pnap:
     access:
       title: Account Access

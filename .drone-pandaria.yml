@@ -9,7 +9,7 @@ platform:
 steps:
 - name: test
   pull: default
-  image: rancher/dapper:v0.4.1
+  image: rancher/dapper:v0.6.0
   commands:
   - dapper ci
   privileged: true
@@ -22,7 +22,7 @@ steps:
 
 - name: build
   pull: default
-  image: rancher/dapper:v0.4.1
+  image: rancher/dapper:v0.6.0
   commands:
   - BUILD_LATEST=true dapper ci
   privileged: true
@@ -31,13 +31,13 @@ steps:
     path: /var/run/docker.sock
   when:
     branch:
-    - 2.7.1-fixes-cn
+    - 2.7.2-fixes-cn
     event:
     - push
 
 - name: build-tag
   pull: default
-  image: rancher/dapper:v0.4.1
+  image: rancher/dapper:v0.6.0
   commands:
   - BUILD_TAG=true dapper ci
   privileged: true
@@ -64,7 +64,7 @@ steps:
     target: /static-2-7/release-2.7.1
   when:
     branch:
-    - 2.7.1-fixes-cn
+    - 2.7.2-fixes-cn
     event:
     - push
 
