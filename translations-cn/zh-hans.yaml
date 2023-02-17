@@ -5077,6 +5077,7 @@ clusterNew:
         label: Kube Proxy Mode
     agentEnvVars:
       label: 代理环境变量
+      tips: '如果需要通过 HTTP(S) 代理连接到外部服务，可以设置如下环境变量: HTTP_PROXY, HTTPS_PROXY, NO_PROXY。例如：'
   rkeWindows:
     shortLabel: Windows
   register:

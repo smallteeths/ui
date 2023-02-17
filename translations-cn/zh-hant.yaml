@@ -3615,6 +3615,7 @@ clusterNew:
         placeholder: "例如: 1024"
     agentEnvVars:
       label: 代理環境變量
+      tips: '如果需要通過 HTTP(S) 代理連接到外部服務，可以設置如下環境變量: HTTP_PROXY, HTTPS_PROXY, NO_PROXY。例如：'
     authorizedEndpoint:
       detail: 授權集羣訪問地址可用於直接訪問 Kubernetes API SERVER，繞過 Rancher API 代理。
       label: 授權集羣訪問地址

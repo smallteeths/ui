@@ -4753,6 +4753,7 @@ clusterNew:
       label: 授權叢集訪問地址
     agentEnvVars:
       label: 代理環境變量
+      tips: '如果需要通過 HTTP(S) 代理連接到外部服務，可以設置如下環境變量: HTTP_PROXY, HTTPS_PROXY, NO_PROXY。例如：'
     clusterTempalteMissing: 啟用了 Cluster Template Enforcement，您無法訪問編輯此叢集所需的模板。請與管理員聯繫。
     gpu:
       enableGPUManagement:

@@ -4971,6 +4971,7 @@ clusterNew:
       label: Advanced Options
     agentEnvVars:
       label: Agent Environment Variables
+      tips: 'If you need to connect to an external service through the HTTP(S) proxy, you can set the following environment variables: HTTP_PROXY, HTTPS_PROXY and NO_PROXY. For example:'
     auth:
       label: Auth Provider
       x509: x509

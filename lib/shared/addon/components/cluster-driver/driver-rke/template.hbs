@@ -1324,6 +1324,12 @@
               <label class="acc-label">
                 {{t "clusterNew.rke.agentEnvVars.label"}}
               </label>
+              <BannerMessage @color="bg-info">
+                {{t "clusterNew.rke.agentEnvVars.tips"}}
+                {{marked-down
+                  markdown=agentEnvVarsTips
+                }}
+              </BannerMessage>
               <FormAgentEnvVar
                 @editable={{notView}}
                 @value={{mut agentEnvVars}}
