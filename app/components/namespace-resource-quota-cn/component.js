@@ -67,7 +67,9 @@ export default Component.extend({
       }
     });
 
-    this.sendAction('changed', Object.keys(out).length ? out : null);
+    if (this.changed) {
+      this.changed(Object.keys(out).length ? out : null);
+    }
     this.updateLimits();
   }),
 
@@ -168,7 +170,7 @@ export default Component.extend({
         case 'limitsCpu':
         case 'requestsCpu':
           value     = convertToMillis(value);
-          usedValue = convertToMillis(projectUse);
+          usedValue = convertToMillis(new String(['k', 'M', 'G'].includes(projectUse[projectUse.length - 1]) ? this.convertToDec(projectUse) : projectUse));
           max       = convertToMillis(get(currentProjectLimit, key));
           break;
         case 'limitsMemory':
