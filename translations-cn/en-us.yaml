@@ -10024,6 +10024,7 @@ nodeDriver:
       managed: Managed Disk
       helpText: "Creates a {type} availability set. Changing this value after the availability set has been created may cause errors."
       warning: StandardSSD_LRS requires managed disks. Please change the Disk Type to Managed Disk or select another storage type.
+      tooltip: The Disk Type must be Managed when using an Availability Zone
     updateDomainCount:
       label: Update Domain Count
       placeholder: e.g. 5
@@ -10082,6 +10083,7 @@ nodeDriver:
       label: Use Private IP To Connect
     staticPublicIp:
       label: Public IP
+      tooltip: The Public IP must be Static when using an Availability Zone
     noPublicIp:
       label: No Public IP
     clientId:
@@ -10108,6 +10110,9 @@ nodeDriver:
       label: Availability Zone
     tags:
       addActionLabel: Add Azure Tags
+    useStandardSKU:
+      label: Use a Standard SKU for the Public IP
+      tooltip: The Standard Public IP SKU must be enabled when using an Availability Zone
   aliyunecs:
     accountSection:
       label: 1. Account Access

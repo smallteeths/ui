@@ -9790,6 +9790,7 @@ nodeDriver:
       managed: 托管的磁盘
       helpText: "创建一个 {type} 可用性集。在创建可用性集后更改此值可能会导致错误。"
       warning: StandardSSD_LRS 需要托管磁盘。请将磁盘类型改为托管磁盘或选择其他存储类型。
+      tooltip: 当使用可用 Zone 时，磁盘类型必须是托管的
     updateDomainCount:
       label: 更新域计数
       placeholder: '例如: 5'
@@ -9848,6 +9849,7 @@ nodeDriver:
       label: 使用私有 IP 连接
     staticPublicIp:
       label: 公网 IP
+      tooltip: 使用可用 Zone 时，公共 IP 必须是静态的。
     noPublicIp:
       label: 无公网 IP
     clientId:
@@ -9874,6 +9876,9 @@ nodeDriver:
       label: 可用 Zone
     tags:
       addActionLabel: 添加 Azure 标签
+    useStandardSKU:
+      label: 为公共 IP 使用一个标准的 SKU
+      tooltip: 在使用可用 Zone 时，必须启用标准公共 IP SKU
   aliyunecs:
     accountSection:
       label: 1. 访问令牌
