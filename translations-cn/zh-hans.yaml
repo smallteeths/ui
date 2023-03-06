@@ -505,23 +505,23 @@ alertPage:
     reset: 重置配置
 podSecurityPoliciesPage:
   index:
-    header: Pod 安全策略
+    header: Pod 安全策略模板
     description: 将策略应用于由具有此角色的用户创建的 Pod。
     table:
       name: 名称
       created: 创建时间
-      noData: 未配置 Pod 安全策略
-      noMatch: 没有与当前搜索匹配的 Pod 安全策略。
-  addPodSecurityPolicy: 添加策略
-  editPodSecurityPolicy: 编辑策略
+      noData: 没有定义 Pod 安全策略模板
+      noMatch: 没有 Pod 安全策略模板与当前搜索相匹配
+  addPodSecurityPolicy: 添加策略模板
+  editPodSecurityPolicy: 编辑策略模板
   detail:
-    header: 策略
+    header: 策略模板
   saveEdit: 编辑
   saveNew: 创建
   new:
     errors:
       nameReq: 名称 (必填)
-      nameInExists: 名称已存在，请使用新的 Pod 安全策略名称。
+      nameInExists: 名称已经存在。请使用一个新的 Pod 安全策略模板名称。
     form:
       name:
         labelText: 名称
@@ -3849,7 +3849,9 @@ clusterNew:
     required: 启用时需要设置默认 Pod 安全策略
     deleteBeforeUpgrade: 该集群中的PSP资源在升级后将无法访问，请在继续进行之前删除它们。
     supportRemoved: 从 kubernetes v1.21.0 版本开始，Pod 安全策略支持已被废弃，将在 v1.25.0 版本中移除。
-    unsupported: 选择的版本中不支持Pod安全策略；请禁用PSP支持，并考虑使用内置的Pod安全准入控制器替代。
+    unsupported: 选择的版本不支持 Pod 安全策略；请禁用 PSP 支持，使用 PodSecurity Admission 代替。
+    deprecatedInfoBanner: 从 Kubernetes v1.21 开始，Pod 安全策略已被废弃，并在 Kubernetes v1.25 中被删除。
+    removedInfoBanner: Kubernetes v1.25 中已经删除了 Pod 安全策略，请使用 PodSecurity Admission 代替。
   amazoneks:
     errors:
       clusterSpec: '无法解析集群上游规范。 集群准备好了吗？'
@@ -4775,6 +4777,10 @@ clusterNew:
       empty: 没有节点池
       countError: 所有节点数量必须大于0。
       placeholder: 请选择要添加的节点类型
+    highAvailability:
+      label: 高可用性
+      month: 月
+      warning: 一旦集群被升级到高可用性，就不能再降级了。
   otccce:
     shortLabel: Open Telekom Cloud CCE
   rancherd:
@@ -8178,6 +8184,11 @@ managedImportClusterInfo:
   drainWorkerNodes: 驱散 Worker 节点
   error:
     int: 并发数必须是整数值
+  pspUpgradeWarning:
+    k3sWarning: 从 1.25 版本开始，Kubernetes 已经取消了对 Pod 安全策略（PSPs）的支持。如果你继续进行升级，集群中可能存在的任何 PSP 将不再可用/强制执行。如果这是一个加固的k3s集群（或启用了PodSecurityPolicy准入控制器），请在继续保存对集群的更改之前，请遵循 <a aria-label="documentation for hardened k3s cluster upgrades" href="https://docs.k3s.io/known-issues" target="_blank" rel="nofollow noreferrer noopener">这里</a> 的说明。
+    modalTitle: 你确定吗？
+    proceed: 继续
+    rke2Warning: 从 1.25 版本开始，Kubernetes 已经取消了对 Pod 安全策略（PSPs）的支持。 在您继续保存对集群的更改之前，请遵循<a aria-label="documentation for hardened rke2 cluster upgrades" href="https://docs.rke2.io/known_issues" target="_blank" rel="nofollow noreferrer noopener">这里的说明</a>，手动准备集群以进行升级。
 k3sNodeEnvVarSection:
   title: K3S 节点环境变量
   detail: 只读取此 K3S 节点的环境变量列表。

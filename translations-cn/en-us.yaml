@@ -505,23 +505,23 @@ alertPage:
     reset: Reset Config
 podSecurityPoliciesPage:
   index:
-    header: Pod Security Policies
+    header: Pod Security Policy Templates
     description: Apply Policies to Pods created by a user with this Role
     table:
       name: Name
       created: Created Time
-      noData: There are no pod security policies defined
-      noMatch: No pod security policies match the current search
-  addPodSecurityPolicy: Add Policy
-  editPodSecurityPolicy: Edit Policy
+      noData: There are no pod security policy templates defined
+      noMatch: No pod security policy templates match the current search
+  addPodSecurityPolicy: Add Policy Template
+  editPodSecurityPolicy: Edit Policy Template
   detail:
-    header: Policy
+    header: Policy Template
   saveEdit: Edit
   saveNew: Create
   new:
     errors:
       nameReq: Name is required.
-      nameInExists: Name is already exists. Please use a new pod security policy name.
+      nameInExists: Name is already exists. Please use a new pod security policy template name.
     form:
       name:
         labelText: Name
@@ -4786,6 +4786,10 @@ clusterNew:
       newTag: New tag
       noTags: No tags added
       placeholder: Add a new tag
+    highAvailability:
+      label: High Availability
+      month: month
+      warning: Once a cluster has been upgraded to High Availability, it cannot be downgraded.
   members:
     detail: Control who has access to the cluster and what permission they have to change it.
     label: Member Roles
@@ -4941,7 +4945,9 @@ clusterNew:
     required: A Default Pod Security Policy is required when support is enabled.
     deleteBeforeUpgrade: The PSP resources in this cluster will be unreachable upon upgrade; please delete them before proceeding.
     supportRemoved: Pod Security Policy support has been deprecated as of kubernetes version v1.21.0 and removed as of v1.25.0.
-    unsupported: Pod security policies are not supported in the version selected; please disable PSP support and consider using the built-in Pod Security Admission Controller instead.
+    unsupported: Pod security policies are not supported in the version selected; please disable PSP support and use PodSecurity Admission instead.
+    deprecatedInfoBanner: Pod Security Policies are deprecated as of Kubernetes v1.21, and have been removed in Kubernetes v1.25.
+    removedInfoBanner: Pod Security Policies have been removed in Kubernetes v1.25, use PodSecurity Admission instead.
   rancherd:
     shortLabel: RancherD
   register:
@@ -8415,6 +8421,11 @@ managedImportClusterInfo:
   drainWorkerNodes: Drain Worker Nodes
   error:
     int: Concurrency values must be integer values
+  pspUpgradeWarning:
+    k3sWarning: Kubernetes has removed support for Pod Security Policies (PSPs) starting with version 1.25. If you proceed with the upgrade, any PSPs that may be present in the cluster will no longer be available/enforced. If this is a hardened k3s cluster (or PodSecurityPolicy admission controller is enabled), please follow the instructions <a aria-label="documentation for hardened k3s cluster upgrades" href="https://docs.k3s.io/known-issues" target="_blank" rel="nofollow noreferrer noopener">here</a> before you proceed with saving the changes to the cluster.
+    modalTitle: Are you sure?
+    proceed: Proceed
+    rke2Warning: Kubernetes has removed support for Pod Security Policies (PSPs) starting with version 1.25. Please follow the instructions <a aria-label="documentation for hardened rke2 cluster upgrades" href="https://docs.rke2.io/known_issues" target="_blank" rel="nofollow noreferrer noopener">here</a> to manually prepare the cluster for the upgrade before you proceed with saving the changes to the cluster.
 k3sNodeEnvVarSection:
   title: K3S Node Environment Variables
   detail: Read only list of the K3s startup environment variables for this node.
