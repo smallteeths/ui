@@ -5,7 +5,7 @@ import Route from '@ember/routing/route';
 import { on } from '@ember/object/evented';
 import C from 'ui/utils/constants';
 
-const resourceQuotaUsageProjectID = 'field.cattle.io/resourceQuotaUsageProjectID'
+// const resourceQuotaUsageProjectID = 'field.cattle.io/resourceQuotaUsageProjectID'
 
 export default Route.extend({
   globalStore:         service(),
@@ -17,14 +17,18 @@ export default Route.extend({
     const project = appRoute.modelFor('authenticated.project').get('project');
     const clusterId = project.get('clusterId');
     const projectId = project.get('id');
-    const parojectQuotaUsage = get(this, 'globalStore').rawRequest({ url: `/v3/projectresourcequotausages` }).then((res) => {
-      let usage = {};
+    const projectQuotaUsage = get(this, 'globalStore').rawRequest({ url: `/v3/projectresourcequotausages/${ projectId.split(':')?.[1] }:${ projectId.replace(':', '-') }` }).then((res) => {
+      // let usage = {};
 
-      if (res.body && res.body.data && res.body.data.length > 0) {
-        usage = res.body.data.find((item) => item && item.annotations && item.annotations[resourceQuotaUsageProjectID] === projectId) || {};
-      }
+      // if (res.body && res.body.data && res.body.data.length > 0) {
+      //   usage = res.body.data.find((item) => item && item.annotations && item.annotations[resourceQuotaUsageProjectID] === projectId) || {};
+      // }
 
-      return usage.status ? usage.status : {};
+      // return usage.status ? usage.status : {};
+
+      const usage = res.body?.status ?? {};
+
+      return usage
     }).catch(() => {
       return {}
     })
@@ -52,9 +56,9 @@ export default Route.extend({
       clusterId,
       namespaces: store.findAll('namespace'),
       users:      get(this, 'globalStore').findAll('user'),
-      parojectQuotaUsage,
+      projectQuotaUsage,
     }).then((hash) => {
-      set(hash, 'quotaSetting.used', hash.parojectQuotaUsage);
+      set(hash, 'quotaSetting.used', hash.projectQuotaUsage);
 
       return hash;
     });
