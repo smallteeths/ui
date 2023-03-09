@@ -5237,7 +5237,7 @@ clusterNew:
       deprecated: Windows support is being deprecated for RKE1. We suggest migrating to RKE2.
     gpu:
       enableGPUManagement:
-        label: GPU shared scheduling (memory unit)
+        label: GPU shared scheduling (memory unit) (Deperacated)
       nodePort:
         label: Set the NodePort port used by the GPU expansion scheduler
         placeholder: e.g. 1024
