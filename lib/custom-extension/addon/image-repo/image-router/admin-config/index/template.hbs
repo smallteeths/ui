@@ -49,8 +49,9 @@
           {{input type="password" class="form-control" value=harborConfig.password placeholder=(t "harborConfig.form.pw.placeholder")}}
         {{/input-or-display}}
       </div>
-      <div class="col span-12">
-        <label class="acc-label">{{t "harborConfig.form.version.label"}}</label>
+      <div class="col span-6">
+        <div class="flex-align-center" style="align-items: baseline;">
+        <label class="acc-label">{{t "harborConfig.form.version.label"}}</label> &nbsp;&nbsp;
         <div class="radio">
           <label>
             {{radio-button disabled=(not harborConfigEditable) selection=harborConfig.version value=""}} v1
@@ -58,6 +59,19 @@
           <label>
             {{radio-button disabled=(not harborConfigEditable) selection=harborConfig.version value="v2.0"}} v2
           </label>
+        </div>
+        </div>
+      </div>
+      <div class="col span-6" style="margin-right: 0px">
+        <div class="flex-align-center" style="height: 32px;">
+           <label class="acc-label flex-align-center" >{{t "harborConfig.form.harborInsecureSkipVerify"}} &nbsp;&nbsp;
+            {{#input-or-display editable=harborConfigEditable value=harborInsecureSkipVerify}}
+              {{input
+                type="checkbox"
+                checked=harborInsecureSkipVerify
+              }}
+            {{/input-or-display}}
+            </label>
         </div>
       </div>
     </div>
