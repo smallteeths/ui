@@ -1635,7 +1635,7 @@ ingressResponse:
   responseTime: 響應時間
   noData: 沒有數據
   noMatch: 沒有記錄匹配當前搜索
-  detail: Upstream響應時長（排序前十位）
+  detail: Upstream 響應時長（排序前十位）
   title: Ingress Upstream響應時長
 etcd:
   hasLeader:
@@ -2063,7 +2063,7 @@ cruVolumeClaimTemplate:
 cruPrivateRegistry:
   title:
     label: 私有鏡像倉庫
-    detail: 配置一個默認的集群級 private registry，用於所有 Rancher 系統容器鏡像。
+    detail: 給集群配置私有鏡像倉庫，當開始構建集群時會通過此鏡像倉庫拉取所需的全部鏡像。
     detailAtImportCluster: 給叢集配置私有鏡像倉庫，部署 Rancher 服務組件時會通過此鏡像倉庫拉取所需的全部鏡像（注意：設置該項會覆蓋全局系統設置中的 system-default-registry 參數）。
   noData: 當前叢集沒有配置私有鏡像倉庫
   defaultError: 您必須指定默認的私有鏡像倉庫。
@@ -3289,7 +3289,7 @@ authorizedEndpoint:
   enabled:
     label: '授權叢集訪問地址(此地址需要能夠訪問k8s api-server，在Rancher不可用時，可通過此地址直接訪問k8s)'
   fqdn:
-    label: 端點
+    label: FQDN(域名和後面的 CA 證書可不用填寫。)
     invalid: 授權的集群端點是無效的
 taintsSection:
   title: Taints
@@ -3519,7 +3519,7 @@ clusterNew:
     prompt: 選擇 Pod 安全策略...
     none: 沒有配置策略
     required: 啟用時需要設置默認 Pod 安全策略
-    deleteBeforeUpgrade: 該集群中的PSP資源在升級後將無法訪問，請在繼續進行之前刪除它們。
+    deleteBeforeUpgrade: 這個集群中存在著 PSP 資源；在升級之前，你必須手動刪除它們。
     supportRemoved: 從 kubernetes v1.21.0 版本開始，Pod 安全策略支持已被廢棄，將在 v1.25.0 版本中移除。
     unsupported: 選擇的版本不支持 Pod 安全策略；請禁用 PSP 支持，使用 PodSecurity Admission 代替。
     deprecatedInfoBanner: 從 Kubernetes v1.21 開始，Pod 安全策略已被廢棄，並在 Kubernetes v1.25 中被刪除。
@@ -3908,7 +3908,7 @@ clusterNew:
     errors:
       included:
         serviceCidr: 'Kubernetes 服務地址範圍必須是有效的 CIDR 格式。'
-        dnsServiceIp: 'Kubernetes DNS 服務 IP 地址必須是有效的 ip 地址。'
+        dnsServiceIp: 'Kubernetes DNS 服務 IP 地址必須是有效的 IP 地址。'
         dockerBridgeCidr: 'Docker bridge 地址必須是有效的 CIDR 格式。'
         parsedServiceCidr: 'Kubernetes 服務地址範圍必須在選定的虛擬網絡範圍內。'
         parsedDnsServiceIp: 'Kubernetes DNS 服務 IP 地址必須在 Kubernetes 服務地址範圍內。'
@@ -5989,7 +5989,7 @@ cruStorageClass:
       placeholder: "例如: DEFAULT"
   rbd:
     monitors:
-      label: "Ceph-Monitor地址"
+      label: "Ceph-Monitor 地址"
       placeholder: "例如: 10.16.153.105:6789"
     adminId:
       label: "管理員帳號(ID)"
@@ -10022,6 +10022,9 @@ nodeDriver:
     storageClass:
       label: 存儲類
       placeholder: 請選擇一個 storageClass
+    installAgent:
+      label: 安裝訪客代理
+    templateError: 模板格式不正確
 newConfigMap:
   title:
     new: 添加配置映射
@@ -10621,7 +10624,7 @@ action:
   backupEtcdMessage:
     success:
       title: 備份成功
-      message: "{clusterId}已備份到{backupType}provider"
+      message: "集群 { clusterId } 的 { backupType } 快照備份已經開始"
       start: 开始備份
     fail:
       message: 備份{clusterId}到{backupType}存儲

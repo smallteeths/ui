@@ -4943,7 +4943,7 @@ clusterNew:
     none: No policies are defined
     prompt: Select a Pod Security Policy...
     required: A Default Pod Security Policy is required when support is enabled.
-    deleteBeforeUpgrade: The PSP resources in this cluster will be unreachable upon upgrade; please delete them before proceeding.
+    deleteBeforeUpgrade: There are PSP resources existing in this cluster; prior to upgrading, you must manually remove them.
     supportRemoved: Pod Security Policy support has been deprecated as of kubernetes version v1.21.0 and removed as of v1.25.0.
     unsupported: Pod security policies are not supported in the version selected; please disable PSP support and use PodSecurity Admission instead.
     deprecatedInfoBanner: Pod Security Policies are deprecated as of Kubernetes v1.21, and have been removed in Kubernetes v1.25.
@@ -10383,6 +10383,9 @@ nodeDriver:
     storageClass:
       label: Storage Class
       placeholder: Please select a storageClass
+    installAgent:
+      label: Install guest agent
+    templateError: Incorrect template format
   pnap:
     access:
       title: Account Access
@@ -11072,7 +11075,7 @@ action:
   backupEtcd: Snapshot Now
   backupEtcdMessage:
     success:
-      message: 'A {backupType} snapshot has been started for {clusterId}'
+      message: 'A { backupType } snapshot has been started for { clusterId }'
       title: Snapshot initiated
       start: Start backup
     fail:

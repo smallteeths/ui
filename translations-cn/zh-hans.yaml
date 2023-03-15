@@ -1813,7 +1813,7 @@ ingressResponse:
   responseTime: 响应时间
   noData: 没有数据
   noMatch: 没有记录匹配当前搜索
-  detail: upstream 响应时长（排序前十位）
+  detail: Upstream 响应时长（排序前十位）
   title: Ingress Upstream 响应时长
 etcd:
   hasLeader:
@@ -2241,7 +2241,7 @@ cruVolumeClaimTemplate:
 cruPrivateRegistry:
   title:
     label: 私有镜像仓库
-    detail: 配置一个默认的集群级 private registry，用于所有 Rancher 系统容器镜像。
+    detail: 给集群配置私有镜像仓库，当开始构建集群时会通过此镜像仓库拉取所需的全部镜像。
     detailAtImportCluster: 给集群配置私有镜像仓库，部署 Rancher 服务组件时会通过此镜像仓库拉取所需的全部镜像（注意：设置该项会覆盖全局系统设置中的 system-default-registry 参数）。
   noData: 当前集群没有配置私有镜像仓库
   defaultError: 您必须指定默认的私有镜像仓库。
@@ -2645,7 +2645,7 @@ globalDnsPage:
       project: 项目
       fqdn:
         label: FQDN (域名)
-        placeholder: dev.example.com
+        placeholder: '例如: dev.example.com'
       multiCluster:
         label: 目标应用
         placeholder: 没有选择多集群应用
@@ -3455,6 +3455,7 @@ ldap:
         none: None
         starttls: STARTTLS
         tls: TLS
+      checkbox: TLS
     serviceAccountDistinguishedName:
       labelText: 服务帐户用户名
     starttls:
@@ -3614,7 +3615,7 @@ authorizedEndpoint:
   enabled:
     label: '此地址必须是能够访问 k8s api-server 的域名或者 IP。在 Rancher Server 不可用时，可使用包含此地址的 kubecfg 文件，通过命令 kubectl --context 直接访问 k8s 集群。'
   fqdn:
-    label: 端点
+    label: FQDN(域名和后面的 CA 证书可不用填写。)
     invalid: 授权的集群端点是无效的
 taintsSection:
   title: Taints
@@ -3847,7 +3848,7 @@ clusterNew:
     prompt: 选择 Pod 安全策略...
     none: 没有配置策略
     required: 启用时需要设置默认 Pod 安全策略
-    deleteBeforeUpgrade: 该集群中的PSP资源在升级后将无法访问，请在继续进行之前删除它们。
+    deleteBeforeUpgrade: 这个集群中存在着 PSP 资源；在升级之前，你必须手动删除它们。
     supportRemoved: 从 kubernetes v1.21.0 版本开始，Pod 安全策略支持已被废弃，将在 v1.25.0 版本中移除。
     unsupported: 选择的版本不支持 Pod 安全策略；请禁用 PSP 支持，使用 PodSecurity Admission 代替。
     deprecatedInfoBanner: 从 Kubernetes v1.21 开始，Pod 安全策略已被废弃，并在 Kubernetes v1.25 中被删除。
@@ -4156,7 +4157,7 @@ clusterNew:
     errors:
       included:
         serviceCidr: 'Kubernetes 服务地址范围必须是有效的 CIDR 格式。'
-        dnsServiceIp: 'Kubernetes DNS 服务 IP 地址必须是有效的 ip 地址。'
+        dnsServiceIp: 'Kubernetes DNS 服务 IP 地址必须是有效的 IP 地址。'
         dockerBridgeCidr: 'Docker bridge 地址必须是有效的 CIDR 格式。'
         parsedServiceCidr: 'Kubernetes 服务地址范围必须在选定的虚拟网络范围内。'
         parsedDnsServiceIp: 'Kubernetes DNS 服务 IP 地址必须在 Kubernetes 服务地址范围内。'
@@ -6072,7 +6073,7 @@ cruStorageClass:
   quobyte:
     quobyteAPIServer:
       label: Quobyte API 服务器
-      placeholder: "例如：http://138.68.74.142:7860"
+      placeholder: "例如: https://138.68.74.142:7860"
     registry:
       label: 镜像库
       placeholder: "例如: 138.68.74.142"
@@ -6096,7 +6097,7 @@ cruStorageClass:
       placeholder: "例如: DEFAULT"
   rbd:
     monitors:
-      label: "Monitors 地址"
+      label: "Ceph-Monitor 地址"
       placeholder: "例如: 10.16.153.105:6789"
     adminId:
       label: "管理员账号(ID)"
@@ -10101,6 +10102,9 @@ nodeDriver:
     storageClass:
       label: 存储类
       placeholder: 请选择一个 storageClass
+    installAgent:
+      label: 安装访客代理
+    templateError: 模板格式不正确
   oci:
     placement:
       title: Placement
@@ -10840,7 +10844,7 @@ action:
     success:
       title: 备份成功
       start: 开始备份
-      message: "已备份 {clusterId} 到 {backupType} 存储。"
+      message: "集群 { clusterId } 的 { backupType } 快照备份已经开始"
     fail:
       title: 备份失败
       message: "备份{clusterId}到{backupType}存储"
