@@ -8426,6 +8426,7 @@ managedImportClusterInfo:
     modalTitle: Are you sure?
     proceed: Proceed
     rke2Warning: Kubernetes has removed support for Pod Security Policies (PSPs) starting with version 1.25. Please follow the instructions <a aria-label="documentation for hardened rke2 cluster upgrades" href="https://docs.rke2.io/known_issues" target="_blank" rel="nofollow noreferrer noopener">here</a> to manually prepare the cluster for the upgrade before you proceed with saving the changes to the cluster.
+  rke2Warning: Kubernetes has removed support for Pod Security Policies (PSPs) starting with version 1.25. Please follow the instructions <a aria-label="documentation for hardened rke2 cluster upgrades" href="https://docs.rke2.io/known_issues#hardened-125" target="_blank" rel="nofollow noreferrer noopener">here</a> to manually prepare the cluster for the upgrade before you proceed with saving the changes to the cluster.
 k3sNodeEnvVarSection:
   title: K3S Node Environment Variables
   detail: Read only list of the K3s startup environment variables for this node.

@@ -11454,6 +11454,7 @@ managedImportClusterInfo:
     modalTitle: 你確定嗎？
     proceed: 繼續
     rke2Warning: 從 1.25 版本開始，Kubernetes 已經取消了對 Pod 安全策略（PSPs）的支持。 在您繼續保存對集羣的更改之前，請遵循<a aria-label="documentation for hardened rke2 cluster upgrades" href="https://docs.rke2.io/known_issues" target="_blank" rel="nofollow noreferrer noopener">這裏的說明</a>，手動準備集羣以進行升級。
+  rke2Warning: Kubernetes 從 1.25 版本開始取消了對 Pod 安全策略（PSP）的支持。 請按照 <a aria-label="documentation for hardened rke2 cluster upgrades" href="https://docs.rke2.io/known_issues#hardened-125" target="_blank" rel="nofollow noreferrer noopener">這裏</a> 的說明，在你繼續保存對集羣的更改之前，手動準備集羣的升級。
 metrics:
   apiserver-request-count: API Server 請求速率
   apiserver-request-latency: API Server 請求延遲

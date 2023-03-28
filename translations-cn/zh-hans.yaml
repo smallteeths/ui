@@ -8192,6 +8192,7 @@ managedImportClusterInfo:
     modalTitle: 你确定吗？
     proceed: 继续
     rke2Warning: 从 1.25 版本开始，Kubernetes 已经取消了对 Pod 安全策略（PSPs）的支持。 在您继续保存对集群的更改之前，请遵循<a aria-label="documentation for hardened rke2 cluster upgrades" href="https://docs.rke2.io/known_issues" target="_blank" rel="nofollow noreferrer noopener">这里的说明</a>，手动准备集群以进行升级。
+  rke2Warning: Kubernetes 从 1.25 版本开始取消了对 Pod 安全策略（PSP）的支持。 请按照 <a aria-label="documentation for hardened rke2 cluster upgrades" href="https://docs.rke2.io/known_issues#hardened-125" target="_blank" rel="nofollow noreferrer noopener">这里</a> 的说明，在你继续保存对集群的更改之前，手动准备集群的升级。
 k3sNodeEnvVarSection:
   title: K3S 节点环境变量
   detail: 只读取此 K3S 节点的环境变量列表。
