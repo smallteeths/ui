@@ -159,6 +159,7 @@ generic:
   required: '{key} is required.'
   run: Run
   Gibibyte: 'GiB'
+  mCPU: mCPU
 realmNames:
   all: All
   usWest: US West
@@ -4126,6 +4127,7 @@ clusterNew:
         linuxName: Linux node pool names must be 1-11 characters.
         nameFormat: Node pool names must be all lower case, start with a letter and may only contain letters and numbers.
         windowsName: Windows node pool names must be 1-6 characters.
+        maxSurge: Max Surge must be either a percentage (1-100) or an integer greater than 1.
       name:
         label: Name
       nodeType:
@@ -4203,6 +4205,10 @@ clusterNew:
         label: Windows Admin Password
       username:
         label: Windows Admin Username
+    maxSurge:
+      label: Max Surge
+      placeholder: Number or %
+    nodeLabelDetail: Configure labels for all nodes in this Node Pool
   config:
     detail: Choose where the nodes for the cluster will come from
     label: Provider
@@ -5344,6 +5350,69 @@ clusterNew:
       hostnamePrefix: Node pools must have unique name prefixes
   psa:
     label: Pod Security Admission Configuration Template
+  agentConfig:
+    accordionDetail:
+      cluster: Customize scheduling fields and resource limits for the Rancher cluster agent
+      fleet: Customize scheduling fields and resource limits for the Rancher fleet agent
+    banners:
+      advanced: These are advanced configuration options. Generally, they should be left as-is.
+      affinity: We do not recommended removing the Node Affinity rule that prevents the <b>agent</b> from running on Windows nodes as this is not a supported configuration.
+      resourceRequests: Pod Requests and Limits do not have a default configuration.
+      tolerations: Additional Pod Tolerations will be added to the default Tolerations applied by Rancher.
+    overrideAffinity:
+      customize: Customize affinity rules
+      nodeAffinity:
+        addTerm: Add Node Selector
+        nodeSelectorTerm:
+          type: Match Type
+          typeOptions:
+            matchExpression: Expression
+            matchField: Field
+        title: Node Affinity
+      podAffinity:
+        addTerm: Add Pod Affinity Term
+        matchExpressions:
+          add: Add Match Expression
+          key: Key
+          operator: Operator
+          operatorOptions:
+            doesNotExist: Does not exist
+            exists: Exists
+            gt: Greater than
+            in: In list
+            lt: Less than
+            notIn: Not in list
+          value: Values
+        namespaces:
+          radioOptions:
+            all: All namespaces
+            inList: Pods in specific namespaces
+            thisPod: This pod's namespace
+        priority: Priority
+        title: Pod Affinity
+        topologyKey:
+          label: Topology Key
+          placeholder: e.g. failure-domain.beta.kubernetes.io/zone
+        typeOptions:
+          affinity: Affinity
+          antiAffinity: AntiAffinity
+          preferred: Preferred
+          required: Required
+        weight:
+          label: Weight
+          placeholder: e.g. 1
+      podAntiAffinity:
+        title: Pod AntiAffinity
+      useDefault: Use default affinity rules defined by Rancher
+    resourceRequirements:
+      cpu: CPU {type}
+      label: Resource Requirements
+      limits: Limits
+      memory: Memory {type}
+      requests: Requests
+    title:
+      cluster: Cluster Agent Configuration
+      fleet: Fleet Agent Configuration
 clusterTemplateNew:
   members:
     label: Member Roles
@@ -7105,6 +7174,7 @@ formEngineOpts:
     none:
       label: None
       help: "Warning: When selecting a value of 'None', Rancher will not install docker under the assumption that the docker is already installed."
+    version: v{version}.x
   engineStorageDriver:
     label: Storage Driver
     placeholder: e.g. overlay
@@ -7723,7 +7793,7 @@ formScheduling:
   addCustom: Add Custom Rule
   condition: Condition
   field: Field
-  key: Label Key
+  key: Key
   value: Value
   operator: Operator
   effect: Effect
@@ -10366,10 +10436,10 @@ nodeDriver:
       node:
         label: Node Scheduling
       pod:
-        label: Pod Scheduling
+        label: VM Scheduling
         namespace:
-          PodInNs: 'Pods in these namespaces:'
-          podsNs: This pod's namespace
+          PodInNs: 'VMs in these namespaces:'
+          podsNs: This VM's namespace
           tips: e.g. default,system,base
     disks:
       addVolume:

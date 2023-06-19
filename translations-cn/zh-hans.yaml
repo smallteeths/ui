@@ -159,6 +159,7 @@ generic:
   run: 运行
   Gibibyte: 'GiB'
   networking: Networking
+  mCPU: mCPU
 realmNames:
   all: 全部
   usWest: 美国西部
@@ -4220,6 +4221,7 @@ clusterNew:
         linuxName: Linux节点池名称必须是 1-11 个字符。
         nameFormat: 节点池名称必须全部为小写，以字母开头，只能包含字母和数字。
         windowsName: Windows节点池名称必须是1-6个字符。
+        maxSurge: 最大 Surge 必须是一个百分比（1-100）或一个大于1的整数。
       name:
         label: 名称
       nodeType:
@@ -4242,6 +4244,10 @@ clusterNew:
         label: Windows Admin 密码
       username:
         label: Windows Admin 用户名
+    maxSurge:
+      label: 最大 Surge
+      placeholder: Number or %
+    nodeLabelDetail: 为该节点池中的所有节点配置标签
   aliyunack:
     shortLabel: Alibaba ACK
   tencenttke:
@@ -5119,6 +5125,69 @@ clusterNew:
       hostnamePrefix: 节点池必须有唯一的名称前缀
   psa:
     label: Pod 安全准入配置模板
+  agentConfig:
+    accordionDetail:
+      cluster: 为 Rancher 集群代理定制调度字段和资源限制
+      fleet: 为 Rancher fleet 代理定制调度字段和资源限制
+    banners:
+      advanced: 这些是高级配置选项。一般来说，它们应该保持原样。
+      affinity: 我们不建议删除阻止<b>代理</b>在 Windows 节点上运行的节点 Affinity 规则，因为这不是一个支持的配置。
+      resourceRequests: Pod 请求和限制没有默认配置。
+      tolerations: 额外的 Pod Tolerations 将被添加到 Rancher 应用的默认 Tolerations 中。
+    overrideAffinity:
+      customize: 定制 Affinity 规则
+      nodeAffinity:
+        addTerm: 添加节点选择器
+        nodeSelectorTerm:
+          type: 匹配类型
+          typeOptions:
+            matchExpression: 表达式
+            matchField: 字段
+        title: 节点 Affinity
+      podAffinity:
+        addTerm: 添加  Pod Affinity Term
+        matchExpressions:
+          add: 添加匹配表达式
+          key: Key
+          operator: Operator
+          operatorOptions:
+            doesNotExist: 不存在
+            exists: 存在
+            gt: 大于
+            in: 在列表中
+            lt: 小于播放
+            notIn: 不在列表中
+          value: 值
+        namespaces:
+          radioOptions:
+            all: 所有命名空间
+            inList: 指定命名空间中的 Pod
+            thisPod: 这个 pod 的命名空间
+        priority: 优先级
+        title: Pod affinity
+        topologyKey:
+          label: 拓扑结构键
+          placeholder: 例如：failure-domain.beta.kubernetes.io/zone
+        typeOptions:
+          affinity: Affinity
+          antiAffinity: AntiAffinity
+          preferred: Preferred
+          required: Required
+        weight:
+          label: Weight
+          placeholder: e.g. 1
+      podAntiAffinity:
+        title: Pod AntiAffinity
+      useDefault: 使用由 Rancher 定义的默认 Affinity 规则
+    resourceRequirements:
+      cpu: CPU {type}
+      label: Resource Requirements
+      limits: Limits
+      memory: 内存 {type}
+      requests: Requests
+    title:
+      cluster: 集群代理配置
+      fleet: Fleet 代理配置
 clusterTemplateNew:
   members:
     label: 成员角色
@@ -6880,6 +6949,7 @@ formEngineOpts:
       help: 警告：当选择值是 'None' 时，Rancher 将不会安装 docker，因为假设 docker 已经安装。
       label: None
     recommendedNoVersion: Recommended
+    version: v{version}.x
   engineStorageDriver:
     label: 存储驱动
     placeholder: '例如: overlay'
@@ -7476,7 +7546,7 @@ formScheduling:
   addCustom: 添加自定义规则
   condition: 条件
   field: 字段
-  key: 键
+  key: Key
   value: 值
   operator: 操作符
   effect: 影响
@@ -10087,10 +10157,10 @@ nodeDriver:
       node:
         label: 节点调度
       pod:
-        label: Pod 调度
+        label: 虚拟机调度
         namespace:
-          PodInNs: 这些命名空间中的 Pod
-          podsNs: 此 Pod 的命名空间
+          PodInNs: '在这些命名空间中的虚拟机:'
+          podsNs: 该虚拟机的命名空间
           tips: 例如：default,system,base
     disks:
       addVolume:

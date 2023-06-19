@@ -159,6 +159,7 @@ generic:
   windows: Windows
   writeOnly: 只寫
   networking: Networking
+  mCPU: mCPU
 realmNames:
   all: 全部
   usWest: 美國西部
@@ -3021,6 +3022,7 @@ clusterNew:
         linuxName: Linux節點池名稱必須是 1-11 個字符。
         nameFormat: 節點池名稱必須全部爲小寫，以字母開頭，只能包含字母和數字。
         windowsName: Windows節點池名稱必須是1-6個字符。
+        maxSurge: 最大 Surge 必須是一個百分比（1-100）或一個大於1的整數。
       name:
         label: 名稱
       nodeType:
@@ -3043,6 +3045,10 @@ clusterNew:
         label: Windows Admin 密碼
       username:
         label: Windows Admin 用戶名
+    maxSurge:
+      label: 最大 Surge
+      placeholder: Number or %
+    nodeLabelDetail: 爲該節點池中的所有節點配置標籤
   googlegke:
     label: Google Kubernetes 引擎
     shortLabel: Google GKE
@@ -3926,6 +3932,69 @@ clusterNew:
       hostnamePrefix: 節點池必須有唯一的名稱前綴
   psa:
     label: Pod 安全准入配置模板
+  agentConfig:
+    accordionDetail:
+      cluster: 爲 Rancher 集羣代理定製調度字段和資源限制
+      fleet: 爲 Rancher fleet 代理定製調度字段和資源限制
+    banners:
+      advanced: 這些是高級配置選項。一般來說，它們應該保持原樣。
+      affinity: 我們不建議刪除阻止<b>代理</b>在 Windows 節點上運行的節點 Affinity 規則，因爲這不是一個支持的配置。
+      resourceRequests: Pod 請求和限制沒有默認配置。
+      tolerations: 額外的 Pod Tolerations 將被添加到 Rancher 應用的默認 Tolerations 中。
+    overrideAffinity:
+      customize: 定製 Affinity 規則
+      nodeAffinity:
+        addTerm: 添加節點選擇器
+        nodeSelectorTerm:
+          type: 匹配類型
+          typeOptions:
+            matchExpression: 表達式
+            matchField: 字段
+        title: 節點 Affinity
+      podAffinity:
+        addTerm: 添加  Pod Affinity Term
+        matchExpressions:
+          add: 添加匹配表達式
+          key: Key
+          operator: Operator
+          operatorOptions:
+            doesNotExist: 不存在
+            exists: 存在
+            gt: 大於
+            in: 在列表中
+            lt: 小於播放
+            notIn: 不在列表中
+          value: 值
+        namespaces:
+          radioOptions:
+            all: 所有命名空間
+            inList: 指定命名空間中的 Pod
+            thisPod: 這個 pod 的命名空間
+        priority: 優先級
+        title: Pod affinity
+        topologyKey:
+          label: 拓撲結構鍵
+          placeholder: 例如：failure-domain.beta.kubernetes.io/zone
+        typeOptions:
+          affinity: Affinity
+          antiAffinity: AntiAffinity
+          preferred: Preferred
+          required: Required
+        weight:
+          label: Weight
+          placeholder: e.g. 1
+      podAntiAffinity:
+        title: Pod AntiAffinity
+      useDefault: 使用由 Rancher 定義的默認 Affinity 規則
+    resourceRequirements:
+      cpu: CPU {type}
+      label: Resource Requirements
+      limits: Limits
+      memory: 內存 {type}
+      requests: Requests
+    title:
+      cluster: 集羣代理配置
+      fleet: Fleet 代理配置
 conditionSections:
   title: 狀態
   detail: '當前{resourceType}運行狀態'
@@ -5234,6 +5303,7 @@ formEngineOpts:
       help: 警告：當選擇值是 'None' 時，Rancher 將不會安裝 docker，因為假設 docker 已經安裝。
       label: None
     recommendedNoVersion: Recommended
+    version: v{version}.x
   engineStorageDriver:
     label: 存儲驅動
     placeholder: '例如: overlay'
@@ -5749,7 +5819,7 @@ formScheduling:
   addCustom: 添加自定義規則
   condition: 條件
   field: 字段
-  key: 標籤鍵
+  key: Key
   value: 標籤值
   operator: 操作符
   effect: 效果
@@ -8028,10 +8098,10 @@ nodeDriver:
       node:
         label: 節點調度
       pod:
-        label: Pod 調度
+        label: 虛擬機調度
         namespace:
-          PodInNs: 這些命名空間中的 Pod
-          podsNs: 此 Pod 的命名空間
+          PodInNs: '在這些命名空間中的虛擬機:'
+          podsNs: 該虛擬機的命名空間
           tips: 例如：default,system,base
     disks:
       addVolume:
