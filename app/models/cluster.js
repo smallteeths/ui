@@ -184,8 +184,11 @@ export const DEFAULT_AKS_NODE_POOL_CONFIG = {
   count:               1,
   enableAutoScaling:   false,
   maxPods:             110,
+  maxSurge:            '1',
   mode:                'System',
   name:                '',
+  nodeLabels:          {},
+  nodeTaints:          [],
   orchestratorVersion: '',
   osDiskSizeGB:        128,
   osDiskType:          'Managed',
@@ -432,11 +435,14 @@ export default Resource.extend(Grafana, ResourceUsage, {
     return false;
   }),
 
-  canShowAddHost: computed('clusterProvider', 'hasPrivateAccess', 'hasPublicAccess', 'imported', 'nodes', function() {
+  canShowAddHost: computed('clusterProvider', 'hasPrivateAccess', 'hasPublicAccess', 'imported', 'nodes', 'internal', function() {
     const { clusterProvider } = this;
     const compatibleProviders = ['custom', 'import', 'amazoneksv2', 'googlegkev2', 'azureaksv2'];
 
-    if (!compatibleProviders.includes(clusterProvider)) {
+    // internal indicates the local cluster. Rancher does not manage the local cluster, so nodes can not be added via the UI
+    const internal = get(this, 'internal');
+
+    if (!compatibleProviders.includes(clusterProvider) || internal) {
       return false;
     }
 
@@ -1194,12 +1200,43 @@ export default Resource.extend(Grafana, ResourceUsage, {
         if (this.compareStringArrays(originalModel.model.originalCluster.annotations, this.annotations)) {
           options.data.annotations = this.annotations;
         }
+
+        const { clusterAgentDeploymentCustomization = {}, fleetAgentDeploymentCustomization = {} } = originalModel.model.originalCluster
+
+        const { clusterAgentDeploymentCustomization:newClusterAgentDeploymentCustomization = {}, fleetAgentDeploymentCustomization: newFleetAgentDeploymentCustomization = {} } = this;
+
+        if (JSON.stringify(clusterAgentDeploymentCustomization) !== JSON.stringify(newClusterAgentDeploymentCustomization)){
+          options.data.clusterAgentDeploymentCustomization = this.addDeletedKeysAsNull(clusterAgentDeploymentCustomization, newClusterAgentDeploymentCustomization)
+        }
+
+        if (JSON.stringify(fleetAgentDeploymentCustomization) !== JSON.stringify(newFleetAgentDeploymentCustomization)){
+          options.data.fleetAgentDeploymentCustomization = this.addDeletedKeysAsNull(fleetAgentDeploymentCustomization, newFleetAgentDeploymentCustomization)
+        }
       }
 
       return this._super(options);
     }
 
     return this._super(...arguments);
+  },
+
+  /**
+ * When editing EKS, GKE, AKS imported clusters, only properties that have changed are sent in the request.
+ * This is part of a strategy to avoid overwriting properties that have changed in the aws/google cloud/azure console
+ * Unfortunately this creates issues when editing agent config customizations: when the user clears a previously-defined field the cluster save request omits that key and the previous value is preserved
+ * Sending null instead of removing the key properly overwrites the old value
+ * We're adding null here instead of changing the key-removing functionality in agent config components to avoid poluting RKE1 'edit as yaml' view & save request
+ */
+  addDeletedKeysAsNull(original, toSave = {}){
+    Object.keys(original).forEach((key) => {
+      if (!toSave[key]){
+        toSave[key] = null
+      } else if (original[key] && typeof original[key] === 'object' && !Array.isArray(original[key])){
+        set(toSave, key, this.addDeletedKeysAsNull(original[key], toSave[key]))
+      }
+    })
+
+    return toSave
   },
 
   syncAksConfigs(opt) {

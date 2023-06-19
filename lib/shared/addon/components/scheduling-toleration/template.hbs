@@ -58,7 +58,7 @@
                value=(or toleration.operator "Equal")
             }}
               {{searchable-select
-                class="form-control input-sm pt-0"
+                class="form-control input-sm"
                 content=operatorChoices
                 value=toleration.operator
               }}
@@ -92,8 +92,7 @@
                value=(or toleration.effect "*")
             }}
               {{searchable-select
-                class="form-control input-sm pt-0"
-                allowCustom=true
+                class="form-control input-sm"
                 content=effectChoices
                 value=toleration.effect
               }}

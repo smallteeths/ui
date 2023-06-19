@@ -86,6 +86,7 @@ generic:
   noRating: No Rating
   node: Node
   none: None
+  mCPU: mCPU
   completedOf: "{completed} of {total}"
   owner: Owner
   paste: Paste
@@ -3347,6 +3348,69 @@ clusterNew:
     viewCancel: View as a Form
     viewYaml: View as YAML
     yaml: Edit as YAML
+  agentConfig:
+    title:
+      cluster: Cluster Agent Configuration
+      fleet: Fleet Agent Configuration
+    accordionDetail:
+      cluster: Customize scheduling fields and resource limits for the Rancher cluster agent
+      fleet: Customize scheduling fields and resource limits for the Rancher fleet agent  
+    banners:
+      advanced: These are advanced configuration options. Generally, they should be left as-is.
+      resourceRequests: Pod Requests and Limits do not have a default configuration.
+      tolerations: Additional Pod Tolerations will be added to the default Tolerations applied by Rancher.
+      affinity: "We do not recommended removing the Node Affinity rule that prevents the <b>agent</b> from running on Windows nodes as this is not a supported configuration."
+    resourceRequirements:
+      label: Resource Requirements
+      cpu: CPU {type}
+      memory: Memory {type}
+      requests: Requests
+      limits: Limits
+    overrideAffinity:
+      customize: Customize affinity rules
+      useDefault: Use default affinity rules defined by Rancher
+      podAntiAffinity:
+        title: Pod AntiAffinity
+      podAffinity:
+        title: Pod Affinity
+        addTerm: Add Pod Affinity Term
+        topologyKey:
+          label: Topology Key
+          placeholder: e.g. failure-domain.beta.kubernetes.io/zone
+        typeOptions:
+          affinity: Affinity
+          antiAffinity: AntiAffinity
+          preferred: Preferred
+          required: Required
+        namespaces:
+          radioOptions:
+            all: All namespaces
+            thisPod: This pod's namespace
+            inList: Pods in specific namespaces
+        weight:
+          placeholder: e.g. 1
+          label: Weight
+        priority: Priority
+        matchExpressions:
+          add: Add Match Expression
+          operator: Operator
+          value: Values
+          key: Key
+          operatorOptions:
+            in: In list
+            notIn: Not in list
+            exists: Exists
+            doesNotExist: Does not exist
+            lt: Less than
+            gt: Greater than
+      nodeAffinity:
+        title: Node Affinity
+        addTerm: Add Node Selector
+        nodeSelectorTerm:
+          typeOptions:
+            matchExpression: Expression
+            matchField: Field
+          type: Match Type
   aliyunack:
     shortLabel: Alibaba ACK
   amazoneks:
@@ -3598,11 +3662,15 @@ clusterNew:
     maxPods:
       label: Max Pods Per Node
       placeholder: '110'
+    maxSurge:
+      label: Max Surge
+      placeholder: 'Number or %'
     members:
       label: Member Roles
     minCount:
       label: Min Node Count
       placeholder: e.g. 1
+    nodeLabelDetail: Configure labels for all nodes in this Node Pool
     monitoring:
       label: Container Monitoring
       workspaceGroup:
@@ -3659,6 +3727,7 @@ clusterNew:
         linuxName: Linux node pool names must be 1-11 characters.
         nameFormat: Node pool names must be all lower case, start with a letter and may only contain letters and numbers.
         windowsName: Windows node pool names must be 1-6 characters.
+        maxSurge: Max Surge must be either a percentage (1-100) or an integer greater than 1.
       name:
         label: Name
       nodeType:
@@ -6630,6 +6699,7 @@ formEngineOpts:
     label: Docker Install URL
     placeholder: e.g. http://get.docker.com/
     recommended: "v{version}.x ( Recommended )"
+    version: "v{version}.x"
     recommendedNoVersion: Recommended
     latest: Latest
     none:
@@ -7202,7 +7272,7 @@ formScheduling:
   addCustom: Add Custom Rule
   condition: Condition
   field: Field
-  key: Label Key
+  key: Key
   value: Value
   operator: Operator
   effect: Effect
@@ -9860,10 +9930,10 @@ nodeDriver:
       node:
         label: Node Scheduling
       pod:
-        label: Pod Scheduling
+        label: VM Scheduling
         namespace:
-          podsNs: This pod's namespace
-          PodInNs: "Pods in these namespaces:"
+          podsNs: This VM's namespace
+          PodInNs: "VMs in these namespaces:"
           tips: e.g. default,system,base
       input:
         priority:
