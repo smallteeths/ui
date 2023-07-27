@@ -399,6 +399,62 @@
           }}
         </div>
       </div>
+    {{else if (eq cloudCredentialType "huawei")}}
+      <div class="row">
+        <div class="col span-6">
+          <label class="acc-label" for="huawei-regionID">
+            {{t "modalAddCloudKey.huawei.regionID.label"}}{{field-required}}
+          </label>
+          {{new-select
+            value=config.regionID
+            content=huaweiRegionChoices
+            localizedLabel=true
+          }}
+        </div>
+        <div class="col span-6">
+          <label class="acc-label" for="huawei-projectID">
+            {{t "modalAddCloudKey.huawei.projectID.label"}}{{field-required}}
+          </label>
+          {{input
+            type="text"
+            name="username"
+            classNames="form-control"
+            placeholder=(t "modalAddCloudKey.huawei.projectID.placeholder")
+            value=config.projectID
+            id="huawei-projectID"
+          }}
+          <p class="text-info text-small m-0">{{t "modalAddCloudKey.huawei.projectId.help" htmlSafe=true}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col span-6">
+          <label class="acc-label" for="huawei-accessKey">
+            {{t "modalAddCloudKey.huawei.accessKey.label"}}{{field-required}}
+          </label>
+          {{input
+            type="text"
+            name="username"
+            classNames="form-control"
+            placeholder=(t "modalAddCloudKey.huawei.accessKey.placeholder")
+            value=config.accessKey
+            id="huawei-accessKey"
+          }}
+        </div>
+
+        <div class="col span-6">
+          <label class="acc-label" for="huawei-secretKey">
+            {{t "modalAddCloudKey.huawei.secretKey.label"}}{{field-required}}
+          </label>
+          {{input
+            type="password"
+            name="password"
+            classNames="form-control"
+            placeholder=(t "modalAddCloudKey.huawei.secretKey.placeholder")
+            value=config.secretKey
+            id="huawei-secretKey"
+          }}
+        </div>
+      </div>
     {{/if}}
   </div>
 
