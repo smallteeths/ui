@@ -8796,7 +8796,7 @@ modalAddCloudKey:
       label: 访问密钥
       placeholder: CCE 访问密钥
       help: 获取访问密钥参考 <a href="https://support.huaweicloud.com/usermanual-ca/zh-cn_topic_0046606340.html" target="_blank">这里</a>.
-    projectId:
+    projectID:
       label: 项目 ID
       placeholder: CCE 项目 ID
       help: 项目 ID 必须与默认区域匹配，云凭证才可以正常使用。获取项目 ID 参考 <a href="https://support.huaweicloud.com/apm_faq/apm_03_0001.html" target="_blank">这里</a>.
