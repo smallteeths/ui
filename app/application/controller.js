@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
 import { run } from '@ember/runloop';
 import { observer, set, computed, get } from '@ember/object';
+import { isEmbedded } from 'shared/utils/util';
 import C from 'shared/utils/constants';
 
 export default Controller.extend({
@@ -33,9 +34,7 @@ export default Controller.extend({
       run.backburner.DEBUG = true;
     }
 
-    const embedded = window.top !== window;
-
-    set(this, 'isEmbedded', embedded);
+    set(this, 'isEmbedded', isEmbedded());
   },
 
   // currentRouteName is set by Ember.Router

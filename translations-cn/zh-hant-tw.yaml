@@ -3914,6 +3914,10 @@ clusterNew:
         parsedServiceCidr: 'Kubernetes 服務地址範圍必須在選定的虛擬網絡範圍內。'
         parsedDnsServiceIp: 'Kubernetes DNS 服務 IP 地址必須在 Kubernetes 服務地址範圍內。'
         parsedDockerBridgeCidr: 'Docker bridge 地址不能與選定的虛擬網絡或 Kubernetes 服務地址相同'
+      nodeResourceGroup:
+        chars: '{key} 名稱只能由下劃線、句點、連字符、括號、字母或數字組成。'
+        length: '{key} 名稱不能超過 80 個字符。'
+        periodEnd: '{key} 名稱不能以句號結尾。'
     loadBalancerSku:
       basic: 基本
       label: LoadBalancer SKU
@@ -3974,7 +3978,7 @@ clusterNew:
       availablityZones:
         label: 節點可用 zone
       errors:
-        linuxName: Linux節點池名稱必須是 1-11 個字符。
+        linuxName: Linux 節點池名稱必須為 1-12 個字符。
         nameFormat: 節點池名稱必須全部為小寫，以字母開頭，只能包含字母和數字。
         windowsName: Windows節點池名稱必須是1-6個字符。
         maxSurge: 最大 Surge 必須是一個百分比（1-100）或一個大於1的整數。
@@ -4004,6 +4008,10 @@ clusterNew:
       label: 最大 Surge
       placeholder: Number or %
     nodeLabelDetail: 為該節點池中的所有節點配置標籤
+    nodeResourceGroup:
+      helpText: 群集資源組包含 Kubernetes 服務資源。節點資源組包含與群集相關的所有基礎架構資源。如果留空，Azure 將自動創建一個格式為 MC_<resource-group1>_<cluster-name>_<location> 的名稱。此值不能超過 80 個字符。
+      label: 節點資源組
+      placeholder: aks-node-resource-group
   googlegke:
     label: Google Kubernetes 引擎
     shortLabel: Google GKE
@@ -5008,8 +5016,8 @@ clusterNew:
     shortLabel: 已註冊
     title: 使用現有的 Kubernetes 叢集
   rke2:
-    label: Rancher RKE Government
-    shortLabel: RKE Government
+    label: Rancher RKE2
+    shortLabel: RKE2
   rkeWindows:
     shortLabel: Windows
   nodePools:
@@ -10112,9 +10120,15 @@ nodeDriver:
       pod:
         label: 虛擬機調度
         namespace:
-          PodInNs: '在這些命名空間中的虛擬機:'
+          PodInNs: '這些命名空間中的工作負載'
           podsNs: 該虛擬機的命名空間
           tips: 例如：default,system,base
+          allNamespaces: 所有命名空間
+          label: 命名空間
+        addLabel: 添加工作負載選擇器
+        removeRuleLabel: 移除此工作負載選擇器
+        topologyKey:
+          placeholder: topology.kubernetes.io/zone
     disks:
       addVolume:
         imageVolume: 添加鏡像卷

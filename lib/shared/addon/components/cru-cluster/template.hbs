@@ -49,6 +49,7 @@
        everExpanded=true
        expanded=expanded
        expand=(action expandFn)
+       componentId="cru-cluster__members"
     }}
       {{#if model.cluster.internal}}
         <BannerMessage
@@ -77,6 +78,7 @@
         @roles={{model.roleTemplates}}
         @type="cluster"
         @users={{model.users}}
+        data-testid="cru-cluster__members__form"
       />
     {{/accordion-list-item}}
 

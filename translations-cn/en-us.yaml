@@ -4026,6 +4026,10 @@ clusterNew:
         parsedDockerBridgeCidr: Docker bridge address can not overlap with the selected Virtual Network or the Kubernetes service address range
         parsedServiceCidr: Kubernetes service address range must fall within the selected Virtual Network range.
         serviceCidr: Kubernetes service address range must be valid CIDR format.
+      nodeResourceGroup:
+        chars: '{key} name may only consist of underscores, periods, hyphens, parentheses, and letters or digits.'
+        length: '{key} name cannot exceed 80 characters.'
+        periodEnd: '{key} name cannot end with a period.'
     image:
       label: Image
       placeholder: canonical:UbuntuServer:18.04-LTS:latest
@@ -4124,7 +4128,7 @@ clusterNew:
       availablityZones:
         label: Node Availabilty Zones
       errors:
-        linuxName: Linux node pool names must be 1-11 characters.
+        linuxName: Linux node pool names must be 1-12 characters.
         nameFormat: Node pool names must be all lower case, start with a letter and may only contain letters and numbers.
         windowsName: Windows node pool names must be 1-6 characters.
         maxSurge: Max Surge must be either a percentage (1-100) or an integer greater than 1.
@@ -4209,6 +4213,10 @@ clusterNew:
       label: Max Surge
       placeholder: Number or %
     nodeLabelDetail: Configure labels for all nodes in this Node Pool
+    nodeResourceGroup:
+      helpText: The cluster resource group contains the Kubernetes Service resource. The node resource group contains all infrastructure resources associated with the cluster. If left blank, Azure will automatically create a name in the format MC_<resource-group1>_<cluster-name>_<location>. This value cannot exceed 80 characters.
+      label: Node Resource Group
+      placeholder: aks-node-resource-group
   config:
     detail: Choose where the nodes for the cluster will come from
     label: Provider
@@ -5252,8 +5260,8 @@ clusterNew:
       mode:
         label: Kube Proxy Mode
   rke2:
-    label: Rancher RKE Government
-    shortLabel: RKE Government
+    label: Rancher RKE2
+    shortLabel: RKE2
   rkeWindows:
     shortLabel: Windows
   security:
@@ -9063,7 +9071,6 @@ modalAddCloudKey:
       eu_west_101: Europe-Dublin
       tr_west_1: Turkey-Istanbul
       ae_ad_1: Middle-East-Abu-Dhabi-OP5
-    
 modalConfirmYaml2Form:
   header: "You are about to switch from yaml to form based editing"
   helpText: "Data loss may occur when switching back to form based editing. The following fields have been identified as fields that will be lost. Please note this list is not all-inclusive, you should verify your answers before saving the application. Please make sure you intended to switch or that you are okay losing the data before selecting confirm."
@@ -10474,9 +10481,15 @@ nodeDriver:
       pod:
         label: VM Scheduling
         namespace:
-          PodInNs: 'VMs in these namespaces:'
+          PodInNs: 'Workloads in these namespaces'
           podsNs: This VM's namespace
           tips: e.g. default,system,base
+          allNamespaces: All namespaces
+          label: Namespaces
+        addLabel: Add Workload Selector
+        removeRuleLabel: Remove this Workload Selector
+        topologyKey:
+          placeholder: topology.kubernetes.io/zone
     disks:
       addVolume:
         imageVolume: Add Image Volume

@@ -4163,6 +4163,10 @@ clusterNew:
         parsedServiceCidr: 'Kubernetes 服务地址范围必须在选定的虚拟网络范围内。'
         parsedDnsServiceIp: 'Kubernetes DNS 服务 IP 地址必须在 Kubernetes 服务地址范围内。'
         parsedDockerBridgeCidr: 'Docker bridge 地址不能与选定的虚拟网络或 Kubernetes 服务地址相同'
+      nodeResourceGroup:
+        chars: '{key} 名称只能由下划线、句点、连字符、括号、字母或数字组成。'
+        length: '{key} 名称不能超过 80 个字符。'
+        periodEnd: '{key} 名称不能以句号结尾。'
     import:
       clusterOptions:
         detail: 配置额外的集群选项
@@ -4218,7 +4222,7 @@ clusterNew:
       availablityZones:
         label: 节点可用 zone
       errors:
-        linuxName: Linux节点池名称必须是 1-11 个字符。
+        linuxName: Linux 节点池名称必须为 1-12 个字符。
         nameFormat: 节点池名称必须全部为小写，以字母开头，只能包含字母和数字。
         windowsName: Windows节点池名称必须是1-6个字符。
         maxSurge: 最大 Surge 必须是一个百分比（1-100）或一个大于1的整数。
@@ -4248,6 +4252,10 @@ clusterNew:
       label: 最大 Surge
       placeholder: Number or %
     nodeLabelDetail: 为该节点池中的所有节点配置标签
+    nodeResourceGroup:
+      helpText: 群集资源组包含 Kubernetes 服务资源。节点资源组包含与群集相关的所有基础架构资源。如果留空，Azure 将自动创建一个格式为 MC_<resource-group1>_<cluster-name>_<location> 的名称。此值不能超过 80 个字符。
+      label: 节点资源组
+      placeholder: aks-node-resource-group
   aliyunack:
     shortLabel: Alibaba ACK
   tencenttke:
@@ -4587,8 +4595,8 @@ clusterNew:
       label: 公共 Endpoint
     policyConfigDisableWarning: 禁用 "网络策略 "将删除并重新创建所有节点池中的所有节点。根据集群的规格，这可能需要大量的时间。
   rke2:
-    label: Rancher RKE Government
-    shortLabel: RKE Government
+    label: Rancher RKE2
+    shortLabel: RKE2
   k3simport:
     label: Rancher K3S
     shortLabel: K3S
@@ -10194,9 +10202,15 @@ nodeDriver:
       pod:
         label: 虚拟机调度
         namespace:
-          PodInNs: '在这些命名空间中的虚拟机:'
+          PodInNs: '这些命名空间中的工作负载'
           podsNs: 该虚拟机的命名空间
           tips: 例如：default,system,base
+          allNamespaces: 所有命名空间
+          label: 命名空间
+        addLabel: 添加工作负载选择器
+        removeRuleLabel: 移除此工作负载选择器
+        topologyKey:
+          placeholder: topology.kubernetes.io/zone
     disks:
       addVolume:
         imageVolume: 添加镜像卷

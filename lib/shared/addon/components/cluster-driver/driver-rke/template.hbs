@@ -1419,11 +1419,13 @@
            expandOnInit=false
            expandAll=al.expandAll
            expand=(action expandFn)
+           componentId="cluster-driver__cluster-agent"
         }}
           <FormAgentConfig
             @mode={{mode}}
             @cluster={{cluster}}
             @type="cluster"
+            data-testid="form-cluster-agent"
           />
         {{/accordion-list-item}}
         {{#accordion-list-item
@@ -1432,11 +1434,14 @@
            expandOnInit=false
            expandAll=al.expandAll
            expand=(action expandFn)
+           componentId="cluster-driver__fleet-agent"
+
         }}
           <FormAgentConfig
             @mode={{mode}}
             @cluster={{cluster}}
             @type="fleet"
+            data-testid="form-fleet-agent"
           />
         {{/accordion-list-item}}
 
@@ -1485,6 +1490,7 @@
          expandOnInit=true
          expandAll=al.expandAll
          expand=(action expandFn)
+         componentId="cluster-driver__role"
       }}
         <CustomCommand @token={{token}} @isLinux={{isLinux}}/>
       {{/accordion-list-item}}
@@ -1546,11 +1552,12 @@
       editing=isEdit
       save=(action "driverSave")
       cancel=(action "close")
+      data-testid='save-cancel-rke1'
     }}
   {{/if}}
 {{else}}
   <div class="footer-actions">
-    <button class="btn bg-primary" type="button" {{action "close"}}>
+    <button data-testid="driver-rke__done" class="btn bg-primary" type="button" {{action "close"}}>
       {{t "clusterNew.rke.done"}}
     </button>
   </div>

@@ -5,6 +5,7 @@ import Controller, { inject as controller } from '@ember/controller';
 import C from 'ui/utils/constants';
 import { computed, get } from '@ember/object';
 import { on } from '@ember/object/evented';
+import { isEmbedded } from 'shared/utils/util';
 
 export default Controller.extend({
   settings:      service(),
@@ -37,9 +38,7 @@ export default Controller.extend({
       }
 
       // Add class to hide Page Header and Footer when embedded
-      const embedded = window.top !== window;
-
-      if (embedded) {
+      if (isEmbedded()) {
         $('BODY').addClass('embedded'); // eslint-disable-line
       }
     });

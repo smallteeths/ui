@@ -1,7 +1,7 @@
 <table class="table fixed no-lines mb-20">
   <thead>
     <tr>
-      {{#if (not labelSelector)}}
+      {{#if (not isPod)}}
         <th class="acc-label">
           {{t "clusterNew.agentConfig.overrideAffinity.nodeAffinity.nodeSelectorTerm.type"}}
         </th>
@@ -24,8 +24,8 @@
   </thead>
   <tbody>
     {{#each allMatches as |match|}}
-      <tr>
-        {{#if (not labelSelector)}}
+      <tr data-testid="match-expression-row">
+        {{#if (not isPod)}}
           <td>
           {{#input-or-display
               editable=editing
@@ -40,6 +40,7 @@
               @localizedLabel={{true}}
               @action={{action "typeChanged" match}}
               @disabled={{not editing}}
+              data-testid="select-match-expression-type"
           />
           {{/input-or-display}}
           </td>
@@ -56,6 +57,7 @@
               type="text"
               class="form-control input-sm"
               value=match.match.key
+              data-testid='input-match-expression-key'
             }}
           {{/input-or-display}}
         </td>
@@ -75,6 +77,7 @@
               optionLabelPath="label"
               @localizedLabel={{true}}
               @action={{action "operatorChanged" match}}
+              data-testid="select-match-expression-operator"
             />
           {{/input-or-display}}
         </td>
@@ -90,15 +93,18 @@
             {{input-array-as-string
               value=match.match.values
               inputClass='form-control input-sm'
+              data-testid="input-match-expression-values"
             }}
             {{else if (or (eq match.match.operator "Gt") (eq match.match.operator "Lt"))}}
-              {{input-array-as-string
+              <InputArrayAsString
                 type="number"
                 inputClass="form-control input-sm"
-                value=match.match.values
-              }}
+                @value={{match.match.values}}
+                @update={{action "operatorChanged" match}}
+                data-testid="input-match-expression-values"
+                />
             {{else}}
-            {{t "generic.na"}}
+              {{t "generic.na"}}
             {{/if}}
           {{/input-or-display}}
         </td>
@@ -107,7 +113,7 @@
         </td>
         {{#if editing}}
           <div class="input-group-btn">
-            <button class="btn bg-primary btn-sm" type="button" {{action "removeMatchAction" match}}>
+            <button data-testid="button-match-expression-remove" class="btn bg-primary btn-sm" type="button" {{action "removeMatchAction" match}}>
               <i class="icon icon-minus"/>
             </button>
           </div>
@@ -117,7 +123,7 @@
   </tbody>
 </table>
 {{#if editing}}
-  <button class="btn bg-link icon-btn" type="button" {{action "addMatch"}}>
+  <button data-testid="button-match-expression-add" class="btn bg-link icon-btn" type="button" {{action "addMatch"}}>
     <i class="icon icon-plus text-small"/>
     <span>
       {{t "clusterNew.agentConfig.overrideAffinity.podAffinity.matchExpressions.add"}}
