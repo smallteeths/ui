@@ -3720,6 +3720,7 @@ cloudProvider:
   harvester:
     helpText: Please enter a "Cluster Name", select a node template and use imported credential to enable this option
     label: Harvester (Out-of-tree)
+  unsupported: The current Cloud Provider is not supported by this version of Kubernetes. The Cloud Provider has been changed to External. Please use the Cloud Provider Config to supply an out-of-tree configuration as needed.
 catalogSettings:
   header: Catalogs
   notAvailable: "Not available: there is a custom catalog called <code>{name}</code>"
@@ -5156,6 +5157,8 @@ clusterNew:
         flannelInterfaceName: Flannel Interface Name
         label: Network advanced options
       none: None
+      banners:
+        weaveDeprecation: The Weave CNI plugin is deprecated as of Kubernetes 1.27 and will be removed in 1.30
     networkMTU:
       detail: e.g. 1500
       help: Only applied if the value is non-zero. When applied, the MTU value is explicitly configured for the chosen network provider (disabling auto-discovery). The override must be calculated from the host's MTU minus the CNI plugin's required overhead.
