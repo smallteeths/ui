@@ -4026,6 +4026,7 @@ clusterNew:
     zone:
       label: 區域
       prompt: 選擇區域...
+      fetchError: 無法獲取 zone - 檢查項目 ID 並確保雲憑證具有適當權限
     project:
       label: 項目
       placeholder: '例如：my-project'

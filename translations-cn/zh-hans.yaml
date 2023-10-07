@@ -4274,6 +4274,7 @@ clusterNew:
     zone:
       label: 区域
       prompt: 选择区域...
+      fetchError: 无法获取 zone - 检查项目 ID 并确保云凭证具有适当权限
     project:
       label: 项目
       placeholder: 例如：my-project
