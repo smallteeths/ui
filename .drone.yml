@@ -33,7 +33,7 @@ steps:
     path: /var/run/docker.sock
   when:
     branch:
-    - release-2.7.7
+    - release-2.8.0
     event:
       exclude:
       - pull_request
@@ -46,13 +46,13 @@ steps:
     acl:
     - allUsers:READER
     cache_control: "no-cache,must-revalidate"
-    source: dist/static/release-2.7.7
-    target: releases.rancher.com/ui/release-2.7.7
+    source: dist/static/release-2.8.0
+    target: releases.rancher.com/ui/release-2.8.0
     token:
       from_secret: google_auth_key
   when:
     branch:
-    - release-2.7.7
+    - release-2.8.0
     event:
       exclude:
       - pull_request
@@ -109,24 +109,6 @@ steps:
   when:
     event:
       - tag
-    ref:
-      include:
-      - "refs/tags/v2.8.*"
-
-- name: create-pr-in-rancher
-  image: curlimages/curl:7.81.0
-  user: root
-  environment:
-    PAT_USERNAME:
-      from_secret: pat_username
-    PAT_TOKEN:
-      from_secret: github_token
-  commands:
-  - apk -U --no-cache add bash
-  - scripts/create-pr-in-rancher
-  when:
-    event:
-    - tag
     ref:
       include:
       - "refs/tags/v2.8.*"
