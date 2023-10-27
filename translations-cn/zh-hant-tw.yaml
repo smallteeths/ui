@@ -3317,7 +3317,7 @@ cloudProvider:
   amazon: Amazon
   azure: Azure
   external:
-    label: 擴展
+    label: External (Out-Of-Tree)
     helpText: '請編輯 YAML 以指定雲控制管理器所需的插件。'
     vsphereHelpText: Out-of-tree cloud provider for vsphere is available through the vsphere-csi and vsphere-cpi helm charts. Please refer to the <a href="{docsBase}/cluster-provisioning/rke-clusters/cloud-providers/vsphere/out-of-tree" target="_blank" rel="nofollow noopener noreferrer">docs</a> for installation.
   name: 雲提供商名稱
@@ -3390,6 +3390,10 @@ cloudProvider:
   harvester:
     helpText: 請輸入一個 "集群名稱 "並選擇一個節點模板來啟用該選項。
     label: Harvester (Out-of-tree)
+  externalAmazon:
+    helpText: External Amazon 啟用 useInstanceMetadataHostname。啟用 useInstanceMetadataHostname 後，RKE 將從 ec2 元數據服務配置節點名稱。在未配置先決條件的情況下在群集中配置雲提供商將導致群集無法正確調配。支持的雲提供商所需的先決條件可在文檔中找到。
+    label: External Amazon (Out-Of-Tree)
+  unsupported: 此版本的 Kubernetes 不支持當前的雲提供商。雲提供商已更改為 External Amazon。請使用雲提供商配置（Cloud Provider Config）根據需要提供 out-of-tree 配置。
 catalogSettings:
   header: 應用商店
   notAvailable: "不可用: 這是名為<code>{name}</code>的自定義商店"
