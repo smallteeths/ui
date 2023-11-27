@@ -5086,8 +5086,6 @@ clusterNew:
       detail: '授权集群访问地址可用于直接访问 Kubernetes API SERVER，绕过 Rancher API 代理。'
       label: 授权集群访问地址
     gpu:
-      enableGPUManagement:
-        label: GPU 共享调度（显存单位）（弃用）
       nodePort:
         label: 设置 GPU 扩展调度器使用的 NodePort 端口
         placeholder: "例如: 1024"

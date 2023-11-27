@@ -3627,8 +3627,6 @@ clusterNew:
       label: 高級集羣選項
       detail: 自定義集羣參數。
     gpu:
-      enableGPUManagement:
-        label: GPU 共享調度（顯存單位）（棄用）
       nodePort:
         label: 設置 GPU 擴展調度器使用的 NodePort 端口
         placeholder: "例如: 1024"
