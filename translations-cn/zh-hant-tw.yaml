@@ -3393,7 +3393,7 @@ cloudProvider:
   externalAmazon:
     helpText: External Amazon 啟用 useInstanceMetadataHostname。啟用 useInstanceMetadataHostname 後，RKE 將從 ec2 元數據服務配置節點名稱。在未配置先決條件的情況下在群集中配置雲提供商將導致群集無法正確調配。支持的雲提供商所需的先決條件可在文檔中找到。
     label: External Amazon (Out-Of-Tree)
-  unsupported: 此版本的 Kubernetes 不支持當前的雲提供商。雲提供商已更改為 External Amazon。請使用雲提供商配置（Cloud Provider Config）根據需要提供 out-of-tree 配置。
+  unsupported: 此版本的 Kubernetes 不支持當前的雲提供商。雲提供商已更改為 External Amazon。
 catalogSettings:
   header: 應用商店
   notAvailable: "不可用: 這是名為<code>{name}</code>的自定義商店"

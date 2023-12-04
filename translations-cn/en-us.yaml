@@ -3720,7 +3720,7 @@ cloudProvider:
   harvester:
     helpText: Please enter a "Cluster Name", select a node template and use imported credential to enable this option
     label: Harvester (Out-of-tree)
-  unsupported: The current Cloud Provider is not supported by this version of Kubernetes. The Cloud Provider has been changed to External Amazon. Please use the Cloud Provider Config to supply an out-of-tree configuration as needed.
+  unsupported: The current Cloud Provider is not supported by this version of Kubernetes. The Cloud Provider has been changed to External Amazon.
   externalAmazon:
     helpText: External Amazon enables use of useInstanceMetadataHostname. When useInstanceMetadataHostname is enabled, RKE will configure node name from ec2 metadata service. Configuring a Cloud Provider in your cluster without configuring the prerequisites will cause your cluster to not provision correctly. Prerequisites needed for supported cloud providers can be found in the documentation.
     label: External Amazon (Out-Of-Tree)
