@@ -25,6 +25,16 @@
   }}
 </div>
 
+<div class="inline-form pt-20">
+  {{form-value-array
+    initialValues=model.whitelistDomains
+    valueLabel="modalEditDriver.whitelist.label"
+    addActionLabel="modalEditDriver.whitelist.addActionLabel"
+    noDataLabel="modalEditDriver.whitelist.noData"
+    changed=(action "updateWhitelist")
+  }}
+</div>
+
 <div class="mt-20"></div>
 
 {{top-errors errors=errors}}
