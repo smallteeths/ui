@@ -4783,6 +4783,9 @@ clusterNew:
         label: Kube Proxy Mode
     secretsEncryption:
       label: 加密密文
+    externalFlags:
+      portChecking:
+        label: 端口檢查
   custom:
     label: 自定義
     shortLabel: 自定義

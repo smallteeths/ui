@@ -197,7 +197,7 @@
             @addOverride={{action "addOverride"}}
           />
           <div class="row">
-            <div class="col span-12">
+            <div class="col span-6">
               <CruCloudProvider
                 @cluster={{cluster}}
                 @driver={{nodeWhich}}
@@ -210,6 +210,49 @@
                 @addOverride={{action "addOverride"}}
                 @model={{model}}
               />
+            </div>
+            <div class="col span-6">
+              <label class="acc-label">
+                {{t "clusterNew.rke.externalFlags.portChecking.label"}}
+                {{#if clusterTemplateCreate}}
+                  <ClusterTemplateOverrideToggle
+                    @path="cluster.externalFlags.disablePortCheck"
+                    @configVariable={{cluster.externalFlags.disablePortCheck}}
+                    @addOverride={{action "addOverride"}}
+                    @questions={{model.clusterTemplateRevision.questions}}
+                  />
+                {{/if}}
+              </label>
+              <CheckOverrideAllowed
+                @applyClusterTemplate={{applyClusterTemplate}}
+                @paramName="cluster.externalFlags.disablePortCheck"
+                @clusterTemplateRevision={{model.clusterTemplateRevision.clusterConfig}}
+                @questions={{model.clusterTemplateRevision.questions}}
+              >
+                {{#input-or-display
+                   editable=notView
+                   value=cluster.externalFlags.disablePortCheck
+                }}
+                  <div class="radio">
+                    <label>
+                      {{radio-button
+                        selection=cluster.externalFlags.disablePortCheck
+                        value=true
+                      }}
+                      {{t "generic.disabled"}}
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                      {{radio-button
+                        selection=cluster.externalFlags.disablePortCheck
+                        value=false
+                      }}
+                      {{t "generic.enabled"}}
+                    </label>
+                  </div>
+                {{/input-or-display}}
+              </CheckOverrideAllowed>
             </div>
           </div>
         {{/accordion-list-item}}

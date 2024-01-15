@@ -5264,6 +5264,9 @@ clusterNew:
     kubeProxy:
       mode:
         label: Kube Proxy Mode
+    externalFlags:
+      portChecking:
+        label: Port Checking
   rke2:
     label: Rancher RKE2
     shortLabel: RKE2
