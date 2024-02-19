@@ -22,6 +22,14 @@
       {{input type="text" value=filePath classNames="form-control" placeholder=(t "modalDownLoadFileComponent.placeholder")}}
     </div>
   </div>
+  <div class="row">
+    <div class="col span-12">
+      <label class="flex-align-center">
+        {{input type="checkbox" class="form-control mr-5" checked=windows}}
+        <span>Windows</span>
+      </label>
+    </div>
+  </div>
   {{#if largeFileSize}}
     {{banner-message
       icon="icon-alert"

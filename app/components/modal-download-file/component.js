@@ -14,6 +14,7 @@ export default Component.extend(ModalBase, {
   containers:       null,
   currentContainer: '',
   filePath:         '',
+  windows:          false,
   errors:           null,
   percent:          -1,
   total:            -1,
@@ -51,6 +52,7 @@ export default Component.extend(ModalBase, {
       }
 
       const filePath = get(this, 'filePath');
+      const windows = get(this, 'windows');
       const fileName = filePath.substr(filePath.lastIndexOf('/') + 1);
 
       if ( typeof XMLHttpRequest !== 'undefined' ) {
@@ -58,6 +60,7 @@ export default Component.extend(ModalBase, {
         const body =  JSON.stringify({
           containerName: get(this, 'currentContainer'),
           filePath,
+          windows
         })
 
         set(this, 'inProgressFunction', (resp) => {
@@ -115,6 +118,7 @@ export default Component.extend(ModalBase, {
           data:    JSON.stringify({
             containerName: get(this, 'currentContainer'),
             filePath,
+            windows
           }),
         }).then((data) => {
           this.growl.fromError('Error', 'If the browser version is low, there may be errors when downloading')
