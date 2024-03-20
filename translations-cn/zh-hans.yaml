@@ -8278,6 +8278,7 @@ managedImportClusterInfo:
     proceed: 继续
     rke2Warning: 从 1.25 版本开始，Kubernetes 已经取消了对 Pod 安全策略（PSPs）的支持。 在您继续保存对集群的更改之前，请遵循<a aria-label="documentation for hardened rke2 cluster upgrades" href="https://docs.rke2.io/known_issues" target="_blank" rel="nofollow noreferrer noopener">这里的说明</a>，手动准备集群以进行升级。
   rke2Warning: Kubernetes 从 1.25 版本开始取消了对 Pod 安全策略（PSP）的支持。 请按照 <a aria-label="documentation for hardened rke2 cluster upgrades" href="https://docs.rke2.io/known_issues#hardened-125" target="_blank" rel="nofollow noreferrer noopener">这里</a> 的说明，在你继续保存对集群的更改之前，手动准备集群的升级。
+  kubernetesVersionBanner: 在 Kubernetes 1.27 或更高版本中，Amazon 云提供商需要额外配置。<br><br>有关详细信息，请参阅<a href="https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/migrate-to-an-out-of-tree-cloud-provider/migrate-to-out-of-tree-amazon" target="_blank">文档</a>。
 k3sNodeEnvVarSection:
   title: K3S 节点环境变量
   detail: 只读取此 K3S 节点的环境变量列表。
@@ -9901,6 +9902,10 @@ nodeDriver:
         placeholder: '例如: ip:VM Network, expression 或 string'
       label: vApp 属性
       addActionLabel: 添加参数
+    gracefulShutdownTimeout:
+      help: 强制删除基础架构中的虚拟机前的等待时间（秒）。零表示禁用正常关机。
+      label: 正常关机超时
+      unit: 秒
   azure:
     placement:
       title: 区域

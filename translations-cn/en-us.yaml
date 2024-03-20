@@ -8514,6 +8514,7 @@ managedImportClusterInfo:
     proceed: Proceed
     rke2Warning: Kubernetes has removed support for Pod Security Policies (PSPs) starting with version 1.25. Please follow the instructions <a aria-label="documentation for hardened rke2 cluster upgrades" href="https://docs.rke2.io/known_issues" target="_blank" rel="nofollow noreferrer noopener">here</a> to manually prepare the cluster for the upgrade before you proceed with saving the changes to the cluster.
   rke2Warning: Kubernetes has removed support for Pod Security Policies (PSPs) starting with version 1.25. Please follow the instructions <a aria-label="documentation for hardened rke2 cluster upgrades" href="https://docs.rke2.io/known_issues#hardened-125" target="_blank" rel="nofollow noreferrer noopener">here</a> to manually prepare the cluster for the upgrade before you proceed with saving the changes to the cluster.
+  kubernetesVersionBanner: On Kubernetes 1.27 or greater, the Amazon Cloud Provider requires additional configuration.<br><br>See <a href="https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/kubernetes-clusters-in-rancher-setup/migrate-to-an-out-of-tree-cloud-provider/migrate-to-out-of-tree-amazon" target="_blank">the documentation</a> for more information.
 k3sNodeEnvVarSection:
   title: K3S Node Environment Variables
   detail: Read only list of the K3s startup environment variables for this node.
@@ -10134,6 +10135,10 @@ nodeDriver:
         placeholder: "e.g. ip:VM Network, expression or string"
       label: vApp properties
       addActionLabel: Add Property
+    gracefulShutdownTimeout:
+      help: The time in seconds to wait before forcing deleting VMs in the infrastructure. Zero means disable graceful shutdown.
+      label: Graceful Shutdown Timeout
+      unit: Seconds
   azure:
     placement:
       title: Placement
