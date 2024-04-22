@@ -12,10 +12,15 @@ export default Route.extend({
     const pid = this.paramsFor('authenticated.project');
 
     return hash({
-      role:         gs.find('projectroletemplatebinding', params.role_id),
-      project:      gs.find('project', pid.project_id, { forceReload: true }),
-      roles:        get(this, 'roleTemplateService').get('allFilteredRoleTemplates'),
+      role:     gs.find('projectroletemplatebinding', params.role_id),
+      roles:    gs.find('roletemplate', null, {
+        filter: {
+          hidden:  false,
+          context: 'cluster'
+        }
+      }),
       roleBindings: gs.findAll('projectRoleTemplateBinding'),
+      project:      gs.find('project', pid.project_id, { forceReload: true }),
     });
   },
 });

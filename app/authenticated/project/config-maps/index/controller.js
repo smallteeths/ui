@@ -2,6 +2,7 @@ import { alias } from '@ember/object/computed';
 import { get, set, computed } from '@ember/object';
 import Controller, { inject as controller } from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { isEmbedded } from 'shared/utils/util';
 
 export const headers = [
   {
@@ -54,6 +55,7 @@ export default Controller.extend({
   resource:    ['configmap'],
 
   headers,
+  showLegacyMessage: isEmbedded(),
 
   namespaceId: '',
 

@@ -12,10 +12,15 @@ export default Route.extend({
     const cid = this.paramsFor('authenticated.cluster');
 
     return hash({
-      cluster:      gs.find('cluster', cid.cluster_id, { forceReload: true }),
-      role:         gs.find('clusterroletemplatebinding', params.role_id),
-      roles:        get(this, 'roleTemplateService').get('allFilteredRoleTemplates'),
+      role:     gs.find('clusterroletemplatebinding', params.role_id),
+      roles:    gs.find('roletemplate', null, {
+        filter: {
+          hidden:  false,
+          context: 'cluster'
+        }
+      }),
       roleBindings: gs.findAll('clusterRoleTemplateBinding'),
+      cluster:      gs.find('cluster', cid.cluster_id, { forceReload: true }),
     });
   },
 });

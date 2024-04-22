@@ -64,3 +64,7 @@ $table-quota-bg-accent               : rgba(249, 251, 253, 1);
 // form
 $input-color-placeholder             : lighten($text-color, 25%);
 $input-color                         : $text-color;
+
+// JSON Diff colors
+$diff-green                          : #bbffbb;
+$diff-red                            : #ffbbbb;

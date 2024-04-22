@@ -55,6 +55,7 @@ export const DEFAULT_NODE_GROUP_CONFIG = {
 export const DEFAULT_EKS_CONFIG = {
   amazonCredentialSecret: '',
   displayName:            '',
+  ebsCSIDriver:           false,
   imported:               false,
   kmsKey:                 '',
   kubernetesVersion:      '',
@@ -216,6 +217,7 @@ export default Resource.extend(Grafana, ResourceUsage, {
   grafanaDashboardName:        'Cluster',
   isMonitoringReady:           false,
   _cachedConfig:               null,
+  canHaveLabels:               true,
   clusterTemplate:             reference('clusterTemplateId'),
   clusterTemplateRevision:     reference('clusterTemplateRevisionId'),
   machines:                    alias('nodes'),
@@ -1072,13 +1074,12 @@ export default Resource.extend(Grafana, ResourceUsage, {
 
   clearConfigFieldsForClusterTemplate() {
     let clearedNull   = ['localClusterAuthEndpoint', 'rancherKubernetesEngineConfig', 'enableNetworkPolicy'];
-    let clearedDelete = ['defaultClusterRoleForProjectMembers', 'defaultPodSecurityPolicyTemplateId'];
+    let clearedDelete = ['defaultClusterRoleForProjectMembers'];
     let {
       localClusterAuthEndpoint,
       rancherKubernetesEngineConfig,
       enableNetworkPolicy,
       defaultClusterRoleForProjectMembers,
-      defaultPodSecurityPolicyTemplateId,
     } = this;
 
     let cachedConfig = {
@@ -1086,7 +1087,6 @@ export default Resource.extend(Grafana, ResourceUsage, {
       rancherKubernetesEngineConfig,
       enableNetworkPolicy,
       defaultClusterRoleForProjectMembers,
-      defaultPodSecurityPolicyTemplateId,
     };
 
     // set this incase we fail to save the cluster;
