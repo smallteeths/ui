@@ -55,9 +55,9 @@ export default Controller.extend({
   resource:    ['configmap'],
 
   headers,
-  showLegacyMessage: isEmbedded(),
-
   namespaceId: '',
+
+  showLegacyMessage: isEmbedded(),
 
   group:        alias('projectController.group'),
   groupTableBy: alias('projectController.groupTableBy'),

@@ -31,7 +31,7 @@ steps:
     path: /var/run/docker.sock
   when:
     branch:
-    - release-2.8.3-cn
+    - release-2.9.0-cn
     event:
     - push
 
@@ -61,10 +61,10 @@ steps:
       from_secret: aws_access_secret
     source: dist/static/release-2.8/**/*
     strip_prefix: dist/static/release-2.8
-    target: /static-2-8/release-2.8
+    target: /static-2-9/release-2.9
   when:
     branch:
-    - release-2.8.3-cn
+    - release-2.9.0-cn
     event:
     - push
 
