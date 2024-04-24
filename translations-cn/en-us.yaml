@@ -1123,7 +1123,7 @@ banner:
   pipeline: Pipelines has been deprecated as of Rancher 2.5.0 - check out the <a href="{docsBase}/faq/deprecated-features-25x" target="_blank">FAQ</a>. For continuous delivery capabilities check out <a href="{dashboardBase}c/local/fleet">Rancher Continuous Delivery</a> in the new view.
   pipeline21: Pipelines in Kubernetes 1.21+ are no longer supported.
   upgrade21: The legacy feature flag is enabled and not all legacy features are supported in Kubernetes 1.21+.
-  secrets: Legacy project functionality can be used to manage secrets that need to be available to all namespaces in a project
+  secrets: Legacy project functionality can be used to manage secrets that need to be available to all namespaces in a project.
   dashboard: Try out the <a href="{dashboardLink}">Cluster Explorer</a> for a new way to view and manage your Kubernetes resources.
   apps: Legacy Apps have been deprecated as of Rancher v2.7.0 and will be removed in a future release - check out the <a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">Release Notes</a>.
   catalogs: Catalogs have been deprecated as of Rancher v2.7.0 and will be removed in a future release - check out the <a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">Release Notes</a>.
@@ -1131,6 +1131,9 @@ banner:
   globalDnsEntries: Global DNS Entries have been deprecated as of Rancher v2.7.0 and will be removed in a future release - check out the <a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">Release Notes</a>.
   globalDnsProviders: Global DNS Providers have been deprecated as of Rancher v2.7.0 and will be removed in a future release - check out the <a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">Release Notes</a>.
   longhorn: For more information on how to migrate the Longhorn chart installed in the legacy Rancher UI to the chart for the new Rancher UI see <a href="https://longhorn.io/kb/how-to-migrate-longhorn-chart-installed-in-old-rancher-ui-to-the-chart-in-new-rancher-ui/" target="_blank">here</a>.
+  configmaps: Legacy project functionality can be used to manage config maps that need to be available to all namespaces in a project.
+  configmapsDeprecated: Project-scoped Config Maps have been deprecated as of Rancher v2.9.0 and will be removed in a future release - check out the <a href="https://github.com/rancher/rancher/releases/tag/v2.9.0" target="_blank">Release Notes</a>.
+  secretsDeprecated: Project-scoped Secrets have been deprecated as of Rancher v2.9.0 and will be removed in a future release - check out the <a href="https://github.com/rancher/rancher/releases/tag/v2.9.0" target="_blank">Release Notes</a>.
 catalogPage:
   istio:
     header: Traffic Rules Catalog
@@ -1548,6 +1551,7 @@ clusterTemplatesPage:
     error: Two RKE Template Revisions required to perform diff
     header: Compare RKE Template Revisions
     label: Compare
+    key: 'Key:'
 ingressPage:
   header: 'Ingress: {name}'
   gkeIngressWarning: 'It may take a few minutes for Kubernetes Engine to allocate an external IP address and prepare the load balancer. In the meanwhile, you may get errors like HTTP 404 and HTTP 500 until the load balancer is ready to serve the traffic.'
@@ -3960,6 +3964,9 @@ clusterNew:
         custom: 'Custom: Choose from your existing VPC and Subnets'
         default: 'Standard: VPC and Subnet are automatically created'
       title: Networking
+    outOfTree:
+      ebsCSIDriver:
+        label: Out of tree EBS CSI Driver
   azureaks:
     access:
       cloudCred: Cloud Credential
@@ -4358,9 +4365,11 @@ clusterNew:
       COS_D: Container-Optimized OS with Containerd
       UBUNTU: Ubuntu with Docker
       UBUNTU_D: Ubuntu with Containerd
-      WINDOWS_LTSC: Windows Long Term Service Channel
-      WINDOWS_SAC: Windows Semi-Annual Channel
+      WINDOWS_LTSC: Windows Long Term Service Channel with Docker
+      WINDOWS_SAC: Windows Semi-Annual Channel with Docker
       label: Image Type
+      WINDOWS_LTSC_CONTAINERD: Windows Long Term Service Channel with Containerd
+      WINDOWS_SAC_CONTAINERD: Windows Semi-Annual Channel with Containerd
     import:
       clusterOptions:
         detail: Configure additional cluster options
@@ -4389,6 +4398,7 @@ clusterNew:
         cidrLabel: Service Secondary CIDR Block
         nameLabel: Services Secondary Range Name
       title: IP Allocation Policy
+      noSecondaryRange: <None>
     ipPolicyClusterIpv4CidrBlock:
       label: Pod address range
       placeholder: e.g. 10.96.0.0/11
@@ -5169,7 +5179,7 @@ clusterNew:
       label: CNI Plugin MTU Override
     networkPolicy:
       label: Project Network Isolation
-      editHelp: The Project Network Isolation option cannot be changed after the cluster is created
+      editHelp: The Project Network Isolation option cannot be enabled after the cluster is created
       selectNetworkPolicyHelp: You must have a Network Policy selected to use Project Network Isolation
     nodeName:
       detail: Optionally configure the node name as identification instead of the actual hostname
@@ -5364,6 +5374,7 @@ clusterNew:
   nodePools:
     errors:
       hostnamePrefix: Node pools must have unique name prefixes
+      namesNotUnique: 'Node pool names must be unique - duplicate names detected: {names}'
   psa:
     label: Pod Security Admission Configuration Template
   agentConfig:
@@ -5429,6 +5440,9 @@ clusterNew:
     title:
       cluster: Cluster Agent Configuration
       fleet: Fleet Agent Configuration
+  nodeGroups:
+    errors:
+      namesNotUnique: 'Node group names must be unique - duplicate names detected: {names}'
 clusterTemplateNew:
   members:
     label: Member Roles

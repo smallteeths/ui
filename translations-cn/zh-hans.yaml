@@ -1121,7 +1121,7 @@ banner:
   istio21: Kubernetes 1.21 以上版本的 Istio（v1）不再被支持。
   logging21: Kubernetes 1.21 以上版本的 Logging（v1）已不再支持。
   pipeline21: Kubernetes 1.21 以上版本的 Pipelines 不再被支持。
-  secrets: Legacy 项目可用于管理需要对项目中所有命名空间可用的秘钥。
+  secrets: 遗留项目功能可用于管理需要项目中的所有命名空间可用的密文
   upgrade21: 启用了 legacy 功能标志，在Kubernetes 1.21+中，并非所有的legacy 功能都被支持。
   apps: 从 Rancher v2.7.0 开始，遗留的应用程序已被废弃，并将在未来的版本中被删除 - 请查看<a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">发布说明</a>。
   catalogs: 从 Rancher v2.7.0 开始，Catalogs 已被弃用，并将在未来的版本中删除 - 请查看<a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">发布说明</a>。
@@ -1129,6 +1129,9 @@ banner:
   globalDnsEntries: 从 Rancher v2.7.0 开始，全局 DNS Entries 已被弃用，并将在未来的版本中删除 - 请查看<a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">发布说明</a>。
   globalDnsProviders: 从 Rancher v2.7.0 开始，全局 DNS Providers 已被弃用，并将在未来的版本中删除 - 请查看<a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">发布说明</a>。
   longhorn: 有关如何将安装在遗留 Rancher UI 中的 Longhorn chart 迁移到新 Rancher UI 中的更多信息，请参阅<a href="https://longhorn.io/kb/how-to-migrate-longhorn-chart-installed-in-old-rancher-ui-to-the-chart-in-new-rancher-ui/" target="_blank">这里</a>。
+  configmaps: 遗留项目功能可用于管理需要可用于项目中所有命名空间的配置映射。
+  configmapsDeprecated: 从 Rancher v2.9.0 起，项目范围的配置映射已被弃用，并将在未来的版本中删除 - 请查看<a href="https://github.com/rancher/rancher/releases/tag/v2.9.0" target="_blank">发布说明</a>。
+  secretsDeprecated: 从 Rancher v2.9.0 起，项目范围内的密文已被弃用，并将在未来的版本中移除 - 请查看 <a href="https://github.com/rancher/rancher/releases/tag/v2.9.0" target="_blank">发布说明</a>.
 catalogPage:
   istio:
     header: 流量规则商店
@@ -1546,6 +1549,7 @@ clusterTemplatesPage:
     error: 需要对 RKE 模板进行两次修订，以进行差异化操作
     header: 对比 RKE 模板的 Revisions
     label: 对比
+    key: 'Key:'
 ingressPage:
   header: 'Ingress: {name}'
   gkeIngressWarning: 'Kubernetes Engine 可能需要几分钟才能分配外部 IP 地址并准备负载均衡器。与此同时，您可能会收到 HTTP 404 和 HTTP 500 等错误，直到负载平衡器准备好为流量提供服务。'
@@ -3646,7 +3650,7 @@ cloudProvider:
   amazon: Amazon
   azure: Azure
   external:
-    label: External (Out-Of-Tree)
+    label: 扩展
     helpText: '请编辑 YAML 以指定云控制管理器所需的插件。'
     vsphereHelpText: Out-of-tree cloud provider for vsphere is available through the vsphere-csi and vsphere-cpi helm charts. Please refer to the <a href="{docsBase}/cluster-provisioning/rke-clusters/cloud-providers/vsphere/out-of-tree" target="_blank" rel="nofollow noopener noreferrer">docs</a> for installation.
   name: 云提供商名称
@@ -3999,6 +4003,9 @@ clusterNew:
         input:
           label: 要注册的集群名
         createLabel: 注册集群
+    outOfTree:
+      ebsCSIDriver:
+        label: 树外 EBS CSI 驱动程序
   azureaks:
     label: Azure 容器服务
     shortLabel: Azure AKS
@@ -4522,9 +4529,11 @@ clusterNew:
       COS_D: Container-Optimized OS with Containerd
       UBUNTU: Ubuntu with Docker
       UBUNTU_D: Ubuntu with Containerd
-      WINDOWS_LTSC: Windows Long Term Service Channel
-      WINDOWS_SAC: Windows Semi-Annual Channel
+      WINDOWS_LTSC: Windows Long Term Service Channel with Docker
+      WINDOWS_SAC: Windows Semi-Annual Channel with Docker
       label: 镜像类型
+      WINDOWS_LTSC_CONTAINERD: Windows Long Term Service Channel with Containerd
+      WINDOWS_SAC_CONTAINERD: Windows Semi-Annual Channel with Containerd
     import:
       clusterSelect:
         createLabel: 注册集群
@@ -4553,6 +4562,7 @@ clusterNew:
         cidrLabel: Service Secondary CIDR 块
         nameLabel: Services Secondary 范围名称
       title: IP 分配策略
+      noSecondaryRange: <None>
     loggingMonitoringWarning: 日志记录和监控服务选项可以独立创建，但不能单独更新。 它们必须都是 NONE 或具有相应的服务集。
     loggingService:
       default: logging.googleapis.com/kubernetes
@@ -5003,7 +5013,7 @@ clusterNew:
       label: 监控指标
     networkPolicy:
       label: 项目网络隔离
-      editHelp: 项目网络隔离选项在集群创建后不能被改变
+      editHelp: 创建群集后无法启用项目网络隔离选项
       selectNetworkPolicyHelp: 你必须选择一个网络策略来使用项目网络隔离
     networkMTU:
       label: 容器网卡 MTU
@@ -5137,6 +5147,7 @@ clusterNew:
   nodePools:
     errors:
       hostnamePrefix: 节点池必须有唯一的名称前缀
+      namesNotUnique: '节点池名称必须唯一 - 检测到重复名称：{names}'
   psa:
     label: Pod 安全准入配置模板
   agentConfig:
@@ -5202,6 +5213,9 @@ clusterNew:
     title:
       cluster: 集群代理配置
       fleet: Fleet 代理配置
+  nodeGroups:
+    errors:
+      namesNotUnique: '节点组名称必须唯一 - 检测到重复名称：{names}'
 clusterTemplateNew:
   members:
     label: 成员角色

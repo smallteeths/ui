@@ -1525,6 +1525,7 @@ clusterTemplatesPage:
     error: 需要對 RKE 模板進行兩次修訂，以進行差異化操作
     header: 對比 RKE 模板的 Revisions
     label: 對比
+    key: 'Key:'
 ingressPage:
   header: 'Ingress: {name}'
   gkeIngressWarning: 'Kubernetes Engine可能需要幾分鐘才能分配外部IP地址並準備負載均衡器。與此同時，您可能會收到HTTP 404和HTTP 500等錯誤，直到負載平衡器準備好為流量提供服務。'
@@ -3317,7 +3318,7 @@ cloudProvider:
   amazon: Amazon
   azure: Azure
   external:
-    label: External (Out-Of-Tree)
+    label: 擴展
     helpText: '請編輯 YAML 以指定雲控制管理器所需的插件。'
     vsphereHelpText: Out-of-tree cloud provider for vsphere is available through the vsphere-csi and vsphere-cpi helm charts. Please refer to the <a href="{docsBase}/cluster-provisioning/rke-clusters/cloud-providers/vsphere/out-of-tree" target="_blank" rel="nofollow noopener noreferrer">docs</a> for installation.
   name: 雲提供商名稱
@@ -3670,6 +3671,9 @@ clusterNew:
         custom: "自定義: 從現有的 VPC 和子網中選擇"
         default: "標準: VPC 和子網自動創建"
       title: 網絡
+    outOfTree:
+      ebsCSIDriver:
+        label: 樹外 EBS CSI 驅動程序
   tencenttke:
     label: 騰訊雲Kubernetes服務
     shortLabel: Tencent TKE
@@ -4274,9 +4278,11 @@ clusterNew:
       COS_D: Container-Optimized OS with Containerd
       UBUNTU: Ubuntu with Docker
       UBUNTU_D: Ubuntu with Containerd
-      WINDOWS_LTSC: Windows Long Term Service Channel
-      WINDOWS_SAC: Windows Semi-Annual Channel
+      WINDOWS_LTSC: Windows Long Term Service Channel with Docker
+      WINDOWS_SAC: Windows Semi-Annual Channel with Docker
       label: 鏡像類型
+      WINDOWS_LTSC_CONTAINERD: Windows Long Term Service Channel with Containerd
+      WINDOWS_SAC_CONTAINERD: Windows Semi-Annual Channel with Containerd
     import:
       clusterSelect:
         createLabel: 註冊叢集
@@ -4305,6 +4311,7 @@ clusterNew:
         cidrLabel: Service Secondary CIDR 塊
         nameLabel: Services Secondary 範圍名稱
       title: IP 分配策略
+      noSecondaryRange: <None>
     loggingMonitoringWarning: 日誌記錄和監控服務選項可以獨立創建，但不能單獨更新。 它們必須都是 NONE 或具有相應的服務集。
     loggingService:
       default: logging.googleapis.com/kubernetes
@@ -4688,7 +4695,7 @@ clusterNew:
       label: 監控指標
     networkPolicy:
       label: 項目網絡隔離
-      editHelp: 項目網絡隔離選項在集群創建後不能被改變
+      editHelp: 創建群集後無法啟用項目網絡隔離選項
       selectNetworkPolicyHelp: 你必須選擇一個網絡策略來使用項目網絡隔離
     networkMTU:
       label: 容器網卡 MTU
@@ -5029,6 +5036,7 @@ clusterNew:
   nodePools:
     errors:
       hostnamePrefix: 節點池必須有唯一的名稱前綴
+      namesNotUnique: '節點池名稱必須唯一 - 檢測到重複名稱：{names}'
   psa:
     label: Pod 安全准入配置模板
   agentConfig:
@@ -5094,6 +5102,9 @@ clusterNew:
     title:
       cluster: 集群代理配置
       fleet: Fleet 代理配置
+  nodeGroups:
+    errors:
+      namesNotUnique: '節點組名稱必須唯一 - 檢測到重複名稱：{names}'
 clusterTemplateNew:
   members:
     label: 成員角色
@@ -11552,7 +11563,7 @@ banner:
   istio21: Kubernetes 1.21 以上版本的 Istio（v1）不再被支持。
   logging21: Kubernetes 1.21 以上版本的 Logging（v1）已不再支持。
   pipeline21: Kubernetes 1.21 以上版本的 Pipelines 不再被支持。
-  secrets: Legacy 項目可用於管理需要對項目中所有命名空間可用的秘鑰。
+  secrets: 遺留項目功能可用於管理需要項目中的所有命名空間可用的密文
   upgrade21: 啟用了 legacy 功能標誌，在Kubernetes 1.21+中，並非所有的legacy 功能都被支持。
   apps: 從 Rancher v2.7.0 開始，遺留的應用程序已被廢棄，並將在未來的版本中被刪除 - 請查看<a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">發佈說明</a>。
   catalogs: 從 Rancher v2.7.0 開始，Catalogs 已被棄用，並將在未來的版本中刪除 - 請查看<a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">發佈說明</a>。
@@ -11560,6 +11571,9 @@ banner:
   globalDnsEntries: 從 Rancher v2.7.0 開始，全局 DNS Entries 已被棄用，並將在未來的版本中刪除 - 請查看<a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">發佈說明</a>。
   globalDnsProviders: 從 Rancher v2.7.0 開始，全局 DNS Providers 已被棄用，並將在未來的版本中刪除 - 請查看<a href="https://github.com/rancher/rancher/releases/tag/v2.7.0" target="_blank">發佈說明</a>。
   longhorn: 有關如何將安裝在遺留 Rancher UI 中的 Longhorn chart 遷移到新 Rancher UI 中的更多信息，請參閱<a href="https://longhorn.io/kb/how-to-migrate-longhorn-chart-installed-in-old-rancher-ui-to-the-chart-in-new-rancher-ui/" target="_blank">這裡</a>。
+  configmaps: 遺留項目功能可用於管理需要可用於項目中所有命名空間的配置映射。
+  configmapsDeprecated: 從 Rancher v2.9.0 起，項目範圍的配置映射已被棄用，並將在未來的版本中刪除 - 請查看<a href="https://github.com/rancher/rancher/releases/tag/v2.9.0" target="_blank">發佈說明</a>。
+  secretsDeprecated: 從 Rancher v2.9.0 起，項目範圍內的密文已被棄用，並將在未來的版本中移除 - 請查看 <a href="https://github.com/rancher/rancher/releases/tag/v2.9.0" target="_blank">發佈說明</a>.
 batchDelete:
   headerSuffix: 名稱
 metricruletemplate:
