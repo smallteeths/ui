@@ -22,7 +22,7 @@ steps:
     exclude:
     - tag
 
-- name: build-latest
+- name: build
   pull: default
   image: rancher/dapper:v0.6.0
   commands:
@@ -33,26 +33,26 @@ steps:
     path: /var/run/docker.sock
   when:
     branch:
-    - release-2.8
+    - master
     event:
       exclude:
       - pull_request
       - tag
 
-- name: upload-latest-2-6
+- name: upload
   pull: default
   image: plugins/gcs
   settings:
     acl:
     - allUsers:READER
     cache_control: "no-cache,must-revalidate"
-    source: dist/static/release-2.8
-    target: releases.rancher.com/ui/release-2.8
+    source: dist/static/latest2
+    target: releases.rancher.com/ui/latest2
     token:
       from_secret: google_auth_key
   when:
     branch:
-    - release-2.8
+    - master
     event:
       exclude:
       - pull_request

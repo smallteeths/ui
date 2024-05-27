@@ -48,7 +48,7 @@ steps:
     event:
     - tag
 
-- name: upload-latest
+- name: upload
   pull: default
   image: plugins/s3
   settings:
@@ -59,8 +59,8 @@ steps:
       from_secret: aws_access_id
     secret_key:
       from_secret: aws_access_secret
-    source: dist/static/release-2.8/**/*
-    strip_prefix: dist/static/release-2.8
+    source: dist/static/latest2
+    strip_prefix: dist/static/latest2
     target: /static-2-9/release-2.9
   when:
     branch:
@@ -68,7 +68,7 @@ steps:
     event:
     - push
 
-- name: upload
+- name: upload-release
   pull: default
   image: plugins/s3
   settings:
