@@ -59,8 +59,8 @@ steps:
       from_secret: aws_access_id
     secret_key:
       from_secret: aws_access_secret
-    source: dist/static/latest2
-    strip_prefix: dist/static/latest2
+    source: dist/static/release-2.9/**/*
+    strip_prefix: dist/static/release-2.9
     target: /static-2-9/release-2.9
   when:
     branch:
