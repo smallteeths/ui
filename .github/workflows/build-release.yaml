@@ -4,7 +4,7 @@ on:
     tags:
       - v[2-9].*
     branches-ignore:
-      - release-2.9.0-cn # PANDARIA: temporarily disable workflow
+      - release-2.9.1-cn # PANDARIA: temporarily disable workflow
 
 jobs:
   test:
