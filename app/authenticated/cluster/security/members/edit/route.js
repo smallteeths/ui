@@ -1,6 +1,5 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import { get } from '@ember/object';
 import { hash } from 'rsvp';
 
 export default Route.extend({
@@ -8,7 +7,7 @@ export default Route.extend({
   roleTemplateService: service('roleTemplate'),
 
   model(params) {
-    const gs  = get(this, 'globalStore');
+    const gs = this.globalStore;
     const cid = this.paramsFor('authenticated.cluster');
 
     return hash({

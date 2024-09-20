@@ -37,9 +37,9 @@ export default Route.extend({
 
         // If an app ID is given, the current app version will be used in the app launch route.
         if (params.upgrade) {
-          dependencies.upgrade = get(this, 'catalog').fetchTemplate(`${ params.template }-${ params.upgrade }`, true, currentVersion);
+          dependencies.upgrade = this.catalog.fetchTemplate(`${ params.template }-${ params.upgrade }`, true, currentVersion);
         }
-        dependencies.tpl = get(this, 'catalog').fetchTemplate(params.template, false, currentVersion);
+        dependencies.tpl = this.catalog.fetchTemplate(params.template, false, currentVersion);
       })
         .catch((err) => {
           throw new Error(err);
@@ -47,9 +47,9 @@ export default Route.extend({
     } else {
       // If an app ID is not given, the current app version will not be used in the app launch route.
       if (params.upgrade) {
-        dependencies.upgrade = get(this, 'catalog').fetchTemplate(`${ params.template }-${ params.upgrade }`, true);
+        dependencies.upgrade = this.catalog.fetchTemplate(`${ params.template }-${ params.upgrade }`, true);
       }
-      dependencies.tpl = get(this, 'catalog').fetchTemplate(params.template);
+      dependencies.tpl = this.catalog.fetchTemplate(params.template);
     }
 
 
@@ -241,7 +241,7 @@ export default Route.extend({
 
   actions: {
     cancel() {
-      get(this, 'modalService').toggleModal();
+      this.modalService.toggleModal();
     },
   },
 
@@ -258,7 +258,7 @@ export default Route.extend({
       newAppName = this.dedupeName(get(duplicateNamespace, 'displayName'));
     }
 
-    const namespace = get(this, 'clusterStore').createRecord({
+    const namespace = this.clusterStore.createRecord({
       type:      'namespace',
       name:      newAppName,
       projectId: this.modelFor('authenticated.project').get('project.id'),

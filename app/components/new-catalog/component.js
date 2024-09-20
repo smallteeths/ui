@@ -94,10 +94,10 @@ export default Component.extend(NewOrEdit, CatalogApp, ChildHook, LazyIcon, {
     },
 
     cancel() {
-      if ( get(this, 'istio') ) {
+      if ( this.istio ) {
         const projectId = get(this, 'scope.currentProject.id');
 
-        get(this, 'router').transitionTo('authenticated.project.istio.project-istio.rules', projectId);
+        this.router.transitionTo('authenticated.project.istio.project-istio.rules', projectId);
       } else if ( this.cancel ) {
         this.cancel();
       }
@@ -113,7 +113,7 @@ export default Component.extend(NewOrEdit, CatalogApp, ChildHook, LazyIcon, {
   },
 
   answersArray: computed('selectedTemplateModel.questions', 'selectedTemplateModel.customAnswers', 'catalogApp.answers', function() {
-    let model = get(this, 'selectedTemplateModel');
+    let model = this.selectedTemplateModel;
 
     if (get(model, 'questions')) {
       const questions = [];
@@ -143,7 +143,7 @@ export default Component.extend(NewOrEdit, CatalogApp, ChildHook, LazyIcon, {
   }),
 
   answersString: computed('answersArray.@each.{variable,answer}', 'selectedTemplateModel.valuesYaml', function() {
-    let model = get(this, 'selectedTemplateModel');
+    let model = this.selectedTemplateModel;
 
     if (get(model, 'questions')) {
       let neu = {};
@@ -152,7 +152,7 @@ export default Component.extend(NewOrEdit, CatalogApp, ChildHook, LazyIcon, {
         neu = YAML.parse(model.valuesYaml);
         neu = flatMap(neu);
       } else {
-        (get(this, 'answersArray') || []).forEach((a) => {
+        (this.answersArray || []).forEach((a) => {
           neu[a.variable] = isEmpty(a.answer) ? a.default : a.answer;
         });
       }
@@ -165,7 +165,7 @@ export default Component.extend(NewOrEdit, CatalogApp, ChildHook, LazyIcon, {
 
       return YAML.stringify(neu);
     } else {
-      return JSON.stringify(get(this, 'answersArray'));
+      return JSON.stringify(this.answersArray);
     }
   }),
 
@@ -173,7 +173,7 @@ export default Component.extend(NewOrEdit, CatalogApp, ChildHook, LazyIcon, {
     var url = get(this, 'editable.selectedTemplateUrl');
 
     if ( url === 'default' ) {
-      let defaultUrl = get(this, 'defaultUrl');
+      let defaultUrl = this.defaultUrl;
 
       if ( defaultUrl ) {
         url = defaultUrl;
@@ -196,7 +196,7 @@ export default Component.extend(NewOrEdit, CatalogApp, ChildHook, LazyIcon, {
         set(this, 'catalogApp.answers', current);
       }
 
-      var selectedTemplateModel = yield get(this, 'catalog').fetchByUrl(url)
+      var selectedTemplateModel = yield this.catalog.fetchByUrl(url)
         .then((response) => {
           if (response.questions) {
             this.parseQuestionsAndAnswers(response, current);
@@ -293,10 +293,10 @@ export default Component.extend(NewOrEdit, CatalogApp, ChildHook, LazyIcon, {
   validate() {
     this._super();
 
-    const errors = get(this, 'errors') || [];
+    const errors = this.errors || [];
 
-    errors.pushObjects(get(this, 'namespaceErrors') || []);
-    errors.pushObjects(get(this, 'selectedTemplateModel').validationErrors(this.answers) || []);
+    errors.pushObjects(this.namespaceErrors || []);
+    errors.pushObjects(this.selectedTemplateModel.validationErrors(this.answers) || []);
 
     if (errors.length) {
       set(this, 'errors', errors.uniq());
@@ -308,10 +308,10 @@ export default Component.extend(NewOrEdit, CatalogApp, ChildHook, LazyIcon, {
   },
 
   doSave() {
-    const requiredNamespace = get(this, 'requiredNamespace');
+    const requiredNamespace = this.requiredNamespace;
 
-    if ( requiredNamespace && (get(this, 'namespaces') || []).findBy('id', requiredNamespace) ) {
-      return resolve(get(this, 'primaryResource'));
+    if ( requiredNamespace && (this.namespaces || []).findBy('id', requiredNamespace) ) {
+      return resolve(this.primaryResource);
     }
 
     return this._super(...arguments);
@@ -325,9 +325,9 @@ export default Component.extend(NewOrEdit, CatalogApp, ChildHook, LazyIcon, {
       // Validation failed
       return false;
     }
-    if ( get(this, 'actuallySave') ) {
+    if ( this.actuallySave ) {
       if (!get(this, 'selectedTemplateModel.valuesYaml') && get(this, 'selectedTemplateModel.questions')) {
-        set(get(this, 'catalogApp'), 'answers', get(this, 'answers'));
+        set(this.catalogApp, 'answers', this.answers);
       }
 
       return this.applyHooks('_beforeSaveHooks').catch((err) => {
@@ -355,7 +355,7 @@ export default Component.extend(NewOrEdit, CatalogApp, ChildHook, LazyIcon, {
   },
 
   didSave(neu) {
-    let app  = get(this, 'catalogApp');
+    let app  = this.catalogApp;
     let yaml = get(this, 'selectedTemplateModel.valuesYaml');
 
     if ( !yaml && this.shouldFallBackToYaml() ) {
@@ -379,11 +379,11 @@ export default Component.extend(NewOrEdit, CatalogApp, ChildHook, LazyIcon, {
         externalId:   get(this, 'selectedTemplateModel.externalId'),
         answers:      yaml ? {} : get(app, 'answers'),
         valuesYaml:   yaml ? yaml : '',
-        forceUpgrade: get(this, 'forceUpgrade'),
+        forceUpgrade: this.forceUpgrade,
       }).then((resp) => resp)
         .catch((err) => err);
     } else {
-      const requiredNamespace = get(this, 'requiredNamespace');
+      const requiredNamespace = this.requiredNamespace;
 
       setProperties(app, {
         targetNamespace: requiredNamespace ? requiredNamespace : neu.name,
@@ -393,17 +393,17 @@ export default Component.extend(NewOrEdit, CatalogApp, ChildHook, LazyIcon, {
         valuesYaml:      yaml ? yaml : '',
       });
 
-      return app.save().then(() => get(this, 'primaryResource'));
+      return app.save().then(() => this.primaryResource);
     }
   },
 
   doneSaving() {
     var projectId = get(this, 'scope.currentProject.id');
 
-    if ( get(this, 'istio') ) {
-      return get(this, 'router').transitionTo('authenticated.project.istio.project-istio.rules', projectId);
+    if ( this.istio ) {
+      return this.router.transitionTo('authenticated.project.istio.project-istio.rules', projectId);
     } else {
-      return get(this, 'router').transitionTo('apps-tab.index', projectId);
+      return this.router.transitionTo('apps-tab.index', projectId);
     }
   },
 
@@ -414,7 +414,7 @@ export default Component.extend(NewOrEdit, CatalogApp, ChildHook, LazyIcon, {
   },
 
   setupComponent() {
-    if ( get(this, 'selectedTemplateUrl') ) {
+    if ( this.selectedTemplateUrl ) {
       if (this.catalogTemplate) {
         this.initTemplateModel(this.catalogTemplate);
       } else {
@@ -422,10 +422,10 @@ export default Component.extend(NewOrEdit, CatalogApp, ChildHook, LazyIcon, {
       }
     } else {
       var def   = get(this, 'templateResource.defaultVersion');
-      var links = get(this, 'versionLinks');
-      var app   = get(this, 'catalogApp');
+      var links = this.versionLinks;
+      var app   = this.catalogApp;
 
-      if (get(app, 'id') && !get(this, 'upgrade')) {
+      if (get(app, 'id') && !this.upgrade) {
         def = get(app, 'externalIdInfo.version');
       }
 
@@ -435,6 +435,6 @@ export default Component.extend(NewOrEdit, CatalogApp, ChildHook, LazyIcon, {
         set(this, 'selectedTemplateUrl', null);
       }
     }
-    set(this, 'editable.selectedTemplateUrl', get(this, 'selectedTemplateUrl'));
+    set(this, 'editable.selectedTemplateUrl', this.selectedTemplateUrl);
   }
 });

@@ -76,14 +76,14 @@ export default Component.extend(ModalBase, {
 
   actions: {
     save(btnCb) {
-      let value = get(this, 'value')
+      let value = this.value
 
       if (get(this, 'model.unit') && get(this, 'model.kind') === 'int'){
         value = value || 0;
         value += get(this, 'model.unit');
       }
-      get(this, 'settings').set(normalizeName(get(this, 'model.key')), value);
-      get(this, 'settings').one('settingsPromisesResolved', () => {
+      this.settings.set(normalizeName(get(this, 'model.key')), value);
+      this.settings.one('settingsPromisesResolved', () => {
         btnCb(true);
         this.send('done');
       });

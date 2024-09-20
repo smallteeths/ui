@@ -37,11 +37,11 @@ var Pod = Resource.extend(Grafana, DisplayImage, {
   }),
 
   canShell: computed('containers', function() {
-    return !!get(this, 'containers').findBy('canShell', true);
+    return !!this.containers.findBy('canShell', true);
   }),
 
   availableActions: computed('actionLinks.download', 'canShell', function() {
-    const canShell = get(this, 'canShell');
+    const canShell = this.canShell;
 
     var choices = [
       {
@@ -71,8 +71,8 @@ var Pod = Resource.extend(Grafana, DisplayImage, {
   }),
 
   memoryReservationBlurb: computed('memoryReservation', function() {
-    if ( get(this, 'memoryReservation') ) {
-      return formatSi(get(this, 'memoryReservation'), 1024, 'iB', 'B');
+    if ( this.memoryReservation ) {
+      return formatSi(this.memoryReservation, 1024, 'iB', 'B');
     }
 
     return;
@@ -80,10 +80,10 @@ var Pod = Resource.extend(Grafana, DisplayImage, {
 
   combinedState: computed('node.state', 'workload.state', 'state', 'healthState', 'healthCheck', function() {
     var node = get(this, 'node.state');
-    var resource = get(this, 'state');
+    var resource = this.state;
     // var workload = get(this,'workload.state');
-    var health = get(this, 'healthState');
-    var hasCheck = !!get(this, 'healthCheck');
+    var health = this.healthState;
+    var hasCheck = !!this.healthCheck;
 
     if ( !hasCheck && C.DISCONNECTED_STATES.includes(node) ) {
       return 'unknown';
@@ -95,14 +95,14 @@ var Pod = Resource.extend(Grafana, DisplayImage, {
   }),
 
   isOn: computed('state', function() {
-    return ['running', 'migrating', 'restarting'].indexOf(get(this, 'state')) >= 0;
+    return ['running', 'migrating', 'restarting'].indexOf(this.state) >= 0;
   }),
 
   displayState: computed('_displayState', 'exitCode', 'state', function() {
-    let out = get(this, '_displayState');
-    let code = get(this, 'exitCode');
+    let out = this._displayState;
+    let code = this.exitCode;
 
-    if ( get(this, 'state') === 'stopped' && get(this, 'exitCode') > 0) {
+    if ( this.state === 'stopped' && this.exitCode > 0) {
       out += ` (${  code  })`;
     }
 
@@ -190,7 +190,7 @@ var Pod = Resource.extend(Grafana, DisplayImage, {
   }),
 
   dislayContainerMessage: computed('containers.@each.showTransitioningMessage', function() {
-    return !!get(this, 'containers').findBy('showTransitioningMessage', true);
+    return !!this.containers.findBy('showTransitioningMessage', true);
   }),
 
   restarts: computed('status.containerStatuses.@each.restartCount', function() {
@@ -208,7 +208,7 @@ var Pod = Resource.extend(Grafana, DisplayImage, {
   }),
 
   sortIp: computed('primaryIpAddress', 'primaryAssociatedIpAddress', function() {
-    var ip = get(this, 'primaryAssociatedIpAddress') || get(this, 'primaryIpAddress');
+    var ip = this.primaryAssociatedIpAddress || this.primaryIpAddress;
 
     if ( !ip ) {
       return '';
@@ -224,16 +224,16 @@ var Pod = Resource.extend(Grafana, DisplayImage, {
   }),
 
   isGlobalScale: computed('labels', function() {
-    return `${ (get(this, 'labels') || {})[C.LABEL.SCHED_GLOBAL]  }` === 'true';
+    return `${ (this.labels || {})[C.LABEL.SCHED_GLOBAL]  }` === 'true';
   }),
 
   actions: {
     clone() {
-      get(this, 'router').transitionTo('containers.run', { queryParams: { podId: get(this, 'id'), } });
+      this.router.transitionTo('containers.run', { queryParams: { podId: this.id, } });
     },
 
     shell() {
-      get(this, 'modalService').toggleModal('modal-shell', {
+      this.modalService.toggleModal('modal-shell', {
         model:           this,
         permissionCheck: !!get(this, 'access.me.hasReadOnlyAdmin')
       });
@@ -241,8 +241,8 @@ var Pod = Resource.extend(Grafana, DisplayImage, {
 
     popoutShell() {
       const projectId = get(this, 'scope.currentProject.id');
-      const podId = get(this, 'id');
-      const route = get(this, 'router').urlFor('authenticated.project.console', projectId);
+      const podId = this.id;
+      const route = this.router.urlFor('authenticated.project.console', projectId);
 
       const system = get(this, 'node.info.os.operatingSystem') || ''
       let windows = false;
@@ -263,13 +263,13 @@ var Pod = Resource.extend(Grafana, DisplayImage, {
         set(dataToModal, 'containerName', this.containers.firstObject.name);
       }
 
-      get(this, 'modalService').toggleModal('modal-container-logs', dataToModal);
+      this.modalService.toggleModal('modal-container-logs', dataToModal);
     },
 
     popoutLogs() {
       const projectId = get(this, 'scope.currentProject.id');
-      const podId = get(this, 'id');
-      const route = get(this, 'router').urlFor('authenticated.project.container-log', projectId);
+      const podId = this.id;
+      const route = this.router.urlFor('authenticated.project.container-log', projectId);
 
       later(() => {
         window.open(`//${ window.location.host }${ route }?podId=${ podId }&isPopup=true`, '_blank', 'toolbars=0,width=900,height=700,left=200,top=200');
@@ -281,7 +281,7 @@ var Pod = Resource.extend(Grafana, DisplayImage, {
   },
 
   hasLabel(key, desiredValue) {
-    const labels = get(this, 'labels') || {};
+    const labels = this.labels || {};
     const value = get(labels, key);
 
     if ( value === undefined ) {

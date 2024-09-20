@@ -10,7 +10,7 @@ export default Route.extend({
   beforeModel() {
     this._super(...arguments);
 
-    return get(this, 'catalog').fetchUnScopedCatalogs();
+    return this.catalog.fetchUnScopedCatalogs();
   },
 
   model(params, transition) {
@@ -18,7 +18,7 @@ export default Route.extend({
     const out = {};
 
     if (get(transition, 'targetName') === 'catalog-tab.index') {
-      return get(this, 'catalog').fetchTemplates().then(() => out);
+      return this.catalog.fetchTemplates().then(() => out);
     }
 
     return out;

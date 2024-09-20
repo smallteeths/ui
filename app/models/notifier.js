@@ -1,6 +1,6 @@
 import Resource from '@rancher/ember-api-store/models/resource';
 import { inject as service } from '@ember/service';
-import {  setProperties, get, computed } from '@ember/object';
+import { setProperties, get, computed } from '@ember/object';
 import { hash } from 'rsvp';
 import C from 'ui/utils/constants';
 import moment from 'moment';
@@ -14,23 +14,23 @@ export default Resource.extend({
   type: 'notifier',
 
   displayNameAndType: computed('displayName', 'notifierType', function() {
-    const upperCaseType = (get(this, 'notifierType') || '').replace(/^\S/, (s) => {
+    const upperCaseType = (this.notifierType || '').replace(/^\S/, (s) => {
       return s.toUpperCase();
     })
 
-    return `${ get(this, 'displayName') } (${ upperCaseType })`
+    return `${ this.displayName } (${ upperCaseType })`;
   }),
 
   notifierTableLabel: computed('dingtalkConfig', 'emailConfig', 'msteamsConfig', 'pagerdutyConfig', 'slackConfig', 'smtpConfig', 'webhookConfig', 'wechatConfig', 'aliyunsmsConfig', 'servicenowConfig', function(){
-    const sc = get(this, 'slackConfig');
-    const pc = get(this, 'pagerdutyConfig');
-    const ec = get(this, 'smtpConfig');
-    const wc = get(this, 'webhookConfig');
-    const wcc = get(this, 'wechatConfig');
-    const dtc = get(this, 'dingtalkConfig');
-    const msc = get(this, 'msteamsConfig');
-    const asc = get(this, 'aliyunsmsConfig');
-    const snc = get(this, 'servicenowConfig');
+    const sc = this.slackConfig;
+    const pc = this.pagerdutyConfig;
+    const ec = this.smtpConfig;
+    const wc = this.webhookConfig;
+    const wcc = this.wechatConfig;
+    const dtc = this.dingtalkConfig;
+    const msc = this.msteamsConfig;
+    const asc = this.aliyunsmsConfig;
+    const snc = this.servicenowConfig;
 
     if ( sc ) {
       return C.NOTIFIER_TABLE_LABEL.SLACK;
@@ -64,15 +64,15 @@ export default Resource.extend({
   }),
 
   notifierType: computed('dingtalkConfig', 'emailConfig', 'msteamsConfig', 'pagerdutyConfig', 'slackConfig', 'smtpConfig', 'webhookConfig', 'wechatConfig', 'aliyunsmsConfig', 'servicenowConfig', function(){
-    const sc = get(this, 'slackConfig');
-    const pc = get(this, 'pagerdutyConfig');
-    const ec = get(this, 'smtpConfig');
-    const wc = get(this, 'webhookConfig');
-    const wcc = get(this, 'wechatConfig');
-    const dtc = get(this, 'dingtalkConfig');
-    const msc = get(this, 'msteamsConfig');
-    const asc = get(this, 'aliyunsmsConfig');
-    const snc = get(this, 'servicenowConfig');
+    const sc = this.slackConfig;
+    const pc = this.pagerdutyConfig;
+    const ec = this.smtpConfig;
+    const wc = this.webhookConfig;
+    const wcc = this.wechatConfig;
+    const dtc = this.dingtalkConfig;
+    const msc = this.msteamsConfig;
+    const asc = this.aliyunsmsConfig;
+    const snc = this.servicenowConfig;
 
     if ( sc ) {
       return 'slack';
@@ -106,11 +106,11 @@ export default Resource.extend({
   }),
 
   notifierValue: computed('emailConfig', 'pagerdutyConfig', 'slackConfig', 'smtpConfig', 'webhookConfig', 'wechatConfig', function(){
-    const sc = get(this, 'slackConfig');
-    const pc = get(this, 'pagerdutyConfig');
-    const ec = get(this, 'smtpConfig');
-    const wc = get(this, 'webhookConfig');
-    const wcc = get(this, 'wechatConfig');
+    const sc = this.slackConfig;
+    const pc = this.pagerdutyConfig;
+    const ec = this.smtpConfig;
+    const wc = this.webhookConfig;
+    const wcc = this.wechatConfig;
 
     if ( sc ) {
       return get(sc, 'defaultRecipient');
@@ -132,17 +132,17 @@ export default Resource.extend({
   }),
 
   displayCreated: computed('created', function(){
-    const d = get(this, 'created');
+    const d = this.created;
 
     return moment(d).fromNow();
   }),
 
   notifierLabel: computed('emailConfig', 'pagerdutyConfig', 'slackConfig', 'smtpConfig', 'webhookConfig', 'wechartConfig', 'wechatConfig', 'aliyunsmsConfig', 'servicenowConfig', function(){
-    const sc = get(this, 'slackConfig');
-    const pc = get(this, 'pagerdutyConfig');
-    const ec = get(this, 'smtpConfig');
-    const wc = get(this, 'webhookConfig');
-    const wcc = get(this, 'wechatConfig');
+    const sc = this.slackConfig;
+    const pc = this.pagerdutyConfig;
+    const ec = this.smtpConfig;
+    const wc = this.webhookConfig;
+    const wcc = this.wechatConfig;
 
     if ( sc ) {
       return 'Channel';
@@ -164,8 +164,8 @@ export default Resource.extend({
   }),
 
   findAlerts(){
-    const globalStore = get(this, 'globalStore');
-    const clusterId = get(this, 'clusterId');
+    const globalStore = this.globalStore;
+    const clusterId = this.clusterId;
     const clusterAlertGroups = globalStore.find('clusterAlertGroup', null, { filter: { clusterId } });
     const projectAlertGroups = globalStore.findAll('projectAlertGroup');
 
@@ -186,7 +186,7 @@ export default Resource.extend({
           return false;
         }
 
-        return recipients.some((recipient) => recipient.notifierId === get(this, 'id'));
+        return recipients.some((recipient) => recipient.notifierId === this.id);
       });
 
       return alerts;
@@ -200,10 +200,10 @@ export default Resource.extend({
       if ( alerts.length ) {
         const alertNames = alerts.map((alert) => get(alert, 'displayName')).join(',');
 
-        get(this, 'growl')
-          .error(get(this, 'intl')
+        this.growl
+          .error(this.intl
             .t('notifierPage.deleteErrorMessage', {
-              displayName: get(this, 'displayName'),
+              displayName: this.displayName,
               alertNames
             }));
       } else {
@@ -213,9 +213,9 @@ export default Resource.extend({
   },
   actions: {
     edit() {
-      get(this, 'modalService').toggleModal('notifier/modal-new-edit', {
+      this.modalService.toggleModal('notifier/modal-new-edit', {
         closeWithOutsideClick: false,
-        currentType:           get(this, 'notifierType'),
+        currentType:           this.notifierType,
         model:                 this,
         mode:                  'edit',
       });
@@ -228,9 +228,9 @@ export default Resource.extend({
         id:   null,
         name: null
       });
-      get(this, 'modalService').toggleModal('notifier/modal-new-edit', {
+      this.modalService.toggleModal('notifier/modal-new-edit', {
         closeWithOutsideClick: false,
-        currentType:           get(this, 'notifierType'),
+        currentType:           this.notifierType,
         model:                 nue,
         mode:                  'clone',
       });

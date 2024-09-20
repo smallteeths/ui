@@ -61,7 +61,7 @@ export default Controller.extend({
 
   actions: {
     toggleExpand() {
-      this.get('projectController').send('toggleExpand', ...arguments);
+      this.projectController.send('toggleExpand', ...arguments);
     },
     labelSelectorChange(d) {
       set(this, 'labelSelector', d)
@@ -69,7 +69,7 @@ export default Controller.extend({
   },
 
   rows: computed('group', 'labelSelector.@each.{key,values,validate}', 'model.pods', 'model.workloads.@each.{isBalancer,namespaceId}', function() {
-    const groupBy = this.get('group');
+    const groupBy = this.group;
     let out = [];
 
     switch (groupBy) {
@@ -97,7 +97,7 @@ export default Controller.extend({
   }),
 
   groupByRef: computed('group', function() {
-    const group = this.get('group');
+    const group = this.group;
 
     if (group === 'node') {
       return 'node';

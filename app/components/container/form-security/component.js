@@ -118,7 +118,7 @@ export default Component.extend({
   }),
 
   memoryReservationChanged: observer('memoryReservationMb', function() {
-    var mem = get(this, 'memoryReservationMb');
+    var mem = this.memoryReservationMb;
 
     if (isNaN(mem) || mem <= 0) {
       const requests = get(this, 'instance.resources.requests');
@@ -134,7 +134,7 @@ export default Component.extend({
   }),
 
   cpuReservationChanged: observer('cpuReservationMillis', function() {
-    var cpu = get(this, 'cpuReservationMillis');
+    var cpu = this.cpuReservationMillis;
 
     if (isNaN(cpu) || cpu <= 0) {
       const requests = get(this, 'instance.resources.requests');
@@ -241,7 +241,7 @@ export default Component.extend({
   initCapability() {
     set(this, 'instance.capAdd', get(this, 'instance.capAdd') || []);
     set(this, 'instance.capDrop', get(this, 'instance.capDrop') || []);
-    var choices = get(this, 'store').getById('schema', 'container')
+    var choices = this.store.getById('schema', 'container')
       .optionsFor('capAdd')
       .sort();
 
@@ -275,8 +275,8 @@ export default Component.extend({
   },
 
   updateMemory() {
-    let mem = parseInt(get(this, 'memoryMb'), 10);
-    let memoryMode = get(this, 'memoryMode');
+    let mem = parseInt(this.memoryMb, 10);
+    let memoryMode = this.memoryMode;
 
     // Memory
     if (memoryMode === 'unlimited' || isNaN(mem) || mem <= 0) {
@@ -309,8 +309,8 @@ export default Component.extend({
   },
 
   updateCpu() {
-    let cpu = parseInt(get(this, 'cpuMillis'), 10);
-    let cpuMode = get(this, 'cpuMode');
+    let cpu = parseInt(this.cpuMillis, 10);
+    let cpuMode = this.cpuMode;
 
     if (cpuMode === 'unlimited' || isNaN(cpu) || cpu <= 0) {
       const limits = get(this, 'instance.resources.limits');

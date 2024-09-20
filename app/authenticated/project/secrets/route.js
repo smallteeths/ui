@@ -1,6 +1,6 @@
 import Route from '@ember/routing/route';
 import { hash } from 'rsvp'
-import { get, set } from '@ember/object';
+import { set, get } from '@ember/object';
 import { on } from '@ember/object/evented';
 import C from 'ui/utils/constants';
 import { inject as service } from '@ember/service';
@@ -23,7 +23,7 @@ export default Route.extend({
       });
     }
 
-    const store = get(this, 'store');
+    const store = this.store;
 
     return hash({
       projectSecrets:    store.findAll('secret'),

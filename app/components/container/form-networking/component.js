@@ -312,7 +312,7 @@ export default Component.extend({
     set(this, 'initHostAliasesArray', []);
     (aliases || []).forEach((alias) => {
       (alias.hostnames || []).forEach((hostname) => {
-        get(this, 'initHostAliasesArray').push({
+        this.initHostAliasesArray.push({
           key:   alias.ip,
           value: hostname,
         });
@@ -325,7 +325,7 @@ export default Component.extend({
 
     set(this, 'initOptionsArray', []);
     (options || []).forEach((option) => {
-      get(this, 'initOptionsArray').push({
+      this.initOptionsArray.push({
         key:   get(option, 'name'),
         value: get(option, 'value'),
       });

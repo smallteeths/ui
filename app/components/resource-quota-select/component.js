@@ -1,5 +1,5 @@
 import C from 'ui/utils/constants';
-import {  get, set, observer } from '@ember/object';
+import { get, set, observer } from '@ember/object';
 import Component from '@ember/component';
 import { next } from '@ember/runloop';
 import layout from './template';
@@ -28,7 +28,7 @@ export default Component.extend({
 
   currentQuotaDidChange: observer('currentQuota.@each.{key,subKey}', function() {
     !get(this, 'subkeyDisabled') && set(this, 'storageClassChoices', get(this, 'allstorageClassChoices').filter((choice) => this.doesExistStorageClass(choice, get(this, 'quota.key'))));
-    set(this, 'resourceChoices', get(this, 'allResourceChoices').filter((choice) => this.doesExist(choice) || this.showStorageclassOption(choice)));
+    set(this, 'resourceChoices', this.allResourceChoices.filter((choice) => this.doesExist(choice) || this.showStorageclassOption(choice)));
   }),
 
   quotaKeyDidChange: observer('storageClassChoices', function(){
@@ -44,7 +44,7 @@ export default Component.extend({
   }),
 
   doesExist(choice) {
-    return get(choice, 'value') === get(this, 'quota.key') || !(get(this, 'currentQuota') || []).findBy('key', get(choice, 'value'));
+    return get(choice, 'value') === get(this, 'quota.key') || !(this.currentQuota || []).findBy('key', get(choice, 'value'));
   },
 
   doesExistStorageClass(choice, quotaKey) {

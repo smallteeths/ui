@@ -1,5 +1,5 @@
 import { hash } from 'rsvp';
-import { get, set } from '@ember/object'
+import { set, get } from '@ember/object'
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 
@@ -8,7 +8,7 @@ export default Route.extend({
   nsResource: service(),
   scope:      service(),
   model(params) {
-    const store = get(this, 'store');
+    const store = this.store;
     let projectSecrets = [];
     let namespacedSecrets = [];
 

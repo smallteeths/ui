@@ -28,11 +28,11 @@ const Catalog = Resource.extend({
   }),
 
   displayKind: computed('kind', function() {
-    return ucFirst(get(this, 'kind'));
+    return ucFirst(this.kind);
   }),
 
   combinedState: computed('id', function() {
-    if ( !get(this, 'id') ) {
+    if ( !this.id ) {
       return 'disabled';
     }
 
@@ -40,7 +40,7 @@ const Catalog = Resource.extend({
   }),
 
   canClone: computed('actions.clone', 'name', function() {
-    const name         = get(this, 'name');
+    const name         = this.name;
     const catalogNames = get(C, 'CATALOG');
     const builtIn      = [
       get(catalogNames, 'ALIBABA_APP_HUB_KEY'),
@@ -56,7 +56,7 @@ const Catalog = Resource.extend({
   }),
 
   availableActions: computed('actionLinks.refresh', 'id', function() {
-    let a = get(this, 'actionLinks') || {};
+    let a = this.actionLinks || {};
 
     return [
       {
@@ -86,18 +86,18 @@ const Catalog = Resource.extend({
     },
 
     edit() {
-      get(this, 'modalService').toggleModal('modal-edit-catalog', {
+      this.modalService.toggleModal('modal-edit-catalog', {
         model: this,
-        scope: get(this, 'level')
+        scope: this.level
       });
     },
 
     clone() {
       const clone = this.cloneForNew();
 
-      get(this, 'modalService').toggleModal('modal-edit-catalog', {
+      this.modalService.toggleModal('modal-edit-catalog', {
         model: clone,
-        scope: get(this, 'level')
+        scope: this.level
       });
     },
 

@@ -53,9 +53,9 @@ export default Component.extend(CustomMenu, {
     get(this, 'intl.locale');
 
     setProperties(this, {
-      stacks:      get(this, 'store').all('stack'),
-      hosts:       get(this, 'store').all('host'),
-      stackSchema: get(this, 'store').getById('schema', 'stack'),
+      stacks:      this.store.all('stack'),
+      hosts:       this.store.all('host'),
+      stackSchema: this.store.getById('schema', 'stack'),
     });
 
     run.once(this, 'updateNavTree');
@@ -83,7 +83,7 @@ export default Component.extend(CustomMenu, {
 
   // beyond things listed in "Inputs"
   hasProject: computed('project', function() {
-    return !!get(this, 'project');
+    return !!this.project;
   }),
 
   // Hackery: You're an owner if you can write to the 'system' field of a stack
@@ -96,12 +96,12 @@ export default Component.extend(CustomMenu, {
   }),
 
   dashboardLink: computed('cluster.isReady', 'clusterId', 'pageScope', 'scope.dashboardLink', function() {
-    if ( get(this, 'pageScope') === 'global' || !this.clusterId ) {
+    if ( this.pageScope === 'global' || !this.clusterId ) {
       // Only inside a cluster
       return;
     }
 
-    const cluster = get(this, 'cluster');
+    const cluster = this.cluster;
 
     if ( !cluster || !cluster.isReady ) {
       // Only in ready/active clusters
@@ -112,7 +112,7 @@ export default Component.extend(CustomMenu, {
   }),
 
   updateNavTree() {
-    const currentScope = get(this, 'pageScope');
+    const currentScope = this.pageScope;
 
     const out = getTree().filter((item) => {
       if ( typeof get(item, 'condition') === 'function' ) {
@@ -161,7 +161,7 @@ export default Component.extend(CustomMenu, {
 
     this.addExtraMenus(out)
 
-    const old = JSON.stringify(get(this, 'navTree'));
+    const old = JSON.stringify(this.navTree);
     const neu = JSON.stringify(out);
 
     if ( old !== neu ) {
@@ -248,7 +248,7 @@ export default Component.extend(CustomMenu, {
   },
 
   setupTearDown() {
-    this.get('router').on('routeWillChange', () => {
+    this.router.on('routeWillChange', () => {
       $('header > nav').removeClass('nav-open');// eslint-disable-line
     });
   }

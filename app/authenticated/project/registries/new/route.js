@@ -36,7 +36,7 @@ export default Route.extend({
 
     if (get(params, 'id')) {
       return hash({
-        cred: get(this, 'store').find(get(params, 'type'), get(params, 'id'))
+        cred: this.store.find(get(params, 'type'), get(params, 'id'))
           .then( ( cred ) => cred.cloneForNew() ),
         harborConfig
       });

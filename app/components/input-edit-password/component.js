@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import layout from './template';
-import { get, set, computed, observer } from '@ember/object';
+import { set, get, computed, observer } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { later, run } from '@ember/runloop';
 import { randomStr } from 'shared/utils/util';
@@ -35,7 +35,7 @@ export default Component.extend({
   passwordStrength: 0,
 
   didReceiveAttrs() {
-    if ( get(this, 'generate') ) {
+    if ( this.generate ) {
       this.send('regenerate');
     }
 
@@ -56,9 +56,9 @@ export default Component.extend({
     },
 
     save(cb) {
-      const user = get(this, 'user');
-      const neu = get(this, 'access').encryptPassword(get(this, 'password').trim()) || '';
-      let old = get(this, 'currentPassword').trim() || '';
+      const user = this.user;
+      const neu = this.access.encryptPassword(this.password.trim()) || '';
+      let old = this.currentPassword.trim() || '';
 
       if (get(this, 'showCurrent')) {
         old = get(this, 'access').encryptPassword(get(this, 'currentPassword').trim()) || '';
@@ -73,12 +73,12 @@ export default Component.extend({
         return
       }
 
-      const setOrChange = get(this, 'setOrChange');
+      const setOrChange = this.setOrChange;
       let promise;
 
       if ( setOrChange === CHANGE ) {
         // @TODO-2.0 better way to call collection actions
-        promise = get(this, 'globalStore').request({
+        promise = this.globalStore.request({
           url:    '/v3/users?action=changepassword',
           method: 'POST',
           data:   {
@@ -90,9 +90,9 @@ export default Component.extend({
         promise = user.doAction('setpassword', { newPassword: neu, });
       }
 
-      return promise.then(() => get(this, 'access').loadMe().then(() => {
-        if ( get(this, 'deleteTokens') ) {
-          return get(this, 'globalStore').findAll('token').then((tokens) => {
+      return promise.then(() => this.access.loadMe().then(() => {
+        if ( this.deleteTokens ) {
+          return this.globalStore.findAll('token').then((tokens) => {
             const promises = [];
 
             tokens.forEach((token) => {
@@ -107,7 +107,7 @@ export default Component.extend({
           return resolve();
         }
       }).then(() => {
-        get(this, 'complete')(true);
+        this.complete(true);
         later(this, () => {
           if ( this.isDestroyed || this.isDestroying ) {
             return;
@@ -116,13 +116,13 @@ export default Component.extend({
         }, 1000);
       })).catch((err) => {
         set(this, 'serverErrors', [err.message]);
-        get(this, 'complete')(false);
+        this.complete(false);
         cb(false);
       });
     },
   },
   generateChanged: observer('generate', function() {
-    if ( get(this, 'generate') ) {
+    if ( this.generate ) {
       set(this, 'password', randomStr(16, 16, 'password'));
     } else {
       set(this, 'password', '');
@@ -132,33 +132,33 @@ export default Component.extend({
   }),
 
   saveDisabled: computed('generate', 'passwordsMatch', 'forceSaveDisabled', 'showCurrent', 'currentPassword', function() {
-    if ( get(this, 'forceSaveDisabled') ) {
+    if ( this.forceSaveDisabled ) {
       return true;
     }
 
-    if ( get(this, 'showCurrent') && !get(this, 'currentPassword') ) {
+    if ( this.showCurrent && !this.currentPassword ) {
       return true;
     }
 
-    if ( get(this, 'generate') ) {
+    if ( this.generate ) {
       return false;
     }
 
-    return !get(this, 'passwordsMatch');
+    return !this.passwordsMatch;
   }),
 
   passwordsMatch: computed('password', 'confirm', function() {
-    const pass = (get(this, 'password') || '').trim();
-    const confirm = (get(this, 'confirm') || '').trim();
+    const pass = (this.password || '').trim();
+    const confirm = (this.confirm || '').trim();
 
     return pass && confirm && pass === confirm;
   }),
 
   errors: computed('confirm', 'confirmBlurred', 'generate', 'passwordsMatch', 'serverErrors.[]', function() {
-    let out = get(this, 'serverErrors') || [];
+    let out = this.serverErrors || [];
 
-    if ( !get(this, 'generate') && get(this, 'confirmBlurred') && get(this, 'confirm') && !get(this, 'passwordsMatch') ) {
-      out.push(get(this, 'intl').t('modalEditPassword.mismatch'));
+    if ( !this.generate && this.confirmBlurred && this.confirm && !this.passwordsMatch ) {
+      out.push(this.intl.t('modalEditPassword.mismatch'));
     }
 
     return out;

@@ -7,7 +7,7 @@ export default Route.extend({
   autoLogout: service(),
 
   beforeModel() {
-    return this.get('language').initLanguage();
+    return this.language.initLanguage();
   },
 
   redirect() {

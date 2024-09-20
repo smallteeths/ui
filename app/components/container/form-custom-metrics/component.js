@@ -35,7 +35,7 @@ export default Component.extend({
 
   actions: {
     add() {
-      get(this, 'metrics').pushObject({
+      this.metrics.pushObject({
         path:                        '',
         port:                        '',
         schema:                      HTTP,
@@ -65,7 +65,7 @@ export default Component.extend({
     },
 
     remove(obj) {
-      get(this, 'metrics').removeObject(obj);
+      this.metrics.removeObject(obj);
     },
 
     removeLabel(metric, label) {
@@ -78,7 +78,7 @@ export default Component.extend({
   },
 
   metricsChanged: observer('metrics.@each.{port,path,bearerToken,schema,workloadMetricRelabelConfig}', function() {
-    let metrics = get(this, 'metrics').map((item) => {
+    let metrics = this.metrics.map((item) => {
       let obj = {};
 
       Object.assign(obj, item)

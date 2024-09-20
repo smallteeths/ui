@@ -11,7 +11,7 @@ export default Route.extend({
   cookies:      service(),
 
   model(/* params, transition */) {
-    const cs = get(this, 'globalStore');
+    const cs = this.globalStore;
     const clusterId = get(this.scope, 'currentCluster.id');
 
     let systemProject = {}

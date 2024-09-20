@@ -18,12 +18,12 @@ const projectAlertRule = Resource.extend(Alert, {
   group: reference('groupId', 'projectAlertGroup'),
 
   displayTargetType: computed('targetType', function() {
-    return get(this, 'intl').t(`alertPage.targetTypes.${ get(this, 'targetType') }`);
+    return this.intl.t(`alertPage.targetTypes.${ this.targetType }`);
   }),
 
   podName: computed('podRule.podId', function() {
     const id = get(this, 'podRule.podId');
-    const pod = get(this, 'projectStore').all('pod').filterBy('id', id).get('firstObject');
+    const pod = this.projectStore.all('pod').filterBy('id', id).get('firstObject');
 
     if (!pod) {
       return null;
@@ -34,7 +34,7 @@ const projectAlertRule = Resource.extend(Alert, {
 
   workloadName: computed('workloadRule.workloadId', function() {
     const id = get(this, 'workloadRule.workloadId');
-    const workload = get(this, 'projectStore').all('workload').filterBy('id', id).get('firstObject');
+    const workload = this.projectStore.all('workload').filterBy('id', id).get('firstObject');
 
     if (!workload) {
       return null;
@@ -44,8 +44,8 @@ const projectAlertRule = Resource.extend(Alert, {
   }),
 
   displayCondition: computed('metricRule', 'podRule.{condition,restartIntervalSeconds,restartTimes}', 'targetType', 'workloadRule.availablePercentage', function() {
-    const t = get(this, 'targetType');
-    const intl = get(this, 'intl');
+    const t = this.targetType;
+    const intl = this.intl;
 
     let out = intl.t('alertPage.na');
 
@@ -53,7 +53,7 @@ const projectAlertRule = Resource.extend(Alert, {
     const interval = get(this, 'podRule.restartIntervalSeconds');
     const c = get(this, 'podRule.condition');
     const percent = get(this, 'workloadRule.availablePercentage');
-    const metricRule = get(this, 'metricRule')
+    const metricRule = this.metricRule
 
     switch (t) {
     case 'pod':
@@ -103,10 +103,10 @@ const projectAlertRule = Resource.extend(Alert, {
 
   actions: {
     clone() {
-      get(this, 'router').transitionTo('authenticated.project.alert.new-rule', get(this, 'groupId'), { queryParams: { id: get(this, 'id'),  } });
+      this.router.transitionTo('authenticated.project.alert.new-rule', this.groupId, { queryParams: { id: this.id,  } });
     },
     edit() {
-      get(this, 'router').transitionTo('authenticated.project.alert.edit-rule', get(this, 'groupId'), get(this, 'id'));
+      this.router.transitionTo('authenticated.project.alert.edit-rule', this.groupId, this.id);
     },
   },
 

@@ -80,7 +80,7 @@ export default Component.extend({
   },
 
   willDestroyElement() {
-    clearInterval(get(this, 'followTimer'));
+    clearInterval(this.followTimer);
     this.disconnect();
     this._super();
   },
@@ -135,7 +135,7 @@ export default Component.extend({
   },
 
   wrapLinesDidChange: observer('wrapLines', function() {
-    set(this, `prefs.${ C.PREFS.WRAP_LINES }`, get(this, 'wrapLines'));
+    set(this, `prefs.${ C.PREFS.WRAP_LINES }`, this.wrapLines);
   }),
 
   watchReconnect: on('init', observer('containerName', 'isPrevious', 'limitBytes', function() {
@@ -150,7 +150,7 @@ export default Component.extend({
   _bootstrap() {
     setProperties(this, {
       wrapLines:     !!get(this, `prefs.${ C.PREFS.WRAP_LINES }`),
-      containerName: get(this, 'containerName') || get(this, 'instance.containers.firstObject.name'),
+      containerName: this.containerName || get(this, 'instance.containers.firstObject.name'),
     });
 
     this._initTimer();
@@ -158,7 +158,7 @@ export default Component.extend({
 
   _initTimer() {
     const followTimer = setInterval(() => {
-      if ( get(this, 'isFollow') ) {
+      if ( this.isFollow ) {
         this.send('scrollToBottom');
       }
     }, 1000);
@@ -167,15 +167,15 @@ export default Component.extend({
   },
 
   exec() {
-    var instance = get(this, 'instance');
+    var instance = this.instance;
     const clusterId = get(this, 'scope.currentCluster.id');
     const namespaceId = get(instance, 'namespaceId');
     const podName = get(instance, 'name');
-    const containerName = get(this, 'containerName');
+    const containerName = this.containerName;
     const scheme = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
     let url = `${ scheme }${ window.location.host }/k8s/clusters/${ clusterId }/api/v1/namespaces/${ namespaceId }/pods/${ podName }/log`;
 
-    url += `?container=${ encodeURIComponent(containerName) }&tailLines=${ LINES }&follow=true&timestamps=true&previous=${ get(this, 'isPrevious') }`;
+    url += `?container=${ encodeURIComponent(containerName) }&tailLines=${ LINES }&follow=true&timestamps=true&previous=${ this.isPrevious }`;
     const limitBytes = get(this, 'limitBytes');
 
     if (limitBytes !== '-1') {
@@ -262,7 +262,7 @@ export default Component.extend({
   disconnect() {
     set(this, 'status', 'closed');
 
-    var socket = get(this, 'socket');
+    var socket = this.socket;
 
     if (socket) {
       socket.close();

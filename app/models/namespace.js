@@ -93,7 +93,7 @@ var Namespace = Resource.extend(StateCounts, {
   },
 
   availableActions: computed('projectId', 'actionLinks.@each.move', 'scope.currentCluster.istioEnabled', 'scope.currentCluster.systemProject', 'autoInjectionEnabled', function() {
-    let aa = get(this, 'actionLinks') || {};
+    let aa = this.actionLinks || {};
 
     let out = [
       {
@@ -107,14 +107,14 @@ var Namespace = Resource.extend(StateCounts, {
         label:    'action.enableAutoInject',
         icon:     'icon icon-plus-circle',
         action:   'enableAutoInject',
-        enabled:  get(this, 'scope.currentCluster.istioEnabled') && !!get(this, 'scope.currentCluster.systemProject') && !get(this, 'autoInjectionEnabled'),
+        enabled:  get(this, 'scope.currentCluster.istioEnabled') && !!get(this, 'scope.currentCluster.systemProject') && !this.autoInjectionEnabled,
         bulkable: true
       },
       {
         label:    'action.disableAutoInject',
         icon:     'icon icon-minus-circle',
         action:   'disableAutoInject',
-        enabled:  get(this, 'scope.currentCluster.istioEnabled') && !!get(this, 'scope.currentCluster.systemProject') && get(this, 'autoInjectionEnabled'),
+        enabled:  get(this, 'scope.currentCluster.istioEnabled') && !!get(this, 'scope.currentCluster.systemProject') && this.autoInjectionEnabled,
         bulkable: true
       },
       {
@@ -130,8 +130,8 @@ var Namespace = Resource.extend(StateCounts, {
   }),
 
   combinedState: computed('state', 'healthState', function() {
-    var stack = this.get('state');
-    var health = this.get('healthState');
+    var stack = this.state;
+    var health = this.healthState;
 
     if ( stack === 'active' && health ) {
       return health;
@@ -141,11 +141,11 @@ var Namespace = Resource.extend(StateCounts, {
   }),
 
   externalIdInfo: computed('externalId', function() {
-    return parseExternalId(this.get('externalId'));
+    return parseExternalId(this.externalId);
   }),
 
   isDefault: computed('name', function() {
-    return (this.get('name') || '').toLowerCase() === 'default';
+    return (this.name || '').toLowerCase() === 'default';
   }),
 
   isEmpty: computed('pods.length', 'workloads.length', function() {
@@ -153,7 +153,7 @@ var Namespace = Resource.extend(StateCounts, {
   }),
 
   hasProject: computed('project', function() {
-    return !!get(this, 'project');
+    return !!this.project;
   }),
 
   isFromCatalog: computed('externalIdInfo.kind', function() {
@@ -164,11 +164,11 @@ var Namespace = Resource.extend(StateCounts, {
 
   // This only works if the templates have already been loaded elsewhere...
   catalogTemplate: computed('externalIdInfo.templateId', function() {
-    return this.get('catalog').getTemplateFromCache(this.get('externalIdInfo.templateId'));
+    return this.catalog.getTemplateFromCache(this.get('externalIdInfo.templateId'));
   }),
 
   icon: computed('catalogTemplate', function() {
-    let tpl = this.get('catalogTemplate');
+    let tpl = this.catalogTemplate;
 
     if ( tpl ) {
       return tpl.linkFor('icon');
@@ -182,7 +182,7 @@ var Namespace = Resource.extend(StateCounts, {
 
     if ( kind === C.EXTERNAL_ID.KIND_KUBERNETES || kind === C.EXTERNAL_ID.KIND_LEGACY_KUBERNETES ) {
       return C.EXTERNAL_ID.KIND_KUBERNETES;
-    } else if ( this.get('system') ) {
+    } else if ( this.system ) {
       return C.EXTERNAL_ID.KIND_INFRA;
     } else {
       return C.EXTERNAL_ID.KIND_USER;
@@ -190,17 +190,17 @@ var Namespace = Resource.extend(StateCounts, {
   }),
 
   normalizedTags: computed('tags.[]', function() {
-    return normalizeTags(this.get('tags'));
+    return normalizeTags(this.tags);
   }),
 
   autoInjectionEnabled: computed('labels', function() {
-    const labels = get(this, 'labels')
+    const labels = this.labels
 
     return labels && labels[ISTIO_INJECTION] === ENABLED;
   }),
 
   validateResourceQuota(originLimit) {
-    const intl = get(this, 'intl');
+    const intl = this.intl;
     let errors = [];
 
     const resourceQuota = get(this, 'resourceQuota.limit') || {};
@@ -247,19 +247,19 @@ var Namespace = Resource.extend(StateCounts, {
 
   actions: {
     edit() {
-      this.get('modalService').toggleModal('modal-edit-namespace', this);
+      this.modalService.toggleModal('modal-edit-namespace', this);
     },
 
     delete() {
       return this._super().then(() => {
         if ( this.get('application.currentRouteName') === 'stack.index' ) {
-          this.get('router').transitionTo('containers');
+          this.router.transitionTo('containers');
         }
       });
     },
 
     move() {
-      this.get('modalService').toggleModal('modal-move-namespace', this);
+      this.modalService.toggleModal('modal-move-namespace', this);
     },
 
     enableAutoInject() {
@@ -278,7 +278,7 @@ var Namespace = Resource.extend(StateCounts, {
 
     want = normalizeTags(want);
 
-    let have = this.get('normalizedTags');
+    let have = this.normalizedTags;
 
     for ( let i = 0 ; i < want.length ; i++ ) {
       if ( !have.includes(want[i]) ) {
@@ -290,16 +290,16 @@ var Namespace = Resource.extend(StateCounts, {
   },
 
   autoInjectToggle() {
-    const labels = get(this, 'labels')
+    const labels = this.labels
     const clone = this.clone()
 
-    if (get(this, 'autoInjectionEnabled')) {
+    if (this.autoInjectionEnabled) {
       delete labels['istio-injection']
     } else {
       labels[ISTIO_INJECTION] = ENABLED;
     }
     set(clone, 'labels', labels)
-    clone.save().catch((err) => get(this, 'growl').fromError('Error:', err))
+    clone.save().catch((err) => this.growl.fromError('Error:', err))
   },
 });
 
