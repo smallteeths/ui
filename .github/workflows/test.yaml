@@ -5,13 +5,13 @@ on:
       - master
       - 'release-*'
     branches-ignore:
-      - release-2.9.1-cn # PANDARIA: temporarily disable workflow
+      - release-2.9.2-cn # PANDARIA: temporarily disable workflow
   pull_request:
     branches:
       - master
       - 'release-*'
     branches-ignore:
-      - release-2.9.1-cn # PANDARIA: temporarily disable workflow
+      - release-2.9.2-cn # PANDARIA: temporarily disable workflow
   # This tells GH that the workflow is reusable
   workflow_call:
 
