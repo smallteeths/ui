@@ -6,7 +6,7 @@ on:
       - 'release-*'
       - '*-dev'
     branches-ignore:
-      - release-2.9.2-cn # PANDARIA: temporarily disable workflow
+      - release-2.9.3-cn # PANDARIA: temporarily disable workflow
 
 jobs:
   test:
