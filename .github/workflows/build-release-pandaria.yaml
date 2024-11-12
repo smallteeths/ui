@@ -1,0 +1,18 @@
+name: Pandaria Build (Release)
+on:
+  push:
+    tags:
+      - v*-cn-ent*
+
+jobs:
+  test:
+    uses: ./.github/workflows/test-pandaria.yaml
+  build-tag-and-upload:
+    secrets: inherit
+    uses: ./.github/workflows/build-and-upload-pandaria.yaml
+    needs: test
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    with:
+      CI_BUILD_TAG: ${{github.ref_name}}

@@ -1,0 +1,18 @@
+name: Pandaria Build (Branch)
+on:
+  push:
+    branches:
+      - 'release-*-cn*'
+
+jobs:
+  test:
+    uses: ./.github/workflows/test-pandaria.yaml
+  build-branch-and-upload:
+    secrets: inherit
+    uses: ./.github/workflows/build-and-upload-pandaria.yaml
+    needs: test
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    with:
+      CI_BRANCH: ${{github.ref_name}}

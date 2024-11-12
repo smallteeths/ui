@@ -1,0 +1,64 @@
+name: Pandaria Build and Upload
+
+on:
+  workflow_call:
+    inputs:
+      CI_BRANCH:
+        required: false
+        type: string
+      CI_BUILD_TAG:
+        required: false
+        type: string
+
+env:
+  CI_BRANCH: ${{inputs.CI_BRANCH || ''}}
+  CI_BUILD_TAG: ${{inputs.CI_BUILD_TAG || ''}}
+  REPO: ${{github.event.repository.name || ''}}
+
+jobs:
+  build-and-upload:
+    runs-on: org-cnrancher-runner-k8s
+    container: ubuntu:22.04
+    steps:
+      - id: install-git
+        name: Install Git
+        run: |
+          apt-get update
+          apt-get install -y git curl
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Setup env
+        uses: ./.github/actions/setup
+
+      - id: build
+        name: Build
+        run: ./scripts/build-static -c 'pandaria-ui.s3.ap-northeast-1.amazonaws.com/static'
+
+      - id: install-aws-cli
+        name: Install AWS CLI
+        run: |
+          apt-get update && apt-get install -y unzip curl
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          ./aws/install
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-southeast-2
+      
+      - name: Upload build
+        if: ${{ env.CI_BRANCH }}
+        run: |
+          aws s3 sync --delete --acl public-read ${{steps.build.outputs.BUILD_DIR}} s3://pandaria-ui/static/${{ steps.build.outputs.VERSION }}
+
+      - name: Upload tar
+        if: ${{ env.CI_BUILD_TAG }}
+        run: |
+          aws s3 cp ${{steps.build.outputs.BUILD_TGZ}} s3://pandaria-ui/releases/

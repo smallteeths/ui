@@ -11,8 +11,9 @@ runs:
     - name: Install Python for node-sass
       shell: bash
       run: |
-        DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --no-install-recommends python2
+        DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y --no-install-recommends python2
+        npm install --global yarn
 
     - name: Install packages
       shell: bash
-      run: ./scripts/bootstrap
+      run:  ./scripts/bootstrap

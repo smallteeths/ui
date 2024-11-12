@@ -1,0 +1,57 @@
+name: Pandaria Tests
+on:
+#   push:
+#     branches:
+#       - 'release-*-cn*'
+#   pull_request:
+#     branches:
+#       - 'release-*-cn*'
+  # This tells GH that the workflow is reusable
+  workflow_call:
+
+jobs:
+  unit-test:
+    runs-on: org-cnrancher-runner-k8s
+    container: ubuntu:22.04
+    steps:
+      - id: install-deps
+        name: Install Deps
+        shell: bash
+        run: |
+          apt-get update && apt-get install -y git curl gnupg2 apt-transport-https
+          curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add -
+          echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
+          apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -qq install -y --no-install-recommends hicolor-icon-theme g++ google-chrome-stable
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Run Setup
+        uses: ./.github/actions/setup
+
+      - name: Run tests
+        run: yarn test
+  lint:
+    runs-on: org-cnrancher-runner-k8s
+    container: ubuntu:22.04
+    needs:
+      - unit-test
+    steps:
+      - id: install-git
+        name: Install Git
+        run: |
+          apt-get update
+          apt-get install -y git
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Run Setup
+        uses: ./.github/actions/setup
+
+      - name: Run linter
+        run: yarn lint:js
