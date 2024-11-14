@@ -56,9 +56,9 @@ jobs:
       - name: Upload build
         if: ${{ env.CI_BRANCH }}
         run: |
-          aws s3 sync --delete --acl public-read ${{steps.build.outputs.BUILD_DIR}} s3://pandaria-ui/static/${{ steps.build.outputs.VERSION }}
+          aws s3 sync ${{steps.build.outputs.BUILD_DIR}} s3://pandaria-ui/static/${{ steps.build.outputs.VERSION }} --delete --acl public-read
 
       - name: Upload tar
         if: ${{ env.CI_BUILD_TAG }}
         run: |
-          aws s3 cp ${{steps.build.outputs.BUILD_TGZ}} s3://pandaria-ui/releases/
+          aws s3 cp ${{steps.build.outputs.BUILD_TGZ}} s3://pandaria-ui/releases/ --acl public-read
