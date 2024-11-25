@@ -169,6 +169,13 @@ realmNames:
   euWest: EU West
   euEast: EU East
 
+
+## Error page for UI access removed ##
+legacyRemoved:
+  title: The Legacy UI has been removed
+  message: Please use the new Rancher Dashboard UI
+  action: Goto Dashboard
+
 ##############################
 # Routes
 ##############################
@@ -718,6 +725,22 @@ authPage:
       help: "<span class='text-italic'>Note: Required Fields in this section are only required if you are configuring OpenLDAP Search with Shibboleth authorization.</span>"
     advanced:
       hr: Additional Configuration Parameters
+    enabled:
+      authenticated:
+        header:
+          text: Authentication
+      disableAccess:
+        header: "Danger Zone&trade;"
+        warning: '<b class="text-danger">Caution:</b> Disabling access control will give complete control over {appName} to anyone that can reach this page or the API.'
+        confirmDisable: "Are you sure?  Click again to disable access control"
+        disable: Disable access control
+      groupsField: 'Groups:'
+      displayName: 'Display Name:'
+      userName: 'Username:'
+      userId: 'User ID:'
+    disabled:
+      header: '1. Configure Shibboleth Account'
+      label: "{providerName} is not configured"
   root:
     header: Access Control
   github:
@@ -9435,7 +9458,7 @@ nodeDriver:
       placeholder: Your Azure subscription certificate
     image:
       label: Image
-      placeholder: 'canonical:UbuntuServer:18.04-LTS:latest'
+      placeholder: 'canonical:ubuntu-24_04-lts:server-gen1:latest'
       helpText: Providing an ARM resource identifier requires using managed disk
     diskSize:
       label: Disk Size

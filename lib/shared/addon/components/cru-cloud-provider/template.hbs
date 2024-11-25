@@ -48,7 +48,6 @@
         />
       </div>
     {{/if}}
-
     {{#input-or-display
        editable=(or (and (eq mode "new") (or (not applyClusterTemplate) (and (eq mode "new") selectedCloudProviderOverrideAvailable))) canEditProvider)
        value=selectedCloudProvider
@@ -263,9 +262,6 @@
             {{t (get (get azureDescriptions answer.key) "description") htmlSafe=true}}
           </p>
         {{/if}}
-        <p class="help-block mt-0">
-          {{t (get (get azureDescriptions answer.key) "description") htmlSafe=true}}
-        </p>
       </div>
       <div class="col span-6">
         <CheckOverrideAllowed

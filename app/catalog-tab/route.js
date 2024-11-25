@@ -1,6 +1,5 @@
 import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
-import { get } from '@ember/object';
 
 export default Route.extend({
   access:  service(),
@@ -17,7 +16,7 @@ export default Route.extend({
     // Do not use the model result
     const out = {};
 
-    if (get(transition, 'targetName') === 'catalog-tab.index') {
+    if (transition.targetName === 'catalog-tab.index') {
       return this.catalog.fetchTemplates().then(() => out);
     }
 

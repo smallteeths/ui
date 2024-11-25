@@ -6,7 +6,7 @@ import { get, set, observer, computed } from '@ember/object';
 import { debouncedObserver } from 'ui/utils/debounce';
 
 const LINUX_LAST_CONTAINER = 'ubuntu:xenial'
-const WINDOWS_LAST_CONTAINER = 'mcr.microsoft.com/dotnet/core/samples:aspnetapp'
+const WINDOWS_LAST_CONTAINER = 'mcr.microsoft.com/dotnet/samples:aspnetapp'
 // Remember the last value and use that for new one
 var lastContainer;
 
