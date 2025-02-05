@@ -7,11 +7,23 @@ runs:
     - uses: actions/setup-node@v3
       with:
         node-version: '14.x'
+       
+    - name: Update packages
+      shell: bash
+      run: |
+        DEBIAN_FRONTEND=noninteractive sudo apt update
 
     - name: Install Python for node-sass
       shell: bash
       run: |
-        DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y --no-install-recommends python2
+        DEBIAN_FRONTEND=noninteractive wget https://www.python.org/ftp/python/2.2/Python-2.2.tgz
+        DEBIAN_FRONTEND=noninteractive sudo tar xzf Python-2.2.tgz
+        DEBIAN_FRONTEND=noninteractive cd Python-2.2
+        DEBIAN_FRONTEND=noninteractive sudo ./configure --enable-optimizations
+        DEBIAN_FRONTEND=noninteractive sudo make install
+        DEBIAN_FRONTEND=noninteractive cd ..
+        DEBIAN_FRONTEND=noninteractive sudo rm Python-2.2.tgz
+        DEBIAN_FRONTEND=noninteractive sudo rm -r Python-2.2
         npm install --global yarn
 
     - name: Install packages
