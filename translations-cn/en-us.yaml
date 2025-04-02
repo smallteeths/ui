@@ -98,6 +98,7 @@ generic:
   persistentVolume: persistent volume
   random: Random
   remove: Remove
+  removed: Functionality has been removed from the legacy UI
   restarts: Restarts
   role: Role
   save: Save
@@ -4810,6 +4811,7 @@ clusterNew:
     selectedNodePoolType:
       label: Select type
       placeholder: Select a node pool type
+      regionPriceWarning: One or more node pools in this configuration are subject to region-specific pricing. These prices are reflected in the displayed configuration below.
     shortLabel: Linode LKE
     tags:
       label: Tags
