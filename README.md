@@ -1,7 +1,9 @@
 Rancher UI
 --------
 
-Perhaps you like managing Cattle.
+This is the source code repository for the original Rancher UI.
+
+The new Rancher UI source code can be found here - https://github.com/rancher/dashboard
 
 ## Usage
 
@@ -72,10 +74,10 @@ Rancher UI supports localization via translations files. You can swap translatio
 If you want to customize the UI, re-packaging all of Rancher to distribute the UI is possible but not terribly convenient. Instead you can change Cattle to load the UI source from a remote web server:
 
 - Build with `./scripts/build-static -l -c 'your-server.com'`
-- Upload `./dist/static/release-2.10` so that it's available at https://your-server.com/release-2.10
+- Upload `./dist/static/release-2.11` so that it's available at https://your-server.com/release-2.11
   - It must be available over HTTPS.
-  - You can rename the "release-2.10" part with the `-v` flag
-- Change the value of https://your-rancher/v3/settings/ui-index to the same `https://your-server.com/release-2.10` URL
+  - You can rename the "release-2.11" part with the `-v` flag
+- Change the value of https://your-rancher/v3/settings/ui-index to the same `https://your-server.com/release-2.11` URL
 
 ### Running Tests
 
@@ -91,9 +93,9 @@ If you want to customize the UI, re-packaging all of Rancher to distribute the U
 * `ember test --server`
 
 ### Bugs & Issues
-Please submit bugs and issues to [rancher/rancher](//github.com/rancher/rancher/issues) with a title starting with `[UI] `.
+Please submit bugs and issues to [rancher/dashboard](//github.com/rancher/dashboard/issues) and add the issue label `ember`.
 
-Or just [click here](//github.com/rancher/rancher/issues/new?title=%5BUI%5D%20) to create a new issue.
+Or just [click here](//github.com/rancher/dashboard/issues/new/choose) to create a new issue.
 
 
 #### Useful links
@@ -107,7 +109,7 @@ Or just [click here](//github.com/rancher/rancher/issues/new?title=%5BUI%5D%20) 
 
 License
 =======
-Copyright (c) 2014-2024 [Rancher Labs, Inc.](http://rancher.com)
+Copyright (c) 2014-2025 [SUSE](http://www.suse.com)
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

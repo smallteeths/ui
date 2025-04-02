@@ -100,6 +100,7 @@ generic:
   persistentVolume: persistent volume
   random: Random
   remove: Remove
+  removed: Functionality has been removed from the legacy UI
   restarts: Restarts
   role: Role
   save: Save
@@ -1425,6 +1426,7 @@ clustersPage:
       label: "Add Cluster - Select Cluster Type"
     template:
       label: "Add Cluster - Select RKE Template"
+  rke1DeprecationMessage: 'Rancher Kubernetes Engine (RKE / RKE1) will reach end of life on July 31, 2025. Rancher 2.12.0 and later will no longer support provisioning or managing downstream RKE1 clusters. We recommend replatforming RKE1 clusters to RKE2 to ensure continued support and security updates. Learn more about the transition <a href="https://www.suse.com/support/kb/doc/?id=000021518" target="_blank" rel="noopener noreferrer nofollow">here</a>.'
 
 clusterRibbonNav:
   title: Recent Clusters
@@ -3347,7 +3349,7 @@ clusterNew:
       fleet: Fleet Agent Configuration
     accordionDetail:
       cluster: Customize scheduling fields and resource limits for the Rancher cluster agent
-      fleet: Customize scheduling fields and resource limits for the Rancher fleet agent  
+      fleet: Customize scheduling fields and resource limits for the Rancher fleet agent
     banners:
       advanced: These are advanced configuration options. Generally, they should be left as-is.
       resourceRequests: Pod Requests and Limits do not have a default configuration.
@@ -3621,7 +3623,7 @@ clusterNew:
         parsedDockerBridgeCidr: Docker bridge address can not overlap with the selected Virtual Network or the Kubernetes service address range
         parsedServiceCidr: Kubernetes service address range must fall within the selected Virtual Network range.
         serviceCidr: Kubernetes service address range must be valid CIDR format.
-      nodeResourceGroup: 
+      nodeResourceGroup:
         length: "{key} name cannot exceed 80 characters."
         chars: "{key} name may only consist of underscores, periods, hyphens, parentheses, and letters or digits."
         periodEnd: "{key} name cannot end with a period."
@@ -4396,6 +4398,7 @@ clusterNew:
     selectedNodePoolType:
       label: Select type
       placeholder: Select a node pool type
+      regionPriceWarning: One or more node pools in this configuration are subject to region-specific pricing. These prices are reflected in the displayed configuration below.
     shortLabel: Linode LKE
     tags:
       label: Tags
