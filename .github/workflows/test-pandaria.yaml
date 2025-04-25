@@ -36,8 +36,6 @@ jobs:
   lint:
     runs-on: org-cnrancher-runner-k8s
     container: ubuntu:22.04
-    needs:
-      - unit-test
     steps:
       - id: install-git
         name: Install Git
