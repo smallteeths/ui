@@ -812,6 +812,22 @@ authPage:
       help: "<span class='text-italic'>Note: Required Fields in this section are only required if you are configuring OpenLDAP Search with Shibboleth authorization.</span>"
     advanced:
       hr: Additional Configuration Parameters
+    disabled:
+      header: 1. Configure Shibboleth Account
+      label: '{providerName} is not configured'
+    enabled:
+      authenticated:
+        header:
+          text: Authentication
+      disableAccess:
+        confirmDisable: Are you sure?  Click again to disable access control
+        disable: Disable access control
+        header: Danger Zone&trade;
+        warning: <b class="text-danger">Caution:</b> Disabling access control will give complete control over {appName} to anyone that can reach this page or the API.
+      displayName: 'Display Name:'
+      groupsField: 'Groups:'
+      userId: 'User ID:'
+      userName: 'Username:'
   root:
     header: Access Control
   github:
@@ -1529,6 +1545,7 @@ clustersPage:
       label: "Add Cluster - Select Cluster Type"
     template:
       label: "Add Cluster - Select RKE Template"
+  rke1DeprecationMessage: 'Rancher Kubernetes Engine (RKE / RKE1) will reach end of life on July 31, 2025. Rancher 2.12.0 and later will no longer support provisioning or managing downstream RKE1 clusters. We recommend replatforming RKE1 clusters to RKE2 to ensure continued support and security updates. Learn more about the transition <a href="https://www.suse.com/support/kb/doc/?id=000021518" target="_blank" rel="noopener noreferrer nofollow">here</a>.'
 clusterRibbonNav:
   title: Recent Clusters
 clusterTemplatesPage:
@@ -10177,7 +10194,7 @@ nodeDriver:
       placeholder: Your Azure subscription certificate
     image:
       label: Image
-      placeholder: 'canonical:UbuntuServer:18.04-LTS:latest'
+      placeholder: 'canonical:ubuntu-24_04-lts:server-gen1:latest'
       helpText: Providing an ARM resource identifier requires using managed disk
     diskSize:
       label: Disk Size
@@ -12497,3 +12514,7 @@ formIngressGeneralSetting:
     detail: "Number of requests accepted from a given IP each second. When clients exceed this limit, limit-req-status-code default: 503 is returned."
   sslRedirect:
     title: http redirect https
+legacyRemoved:
+  action: Goto Dashboard
+  message: Please use the new Rancher Dashboard UI
+  title: The Legacy UI has been removed
