@@ -1261,9 +1261,7 @@
               </label>
               <BannerMessage @color="bg-info">
                 {{t "clusterNew.rke.agentEnvVars.tips"}}
-                {{marked-down
-                  markdown=agentEnvVarsTips
-                }}
+                <pre>{{agentEnvVarsTips}}</pre>
               </BannerMessage>
               <FormAgentEnvVar
                 @editable={{notView}}
