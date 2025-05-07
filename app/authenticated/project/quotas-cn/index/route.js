@@ -15,9 +15,14 @@ export default Route.extend({
   model() {
     const appRoute = window.l('route:application');
     const project = appRoute.modelFor('authenticated.project').get('project');
+    const backingNamespace = project.get('backingNamespace') ? project.get('backingNamespace') : projectId.split(':')?.[1]
     const clusterId = project.get('clusterId');
     const projectId = project.get('id');
-    const projectQuotaUsage = get(this, 'globalStore').rawRequest({ url: `/v3/projectresourcequotausages/${ projectId.split(':')?.[1] }:${ projectId.replace(':', '-') }` }).then((res) => {
+
+    if (!backingNamespace) {
+      return {}
+    }
+    const projectQuotaUsage = get(this, 'globalStore').rawRequest({ url: `/v3/projectresourcequotausages/${ backingNamespace }:${ projectId.replace(':', '-') }` }).then((res) => {
       // let usage = {};
 
       // if (res.body && res.body.data && res.body.data.length > 0) {
