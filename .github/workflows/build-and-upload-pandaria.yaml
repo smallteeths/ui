@@ -36,7 +36,7 @@ jobs:
 
       - id: build
         name: Build
-        run: ./scripts/build-static -c 'pandaria-ui.s3.ap-northeast-1.amazonaws.com/static'
+        run: ./scripts/build-static -c 'cn-pandaria-ui.s3.ap-east-1.amazonaws.com/static'
 
       - id: install-aws-cli
         name: Install AWS CLI
@@ -56,9 +56,9 @@ jobs:
       - name: Upload build
         if: ${{ env.CI_BRANCH }}
         run: |
-          aws s3 sync ${{steps.build.outputs.BUILD_DIR}} s3://pandaria-ui/static/${{ steps.build.outputs.VERSION }} --delete --acl public-read
+          aws s3 sync ${{steps.build.outputs.BUILD_DIR}} s3://cn-pandaria-ui/static/${{ steps.build.outputs.VERSION }} --delete --acl public-read
 
       - name: Upload tar
         if: ${{ env.CI_BUILD_TAG }}
         run: |
-          aws s3 cp ${{steps.build.outputs.BUILD_TGZ}} s3://pandaria-ui/releases/ --acl public-read
+          aws s3 cp ${{steps.build.outputs.BUILD_TGZ}} s3://cn-pandaria-ui/releases/ --acl public-read
