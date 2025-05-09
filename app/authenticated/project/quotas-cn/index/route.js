@@ -15,9 +15,9 @@ export default Route.extend({
   model() {
     const appRoute = window.l('route:application');
     const project = appRoute.modelFor('authenticated.project').get('project');
-    const backingNamespace = project.get('backingNamespace') ? project.get('backingNamespace') : projectId.split(':')?.[1]
     const clusterId = project.get('clusterId');
     const projectId = project.get('id');
+    const backingNamespace = typeof project.get === 'function' && project.get('backingNamespace') ? project.get('backingNamespace') : projectId?.split(':')?.[1]
 
     if (!backingNamespace) {
       return {}
